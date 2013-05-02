@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12D78" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Action" representedClassName="Action" syncable="YES">
+        <attribute name="arguments" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="dictionary"/>
+            </userInfo>
+        </attribute>
+        <attribute name="methodName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Activity" representedClassName="Activity" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Page" syncable="YES"/>
+    </entity>
+    <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES"/>
+    <entity name="Behavior" representedClassName="Behavior" parentEntity="Member" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="action" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Action" syncable="YES"/>
+        <relationship name="trigger" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rule" syncable="YES"/>
+    </entity>
+    <entity name="Datum" representedClassName="Datum" syncable="YES">
+        <attribute name="key" attributeType="String" syncable="YES"/>
+        <attribute name="type" attributeType="String" syncable="YES"/>
+        <attribute name="value" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Element" representedClassName="Element" syncable="YES">
+        <attribute name="assetLibUID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="assetMemberIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="behaviorLibUID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="behaviorMemberIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rect" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="rect"/>
+            </userInfo>
+        </attribute>
+        <relationship name="context" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Html" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES"/>
+    <entity name="Hyperlink" representedClassName="Image" parentEntity="Asset" syncable="YES">
+        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="size"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <entity name="Image" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="size"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <entity name="Label" representedClassName="Text" parentEntity="Asset" syncable="YES">
+        <attribute name="font" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="LangDictionary" representedClassName="LangDictionary" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locale" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Library" representedClassName="Library" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" syncable="YES"/>
+    </entity>
+    <entity name="LinkedAsset" representedClassName="LinkedAsset" parentEntity="Asset" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relativePath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Member" representedClassName="Member" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="metadata" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
+    </entity>
+    <entity name="Operand" representedClassName="Operand" syncable="YES">
+        <attribute name="expression" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Operator" representedClassName="Operator" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Package" representedClassName="Package" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="license" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="minEngineVersion" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" syncable="YES"/>
+        <relationship name="langDictionaries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LangDictionary" syncable="YES"/>
+        <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" syncable="YES"/>
+        <relationship name="owner" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Page" representedClassName="Page" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="elements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Element" syncable="YES"/>
+    </entity>
+    <entity name="Pdf" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="size"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <entity name="Rule" representedClassName="Rule" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="operandsA" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operand" syncable="YES"/>
+        <relationship name="operandsB" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operand" syncable="YES"/>
+        <relationship name="operator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operator" syncable="YES"/>
+    </entity>
+    <entity name="Shelf" representedClassName="Shelf" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="localUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+        <relationship name="packages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Package" syncable="YES"/>
+    </entity>
+    <entity name="Sound" representedClassName="Sound" parentEntity="LinkedAsset" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
+    </entity>
+    <entity name="Video" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
+        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="type" value="size"/>
+            </userInfo>
+        </attribute>
+    </entity>
+    <elements>
+        <element name="Action" positionX="-7380" positionY="-3762" width="128" height="73"/>
+        <element name="Activity" positionX="-6932" positionY="-4102" width="128" height="148"/>
+        <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="43"/>
+        <element name="Behavior" positionX="-7272" positionY="-3661" width="128" height="88"/>
+        <element name="Datum" positionX="-6876" positionY="-3859" width="128" height="88"/>
+        <element name="Element" positionX="-6572" positionY="-3964" width="128" height="148"/>
+        <element name="Group" positionX="-7641" positionY="-3888" width="128" height="58"/>
+        <element name="Html" positionX="-7202" positionY="-3418" width="128" height="43"/>
+        <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
+        <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
+        <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
+        <element name="LangDictionary" positionX="-7328" positionY="-4093" width="128" height="88"/>
+        <element name="Library" positionX="-7101" positionY="-3913" width="126" height="88"/>
+        <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="88"/>
+        <element name="Member" positionX="-7103" positionY="-3780" width="128" height="103"/>
+        <element name="Operand" positionX="-7533" positionY="-3762" width="128" height="58"/>
+        <element name="Operator" positionX="-7598" positionY="-3690" width="128" height="58"/>
+        <element name="Package" positionX="-7103" positionY="-4156" width="128" height="193"/>
+        <element name="Page" positionX="-6741" positionY="-4033" width="128" height="118"/>
+        <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
+        <element name="Rule" positionX="-7382" positionY="-3528" width="128" height="118"/>
+        <element name="Shelf" positionX="-7389" positionY="-4210" width="128" height="88"/>
+        <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
+        <element name="User" positionX="-7641" positionY="-4014" width="128" height="88"/>
+        <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
+    </elements>
+</model>
