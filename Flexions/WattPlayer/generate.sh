@@ -8,13 +8,15 @@
 ########################
 
 # the relative path to flexions.php
-cmdPath="/Users/bpds/Entrepot/Git/Public-projects/Flexions/src/flexions.php"
+cmdPath="../../../Flexions/src/flexions.php"
 
 # the source folder
-source="/Users/bpds/Entrepot/Git/Public-projects/Watt/Watt/Player/Flexions/"
+source="./"
 
 # the destination folder
-destination="/Users/bpds/Entrepot/Git/Public-projects/Watt/Watt/Player/Generated/"
+# destination="../../../Flexions/src/out/"
+destination="../../WattPlayer/Generated/"
+
 
 # the optional web url to invoke from a browser 
 webBaseUrl="http://flexions.local/flexions.php?"

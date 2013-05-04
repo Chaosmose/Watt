@@ -7,6 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E52D1CC21734F32C0043C615 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C7C1734F32C0043C615 /* WTMAction.m */; };
+		E52D1CC31734F32C0043C615 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C7E1734F32C0043C615 /* WTMActivity.m */; };
+		E52D1CC41734F32C0043C615 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C801734F32C0043C615 /* WTMAsset.m */; };
+		E52D1CC51734F32C0043C615 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C821734F32C0043C615 /* WTMBehavior.m */; };
+		E52D1CC61734F32C0043C615 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C841734F32C0043C615 /* WTMCollectionOfActivity.m */; };
+		E52D1CC71734F32C0043C615 /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C861734F32C0043C615 /* WTMCollectionOfDatum.m */; };
+		E52D1CC81734F32C0043C615 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C881734F32C0043C615 /* WTMCollectionOfElement.m */; };
+		E52D1CC91734F32C0043C615 /* WTMCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C8A1734F32C0043C615 /* WTMCollectionOfGroup.m */; };
+		E52D1CCA1734F32C0043C615 /* WTMCollectionOfLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C8C1734F32C0043C615 /* WTMCollectionOfLangDictionary.m */; };
+		E52D1CCB1734F32C0043C615 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C8E1734F32C0043C615 /* WTMCollectionOfLibrary.m */; };
+		E52D1CCC1734F32C0043C615 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C901734F32C0043C615 /* WTMCollectionOfMember.m */; };
+		E52D1CCD1734F32C0043C615 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C921734F32C0043C615 /* WTMCollectionOfPackage.m */; };
+		E52D1CCE1734F32C0043C615 /* WTMCollectionOfPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C941734F32C0043C615 /* WTMCollectionOfPage.m */; };
+		E52D1CCF1734F32C0043C615 /* WTMCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C961734F32C0043C615 /* WTMCollectionOfUser.m */; };
+		E52D1CD01734F32C0043C615 /* WTMDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C981734F32C0043C615 /* WTMDatum.m */; };
+		E52D1CD11734F32C0043C615 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C9A1734F32C0043C615 /* WTMElement.m */; };
+		E52D1CD21734F32C0043C615 /* WTMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C9C1734F32C0043C615 /* WTMGroup.m */; };
+		E52D1CD31734F32C0043C615 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1C9E1734F32C0043C615 /* WTMImage.m */; };
+		E52D1CD41734F32C0043C615 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CA01734F32C0043C615 /* WTMLangDictionary.m */; };
+		E52D1CD51734F32C0043C615 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CA21734F32C0043C615 /* WTMLibrary.m */; };
+		E52D1CD61734F32C0043C615 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CA41734F32C0043C615 /* WTMLinkedAsset.m */; };
+		E52D1CD71734F32C0043C615 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CA61734F32C0043C615 /* WTMMember.m */; };
+		E52D1CD81734F32C0043C615 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CA81734F32C0043C615 /* WTMOperand.m */; };
+		E52D1CD91734F32C0043C615 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CAA1734F32C0043C615 /* WTMOperator.m */; };
+		E52D1CDA1734F32C0043C615 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CAC1734F32C0043C615 /* WTMPackage.m */; };
+		E52D1CDB1734F32C0043C615 /* WTMPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CAE1734F32C0043C615 /* WTMPage.m */; };
+		E52D1CDC1734F32C0043C615 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CB01734F32C0043C615 /* WTMRule.m */; };
+		E52D1CDD1734F32C0043C615 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CB21734F32C0043C615 /* WTMShelf.m */; };
+		E52D1CDE1734F32C0043C615 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CB41734F32C0043C615 /* WTMSound.m */; };
+		E52D1CDF1734F32C0043C615 /* WTMText.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CB61734F32C0043C615 /* WTMText.m */; };
+		E52D1CE01734F32C0043C615 /* WTMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D1CB81734F32C0043C615 /* WTMUser.m */; };
 		E5B462451732A4A000E654A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
 		E5B462471732A4A000E654A1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
 		E5B462491732A4A000E654A1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462481732A4A000E654A1 /* CoreGraphics.framework */; };
@@ -19,40 +50,72 @@
 		E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5B462641732A4A000E654A1 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462631732A4A000E654A1 /* WTMViewController.m */; };
-		E5B462AE1732CD6D00E654A1 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462701732CD6D00E654A1 /* WTMAction.m */; };
-		E5B462AF1732CD6D00E654A1 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462721732CD6D00E654A1 /* WTMActivity.m */; };
-		E5B462B01732CD6D00E654A1 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462741732CD6D00E654A1 /* WTMAsset.m */; };
-		E5B462B11732CD6D00E654A1 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462761732CD6D00E654A1 /* WTMBehavior.m */; };
-		E5B462B21732CD6D00E654A1 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462781732CD6D00E654A1 /* WTMCollectionOfActivity.m */; };
-		E5B462B31732CD6D00E654A1 /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4627A1732CD6D00E654A1 /* WTMCollectionOfDatum.m */; };
-		E5B462B41732CD6D00E654A1 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4627C1732CD6D00E654A1 /* WTMCollectionOfElement.m */; };
-		E5B462B51732CD6D00E654A1 /* WTMCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4627E1732CD6D00E654A1 /* WTMCollectionOfGroup.m */; };
-		E5B462B61732CD6D00E654A1 /* WTMCollectionOfLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462801732CD6D00E654A1 /* WTMCollectionOfLangDictionary.m */; };
-		E5B462B71732CD6D00E654A1 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462821732CD6D00E654A1 /* WTMCollectionOfLibrary.m */; };
-		E5B462B81732CD6D00E654A1 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462841732CD6D00E654A1 /* WTMCollectionOfMember.m */; };
-		E5B462B91732CD6D00E654A1 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462861732CD6D00E654A1 /* WTMCollectionOfPackage.m */; };
-		E5B462BA1732CD6D00E654A1 /* WTMCollectionOfPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462881732CD6D00E654A1 /* WTMCollectionOfPage.m */; };
-		E5B462BB1732CD6D00E654A1 /* WTMCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4628A1732CD6D00E654A1 /* WTMCollectionOfUser.m */; };
-		E5B462BC1732CD6D00E654A1 /* WTMDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4628C1732CD6D00E654A1 /* WTMDatum.m */; };
-		E5B462BD1732CD6D00E654A1 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4628E1732CD6D00E654A1 /* WTMElement.m */; };
-		E5B462BE1732CD6D00E654A1 /* WTMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462901732CD6D00E654A1 /* WTMGroup.m */; };
-		E5B462BF1732CD6D00E654A1 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462921732CD6D00E654A1 /* WTMImage.m */; };
-		E5B462C01732CD6D00E654A1 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462941732CD6D00E654A1 /* WTMLangDictionary.m */; };
-		E5B462C11732CD6D00E654A1 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462961732CD6D00E654A1 /* WTMLibrary.m */; };
-		E5B462C21732CD6D00E654A1 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462981732CD6D00E654A1 /* WTMLinkedAsset.m */; };
-		E5B462C31732CD6D00E654A1 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4629A1732CD6D00E654A1 /* WTMMember.m */; };
-		E5B462C41732CD6D00E654A1 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4629C1732CD6D00E654A1 /* WTMOperand.m */; };
-		E5B462C51732CD6D00E654A1 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B4629E1732CD6D00E654A1 /* WTMOperator.m */; };
-		E5B462C61732CD6D00E654A1 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462A01732CD6D00E654A1 /* WTMPackage.m */; };
-		E5B462C71732CD6D00E654A1 /* WTMPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462A21732CD6D00E654A1 /* WTMPage.m */; };
-		E5B462C81732CD6D00E654A1 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462A41732CD6D00E654A1 /* WTMRule.m */; };
-		E5B462C91732CD6D00E654A1 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462A61732CD6D00E654A1 /* WTMShelf.m */; };
-		E5B462CA1732CD6D00E654A1 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462A81732CD6D00E654A1 /* WTMSound.m */; };
-		E5B462CB1732CD6D00E654A1 /* WTMText.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462AA1732CD6D00E654A1 /* WTMText.m */; };
-		E5B462CC1732CD6D00E654A1 /* WTMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462AC1732CD6D00E654A1 /* WTMUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E52D1C7B1734F32C0043C615 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
+		E52D1C7C1734F32C0043C615 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
+		E52D1C7D1734F32C0043C615 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
+		E52D1C7E1734F32C0043C615 /* WTMActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivity.m; sourceTree = "<group>"; };
+		E52D1C7F1734F32C0043C615 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
+		E52D1C801734F32C0043C615 /* WTMAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAsset.m; sourceTree = "<group>"; };
+		E52D1C811734F32C0043C615 /* WTMBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMBehavior.h; sourceTree = "<group>"; };
+		E52D1C821734F32C0043C615 /* WTMBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMBehavior.m; sourceTree = "<group>"; };
+		E52D1C831734F32C0043C615 /* WTMCollectionOfActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfActivity.h; sourceTree = "<group>"; };
+		E52D1C841734F32C0043C615 /* WTMCollectionOfActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfActivity.m; sourceTree = "<group>"; };
+		E52D1C851734F32C0043C615 /* WTMCollectionOfDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfDatum.h; sourceTree = "<group>"; };
+		E52D1C861734F32C0043C615 /* WTMCollectionOfDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfDatum.m; sourceTree = "<group>"; };
+		E52D1C871734F32C0043C615 /* WTMCollectionOfElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfElement.h; sourceTree = "<group>"; };
+		E52D1C881734F32C0043C615 /* WTMCollectionOfElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfElement.m; sourceTree = "<group>"; };
+		E52D1C891734F32C0043C615 /* WTMCollectionOfGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfGroup.h; sourceTree = "<group>"; };
+		E52D1C8A1734F32C0043C615 /* WTMCollectionOfGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfGroup.m; sourceTree = "<group>"; };
+		E52D1C8B1734F32C0043C615 /* WTMCollectionOfLangDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLangDictionary.h; sourceTree = "<group>"; };
+		E52D1C8C1734F32C0043C615 /* WTMCollectionOfLangDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLangDictionary.m; sourceTree = "<group>"; };
+		E52D1C8D1734F32C0043C615 /* WTMCollectionOfLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLibrary.h; sourceTree = "<group>"; };
+		E52D1C8E1734F32C0043C615 /* WTMCollectionOfLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLibrary.m; sourceTree = "<group>"; };
+		E52D1C8F1734F32C0043C615 /* WTMCollectionOfMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMember.h; sourceTree = "<group>"; };
+		E52D1C901734F32C0043C615 /* WTMCollectionOfMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMember.m; sourceTree = "<group>"; };
+		E52D1C911734F32C0043C615 /* WTMCollectionOfPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfPackage.h; sourceTree = "<group>"; };
+		E52D1C921734F32C0043C615 /* WTMCollectionOfPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfPackage.m; sourceTree = "<group>"; };
+		E52D1C931734F32C0043C615 /* WTMCollectionOfPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfPage.h; sourceTree = "<group>"; };
+		E52D1C941734F32C0043C615 /* WTMCollectionOfPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfPage.m; sourceTree = "<group>"; };
+		E52D1C951734F32C0043C615 /* WTMCollectionOfUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfUser.h; sourceTree = "<group>"; };
+		E52D1C961734F32C0043C615 /* WTMCollectionOfUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfUser.m; sourceTree = "<group>"; };
+		E52D1C971734F32C0043C615 /* WTMDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMDatum.h; sourceTree = "<group>"; };
+		E52D1C981734F32C0043C615 /* WTMDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMDatum.m; sourceTree = "<group>"; };
+		E52D1C991734F32C0043C615 /* WTMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElement.h; sourceTree = "<group>"; };
+		E52D1C9A1734F32C0043C615 /* WTMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMElement.m; sourceTree = "<group>"; };
+		E52D1C9B1734F32C0043C615 /* WTMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGroup.h; sourceTree = "<group>"; };
+		E52D1C9C1734F32C0043C615 /* WTMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGroup.m; sourceTree = "<group>"; };
+		E52D1C9D1734F32C0043C615 /* WTMImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMImage.h; sourceTree = "<group>"; };
+		E52D1C9E1734F32C0043C615 /* WTMImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMImage.m; sourceTree = "<group>"; };
+		E52D1C9F1734F32C0043C615 /* WTMLangDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLangDictionary.h; sourceTree = "<group>"; };
+		E52D1CA01734F32C0043C615 /* WTMLangDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLangDictionary.m; sourceTree = "<group>"; };
+		E52D1CA11734F32C0043C615 /* WTMLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLibrary.h; sourceTree = "<group>"; };
+		E52D1CA21734F32C0043C615 /* WTMLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLibrary.m; sourceTree = "<group>"; };
+		E52D1CA31734F32C0043C615 /* WTMLinkedAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLinkedAsset.h; sourceTree = "<group>"; };
+		E52D1CA41734F32C0043C615 /* WTMLinkedAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLinkedAsset.m; sourceTree = "<group>"; };
+		E52D1CA51734F32C0043C615 /* WTMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMember.h; sourceTree = "<group>"; };
+		E52D1CA61734F32C0043C615 /* WTMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMember.m; sourceTree = "<group>"; };
+		E52D1CA71734F32C0043C615 /* WTMOperand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperand.h; sourceTree = "<group>"; };
+		E52D1CA81734F32C0043C615 /* WTMOperand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperand.m; sourceTree = "<group>"; };
+		E52D1CA91734F32C0043C615 /* WTMOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperator.h; sourceTree = "<group>"; };
+		E52D1CAA1734F32C0043C615 /* WTMOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperator.m; sourceTree = "<group>"; };
+		E52D1CAB1734F32C0043C615 /* WTMPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPackage.h; sourceTree = "<group>"; };
+		E52D1CAC1734F32C0043C615 /* WTMPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPackage.m; sourceTree = "<group>"; };
+		E52D1CAD1734F32C0043C615 /* WTMPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPage.h; sourceTree = "<group>"; };
+		E52D1CAE1734F32C0043C615 /* WTMPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPage.m; sourceTree = "<group>"; };
+		E52D1CAF1734F32C0043C615 /* WTMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMRule.h; sourceTree = "<group>"; };
+		E52D1CB01734F32C0043C615 /* WTMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMRule.m; sourceTree = "<group>"; };
+		E52D1CB11734F32C0043C615 /* WTMShelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMShelf.h; sourceTree = "<group>"; };
+		E52D1CB21734F32C0043C615 /* WTMShelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMShelf.m; sourceTree = "<group>"; };
+		E52D1CB31734F32C0043C615 /* WTMSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMSound.h; sourceTree = "<group>"; };
+		E52D1CB41734F32C0043C615 /* WTMSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMSound.m; sourceTree = "<group>"; };
+		E52D1CB51734F32C0043C615 /* WTMText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMText.h; sourceTree = "<group>"; };
+		E52D1CB61734F32C0043C615 /* WTMText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMText.m; sourceTree = "<group>"; };
+		E52D1CB71734F32C0043C615 /* WTMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMUser.h; sourceTree = "<group>"; };
+		E52D1CB81734F32C0043C615 /* WTMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMUser.m; sourceTree = "<group>"; };
+		E52D1CB91734F32C0043C615 /* WTMModelsImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModelsImports.h; sourceTree = "<group>"; };
 		E5B462411732A4A000E654A1 /* PlayerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462441732A4A000E654A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E5B462461732A4A000E654A1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -70,69 +133,6 @@
 		E5B462601732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E5B462621732A4A000E654A1 /* WTMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTMViewController.h; sourceTree = "<group>"; };
 		E5B462631732A4A000E654A1 /* WTMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
-		E5B4626F1732CD6D00E654A1 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
-		E5B462701732CD6D00E654A1 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
-		E5B462711732CD6D00E654A1 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
-		E5B462721732CD6D00E654A1 /* WTMActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivity.m; sourceTree = "<group>"; };
-		E5B462731732CD6D00E654A1 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
-		E5B462741732CD6D00E654A1 /* WTMAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAsset.m; sourceTree = "<group>"; };
-		E5B462751732CD6D00E654A1 /* WTMBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMBehavior.h; sourceTree = "<group>"; };
-		E5B462761732CD6D00E654A1 /* WTMBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMBehavior.m; sourceTree = "<group>"; };
-		E5B462771732CD6D00E654A1 /* WTMCollectionOfActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfActivity.h; sourceTree = "<group>"; };
-		E5B462781732CD6D00E654A1 /* WTMCollectionOfActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfActivity.m; sourceTree = "<group>"; };
-		E5B462791732CD6D00E654A1 /* WTMCollectionOfDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfDatum.h; sourceTree = "<group>"; };
-		E5B4627A1732CD6D00E654A1 /* WTMCollectionOfDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfDatum.m; sourceTree = "<group>"; };
-		E5B4627B1732CD6D00E654A1 /* WTMCollectionOfElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfElement.h; sourceTree = "<group>"; };
-		E5B4627C1732CD6D00E654A1 /* WTMCollectionOfElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfElement.m; sourceTree = "<group>"; };
-		E5B4627D1732CD6D00E654A1 /* WTMCollectionOfGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfGroup.h; sourceTree = "<group>"; };
-		E5B4627E1732CD6D00E654A1 /* WTMCollectionOfGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfGroup.m; sourceTree = "<group>"; };
-		E5B4627F1732CD6D00E654A1 /* WTMCollectionOfLangDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLangDictionary.h; sourceTree = "<group>"; };
-		E5B462801732CD6D00E654A1 /* WTMCollectionOfLangDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLangDictionary.m; sourceTree = "<group>"; };
-		E5B462811732CD6D00E654A1 /* WTMCollectionOfLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLibrary.h; sourceTree = "<group>"; };
-		E5B462821732CD6D00E654A1 /* WTMCollectionOfLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLibrary.m; sourceTree = "<group>"; };
-		E5B462831732CD6D00E654A1 /* WTMCollectionOfMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMember.h; sourceTree = "<group>"; };
-		E5B462841732CD6D00E654A1 /* WTMCollectionOfMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMember.m; sourceTree = "<group>"; };
-		E5B462851732CD6D00E654A1 /* WTMCollectionOfPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfPackage.h; sourceTree = "<group>"; };
-		E5B462861732CD6D00E654A1 /* WTMCollectionOfPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfPackage.m; sourceTree = "<group>"; };
-		E5B462871732CD6D00E654A1 /* WTMCollectionOfPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfPage.h; sourceTree = "<group>"; };
-		E5B462881732CD6D00E654A1 /* WTMCollectionOfPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfPage.m; sourceTree = "<group>"; };
-		E5B462891732CD6D00E654A1 /* WTMCollectionOfUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfUser.h; sourceTree = "<group>"; };
-		E5B4628A1732CD6D00E654A1 /* WTMCollectionOfUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfUser.m; sourceTree = "<group>"; };
-		E5B4628B1732CD6D00E654A1 /* WTMDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMDatum.h; sourceTree = "<group>"; };
-		E5B4628C1732CD6D00E654A1 /* WTMDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMDatum.m; sourceTree = "<group>"; };
-		E5B4628D1732CD6D00E654A1 /* WTMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElement.h; sourceTree = "<group>"; };
-		E5B4628E1732CD6D00E654A1 /* WTMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMElement.m; sourceTree = "<group>"; };
-		E5B4628F1732CD6D00E654A1 /* WTMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGroup.h; sourceTree = "<group>"; };
-		E5B462901732CD6D00E654A1 /* WTMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGroup.m; sourceTree = "<group>"; };
-		E5B462911732CD6D00E654A1 /* WTMImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMImage.h; sourceTree = "<group>"; };
-		E5B462921732CD6D00E654A1 /* WTMImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMImage.m; sourceTree = "<group>"; };
-		E5B462931732CD6D00E654A1 /* WTMLangDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLangDictionary.h; sourceTree = "<group>"; };
-		E5B462941732CD6D00E654A1 /* WTMLangDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLangDictionary.m; sourceTree = "<group>"; };
-		E5B462951732CD6D00E654A1 /* WTMLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLibrary.h; sourceTree = "<group>"; };
-		E5B462961732CD6D00E654A1 /* WTMLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLibrary.m; sourceTree = "<group>"; };
-		E5B462971732CD6D00E654A1 /* WTMLinkedAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLinkedAsset.h; sourceTree = "<group>"; };
-		E5B462981732CD6D00E654A1 /* WTMLinkedAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLinkedAsset.m; sourceTree = "<group>"; };
-		E5B462991732CD6D00E654A1 /* WTMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMember.h; sourceTree = "<group>"; };
-		E5B4629A1732CD6D00E654A1 /* WTMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMember.m; sourceTree = "<group>"; };
-		E5B4629B1732CD6D00E654A1 /* WTMOperand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperand.h; sourceTree = "<group>"; };
-		E5B4629C1732CD6D00E654A1 /* WTMOperand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperand.m; sourceTree = "<group>"; };
-		E5B4629D1732CD6D00E654A1 /* WTMOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperator.h; sourceTree = "<group>"; };
-		E5B4629E1732CD6D00E654A1 /* WTMOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperator.m; sourceTree = "<group>"; };
-		E5B4629F1732CD6D00E654A1 /* WTMPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPackage.h; sourceTree = "<group>"; };
-		E5B462A01732CD6D00E654A1 /* WTMPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPackage.m; sourceTree = "<group>"; };
-		E5B462A11732CD6D00E654A1 /* WTMPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPage.h; sourceTree = "<group>"; };
-		E5B462A21732CD6D00E654A1 /* WTMPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPage.m; sourceTree = "<group>"; };
-		E5B462A31732CD6D00E654A1 /* WTMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMRule.h; sourceTree = "<group>"; };
-		E5B462A41732CD6D00E654A1 /* WTMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMRule.m; sourceTree = "<group>"; };
-		E5B462A51732CD6D00E654A1 /* WTMShelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMShelf.h; sourceTree = "<group>"; };
-		E5B462A61732CD6D00E654A1 /* WTMShelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMShelf.m; sourceTree = "<group>"; };
-		E5B462A71732CD6D00E654A1 /* WTMSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMSound.h; sourceTree = "<group>"; };
-		E5B462A81732CD6D00E654A1 /* WTMSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMSound.m; sourceTree = "<group>"; };
-		E5B462A91732CD6D00E654A1 /* WTMText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMText.h; sourceTree = "<group>"; };
-		E5B462AA1732CD6D00E654A1 /* WTMText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMText.m; sourceTree = "<group>"; };
-		E5B462AB1732CD6D00E654A1 /* WTMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMUser.h; sourceTree = "<group>"; };
-		E5B462AC1732CD6D00E654A1 /* WTMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMUser.m; sourceTree = "<group>"; };
-		E5B462AD1732CD6D00E654A1 /* WTMModelsImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModelsImports.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,10 +149,105 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E52D1C6E1734F32C0043C615 /* WattPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				E52D1C791734F32C0043C615 /* Generated */,
+				E52D1CBA1734F32C0043C615 /* Packager */,
+			);
+			name = WattPlayer;
+			path = ../../WattPlayer;
+			sourceTree = "<group>";
+		};
+		E52D1C791734F32C0043C615 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				E52D1C7A1734F32C0043C615 /* Models */,
+				E52D1CB91734F32C0043C615 /* WTMModelsImports.h */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		E52D1C7A1734F32C0043C615 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E52D1C7B1734F32C0043C615 /* WTMAction.h */,
+				E52D1C7C1734F32C0043C615 /* WTMAction.m */,
+				E52D1C7D1734F32C0043C615 /* WTMActivity.h */,
+				E52D1C7E1734F32C0043C615 /* WTMActivity.m */,
+				E52D1C7F1734F32C0043C615 /* WTMAsset.h */,
+				E52D1C801734F32C0043C615 /* WTMAsset.m */,
+				E52D1C811734F32C0043C615 /* WTMBehavior.h */,
+				E52D1C821734F32C0043C615 /* WTMBehavior.m */,
+				E52D1C831734F32C0043C615 /* WTMCollectionOfActivity.h */,
+				E52D1C841734F32C0043C615 /* WTMCollectionOfActivity.m */,
+				E52D1C851734F32C0043C615 /* WTMCollectionOfDatum.h */,
+				E52D1C861734F32C0043C615 /* WTMCollectionOfDatum.m */,
+				E52D1C871734F32C0043C615 /* WTMCollectionOfElement.h */,
+				E52D1C881734F32C0043C615 /* WTMCollectionOfElement.m */,
+				E52D1C891734F32C0043C615 /* WTMCollectionOfGroup.h */,
+				E52D1C8A1734F32C0043C615 /* WTMCollectionOfGroup.m */,
+				E52D1C8B1734F32C0043C615 /* WTMCollectionOfLangDictionary.h */,
+				E52D1C8C1734F32C0043C615 /* WTMCollectionOfLangDictionary.m */,
+				E52D1C8D1734F32C0043C615 /* WTMCollectionOfLibrary.h */,
+				E52D1C8E1734F32C0043C615 /* WTMCollectionOfLibrary.m */,
+				E52D1C8F1734F32C0043C615 /* WTMCollectionOfMember.h */,
+				E52D1C901734F32C0043C615 /* WTMCollectionOfMember.m */,
+				E52D1C911734F32C0043C615 /* WTMCollectionOfPackage.h */,
+				E52D1C921734F32C0043C615 /* WTMCollectionOfPackage.m */,
+				E52D1C931734F32C0043C615 /* WTMCollectionOfPage.h */,
+				E52D1C941734F32C0043C615 /* WTMCollectionOfPage.m */,
+				E52D1C951734F32C0043C615 /* WTMCollectionOfUser.h */,
+				E52D1C961734F32C0043C615 /* WTMCollectionOfUser.m */,
+				E52D1C971734F32C0043C615 /* WTMDatum.h */,
+				E52D1C981734F32C0043C615 /* WTMDatum.m */,
+				E52D1C991734F32C0043C615 /* WTMElement.h */,
+				E52D1C9A1734F32C0043C615 /* WTMElement.m */,
+				E52D1C9B1734F32C0043C615 /* WTMGroup.h */,
+				E52D1C9C1734F32C0043C615 /* WTMGroup.m */,
+				E52D1C9D1734F32C0043C615 /* WTMImage.h */,
+				E52D1C9E1734F32C0043C615 /* WTMImage.m */,
+				E52D1C9F1734F32C0043C615 /* WTMLangDictionary.h */,
+				E52D1CA01734F32C0043C615 /* WTMLangDictionary.m */,
+				E52D1CA11734F32C0043C615 /* WTMLibrary.h */,
+				E52D1CA21734F32C0043C615 /* WTMLibrary.m */,
+				E52D1CA31734F32C0043C615 /* WTMLinkedAsset.h */,
+				E52D1CA41734F32C0043C615 /* WTMLinkedAsset.m */,
+				E52D1CA51734F32C0043C615 /* WTMMember.h */,
+				E52D1CA61734F32C0043C615 /* WTMMember.m */,
+				E52D1CA71734F32C0043C615 /* WTMOperand.h */,
+				E52D1CA81734F32C0043C615 /* WTMOperand.m */,
+				E52D1CA91734F32C0043C615 /* WTMOperator.h */,
+				E52D1CAA1734F32C0043C615 /* WTMOperator.m */,
+				E52D1CAB1734F32C0043C615 /* WTMPackage.h */,
+				E52D1CAC1734F32C0043C615 /* WTMPackage.m */,
+				E52D1CAD1734F32C0043C615 /* WTMPage.h */,
+				E52D1CAE1734F32C0043C615 /* WTMPage.m */,
+				E52D1CAF1734F32C0043C615 /* WTMRule.h */,
+				E52D1CB01734F32C0043C615 /* WTMRule.m */,
+				E52D1CB11734F32C0043C615 /* WTMShelf.h */,
+				E52D1CB21734F32C0043C615 /* WTMShelf.m */,
+				E52D1CB31734F32C0043C615 /* WTMSound.h */,
+				E52D1CB41734F32C0043C615 /* WTMSound.m */,
+				E52D1CB51734F32C0043C615 /* WTMText.h */,
+				E52D1CB61734F32C0043C615 /* WTMText.m */,
+				E52D1CB71734F32C0043C615 /* WTMUser.h */,
+				E52D1CB81734F32C0043C615 /* WTMUser.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E52D1CBA1734F32C0043C615 /* Packager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Packager;
+			sourceTree = "<group>";
+		};
 		E5B462381732A4A000E654A1 = {
 			isa = PBXGroup;
 			children = (
-				E5B4626D1732CD6D00E654A1 /* Generated */,
+				E52D1C6E1734F32C0043C615 /* WattPlayer */,
 				E5B4624A1732A4A000E654A1 /* PlayerSample */,
 				E5B462431732A4A000E654A1 /* Frameworks */,
 				E5B462421732A4A000E654A1 /* Products */,
@@ -203,85 +298,6 @@
 				E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E5B4626D1732CD6D00E654A1 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				E5B4626E1732CD6D00E654A1 /* Models */,
-				E5B462AD1732CD6D00E654A1 /* WTMModelsImports.h */,
-			);
-			name = Generated;
-			path = ../../Player/Generated;
-			sourceTree = "<group>";
-		};
-		E5B4626E1732CD6D00E654A1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E5B4626F1732CD6D00E654A1 /* WTMAction.h */,
-				E5B462701732CD6D00E654A1 /* WTMAction.m */,
-				E5B462711732CD6D00E654A1 /* WTMActivity.h */,
-				E5B462721732CD6D00E654A1 /* WTMActivity.m */,
-				E5B462731732CD6D00E654A1 /* WTMAsset.h */,
-				E5B462741732CD6D00E654A1 /* WTMAsset.m */,
-				E5B462751732CD6D00E654A1 /* WTMBehavior.h */,
-				E5B462761732CD6D00E654A1 /* WTMBehavior.m */,
-				E5B462771732CD6D00E654A1 /* WTMCollectionOfActivity.h */,
-				E5B462781732CD6D00E654A1 /* WTMCollectionOfActivity.m */,
-				E5B462791732CD6D00E654A1 /* WTMCollectionOfDatum.h */,
-				E5B4627A1732CD6D00E654A1 /* WTMCollectionOfDatum.m */,
-				E5B4627B1732CD6D00E654A1 /* WTMCollectionOfElement.h */,
-				E5B4627C1732CD6D00E654A1 /* WTMCollectionOfElement.m */,
-				E5B4627D1732CD6D00E654A1 /* WTMCollectionOfGroup.h */,
-				E5B4627E1732CD6D00E654A1 /* WTMCollectionOfGroup.m */,
-				E5B4627F1732CD6D00E654A1 /* WTMCollectionOfLangDictionary.h */,
-				E5B462801732CD6D00E654A1 /* WTMCollectionOfLangDictionary.m */,
-				E5B462811732CD6D00E654A1 /* WTMCollectionOfLibrary.h */,
-				E5B462821732CD6D00E654A1 /* WTMCollectionOfLibrary.m */,
-				E5B462831732CD6D00E654A1 /* WTMCollectionOfMember.h */,
-				E5B462841732CD6D00E654A1 /* WTMCollectionOfMember.m */,
-				E5B462851732CD6D00E654A1 /* WTMCollectionOfPackage.h */,
-				E5B462861732CD6D00E654A1 /* WTMCollectionOfPackage.m */,
-				E5B462871732CD6D00E654A1 /* WTMCollectionOfPage.h */,
-				E5B462881732CD6D00E654A1 /* WTMCollectionOfPage.m */,
-				E5B462891732CD6D00E654A1 /* WTMCollectionOfUser.h */,
-				E5B4628A1732CD6D00E654A1 /* WTMCollectionOfUser.m */,
-				E5B4628B1732CD6D00E654A1 /* WTMDatum.h */,
-				E5B4628C1732CD6D00E654A1 /* WTMDatum.m */,
-				E5B4628D1732CD6D00E654A1 /* WTMElement.h */,
-				E5B4628E1732CD6D00E654A1 /* WTMElement.m */,
-				E5B4628F1732CD6D00E654A1 /* WTMGroup.h */,
-				E5B462901732CD6D00E654A1 /* WTMGroup.m */,
-				E5B462911732CD6D00E654A1 /* WTMImage.h */,
-				E5B462921732CD6D00E654A1 /* WTMImage.m */,
-				E5B462931732CD6D00E654A1 /* WTMLangDictionary.h */,
-				E5B462941732CD6D00E654A1 /* WTMLangDictionary.m */,
-				E5B462951732CD6D00E654A1 /* WTMLibrary.h */,
-				E5B462961732CD6D00E654A1 /* WTMLibrary.m */,
-				E5B462971732CD6D00E654A1 /* WTMLinkedAsset.h */,
-				E5B462981732CD6D00E654A1 /* WTMLinkedAsset.m */,
-				E5B462991732CD6D00E654A1 /* WTMMember.h */,
-				E5B4629A1732CD6D00E654A1 /* WTMMember.m */,
-				E5B4629B1732CD6D00E654A1 /* WTMOperand.h */,
-				E5B4629C1732CD6D00E654A1 /* WTMOperand.m */,
-				E5B4629D1732CD6D00E654A1 /* WTMOperator.h */,
-				E5B4629E1732CD6D00E654A1 /* WTMOperator.m */,
-				E5B4629F1732CD6D00E654A1 /* WTMPackage.h */,
-				E5B462A01732CD6D00E654A1 /* WTMPackage.m */,
-				E5B462A11732CD6D00E654A1 /* WTMPage.h */,
-				E5B462A21732CD6D00E654A1 /* WTMPage.m */,
-				E5B462A31732CD6D00E654A1 /* WTMRule.h */,
-				E5B462A41732CD6D00E654A1 /* WTMRule.m */,
-				E5B462A51732CD6D00E654A1 /* WTMShelf.h */,
-				E5B462A61732CD6D00E654A1 /* WTMShelf.m */,
-				E5B462A71732CD6D00E654A1 /* WTMSound.h */,
-				E5B462A81732CD6D00E654A1 /* WTMSound.m */,
-				E5B462A91732CD6D00E654A1 /* WTMText.h */,
-				E5B462AA1732CD6D00E654A1 /* WTMText.m */,
-				E5B462AB1732CD6D00E654A1 /* WTMUser.h */,
-				E5B462AC1732CD6D00E654A1 /* WTMUser.m */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,37 +371,37 @@
 				E5B462511732A4A000E654A1 /* main.m in Sources */,
 				E5B462551732A4A000E654A1 /* WTMAppDelegate.m in Sources */,
 				E5B462641732A4A000E654A1 /* WTMViewController.m in Sources */,
-				E5B462AE1732CD6D00E654A1 /* WTMAction.m in Sources */,
-				E5B462AF1732CD6D00E654A1 /* WTMActivity.m in Sources */,
-				E5B462B01732CD6D00E654A1 /* WTMAsset.m in Sources */,
-				E5B462B11732CD6D00E654A1 /* WTMBehavior.m in Sources */,
-				E5B462B21732CD6D00E654A1 /* WTMCollectionOfActivity.m in Sources */,
-				E5B462B31732CD6D00E654A1 /* WTMCollectionOfDatum.m in Sources */,
-				E5B462B41732CD6D00E654A1 /* WTMCollectionOfElement.m in Sources */,
-				E5B462B51732CD6D00E654A1 /* WTMCollectionOfGroup.m in Sources */,
-				E5B462B61732CD6D00E654A1 /* WTMCollectionOfLangDictionary.m in Sources */,
-				E5B462B71732CD6D00E654A1 /* WTMCollectionOfLibrary.m in Sources */,
-				E5B462B81732CD6D00E654A1 /* WTMCollectionOfMember.m in Sources */,
-				E5B462B91732CD6D00E654A1 /* WTMCollectionOfPackage.m in Sources */,
-				E5B462BA1732CD6D00E654A1 /* WTMCollectionOfPage.m in Sources */,
-				E5B462BB1732CD6D00E654A1 /* WTMCollectionOfUser.m in Sources */,
-				E5B462BC1732CD6D00E654A1 /* WTMDatum.m in Sources */,
-				E5B462BD1732CD6D00E654A1 /* WTMElement.m in Sources */,
-				E5B462BE1732CD6D00E654A1 /* WTMGroup.m in Sources */,
-				E5B462BF1732CD6D00E654A1 /* WTMImage.m in Sources */,
-				E5B462C01732CD6D00E654A1 /* WTMLangDictionary.m in Sources */,
-				E5B462C11732CD6D00E654A1 /* WTMLibrary.m in Sources */,
-				E5B462C21732CD6D00E654A1 /* WTMLinkedAsset.m in Sources */,
-				E5B462C31732CD6D00E654A1 /* WTMMember.m in Sources */,
-				E5B462C41732CD6D00E654A1 /* WTMOperand.m in Sources */,
-				E5B462C51732CD6D00E654A1 /* WTMOperator.m in Sources */,
-				E5B462C61732CD6D00E654A1 /* WTMPackage.m in Sources */,
-				E5B462C71732CD6D00E654A1 /* WTMPage.m in Sources */,
-				E5B462C81732CD6D00E654A1 /* WTMRule.m in Sources */,
-				E5B462C91732CD6D00E654A1 /* WTMShelf.m in Sources */,
-				E5B462CA1732CD6D00E654A1 /* WTMSound.m in Sources */,
-				E5B462CB1732CD6D00E654A1 /* WTMText.m in Sources */,
-				E5B462CC1732CD6D00E654A1 /* WTMUser.m in Sources */,
+				E52D1CC21734F32C0043C615 /* WTMAction.m in Sources */,
+				E52D1CC31734F32C0043C615 /* WTMActivity.m in Sources */,
+				E52D1CC41734F32C0043C615 /* WTMAsset.m in Sources */,
+				E52D1CC51734F32C0043C615 /* WTMBehavior.m in Sources */,
+				E52D1CC61734F32C0043C615 /* WTMCollectionOfActivity.m in Sources */,
+				E52D1CC71734F32C0043C615 /* WTMCollectionOfDatum.m in Sources */,
+				E52D1CC81734F32C0043C615 /* WTMCollectionOfElement.m in Sources */,
+				E52D1CC91734F32C0043C615 /* WTMCollectionOfGroup.m in Sources */,
+				E52D1CCA1734F32C0043C615 /* WTMCollectionOfLangDictionary.m in Sources */,
+				E52D1CCB1734F32C0043C615 /* WTMCollectionOfLibrary.m in Sources */,
+				E52D1CCC1734F32C0043C615 /* WTMCollectionOfMember.m in Sources */,
+				E52D1CCD1734F32C0043C615 /* WTMCollectionOfPackage.m in Sources */,
+				E52D1CCE1734F32C0043C615 /* WTMCollectionOfPage.m in Sources */,
+				E52D1CCF1734F32C0043C615 /* WTMCollectionOfUser.m in Sources */,
+				E52D1CD01734F32C0043C615 /* WTMDatum.m in Sources */,
+				E52D1CD11734F32C0043C615 /* WTMElement.m in Sources */,
+				E52D1CD21734F32C0043C615 /* WTMGroup.m in Sources */,
+				E52D1CD31734F32C0043C615 /* WTMImage.m in Sources */,
+				E52D1CD41734F32C0043C615 /* WTMLangDictionary.m in Sources */,
+				E52D1CD51734F32C0043C615 /* WTMLibrary.m in Sources */,
+				E52D1CD61734F32C0043C615 /* WTMLinkedAsset.m in Sources */,
+				E52D1CD71734F32C0043C615 /* WTMMember.m in Sources */,
+				E52D1CD81734F32C0043C615 /* WTMOperand.m in Sources */,
+				E52D1CD91734F32C0043C615 /* WTMOperator.m in Sources */,
+				E52D1CDA1734F32C0043C615 /* WTMPackage.m in Sources */,
+				E52D1CDB1734F32C0043C615 /* WTMPage.m in Sources */,
+				E52D1CDC1734F32C0043C615 /* WTMRule.m in Sources */,
+				E52D1CDD1734F32C0043C615 /* WTMShelf.m in Sources */,
+				E52D1CDE1734F32C0043C615 /* WTMSound.m in Sources */,
+				E52D1CDF1734F32C0043C615 /* WTMText.m in Sources */,
+				E52D1CE01734F32C0043C615 /* WTMUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
