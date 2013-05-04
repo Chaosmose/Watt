@@ -23,7 +23,7 @@
 #import "WTMCollectionOfActivity.h"
 #import "WTMCollectionOfLangDictionary.h"
 #import "WTMCollectionOfLibrary.h"
-#import "WTMUser.h"
+#import "WTMCollectionOfUser.h"
 
 @implementation WTMPackage 
 
@@ -54,8 +54,12 @@
 		[super setValue:value forKey:@"minEngineVersion"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"ownerUserUID"]) {
+		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
+	} else if ([key isEqualToString:@"shelfIndex"]) {
+		[super setValue:value forKey:@"shelfIndex"];
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"activities"]) {
@@ -64,8 +68,8 @@
 		[super setValue:[WTMCollectionOfLangDictionary instanceFromDictionary:value] forKey:@"langDictionaries"];
 	} else if ([key isEqualToString:@"libraries"]) {
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value] forKey:@"libraries"];
-	} else if ([key isEqualToString:@"owner"]) {
-		[super setValue:[WTMUser instanceFromDictionary:value] forKey:@"owner"];
+	} else if ([key isEqualToString:@"rightsAssignees"]) {
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value] forKey:@"rightsAssignees"];
 	} else {
 		[super setValue:value forUndefinedKey:key];
 	}
@@ -78,12 +82,14 @@
 	[dictionary setValue:self.license forKey:@"license"];
 	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
 	[dictionary setValue:self.name forKey:@"name"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:self.rights forKey:@"rights"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.shelfIndex] forKey:@"shelfIndex"];
 	[dictionary setValue:self.uid forKey:@"uid"];
 	[dictionary setValue:[self.activities dictionaryRepresentation] forKey:@"activities"];
 	[dictionary setValue:[self.langDictionaries dictionaryRepresentation] forKey:@"langDictionaries"];
 	[dictionary setValue:[self.libraries dictionaryRepresentation] forKey:@"libraries"];
-	[dictionary setValue:[self.owner dictionaryRepresentation] forKey:@"owner"];
+	[dictionary setValue:[self.rightsAssignees dictionaryRepresentation] forKey:@"rightsAssignees"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -95,12 +101,14 @@
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"shelfIndex : %@\n",[NSNumber numberWithInteger:self.shelfIndex]];
 	[s appendFormat:@"uid : %@\n",self.uid];
 	[s appendFormat:@"activities : %@\n",self.activities];
 	[s appendFormat:@"langDictionaries : %@\n",self.langDictionaries];
 	[s appendFormat:@"libraries : %@\n",self.libraries];
-	[s appendFormat:@"owner : %@\n",self.owner];
+	[s appendFormat:@"rightsAssignees : %@\n",self.rightsAssignees];
 	return s;
 }
 

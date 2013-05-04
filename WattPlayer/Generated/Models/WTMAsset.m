@@ -42,11 +42,17 @@
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {
+	if ([key isEqualToString:@"comment"]){
+		[super setValue:value forKey:@"comment"];
+	} else {
+		[super setValue:value forUndefinedKey:key];
+	}
 }
 
 - (NSDictionary*)dictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.comment forKey:@"comment"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -54,6 +60,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"comment : %@\n",self.comment];
 	return s;
 }
 

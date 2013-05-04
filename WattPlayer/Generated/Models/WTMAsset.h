@@ -27,6 +27,7 @@
 @interface WTMAsset:WTMMember{
 }
 
+@property (nonatomic,copy) NSString * comment;
  
 + (WTMAsset *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;

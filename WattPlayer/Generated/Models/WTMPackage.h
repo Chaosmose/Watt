@@ -25,7 +25,7 @@
 @class WTMCollectionOfActivity;
 @class WTMCollectionOfLangDictionary;
 @class WTMCollectionOfLibrary;
-@class WTMUser;
+@class WTMCollectionOfUser;
 
 @interface WTMPackage:NSObject{
 }
@@ -34,12 +34,14 @@
 @property (nonatomic,copy) NSString * license;
 @property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,copy) NSString * rights;
+@property (nonatomic,assign) NSInteger  shelfIndex;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMCollectionOfLangDictionary * langDictionaries;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
-@property (nonatomic,strong) WTMUser * owner;
+@property (nonatomic,strong) WTMCollectionOfUser * rightsAssignees;
  
 + (WTMPackage *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;

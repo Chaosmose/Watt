@@ -27,7 +27,6 @@
 @interface WTMLinkedAsset:WTMAsset{
 }
 
-@property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * fileName;
 @property (nonatomic,copy) NSString * relativePath;
  

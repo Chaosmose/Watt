@@ -28,6 +28,7 @@
 }
 
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
  

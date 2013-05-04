@@ -47,8 +47,14 @@
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
+	} else if ([key isEqualToString:@"ownerUserUID"]) {
+		[super setValue:value forKey:@"ownerUserUID"];
+	} else if ([key isEqualToString:@"packageIndex"]) {
+		[super setValue:value forKey:@"packageIndex"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
+	} else if ([key isEqualToString:@"rights"]) {
+		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"shortName"]) {
 		[super setValue:value forKey:@"shortName"];
 	} else if ([key isEqualToString:@"title"]) {
@@ -67,7 +73,10 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
+	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
@@ -81,7 +90,10 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
+	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];

@@ -29,6 +29,8 @@
 
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,copy) NSString * ownerUserUID;
+@property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfDatum * metadata;
  

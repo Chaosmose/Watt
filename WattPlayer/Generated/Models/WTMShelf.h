@@ -29,6 +29,8 @@
 }
 
 @property (nonatomic,copy) NSString * comment;
+@property (nonatomic,copy) NSString * ownerUserUID;
+@property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfUser * localUsers;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
  

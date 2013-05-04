@@ -42,9 +42,7 @@
 }
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"comment"]){
-		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"fileName"]) {
+	if ([key isEqualToString:@"fileName"]){
 		[super setValue:value forKey:@"fileName"];
 	} else if ([key isEqualToString:@"relativePath"]) {
 		[super setValue:value forKey:@"relativePath"];
@@ -56,7 +54,6 @@
 - (NSDictionary*)dictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.fileName forKey:@"fileName"];
 	[dictionary setValue:self.relativePath forKey:@"relativePath"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
@@ -66,7 +63,6 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"fileName : %@\n",self.fileName];
 	[s appendFormat:@"relativePath : %@\n",self.relativePath];
 	return s;

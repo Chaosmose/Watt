@@ -20,21 +20,19 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMUser.h" 
+#import <Foundation/Foundation.h>
 
-@interface WTMUser:NSObject {
+@class WTMCollectionOfGroup;
+
+@interface WTMUser:NSObject{
 }
 
+@property (nonatomic,copy) NSString * identity;
+@property (nonatomic,copy) NSString * uid;
+@property (nonatomic,strong) WTMCollectionOfGroup * groups;
+ 
 + (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
-- (NSUInteger)count;
-- (WTMUser *)objectAtIndex:(NSUInteger)index;
-- (void)addObject:(WTMUser*)anObject;
-- (void)insertObject:(WTMUser*)anObject atIndex:(NSUInteger)index;
-- (void)removeLastObject;
-- (void)removeObjectAtIndex:(NSUInteger)index;
-- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WTMUser*)anObject;
 
 @end

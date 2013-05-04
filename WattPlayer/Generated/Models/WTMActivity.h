@@ -29,7 +29,10 @@
 
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,assign) NSInteger  level;
+@property (nonatomic,copy) NSString * ownerUserUID;
+@property (nonatomic,assign) NSInteger  packageIndex;
 @property (nonatomic,assign) NSInteger  rating;
+@property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;

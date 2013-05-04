@@ -45,6 +45,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"ownerUserUID"]) {
+		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"members"]) {
@@ -58,6 +60,7 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.name forKey:@"name"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[self.members dictionaryRepresentation] forKey:@"members"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
@@ -68,6 +71,7 @@
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"members : %@\n",self.members];
 	return s;
