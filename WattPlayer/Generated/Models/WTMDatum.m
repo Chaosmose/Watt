@@ -24,8 +24,13 @@
 @implementation WTMDatum 
 
 + (WTMDatum*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMDatum*instance = [[WTMDatum alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMDatum*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMDatum*)unCasted;
+	}
 	return instance;
 }
 
@@ -49,18 +54,21 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.key forKey:@"key"];
 	[dictionary setValue:self.type forKey:@"type"];
 	[dictionary setValue:self.value forKey:@"value"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"key : %@",self.key];
-	[s appendFormat:@"type : %@",self.type];
-	[s appendFormat:@"value : %@",self.value];
+	[s appendFormat:@"key : %@\n",self.key];
+	[s appendFormat:@"type : %@\n",self.type];
+	[s appendFormat:@"value : %@\n",self.value];
 	return s;
 }
 

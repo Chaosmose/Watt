@@ -25,8 +25,13 @@
 @implementation WTMActivity 
 
 + (WTMActivity*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMActivity*instance = [[WTMActivity alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMActivity*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMActivity*)unCasted;
+	}
 	return instance;
 }
 
@@ -58,7 +63,8 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
@@ -66,18 +72,20 @@
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
 	[dictionary setValue:[self.pages dictionaryRepresentation] forKey:@"pages"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@",self.comment];
-	[s appendFormat:@"level : %@",[NSNumber numberWithInteger:self.level]];
-	[s appendFormat:@"rating : %@",[NSNumber numberWithInteger:self.rating]];
-	[s appendFormat:@"shortName : %@",self.shortName];
-	[s appendFormat:@"title : %@",self.title];
-	[s appendFormat:@"uid : %@",self.uid];
-	[s appendFormat:@"pages : %@",self.pages];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
+	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
+	[s appendFormat:@"shortName : %@\n",self.shortName];
+	[s appendFormat:@"title : %@\n",self.title];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"pages : %@\n",self.pages];
 	return s;
 }
 

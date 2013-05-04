@@ -24,8 +24,13 @@
 @implementation WTMLangDictionary 
 
 + (WTMLangDictionary*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMLangDictionary*instance = [[WTMLangDictionary alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMLangDictionary*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMLangDictionary*)unCasted;
+	}
 	return instance;
 }
 
@@ -49,18 +54,21 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.key forKey:@"key"];
 	[dictionary setValue:self.locale forKey:@"locale"];
 	[dictionary setValue:self.value forKey:@"value"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"key : %@",self.key];
-	[s appendFormat:@"locale : %@",self.locale];
-	[s appendFormat:@"value : %@",self.value];
+	[s appendFormat:@"key : %@\n",self.key];
+	[s appendFormat:@"locale : %@\n",self.locale];
+	[s appendFormat:@"value : %@\n",self.value];
 	return s;
 }
 

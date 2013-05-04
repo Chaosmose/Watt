@@ -25,8 +25,13 @@
 @implementation WTMLibrary 
 
 + (WTMLibrary*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMLibrary*instance = [[WTMLibrary alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMLibrary*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMLibrary*)unCasted;
+	}
 	return instance;
 }
 
@@ -50,18 +55,21 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.name forKey:@"name"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[self.members dictionaryRepresentation] forKey:@"members"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"name : %@",self.name];
-	[s appendFormat:@"rights : %@",self.rights];
-	[s appendFormat:@"members : %@",self.members];
+	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"members : %@\n",self.members];
 	return s;
 }
 

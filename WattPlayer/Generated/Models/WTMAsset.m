@@ -24,8 +24,13 @@
 @implementation WTMAsset 
 
 + (WTMAsset*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMAsset*instance = [[WTMAsset alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMAsset*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMAsset*)unCasted;
+	}
 	return instance;
 }
 
@@ -40,8 +45,11 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-	return dictionary;
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{

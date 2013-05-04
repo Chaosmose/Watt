@@ -26,8 +26,13 @@
 @implementation WTMBehavior 
 
 + (WTMBehavior*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMBehavior*instance = [[WTMBehavior alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMBehavior*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMBehavior*)unCasted;
+	}
 	return instance;
 }
 
@@ -51,18 +56,21 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:[self.action dictionaryRepresentation] forKey:@"action"];
 	[dictionary setValue:[self.trigger dictionaryRepresentation] forKey:@"trigger"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@",self.comment];
-	[s appendFormat:@"action : %@",self.action];
-	[s appendFormat:@"trigger : %@",self.trigger];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"action : %@\n",self.action];
+	[s appendFormat:@"trigger : %@\n",self.trigger];
 	return s;
 }
 

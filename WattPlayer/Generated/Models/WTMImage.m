@@ -24,8 +24,13 @@
 @implementation WTMImage 
 
 + (WTMImage*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMImage*instance = [[WTMImage alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMImage*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMImage*)unCasted;
+	}
 	return instance;
 }
 
@@ -45,14 +50,17 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSValue valueWithCGSize:self.duration] forKey:@"duration"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"duration : %@",[NSValue valueWithCGSize:self.duration]];
+	[s appendFormat:@"duration : %@\n",[NSValue valueWithCGSize:self.duration]];
 	return s;
 }
 

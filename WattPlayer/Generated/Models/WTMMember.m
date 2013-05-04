@@ -25,8 +25,13 @@
 @implementation WTMMember 
 
 + (WTMMember*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMMember*instance = [[WTMMember alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMMember*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMMember*)unCasted;
+	}
 	return instance;
 }
 
@@ -52,20 +57,23 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.name forKey:@"name"];
 	[dictionary setValue:self.uid forKey:@"uid"];
 	[dictionary setValue:[self.metadata dictionaryRepresentation] forKey:@"metadata"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"index : %@",[NSNumber numberWithInteger:self.index]];
-	[s appendFormat:@"name : %@",self.name];
-	[s appendFormat:@"uid : %@",self.uid];
-	[s appendFormat:@"metadata : %@",self.metadata];
+	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
+	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"metadata : %@\n",self.metadata];
 	return s;
 }
 

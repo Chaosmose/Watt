@@ -24,8 +24,13 @@
 @implementation WTMOperator 
 
 + (WTMOperator*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMOperator*instance = [[WTMOperator alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMOperator*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMOperator*)unCasted;
+	}
 	return instance;
 }
 
@@ -45,14 +50,17 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.name forKey:@"name"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"name : %@",self.name];
+	[s appendFormat:@"name : %@\n",self.name];
 	return s;
 }
 

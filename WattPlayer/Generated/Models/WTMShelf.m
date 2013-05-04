@@ -26,8 +26,13 @@
 @implementation WTMShelf 
 
 + (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMShelf*instance = [[WTMShelf alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMShelf*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMShelf*)unCasted;
+	}
 	return instance;
 }
 
@@ -51,18 +56,21 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:[self.localUsers dictionaryRepresentation] forKey:@"localUsers"];
 	[dictionary setValue:[self.packages dictionaryRepresentation] forKey:@"packages"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@",self.comment];
-	[s appendFormat:@"localUsers : %@",self.localUsers];
-	[s appendFormat:@"packages : %@",self.packages];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"localUsers : %@\n",self.localUsers];
+	[s appendFormat:@"packages : %@\n",self.packages];
 	return s;
 }
 

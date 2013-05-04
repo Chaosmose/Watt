@@ -25,8 +25,13 @@
 @implementation WTMElement 
 
 + (WTMElement*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMElement*instance = [[WTMElement alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMElement*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMElement*)unCasted;
+	}
 	return instance;
 }
 
@@ -58,7 +63,8 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.assetLibUID forKey:@"assetLibUID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.assetMemberIndex] forKey:@"assetMemberIndex"];
 	[dictionary setValue:self.behaviorLibUID forKey:@"behaviorLibUID"];
@@ -66,18 +72,20 @@
 	[dictionary setValue:[NSNumber numberWithInteger:self.pageIndex] forKey:@"pageIndex"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
 	[dictionary setValue:[self.context dictionaryRepresentation] forKey:@"context"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"assetLibUID : %@",self.assetLibUID];
-	[s appendFormat:@"assetMemberIndex : %@",[NSNumber numberWithInteger:self.assetMemberIndex]];
-	[s appendFormat:@"behaviorLibUID : %@",self.behaviorLibUID];
-	[s appendFormat:@"behaviorMemberIndex : %@",[NSNumber numberWithInteger:self.behaviorMemberIndex]];
-	[s appendFormat:@"pageIndex : %@",[NSNumber numberWithInteger:self.pageIndex]];
-	[s appendFormat:@"rect : %@",[NSValue valueWithCGRect:self.rect]];
-	[s appendFormat:@"context : %@",self.context];
+	[s appendFormat:@"assetLibUID : %@\n",self.assetLibUID];
+	[s appendFormat:@"assetMemberIndex : %@\n",[NSNumber numberWithInteger:self.assetMemberIndex]];
+	[s appendFormat:@"behaviorLibUID : %@\n",self.behaviorLibUID];
+	[s appendFormat:@"behaviorMemberIndex : %@\n",[NSNumber numberWithInteger:self.behaviorMemberIndex]];
+	[s appendFormat:@"pageIndex : %@\n",[NSNumber numberWithInteger:self.pageIndex]];
+	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
+	[s appendFormat:@"context : %@\n",self.context];
 	return s;
 }
 

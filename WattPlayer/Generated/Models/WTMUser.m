@@ -35,11 +35,15 @@
 }
 
 + (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMUser* instance = [[WTMUser alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMUser*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMUser*)unCasted;
+	}
 	return instance;
 }
-
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
 	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
@@ -55,6 +59,7 @@
 
 
 - (NSDictionary*)dictionaryRepresentation{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     NSMutableArray *array=[NSMutableArray array];
     for (WTMUser *o in _collection) {
@@ -62,7 +67,9 @@
         [array addObject:oDictionary];
     }
     [dictionary setValue:array forKey:@"collection"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 

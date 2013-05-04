@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Flexions/WattPlayer/wattM.xcdatamodel">
+   </FileRef>
+   <FileRef
       location = "group:Samples/PlayerSample/PlayerSample.xcodeproj">
    </FileRef>
 </Workspace>

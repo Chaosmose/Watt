@@ -28,8 +28,13 @@
 @implementation WTMPackage 
 
 + (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMPackage*instance = [[WTMPackage alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMPackage*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMPackage*)unCasted;
+	}
 	return instance;
 }
 
@@ -67,7 +72,8 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.license forKey:@"license"];
 	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
@@ -78,21 +84,23 @@
 	[dictionary setValue:[self.langDictionaries dictionaryRepresentation] forKey:@"langDictionaries"];
 	[dictionary setValue:[self.libraries dictionaryRepresentation] forKey:@"libraries"];
 	[dictionary setValue:[self.owner dictionaryRepresentation] forKey:@"owner"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@",self.comment];
-	[s appendFormat:@"license : %@",self.license];
-	[s appendFormat:@"minEngineVersion : %@",[NSNumber numberWithFloat:self.minEngineVersion]];
-	[s appendFormat:@"name : %@",self.name];
-	[s appendFormat:@"rights : %@",self.rights];
-	[s appendFormat:@"uid : %@",self.uid];
-	[s appendFormat:@"activities : %@",self.activities];
-	[s appendFormat:@"langDictionaries : %@",self.langDictionaries];
-	[s appendFormat:@"libraries : %@",self.libraries];
-	[s appendFormat:@"owner : %@",self.owner];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"license : %@\n",self.license];
+	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
+	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"activities : %@\n",self.activities];
+	[s appendFormat:@"langDictionaries : %@\n",self.langDictionaries];
+	[s appendFormat:@"libraries : %@\n",self.libraries];
+	[s appendFormat:@"owner : %@\n",self.owner];
 	return s;
 }
 

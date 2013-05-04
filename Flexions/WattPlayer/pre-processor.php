@@ -4,11 +4,11 @@ require_once  FLEXIONS_ROOT_DIR.'flexions/helpers/representations/flexions/Flexi
 require_once  FLEXIONS_ROOT_DIR.'flexions/helpers/transformations/XcdatamodelXMLToFlexionsRepresentation.class.php';
 
 /* @var $descriptorFilePath string */
-
-include  FLEXIONS_SOURCE_DIR.'/watt-variables.php';// we load the shared variables
+include  FLEXIONS_SOURCE_DIR.'/variables.php';// we load the shared variables
 /* @var $prefix string */
+
 $transformer=new XCDDataXMLToFlexionsRepresentation();
-$r=$transformer->projectRepresentationFromCoreDataXML($descriptorFilePath,$prefix);
+$r=$transformer->projectRepresentationFromXcodeModel($descriptorFilePath,$prefix);
 
 // we instanciate the Hypotypose singleton;
 $h = Hypotypose::instance (array(DefaultLoops::ENTITIES));

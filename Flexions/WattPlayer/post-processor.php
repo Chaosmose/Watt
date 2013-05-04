@@ -14,6 +14,10 @@ hypotyposeToFiles();
 
 /* @var $outPutFolderRelativePath string */
 
+if(file_exists(realpath($destination))==false){
+	throw new Exception("Unexisting destination ".realpath($destination));
+}
+
 $generated='';
 $classList = Hypotypose::Instance()->flexedList [DefaultLoops::ENTITIES];
 $counter = 0;
@@ -45,7 +49,7 @@ foreach ( $classList as $flexed ) {
 // We use the models variables
 $f=new Flexed();
 // This include sets $f properties
-include  FLEXIONS_SOURCE_DIR."watt-variables.php";
+include  FLEXIONS_SOURCE_DIR."variables.php";
 $f->package="";
 $f->fileName="WTMModelsImports.h";
 

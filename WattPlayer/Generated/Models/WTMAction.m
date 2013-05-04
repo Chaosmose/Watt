@@ -24,8 +24,13 @@
 @implementation WTMAction 
 
 + (WTMAction*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMAction*instance = [[WTMAction alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMAction*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMAction*)unCasted;
+	}
 	return instance;
 }
 
@@ -47,16 +52,19 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.arguments forKey:@"arguments"];
 	[dictionary setValue:self.methodName forKey:@"methodName"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"arguments : %@",self.arguments];
-	[s appendFormat:@"methodName : %@",self.methodName];
+	[s appendFormat:@"arguments : %@\n",self.arguments];
+	[s appendFormat:@"methodName : %@\n",self.methodName];
 	return s;
 }
 

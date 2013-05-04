@@ -24,8 +24,13 @@
 @implementation WTMText 
 
 + (WTMText*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMText*instance = [[WTMText alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMText*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMText*)unCasted;
+	}
 	return instance;
 }
 
@@ -47,16 +52,19 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.font forKey:@"font"];
 	[dictionary setValue:self.value forKey:@"value"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"font : %@",self.font];
-	[s appendFormat:@"value : %@",self.value];
+	[s appendFormat:@"font : %@\n",self.font];
+	[s appendFormat:@"value : %@\n",self.value];
 	return s;
 }
 

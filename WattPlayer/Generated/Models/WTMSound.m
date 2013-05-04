@@ -24,8 +24,13 @@
 @implementation WTMSound 
 
 + (WTMSound*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMSound*instance = [[WTMSound alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMSound*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMSound*)unCasted;
+	}
 	return instance;
 }
 
@@ -45,14 +50,17 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.duration] forKey:@"duration"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"duration : %@",[NSNumber numberWithInteger:self.duration]];
+	[s appendFormat:@"duration : %@\n",[NSNumber numberWithInteger:self.duration]];
 	return s;
 }
 

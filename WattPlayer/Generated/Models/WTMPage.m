@@ -25,8 +25,13 @@
 @implementation WTMPage 
 
 + (WTMPage*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMPage*instance = [[WTMPage alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMPage*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMPage*)unCasted;
+	}
 	return instance;
 }
 
@@ -54,22 +59,25 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
 	[dictionary setValue:[self.elements dictionaryRepresentation] forKey:@"elements"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@",self.comment];
-	[s appendFormat:@"number : %@",[NSNumber numberWithInteger:self.number]];
-	[s appendFormat:@"title : %@",self.title];
-	[s appendFormat:@"uid : %@",self.uid];
-	[s appendFormat:@"elements : %@",self.elements];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
+	[s appendFormat:@"title : %@\n",self.title];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"elements : %@\n",self.elements];
 	return s;
 }
 

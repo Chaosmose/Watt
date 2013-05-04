@@ -24,8 +24,13 @@
 @implementation WTMLinkedAsset 
 
 + (WTMLinkedAsset*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMLinkedAsset*instance = [[WTMLinkedAsset alloc] init];
-	[instance setAttributesFromDictionary:aDictionary];
+	WTMLinkedAsset*instance = nil;
+	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		instance=(WTMLinkedAsset*)unCasted;
+	}
 	return instance;
 }
 
@@ -49,18 +54,21 @@
 }
 
 - (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.fileName forKey:@"fileName"];
 	[dictionary setValue:self.relativePath forKey:@"relativePath"];
-	return dictionary;
+	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
+    [wrapper setObject:dictionary forKey:@"properties"];
+    return wrapper;
 }
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"comment : %@",self.comment];
-	[s appendFormat:@"fileName : %@",self.fileName];
-	[s appendFormat:@"relativePath : %@",self.relativePath];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"fileName : %@\n",self.fileName];
+	[s appendFormat:@"relativePath : %@\n",self.relativePath];
 	return s;
 }
 
