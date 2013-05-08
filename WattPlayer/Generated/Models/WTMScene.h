@@ -23,19 +23,22 @@
 #import <Foundation/Foundation.h>
 
 @class WTMCollectionOfElement;
+@class WTMCollectionOfDatum;
 
 @interface WTMScene:NSObject{
 }
 
 @property (nonatomic,assign) NSInteger  activityIndex;
-@property (nonatomic,copy) NSString * bounds;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,assign) NSInteger  number;
 @property (nonatomic,copy) NSString * ownerUserUID;
+@property (nonatomic,assign) CGRect  rect;
+@property (nonatomic,copy) NSString * renderingClassName;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
+@property (nonatomic,strong) WTMCollectionOfDatum * metadata;
  
 + (WTMScene *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;

@@ -20,6 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMActivity.h" 
+#import "WTMCollectionOfDatum.h"
 #import "WTMCollectionOfScene.h"
 
 @implementation WTMActivity 
@@ -61,6 +62,8 @@
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
+	} else if ([key isEqualToString:@"metadata"]) {
+		[super setValue:[WTMCollectionOfDatum instanceFromDictionary:value] forKey:@"metadata"];
 	} else if ([key isEqualToString:@"scenes"]) {
 		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value] forKey:@"scenes"];
 	} else {
@@ -80,6 +83,7 @@
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
+	[dictionary setValue:[self.metadata dictionaryRepresentation] forKey:@"metadata"];
 	[dictionary setValue:[self.scenes dictionaryRepresentation] forKey:@"scenes"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
@@ -97,6 +101,7 @@
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"metadata : %@\n",self.metadata];
 	[s appendFormat:@"scenes : %@\n",self.scenes];
 	return s;
 }

@@ -55,6 +55,8 @@
 		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rect"]) {
 		[super setValue:value forKey:@"rect"];
+	} else if ([key isEqualToString:@"renderingClassName"]) {
+		[super setValue:value forKey:@"renderingClassName"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"sceneIndex"]) {
@@ -75,6 +77,7 @@
 	[dictionary setValue:[NSNumber numberWithInteger:self.behaviorMemberIndex] forKey:@"behaviorMemberIndex"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
+	[dictionary setValue:self.renderingClassName forKey:@"renderingClassName"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.sceneIndex] forKey:@"sceneIndex"];
 	[dictionary setValue:[self.context dictionaryRepresentation] forKey:@"context"];
@@ -91,6 +94,7 @@
 	[s appendFormat:@"behaviorMemberIndex : %@\n",[NSNumber numberWithInteger:self.behaviorMemberIndex]];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
+	[s appendFormat:@"renderingClassName : %@\n",self.renderingClassName];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
 	[s appendFormat:@"context : %@\n",self.context];

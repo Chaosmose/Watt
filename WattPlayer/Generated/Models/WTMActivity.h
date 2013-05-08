@@ -22,6 +22,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class WTMCollectionOfDatum;
 @class WTMCollectionOfScene;
 
 @interface WTMActivity:NSObject{
@@ -36,6 +37,7 @@
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;
+@property (nonatomic,strong) WTMCollectionOfDatum * metadata;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
  
 + (WTMActivity *)instanceFromDictionary:(NSDictionary *)aDictionary;

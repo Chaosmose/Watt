@@ -33,6 +33,7 @@
 @property (nonatomic,assign) NSInteger  behaviorMemberIndex;
 @property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,assign) CGRect  rect;
+@property (nonatomic,copy) NSString * renderingClassName;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
 @property (nonatomic,strong) WTMCollectionOfDatum * context;

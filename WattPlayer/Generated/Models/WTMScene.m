@@ -21,6 +21,7 @@
  
 #import "WTMScene.h" 
 #import "WTMCollectionOfElement.h"
+#import "WTMCollectionOfDatum.h"
 
 @implementation WTMScene 
 
@@ -45,14 +46,16 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"activityIndex"]){
 		[super setValue:value forKey:@"activityIndex"];
-	} else if ([key isEqualToString:@"bounds"]) {
-		[super setValue:value forKey:@"bounds"];
 	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"number"]) {
 		[super setValue:value forKey:@"number"];
 	} else if ([key isEqualToString:@"ownerUserUID"]) {
 		[super setValue:value forKey:@"ownerUserUID"];
+	} else if ([key isEqualToString:@"rect"]) {
+		[super setValue:value forKey:@"rect"];
+	} else if ([key isEqualToString:@"renderingClassName"]) {
+		[super setValue:value forKey:@"renderingClassName"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"title"]) {
@@ -61,6 +64,8 @@
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"elements"]) {
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value] forKey:@"elements"];
+	} else if ([key isEqualToString:@"metadata"]) {
+		[super setValue:[WTMCollectionOfDatum instanceFromDictionary:value] forKey:@"metadata"];
 	} else {
 		[super setValue:value forUndefinedKey:key];
 	}
@@ -70,14 +75,16 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
-	[dictionary setValue:self.bounds forKey:@"bounds"];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
+	[dictionary setValue:self.renderingClassName forKey:@"renderingClassName"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
 	[dictionary setValue:[self.elements dictionaryRepresentation] forKey:@"elements"];
+	[dictionary setValue:[self.metadata dictionaryRepresentation] forKey:@"metadata"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -86,14 +93,16 @@
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
-	[s appendFormat:@"bounds : %@\n",self.bounds];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
+	[s appendFormat:@"renderingClassName : %@\n",self.renderingClassName];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];
 	[s appendFormat:@"elements : %@\n",self.elements];
+	[s appendFormat:@"metadata : %@\n",self.metadata];
 	return s;
 }
 
