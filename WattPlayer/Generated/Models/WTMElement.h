@@ -32,9 +32,9 @@
 @property (nonatomic,copy) NSString * behaviorLibUID;
 @property (nonatomic,assign) NSInteger  behaviorMemberIndex;
 @property (nonatomic,copy) NSString * ownerUserUID;
-@property (nonatomic,assign) NSInteger  pageIndex;
 @property (nonatomic,assign) CGRect  rect;
 @property (nonatomic,copy) NSString * rights;
+@property (nonatomic,assign) NSInteger  sceneIndex;
 @property (nonatomic,strong) WTMCollectionOfDatum * context;
  
 + (WTMElement *)instanceFromDictionary:(NSDictionary *)aDictionary;

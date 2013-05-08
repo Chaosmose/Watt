@@ -7,7 +7,7 @@
 
 
 #import "WTMAction.h"
-#import "WTMCollectionOfPage.h"
+#import "WTMCollectionOfScene.h"
 #import "WTMActivity.h"
 #import "WTMAsset.h"
 #import "WTMRule.h"
@@ -31,7 +31,7 @@
 #import "WTMCollectionOfUser.h"
 #import "WTMPackage.h"
 #import "WTMCollectionOfElement.h"
-#import "WTMPage.h"
+#import "WTMScene.h"
 #import "WTMCollectionOfPackage.h"
 #import "WTMShelf.h"
 #import "WTMSound.h"

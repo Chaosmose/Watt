@@ -22,7 +22,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class WTMCollectionOfPage;
+@class WTMCollectionOfScene;
 
 @interface WTMActivity:NSObject{
 }
@@ -36,7 +36,7 @@
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;
-@property (nonatomic,strong) WTMCollectionOfPage * pages;
+@property (nonatomic,strong) WTMCollectionOfScene * scenes;
  
 + (WTMActivity *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;

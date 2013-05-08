@@ -53,12 +53,12 @@
 		[super setValue:value forKey:@"behaviorMemberIndex"];
 	} else if ([key isEqualToString:@"ownerUserUID"]) {
 		[super setValue:value forKey:@"ownerUserUID"];
-	} else if ([key isEqualToString:@"pageIndex"]) {
-		[super setValue:value forKey:@"pageIndex"];
 	} else if ([key isEqualToString:@"rect"]) {
 		[super setValue:value forKey:@"rect"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
+	} else if ([key isEqualToString:@"sceneIndex"]) {
+		[super setValue:value forKey:@"sceneIndex"];
 	} else if ([key isEqualToString:@"context"]) {
 		[super setValue:[WTMCollectionOfDatum instanceFromDictionary:value] forKey:@"context"];
 	} else {
@@ -74,9 +74,9 @@
 	[dictionary setValue:self.behaviorLibUID forKey:@"behaviorLibUID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.behaviorMemberIndex] forKey:@"behaviorMemberIndex"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.pageIndex] forKey:@"pageIndex"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.sceneIndex] forKey:@"sceneIndex"];
 	[dictionary setValue:[self.context dictionaryRepresentation] forKey:@"context"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
@@ -90,9 +90,9 @@
 	[s appendFormat:@"behaviorLibUID : %@\n",self.behaviorLibUID];
 	[s appendFormat:@"behaviorMemberIndex : %@\n",[NSNumber numberWithInteger:self.behaviorMemberIndex]];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"pageIndex : %@\n",[NSNumber numberWithInteger:self.pageIndex]];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
 	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
 	[s appendFormat:@"context : %@\n",self.context];
 	return s;
 }

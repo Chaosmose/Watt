@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMActivity.h" 
-#import "WTMCollectionOfPage.h"
+#import "WTMCollectionOfScene.h"
 
 @implementation WTMActivity 
 
@@ -61,8 +61,8 @@
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
-	} else if ([key isEqualToString:@"pages"]) {
-		[super setValue:[WTMCollectionOfPage instanceFromDictionary:value] forKey:@"pages"];
+	} else if ([key isEqualToString:@"scenes"]) {
+		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value] forKey:@"scenes"];
 	} else {
 		[super setValue:value forUndefinedKey:key];
 	}
@@ -80,7 +80,7 @@
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
-	[dictionary setValue:[self.pages dictionaryRepresentation] forKey:@"pages"];
+	[dictionary setValue:[self.scenes dictionaryRepresentation] forKey:@"scenes"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -97,7 +97,7 @@
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];
-	[s appendFormat:@"pages : %@\n",self.pages];
+	[s appendFormat:@"scenes : %@\n",self.scenes];
 	return s;
 }
 

@@ -18,7 +18,7 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Page" syncable="YES"/>
+        <relationship name="scenes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,13 +39,13 @@
         <attribute name="behaviorLibUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="behaviorMemberIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="pageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="rect" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="type" value="rect"/>
             </userInfo>
         </attribute>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
+        <attribute name="sceneIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="context" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
@@ -113,16 +113,6 @@
         <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" syncable="YES"/>
         <relationship name="rightsAssignees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Page" representedClassName="Page" syncable="YES">
-        <attribute name="activityIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="elements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Element" syncable="YES"/>
-    </entity>
     <entity name="Pdf" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -136,6 +126,17 @@
         <relationship name="operandsA" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operand" syncable="YES"/>
         <relationship name="operandsB" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operand" syncable="YES"/>
         <relationship name="operator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operator" syncable="YES"/>
+    </entity>
+    <entity name="Scene" representedClassName="Scene" syncable="YES">
+        <attribute name="activityIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="bounds" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="elements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Element" syncable="YES"/>
     </entity>
     <entity name="Shelf" representedClassName="Shelf" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
@@ -160,14 +161,14 @@
         </attribute>
     </entity>
     <elements>
-        <element name="Action" positionX="-7380" positionY="-3762" width="128" height="73"/>
-        <element name="Activity" positionX="-6932" positionY="-4102" width="128" height="193"/>
+        <element name="Action" positionX="-7470" positionY="-3762" width="128" height="73"/>
+        <element name="Activity" positionX="-6921" positionY="-4131" width="128" height="193"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
-        <element name="Behavior" positionX="-7272" positionY="-3661" width="128" height="88"/>
+        <element name="Behavior" positionX="-7362" positionY="-3661" width="128" height="88"/>
         <element name="Datum" positionX="-6876" positionY="-3859" width="128" height="88"/>
         <element name="Element" positionX="-6572" positionY="-3964" width="128" height="178"/>
         <element name="Group" positionX="-7641" positionY="-3888" width="128" height="58"/>
-        <element name="Html" positionX="-7202" positionY="-3418" width="128" height="43"/>
+        <element name="Html" positionX="-7256" positionY="-3429" width="128" height="43"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
         <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
@@ -175,12 +176,12 @@
         <element name="Library" positionX="-7101" positionY="-3913" width="126" height="103"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
         <element name="Member" positionX="-7103" positionY="-3780" width="128" height="133"/>
-        <element name="Operand" positionX="-7533" positionY="-3762" width="128" height="58"/>
-        <element name="Operator" positionX="-7598" positionY="-3690" width="128" height="58"/>
-        <element name="Package" positionX="-7103" positionY="-4156" width="128" height="223"/>
-        <element name="Page" positionX="-6741" positionY="-4033" width="128" height="163"/>
+        <element name="Operand" positionX="-7623" positionY="-3762" width="128" height="58"/>
+        <element name="Operator" positionX="-7688" positionY="-3690" width="128" height="58"/>
+        <element name="Package" positionX="-7103" positionY="-4219" width="128" height="223"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
-        <element name="Rule" positionX="-7382" positionY="-3528" width="128" height="118"/>
+        <element name="Rule" positionX="-7472" positionY="-3528" width="128" height="118"/>
+        <element name="Scene" positionX="-6741" positionY="-4033" width="128" height="178"/>
         <element name="Shelf" positionX="-7398" positionY="-4285" width="128" height="118"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7641" positionY="-4014" width="128" height="88"/>

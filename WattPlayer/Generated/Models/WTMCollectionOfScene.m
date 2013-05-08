@@ -20,9 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMCollectionOfPage.h" 
+#import "WTMCollectionOfScene.h" 
 
-@implementation WTMCollectionOfPage{
+@implementation WTMCollectionOfScene{
 	NSMutableArray* _collection;
 }
 
@@ -34,13 +34,13 @@
     return self;
 }
 
-+ (WTMCollectionOfPage*)instanceFromDictionary:(NSDictionary *)aDictionary{
-	WTMCollectionOfPage*instance = nil;
++ (WTMCollectionOfScene*)instanceFromDictionary:(NSDictionary *)aDictionary{
+	WTMCollectionOfScene*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
 		id unCasted= [[theClass alloc] init];
 		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
-		instance=(WTMCollectionOfPage*)unCasted;
+		instance=(WTMCollectionOfScene*)unCasted;
 	}
 	return instance;
 }
@@ -52,7 +52,7 @@
 	_collection=[NSMutableArray array];
     NSArray *a=[aDictionary objectForKey:@"collection"];
     for (NSDictionary*objectDictionary in a) {
-        WTMPage*o=[WTMPage instanceFromDictionary:objectDictionary];
+        WTMScene*o=[WTMScene instanceFromDictionary:objectDictionary];
         [_collection addObject:o];
     }
 }
@@ -62,7 +62,7 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
     NSMutableArray *array=[NSMutableArray array];
-    for (WTMPage *o in _collection) {
+    for (WTMScene *o in _collection) {
         NSDictionary*oDictionary=[o dictionaryRepresentation];
         [array addObject:oDictionary];
     }
@@ -75,7 +75,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-    [s appendFormat:@"Collection of %@\n",@"WTMPage"];
+    [s appendFormat:@"Collection of %@\n",@"WTMScene"];
     [s appendFormat:@"With of %i members\n",[_collection count]];
 	return s;
 }
@@ -84,16 +84,16 @@
 - (NSUInteger)count{
     return [_collection count];
 }
-- (WTMPage *)objectAtIndex:(NSUInteger)index{
+- (WTMScene *)objectAtIndex:(NSUInteger)index{
 	return [_collection objectAtIndex:index];
 }
 
 
-- (void)addObject:(WTMPage*)anObject{
+- (void)addObject:(WTMScene*)anObject{
  	[_collection addObject:anObject];
 }
 
-- (void)insertObject:(WTMPage*)anObject atIndex:(NSUInteger)index{
+- (void)insertObject:(WTMScene*)anObject atIndex:(NSUInteger)index{
 	[_collection insertObject:anObject atIndex:index];
 }
 
@@ -105,7 +105,7 @@
     [_collection removeObjectAtIndex:index];
 }
 
-- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WTMPage*)anObject{
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WTMScene*)anObject{
     [_collection replaceObjectAtIndex:index withObject:anObject];
 }
 
