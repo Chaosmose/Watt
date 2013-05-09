@@ -12,6 +12,7 @@
 #import "WTMAsset.h"
 #import "WTMRule.h"
 #import "WTMBehavior.h"
+#import "WTMCollectionOfDatum.h"
 #import "WTMDatum.h"
 #import "WTMElement.h"
 #import "WTMGroup.h"

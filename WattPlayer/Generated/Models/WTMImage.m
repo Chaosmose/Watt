@@ -52,7 +52,7 @@
 - (NSDictionary*)dictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:[NSValue valueWithCGSize:self.duration] forKey:@"duration"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.duration] forKey:@"duration"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -60,7 +60,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"duration : %@\n",[NSValue valueWithCGSize:self.duration]];
+	[s appendFormat:@"duration : %@\n",[NSNumber numberWithInteger:self.duration]];
 	return s;
 }
 

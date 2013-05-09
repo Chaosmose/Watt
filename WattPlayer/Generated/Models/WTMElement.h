@@ -32,7 +32,7 @@
 @property (nonatomic,assign) NSInteger  behaviorMemberIndex;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,copy) NSString * ownerUserUID;
-@property (nonatomic,assign) CGRect  rect;
+@property (nonatomic,copy) NSString * rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
  

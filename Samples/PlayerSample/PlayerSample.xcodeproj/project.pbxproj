@@ -27,6 +27,7 @@
 		E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5B462641732A4A000E654A1 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462631732A4A000E654A1 /* WTMViewController.m */; };
+		E5BF32A6173BFF79008D77BE /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */; };
 		E5F0D2D2173ABA1E002A8A24 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D295173ABA1E002A8A24 /* WTMAction.m */; };
 		E5F0D2D3173ABA1E002A8A24 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D297173ABA1E002A8A24 /* WTMActivity.m */; };
 		E5F0D2D4173ABA1E002A8A24 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D299173ABA1E002A8A24 /* WTMAsset.m */; };
@@ -93,6 +94,8 @@
 		E5B462601732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E5B462621732A4A000E654A1 /* WTMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTMViewController.h; sourceTree = "<group>"; };
 		E5B462631732A4A000E654A1 /* WTMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
+		E5BF32A4173BFF79008D77BE /* WTMCollectionOfDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfDatum.h; sourceTree = "<group>"; };
+		E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfDatum.m; sourceTree = "<group>"; };
 		E5F0D294173ABA1E002A8A24 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E5F0D295173ABA1E002A8A24 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E5F0D296173ABA1E002A8A24 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 				E5F0D2AF173ABA1E002A8A24 /* WTMCollectionOfUser.m */,
 				E5F0D2B0173ABA1E002A8A24 /* WTMDatum.h */,
 				E5F0D2B1173ABA1E002A8A24 /* WTMDatum.m */,
+				E5BF32A4173BFF79008D77BE /* WTMCollectionOfDatum.h */,
+				E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */,
 				E5F0D2B2173ABA1E002A8A24 /* WTMElement.h */,
 				E5F0D2B3173ABA1E002A8A24 /* WTMElement.m */,
 				E5F0D2B4173ABA1E002A8A24 /* WTMGroup.h */,
@@ -476,6 +481,7 @@
 				E53C6986173B881E00E135CA /* WTMViewController.m in Sources */,
 				E53C698C173B899600E135CA /* WTMDatumSerializer.m in Sources */,
 				E53C698F173B8A1300E135CA /* WTMDatumDeSerializer.m in Sources */,
+				E5BF32A6173BFF79008D77BE /* WTMCollectionOfDatum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
