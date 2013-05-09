@@ -19,7 +19,6 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="metadata" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Datum" syncable="YES"/>
         <relationship name="scenes" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES">
@@ -34,6 +33,9 @@
         <attribute name="key" attributeType="String" syncable="YES"/>
         <attribute name="type" attributeType="String" syncable="YES"/>
         <attribute name="value" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
     </entity>
     <entity name="Element" representedClassName="Element" syncable="YES">
         <attribute name="assetLibUID" optional="YES" attributeType="String" syncable="YES"/>
@@ -49,7 +51,6 @@
         </attribute>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="sceneIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="metadata" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -94,7 +95,6 @@
         <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="metadata" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
     </entity>
     <entity name="Operand" representedClassName="Operand" syncable="YES">
         <attribute name="expression" optional="YES" attributeType="String" syncable="YES"/>
@@ -145,7 +145,6 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="elements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Element" syncable="YES"/>
-        <relationship name="metadata" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
     </entity>
     <entity name="Shelf" representedClassName="Shelf" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
@@ -171,11 +170,11 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
-        <element name="Activity" positionX="-6921" positionY="-4186" width="128" height="223"/>
+        <element name="Activity" positionX="-6921" positionY="-4186" width="128" height="208"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Behavior" positionX="-7434" positionY="-3652" width="128" height="88"/>
-        <element name="Datum" positionX="-6939" positionY="-3832" width="128" height="88"/>
-        <element name="Element" positionX="-6536" positionY="-3964" width="128" height="193"/>
+        <element name="Datum" positionX="-7956" positionY="-4273" width="128" height="88"/>
+        <element name="Element" positionX="-6536" positionY="-3964" width="128" height="178"/>
         <element name="Group" positionX="-7641" positionY="-3888" width="128" height="58"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="43"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
@@ -184,13 +183,13 @@
         <element name="LangDictionary" positionX="-7371" positionY="-4113" width="128" height="88"/>
         <element name="Library" positionX="-7101" positionY="-3913" width="126" height="103"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
-        <element name="Member" positionX="-7103" positionY="-3780" width="128" height="133"/>
+        <element name="Member" positionX="-7103" positionY="-3780" width="128" height="118"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
         <element name="Package" positionX="-7103" positionY="-4219" width="128" height="223"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
         <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="118"/>
-        <element name="Scene" positionX="-6725" positionY="-4129" width="128" height="208"/>
+        <element name="Scene" positionX="-6725" positionY="-4129" width="128" height="193"/>
         <element name="Shelf" positionX="-7398" positionY="-4285" width="128" height="118"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7641" positionY="-4014" width="128" height="88"/>
