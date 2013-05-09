@@ -30,10 +30,10 @@
 
 @property (nonatomic,assign) NSInteger  activityIndex;
 @property (nonatomic,copy) NSString * comment;
+@property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,assign) NSInteger  number;
 @property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,assign) CGRect  rect;
-@property (nonatomic,copy) NSString * renderingClassName;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;

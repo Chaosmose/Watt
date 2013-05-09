@@ -10,6 +10,7 @@
     </entity>
     <entity name="Activity" representedClassName="Activity" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -39,16 +40,16 @@
         <attribute name="assetMemberIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="behaviorLibUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="behaviorMemberIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rect" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="type" value="rect"/>
             </userInfo>
         </attribute>
-        <attribute name="renderingClassName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="sceneIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="context" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
+        <relationship name="metadata" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Datum" syncable="YES"/>
     </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -132,6 +133,7 @@
     <entity name="Scene" representedClassName="Scene" syncable="YES">
         <attribute name="activityIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rect" optional="YES" attributeType="String" syncable="YES">
@@ -139,7 +141,6 @@
                 <entry key="type" value="rect"/>
             </userInfo>
         </attribute>
-        <attribute name="renderingClassName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
@@ -169,10 +170,10 @@
         </attribute>
     </entity>
     <elements>
-        <element name="Action" positionX="-7470" positionY="-3762" width="128" height="73"/>
-        <element name="Activity" positionX="-6921" positionY="-4186" width="128" height="208"/>
+        <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
+        <element name="Activity" positionX="-6921" positionY="-4186" width="128" height="223"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
-        <element name="Behavior" positionX="-7362" positionY="-3661" width="128" height="88"/>
+        <element name="Behavior" positionX="-7434" positionY="-3652" width="128" height="88"/>
         <element name="Datum" positionX="-6939" positionY="-3832" width="128" height="88"/>
         <element name="Element" positionX="-6536" positionY="-3964" width="128" height="193"/>
         <element name="Group" positionX="-7641" positionY="-3888" width="128" height="58"/>
@@ -184,11 +185,11 @@
         <element name="Library" positionX="-7101" positionY="-3913" width="126" height="103"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
         <element name="Member" positionX="-7103" positionY="-3780" width="128" height="133"/>
-        <element name="Operand" positionX="-7623" positionY="-3762" width="128" height="58"/>
-        <element name="Operator" positionX="-7688" positionY="-3690" width="128" height="58"/>
+        <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
+        <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
         <element name="Package" positionX="-7103" positionY="-4219" width="128" height="223"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
-        <element name="Rule" positionX="-7472" positionY="-3528" width="128" height="118"/>
+        <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="118"/>
         <element name="Scene" positionX="-6725" positionY="-4129" width="128" height="208"/>
         <element name="Shelf" positionX="-7398" positionY="-4285" width="128" height="118"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>

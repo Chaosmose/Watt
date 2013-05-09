@@ -48,14 +48,14 @@
 		[super setValue:value forKey:@"activityIndex"];
 	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
+	} else if ([key isEqualToString:@"controllerClass"]) {
+		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"number"]) {
 		[super setValue:value forKey:@"number"];
 	} else if ([key isEqualToString:@"ownerUserUID"]) {
 		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rect"]) {
 		[super setValue:value forKey:@"rect"];
-	} else if ([key isEqualToString:@"renderingClassName"]) {
-		[super setValue:value forKey:@"renderingClassName"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"title"]) {
@@ -76,10 +76,10 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
 	[dictionary setValue:self.comment forKey:@"comment"];
+	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
-	[dictionary setValue:self.renderingClassName forKey:@"renderingClassName"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
@@ -94,10 +94,10 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
 	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
-	[s appendFormat:@"renderingClassName : %@\n",self.renderingClassName];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];

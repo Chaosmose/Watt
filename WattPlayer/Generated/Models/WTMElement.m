@@ -51,18 +51,18 @@
 		[super setValue:value forKey:@"behaviorLibUID"];
 	} else if ([key isEqualToString:@"behaviorMemberIndex"]) {
 		[super setValue:value forKey:@"behaviorMemberIndex"];
+	} else if ([key isEqualToString:@"controllerClass"]) {
+		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"ownerUserUID"]) {
 		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rect"]) {
 		[super setValue:value forKey:@"rect"];
-	} else if ([key isEqualToString:@"renderingClassName"]) {
-		[super setValue:value forKey:@"renderingClassName"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"sceneIndex"]) {
 		[super setValue:value forKey:@"sceneIndex"];
-	} else if ([key isEqualToString:@"context"]) {
-		[super setValue:[WTMCollectionOfDatum instanceFromDictionary:value] forKey:@"context"];
+	} else if ([key isEqualToString:@"metadata"]) {
+		[super setValue:[WTMCollectionOfDatum instanceFromDictionary:value] forKey:@"metadata"];
 	} else {
 		[super setValue:value forUndefinedKey:key];
 	}
@@ -75,12 +75,12 @@
 	[dictionary setValue:[NSNumber numberWithInteger:self.assetMemberIndex] forKey:@"assetMemberIndex"];
 	[dictionary setValue:self.behaviorLibUID forKey:@"behaviorLibUID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.behaviorMemberIndex] forKey:@"behaviorMemberIndex"];
+	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
-	[dictionary setValue:self.renderingClassName forKey:@"renderingClassName"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.sceneIndex] forKey:@"sceneIndex"];
-	[dictionary setValue:[self.context dictionaryRepresentation] forKey:@"context"];
+	[dictionary setValue:[self.metadata dictionaryRepresentation] forKey:@"metadata"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -92,12 +92,12 @@
 	[s appendFormat:@"assetMemberIndex : %@\n",[NSNumber numberWithInteger:self.assetMemberIndex]];
 	[s appendFormat:@"behaviorLibUID : %@\n",self.behaviorLibUID];
 	[s appendFormat:@"behaviorMemberIndex : %@\n",[NSNumber numberWithInteger:self.behaviorMemberIndex]];
+	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
-	[s appendFormat:@"renderingClassName : %@\n",self.renderingClassName];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
-	[s appendFormat:@"context : %@\n",self.context];
+	[s appendFormat:@"metadata : %@\n",self.metadata];
 	return s;
 }
 

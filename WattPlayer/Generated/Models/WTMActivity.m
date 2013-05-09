@@ -46,6 +46,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
+	} else if ([key isEqualToString:@"controllerClass"]) {
+		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
 	} else if ([key isEqualToString:@"ownerUserUID"]) {
@@ -75,6 +77,7 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
+	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
@@ -93,6 +96,7 @@
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
