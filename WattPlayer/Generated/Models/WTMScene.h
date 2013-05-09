@@ -32,7 +32,7 @@
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,assign) NSInteger  number;
 @property (nonatomic,copy) NSString * ownerUserUID;
-@property (nonatomic,copy) NSString * rect;
+@property (nonatomic,assign) CGRect  rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;

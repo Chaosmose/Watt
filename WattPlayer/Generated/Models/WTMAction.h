@@ -26,7 +26,7 @@
 @interface WTMAction:WTMObject{
 }
 
-@property (nonatomic,copy) NSString * arguments;
+@property (nonatomic,strong) NSDictionary * arguments;
 @property (nonatomic,copy) NSString * methodName;
  
 + (WTMAction *)instanceFromDictionary:(NSDictionary *)aDictionary;

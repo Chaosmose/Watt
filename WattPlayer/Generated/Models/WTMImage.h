@@ -27,7 +27,7 @@
 @interface WTMImage:WTMLinkedAsset{
 }
 
-@property (nonatomic,assign) NSInteger  duration;
+@property (nonatomic,assign) CGSize  duration;
  
 + (WTMImage *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;

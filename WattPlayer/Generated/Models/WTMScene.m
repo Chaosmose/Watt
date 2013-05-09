@@ -76,7 +76,7 @@
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:self.rect forKey:@"rect"];
+	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
@@ -93,7 +93,7 @@
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"rect : %@\n",self.rect];
+	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];
