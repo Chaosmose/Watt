@@ -23,29 +23,56 @@
 
 #import "WTMViewController.h"
 
+#import "WTMModelsImports.h"
+
 @interface WTMViewController ()
 
 @end
 
 @implementation WTMViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
-- (void)viewDidLoad
-{
+
+- (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    WTMShelf *s=[self _createAShelf];
+    WTMPackage*p=[s.packages lastObject];
+    p.name=@"Package A";
+    
+    WTMLibrary*lib=[p.libraries lastObject];
+    lib.name=@"Library #1";
+    
+    WTMHtml *
+    
+
 }
 
-- (void)didReceiveMemoryWarning
-{
+
+
+-(WTMShelf*)_createAShelf{
+    // We create a Shelf
+    WTMShelf *shelf=[[WTMShelf alloc] init];
+   
+    // With one package
+    WTMPackage *p=[[WTMPackage alloc]init];
+    shelf.packages=[[WTMCollectionOfPackage alloc]init];
+    [shelf.packages addObject:p];
+    
+    // With one lang dictionary
+    WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] init];
+    p.langDictionaries=ld;
+    
+    // Containing one library
+    p.libraries=[[WTMCollectionOfLibrary alloc]init];
+    WTMLibrary*castLib=[[WTMLibrary alloc] init];
+    [p.libraries addObject:castLib];
+    
+    return shelf;
+}
+
+
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

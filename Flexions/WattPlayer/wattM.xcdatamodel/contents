@@ -55,8 +55,10 @@
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Html" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES"/>
-    <entity name="Hyperlink" representedClassName="Image" parentEntity="Asset" syncable="YES">
+    <entity name="Html" representedClassName="Html" parentEntity="LinkedAsset" syncable="YES">
+        <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Hyperlink" representedClassName="Hyperlink" parentEntity="Asset" syncable="YES">
         <attribute name="urlString" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="type" value="size"/>
@@ -70,7 +72,7 @@
             </userInfo>
         </attribute>
     </entity>
-    <entity name="Label" representedClassName="Text" parentEntity="Asset" syncable="YES">
+    <entity name="Label" representedClassName="Label" parentEntity="Asset" syncable="YES">
         <attribute name="font" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -116,7 +118,7 @@
         <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" syncable="YES"/>
         <relationship name="rightsAssignees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Pdf" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
+    <entity name="Pdf" representedClassName="Pdf" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="type" value="size"/>
@@ -161,7 +163,7 @@
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
     </entity>
-    <entity name="Video" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
+    <entity name="Video" representedClassName="Video" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES">
             <userInfo>
                 <entry key="type" value="size"/>
@@ -176,8 +178,8 @@
         <element name="Datum" positionX="-7956" positionY="-4273" width="128" height="88"/>
         <element name="Element" positionX="-6536" positionY="-3964" width="128" height="178"/>
         <element name="Group" positionX="-7641" positionY="-3888" width="128" height="58"/>
-        <element name="Html" positionX="-7256" positionY="-3429" width="128" height="43"/>
-        <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
+        <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
+        <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="58"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
         <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
         <element name="LangDictionary" positionX="-7371" positionY="-4113" width="128" height="88"/>
