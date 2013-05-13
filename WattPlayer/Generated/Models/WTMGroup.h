@@ -20,10 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMObject.h"
+#import "WTMModel.h"
 
-
-@interface WTMGroup:WTMObject{
+@interface WTMGroup:WTMModel{
 }
 
 @property (nonatomic,copy) NSString * name;

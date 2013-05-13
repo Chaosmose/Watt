@@ -20,10 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMObject.h"
+#import "WTMModel.h"
 
-
-@interface WTMDatum:WTMObject{
+@interface WTMDatum:WTMModel{
 }
 
 @property (nonatomic,copy) NSString * key;

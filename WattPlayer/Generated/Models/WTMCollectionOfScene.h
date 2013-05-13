@@ -20,9 +20,10 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
+#import "WTMModel.h"
 #import "WTMScene.h" 
 
-@interface WTMCollectionOfScene:NSObject {
+@interface WTMCollectionOfScene:WTMModel {
 }
 
 + (WTMCollectionOfScene *)instanceFromDictionary:(NSDictionary *)aDictionary;

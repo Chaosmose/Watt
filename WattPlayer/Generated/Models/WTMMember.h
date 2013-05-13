@@ -20,10 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMObject.h"
+#import "WTMModel.h"
 
-
-@interface WTMMember:WTMObject{
+@interface WTMMember:WTMModel{
 }
 
 @property (nonatomic,assign) NSInteger  index;

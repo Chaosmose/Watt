@@ -20,10 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMObject.h"
+#import "WTMModel.h"
 
-
-@interface WTMAction:WTMObject{
+@interface WTMAction:WTMModel{
 }
 
 @property (nonatomic,strong) NSDictionary * arguments;

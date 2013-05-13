@@ -20,9 +20,10 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
+#import "WTMModel.h"
 #import "WTMLangDictionary.h" 
 
-@interface WTMCollectionOfLangDictionary:NSObject {
+@interface WTMCollectionOfLangDictionary:WTMModel {
 }
 
 + (WTMCollectionOfLangDictionary *)instanceFromDictionary:(NSDictionary *)aDictionary;

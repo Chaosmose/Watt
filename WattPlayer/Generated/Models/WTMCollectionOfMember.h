@@ -20,9 +20,10 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
+#import "WTMModel.h"
 #import "WTMMember.h" 
 
-@interface WTMCollectionOfMember:NSObject {
+@interface WTMCollectionOfMember:WTMModel {
 }
 
 + (WTMCollectionOfMember *)instanceFromDictionary:(NSDictionary *)aDictionary;

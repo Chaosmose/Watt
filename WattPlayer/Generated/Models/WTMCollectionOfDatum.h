@@ -20,9 +20,10 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
+#import "WTMModel.h"
 #import "WTMDatum.h" 
 
-@interface WTMCollectionOfDatum:NSObject {
+@interface WTMCollectionOfDatum:WTMModel {
 }
 
 + (WTMCollectionOfDatum *)instanceFromDictionary:(NSDictionary *)aDictionary;

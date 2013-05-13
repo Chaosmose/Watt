@@ -20,9 +20,10 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
+#import "WTMModel.h"
 #import "WTMRule.h" 
 
-@interface WTMRule:NSObject {
+@interface WTMRule:WTMModel {
 }
 
 + (WTMRule *)instanceFromDictionary:(NSDictionary *)aDictionary;

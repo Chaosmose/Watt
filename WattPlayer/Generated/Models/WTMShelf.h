@@ -20,12 +20,11 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMObject.h"
-
+#import "WTMModel.h"
 @class WTMCollectionOfUser;
 @class WTMCollectionOfPackage;
 
-@interface WTMShelf:WTMObject{
+@interface WTMShelf:WTMModel{
 }
 
 @property (nonatomic,copy) NSString * comment;
