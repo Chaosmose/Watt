@@ -88,6 +88,13 @@
 	return [_collection objectAtIndex:index];
 }
 
+- (WTMScene *)lastObject{
+    return [_collection lastObject];
+}
+
+- (WTMScene *)firstObjectCommonWithArray:(NSArray*)array{
+    return [_collection firstObjectCommonWithArray:array];
+}
 
 - (void)addObject:(WTMScene*)anObject{
  	[_collection addObject:anObject];

@@ -32,6 +32,8 @@
 
 - (NSUInteger)count;
 - (WTMDatum *)objectAtIndex:(NSUInteger)index;
+- (WTMDatum *)lastObject;
+- (WTMDatum *)firstObjectCommonWithArray:(NSArray*)array;
 - (void)addObject:(WTMDatum*)anObject;
 - (void)insertObject:(WTMDatum*)anObject atIndex:(NSUInteger)index;
 - (void)removeLastObject;

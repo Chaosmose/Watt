@@ -32,6 +32,8 @@
 
 - (NSUInteger)count;
 - (WTMMember *)objectAtIndex:(NSUInteger)index;
+- (WTMMember *)lastObject;
+- (WTMMember *)firstObjectCommonWithArray:(NSArray*)array;
 - (void)addObject:(WTMMember*)anObject;
 - (void)insertObject:(WTMMember*)anObject atIndex:(NSUInteger)index;
 - (void)removeLastObject;

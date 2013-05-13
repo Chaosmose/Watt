@@ -88,6 +88,13 @@
 	return [_collection objectAtIndex:index];
 }
 
+- (WTMGroup *)lastObject{
+    return [_collection lastObject];
+}
+
+- (WTMGroup *)firstObjectCommonWithArray:(NSArray*)array{
+    return [_collection firstObjectCommonWithArray:array];
+}
 
 - (void)addObject:(WTMGroup*)anObject{
  	[_collection addObject:anObject];

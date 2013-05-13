@@ -88,6 +88,13 @@
 	return [_collection objectAtIndex:index];
 }
 
+- (WTMDatum *)lastObject{
+    return [_collection lastObject];
+}
+
+- (WTMDatum *)firstObjectCommonWithArray:(NSArray*)array{
+    return [_collection firstObjectCommonWithArray:array];
+}
 
 - (void)addObject:(WTMDatum*)anObject{
  	[_collection addObject:anObject];
