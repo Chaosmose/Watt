@@ -27,6 +27,20 @@
 
 @implementation WTMPackage 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.activities=[[WTMCollectionOfActivity alloc] init];
+		self.langDictionaries=[[WTMCollectionOfLangDictionary alloc] init];
+		self.libraries=[[WTMCollectionOfLibrary alloc] init];
+		self.rightsAssignees=[[WTMCollectionOfUser alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMPackage*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

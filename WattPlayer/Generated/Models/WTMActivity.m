@@ -24,6 +24,17 @@
 
 @implementation WTMActivity 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.scenes=[[WTMCollectionOfScene alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMActivity*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMActivity*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

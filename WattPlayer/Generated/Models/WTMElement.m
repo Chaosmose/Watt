@@ -23,6 +23,16 @@
 
 @implementation WTMElement 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMElement*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMElement*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

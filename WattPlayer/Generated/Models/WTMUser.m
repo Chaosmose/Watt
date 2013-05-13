@@ -24,6 +24,17 @@
 
 @implementation WTMUser 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.groups=[[WTMCollectionOfGroup alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMUser*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

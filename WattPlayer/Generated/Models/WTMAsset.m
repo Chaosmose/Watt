@@ -23,6 +23,16 @@
 
 @implementation WTMAsset 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMAsset*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMAsset*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

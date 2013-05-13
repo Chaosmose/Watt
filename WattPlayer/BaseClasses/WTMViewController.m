@@ -43,7 +43,16 @@
     WTMLibrary*lib=[p.libraries lastObject];
     lib.name=@"Library #1";
     
-    WTMHtml *
+    WTMHyperlink*h=[[WTMHyperlink alloc] init];
+    h.urlString=@"http://www.secouchermoinsbete.fr";
+    
+    [lib.members addObject:h];
+    
+    NSDictionary* d=[s dictionaryRepresentation];
+    NSLog(@"%@",d);
+    
+    WTMShelf *s2=[WTMShelf instanceFromDictionary:d];
+    NSLog(@"%@",[s2 dictionaryRepresentation]);
     
 
 }
@@ -51,23 +60,18 @@
 
 
 -(WTMShelf*)_createAShelf{
+    
     // We create a Shelf
     WTMShelf *shelf=[[WTMShelf alloc] init];
-   
     // With one package
     WTMPackage *p=[[WTMPackage alloc]init];
-    shelf.packages=[[WTMCollectionOfPackage alloc]init];
     [shelf.packages addObject:p];
-    
     // With one lang dictionary
     WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] init];
     p.langDictionaries=ld;
-    
     // Containing one library
-    p.libraries=[[WTMCollectionOfLibrary alloc]init];
     WTMLibrary*castLib=[[WTMLibrary alloc] init];
     [p.libraries addObject:castLib];
-    
     return shelf;
 }
 

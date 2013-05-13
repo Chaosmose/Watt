@@ -23,6 +23,16 @@
 
 @implementation WTMLabel 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMLabel*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMLabel*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

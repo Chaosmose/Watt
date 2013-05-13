@@ -23,6 +23,16 @@
 
 @implementation WTMMember 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMMember*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMMember*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

@@ -59,11 +59,7 @@
         <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Hyperlink" representedClassName="Hyperlink" parentEntity="Asset" syncable="YES">
-        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="type" value="size"/>
-            </userInfo>
-        </attribute>
+        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES">
@@ -179,7 +175,7 @@
         <element name="Element" positionX="-6536" positionY="-3964" width="128" height="178"/>
         <element name="Group" positionX="-7641" positionY="-3888" width="128" height="58"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
-        <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="58"/>
+        <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
         <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
         <element name="LangDictionary" positionX="-7371" positionY="-4113" width="128" height="88"/>

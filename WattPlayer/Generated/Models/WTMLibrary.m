@@ -24,6 +24,17 @@
 
 @implementation WTMLibrary 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.members=[[WTMCollectionOfMember alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMLibrary*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMLibrary*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

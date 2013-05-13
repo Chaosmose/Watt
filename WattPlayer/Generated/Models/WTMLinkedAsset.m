@@ -23,6 +23,16 @@
 
 @implementation WTMLinkedAsset 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMLinkedAsset*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMLinkedAsset*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

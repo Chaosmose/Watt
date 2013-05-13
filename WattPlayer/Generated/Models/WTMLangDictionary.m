@@ -23,6 +23,16 @@
 
 @implementation WTMLangDictionary 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMLangDictionary*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMLangDictionary*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

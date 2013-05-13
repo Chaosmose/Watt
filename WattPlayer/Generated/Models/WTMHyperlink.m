@@ -23,6 +23,16 @@
 
 @implementation WTMHyperlink 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMHyperlink*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMHyperlink*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
@@ -52,7 +62,7 @@
 - (NSDictionary*)dictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:[NSValue valueWithCGSize:self.urlString] forKey:@"urlString"];
+	[dictionary setValue:self.urlString forKey:@"urlString"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
@@ -60,7 +70,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"urlString : %@\n",[NSValue valueWithCGSize:self.urlString]];
+	[s appendFormat:@"urlString : %@\n",self.urlString];
 	return s;
 }
 

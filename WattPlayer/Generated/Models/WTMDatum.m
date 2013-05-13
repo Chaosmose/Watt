@@ -23,6 +23,16 @@
 
 @implementation WTMDatum 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMDatum*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMDatum*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

@@ -26,7 +26,7 @@
 @interface WTMHyperlink:WTMAsset{
 }
 
-@property (nonatomic,assign) CGSize  urlString;
+@property (nonatomic,copy) NSString * urlString;
  
 + (WTMHyperlink *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;

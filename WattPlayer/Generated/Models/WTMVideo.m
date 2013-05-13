@@ -23,6 +23,16 @@
 
 @implementation WTMVideo 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMVideo*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMVideo*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

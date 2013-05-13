@@ -25,6 +25,18 @@
 
 @implementation WTMBehavior 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.action=[[WTMAction alloc] init];
+		self.trigger=[[WTMRule alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMBehavior*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMBehavior*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

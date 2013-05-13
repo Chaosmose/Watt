@@ -23,6 +23,16 @@
 
 @implementation WTMHtml 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMHtml*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMHtml*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

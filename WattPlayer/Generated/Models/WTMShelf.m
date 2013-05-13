@@ -25,6 +25,18 @@
 
 @implementation WTMShelf 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.localUsers=[[WTMCollectionOfUser alloc] init];
+		self.packages=[[WTMCollectionOfPackage alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMShelf*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

@@ -23,6 +23,16 @@
 
 @implementation WTMOperand 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMOperand*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMOperand*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

@@ -23,6 +23,16 @@
 
 @implementation WTMPdf 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMPdf*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMPdf*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

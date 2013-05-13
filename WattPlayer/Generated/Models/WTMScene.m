@@ -24,6 +24,17 @@
 
 @implementation WTMScene 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+		self.elements=[[WTMCollectionOfElement alloc] init];
+   
+    }
+    return self;
+}
+
+
 + (WTMScene*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMScene*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){

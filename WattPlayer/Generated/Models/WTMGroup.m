@@ -23,6 +23,16 @@
 
 @implementation WTMGroup 
 
+
+-(id)init{
+    self=[super init];
+    if(self){
+   
+    }
+    return self;
+}
+
+
 + (WTMGroup*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMGroup*instance = nil;
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
