@@ -22,7 +22,6 @@
 //
 
 #import "WTMViewController.h"
-
 #import "WTMModelsImports.h"
 
 @interface WTMViewController ()
@@ -51,16 +50,15 @@
     NSDictionary* d=[s dictionaryRepresentation];
     NSLog(@"%@",d);
     
-    WTMShelf *s2=[WTMShelf instanceFromDictionary:d];
+    WTMShelf *s2;
+    s2=[WTMShelf instanceFromDictionary:d];
     NSLog(@"%@",[s2 dictionaryRepresentation]);
-    
 
 }
 
 
 
 -(WTMShelf*)_createAShelf{
-    
     // We create a Shelf
     WTMShelf *shelf=[[WTMShelf alloc] init];
     // With one package

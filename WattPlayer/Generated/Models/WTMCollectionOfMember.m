@@ -36,6 +36,7 @@
 
 + (WTMCollectionOfMember*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMCollectionOfMember*instance = nil;
+	//WTLog(@"%@",aDictionary);
 	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
 		id unCasted= [[theClass alloc] init];
@@ -52,11 +53,11 @@
 	_collection=[NSMutableArray array];
     NSArray *a=[aDictionary objectForKey:@"collection"];
     for (NSDictionary*objectDictionary in a) {
-        WTMMember*o=[WTMMember instanceFromDictionary:objectDictionary];
+        Class c=NSClassFromString([objectDictionary objectForKey:@"className"]);
+        id o=[c instanceFromDictionary:objectDictionary];
         [_collection addObject:o];
     }
 }
-
 
 - (NSDictionary*)dictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];

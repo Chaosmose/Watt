@@ -22,6 +22,32 @@
 
 #import <Foundation/Foundation.h>
 
+
+#ifndef WT_LOG
+#define WT_LOG 1 // You can set up WT_LOG to 1 or 0
+typedef enum logNatures{
+    WT_LOG_DEBUG=0,
+    WT_LOG_RUNTIME=1,
+}LogNature;
+#if WT_LOG
+#define WTLogNF(nature,format, ... ){\
+NSLog( @"WT(%i):%s line:%d:{\n%@\n}\n",\
+nature,\
+__PRETTY_FUNCTION__,\
+__LINE__ ,\
+[NSString stringWithFormat:(format), ##__VA_ARGS__]\
+);\
+}
+#define WTLog(format, ...){ WTLogNF(WT_LOG_DEBUG,format, ##__VA_ARGS__); }
+#define WTLogN(message,nature){ WTLogNF(nature,@"%@",message); }
+#else
+#define WTLogNF(nature,format, ... ){}
+#define WTLog(format, ...){  }
+#define WTLogN(message,nature){ }
+#endif
+#endif
+
+
 @interface WTMObject : NSObject
 
 @end
