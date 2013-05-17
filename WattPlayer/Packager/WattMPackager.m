@@ -6,8 +6,18 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WTMPackager.h"
+#import "WattMPackager.h"
 
-@implementation WTMPackager
+@implementation WattMPackager
+
++ (WattMPackager*)sharedInstance {
+    static WattMPackager *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 
 @end

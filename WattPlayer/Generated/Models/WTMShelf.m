@@ -36,6 +36,11 @@
     return self;
 }
 
+- (WTMShelf *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMShelf*instance = nil;

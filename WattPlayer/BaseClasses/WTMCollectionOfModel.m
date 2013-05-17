@@ -10,4 +10,11 @@
 
 @implementation WTMCollectionOfModel
 
+-(void)localize{
+    for (WTMModel*model in _collection) {
+        if([model respondsToSelector:@selector(localize)]){
+            [model localize];
+        }
+    }
+}
 @end

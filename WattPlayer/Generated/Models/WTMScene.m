@@ -34,6 +34,11 @@
     return self;
 }
 
+- (WTMScene *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMScene*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMScene*instance = nil;

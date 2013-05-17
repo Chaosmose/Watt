@@ -31,5 +31,5 @@
 + (WTMHyperlink *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMHyperlink *)localized;
 @end

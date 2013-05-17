@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMPdf *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMPdf*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMPdf*instance = nil;

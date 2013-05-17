@@ -32,5 +32,5 @@
 + (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMLabel *)localized;
 @end

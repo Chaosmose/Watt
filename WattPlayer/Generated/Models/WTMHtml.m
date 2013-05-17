@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMHtml *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMHtml*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMHtml*instance = nil;

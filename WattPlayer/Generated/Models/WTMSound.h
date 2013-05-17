@@ -31,5 +31,5 @@
 + (WTMSound *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMSound *)localized;
 @end

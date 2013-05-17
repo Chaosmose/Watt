@@ -31,5 +31,5 @@
 + (WTMVideo *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMVideo *)localized;
 @end

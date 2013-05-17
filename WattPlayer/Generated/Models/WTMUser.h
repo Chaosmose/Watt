@@ -33,5 +33,5 @@
 + (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMUser *)localized;
 @end

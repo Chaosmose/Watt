@@ -36,6 +36,11 @@
     return self;
 }
 
+- (WTMBehavior *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMBehavior*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMBehavior*instance = nil;

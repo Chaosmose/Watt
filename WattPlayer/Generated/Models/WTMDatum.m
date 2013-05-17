@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMDatum *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMDatum*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMDatum*instance = nil;

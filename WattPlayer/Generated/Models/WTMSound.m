@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMSound *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMSound*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMSound*instance = nil;

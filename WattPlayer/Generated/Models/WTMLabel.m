@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMLabel *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMLabel*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMLabel*instance = nil;

@@ -23,7 +23,6 @@
 #import "WTMCollectionOfElement.h" 
 
 @implementation WTMCollectionOfElement{
-	NSMutableArray* _collection;
 }
 
 -(id)init{
@@ -71,6 +70,11 @@
 	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
     [wrapper setObject:dictionary forKey:@"properties"];
     return wrapper;
+}
+
+- (WTMCollectionOfElement*)localized{
+	[self localize];
+	return self;
 }
 
 

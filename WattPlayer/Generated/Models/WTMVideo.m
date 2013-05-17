@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMVideo *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMVideo*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMVideo*instance = nil;

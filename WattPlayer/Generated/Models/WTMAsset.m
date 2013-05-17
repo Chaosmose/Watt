@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMAsset *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMAsset*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMAsset*instance = nil;

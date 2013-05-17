@@ -40,6 +40,11 @@
     return self;
 }
 
+- (WTMPackage *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMPackage*instance = nil;

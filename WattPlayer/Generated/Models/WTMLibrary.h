@@ -34,5 +34,5 @@
 + (WTMLibrary *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMLibrary *)localized;
 @end

@@ -32,5 +32,5 @@
 + (WTMLangDictionary *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMLangDictionary *)localized;
 @end

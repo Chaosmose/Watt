@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMAction *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMAction*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMAction*instance = nil;

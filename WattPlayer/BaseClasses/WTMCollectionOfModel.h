@@ -8,6 +8,9 @@
 
 #import "WTMModel.h"
 
-@interface WTMCollectionOfModel : WTMModel
+@interface WTMCollectionOfModel : WTMModel {
+    @protected
+    NSMutableArray* _collection;
+}
 
 @end

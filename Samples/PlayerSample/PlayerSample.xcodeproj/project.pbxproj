@@ -33,6 +33,8 @@
 		E5BF32A6173BFF79008D77BE /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */; };
 		E5C5D93D17465BF300A6A46F /* WattMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D93C17465BF300A6A46F /* WattMApi.m */; };
 		E5C5D94317466E3300A6A46F /* NSObject+Watt.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D94217466E3300A6A46F /* NSObject+Watt.m */; };
+		E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
+		E5C5D94A174671F500A6A46F /* WattMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D949174671F500A6A46F /* WattMPackager.m */; };
 		E5F0D2D2173ABA1E002A8A24 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D295173ABA1E002A8A24 /* WTMAction.m */; };
 		E5F0D2D3173ABA1E002A8A24 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D297173ABA1E002A8A24 /* WTMActivity.m */; };
 		E5F0D2D4173ABA1E002A8A24 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D299173ABA1E002A8A24 /* WTMAsset.m */; };
@@ -113,6 +115,10 @@
 		E5C5D93E17465F9700A6A46F /* WattM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WattM.h; sourceTree = "<group>"; };
 		E5C5D94117466E3300A6A46F /* NSObject+Watt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Watt.h"; sourceTree = "<group>"; };
 		E5C5D94217466E3300A6A46F /* NSObject+Watt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Watt.m"; sourceTree = "<group>"; };
+		E5C5D9451746719200A6A46F /* WTMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMViewController.h; sourceTree = "<group>"; };
+		E5C5D9461746719200A6A46F /* WTMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
+		E5C5D948174671F500A6A46F /* WattMPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattMPackager.h; sourceTree = "<group>"; };
+		E5C5D949174671F500A6A46F /* WattMPackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattMPackager.m; sourceTree = "<group>"; };
 		E5F0D294173ABA1E002A8A24 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E5F0D295173ABA1E002A8A24 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E5F0D296173ABA1E002A8A24 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -219,6 +225,8 @@
 		E52D1CBA1734F32C0043C615 /* Packager */ = {
 			isa = PBXGroup;
 			children = (
+				E5C5D948174671F500A6A46F /* WattMPackager.h */,
+				E5C5D949174671F500A6A46F /* WattMPackager.m */,
 			);
 			path = Packager;
 			sourceTree = "<group>";
@@ -299,6 +307,8 @@
 		E5B4624A1732A4A000E654A1 /* PlayerSample */ = {
 			isa = PBXGroup;
 			children = (
+				E5C5D9451746719200A6A46F /* WTMViewController.h */,
+				E5C5D9461746719200A6A46F /* WTMViewController.m */,
 				E5B462531732A4A000E654A1 /* WTMAppDelegate.h */,
 				E5B462541732A4A000E654A1 /* WTMAppDelegate.m */,
 				E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */,
@@ -528,6 +538,8 @@
 				E5F258571746367D00C18784 /* WTMCollectionOfModel.m in Sources */,
 				E5C5D93D17465BF300A6A46F /* WattMApi.m in Sources */,
 				E5C5D94317466E3300A6A46F /* NSObject+Watt.m in Sources */,
+				E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */,
+				E5C5D94A174671F500A6A46F /* WattMPackager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

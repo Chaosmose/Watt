@@ -23,31 +23,22 @@
 #import <Foundation/Foundation.h>
 
 
-#ifndef WT_LOG
-#define WT_LOG 1 // You can set up WT_LOG to 1 or 0
-typedef enum logNatures{
-    WT_LOG_DEBUG=0,
-    WT_LOG_RUNTIME=1,
-}LogNature;
-#if WT_LOG
-#define WTLogNF(nature,format, ... ){\
-NSLog( @"WT(%i):%s line:%d:{\n%@\n}\n",\
-nature,\
-__PRETTY_FUNCTION__,\
-__LINE__ ,\
-[NSString stringWithFormat:(format), ##__VA_ARGS__]\
-);\
+@class WattMApi;
+
+@interface WTMObject : NSObject{
+    @private
+    NSString *_currentLocale;           // The locale that has been used for localization
+    NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
+    WattMApi *_wapi;
 }
-#define WTLog(format, ...){ WTLogNF(WT_LOG_DEBUG,format, ##__VA_ARGS__); }
-#define WTLogN(message,nature){ WTLogNF(nature,@"%@",message); }
-#else
-#define WTLogNF(nature,format, ... ){}
-#define WTLog(format, ...){  }
-#define WTLogN(message,nature){ }
-#endif
-#endif
 
+-(WTMObject*)localized;
+-(void)localize;
+-(BOOL)hasBeenLocalized;
 
-@interface WTMObject : NSObject
+// Reflexion utility that is not as fast as NSFastEnumeration on the first call 
+// But this approach is much more flexible in our context KVC, inheritance & universal persistency.
+-(NSArray*)allPropertiesName;
+
 
 @end

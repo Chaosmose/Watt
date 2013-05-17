@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMImage *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMImage*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMImage*instance = nil;

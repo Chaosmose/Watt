@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WTMPackager : NSObject
+@interface WattMPackager : NSObject
+
+// WTMPackager singleton accessor
++(WattMPackager*)sharedInstance;
 
 @end

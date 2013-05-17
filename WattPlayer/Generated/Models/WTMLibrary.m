@@ -34,6 +34,11 @@
     return self;
 }
 
+- (WTMLibrary *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMLibrary*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMLibrary*instance = nil;

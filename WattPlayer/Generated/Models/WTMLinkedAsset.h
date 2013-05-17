@@ -32,5 +32,5 @@
 + (WTMLinkedAsset *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMLinkedAsset *)localized;
 @end

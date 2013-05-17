@@ -35,5 +35,5 @@
 + (WTMBehavior *)instanceFromDictionary:(NSDictionary *)aDictionary;
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 - (NSDictionary *)dictionaryRepresentation;
-
+- (WTMBehavior *)localized;
 @end

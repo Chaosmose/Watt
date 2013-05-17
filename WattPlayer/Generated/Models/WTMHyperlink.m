@@ -32,6 +32,11 @@
     return self;
 }
 
+- (WTMHyperlink *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMHyperlink*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMHyperlink*instance = nil;

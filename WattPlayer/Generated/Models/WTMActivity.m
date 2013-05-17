@@ -34,6 +34,11 @@
     return self;
 }
 
+- (WTMActivity *)localized{
+    [self localize];
+    return self;
+}
+
 
 + (WTMActivity*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMActivity*instance = nil;
