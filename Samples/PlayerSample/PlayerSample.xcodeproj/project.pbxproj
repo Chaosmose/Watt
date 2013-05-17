@@ -14,7 +14,6 @@
 		E53C6985173B881E00E135CA /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
 		E53C698C173B899600E135CA /* WTMDatumSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C698B173B899600E135CA /* WTMDatumSerializer.m */; };
 		E53C698F173B8A1300E135CA /* WTMDatumDeSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C698E173B8A1300E135CA /* WTMDatumDeSerializer.m */; };
-		E5A59AC5174144A800AB881F /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC4174144A800AB881F /* WTMViewController.m */; };
 		E5A59AD017414CE300AB881F /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC717414CDB00AB881F /* WTMHtml.m */; };
 		E5A59AD117414CE300AB881F /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC917414CDC00AB881F /* WTMHyperlink.m */; };
 		E5A59AD217414CE300AB881F /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59ACB17414CDE00AB881F /* WTMLabel.m */; };
@@ -32,6 +31,8 @@
 		E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5BF32A6173BFF79008D77BE /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */; };
+		E5C5D93D17465BF300A6A46F /* WattMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D93C17465BF300A6A46F /* WattMApi.m */; };
+		E5C5D94317466E3300A6A46F /* NSObject+Watt.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D94217466E3300A6A46F /* NSObject+Watt.m */; };
 		E5F0D2D2173ABA1E002A8A24 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D295173ABA1E002A8A24 /* WTMAction.m */; };
 		E5F0D2D3173ABA1E002A8A24 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D297173ABA1E002A8A24 /* WTMActivity.m */; };
 		E5F0D2D4173ABA1E002A8A24 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D299173ABA1E002A8A24 /* WTMAsset.m */; };
@@ -62,6 +63,7 @@
 		E5F0D2EE173ABA1E002A8A24 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2CD173ABA1E002A8A24 /* WTMSound.m */; };
 		E5F0D2EF173ABA1E002A8A24 /* WTMText.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2CF173ABA1E002A8A24 /* WTMText.m */; };
 		E5F0D2F0173ABA1E002A8A24 /* WTMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2D1173ABA1E002A8A24 /* WTMUser.m */; };
+		E5F258571746367D00C18784 /* WTMCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F258561746367D00C18784 /* WTMCollectionOfModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,8 +81,6 @@
 		E53C698B173B899600E135CA /* WTMDatumSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMDatumSerializer.m; sourceTree = "<group>"; };
 		E53C698D173B8A1300E135CA /* WTMDatumDeSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMDatumDeSerializer.h; sourceTree = "<group>"; };
 		E53C698E173B8A1300E135CA /* WTMDatumDeSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMDatumDeSerializer.m; sourceTree = "<group>"; };
-		E5A59AC3174144A800AB881F /* WTMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMViewController.h; sourceTree = "<group>"; };
-		E5A59AC4174144A800AB881F /* WTMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
 		E5A59AC617414CDA00AB881F /* WTMHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHtml.h; sourceTree = "<group>"; };
 		E5A59AC717414CDB00AB881F /* WTMHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMHtml.m; sourceTree = "<group>"; };
 		E5A59AC817414CDC00AB881F /* WTMHyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHyperlink.h; sourceTree = "<group>"; };
@@ -108,6 +108,11 @@
 		E5B462601732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E5BF32A4173BFF79008D77BE /* WTMCollectionOfDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfDatum.h; sourceTree = "<group>"; };
 		E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfDatum.m; sourceTree = "<group>"; };
+		E5C5D93B17465BF300A6A46F /* WattMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattMApi.h; sourceTree = "<group>"; };
+		E5C5D93C17465BF300A6A46F /* WattMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattMApi.m; sourceTree = "<group>"; };
+		E5C5D93E17465F9700A6A46F /* WattM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WattM.h; sourceTree = "<group>"; };
+		E5C5D94117466E3300A6A46F /* NSObject+Watt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Watt.h"; sourceTree = "<group>"; };
+		E5C5D94217466E3300A6A46F /* NSObject+Watt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Watt.m"; sourceTree = "<group>"; };
 		E5F0D294173ABA1E002A8A24 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E5F0D295173ABA1E002A8A24 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E5F0D296173ABA1E002A8A24 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -169,6 +174,8 @@
 		E5F0D2D0173ABA1E002A8A24 /* WTMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMUser.h; sourceTree = "<group>"; };
 		E5F0D2D1173ABA1E002A8A24 /* WTMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMUser.m; sourceTree = "<group>"; };
 		E5F0D2F1173ABA23002A8A24 /* WTMModelsImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModelsImports.h; sourceTree = "<group>"; };
+		E5F258551746367D00C18784 /* WTMCollectionOfModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfModel.h; sourceTree = "<group>"; };
+		E5F258561746367D00C18784 /* WTMCollectionOfModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +201,7 @@
 				E53C6974173B881E00E135CA /* BaseClasses */,
 				E52D1C791734F32C0043C615 /* Generated */,
 				E52D1CBA1734F32C0043C615 /* Packager */,
+				E5C5D93E17465F9700A6A46F /* WattM.h */,
 			);
 			name = WattPlayer;
 			path = ../../WattPlayer;
@@ -218,8 +226,6 @@
 		E53C6974173B881E00E135CA /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E5A59AC3174144A800AB881F /* WTMViewController.h */,
-				E5A59AC4174144A800AB881F /* WTMViewController.m */,
 				E53C6975173B881E00E135CA /* WTMActivityViewController.h */,
 				E53C6976173B881E00E135CA /* WTMActivityViewController.m */,
 				E53C6977173B881E00E135CA /* WTMElementViewController.h */,
@@ -228,6 +234,8 @@
 				E53C697A173B881E00E135CA /* WTMModel.m */,
 				E53C697B173B881E00E135CA /* WTMObject.h */,
 				E53C697C173B881E00E135CA /* WTMObject.m */,
+				E5F258551746367D00C18784 /* WTMCollectionOfModel.h */,
+				E5F258561746367D00C18784 /* WTMCollectionOfModel.m */,
 				E53C697D173B881E00E135CA /* WTMSceneViewController.h */,
 				E53C697E173B881E00E135CA /* WTMSceneViewController.m */,
 			);
@@ -244,10 +252,11 @@
 		E53C6988173B886500E135CA /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E53C698A173B899500E135CA /* WTMDatumSerializer.h */,
-				E53C698B173B899600E135CA /* WTMDatumSerializer.m */,
-				E53C698D173B8A1300E135CA /* WTMDatumDeSerializer.h */,
-				E53C698E173B8A1300E135CA /* WTMDatumDeSerializer.m */,
+				E5C5D93B17465BF300A6A46F /* WattMApi.h */,
+				E5C5D93C17465BF300A6A46F /* WattMApi.m */,
+				E5C5D94117466E3300A6A46F /* NSObject+Watt.h */,
+				E5C5D94217466E3300A6A46F /* NSObject+Watt.m */,
+				E5C5D94417466FEF00A6A46F /* experimental */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -311,6 +320,17 @@
 				E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E5C5D94417466FEF00A6A46F /* experimental */ = {
+			isa = PBXGroup;
+			children = (
+				E53C698A173B899500E135CA /* WTMDatumSerializer.h */,
+				E53C698B173B899600E135CA /* WTMDatumSerializer.m */,
+				E53C698D173B8A1300E135CA /* WTMDatumDeSerializer.h */,
+				E53C698E173B8A1300E135CA /* WTMDatumDeSerializer.m */,
+			);
+			name = experimental;
 			sourceTree = "<group>";
 		};
 		E5F0D293173ABA1E002A8A24 /* Models */ = {
@@ -500,12 +520,14 @@
 				E53C698C173B899600E135CA /* WTMDatumSerializer.m in Sources */,
 				E53C698F173B8A1300E135CA /* WTMDatumDeSerializer.m in Sources */,
 				E5BF32A6173BFF79008D77BE /* WTMCollectionOfDatum.m in Sources */,
-				E5A59AC5174144A800AB881F /* WTMViewController.m in Sources */,
 				E5A59AD017414CE300AB881F /* WTMHtml.m in Sources */,
 				E5A59AD117414CE300AB881F /* WTMHyperlink.m in Sources */,
 				E5A59AD217414CE300AB881F /* WTMLabel.m in Sources */,
 				E5A59AD317414CE300AB881F /* WTMPdf.m in Sources */,
 				E5A59AD417414CE300AB881F /* WTMVideo.m in Sources */,
+				E5F258571746367D00C18784 /* WTMCollectionOfModel.m in Sources */,
+				E5C5D93D17465BF300A6A46F /* WattMApi.m in Sources */,
+				E5C5D94317466E3300A6A46F /* NSObject+Watt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,6 +13,7 @@ if (isset ( $f )) {
 	$f->license = FLEXIONS_ROOT_DIR."flexions/helpers/licenses/LGPL.tpl.php";
 }
 $parentClass = "WTMModel";
+$collectionParentClass="WTMCollectionOfModel";
 $imports = "\n#import \"$parentClass.h\"\n";
 $markAsDynamic = false;
 $allowScalars = true;
