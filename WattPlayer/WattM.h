@@ -26,7 +26,7 @@
 #import "WTMObject.h"
 #import "WTMModel.h"
 #import "WTMCollectionOfModel.h"
-#import "WTMViewController.h"
+
 //Base view controllers
 #import "WTMActivityViewController.h"
 #import "WTMElementViewController.h"
