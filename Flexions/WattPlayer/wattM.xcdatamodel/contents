@@ -19,7 +19,7 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="scenes" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Scene" syncable="YES"/>
+        <relationship name="scenes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
