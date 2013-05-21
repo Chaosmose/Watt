@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
   s.platform = :ios, '5.0'
   s.requires_arc = true
-  s.source_files = 'WattPlayer/*.{h,m}'
-  s.public_header_files = 'WattPlayer/*.h'
+  s.source_files =  'WattPlayer','WattPlayer/**/*.{h,m}'
+  s.public_header_files = 'WattPlayer/**/*.h'
   s.ios.deployment_target = '5.0'
 end
