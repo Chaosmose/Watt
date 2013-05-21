@@ -424,7 +424,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5B462671732A4A000E654A1 /* Build configuration list for PBXNativeTarget "PlayerSample" */;
 			buildPhases = (
-				E5F6C75C174B707E00961C55 /* ShellScript */,
+				E5F6C75C174B707E00961C55 /* Invoke Flexions */,
 				E5B4623D1732A4A000E654A1 /* Sources */,
 				E5B4623E1732A4A000E654A1 /* Frameworks */,
 				E5B4623F1732A4A000E654A1 /* Resources */,
@@ -482,13 +482,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E5F6C75C174B707E00961C55 /* ShellScript */ = {
+		E5F6C75C174B707E00961C55 /* Invoke Flexions */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Invoke Flexions";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
