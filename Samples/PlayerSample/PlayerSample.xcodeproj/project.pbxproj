@@ -30,6 +30,7 @@
 		E5B4625B1732A4A000E654A1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */; };
 		E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
+		E5BBD679174B4FE200BF66F3 /* WattPlayer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = E5BBD678174B4FE200BF66F3 /* WattPlayer.podspec */; };
 		E5BF32A6173BFF79008D77BE /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */; };
 		E5C5D93D17465BF300A6A46F /* WattMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D93C17465BF300A6A46F /* WattMApi.m */; };
 		E5C5D94317466E3300A6A46F /* NSObject+Watt.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D94217466E3300A6A46F /* NSObject+Watt.m */; };
@@ -107,6 +108,7 @@
 		E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E5B4625D1732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		E5B462601732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		E5BBD678174B4FE200BF66F3 /* WattPlayer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WattPlayer.podspec; sourceTree = "<group>"; };
 		E5BF32A4173BFF79008D77BE /* WTMCollectionOfDatum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfDatum.h; sourceTree = "<group>"; };
 		E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfDatum.m; sourceTree = "<group>"; };
 		E5C5D93B17465BF300A6A46F /* WattMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattMApi.h; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 		E5B462381732A4A000E654A1 = {
 			isa = PBXGroup;
 			children = (
+				E5BBD678174B4FE200BF66F3 /* WattPlayer.podspec */,
 				E52D1C6E1734F32C0043C615 /* WattPlayer */,
 				E5B4624A1732A4A000E654A1 /* PlayerSample */,
 				E5B462431732A4A000E654A1 /* Frameworks */,
@@ -475,6 +478,7 @@
 				E5B4625B1732A4A000E654A1 /* Default-568h@2x.png in Resources */,
 				E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */,
+				E5BBD679174B4FE200BF66F3 /* WattPlayer.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
