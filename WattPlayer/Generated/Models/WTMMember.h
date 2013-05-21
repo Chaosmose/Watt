@@ -22,7 +22,7 @@
 
 #import "WTMModel.h"
 
-@interface WTMMember:WTMModel{
+@interface WTMMember:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,assign) NSInteger  index;
@@ -30,9 +30,7 @@
 @property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * uid;
- 
+
 + (WTMMember *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMMember *)localized;
 @end

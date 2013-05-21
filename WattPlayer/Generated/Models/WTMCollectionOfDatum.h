@@ -22,12 +22,10 @@
 #import "WTMDatum.h" 
 #import "WTMCollectionOfModel.h" 
 
-@interface WTMCollectionOfDatum:WTMCollectionOfModel {
+@interface WTMCollectionOfDatum:WTMCollectionOfModel <WattCoding>{
 }
 
 + (WTMCollectionOfDatum *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMCollectionOfDatum *)localized;
 
 - (NSUInteger)count;

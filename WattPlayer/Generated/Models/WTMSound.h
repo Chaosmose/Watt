@@ -23,13 +23,11 @@
 #import "WTMModel.h"
 #import "WTMLinkedAsset.h"
 
-@interface WTMSound:WTMLinkedAsset{
+@interface WTMSound:WTMLinkedAsset<WattCoding>{
 }
 
 @property (nonatomic,assign) NSInteger  duration;
- 
+
 + (WTMSound *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMSound *)localized;
 @end

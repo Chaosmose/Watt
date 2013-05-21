@@ -23,15 +23,13 @@
 #import "WTMModel.h"
 @class WTMCollectionOfGroup;
 
-@interface WTMUser:WTMModel{
+@interface WTMUser:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * identity;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfGroup * groups;
- 
+
 + (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMUser *)localized;
 @end

@@ -14,6 +14,7 @@ if (isset ( $f )) {
 }
 $parentClass = "WTMModel";
 $collectionParentClass="WTMCollectionOfModel";
+$protocols="WattCoding";
 $imports = "\n#import \"$parentClass.h\"\n";
 $markAsDynamic = false;
 $allowScalars = true;

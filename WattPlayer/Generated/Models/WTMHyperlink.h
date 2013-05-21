@@ -23,13 +23,11 @@
 #import "WTMModel.h"
 #import "WTMAsset.h"
 
-@interface WTMHyperlink:WTMAsset{
+@interface WTMHyperlink:WTMAsset<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * urlString;
- 
+
 + (WTMHyperlink *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMHyperlink *)localized;
 @end

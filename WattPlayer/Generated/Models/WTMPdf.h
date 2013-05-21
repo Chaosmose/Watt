@@ -23,13 +23,11 @@
 #import "WTMModel.h"
 #import "WTMLinkedAsset.h"
 
-@interface WTMPdf:WTMLinkedAsset{
+@interface WTMPdf:WTMLinkedAsset<WattCoding>{
 }
 
 @property (nonatomic,assign) CGSize  size;
- 
+
 + (WTMPdf *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMPdf *)localized;
 @end

@@ -22,15 +22,13 @@
 
 #import "WTMModel.h"
 
-@interface WTMDatum:WTMModel{
+@interface WTMDatum:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * key;
 @property (nonatomic,copy) NSString * type;
 @property (nonatomic,copy) NSString * value;
- 
+
 + (WTMDatum *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMDatum *)localized;
 @end

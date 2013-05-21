@@ -23,7 +23,7 @@
 #import "WTMModel.h"
 @class WTMCollectionOfScene;
 
-@interface WTMActivity:WTMModel{
+@interface WTMActivity:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
@@ -37,9 +37,7 @@
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
- 
+
 + (WTMActivity *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMActivity *)localized;
 @end

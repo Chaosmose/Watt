@@ -25,15 +25,13 @@
 @class WTMAction;
 @class WTMRule;
 
-@interface WTMBehavior:WTMMember{
+@interface WTMBehavior:WTMMember<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,strong) WTMAction * action;
 @property (nonatomic,strong) WTMRule * trigger;
- 
+
 + (WTMBehavior *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMBehavior *)localized;
 @end

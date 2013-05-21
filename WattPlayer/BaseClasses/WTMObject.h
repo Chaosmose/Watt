@@ -23,6 +23,7 @@
 #import <Foundation/Foundation.h>
 
 
+
 @class WattMApi;
 
 @interface WTMObject : NSObject{
@@ -32,7 +33,7 @@
     WattMApi *_wapi;
 }
 
--(WTMObject*)localized;
+-(WTMObject*)localized; // Usually overriden for strong typing during Flexions
 -(void)localize;
 -(BOOL)hasBeenLocalized;
 
@@ -41,4 +42,12 @@
 -(NSArray*)allPropertiesName;
 
 
+@end
+
+#pragma mark WattCoding
+
+@protocol WattCoding <NSObject>
++ (WTMObject*)instanceFromDictionary:(NSDictionary *)aDictionary; // Usually overriden for strong typing during Flexions
+- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
+- (NSDictionary *)dictionaryRepresentation;
 @end

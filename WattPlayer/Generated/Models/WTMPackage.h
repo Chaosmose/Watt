@@ -26,7 +26,7 @@
 @class WTMCollectionOfLibrary;
 @class WTMCollectionOfUser;
 
-@interface WTMPackage:WTMModel{
+@interface WTMPackage:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
@@ -41,9 +41,7 @@
 @property (nonatomic,strong) WTMCollectionOfLangDictionary * langDictionaries;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMCollectionOfUser * rightsAssignees;
- 
+
 + (WTMPackage *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMPackage *)localized;
 @end

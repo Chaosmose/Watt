@@ -23,13 +23,11 @@
 #import "WTMModel.h"
 #import "WTMLinkedAsset.h"
 
-@interface WTMHtml:WTMLinkedAsset{
+@interface WTMHtml:WTMLinkedAsset<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * string;
- 
+
 + (WTMHtml *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMHtml *)localized;
 @end

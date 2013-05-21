@@ -23,13 +23,11 @@
 #import "WTMModel.h"
 #import "WTMMember.h"
 
-@interface WTMAsset:WTMMember{
+@interface WTMAsset:WTMMember<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
- 
+
 + (WTMAsset *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMAsset *)localized;
 @end

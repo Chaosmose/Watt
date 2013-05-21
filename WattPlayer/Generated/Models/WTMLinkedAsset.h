@@ -23,14 +23,12 @@
 #import "WTMModel.h"
 #import "WTMAsset.h"
 
-@interface WTMLinkedAsset:WTMAsset{
+@interface WTMLinkedAsset:WTMAsset<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * fileName;
 @property (nonatomic,copy) NSString * relativePath;
- 
+
 + (WTMLinkedAsset *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMLinkedAsset *)localized;
 @end

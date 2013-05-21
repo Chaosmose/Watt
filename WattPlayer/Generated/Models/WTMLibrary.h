@@ -23,16 +23,14 @@
 #import "WTMModel.h"
 @class WTMCollectionOfMember;
 
-@interface WTMLibrary:WTMModel{
+@interface WTMLibrary:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
- 
+
 + (WTMLibrary *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMLibrary *)localized;
 @end

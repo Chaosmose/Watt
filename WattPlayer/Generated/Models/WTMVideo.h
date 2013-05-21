@@ -23,13 +23,11 @@
 #import "WTMModel.h"
 #import "WTMLinkedAsset.h"
 
-@interface WTMVideo:WTMLinkedAsset{
+@interface WTMVideo:WTMLinkedAsset<WattCoding>{
 }
 
 @property (nonatomic,assign) CGSize  duration;
- 
+
 + (WTMVideo *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMVideo *)localized;
 @end

@@ -23,14 +23,12 @@
 #import "WTMModel.h"
 #import "WTMAsset.h"
 
-@interface WTMLabel:WTMAsset{
+@interface WTMLabel:WTMAsset<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * font;
 @property (nonatomic,copy) NSString * value;
- 
+
 + (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMLabel *)localized;
 @end

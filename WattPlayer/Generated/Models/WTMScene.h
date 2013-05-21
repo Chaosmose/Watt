@@ -23,7 +23,7 @@
 #import "WTMModel.h"
 @class WTMCollectionOfElement;
 
-@interface WTMScene:WTMModel{
+@interface WTMScene:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,assign) NSInteger  activityIndex;
@@ -36,9 +36,7 @@
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
- 
+
 + (WTMScene *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMScene *)localized;
 @end

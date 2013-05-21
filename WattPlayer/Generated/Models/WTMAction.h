@@ -22,14 +22,12 @@
 
 #import "WTMModel.h"
 
-@interface WTMAction:WTMModel{
+@interface WTMAction:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,strong) NSDictionary * arguments;
 @property (nonatomic,copy) NSString * methodName;
- 
+
 + (WTMAction *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMAction *)localized;
 @end

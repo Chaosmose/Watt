@@ -22,7 +22,7 @@
 
 #import "WTMModel.h"
 
-@interface WTMElement:WTMModel{
+@interface WTMElement:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * assetLibUID;
@@ -34,9 +34,7 @@
 @property (nonatomic,assign) CGRect  rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
- 
+
 + (WTMElement *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMElement *)localized;
 @end

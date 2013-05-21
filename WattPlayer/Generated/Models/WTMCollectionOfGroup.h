@@ -22,12 +22,10 @@
 #import "WTMGroup.h" 
 #import "WTMCollectionOfModel.h" 
 
-@interface WTMCollectionOfGroup:WTMCollectionOfModel {
+@interface WTMCollectionOfGroup:WTMCollectionOfModel <WattCoding>{
 }
 
 + (WTMCollectionOfGroup *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMCollectionOfGroup *)localized;
 
 - (NSUInteger)count;

@@ -22,12 +22,10 @@
 #import "WTMScene.h" 
 #import "WTMCollectionOfModel.h" 
 
-@interface WTMCollectionOfScene:WTMCollectionOfModel {
+@interface WTMCollectionOfScene:WTMCollectionOfModel <WattCoding>{
 }
 
 + (WTMCollectionOfScene *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMCollectionOfScene *)localized;
 
 - (NSUInteger)count;

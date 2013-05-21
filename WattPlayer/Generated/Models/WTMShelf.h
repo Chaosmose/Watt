@@ -24,7 +24,7 @@
 @class WTMCollectionOfUser;
 @class WTMCollectionOfPackage;
 
-@interface WTMShelf:WTMModel{
+@interface WTMShelf:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
@@ -32,9 +32,7 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfUser * localUsers;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
- 
+
 + (WTMShelf *)instanceFromDictionary:(NSDictionary *)aDictionary;
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
-- (NSDictionary *)dictionaryRepresentation;
 - (WTMShelf *)localized;
 @end

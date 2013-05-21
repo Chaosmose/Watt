@@ -43,4 +43,91 @@
     }
 }
 
+#pragma mark - serialization 
+
+
+-(BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
+    NSString*path=[self _pathForFileName:fileName];
+    if([self _createRequirePaths:path]){
+        NSError*errorJson=nil;
+        NSData *data=nil;
+        @try {
+            data=[NSJSONSerialization dataWithJSONObject:reference
+                                                 options:NSJSONWritingPrettyPrinted error:&errorJson];
+            
+        }
+        @catch (NSException *exception) {
+            return NO;
+        }
+        @finally {
+        }
+        if(data){
+            return [data writeToFile:path atomically:YES];
+        }else{
+            return NO;
+        }
+    }
+}
+
+-(id)deserializeFromFileName:(NSString*)fileName{
+    NSString *path=[self _pathForFileName:fileName];
+    if(path){
+        NSData *data=[NSData dataWithContentsOfFile:path];
+        NSError*errorJson=nil;
+        @try {
+            // We use mutable containers and leaves by default.
+            id result=[NSJSONSerialization JSONObjectWithData:data
+                                                      options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments
+                                                        error:&errorJson];
+            if([result respondsToSelector:@selector(mutableCopy)]){
+                return [result mutableCopy];
+            }
+            return result;
+        }
+        @catch (NSException *exception) {
+            return nil;
+        }
+        @finally {
+        }
+    }else{
+        return nil;
+    }
+}
+
+
+
+
+-(BOOL)_createRequirePaths:(NSString*)path{
+    if([path rangeOfString:[self _applicationDocumentPath]].location==NSNotFound){
+        NSLog(@"Illegal path %@", path);
+        return NO;
+    }
+    if(![[path substringFromIndex:path.length-1] isEqualToString:@"/"])
+        path=[path stringByDeletingLastPathComponent];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:path]){
+        NSError *error=nil;
+        [[NSFileManager defaultManager] createDirectoryAtPath:path
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil error:&error];
+        if(error){
+            NSLog(@"Error on path creation  %@ %@", path,[error localizedDescription]);
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+-(NSString*)_pathForFileName:(NSString*)fileName{
+    return [[self _applicationDocumentPath ] stringByAppendingFormat:@"%@",fileName];
+}
+
+-(NSString*)_applicationDocumentPath{
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path=[searchPaths objectAtIndex:0];
+    return [path stringByAppendingFormat:@"/"];
+}
+
+
 @end
