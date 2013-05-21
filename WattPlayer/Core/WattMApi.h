@@ -20,7 +20,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WTMObject.h"
 
+#pragma mark - log macros 
 
 #ifndef WT_LOG
 #define WT_LOG 1 // You can set up WT_LOG to 1 or 0
@@ -46,7 +48,9 @@ __LINE__ ,\
 #endif
 #endif
 
-#import "WTMObject.h"
+#pragma mark - WattMApi
+
+
 
 @protocol WTMlocalizationDelegateProtocol;
 
