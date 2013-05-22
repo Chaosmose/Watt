@@ -23,7 +23,6 @@
 #import <Foundation/Foundation.h>
 
 
-
 @class WattMApi;
 
 @interface WTMObject : NSObject{
@@ -33,6 +32,18 @@
     WattMApi *_wapi;
 }
 
+#pragma mark - registry
+
+-(id)initInDefaultRegistry;
+
+
+@property (readonly)NSInteger uinstID;
+// Should be used once during deserialisation or serialisation phases.
+// Do not use during runtime.
+-(void)identifyWithUinstId:(NSInteger)identifier;
+
+#pragma mark - localization
+
 -(WTMObject*)localized; // Usually overriden for strong typing during Flexions
 -(void)localize;
 -(BOOL)hasBeenLocalized;
@@ -40,7 +51,6 @@
 // Reflexion utility that is not as fast as NSFastEnumeration on the first call 
 // But this approach is much more flexible in our context KVC, inheritance & universal persistency.
 -(NSArray*)allPropertiesName;
-
 
 @end
 

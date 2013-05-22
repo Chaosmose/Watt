@@ -35,11 +35,10 @@
 
 + (WTMCollectionOfScene*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMCollectionOfScene*instance = nil;
-	//WTLog(@"%@",aDictionary);
-	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
 		id unCasted= [[theClass alloc] init];
-		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:@"properties"]];
+		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:__properties__]];
 		instance=(WTMCollectionOfScene*)unCasted;
 	}
 	return instance;
@@ -50,9 +49,9 @@
 		return;
 	}
 	_collection=[NSMutableArray array];
-    NSArray *a=[aDictionary objectForKey:@"collection"];
+    NSArray *a=[aDictionary objectForKey:__collection__];
     for (NSDictionary*objectDictionary in a) {
-        Class c=NSClassFromString([objectDictionary objectForKey:@"className"]);
+        Class c=NSClassFromString([objectDictionary objectForKey:__className__]);
         id o=[c instanceFromDictionary:objectDictionary];
         [_collection addObject:o];
     }
@@ -66,9 +65,10 @@
         NSDictionary*oDictionary=[o dictionaryRepresentation];
         [array addObject:oDictionary];
     }
-    [dictionary setValue:array forKey:@"collection"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
-    [wrapper setObject:dictionary forKey:@"properties"];
+    [dictionary setValue:array forKey:__collection__];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }
 

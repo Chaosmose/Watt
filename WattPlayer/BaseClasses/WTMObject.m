@@ -24,13 +24,24 @@
 #import "WattMApi.h"
 #import <objc/runtime.h>
 
-@implementation WTMObject
+@implementation WTMObject{
+    NSInteger _uinstID;
+}
+
+-(id)initInDefaultRegistry{
+    self=[self init];
+    if(self){
+        [[wattMAPI defaultRegistry] registerObject:self];
+    }
+    return self;
+}
 
 
 -(id)init{
     self=[super init];
     if(self){
         _wapi=[WattMApi sharedInstance];
+        _uinstID=0;// no registration
     }
     return self;
 }
@@ -38,6 +49,20 @@
 -(WTMObject*)localized{
     [self localize];
     return self;
+}
+
+-(NSInteger)uinstID{
+    return _uinstID;
+}
+
+-(void)identifyWithUinstId:(NSInteger)identifier{
+    if(_uinstID==0){
+        _uinstID=identifier;
+    }else if(identifier==_uinstID){
+        [NSException raise:@"Registry" format:@"Attempt to re-identify an instance"];
+    }else{
+        [NSException raise:@"Registry" format:@"Attempt to change the identity of an instance"];
+    }
 }
 
 -(void)localize{

@@ -48,9 +48,12 @@
 
 + (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary{
 	WTMPackage*instance = nil;
-	// WTLog(@"%@",aDictionary);
-	if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:@"className"]);
+	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
+    if(wtuinstID>0){
+        return (WTMPackage*)[[wattMAPI defaultRegistry] objectWithUinstID:wtuinstID];
+    }
+	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
 		id unCasted= [[theClass alloc] init];
 		[unCasted setAttributesFromDictionary:aDictionary];
 		instance=(WTMPackage*)unCasted;
@@ -63,11 +66,11 @@
 	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
 		return;
 	}
-    if([aDictionary objectForKey:@"className"] && [aDictionary objectForKey:@"properties"]){
-        id properties=[aDictionary objectForKey:@"properties"];
+    if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
+        id properties=[aDictionary objectForKey:__properties__];
         NSString *selfClassName=NSStringFromClass([self class]);
-        if (![selfClassName isEqualToString:[aDictionary objectForKey:@"className"]]) {
-             [NSException raise:@"WTMAttributesException" format:@"selfClassName %@ is not a %@ ",selfClassName,[aDictionary objectForKey:@"className"]];
+        if (![selfClassName isEqualToString:[aDictionary objectForKey:__className__]]) {
+             [NSException raise:@"WTMAttributesException" format:@"selfClassName %@ is not a %@ ",selfClassName,[aDictionary objectForKey:__className__]];
         }
         if([properties isKindOfClass:[NSDictionary class]]){
             for (NSString *key in properties) {
@@ -161,8 +164,9 @@
 	[dictionary setValue:[self.langDictionaries dictionaryRepresentation] forKey:@"langDictionaries"];
 	[dictionary setValue:[self.libraries dictionaryRepresentation] forKey:@"libraries"];
 	[dictionary setValue:[self.rightsAssignees dictionaryRepresentation] forKey:@"rightsAssignees"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:@"className"];
-    [wrapper setObject:dictionary forKey:@"properties"];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }
 

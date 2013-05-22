@@ -21,7 +21,9 @@
 
 #import "WattMApi.h"
 
-@implementation WattMApi
+@implementation WattMApi{
+    WTMRegistry*_defaultRegistry;
+}
 
 + (WattMApi*)sharedInstance {
     static WattMApi *sharedInstance = nil;
@@ -31,6 +33,15 @@
     });
     return sharedInstance;
 }
+
+-(id)init{
+    self=[super init];
+    if(self){
+        _defaultRegistry=[[WTMRegistry alloc] init];
+    }
+    return self;
+}
+
 
 
 #pragma mark - localization

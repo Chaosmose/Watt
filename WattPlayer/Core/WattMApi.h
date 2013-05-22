@@ -21,6 +21,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WTMObject.h"
+#import "WTMRegistry.h"
 
 #pragma mark - log macros 
 
@@ -48,15 +49,32 @@ __LINE__ ,\
 #endif
 #endif
 
+#pragma mark - WattCoding
+
+#ifndef WT_CODING_KEYS
+#define WT_CODING_KEYS
+#define __uinstID__         @"__uinstID__"
+#define __className__       @"__className__"
+#define __properties__      @"__properties__"
+#define __collection__      @"__collection__"
+#endif
+
+#pragma mark - Runtime
+
+#ifdef WT_RUNTIME_CONFIGURATION
+#define WT_RUNTIME_CONFIGURATION
+#define WT_ALLOW_MULTIPLE_REGISTRATION 0
+#endif
+
 #pragma mark - WattMApi
-
-
 
 @protocol WTMlocalizationDelegateProtocol;
 
 @interface WattMApi : NSObject
 
 @property (nonatomic,assign)id<WTMlocalizationDelegateProtocol>localizationDelegate;
+
+@property (readonly)WTMRegistry*defaultRegistry;
 
 // WattMApi singleton accessor
 +(WattMApi*)sharedInstance;
@@ -70,8 +88,13 @@ __LINE__ ,\
 @end
 
 #pragma mark localization delegate prototocol
+
 // You can implement this protocol if you want to customize the internationalization process.
 @protocol WTMlocalizationDelegateProtocol <NSObject>
 @required
 -(void)localize:(id)reference withKey:(NSString*)key andValue:(id)value;
 @end
+
+#ifndef WTM_API
+#define wattMAPI [WattMApi sharedInstance]
+#endif

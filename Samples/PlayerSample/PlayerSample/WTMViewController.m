@@ -42,7 +42,7 @@
     WTMLibrary*lib=[p.libraries lastObject];
     lib.name=@"Library #1";
     
-    WTMHyperlink*h=[[WTMHyperlink alloc] init];
+    WTMHyperlink*h=[[WTMHyperlink alloc] initInDefaultRegistry];
     h.urlString=@"http://www.secouchermoinsbete.fr";
     
     [lib.members addObject:h];
@@ -62,15 +62,15 @@
 
 -(WTMShelf*)_createAShelf{
     // We create a Shelf
-    WTMShelf *shelf=[[WTMShelf alloc] init];
+    WTMShelf *shelf=[[WTMShelf alloc]initInDefaultRegistry];
     // With one package
-    WTMPackage *p=[[WTMPackage alloc]init];
+    WTMPackage *p=[[WTMPackage alloc]initInDefaultRegistry];
     [shelf.packages addObject:p];
     // With one lang dictionary
-    WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] init];
+    WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] initInDefaultRegistry];
     p.langDictionaries=ld;
     // Containing one library
-    WTMLibrary*castLib=[[WTMLibrary alloc] init];
+    WTMLibrary*castLib=[[WTMLibrary alloc] initInDefaultRegistry];
     [p.libraries addObject:castLib];
     return shelf;
 }
