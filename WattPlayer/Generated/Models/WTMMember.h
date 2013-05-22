@@ -20,9 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 
-@interface WTMMember:WTMModel<WattCoding>{
+@interface WTMMember:WattObject<WattCoding>{
 }
 
 @property (nonatomic,assign) NSInteger  index;
@@ -31,6 +31,6 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * uid;
 
-+ (WTMMember *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMMember *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMMember *)localized;
 @end

@@ -20,12 +20,11 @@
 
 
 // WattApi
-#import "WattMApi.h"
+#import "WattApi.h"
 
 //Base classes
-#import "WTMObject.h"
-#import "WTMModel.h"
-#import "WTMCollectionOfModel.h"
+#import "WattObject.h"
+#import "WattCollectionOfObject.h"
 
 //Base view controllers
 #import "WTMActivityViewController.h"

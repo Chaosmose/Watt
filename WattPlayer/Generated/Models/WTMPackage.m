@@ -28,13 +28,13 @@
 @implementation WTMPackage 
 
 
--(id)initInDefaultRegistry{
-    self=[self init];
+-(id)initInRegistry:(WattRegistry*)registry{
+    self=[super initInRegistry:registry];
     if(self){
-		self.activities=[[WTMCollectionOfActivity alloc] initInDefaultRegistry];
-		self.langDictionaries=[[WTMCollectionOfLangDictionary alloc] initInDefaultRegistry];
-		self.libraries=[[WTMCollectionOfLibrary alloc] initInDefaultRegistry];
-		self.rightsAssignees=[[WTMCollectionOfUser alloc] initInDefaultRegistry];
+		self.activities=[[WTMCollectionOfActivity alloc] initInRegistry:registry];
+		self.langDictionaries=[[WTMCollectionOfLangDictionary alloc] initInRegistry:registry];
+		self.libraries=[[WTMCollectionOfLibrary alloc] initInRegistry:registry];
+		self.rightsAssignees=[[WTMCollectionOfUser alloc] initInRegistry:registry];
    
     }
     return self;
@@ -46,47 +46,21 @@
 }
 
 
-+ (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary{
++ (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
 	WTMPackage*instance = nil;
 	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-    if(wtuinstID>0){
-        return (WTMPackage*)[[wattMAPI defaultRegistry] objectWithUinstID:wtuinstID];
+     if(wtuinstID<=[registry count]){
+        return (WTMPackage*)[registry objectWithUinstID:wtuinstID];
     }
 	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] init];
+		id unCasted= [[theClass alloc] initInRegistry:registry];
 		[unCasted setAttributesFromDictionary:aDictionary];
 		instance=(WTMPackage*)unCasted;
+		[registry registerObject:instance];
 	}
 	return instance;
 }
-
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
-	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-		return;
-	}
-    if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-        id properties=[aDictionary objectForKey:__properties__];
-        NSString *selfClassName=NSStringFromClass([self class]);
-        if (![selfClassName isEqualToString:[aDictionary objectForKey:__className__]]) {
-             [NSException raise:@"WTMAttributesException" format:@"selfClassName %@ is not a %@ ",selfClassName,[aDictionary objectForKey:__className__]];
-        }
-        if([properties isKindOfClass:[NSDictionary class]]){
-            for (NSString *key in properties) {
-                id value=[properties objectForKey:key];
-                if(value)
-                    [self setValue:value forKey:key];
-            }
-        }else{
-            [NSException raise:@"WTMAttributesException" format:@"properties is not a NSDictionary"];
-        }
-    }else{
-        [self setValuesForKeysWithDictionary:aDictionary];
-    }
-}
-
-
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -107,13 +81,13 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"activities"]) {
-		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value] forKey:@"activities"];
+		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry] forKey:@"activities"];
 	} else if ([key isEqualToString:@"langDictionaries"]) {
-		[super setValue:[WTMCollectionOfLangDictionary instanceFromDictionary:value] forKey:@"langDictionaries"];
+		[super setValue:[WTMCollectionOfLangDictionary instanceFromDictionary:value inRegistry:_registry] forKey:@"langDictionaries"];
 	} else if ([key isEqualToString:@"libraries"]) {
-		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value] forKey:@"libraries"];
+		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry] forKey:@"libraries"];
 	} else if ([key isEqualToString:@"rightsAssignees"]) {
-		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value] forKey:@"rightsAssignees"];
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry] forKey:@"rightsAssignees"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -172,6 +146,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];

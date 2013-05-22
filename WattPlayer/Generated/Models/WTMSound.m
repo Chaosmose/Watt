@@ -24,8 +24,8 @@
 @implementation WTMSound 
 
 
--(id)initInDefaultRegistry{
-    self=[self init];
+-(id)initInRegistry:(WattRegistry*)registry{
+    self=[super initInRegistry:registry];
     if(self){
    
     }
@@ -38,47 +38,21 @@
 }
 
 
-+ (WTMSound*)instanceFromDictionary:(NSDictionary *)aDictionary{
++ (WTMSound*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
 	WTMSound*instance = nil;
 	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-    if(wtuinstID>0){
-        return (WTMSound*)[[wattMAPI defaultRegistry] objectWithUinstID:wtuinstID];
+     if(wtuinstID<=[registry count]){
+        return (WTMSound*)[registry objectWithUinstID:wtuinstID];
     }
 	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] init];
+		id unCasted= [[theClass alloc] initInRegistry:registry];
 		[unCasted setAttributesFromDictionary:aDictionary];
 		instance=(WTMSound*)unCasted;
+		[registry registerObject:instance];
 	}
 	return instance;
 }
-
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
-	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-		return;
-	}
-    if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-        id properties=[aDictionary objectForKey:__properties__];
-        NSString *selfClassName=NSStringFromClass([self class]);
-        if (![selfClassName isEqualToString:[aDictionary objectForKey:__className__]]) {
-             [NSException raise:@"WTMAttributesException" format:@"selfClassName %@ is not a %@ ",selfClassName,[aDictionary objectForKey:__className__]];
-        }
-        if([properties isKindOfClass:[NSDictionary class]]){
-            for (NSString *key in properties) {
-                id value=[properties objectForKey:key];
-                if(value)
-                    [self setValue:value forKey:key];
-            }
-        }else{
-            [NSException raise:@"WTMAttributesException" format:@"properties is not a NSDictionary"];
-        }
-    }else{
-        [self setValuesForKeysWithDictionary:aDictionary];
-    }
-}
-
-
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -131,6 +105,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"duration : %@\n",[NSNumber numberWithInteger:self.duration]];
 	return s;
 }

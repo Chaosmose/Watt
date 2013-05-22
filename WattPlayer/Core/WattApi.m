@@ -19,14 +19,14 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WattMApi.h"
+#import "WattApi.h"
 
-@implementation WattMApi{
-    WTMRegistry*_defaultRegistry;
+@implementation WattApi{
+    WattRegistry*_defaultRegistry;
 }
 
-+ (WattMApi*)sharedInstance {
-    static WattMApi *sharedInstance = nil;
++ (WattApi*)sharedInstance {
+    static WattApi *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
@@ -37,7 +37,7 @@
 -(id)init{
     self=[super init];
     if(self){
-        _defaultRegistry=[[WTMRegistry alloc] init];
+        _defaultRegistry=[[WattRegistry alloc] init];
     }
     return self;
 }
@@ -55,7 +55,6 @@
 }
 
 #pragma mark - serialization 
-
 
 -(BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
     NSString*path=[self _pathForFileName:fileName];
@@ -104,7 +103,6 @@
         return nil;
     }
 }
-
 
 
 

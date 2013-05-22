@@ -20,10 +20,10 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 @class WTMCollectionOfScene;
 
-@interface WTMActivity:WTMModel<WattCoding>{
+@interface WTMActivity:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
@@ -38,6 +38,6 @@
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
 
-+ (WTMActivity *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMActivity *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMActivity *)localized;
 @end

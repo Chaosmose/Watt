@@ -20,11 +20,11 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 @class WTMCollectionOfUser;
 @class WTMCollectionOfPackage;
 
-@interface WTMShelf:WTMModel<WattCoding>{
+@interface WTMShelf:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
@@ -33,6 +33,6 @@
 @property (nonatomic,strong) WTMCollectionOfUser * localUsers;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
 
-+ (WTMShelf *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMShelf *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMShelf *)localized;
 @end

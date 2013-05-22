@@ -20,14 +20,14 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 
-@interface WTMAction:WTMModel<WattCoding>{
+@interface WTMAction:WattObject<WattCoding>{
 }
 
 @property (nonatomic,strong) NSDictionary * arguments;
 @property (nonatomic,copy) NSString * methodName;
 
-+ (WTMAction *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMAction *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMAction *)localized;
 @end

@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMLinkedAsset.h"
 
 @interface WTMVideo:WTMLinkedAsset<WattCoding>{
@@ -28,6 +28,6 @@
 
 @property (nonatomic,assign) CGSize  duration;
 
-+ (WTMVideo *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMVideo *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMVideo *)localized;
 @end

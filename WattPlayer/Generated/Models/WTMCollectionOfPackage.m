@@ -25,37 +25,26 @@
 @implementation WTMCollectionOfPackage{
 }
 
--(id)init{
-    self=[super init];
+-(id)initInRegistry:(WattRegistry*)registry{
+    self=[super initInRegistry:registry];
     if(self){
         _collection=[NSMutableArray array];
     }
     return self;
 }
 
-+ (WTMCollectionOfPackage*)instanceFromDictionary:(NSDictionary *)aDictionary{
++ (WTMCollectionOfPackage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
 	WTMCollectionOfPackage*instance = nil;
 	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] init];
+		id unCasted= [[theClass alloc] initInRegistry:registry];
 		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:__properties__]];
 		instance=(WTMCollectionOfPackage*)unCasted;
+		[registry registerObject:instance];
 	}
 	return instance;
 }
 
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
-	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-		return;
-	}
-	_collection=[NSMutableArray array];
-    NSArray *a=[aDictionary objectForKey:__collection__];
-    for (NSDictionary*objectDictionary in a) {
-        Class c=NSClassFromString([objectDictionary objectForKey:__className__]);
-        id o=[c instanceFromDictionary:objectDictionary];
-        [_collection addObject:o];
-    }
-}
 
 - (NSDictionary*)dictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];

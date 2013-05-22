@@ -12,8 +12,8 @@ if (isset ( $f )) {
 	$f->projectName = "Watt";
 	$f->license = FLEXIONS_ROOT_DIR."flexions/helpers/licenses/LGPL.tpl.php";
 }
-$parentClass = "WTMModel";
-$collectionParentClass="WTMCollectionOfModel";
+$parentClass = "WattObject";
+$collectionParentClass="WattCollectionOfObject";
 $protocols="WattCoding";
 $imports = "\n#import \"$parentClass.h\"\n";
 $markAsDynamic = false;

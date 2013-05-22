@@ -20,15 +20,15 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 
-@interface WTMDatum:WTMModel<WattCoding>{
+@interface WTMDatum:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * key;
 @property (nonatomic,copy) NSString * type;
 @property (nonatomic,copy) NSString * value;
 
-+ (WTMDatum *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMDatum *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMDatum *)localized;
 @end

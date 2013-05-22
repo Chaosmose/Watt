@@ -20,18 +20,20 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WTMObject.h"
-#import "WattMApi.h"
+#import "WattObject.h"
+#import "WattApi.h"
 #import <objc/runtime.h>
 
-@implementation WTMObject{
-    NSInteger _uinstID;
+@implementation WattObject{
+
 }
 
--(id)initInDefaultRegistry{
+
+-(id)initInRegistry:(WattRegistry*)registry{
     self=[self init];
     if(self){
-        [[wattMAPI defaultRegistry] registerObject:self];
+        _registry=registry;
+        [_registry registerObject:self];
     }
     return self;
 }
@@ -40,13 +42,64 @@
 -(id)init{
     self=[super init];
     if(self){
-        _wapi=[WattMApi sharedInstance];
+        _wapi=[WattApi sharedInstance];
         _uinstID=0;// no registration
     }
     return self;
 }
 
--(WTMObject*)localized{
++ (WattObject*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry *)registry{
+	WattObject*instance = nil;
+	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
+    if(wtuinstID>0){
+        return (WattObject*)[registry objectWithUinstID:wtuinstID];
+    }
+	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
+		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
+		id unCasted= [[theClass alloc] init];
+		[unCasted setAttributesFromDictionary:aDictionary];
+		instance=(WattObject*)unCasted;
+	}
+	return instance;
+}
+
+- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
+	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
+		return;
+	}
+    if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
+        id properties=[aDictionary objectForKey:__properties__];
+        NSString *selfClassName=NSStringFromClass([self class]);
+        if (![selfClassName isEqualToString:[aDictionary objectForKey:__className__]]) {
+            [NSException raise:@"WTMAttributesException" format:@"selfClassName %@ is not a %@ ",selfClassName,[aDictionary objectForKey:__className__]];
+        }
+        if([properties isKindOfClass:[NSDictionary class]]){
+            for (NSString *key in properties) {
+                id value=[properties objectForKey:key];
+                if(value)
+                    [self setValue:value forKey:key];
+            }
+        }else{
+            [NSException raise:@"WTMAttributesException" format:@"properties is not a NSDictionary"];
+        }
+    }else{
+        [self setValuesForKeysWithDictionary:aDictionary];
+    }
+}
+
+
+- (NSDictionary*)dictionaryRepresentation{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+
+
+-(WattObject*)localized{
     [self localize];
     return self;
 }

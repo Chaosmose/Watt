@@ -20,8 +20,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WTMObject.h"
-#import "WTMRegistry.h"
+#import "WattObject.h"
+#import "WattRegistry.h"
 
 #pragma mark - log macros 
 
@@ -53,37 +53,37 @@ __LINE__ ,\
 
 #ifndef WT_CODING_KEYS
 #define WT_CODING_KEYS
-#define __uinstID__         @"uinstID"
-#define __className__       @"className"
-#define __properties__      @"properties"
-#define __collection__      @"collection"
+#define __uinstID__         @"i"
+#define __className__       @"cln"
+#define __properties__      @"p"
+#define __collection__      @"cll"
 #endif
 
 #pragma mark - Runtime
 
-#ifdef WT_RUNTIME_CONFIGURATION
+#ifndef WT_RUNTIME_CONFIGURATION
 #define WT_RUNTIME_CONFIGURATION
-#define WT_ALLOW_MULTIPLE_REGISTRATION 0
+#define WT_ALLOW_MULTIPLE_REGISTRATION 1
 #endif
 
 #pragma mark - WattMApi
 
 @protocol WTMlocalizationDelegateProtocol;
 
-@interface WattMApi : NSObject
+@interface WattApi : NSObject
 
 @property (nonatomic,assign)id<WTMlocalizationDelegateProtocol>localizationDelegate;
 
-@property (readonly)WTMRegistry*defaultRegistry;
+@property (readonly)WattRegistry*defaultRegistry;
 
 // WattMApi singleton accessor
-+(WattMApi*)sharedInstance;
++(WattApi*)sharedInstance;
 
 #pragma mark localization
 
 //This method is called from WTMObject within the localize implementation.
 //Calls the localizationDelegate if it is set or invokes the default implementation
--(void)localize:(WTMObject*)reference withKey:(NSString*)key andValue:(id)value;
+-(void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
 
 @end
 
@@ -96,5 +96,5 @@ __LINE__ ,\
 @end
 
 #ifndef WTM_API
-#define wattMAPI [WattMApi sharedInstance]
+#define wattAPI [WattApi sharedInstance]
 #endif

@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMLinkedAsset.h"
 
 @interface WTMHtml:WTMLinkedAsset<WattCoding>{
@@ -28,6 +28,6 @@
 
 @property (nonatomic,copy) NSString * string;
 
-+ (WTMHtml *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMHtml *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMHtml *)localized;
 @end

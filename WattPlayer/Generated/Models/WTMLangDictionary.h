@@ -20,15 +20,15 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 
-@interface WTMLangDictionary:WTMModel<WattCoding>{
+@interface WTMLangDictionary:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * key;
 @property (nonatomic,copy) NSString * locale;
 @property (nonatomic,copy) NSString * value;
 
-+ (WTMLangDictionary *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMLangDictionary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMLangDictionary *)localized;
 @end

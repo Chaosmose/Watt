@@ -20,12 +20,12 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMDatum.h" 
-#import "WTMCollectionOfModel.h" 
+#import "WattCollectionOfObject.h" 
 
-@interface WTMCollectionOfDatum:WTMCollectionOfModel <WattCoding>{
+@interface WTMCollectionOfDatum:WattCollectionOfObject <WattCoding>{
 }
 
-+ (WTMCollectionOfDatum *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMCollectionOfDatum *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMCollectionOfDatum *)localized;
 
 - (NSUInteger)count;

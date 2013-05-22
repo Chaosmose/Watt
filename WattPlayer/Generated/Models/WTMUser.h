@@ -20,16 +20,16 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 @class WTMCollectionOfGroup;
 
-@interface WTMUser:WTMModel<WattCoding>{
+@interface WTMUser:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * identity;
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfGroup * groups;
 
-+ (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMUser *)localized;
 @end

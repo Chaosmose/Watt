@@ -20,9 +20,9 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 
-@interface WTMElement:WTMModel<WattCoding>{
+@interface WTMElement:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * assetLibUID;
@@ -35,6 +35,6 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
 
-+ (WTMElement *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMElement *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMElement *)localized;
 @end

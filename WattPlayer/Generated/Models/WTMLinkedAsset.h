@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMAsset.h"
 
 @interface WTMLinkedAsset:WTMAsset<WattCoding>{
@@ -29,6 +29,6 @@
 @property (nonatomic,copy) NSString * fileName;
 @property (nonatomic,copy) NSString * relativePath;
 
-+ (WTMLinkedAsset *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMLinkedAsset *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMLinkedAsset *)localized;
 @end

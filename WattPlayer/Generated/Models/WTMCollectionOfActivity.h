@@ -20,12 +20,12 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMActivity.h" 
-#import "WTMCollectionOfModel.h" 
+#import "WattCollectionOfObject.h" 
 
-@interface WTMCollectionOfActivity:WTMCollectionOfModel <WattCoding>{
+@interface WTMCollectionOfActivity:WattCollectionOfObject <WattCoding>{
 }
 
-+ (WTMCollectionOfActivity *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMCollectionOfActivity *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMCollectionOfActivity *)localized;
 
 - (NSUInteger)count;

@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMLinkedAsset.h"
 
 @interface WTMPdf:WTMLinkedAsset<WattCoding>{
@@ -28,6 +28,6 @@
 
 @property (nonatomic,assign) CGSize  size;
 
-+ (WTMPdf *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMPdf *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMPdf *)localized;
 @end

@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMAsset.h"
 
 @interface WTMLabel:WTMAsset<WattCoding>{
@@ -29,6 +29,6 @@
 @property (nonatomic,copy) NSString * font;
 @property (nonatomic,copy) NSString * value;
 
-+ (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMLabel *)localized;
 @end

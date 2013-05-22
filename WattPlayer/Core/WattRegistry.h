@@ -13,15 +13,30 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
-//  WTMModel.m
+//
+//  WTMObjectsRegister.h
 //  PlayerSample
 //
-//  Created by Benoit Pereira da Silva on 09/05/13.
+//  Created by Benoit Pereira da Silva on 22/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WTMModel.h"
+#import <Foundation/Foundation.h>
+#import "WattObject.h"
 
-@implementation WTMModel
+@interface WattRegistry : NSObject
+
+-(NSUInteger)count;
+
+#pragma mark -
+
++ (WattRegistry*)instanceFromArray:(NSArray*)array;
+- (NSArray*)arrayRepresentation;
+
+#pragma runtime object graph identification
+
+-(WattObject*)objectWithUinstID:(NSInteger)uinstID;
+-(void)registerObject:(WattObject*)reference;
+-(void)unRegisterObject:(WattObject*)reference;
 
 @end

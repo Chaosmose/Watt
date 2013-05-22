@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WTMModel.h"
+#import "WattObject.h"
 
-@interface WTMCollectionOfModel : WTMModel {
+@interface WattCollectionOfObject : WattObject {
     @protected
     NSMutableArray* _collection;
 }

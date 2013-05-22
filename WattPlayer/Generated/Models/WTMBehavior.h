@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMMember.h"
 @class WTMAction;
 @class WTMRule;
@@ -32,6 +32,6 @@
 @property (nonatomic,strong) WTMAction * action;
 @property (nonatomic,strong) WTMRule * trigger;
 
-+ (WTMBehavior *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMBehavior *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMBehavior *)localized;
 @end

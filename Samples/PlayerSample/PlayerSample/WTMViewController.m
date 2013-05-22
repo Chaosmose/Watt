@@ -30,47 +30,57 @@
 
 @implementation WTMViewController
 
-
+// Principle :
+// 
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    
-    WTMShelf *s=[self _createAShelf];
+
+    WattRegistry*r1=[[WattRegistry alloc] init];
+    WTMShelf *s=[self _createAShelfInRegistry:r1];
     WTMPackage*p=[s.packages lastObject];
     p.name=@"Package A";
     
     WTMLibrary*lib=[p.libraries lastObject];
     lib.name=@"Library #1";
     
-    WTMHyperlink*h=[[WTMHyperlink alloc] initInDefaultRegistry];
+    WTMHyperlink*h=[[WTMHyperlink alloc] initInRegistry:r1];
     h.urlString=@"http://www.secouchermoinsbete.fr";
-    
     [lib.members addObject:h];
     
-    NSDictionary* d=[s dictionaryRepresentation];
-    NSLog(@"%@",d);
+    NSArray *a1=[r1 arrayRepresentation];
+    WTLog(@"%i element(s) : %@",[a1 count],a1);
     
-    WTMShelf *s2;
-    s2=[WTMShelf instanceFromDictionary:d];
-    NSLog(@"%@",[s2 dictionaryRepresentation]);
+    
+     /*
+    NSDictionary* d=[s dictionaryRepresentation];
+    WTLog(@"%@",d);     // Graph
+    WTLog(@"%@",r1);    // Registry
+    
+   
+    WTMRegistry*r2=[[WTMRegistry alloc] init];    
+    WTMShelf *s2=[WTMShelf instanceFromDictionary:d inRegistry:r2];
+    WTLog(@"%@",r2);    // Registry
+    WTLog(@"%@",[s2 dictionaryRepresentation]);
+     
+   
     
     [s2 localize];
-
+ */
 }
 
 
-
--(WTMShelf*)_createAShelf{
+-(WTMShelf*)_createAShelfInRegistry:(WattRegistry*)registry{
     // We create a Shelf
-    WTMShelf *shelf=[[WTMShelf alloc]initInDefaultRegistry];
+    WTMShelf *shelf=[[WTMShelf alloc]initInRegistry:registry];
     // With one package
-    WTMPackage *p=[[WTMPackage alloc]initInDefaultRegistry];
+    WTMPackage *p=[[WTMPackage alloc]initInRegistry:registry];
     [shelf.packages addObject:p];
     // With one lang dictionary
-    WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] initInDefaultRegistry];
+    WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] initInRegistry:registry];
     p.langDictionaries=ld;
     // Containing one library
-    WTMLibrary*castLib=[[WTMLibrary alloc] initInDefaultRegistry];
+    WTMLibrary*castLib=[[WTMLibrary alloc] initInRegistry:registry];
     [p.libraries addObject:castLib];
     return shelf;
 }

@@ -25,10 +25,10 @@
 @implementation WTMUser 
 
 
--(id)initInDefaultRegistry{
-    self=[self init];
+-(id)initInRegistry:(WattRegistry*)registry{
+    self=[super initInRegistry:registry];
     if(self){
-		self.groups=[[WTMCollectionOfGroup alloc] initInDefaultRegistry];
+		self.groups=[[WTMCollectionOfGroup alloc] initInRegistry:registry];
    
     }
     return self;
@@ -40,47 +40,21 @@
 }
 
 
-+ (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary{
++ (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
 	WTMUser*instance = nil;
 	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-    if(wtuinstID>0){
-        return (WTMUser*)[[wattMAPI defaultRegistry] objectWithUinstID:wtuinstID];
+     if(wtuinstID<=[registry count]){
+        return (WTMUser*)[registry objectWithUinstID:wtuinstID];
     }
 	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] init];
+		id unCasted= [[theClass alloc] initInRegistry:registry];
 		[unCasted setAttributesFromDictionary:aDictionary];
 		instance=(WTMUser*)unCasted;
+		[registry registerObject:instance];
 	}
 	return instance;
 }
-
-
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
-	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-		return;
-	}
-    if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-        id properties=[aDictionary objectForKey:__properties__];
-        NSString *selfClassName=NSStringFromClass([self class]);
-        if (![selfClassName isEqualToString:[aDictionary objectForKey:__className__]]) {
-             [NSException raise:@"WTMAttributesException" format:@"selfClassName %@ is not a %@ ",selfClassName,[aDictionary objectForKey:__className__]];
-        }
-        if([properties isKindOfClass:[NSDictionary class]]){
-            for (NSString *key in properties) {
-                id value=[properties objectForKey:key];
-                if(value)
-                    [self setValue:value forKey:key];
-            }
-        }else{
-            [NSException raise:@"WTMAttributesException" format:@"properties is not a NSDictionary"];
-        }
-    }else{
-        [self setValuesForKeysWithDictionary:aDictionary];
-    }
-}
-
-
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -89,7 +63,7 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"groups"]) {
-		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value] forKey:@"groups"];
+		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry] forKey:@"groups"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -139,6 +113,7 @@
 
 -(NSString*)description{
 	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"identity : %@\n",self.identity];
 	[s appendFormat:@"uid : %@\n",self.uid];
 	[s appendFormat:@"groups : %@\n",self.groups];

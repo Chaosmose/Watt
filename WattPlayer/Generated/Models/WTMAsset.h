@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WTMModel.h"
+#import "WattObject.h"
 #import "WTMMember.h"
 
 @interface WTMAsset:WTMMember<WattCoding>{
@@ -28,6 +28,6 @@
 
 @property (nonatomic,copy) NSString * comment;
 
-+ (WTMAsset *)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WTMAsset *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
 - (WTMAsset *)localized;
 @end

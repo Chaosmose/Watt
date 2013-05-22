@@ -23,28 +23,41 @@
 #import <Foundation/Foundation.h>
 
 
-@class WattMApi;
+@class WattApi;
+@class WattObject;
+@class WattRegistry;
 
-@interface WTMObject : NSObject{
+@interface WattObject : NSObject{
     @private
     NSString *_currentLocale;           // The locale that has been used for localization
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
-    WattMApi *_wapi;
+    WattApi *_wapi;
+    NSInteger _uinstID;
+    @protected
+    WattRegistry*_registry;
 }
 
 #pragma mark - registry
 
--(id)initInDefaultRegistry;
-
+-(id)initInRegistry:(WattRegistry*)registry;
 
 @property (readonly)NSInteger uinstID;
+@property (readonly)WattRegistry*registry;
+
 // Should be used once during deserialisation or serialisation phases.
 // Do not use during runtime.
 -(void)identifyWithUinstId:(NSInteger)identifier;
 
+
+#pragma mark - pseudo protocol implementation 
+
++ (WattObject*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry;
+- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
+- (NSDictionary *)dictionaryRepresentation;
+
 #pragma mark - localization
 
--(WTMObject*)localized; // Usually overriden for strong typing during Flexions
+-(WattObject*)localized; // Usually overriden for strong typing during Flexions
 -(void)localize;
 -(BOOL)hasBeenLocalized;
 
@@ -57,7 +70,6 @@
 #pragma mark WattCoding
 
 @protocol WattCoding <NSObject>
-+ (WTMObject*)instanceFromDictionary:(NSDictionary *)aDictionary; // Usually overriden for strong typing during Flexions
-- (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
++ (WattObject*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry; // Usually overriden for strong typing during Flexions
 - (NSDictionary *)dictionaryRepresentation;
 @end
