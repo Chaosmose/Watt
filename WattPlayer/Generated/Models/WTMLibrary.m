@@ -25,10 +25,10 @@
 @implementation WTMLibrary 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.members=[[WTMCollectionOfMember alloc] init];
+		self.members=[[WTMCollectionOfMember alloc] initInDefaultRegistry];
    
     }
     return self;

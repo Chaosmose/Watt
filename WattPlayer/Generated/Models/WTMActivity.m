@@ -25,10 +25,10 @@
 @implementation WTMActivity 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.scenes=[[WTMCollectionOfScene alloc] init];
+		self.scenes=[[WTMCollectionOfScene alloc] initInDefaultRegistry];
    
     }
     return self;

@@ -25,10 +25,10 @@
 @implementation WTMScene 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.elements=[[WTMCollectionOfElement alloc] init];
+		self.elements=[[WTMCollectionOfElement alloc] initInDefaultRegistry];
    
     }
     return self;

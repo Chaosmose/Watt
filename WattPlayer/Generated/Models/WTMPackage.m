@@ -28,13 +28,13 @@
 @implementation WTMPackage 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.activities=[[WTMCollectionOfActivity alloc] init];
-		self.langDictionaries=[[WTMCollectionOfLangDictionary alloc] init];
-		self.libraries=[[WTMCollectionOfLibrary alloc] init];
-		self.rightsAssignees=[[WTMCollectionOfUser alloc] init];
+		self.activities=[[WTMCollectionOfActivity alloc] initInDefaultRegistry];
+		self.langDictionaries=[[WTMCollectionOfLangDictionary alloc] initInDefaultRegistry];
+		self.libraries=[[WTMCollectionOfLibrary alloc] initInDefaultRegistry];
+		self.rightsAssignees=[[WTMCollectionOfUser alloc] initInDefaultRegistry];
    
     }
     return self;

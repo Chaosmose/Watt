@@ -24,8 +24,8 @@
 @implementation WTMAsset 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
    
     }

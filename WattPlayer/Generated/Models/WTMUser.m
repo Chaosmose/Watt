@@ -25,10 +25,10 @@
 @implementation WTMUser 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.groups=[[WTMCollectionOfGroup alloc] init];
+		self.groups=[[WTMCollectionOfGroup alloc] initInDefaultRegistry];
    
     }
     return self;

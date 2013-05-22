@@ -26,11 +26,11 @@
 @implementation WTMShelf 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.localUsers=[[WTMCollectionOfUser alloc] init];
-		self.packages=[[WTMCollectionOfPackage alloc] init];
+		self.localUsers=[[WTMCollectionOfUser alloc] initInDefaultRegistry];
+		self.packages=[[WTMCollectionOfPackage alloc] initInDefaultRegistry];
    
     }
     return self;

@@ -26,11 +26,11 @@
 @implementation WTMBehavior 
 
 
--(id)init{
-    self=[super init];
+-(id)initInDefaultRegistry{
+    self=[self init];
     if(self){
-		self.action=[[WTMAction alloc] init];
-		self.trigger=[[WTMRule alloc] init];
+		self.action=[[WTMAction alloc] initInDefaultRegistry];
+		self.trigger=[[WTMRule alloc] initInDefaultRegistry];
    
     }
     return self;
