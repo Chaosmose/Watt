@@ -12,6 +12,62 @@
 		E53C6983173B881E00E135CA /* WTMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697A173B881E00E135CA /* WTMModel.m */; };
 		E53C6984173B881E00E135CA /* WTMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697C173B881E00E135CA /* WTMObject.m */; };
 		E53C6985173B881E00E135CA /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
+		E5998FBD174CB1AA0066EFE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
+		E5998FBE174CB1AA0066EFE8 /* WTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462541732A4A000E654A1 /* WTMAppDelegate.m */; };
+		E5998FBF174CB1AA0066EFE8 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D295173ABA1E002A8A24 /* WTMAction.m */; };
+		E5998FC0174CB1AA0066EFE8 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D297173ABA1E002A8A24 /* WTMActivity.m */; };
+		E5998FC1174CB1AA0066EFE8 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D299173ABA1E002A8A24 /* WTMAsset.m */; };
+		E5998FC2174CB1AA0066EFE8 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D29B173ABA1E002A8A24 /* WTMBehavior.m */; };
+		E5998FC3174CB1AA0066EFE8 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D29D173ABA1E002A8A24 /* WTMCollectionOfActivity.m */; };
+		E5998FC4174CB1AA0066EFE8 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2A1173ABA1E002A8A24 /* WTMCollectionOfElement.m */; };
+		E5998FC5174CB1AA0066EFE8 /* WTMCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2A3173ABA1E002A8A24 /* WTMCollectionOfGroup.m */; };
+		E5998FC6174CB1AA0066EFE8 /* WTMCollectionOfLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2A5173ABA1E002A8A24 /* WTMCollectionOfLangDictionary.m */; };
+		E5998FC7174CB1AA0066EFE8 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2A7173ABA1E002A8A24 /* WTMCollectionOfLibrary.m */; };
+		E5998FC8174CB1AA0066EFE8 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2A9173ABA1E002A8A24 /* WTMCollectionOfMember.m */; };
+		E5998FC9174CB1AA0066EFE8 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2AB173ABA1E002A8A24 /* WTMCollectionOfPackage.m */; };
+		E5998FCA174CB1AA0066EFE8 /* WTMCollectionOfScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2AD173ABA1E002A8A24 /* WTMCollectionOfScene.m */; };
+		E5998FCB174CB1AA0066EFE8 /* WTMCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2AF173ABA1E002A8A24 /* WTMCollectionOfUser.m */; };
+		E5998FCC174CB1AA0066EFE8 /* WTMDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2B1173ABA1E002A8A24 /* WTMDatum.m */; };
+		E5998FCD174CB1AA0066EFE8 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2B3173ABA1E002A8A24 /* WTMElement.m */; };
+		E5998FCE174CB1AA0066EFE8 /* WTMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2B5173ABA1E002A8A24 /* WTMGroup.m */; };
+		E5998FCF174CB1AA0066EFE8 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2B7173ABA1E002A8A24 /* WTMImage.m */; };
+		E5998FD0174CB1AA0066EFE8 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2B9173ABA1E002A8A24 /* WTMLangDictionary.m */; };
+		E5998FD1174CB1AA0066EFE8 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2BB173ABA1E002A8A24 /* WTMLibrary.m */; };
+		E5998FD2174CB1AA0066EFE8 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2BD173ABA1E002A8A24 /* WTMLinkedAsset.m */; };
+		E5998FD3174CB1AA0066EFE8 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2BF173ABA1E002A8A24 /* WTMMember.m */; };
+		E5998FD4174CB1AA0066EFE8 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2C1173ABA1E002A8A24 /* WTMOperand.m */; };
+		E5998FD5174CB1AA0066EFE8 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2C3173ABA1E002A8A24 /* WTMOperator.m */; };
+		E5998FD6174CB1AA0066EFE8 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2C5173ABA1E002A8A24 /* WTMPackage.m */; };
+		E5998FD7174CB1AA0066EFE8 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2C7173ABA1E002A8A24 /* WTMRule.m */; };
+		E5998FD8174CB1AA0066EFE8 /* WTMScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2C9173ABA1E002A8A24 /* WTMScene.m */; };
+		E5998FD9174CB1AA0066EFE8 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2CB173ABA1E002A8A24 /* WTMShelf.m */; };
+		E5998FDA174CB1AA0066EFE8 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2CD173ABA1E002A8A24 /* WTMSound.m */; };
+		E5998FDB174CB1AA0066EFE8 /* WTMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F0D2D1173ABA1E002A8A24 /* WTMUser.m */; };
+		E5998FDC174CB1AA0066EFE8 /* WTMActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6976173B881E00E135CA /* WTMActivityViewController.m */; };
+		E5998FDD174CB1AA0066EFE8 /* WTMElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6978173B881E00E135CA /* WTMElementViewController.m */; };
+		E5998FDE174CB1AA0066EFE8 /* WTMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697A173B881E00E135CA /* WTMModel.m */; };
+		E5998FDF174CB1AA0066EFE8 /* WTMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697C173B881E00E135CA /* WTMObject.m */; };
+		E5998FE0174CB1AA0066EFE8 /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
+		E5998FE1174CB1AA0066EFE8 /* WTMCollectionOfDatum.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BF32A5173BFF79008D77BE /* WTMCollectionOfDatum.m */; };
+		E5998FE2174CB1AA0066EFE8 /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC717414CDB00AB881F /* WTMHtml.m */; };
+		E5998FE3174CB1AA0066EFE8 /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC917414CDC00AB881F /* WTMHyperlink.m */; };
+		E5998FE4174CB1AA0066EFE8 /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59ACB17414CDE00AB881F /* WTMLabel.m */; };
+		E5998FE5174CB1AA0066EFE8 /* WTMPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59ACD17414CE000AB881F /* WTMPdf.m */; };
+		E5998FE6174CB1AA0066EFE8 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59ACF17414CE200AB881F /* WTMVideo.m */; };
+		E5998FE7174CB1AA0066EFE8 /* WTMCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F258561746367D00C18784 /* WTMCollectionOfModel.m */; };
+		E5998FE8174CB1AA0066EFE8 /* WattMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D93C17465BF300A6A46F /* WattMApi.m */; };
+		E5998FE9174CB1AA0066EFE8 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
+		E5998FEA174CB1AA0066EFE8 /* WattMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D949174671F500A6A46F /* WattMPackager.m */; };
+		E5998FEB174CB1AA0066EFE8 /* WTMRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5BB2AD6174C98100007D4D8 /* WTMRegistry.m */; };
+		E5998FED174CB1AA0066EFE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
+		E5998FEE174CB1AA0066EFE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
+		E5998FEF174CB1AA0066EFE8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462481732A4A000E654A1 /* CoreGraphics.framework */; };
+		E5998FF1174CB1AA0066EFE8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B4624D1732A4A000E654A1 /* InfoPlist.strings */; };
+		E5998FF2174CB1AA0066EFE8 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B462561732A4A000E654A1 /* Default.png */; };
+		E5998FF3174CB1AA0066EFE8 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B462581732A4A000E654A1 /* Default@2x.png */; };
+		E5998FF4174CB1AA0066EFE8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */; };
+		E5998FF5174CB1AA0066EFE8 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
+		E5998FF6174CB1AA0066EFE8 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5A59AD017414CE300AB881F /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC717414CDB00AB881F /* WTMHtml.m */; };
 		E5A59AD117414CE300AB881F /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59AC917414CDC00AB881F /* WTMHyperlink.m */; };
 		E5A59AD217414CE300AB881F /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5A59ACB17414CDE00AB881F /* WTMLabel.m */; };
@@ -76,6 +132,7 @@
 		E53C697C173B881E00E135CA /* WTMObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMObject.m; sourceTree = "<group>"; };
 		E53C697D173B881E00E135CA /* WTMSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMSceneViewController.h; sourceTree = "<group>"; };
 		E53C697E173B881E00E135CA /* WTMSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMSceneViewController.m; sourceTree = "<group>"; };
+		E5998FFA174CB1AA0066EFE8 /* PlayerSample copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlayerSample copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5A59AC617414CDA00AB881F /* WTMHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHtml.h; sourceTree = "<group>"; };
 		E5A59AC717414CDB00AB881F /* WTMHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMHtml.m; sourceTree = "<group>"; };
 		E5A59AC817414CDC00AB881F /* WTMHyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHyperlink.h; sourceTree = "<group>"; };
@@ -176,6 +233,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E5998FEC174CB1AA0066EFE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5998FED174CB1AA0066EFE8 /* UIKit.framework in Frameworks */,
+				E5998FEE174CB1AA0066EFE8 /* Foundation.framework in Frameworks */,
+				E5998FEF174CB1AA0066EFE8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5B4623E1732A4A000E654A1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -280,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				E5B462411732A4A000E654A1 /* PlayerSample.app */,
+				E5998FFA174CB1AA0066EFE8 /* PlayerSample copy.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -402,11 +470,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E5998FBA174CB1AA0066EFE8 /* Flexions+PlayerSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5998FF7174CB1AA0066EFE8 /* Build configuration list for PBXNativeTarget "Flexions+PlayerSample" */;
+			buildPhases = (
+				E5998FBB174CB1AA0066EFE8 /* Invoke Flexions */,
+				E5998FBC174CB1AA0066EFE8 /* Sources */,
+				E5998FEC174CB1AA0066EFE8 /* Frameworks */,
+				E5998FF0174CB1AA0066EFE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Flexions+PlayerSample";
+			productName = PlayerSample;
+			productReference = E5998FFA174CB1AA0066EFE8 /* PlayerSample copy.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E5B462401732A4A000E654A1 /* PlayerSample */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5B462671732A4A000E654A1 /* Build configuration list for PBXNativeTarget "PlayerSample" */;
 			buildPhases = (
-				E5F6C75C174B707E00961C55 /* Invoke Flexions */,
 				E5B4623D1732A4A000E654A1 /* Sources */,
 				E5B4623E1732A4A000E654A1 /* Frameworks */,
 				E5B4623F1732A4A000E654A1 /* Resources */,
@@ -443,11 +528,25 @@
 			projectRoot = "";
 			targets = (
 				E5B462401732A4A000E654A1 /* PlayerSample */,
+				E5998FBA174CB1AA0066EFE8 /* Flexions+PlayerSample */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E5998FF0174CB1AA0066EFE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5998FF1174CB1AA0066EFE8 /* InfoPlist.strings in Resources */,
+				E5998FF2174CB1AA0066EFE8 /* Default.png in Resources */,
+				E5998FF3174CB1AA0066EFE8 /* Default@2x.png in Resources */,
+				E5998FF4174CB1AA0066EFE8 /* Default-568h@2x.png in Resources */,
+				E5998FF5174CB1AA0066EFE8 /* MainStoryboard_iPhone.storyboard in Resources */,
+				E5998FF6174CB1AA0066EFE8 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5B4623F1732A4A000E654A1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -464,7 +563,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E5F6C75C174B707E00961C55 /* Invoke Flexions */ = {
+		E5998FBB174CB1AA0066EFE8 /* Invoke Flexions */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -481,6 +580,60 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E5998FBC174CB1AA0066EFE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5998FBD174CB1AA0066EFE8 /* main.m in Sources */,
+				E5998FBE174CB1AA0066EFE8 /* WTMAppDelegate.m in Sources */,
+				E5998FBF174CB1AA0066EFE8 /* WTMAction.m in Sources */,
+				E5998FC0174CB1AA0066EFE8 /* WTMActivity.m in Sources */,
+				E5998FC1174CB1AA0066EFE8 /* WTMAsset.m in Sources */,
+				E5998FC2174CB1AA0066EFE8 /* WTMBehavior.m in Sources */,
+				E5998FC3174CB1AA0066EFE8 /* WTMCollectionOfActivity.m in Sources */,
+				E5998FC4174CB1AA0066EFE8 /* WTMCollectionOfElement.m in Sources */,
+				E5998FC5174CB1AA0066EFE8 /* WTMCollectionOfGroup.m in Sources */,
+				E5998FC6174CB1AA0066EFE8 /* WTMCollectionOfLangDictionary.m in Sources */,
+				E5998FC7174CB1AA0066EFE8 /* WTMCollectionOfLibrary.m in Sources */,
+				E5998FC8174CB1AA0066EFE8 /* WTMCollectionOfMember.m in Sources */,
+				E5998FC9174CB1AA0066EFE8 /* WTMCollectionOfPackage.m in Sources */,
+				E5998FCA174CB1AA0066EFE8 /* WTMCollectionOfScene.m in Sources */,
+				E5998FCB174CB1AA0066EFE8 /* WTMCollectionOfUser.m in Sources */,
+				E5998FCC174CB1AA0066EFE8 /* WTMDatum.m in Sources */,
+				E5998FCD174CB1AA0066EFE8 /* WTMElement.m in Sources */,
+				E5998FCE174CB1AA0066EFE8 /* WTMGroup.m in Sources */,
+				E5998FCF174CB1AA0066EFE8 /* WTMImage.m in Sources */,
+				E5998FD0174CB1AA0066EFE8 /* WTMLangDictionary.m in Sources */,
+				E5998FD1174CB1AA0066EFE8 /* WTMLibrary.m in Sources */,
+				E5998FD2174CB1AA0066EFE8 /* WTMLinkedAsset.m in Sources */,
+				E5998FD3174CB1AA0066EFE8 /* WTMMember.m in Sources */,
+				E5998FD4174CB1AA0066EFE8 /* WTMOperand.m in Sources */,
+				E5998FD5174CB1AA0066EFE8 /* WTMOperator.m in Sources */,
+				E5998FD6174CB1AA0066EFE8 /* WTMPackage.m in Sources */,
+				E5998FD7174CB1AA0066EFE8 /* WTMRule.m in Sources */,
+				E5998FD8174CB1AA0066EFE8 /* WTMScene.m in Sources */,
+				E5998FD9174CB1AA0066EFE8 /* WTMShelf.m in Sources */,
+				E5998FDA174CB1AA0066EFE8 /* WTMSound.m in Sources */,
+				E5998FDB174CB1AA0066EFE8 /* WTMUser.m in Sources */,
+				E5998FDC174CB1AA0066EFE8 /* WTMActivityViewController.m in Sources */,
+				E5998FDD174CB1AA0066EFE8 /* WTMElementViewController.m in Sources */,
+				E5998FDE174CB1AA0066EFE8 /* WTMModel.m in Sources */,
+				E5998FDF174CB1AA0066EFE8 /* WTMObject.m in Sources */,
+				E5998FE0174CB1AA0066EFE8 /* WTMSceneViewController.m in Sources */,
+				E5998FE1174CB1AA0066EFE8 /* WTMCollectionOfDatum.m in Sources */,
+				E5998FE2174CB1AA0066EFE8 /* WTMHtml.m in Sources */,
+				E5998FE3174CB1AA0066EFE8 /* WTMHyperlink.m in Sources */,
+				E5998FE4174CB1AA0066EFE8 /* WTMLabel.m in Sources */,
+				E5998FE5174CB1AA0066EFE8 /* WTMPdf.m in Sources */,
+				E5998FE6174CB1AA0066EFE8 /* WTMVideo.m in Sources */,
+				E5998FE7174CB1AA0066EFE8 /* WTMCollectionOfModel.m in Sources */,
+				E5998FE8174CB1AA0066EFE8 /* WattMApi.m in Sources */,
+				E5998FE9174CB1AA0066EFE8 /* WTMViewController.m in Sources */,
+				E5998FEA174CB1AA0066EFE8 /* WattMPackager.m in Sources */,
+				E5998FEB174CB1AA0066EFE8 /* WTMRegistry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5B4623D1732A4A000E654A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -565,6 +718,28 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E5998FF8174CB1AA0066EFE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PlayerSample/PlayerSample-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/PlayerSample/PlayerSample-Info.plist";
+				PRODUCT_NAME = "PlayerSample copy";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E5998FF9174CB1AA0066EFE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PlayerSample/PlayerSample-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/PlayerSample/PlayerSample-Info.plist";
+				PRODUCT_NAME = "PlayerSample copy";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		E5B462651732A4A000E654A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -648,6 +823,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E5998FF7174CB1AA0066EFE8 /* Build configuration list for PBXNativeTarget "Flexions+PlayerSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5998FF8174CB1AA0066EFE8 /* Debug */,
+				E5998FF9174CB1AA0066EFE8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5B4623C1732A4A000E654A1 /* Build configuration list for PBXProject "PlayerSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
