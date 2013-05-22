@@ -32,8 +32,6 @@
 #import "WTMElementViewController.h"
 #import "WTMSceneViewController.h"
 
-// Categories
-#import "NSObject+Watt.h"
 
 //Import of flexion generated classes
 #import "WTMModelsImports.h"

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WTMObject.h"
 
 @interface WTMRegistry : NSObject
 

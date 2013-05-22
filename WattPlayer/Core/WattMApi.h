@@ -53,10 +53,10 @@ __LINE__ ,\
 
 #ifndef WT_CODING_KEYS
 #define WT_CODING_KEYS
-#define __uinstID__         @"__uinstID__"
-#define __className__       @"__className__"
-#define __properties__      @"__properties__"
-#define __collection__      @"__collection__"
+#define __uinstID__         @"uinstID"
+#define __className__       @"className"
+#define __properties__      @"properties"
+#define __collection__      @"collection"
 #endif
 
 #pragma mark - Runtime
