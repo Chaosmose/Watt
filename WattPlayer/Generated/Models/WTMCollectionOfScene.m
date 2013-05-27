@@ -33,32 +33,12 @@
     return self;
 }
 
-+ (WTMCollectionOfScene*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMCollectionOfScene*instance = nil;
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:__properties__]];
-		instance=(WTMCollectionOfScene*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMCollectionOfScene*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMCollectionOfScene*)[WattCollectionOfObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:includeChildren];
 }
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    NSMutableArray *array=[NSMutableArray array];
-    for (WTMScene *o in _collection) {
-        NSDictionary*oDictionary=[o dictionaryRepresentation];
-        [array addObject:oDictionary];
-    }
-    [dictionary setValue:array forKey:__collection__];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
+- (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    return [super dictionaryRepresentationWithChildren:includeChildren];
 }
 
 - (WTMCollectionOfScene*)localized{
@@ -79,35 +59,35 @@
     return [_collection count];
 }
 - (WTMScene *)objectAtIndex:(NSUInteger)index{
-	return [_collection objectAtIndex:index];
+	return (WTMScene*)[super  objectAtIndex:index];
 }
 
 - (WTMScene *)lastObject{
-    return [_collection lastObject];
+    return  (WTMScene*)[super lastObject];
 }
 
 - (WTMScene *)firstObjectCommonWithArray:(NSArray*)array{
-    return [_collection firstObjectCommonWithArray:array];
+    return (WTMScene*)[super firstObjectCommonWithArray:array];
 }
 
 - (void)addObject:(WTMScene*)anObject{
- 	[_collection addObject:anObject];
+ 	[super addObject:anObject];
 }
 
 - (void)insertObject:(WTMScene*)anObject atIndex:(NSUInteger)index{
-	[_collection insertObject:anObject atIndex:index];
+	[super insertObject:anObject atIndex:index];
 }
 
 - (void)removeLastObject{
-	[_collection removeLastObject];
+	[super removeLastObject];
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
-    [_collection removeObjectAtIndex:index];
+    [super removeObjectAtIndex:index];
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WTMScene*)anObject{
-    [_collection replaceObjectAtIndex:index withObject:anObject];
+    [super replaceObjectAtIndex:index withObject:anObject];
 }
 
 

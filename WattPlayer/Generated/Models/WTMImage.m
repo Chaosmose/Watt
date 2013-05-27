@@ -23,35 +23,15 @@
 
 @implementation WTMImage 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-   
-    }
-    return self;
-}
+@synthesize size=_size;
 
 - (WTMImage *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMImage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMImage*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMImage*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMImage*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMImage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMImage*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -61,6 +41,26 @@
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:[NSValue valueWithCGSize:self.size] forKey:@"size"];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"size : %@\n",[NSValue valueWithCGSize:self.size]];
+	return s;
 }
 
 /*
@@ -92,22 +92,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:[NSValue valueWithCGSize:self.size] forKey:@"size"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"size : %@\n",[NSValue valueWithCGSize:self.size]];
-	return s;
-}
 
 @end

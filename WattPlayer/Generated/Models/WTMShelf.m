@@ -25,37 +25,19 @@
 
 @implementation WTMShelf 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-		self.localUsers=[[WTMCollectionOfUser alloc] initInRegistry:registry];
-		self.packages=[[WTMCollectionOfPackage alloc] initInRegistry:registry];
-   
-    }
-    return self;
-}
+@synthesize comment=_comment;
+@synthesize ownerUserUID=_ownerUserUID;
+@synthesize rights=_rights;
+@synthesize localUsers=_localUsers;
+@synthesize packages=_packages;
 
 - (WTMShelf *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMShelf*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMShelf*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMShelf*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMShelf*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -67,12 +49,96 @@
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"localUsers"]) {
-		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry] forKey:@"localUsers"];
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"localUsers"];
 	} else if ([key isEqualToString:@"packages"]) {
-		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry] forKey:@"packages"];
+		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"packages"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+-(WTMCollectionOfUser*)localUsers{
+	if([_localUsers isAnAlias]){
+		WattObjectAlias *alias=(WattObjectAlias*)_localUsers;
+		_localUsers=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
+	}
+	if(!_localUsers){
+		_localUsers=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
+	}
+	return _localUsers;
+}
+
+
+- (WTMCollectionOfUser*)localUsers_auto{
+	_localUsers=[self localUsers];
+	if(!_localUsers){
+		_localUsers=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
+	}
+	return _localUsers;
+}
+
+-(void)setLocalUsers:(WTMCollectionOfUser*)localUsers{
+	_localUsers=localUsers;
+}
+
+-(WTMCollectionOfPackage*)packages{
+	if([_packages isAnAlias]){
+		WattObjectAlias *alias=(WattObjectAlias*)_packages;
+		_packages=(WTMCollectionOfPackage*)[_registry objectWithUinstID:alias.uinstID];
+	}
+	if(!_packages){
+		_packages=[[WTMCollectionOfPackage alloc] initInRegistry:_registry];
+	}
+	return _packages;
+}
+
+
+- (WTMCollectionOfPackage*)packages_auto{
+	_packages=[self packages];
+	if(!_packages){
+		_packages=[[WTMCollectionOfPackage alloc] initInRegistry:_registry];
+	}
+	return _packages;
+}
+
+-(void)setPackages:(WTMCollectionOfPackage*)packages{
+	_packages=packages;
+}
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.comment forKey:@"comment"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:self.rights forKey:@"rights"];
+	if(includeChildren){
+		[dictionary setValue:[self.localUsers dictionaryRepresentationWithChildren:includeChildren] forKey:@"localUsers"];
+	}else{
+		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.localUsers] forKey:@"localUsers"];
+	}
+	if(includeChildren){
+		[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
+	}else{
+		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.packages] forKey:@"packages"];
+	}
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"localUsers : %@\n",NSStringFromClass([self.localUsers class])];
+	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
+	return s;
 }
 
 /*
@@ -104,30 +170,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:[self.localUsers dictionaryRepresentation] forKey:@"localUsers"];
-	[dictionary setValue:[self.packages dictionaryRepresentation] forKey:@"packages"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"localUsers : %@\n",self.localUsers];
-	[s appendFormat:@"packages : %@\n",self.packages];
-	return s;
-}
 
 @end

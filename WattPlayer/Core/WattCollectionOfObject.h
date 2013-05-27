@@ -13,4 +13,23 @@
     NSMutableArray* _collection;
 }
 
+
++ (WattCollectionOfObject*)instanceFromDictionary:(NSDictionary *)aDictionary
+                                       inRegistry:(WattRegistry*)registry
+                                  includeChildren:(BOOL)includeChildren;
+
+
+// Accessors
+
+- (WattObject *)objectAtIndex:(NSUInteger)index;
+- (WattObject *)lastObject;
+- (WattObject *)firstObjectCommonWithArray:(NSArray*)array;
+
+- (void)addObject:(WattObject*)anObject;
+- (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index;
+- (void)removeLastObject;
+- (void)removeObjectAtIndex:(NSUInteger)index;
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject;
+
+
 @end

@@ -28,6 +28,7 @@
 
 @property (nonatomic,copy) NSString * urlString;
 
-+ (WTMHyperlink *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMHyperlink *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMHyperlink *)localized;
 @end

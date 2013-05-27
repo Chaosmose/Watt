@@ -24,6 +24,7 @@
 
 //Base classes
 #import "WattObject.h"
+#import "WattObjectAlias.h"
 #import "WattCollectionOfObject.h"
 
 //Base view controllers

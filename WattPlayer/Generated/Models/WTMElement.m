@@ -23,35 +23,23 @@
 
 @implementation WTMElement 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-   
-    }
-    return self;
-}
+@synthesize assetLibUID=_assetLibUID;
+@synthesize assetMemberIndex=_assetMemberIndex;
+@synthesize behaviorLibUID=_behaviorLibUID;
+@synthesize behaviorMemberIndex=_behaviorMemberIndex;
+@synthesize controllerClass=_controllerClass;
+@synthesize ownerUserUID=_ownerUserUID;
+@synthesize rect=_rect;
+@synthesize rights=_rights;
+@synthesize sceneIndex=_sceneIndex;
 
 - (WTMElement *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMElement*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMElement*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMElement*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMElement*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMElement*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMElement*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -79,37 +67,10 @@
 	}
 }
 
-/*
-// @todo implement the default values? 
-- (void)setNilValueForKey:(NSString *)theKey{
-    if ([theKey isEqualToString:@"age"]) {
-        [self setValue:[NSNumber numberWithFloat:0.0] forKey:@"age"];
-    } else
-        [super setNilValueForKey:theKey];
-}
-
-//@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
- 
-    // The name must not be nil, and must be at least two characters long.
-    if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {
-        if (outError != NULL) {
-            NSString *errorString = NSLocalizedString(
-                    @"A Person's name must be at least two characters long",
-                    @"validation: Person, too short name error");
-            NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
-            *outError = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN"
-                                                    code:1//PERSON_INVALID_NAME_CODE
-                                                userInfo:userInfoDict];
-        }
-        return NO;
-    }
-    return YES;
-}
-*/
 
 
-- (NSDictionary*)dictionaryRepresentation{
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.assetLibUID forKey:@"assetLibUID"];
@@ -141,5 +102,35 @@
 	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
 	return s;
 }
+
+/*
+// @todo implement the default values? 
+- (void)setNilValueForKey:(NSString *)theKey{
+    if ([theKey isEqualToString:@"age"]) {
+        [self setValue:[NSNumber numberWithFloat:0.0] forKey:@"age"];
+    } else
+        [super setNilValueForKey:theKey];
+}
+
+//@todo implement the validation process
+-(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+ 
+    // The name must not be nil, and must be at least two characters long.
+    if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {
+        if (outError != NULL) {
+            NSString *errorString = NSLocalizedString(
+                    @"A Person's name must be at least two characters long",
+                    @"validation: Person, too short name error");
+            NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+            *outError = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN"
+                                                    code:1//PERSON_INVALID_NAME_CODE
+                                                userInfo:userInfoDict];
+        }
+        return NO;
+    }
+    return YES;
+}
+*/
+
 
 @end

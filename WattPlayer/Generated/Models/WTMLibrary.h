@@ -31,6 +31,8 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
 
-+ (WTMLibrary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+- (WTMCollectionOfMember*)members_auto;
+
++ (WTMLibrary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMLibrary *)localized;
 @end

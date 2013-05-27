@@ -24,36 +24,18 @@
 
 @implementation WTMLibrary 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-		self.members=[[WTMCollectionOfMember alloc] initInRegistry:registry];
-   
-    }
-    return self;
-}
+@synthesize name=_name;
+@synthesize ownerUserUID=_ownerUserUID;
+@synthesize rights=_rights;
+@synthesize members=_members;
 
 - (WTMLibrary *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMLibrary*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMLibrary*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMLibrary*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMLibrary*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMLibrary*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMLibrary*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -65,10 +47,64 @@
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"members"]) {
-		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry] forKey:@"members"];
+		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"members"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+-(WTMCollectionOfMember*)members{
+	if([_members isAnAlias]){
+		WattObjectAlias *alias=(WattObjectAlias*)_members;
+		_members=(WTMCollectionOfMember*)[_registry objectWithUinstID:alias.uinstID];
+	}
+	if(!_members){
+		_members=[[WTMCollectionOfMember alloc] initInRegistry:_registry];
+	}
+	return _members;
+}
+
+
+- (WTMCollectionOfMember*)members_auto{
+	_members=[self members];
+	if(!_members){
+		_members=[[WTMCollectionOfMember alloc] initInRegistry:_registry];
+	}
+	return _members;
+}
+
+-(void)setMembers:(WTMCollectionOfMember*)members{
+	_members=members;
+}
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.name forKey:@"name"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:self.rights forKey:@"rights"];
+	if(includeChildren){
+		[dictionary setValue:[self.members dictionaryRepresentationWithChildren:includeChildren] forKey:@"members"];
+	}else{
+		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.members] forKey:@"members"];
+	}
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];
+	return s;
 }
 
 /*
@@ -100,28 +136,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:[self.members dictionaryRepresentation] forKey:@"members"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"members : %@\n",self.members];
-	return s;
-}
 
 @end

@@ -34,7 +34,7 @@
     return sharedInstance;
 }
 
--(id)init{
+- (id)init{
     self=[super init];
     if(self){
         _defaultRegistry=[[WattRegistry alloc] init];
@@ -46,7 +46,7 @@
 
 #pragma mark - localization
 
--(void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
+- (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
     if(_localizationDelegate){
         [_localizationDelegate localize:reference withKey:key andValue:value];
     }else{
@@ -56,7 +56,7 @@
 
 #pragma mark - serialization 
 
--(BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
+- (BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
     NSString*path=[self _pathForFileName:fileName];
     if([self _createRequirePaths:path]){
         NSError*errorJson=nil;
@@ -79,7 +79,7 @@
     }
 }
 
--(id)deserializeFromFileName:(NSString*)fileName{
+- (id)deserializeFromFileName:(NSString*)fileName{
     NSString *path=[self _pathForFileName:fileName];
     if(path){
         NSData *data=[NSData dataWithContentsOfFile:path];
@@ -106,7 +106,7 @@
 
 
 
--(BOOL)_createRequirePaths:(NSString*)path{
+- (BOOL)_createRequirePaths:(NSString*)path{
     if([path rangeOfString:[self _applicationDocumentPath]].location==NSNotFound){
         NSLog(@"Illegal path %@", path);
         return NO;
@@ -128,11 +128,11 @@
 }
 
 
--(NSString*)_pathForFileName:(NSString*)fileName{
+- (NSString*)_pathForFileName:(NSString*)fileName{
     return [[self _applicationDocumentPath ] stringByAppendingFormat:@"%@",fileName];
 }
 
--(NSString*)_applicationDocumentPath{
+- (NSString*)_applicationDocumentPath{
     NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *path=[searchPaths objectAtIndex:0];
     return [path stringByAppendingFormat:@"/"];

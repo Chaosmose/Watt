@@ -23,35 +23,16 @@
 
 @implementation WTMAction 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-   
-    }
-    return self;
-}
+@synthesize arguments=_arguments;
+@synthesize methodName=_methodName;
 
 - (WTMAction *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMAction*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMAction*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMAction*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMAction*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMAction*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMAction*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -63,6 +44,28 @@
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.arguments forKey:@"arguments"];
+	[dictionary setValue:self.methodName forKey:@"methodName"];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"arguments : %@\n",self.arguments];
+	[s appendFormat:@"methodName : %@\n",self.methodName];
+	return s;
 }
 
 /*
@@ -94,24 +97,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.arguments forKey:@"arguments"];
-	[dictionary setValue:self.methodName forKey:@"methodName"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"arguments : %@\n",self.arguments];
-	[s appendFormat:@"methodName : %@\n",self.methodName];
-	return s;
-}
 
 @end

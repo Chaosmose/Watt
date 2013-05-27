@@ -11,13 +11,19 @@
 // during a registry serialization.
 
 #import <Foundation/Foundation.h>
+#import "WattObject.h"
 
-@interface WattObjectAlias : NSObject{
+@interface WattObjectAlias : NSObject<WattAliasing>{
 }
 
--(id)initWithUinstID:(NSInteger)uinstID;
--(NSInteger)uinstID;
--(NSDictionary*)dictionaryRepresentation;
++ (NSDictionary*)aliasDictionaryRepresentationFrom:(WattObject*)object;
++ (WattObjectAlias*)aliasFrom:(WattObject*)object;
++ (id)instanceFromDictionary:(NSDictionary *)aDictionary;
+- (NSInteger)uinstID;
+
+- (id)initInRegistry:(WattRegistry*)registry;
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
+
 
 
 @end

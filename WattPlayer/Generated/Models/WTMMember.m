@@ -23,35 +23,19 @@
 
 @implementation WTMMember 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-   
-    }
-    return self;
-}
+@synthesize index=_index;
+@synthesize name=_name;
+@synthesize ownerUserUID=_ownerUserUID;
+@synthesize rights=_rights;
+@synthesize uid=_uid;
 
 - (WTMMember *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMMember*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMMember*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMMember*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMMember*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMMember*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMMember*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -69,6 +53,34 @@
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
+	[dictionary setValue:self.name forKey:@"name"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:self.rights forKey:@"rights"];
+	[dictionary setValue:self.uid forKey:@"uid"];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
+	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	return s;
 }
 
 /*
@@ -100,30 +112,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
-	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:self.uid forKey:@"uid"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
-	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"uid : %@\n",self.uid];
-	return s;
-}
 
 @end

@@ -42,6 +42,11 @@
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMCollectionOfUser * rightsAssignees;
 
-+ (WTMPackage *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+- (WTMCollectionOfActivity*)activities_auto;
+- (WTMCollectionOfLangDictionary*)langDictionaries_auto;
+- (WTMCollectionOfLibrary*)libraries_auto;
+- (WTMCollectionOfUser*)rightsAssignees_auto;
+
++ (WTMPackage *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMPackage *)localized;
 @end

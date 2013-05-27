@@ -24,36 +24,25 @@
 
 @implementation WTMActivity 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-		self.scenes=[[WTMCollectionOfScene alloc] initInRegistry:registry];
-   
-    }
-    return self;
-}
+@synthesize comment=_comment;
+@synthesize controllerClass=_controllerClass;
+@synthesize level=_level;
+@synthesize ownerUserUID=_ownerUserUID;
+@synthesize packageIndex=_packageIndex;
+@synthesize rating=_rating;
+@synthesize rights=_rights;
+@synthesize shortName=_shortName;
+@synthesize title=_title;
+@synthesize uid=_uid;
+@synthesize scenes=_scenes;
 
 - (WTMActivity *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMActivity*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMActivity*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMActivity*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMActivity*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMActivity*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMActivity*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -79,10 +68,78 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"scenes"]) {
-		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry] forKey:@"scenes"];
+		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"scenes"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+-(WTMCollectionOfScene*)scenes{
+	if([_scenes isAnAlias]){
+		WattObjectAlias *alias=(WattObjectAlias*)_scenes;
+		_scenes=(WTMCollectionOfScene*)[_registry objectWithUinstID:alias.uinstID];
+	}
+	if(!_scenes){
+		_scenes=[[WTMCollectionOfScene alloc] initInRegistry:_registry];
+	}
+	return _scenes;
+}
+
+
+- (WTMCollectionOfScene*)scenes_auto{
+	_scenes=[self scenes];
+	if(!_scenes){
+		_scenes=[[WTMCollectionOfScene alloc] initInRegistry:_registry];
+	}
+	return _scenes;
+}
+
+-(void)setScenes:(WTMCollectionOfScene*)scenes{
+	_scenes=scenes;
+}
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.comment forKey:@"comment"];
+	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
+	[dictionary setValue:self.rights forKey:@"rights"];
+	[dictionary setValue:self.shortName forKey:@"shortName"];
+	[dictionary setValue:self.title forKey:@"title"];
+	[dictionary setValue:self.uid forKey:@"uid"];
+	if(includeChildren){
+		[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"scenes"];
+	}else{
+		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.scenes] forKey:@"scenes"];
+	}
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
+	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
+	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"shortName : %@\n",self.shortName];
+	[s appendFormat:@"title : %@\n",self.title];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
+	return s;
 }
 
 /*
@@ -114,42 +171,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
-	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:self.shortName forKey:@"shortName"];
-	[dictionary setValue:self.title forKey:@"title"];
-	[dictionary setValue:self.uid forKey:@"uid"];
-	[dictionary setValue:[self.scenes dictionaryRepresentation] forKey:@"scenes"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
-	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
-	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
-	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"shortName : %@\n",self.shortName];
-	[s appendFormat:@"title : %@\n",self.title];
-	[s appendFormat:@"uid : %@\n",self.uid];
-	[s appendFormat:@"scenes : %@\n",self.scenes];
-	return s;
-}
 
 @end

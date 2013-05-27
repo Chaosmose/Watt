@@ -24,36 +24,24 @@
 
 @implementation WTMScene 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-		self.elements=[[WTMCollectionOfElement alloc] initInRegistry:registry];
-   
-    }
-    return self;
-}
+@synthesize activityIndex=_activityIndex;
+@synthesize comment=_comment;
+@synthesize controllerClass=_controllerClass;
+@synthesize number=_number;
+@synthesize ownerUserUID=_ownerUserUID;
+@synthesize rect=_rect;
+@synthesize rights=_rights;
+@synthesize title=_title;
+@synthesize uid=_uid;
+@synthesize elements=_elements;
 
 - (WTMScene *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMScene*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMScene*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMScene*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMScene*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMScene*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMScene*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -77,10 +65,76 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"elements"]) {
-		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry] forKey:@"elements"];
+		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"elements"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+-(WTMCollectionOfElement*)elements{
+	if([_elements isAnAlias]){
+		WattObjectAlias *alias=(WattObjectAlias*)_elements;
+		_elements=(WTMCollectionOfElement*)[_registry objectWithUinstID:alias.uinstID];
+	}
+	if(!_elements){
+		_elements=[[WTMCollectionOfElement alloc] initInRegistry:_registry];
+	}
+	return _elements;
+}
+
+
+- (WTMCollectionOfElement*)elements_auto{
+	_elements=[self elements];
+	if(!_elements){
+		_elements=[[WTMCollectionOfElement alloc] initInRegistry:_registry];
+	}
+	return _elements;
+}
+
+-(void)setElements:(WTMCollectionOfElement*)elements{
+	_elements=elements;
+}
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
+	[dictionary setValue:self.comment forKey:@"comment"];
+	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
+	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
+	[dictionary setValue:self.rights forKey:@"rights"];
+	[dictionary setValue:self.title forKey:@"title"];
+	[dictionary setValue:self.uid forKey:@"uid"];
+	if(includeChildren){
+		[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"elements"];
+	}else{
+		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.elements] forKey:@"elements"];
+	}
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
+	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
+	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
+	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
+	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"title : %@\n",self.title];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
+	return s;
 }
 
 /*
@@ -112,40 +166,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
-	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
-	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:self.title forKey:@"title"];
-	[dictionary setValue:self.uid forKey:@"uid"];
-	[dictionary setValue:[self.elements dictionaryRepresentation] forKey:@"elements"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
-	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
-	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
-	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"title : %@\n",self.title];
-	[s appendFormat:@"uid : %@\n",self.uid];
-	[s appendFormat:@"elements : %@\n",self.elements];
-	return s;
-}
 
 @end

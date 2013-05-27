@@ -33,32 +33,12 @@
     return self;
 }
 
-+ (WTMCollectionOfActivity*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMCollectionOfActivity*instance = nil;
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:[aDictionary objectForKey:__properties__]];
-		instance=(WTMCollectionOfActivity*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMCollectionOfActivity*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMCollectionOfActivity*)[WattCollectionOfObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:includeChildren];
 }
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    NSMutableArray *array=[NSMutableArray array];
-    for (WTMActivity *o in _collection) {
-        NSDictionary*oDictionary=[o dictionaryRepresentation];
-        [array addObject:oDictionary];
-    }
-    [dictionary setValue:array forKey:__collection__];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
+- (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    return [super dictionaryRepresentationWithChildren:includeChildren];
 }
 
 - (WTMCollectionOfActivity*)localized{
@@ -79,35 +59,35 @@
     return [_collection count];
 }
 - (WTMActivity *)objectAtIndex:(NSUInteger)index{
-	return [_collection objectAtIndex:index];
+	return (WTMActivity*)[super  objectAtIndex:index];
 }
 
 - (WTMActivity *)lastObject{
-    return [_collection lastObject];
+    return  (WTMActivity*)[super lastObject];
 }
 
 - (WTMActivity *)firstObjectCommonWithArray:(NSArray*)array{
-    return [_collection firstObjectCommonWithArray:array];
+    return (WTMActivity*)[super firstObjectCommonWithArray:array];
 }
 
 - (void)addObject:(WTMActivity*)anObject{
- 	[_collection addObject:anObject];
+ 	[super addObject:anObject];
 }
 
 - (void)insertObject:(WTMActivity*)anObject atIndex:(NSUInteger)index{
-	[_collection insertObject:anObject atIndex:index];
+	[super insertObject:anObject atIndex:index];
 }
 
 - (void)removeLastObject{
-	[_collection removeLastObject];
+	[super removeLastObject];
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
-    [_collection removeObjectAtIndex:index];
+    [super removeObjectAtIndex:index];
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WTMActivity*)anObject{
-    [_collection replaceObjectAtIndex:index withObject:anObject];
+    [super replaceObjectAtIndex:index withObject:anObject];
 }
 
 

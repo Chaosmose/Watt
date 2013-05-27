@@ -369,10 +369,10 @@
 			children = (
 				E5DE3ACE174CF797005937DC /* WattApi.h */,
 				E5DE3ACF174CF797005937DC /* WattApi.m */,
-				E5DE3AD0174CF797005937DC /* WattCollectionOfObject.h */,
-				E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */,
 				E5DE3AD4174CF797005937DC /* WattObject.h */,
 				E5DE3AD5174CF797005937DC /* WattObject.m */,
+				E5DE3AD0174CF797005937DC /* WattCollectionOfObject.h */,
+				E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */,
 				E5DE3AD6174CF797005937DC /* WattObjectAlias.h */,
 				E5DE3AD7174CF797005937DC /* WattObjectAlias.m */,
 				E5DE3AD8174CF797005937DC /* WattRegistry.h */,

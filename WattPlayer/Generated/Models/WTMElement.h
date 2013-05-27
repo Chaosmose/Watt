@@ -35,6 +35,7 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
 
-+ (WTMElement *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMElement *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMElement *)localized;
 @end

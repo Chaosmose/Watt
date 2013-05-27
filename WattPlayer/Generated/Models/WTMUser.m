@@ -24,36 +24,17 @@
 
 @implementation WTMUser 
 
-
--(id)initInRegistry:(WattRegistry*)registry{
-    self=[super initInRegistry:registry];
-    if(self){
-		self.groups=[[WTMCollectionOfGroup alloc] initInRegistry:registry];
-   
-    }
-    return self;
-}
+@synthesize identity=_identity;
+@synthesize uid=_uid;
+@synthesize groups=_groups;
 
 - (WTMUser *)localized{
     [self localize];
     return self;
 }
 
-
-+ (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry{
-	WTMUser*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-     if(wtuinstID<=[registry count]){
-        return (WTMUser*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-		id unCasted= [[theClass alloc] initInRegistry:registry];
-		[unCasted setAttributesFromDictionary:aDictionary];
-		instance=(WTMUser*)unCasted;
-		[registry registerObject:instance];
-	}
-	return instance;
++ (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
+	return (WTMUser*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
 }
 
 
@@ -63,10 +44,62 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"groups"]) {
-		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry] forKey:@"groups"];
+		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"groups"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+
+-(WTMCollectionOfGroup*)groups{
+	if([_groups isAnAlias]){
+		WattObjectAlias *alias=(WattObjectAlias*)_groups;
+		_groups=(WTMCollectionOfGroup*)[_registry objectWithUinstID:alias.uinstID];
+	}
+	if(!_groups){
+		_groups=[[WTMCollectionOfGroup alloc] initInRegistry:_registry];
+	}
+	return _groups;
+}
+
+
+- (WTMCollectionOfGroup*)groups_auto{
+	_groups=[self groups];
+	if(!_groups){
+		_groups=[[WTMCollectionOfGroup alloc] initInRegistry:_registry];
+	}
+	return _groups;
+}
+
+-(void)setGroups:(WTMCollectionOfGroup*)groups{
+	_groups=groups;
+}
+
+
+
+-(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.identity forKey:@"identity"];
+	[dictionary setValue:self.uid forKey:@"uid"];
+	if(includeChildren){
+		[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
+	}else{
+		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.groups] forKey:@"groups"];
+	}
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+-(NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"identity : %@\n",self.identity];
+	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
+	return s;
 }
 
 /*
@@ -98,26 +131,5 @@
 }
 */
 
-
-- (NSDictionary*)dictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.identity forKey:@"identity"];
-	[dictionary setValue:self.uid forKey:@"uid"];
-	[dictionary setValue:[self.groups dictionaryRepresentation] forKey:@"groups"];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
-}
-
--(NSString*)description{
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"identity : %@\n",self.identity];
-	[s appendFormat:@"uid : %@\n",self.uid];
-	[s appendFormat:@"groups : %@\n",self.groups];
-	return s;
-}
 
 @end

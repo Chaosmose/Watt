@@ -29,6 +29,7 @@
 @property (nonatomic,copy) NSString * locale;
 @property (nonatomic,copy) NSString * value;
 
-+ (WTMLangDictionary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMLangDictionary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMLangDictionary *)localized;
 @end

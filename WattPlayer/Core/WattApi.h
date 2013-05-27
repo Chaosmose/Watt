@@ -23,50 +23,7 @@
 #import "WattObject.h"
 #import "WattRegistry.h"
 
-#pragma mark - log macros 
-
-#ifndef WT_LOG
-#define WT_LOG 1 // You can set up WT_LOG to 1 or 0
-typedef enum logNatures{
-    WT_LOG_DEBUG=0,
-    WT_LOG_RUNTIME=1,
-}LogNature;
-#if WT_LOG
-#define WTLogNF(nature,format, ... ){\
-NSLog( @"WT(%i):%s line:%d:{\n%@\n}\n",\
-nature,\
-__PRETTY_FUNCTION__,\
-__LINE__ ,\
-[NSString stringWithFormat:(format), ##__VA_ARGS__]\
-);\
-}
-#define WTLog(format, ...){ WTLogNF(WT_LOG_DEBUG,format, ##__VA_ARGS__); }
-#define WTLogN(message,nature){ WTLogNF(nature,@"%@",message); }
-#else
-#define WTLogNF(nature,format, ... ){}
-#define WTLog(format, ...){  }
-#define WTLogN(message,nature){ }
-#endif
-#endif
-
-#pragma mark - WattCoding
-
-#ifndef WT_CODING_KEYS
-#define WT_CODING_KEYS
-#define __uinstID__         @"i"
-#define __className__       @"cln"
-#define __properties__      @"p"
-#define __collection__      @"cll"
-#endif
-
-#pragma mark - Runtime
-
-#ifndef WT_RUNTIME_CONFIGURATION
-#define WT_RUNTIME_CONFIGURATION
-#define WT_ALLOW_MULTIPLE_REGISTRATION 1
-#endif
-
-#pragma mark - WattMApi
+#pragma mark - WattApi
 
 @protocol WTMlocalizationDelegateProtocol;
 
@@ -77,13 +34,14 @@ __LINE__ ,\
 @property (readonly)WattRegistry*defaultRegistry;
 
 // WattMApi singleton accessor
-+(WattApi*)sharedInstance;
++ (WattApi*)sharedInstance;
 
 #pragma mark localization
 
-//This method is called from WTMObject within the localize implementation.
+//You should normaly not call directly that method
+//This method is called from WTMObject from the @selector(localize) implementation.
 //Calls the localizationDelegate if it is set or invokes the default implementation
--(void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
+- (void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
 
 @end
 
@@ -92,9 +50,10 @@ __LINE__ ,\
 // You can implement this protocol if you want to customize the internationalization process.
 @protocol WTMlocalizationDelegateProtocol <NSObject>
 @required
--(void)localize:(id)reference withKey:(NSString*)key andValue:(id)value;
+- (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value;
 @end
 
 #ifndef WTM_API
+//Singleton accessor alias
 #define wattAPI [WattApi sharedInstance]
 #endif

@@ -28,6 +28,7 @@
 
 @property (nonatomic,assign) CGSize  size;
 
-+ (WTMPdf *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMPdf *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMPdf *)localized;
 @end

@@ -23,20 +23,33 @@
 
 #import <Foundation/Foundation.h>
 #import "WattObject.h"
+#import "WattCollectionOfObject.h"
 
 @interface WattRegistry : NSObject
 
--(NSUInteger)count;
+- (NSUInteger)count;
 
-#pragma mark -
+#pragma mark - Serialization/Deserialization facilities
 
+// If you want serialize / deserialize a registry
+// Including fully decoupled object.
 + (WattRegistry*)instanceFromArray:(NSArray*)array;
 - (NSArray*)arrayRepresentation;
 
-#pragma runtime object graph identification
+// If you want just sub graphs
+// resetHistory is done once per "session" to invalidate the serialization history
+// the serialization history prevents from circular referencing;
+- (NSDictionary*)dictionaryWithAliasesFrom:(WattObject*)object
+                             resetHistory:(BOOL)resetHistory;
 
--(WattObject*)objectWithUinstID:(NSInteger)uinstID;
--(void)registerObject:(WattObject*)reference;
--(void)unRegisterObject:(WattObject*)reference;
+- (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary;
+
+#pragma mark - runtime object graph register
+
+- (WattObject*)objectWithUinstID:(NSInteger)uinstID;
+- (void)registerObject:(WattObject*)reference;
+- (void)unRegisterObject:(WattObject*)reference;
+
+- (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix;
 
 @end

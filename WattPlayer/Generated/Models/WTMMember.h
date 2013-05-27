@@ -31,6 +31,7 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * uid;
 
-+ (WTMMember *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMMember *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMMember *)localized;
 @end

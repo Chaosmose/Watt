@@ -29,6 +29,7 @@
 @property (nonatomic,copy) NSString * font;
 @property (nonatomic,copy) NSString * value;
 
-+ (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMLabel *)localized;
 @end

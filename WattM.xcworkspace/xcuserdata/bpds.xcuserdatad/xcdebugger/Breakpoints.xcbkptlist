@@ -4,28 +4,17 @@
    version = "1.0">
    <FileBreakpoints>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "WattPlayer/Generated/Models/WTMMember.m"
-         timestampString = "390225200.16202"
+         filePath = "WattPlayer/Core/WattObjectAlias.m"
+         timestampString = "390998422.767007"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "47"
-         endingLineNumber = "47"
-         landmarkName = "-setAttributesFromDictionary:"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
+         landmarkName = "-initInRegistry:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "WattPlayer/Generated/Models/WTMCollectionOfUser.m"
-         timestampString = "390414699.142869"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

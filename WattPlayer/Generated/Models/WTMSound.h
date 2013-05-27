@@ -28,6 +28,7 @@
 
 @property (nonatomic,assign) NSInteger  duration;
 
-+ (WTMSound *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMSound *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMSound *)localized;
 @end

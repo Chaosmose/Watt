@@ -27,6 +27,7 @@
 
 @property (nonatomic,copy) NSString * name;
 
-+ (WTMGroup *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMGroup *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMGroup *)localized;
 @end

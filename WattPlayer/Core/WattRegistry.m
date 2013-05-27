@@ -24,12 +24,13 @@
 #import "WattRegistry.h"
 
 @implementation WattRegistry{
-    NSInteger           _uinstIDCounter;
-    NSMutableDictionary  *_registry;
+    NSInteger               _uinstIDCounter;
+    NSMutableDictionary     *_registry;
+    NSMutableArray          *_history;
 }
 
 
--(id)init{
+- (id)init{
     self=[super init];
     if(self){
         _uinstIDCounter=0;
@@ -38,16 +39,26 @@
     return self;
 }
 
--(NSUInteger)count{
+- (NSUInteger)count{
     return _uinstIDCounter;
 }
+
+#pragma mark - Serialization/Deserialization facilities
+
+
+// If you want serialize / deserialize the whole registry
 
 
 + (WattRegistry*)instanceFromArray:(NSArray*)array{
     WattRegistry *r=[[WattRegistry alloc] init];
+    int i=1;
     for (NSDictionary *d in array) {
-        WattObject *liveObject=[WattObject instanceFromDictionary:d inRegistry:r];
-        [r registerObject:liveObject];
+        //WTLog(@"%i|ID->%@ %@",i,[d objectForKey:__uinstID__],[d objectForKey:__className__]);
+        WattObject *liveObject=[WattObject instanceFromDictionary:d inRegistry:r includeChildren:NO];
+        if(liveObject){
+            [r registerObject:liveObject];
+            i++;
+        }
     }
     return r;
 }
@@ -55,15 +66,66 @@
 
 - (NSArray*)arrayRepresentation{
     NSMutableArray*registryArray=[NSMutableArray array];
-    for (NSString *k in _registry) {
+    NSArray *sortedKeys=[self _sortedKeys];
+    for (NSString *k in sortedKeys) {
         id o=[_registry objectForKey:k];
-        if(![o isKindOfClass:[NSNull class]]){
-            if([o respondsToSelector:@selector(dictionaryRepresentation)]){
-                [registryArray addObject:[o dictionaryRepresentation]];
-            }
+        if([o respondsToSelector:@selector(dictionaryRepresentationWithChildren:)]){
+            [registryArray addObject:[o dictionaryRepresentationWithChildren:NO]];
+        }else{
+            [NSException raise:@"Registry" format:@"%@ do not respond to @selector(dictionaryRepresentationWithChildren:)",NSStringFromClass([o class])];
         }
     }
     return registryArray;
+}
+
+-(NSArray*)_sortedKeys{
+    // We prefer to have a fast key based random access using a NSDictionary
+    // allKeys selector returns an unordered key array.
+    // So we sort the keys to store in the linear creation order.
+    NSArray *keys=[_registry allKeys];
+    NSArray *sortedKeys=[keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if ( [obj1 integerValue] < [obj2 integerValue]) {
+            return NSOrderedAscending;
+        } else  {
+            return NSOrderedDescending;
+        }
+        // In this case NSOrderedSame is not possible (two keys cannot be equals)
+    }];
+    return sortedKeys;
+}
+
+// If you want serialize / deserialize an arbitrary object graph from a given object
+
+
+- (NSDictionary*)dictionaryWithAliasesFrom:(WattObject*)object
+                             resetHistory:(BOOL)resetHistory{
+    if(resetHistory){
+        _history=[NSMutableArray array];
+    }
+    BOOL inHistory=NO;
+    for (NSNumber*uid in _history) {
+        if([uid integerValue]==object.uinstID){
+            inHistory=YES;
+            break;
+        }
+    }
+    if(inHistory){
+        return [WattObjectAlias aliasDictionaryRepresentationFrom:object];
+    }else{
+        [_history addObject:@(object.uinstID)];
+        return [object dictionaryRepresentationWithChildren:YES];
+    }
+}
+
+
+- (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary{
+    NSInteger uinstID=[[dictionary objectForKey:__uinstID__] integerValue];
+    WattObject*o=[self objectWithUinstID:uinstID];
+    if(o){
+        return o;
+    }else{
+        return [WattObject instanceFromDictionary:dictionary inRegistry:self includeChildren:YES];
+    }
 }
 
 
@@ -71,13 +133,13 @@
 #pragma runtime object graph identification
 
 
--(NSInteger)_createAnUinstID{
+- (NSInteger)_createAnUinstID{
     _uinstIDCounter++;
     return _uinstIDCounter;
 }
 
 
--(WattObject*)objectWithUinstID:(NSInteger)uinstID{
+- (WattObject*)objectWithUinstID:(NSInteger)uinstID{
     if([_registry count]>uinstID){
         return [_registry objectForKey:[self _keyFrom:uinstID]];
     }else{
@@ -85,12 +147,36 @@
     }
 }
 
--(NSString*)_keyFrom:(NSInteger)uinstID{
+
+- (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix{
+    NSString *collectionClassName;
+    NSString *baseClassName=[NSStringFromClass(theClass) stringByReplacingOccurrencesOfString:prefix withString:@""];
+    if(prefix){
+        collectionClassName=[NSString stringWithFormat:@"%@%@%@",prefix,@"CollectionOf",baseClassName];
+    }else{
+        collectionClassName=[NSString stringWithFormat:@"%@%@",@"CollectionOf",baseClassName];
+    }
+    Class collectionClass=NSClassFromString(collectionClassName);
+    if(!collectionClass)
+        collectionClass=[WattCollectionOfObject class];
+    WattCollectionOfObject*collection=[[collectionClass alloc ]initInRegistry:self];
+    NSArray *sortedKeys=[self _sortedKeys];
+    for (NSString*key in sortedKeys) {
+        WattObject*o=[_registry objectForKey:key];
+        if([o isKindOfClass:theClass]){
+            [collection addObject:o];
+        }
+    }
+    return collection;
+}
+
+
+- (NSString*)_keyFrom:(NSInteger)uinstID{
     return [NSString stringWithFormat:@"%i",uinstID];
 }
 
 
--(void)registerObject:(WattObject*)reference{
+- (void)registerObject:(WattObject*)reference{
     if(reference.uinstID==0){
         [reference identifyWithUinstId:[self _createAnUinstID]];
         [_registry setValue:reference forKey:[self _keyFrom:reference.uinstID]];
@@ -105,17 +191,19 @@
     }
 }
 
--(void)unRegisterObject:(WattObject*)reference{
+- (void)unRegisterObject:(WattObject*)reference{
     [_registry removeObjectForKey:[self _keyFrom:reference.uinstID]];
 }
 
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
     [s appendFormat:@"Registry with %i members\n\n",[self count]];
     int i=0;
-    for (NSString*key in _registry) {
-        [s appendFormat:@"#%i|%@\n",i,[_registry objectForKey:key]];
+    NSArray *sortedKeys=[self _sortedKeys];
+    for (NSString*key in sortedKeys) {
+        WattObject*o=[_registry objectForKey:key];
+        [s appendFormat:@"%i|#%i|%@\n",i,o.uinstID,o];
         i++;
     }
 	return s;

@@ -28,6 +28,7 @@
 
 @property (nonatomic,assign) CGSize  duration;
 
-+ (WTMVideo *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMVideo *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMVideo *)localized;
 @end

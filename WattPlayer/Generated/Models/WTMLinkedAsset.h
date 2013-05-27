@@ -29,6 +29,7 @@
 @property (nonatomic,copy) NSString * fileName;
 @property (nonatomic,copy) NSString * relativePath;
 
-+ (WTMLinkedAsset *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+
++ (WTMLinkedAsset *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMLinkedAsset *)localized;
 @end

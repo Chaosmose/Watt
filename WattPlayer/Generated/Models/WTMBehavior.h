@@ -32,6 +32,9 @@
 @property (nonatomic,strong) WTMAction * action;
 @property (nonatomic,strong) WTMRule * trigger;
 
-+ (WTMBehavior *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+- (WTMAction*)action_auto;
+- (WTMRule*)trigger_auto;
+
++ (WTMBehavior *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMBehavior *)localized;
 @end

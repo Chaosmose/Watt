@@ -37,6 +37,8 @@
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
 
-+ (WTMScene *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+- (WTMCollectionOfElement*)elements_auto;
+
++ (WTMScene *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMScene *)localized;
 @end

@@ -30,6 +30,8 @@
 @property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfGroup * groups;
 
-+ (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry;
+- (WTMCollectionOfGroup*)groups_auto;
+
++ (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
 - (WTMUser *)localized;
 @end
