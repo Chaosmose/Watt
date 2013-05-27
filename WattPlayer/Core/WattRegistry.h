@@ -22,8 +22,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WattObject.h"
-#import "WattCollectionOfObject.h"
+
+@class WattObject;
+@class WattCollectionOfObject;
 
 @interface WattRegistry : NSObject
 

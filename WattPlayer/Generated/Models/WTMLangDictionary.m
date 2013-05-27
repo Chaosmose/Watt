@@ -29,7 +29,7 @@
 
 - (WTMLangDictionary *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMLangDictionary*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

@@ -31,7 +31,7 @@
 
 - (WTMMember *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMMember*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

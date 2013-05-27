@@ -21,6 +21,7 @@
 //
 
 #import "WattObject.h"
+#import "WattObjectAlias.h"
 #import "WattApi.h"
 #import <objc/runtime.h>
 

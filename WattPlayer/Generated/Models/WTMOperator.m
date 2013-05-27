@@ -27,7 +27,7 @@
 
 - (WTMOperator *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMOperator*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

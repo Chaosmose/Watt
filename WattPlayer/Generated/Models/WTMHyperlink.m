@@ -27,7 +27,7 @@
 
 - (WTMHyperlink *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMHyperlink*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

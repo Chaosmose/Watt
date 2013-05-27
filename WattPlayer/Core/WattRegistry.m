@@ -22,6 +22,9 @@
 //
 
 #import "WattRegistry.h"
+#import "WattObject.h"
+#import "WattObjectAlias.h"
+#import "WattCollectionOfObject.h"
 
 @implementation WattRegistry{
     NSInteger               _uinstIDCounter;

@@ -10,8 +10,10 @@
 // We uses aliases to store reference to object graph
 // during a registry serialization.
 
-#import <Foundation/Foundation.h>
-#import "WattObject.h"
+#import"WattObject.h"
+
+@class WattObject;
+@class WattRegistry;
 
 @interface WattObjectAlias : NSObject<WattAliasing>{
 }

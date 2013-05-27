@@ -8,7 +8,9 @@
 
 #import "WattObject.h"
 
-@interface WattCollectionOfObject : WattObject {
+@class WattRegistry;
+
+@interface WattCollectionOfObject : WattObject<WattAliasing> {
     @protected
     NSMutableArray* _collection;
 }

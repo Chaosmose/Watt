@@ -27,7 +27,7 @@
 
 - (WTMVideo *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMVideo*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

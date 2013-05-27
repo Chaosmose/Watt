@@ -28,7 +28,7 @@
 
 - (WTMLabel *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMLabel*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

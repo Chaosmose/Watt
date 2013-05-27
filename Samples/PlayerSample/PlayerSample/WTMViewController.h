@@ -22,6 +22,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WattM.h"
 
 @interface WTMViewController : UIViewController
 

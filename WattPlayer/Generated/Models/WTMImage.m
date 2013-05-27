@@ -27,7 +27,7 @@
 
 - (WTMImage *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMImage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

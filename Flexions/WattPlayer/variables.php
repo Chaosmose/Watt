@@ -15,6 +15,6 @@ if (isset ( $f )) {
 $parentClass = "WattObject";
 $collectionParentClass="WattCollectionOfObject";
 $protocols="WattCoding";
-$imports = "\n#import \"$parentClass.h\"\n";
+$imports = "\n#import \"WattObjectAlias.h\"\n#import \"$parentClass.h\"\n";
 $markAsDynamic = false;
 $allowScalars = true;

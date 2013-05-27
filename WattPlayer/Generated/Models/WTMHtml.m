@@ -27,7 +27,7 @@
 
 - (WTMHtml *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMHtml*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

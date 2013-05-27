@@ -42,7 +42,7 @@
 
 - (WTMPackage *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

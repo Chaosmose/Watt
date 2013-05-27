@@ -20,7 +20,6 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
 #pragma mark - log macros
 
@@ -65,10 +64,10 @@ __LINE__ ,\
 #define WT_ALLOW_MULTIPLE_REGISTRATION 1
 #endif
 
-
-@class WattApi;
 @class WattObject;
-@class WattRegistry;
+@class WattApi;
+
+#import "WattRegistry.h"
 
 #pragma mark WattAliasing
 @protocol WattAliasing <NSObject>
@@ -76,6 +75,8 @@ __LINE__ ,\
 - (BOOL)isAnAlias;
 - (id)initInRegistry:(WattRegistry*)registry;
 @end
+
+
 
 @interface WattObject : NSObject<WattAliasing>{
     @private
@@ -122,23 +123,18 @@ __LINE__ ,\
 // Reflexion utility that is not as fast as NSFastEnumeration on the first call 
 // But this approach is much more flexible in our context KVC, inheritance & universal persistency.
 - (NSArray*)allPropertiesName;
-
-
 @end
 
+
+
+
 #pragma mark WattCoding
-
 @protocol WattCoding <NSObject>
-
 + (WattObject*)instanceFromDictionary:(NSDictionary *)aDictionary
                            inRegistry:(WattRegistry*)registry
                       includeChildren:(BOOL)includeChildren; // Usually overriden to return strongly typed instances during Flexions
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
 @end
-
-
-
-
 
 

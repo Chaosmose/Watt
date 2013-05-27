@@ -18,25 +18,20 @@
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#endif
 
 #import <Foundation/Foundation.h>
 
-// WattApi
 #import "WattApi.h"
-
-//Base classes
 #import "WattObject.h"
 #import "WattObjectAlias.h"
 #import "WattCollectionOfObject.h"
+#import "WattRegistry.h"
 
-//Base view controllers
+#if TARGET_OS_IPHONE
 #import "WTMActivityViewController.h"
 #import "WTMElementViewController.h"
 #import "WTMSceneViewController.h"
-
+#endif
 
 //Import of flexion generated classes
 #import "WTMModelsImports.h"

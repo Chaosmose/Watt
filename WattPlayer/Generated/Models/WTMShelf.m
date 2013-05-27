@@ -33,7 +33,7 @@
 
 - (WTMShelf *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

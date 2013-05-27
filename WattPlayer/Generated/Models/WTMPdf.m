@@ -27,7 +27,7 @@
 
 - (WTMPdf *)localized{
     [self localize];
-    return self;
+     return self;
 }
 
 + (WTMPdf*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{

@@ -7,6 +7,8 @@
 //
 
 #import "WattCollectionOfObject.h"
+#import "WattObjectAlias.h"
+#import "WattApi.h"
 
 @implementation WattCollectionOfObject
 
@@ -125,11 +127,11 @@
     return o;
 }
 
-- (void)addObject:(WTMActivity*)anObject{
+- (void)addObject:(WattObject*)anObject{
  	[_collection addObject:anObject];
 }
 
-- (void)insertObject:(WTMActivity*)anObject atIndex:(NSUInteger)index{
+- (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
 	[_collection insertObject:anObject atIndex:index];
 }
 
@@ -141,7 +143,7 @@
     [_collection removeObjectAtIndex:index];
 }
 
-- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WTMActivity*)anObject{
+- (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject{
     [_collection replaceObjectAtIndex:index withObject:anObject];
 }
 
