@@ -11,6 +11,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files =  'WattPlayer','WattPlayer/**/*.{h,m}'
   s.public_header_files = 'WattPlayer/**/*.h'
-  s.prefix_header_file='WattM.h' 
   s.ios.deployment_target = '5.0'
 end

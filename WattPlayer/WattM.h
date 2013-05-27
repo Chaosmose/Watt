@@ -28,6 +28,9 @@
 #import "WattRegistry.h"
 
 #if TARGET_OS_IPHONE
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
 #import "WTMActivityViewController.h"
 #import "WTMElementViewController.h"
 #import "WTMSceneViewController.h"
