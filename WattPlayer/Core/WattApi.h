@@ -21,6 +21,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WattObject.h"
+#import "WattObjectAlias.h"
 #import "WattRegistry.h"
 
 #pragma mark - WattApi
