@@ -10,15 +10,10 @@
 
 @class WattRegistry;
 
-@interface WattCollectionOfObject : WattObject<WattAliasing> {
+@interface WattCollectionOfObject : WattObject {
     @protected
     NSMutableArray* _collection;
 }
-
-
-+ (WattCollectionOfObject*)instanceFromDictionary:(NSDictionary *)aDictionary
-                                       inRegistry:(WattRegistry*)registry
-                                  includeChildren:(BOOL)includeChildren;
 
 
 // Accessors
@@ -33,5 +28,10 @@
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject;
 
+- (NSUInteger)indexOfObjectWithID:(NSUInteger)uinstID;
+- (BOOL)containsAnObjectWithID:(NSUInteger)uinstID;
+
+- (NSUInteger)count;
+- (NSUInteger)indexOfObject:(WattObject *)object;
 
 @end

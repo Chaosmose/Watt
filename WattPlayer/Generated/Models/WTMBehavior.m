@@ -29,30 +29,20 @@
 @synthesize action=_action;
 @synthesize trigger=_trigger;
 
-- (WTMBehavior *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMBehavior*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMBehavior*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"action"]) {
-		[super setValue:[WTMAction instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"action"];
+		[super setValue:[WTMAction instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"action"];
 	} else if ([key isEqualToString:@"trigger"]) {
-		[super setValue:[WTMRule instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"trigger"];
+		[super setValue:[WTMRule instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"trigger"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
--(WTMAction*)action{
+- (WTMAction*)action{
 	if([_action isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_action;
 		_action=(WTMAction*)[_registry objectWithUinstID:alias.uinstID];
@@ -69,11 +59,11 @@
 	return _action;
 }
 
--(void)setAction:(WTMAction*)action{
+- (void)setAction:(WTMAction*)action{
 	_action=action;
 }
 
--(WTMRule*)trigger{
+- (WTMRule*)trigger{
 	if([_trigger isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_trigger;
 		_trigger=(WTMRule*)[_registry objectWithUinstID:alias.uinstID];
@@ -90,25 +80,29 @@
 	return _trigger;
 }
 
--(void)setTrigger:(WTMRule*)trigger{
+- (void)setTrigger:(WTMRule*)trigger{
 	_trigger=trigger;
 }
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
-	if(includeChildren){
-		[dictionary setValue:[self.action dictionaryRepresentationWithChildren:includeChildren] forKey:@"action"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.action] forKey:@"action"];
+	if(self.action){
+		if(includeChildren){
+			[dictionary setValue:[self.action dictionaryRepresentationWithChildren:includeChildren] forKey:@"action"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.action] forKey:@"action"];
+		}
 	}
-	if(includeChildren){
-		[dictionary setValue:[self.trigger dictionaryRepresentationWithChildren:includeChildren] forKey:@"trigger"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.trigger] forKey:@"trigger"];
+	if(self.trigger){
+		if(includeChildren){
+			[dictionary setValue:[self.trigger dictionaryRepresentationWithChildren:includeChildren] forKey:@"trigger"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.trigger] forKey:@"trigger"];
+		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -116,7 +110,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
@@ -135,7 +129,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

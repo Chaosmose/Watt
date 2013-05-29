@@ -30,6 +30,4 @@
 @property (nonatomic,copy) NSString * comment;
 
 
-+ (WTMAsset *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMAsset *)localized;
 @end

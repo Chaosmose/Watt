@@ -25,8 +25,6 @@
 @interface WTMRule:WattCollectionOfObject <WattCoding>{
 }
 
-+ (WTMRule *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMRule *)localized;
 
 - (NSUInteger)count;
 - (WTMRule *)objectAtIndex:(NSUInteger)index;

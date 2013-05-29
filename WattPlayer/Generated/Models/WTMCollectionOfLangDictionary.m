@@ -25,7 +25,7 @@
 @implementation WTMCollectionOfLangDictionary{
 }
 
--(id)initInRegistry:(WattRegistry*)registry{
+- (instancetype)initInRegistry:(WattRegistry*)registry{
     self=[super initInRegistry:registry];
     if(self){
         _collection=[NSMutableArray array];
@@ -33,21 +33,8 @@
     return self;
 }
 
-+ (WTMCollectionOfLangDictionary*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMCollectionOfLangDictionary*)[WattCollectionOfObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:includeChildren];
-}
 
-- (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
-    return [super dictionaryRepresentationWithChildren:includeChildren];
-}
-
-- (WTMCollectionOfLangDictionary*)localized{
-	[self localize];
-	return self;
-}
-
-
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
     [s appendFormat:@"Collection of %@\n",@"WTMLangDictionary"];
     [s appendFormat:@"With of %i members\n",[_collection count]];

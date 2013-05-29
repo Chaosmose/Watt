@@ -79,32 +79,36 @@
     WTMMember*m2=[l2.members lastObject];
     WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
     
+    /*
     
+    
+#warning not tested 
+    
+    // Request a collection of members.
     WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class] andPrefix:@"WTM"];
     // Use the collection
     // ...
     WTLog(@"%@",members);
-    
     // And deregister the collection
     [r2 unRegisterObject:members];
     
+    
+    
+    
     // ANY WattObject should be unRegisterObject to purge it from its register.
     // OR you can "purge" the whole registry (Best practice)
-    
-    
-    
-    /*
 
-    // Graph representations 
+
+    // Graph representations
     WTLog(@"%@",[s dictionaryRepresentationWithChildren:NO]);     // Graph
     WTLog(@"%@",[s dictionaryRepresentationWithChildren:YES]);     // Graph
     
     
     NSDictionary* d=[s dictionaryRepresentationWithChildren:NO];
-    WTMShelf *s2=[WTMShelf instanceFromDictionary:d inRegistry:r2 includeChildren:YES];
+    WTMShelf *s3=[WTMShelf instanceFromDictionary:d inRegistry:r2 includeChildren:YES];
     
     WTLog(@"%@",r2);    // Registry
-    WTLog(@"%@",[s2 dictionaryRepresentationWithChildren:YES]);
+    WTLog(@"%@",[s3 dictionaryRepresentationWithChildren:YES]);
      
    
     [s2 localize];

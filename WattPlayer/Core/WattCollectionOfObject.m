@@ -12,7 +12,7 @@
 
 @implementation WattCollectionOfObject
 
--(id)init{
+- (instancetype)init{
     self=[self initInRegistry:wattAPI.defaultRegistry];
     if (self) {
         _collection=[NSMutableArray array];
@@ -20,7 +20,7 @@
     return self;
 }
 
--(id)initInRegistry:(WattRegistry *)registry{
+- (instancetype)initInRegistry:(WattRegistry *)registry{
     self=[super initInRegistry:registry];
     if (self) {
         _collection=[NSMutableArray array];
@@ -53,25 +53,9 @@
 + (WattCollectionOfObject*)instanceFromDictionary:(NSDictionary *)aDictionary
                                        inRegistry:(WattRegistry*)registry
                                   includeChildren:(BOOL)includeChildren{
-	WattCollectionOfObject*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-    if(wtuinstID<[registry count]){
-        return (WattCollectionOfObject*)[registry objectWithUinstID:wtuinstID];
-    }
-	if([aDictionary objectForKey:__className__] && [aDictionary objectForKey:__properties__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-        if(theClass!=[WattObjectAlias class]){
-            // We instantiate the class.
-            id unCasted= [[theClass alloc] initInRegistry:registry];
-            [unCasted setAttributesFromDictionary:aDictionary];
-            instance=(WattCollectionOfObject*)unCasted;
-        }else{
-            // We keep the alias for runtime resolution.
-            // The resolution will occur once in the kvc selector valueForKey:
-            return [WattObjectAlias instanceFromDictionary:aDictionary];
-        }
-	}
-	return instance;
+	return (WattCollectionOfObject*)[WattObject instanceFromDictionary:aDictionary
+                                                     inRegistry:registry
+                                                includeChildren:includeChildren];
 }
 
 - (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
@@ -88,7 +72,7 @@
             [array addObject:oDictionary];
         }
     }
-    [dictionary setValue:array forKey:__collection__];
+    [wrapper setValue:array forKey:__collection__];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -128,7 +112,7 @@
 }
 
 - (void)addObject:(WattObject*)anObject{
- 	[_collection addObject:anObject];
+    [_collection addObject:anObject];
 }
 
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
@@ -145,6 +129,36 @@
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject{
     [_collection replaceObjectAtIndex:index withObject:anObject];
+}
+
+
+- (BOOL)containsAnObjectWithID:(NSUInteger)uinstID{
+    for (WattObject*o in _collection) {
+        if(o.uinstID==uinstID)
+            return YES;
+    }
+    return NO;
+}
+
+
+- (NSUInteger)indexOfObjectWithID:(NSUInteger)uinstID{
+    NSUInteger i=0;
+    for (WattObject*o in _collection) {
+        if(o.uinstID==uinstID)
+            return i;
+        i++;
+    }
+    return NSNotFound;
+}
+
+
+
+-(NSUInteger)count{
+    return [_collection count];
+}
+
+- (NSUInteger)indexOfObject:(WattObject *)object{
+   return [_collection indexOfObject:object];
 }
 
 @end

@@ -48,6 +48,4 @@
 - (WTMCollectionOfLibrary*)libraries_auto;
 - (WTMCollectionOfUser*)rightsAssignees_auto;
 
-+ (WTMPackage *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMPackage *)localized;
 @end

@@ -33,6 +33,4 @@
 
 - (WTMCollectionOfGroup*)groups_auto;
 
-+ (WTMUser *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMUser *)localized;
 @end

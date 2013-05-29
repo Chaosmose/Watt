@@ -25,8 +25,6 @@
 @interface WTMCollectionOfScene:WattCollectionOfObject <WattCoding>{
 }
 
-+ (WTMCollectionOfScene *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMCollectionOfScene *)localized;
 
 - (NSUInteger)count;
 - (WTMScene *)objectAtIndex:(NSUInteger)index;

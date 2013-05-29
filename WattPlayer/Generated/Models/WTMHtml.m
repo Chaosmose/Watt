@@ -25,16 +25,6 @@
 
 @synthesize string=_string;
 
-- (WTMHtml *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMHtml*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMHtml*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"string"]){
 		[super setValue:value forKey:@"string"];
@@ -46,7 +36,7 @@
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.string forKey:@"string"];
@@ -56,7 +46,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"string : %@\n",self.string];
@@ -73,7 +63,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

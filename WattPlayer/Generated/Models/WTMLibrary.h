@@ -34,6 +34,4 @@
 
 - (WTMCollectionOfMember*)members_auto;
 
-+ (WTMLibrary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMLibrary *)localized;
 @end

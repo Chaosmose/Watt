@@ -25,8 +25,6 @@
 @interface WTMCollectionOfDatum:WattCollectionOfObject <WattCoding>{
 }
 
-+ (WTMCollectionOfDatum *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMCollectionOfDatum *)localized;
 
 - (NSUInteger)count;
 - (WTMDatum *)objectAtIndex:(NSUInteger)index;

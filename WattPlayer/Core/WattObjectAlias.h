@@ -12,7 +12,6 @@
 
 #import"WattObject.h"
 
-@class WattObject;
 @class WattRegistry;
 
 @interface WattObjectAlias : NSObject<WattAliasing>{
@@ -20,11 +19,9 @@
 
 + (NSDictionary*)aliasDictionaryRepresentationFrom:(WattObject*)object;
 + (WattObjectAlias*)aliasFrom:(WattObject*)object;
-+ (id)instanceFromDictionary:(NSDictionary *)aDictionary;
++ (WattObjectAlias*)aliasFromDictionary:(NSDictionary *)aDictionary;
 - (NSInteger)uinstID;
 
-- (id)initInRegistry:(WattRegistry*)registry;
-- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
 
 
 

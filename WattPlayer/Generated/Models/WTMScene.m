@@ -35,16 +35,6 @@
 @synthesize uid=_uid;
 @synthesize elements=_elements;
 
-- (WTMScene *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMScene*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMScene*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"activityIndex"]){
 		[super setValue:value forKey:@"activityIndex"];
@@ -65,14 +55,14 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"elements"]) {
-		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"elements"];
+		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
--(WTMCollectionOfElement*)elements{
+- (WTMCollectionOfElement*)elements{
 	if([_elements isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_elements;
 		_elements=(WTMCollectionOfElement*)[_registry objectWithUinstID:alias.uinstID];
@@ -89,13 +79,13 @@
 	return _elements;
 }
 
--(void)setElements:(WTMCollectionOfElement*)elements{
+- (void)setElements:(WTMCollectionOfElement*)elements{
 	_elements=elements;
 }
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
@@ -107,10 +97,12 @@
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
-	if(includeChildren){
-		[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"elements"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.elements] forKey:@"elements"];
+	if(self.elements){
+		if(includeChildren){
+			[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"elements"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.elements] forKey:@"elements"];
+		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -118,7 +110,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
@@ -144,7 +136,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

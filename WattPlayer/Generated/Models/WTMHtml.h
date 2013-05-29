@@ -30,6 +30,4 @@
 @property (nonatomic,copy) NSString * string;
 
 
-+ (WTMHtml *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMHtml *)localized;
 @end

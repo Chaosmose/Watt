@@ -36,16 +36,6 @@
 @synthesize uid=_uid;
 @synthesize scenes=_scenes;
 
-- (WTMActivity *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMActivity*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMActivity*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
@@ -68,14 +58,14 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"scenes"]) {
-		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"scenes"];
+		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scenes"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
--(WTMCollectionOfScene*)scenes{
+- (WTMCollectionOfScene*)scenes{
 	if([_scenes isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_scenes;
 		_scenes=(WTMCollectionOfScene*)[_registry objectWithUinstID:alias.uinstID];
@@ -92,13 +82,13 @@
 	return _scenes;
 }
 
--(void)setScenes:(WTMCollectionOfScene*)scenes{
+- (void)setScenes:(WTMCollectionOfScene*)scenes{
 	_scenes=scenes;
 }
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
@@ -111,10 +101,12 @@
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
-	if(includeChildren){
-		[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"scenes"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.scenes] forKey:@"scenes"];
+	if(self.scenes){
+		if(includeChildren){
+			[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"scenes"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.scenes] forKey:@"scenes"];
+		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -122,7 +114,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
@@ -149,7 +141,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

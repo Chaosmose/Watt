@@ -26,16 +26,6 @@
 @synthesize fileName=_fileName;
 @synthesize relativePath=_relativePath;
 
-- (WTMLinkedAsset *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMLinkedAsset*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMLinkedAsset*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"fileName"]){
 		[super setValue:value forKey:@"fileName"];
@@ -49,7 +39,7 @@
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.fileName forKey:@"fileName"];
@@ -60,7 +50,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"fileName : %@\n",self.fileName];
@@ -78,7 +68,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

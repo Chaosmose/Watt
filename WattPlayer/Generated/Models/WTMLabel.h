@@ -31,6 +31,4 @@
 @property (nonatomic,copy) NSString * value;
 
 
-+ (WTMLabel *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMLabel *)localized;
 @end

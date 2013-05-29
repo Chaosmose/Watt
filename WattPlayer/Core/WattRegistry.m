@@ -26,10 +26,17 @@
 #import "WattObjectAlias.h"
 #import "WattCollectionOfObject.h"
 
+@interface WattRegistry (){
+}
+// Call the selector on all the members of the registry
+-(void)performSelectorOnMembers:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait;
+@end
+
 @implementation WattRegistry{
     NSInteger               _uinstIDCounter;
     NSMutableDictionary     *_registry;
     NSMutableArray          *_history;
+    NSArray                *__sortedKeys;
 }
 
 
@@ -54,16 +61,38 @@
 
 + (WattRegistry*)instanceFromArray:(NSArray*)array{
     WattRegistry *r=[[WattRegistry alloc] init];
-    int i=1;
+    
+    // Double pass deserialization
+    //
+    // First pass   :  deserialize the registry with aliases
+    // Second pass  :  resolves the aliases and compute the caches (keys, etc)
+    
+    // This process prevent from using runtime aliases resolution.
+    // and allows circular referencing
+    
+    int i=0;
     for (NSDictionary *d in array) {
         //WTLog(@"%i|ID->%@ %@",i,[d objectForKey:__uinstID__],[d objectForKey:__className__]);
         WattObject *liveObject=[WattObject instanceFromDictionary:d inRegistry:r includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
-            i++;
         }
+        i++;
     }
+    
+    [r performSelectorOnMembers:@selector(resolveAliases)
+                       onThread:[NSThread currentThread]
+                     withObject:nil waitUntilDone:NO];
+    
     return r;
+}
+
+-(void)performSelectorOnMembers:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait{
+    NSArray *sortedKeys=[self _sortedKeys];
+    for (NSString*key in sortedKeys) {
+        WattObject*o=[_registry objectForKey:key];
+        [o performSelector:aSelector onThread:thr withObject:arg waitUntilDone:wait];
+    }
 }
 
 
@@ -81,10 +110,14 @@
     return registryArray;
 }
 
--(NSArray*)_sortedKeys{
+- (NSArray*)_sortedKeys{
     // We prefer to have a fast key based random access using a NSDictionary
     // allKeys selector returns an unordered key array.
     // So we sort the keys to store in the linear creation order.
+    
+    // Check _invalidateSortedKeys?
+    if(__sortedKeys)
+        return __sortedKeys;
     NSArray *keys=[_registry allKeys];
     NSArray *sortedKeys=[keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         if ( [obj1 integerValue] < [obj2 integerValue]) {
@@ -94,14 +127,20 @@
         }
         // In this case NSOrderedSame is not possible (two keys cannot be equals)
     }];
-    return sortedKeys;
+    __sortedKeys=sortedKeys;
+    return __sortedKeys;
+}
+
+
+- (void)_invalidateSortedKeys{
+    __sortedKeys=nil;
 }
 
 // If you want serialize / deserialize an arbitrary object graph from a given object
 
 
 - (NSDictionary*)dictionaryWithAliasesFrom:(WattObject*)object
-                             resetHistory:(BOOL)resetHistory{
+                              resetHistory:(BOOL)resetHistory{
     if(resetHistory){
         _history=[NSMutableArray array];
     }
@@ -180,6 +219,7 @@
 
 
 - (void)registerObject:(WattObject*)reference{
+    [self _invalidateSortedKeys];
     if(reference.uinstID==0){
         [reference identifyWithUinstId:[self _createAnUinstID]];
         [_registry setValue:reference forKey:[self _keyFrom:reference.uinstID]];
@@ -189,12 +229,13 @@
         }
     }else{
 #if  !WT_ALLOW_MULTIPLE_REGISTRATION
-       [NSException raise:@"Registry" format:@"Identity overflow"];
+        [NSException raise:@"Registry" format:@"Identity overflow"];
 #endif
     }
 }
 
 - (void)unRegisterObject:(WattObject*)reference{
+    [self _invalidateSortedKeys];
     [_registry removeObjectForKey:[self _keyFrom:reference.uinstID]];
 }
 

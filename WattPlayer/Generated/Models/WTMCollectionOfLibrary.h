@@ -25,8 +25,6 @@
 @interface WTMCollectionOfLibrary:WattCollectionOfObject <WattCoding>{
 }
 
-+ (WTMCollectionOfLibrary *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMCollectionOfLibrary *)localized;
 
 - (NSUInteger)count;
 - (WTMLibrary *)objectAtIndex:(NSUInteger)index;

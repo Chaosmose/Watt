@@ -31,16 +31,6 @@
 @synthesize localUsers=_localUsers;
 @synthesize packages=_packages;
 
-- (WTMShelf *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMShelf*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMShelf*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
@@ -49,16 +39,16 @@
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"localUsers"]) {
-		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"localUsers"];
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"localUsers"];
 	} else if ([key isEqualToString:@"packages"]) {
-		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"packages"];
+		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
--(WTMCollectionOfUser*)localUsers{
+- (WTMCollectionOfUser*)localUsers{
 	if([_localUsers isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_localUsers;
 		_localUsers=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
@@ -75,11 +65,11 @@
 	return _localUsers;
 }
 
--(void)setLocalUsers:(WTMCollectionOfUser*)localUsers{
+- (void)setLocalUsers:(WTMCollectionOfUser*)localUsers{
 	_localUsers=localUsers;
 }
 
--(WTMCollectionOfPackage*)packages{
+- (WTMCollectionOfPackage*)packages{
 	if([_packages isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_packages;
 		_packages=(WTMCollectionOfPackage*)[_registry objectWithUinstID:alias.uinstID];
@@ -96,27 +86,31 @@
 	return _packages;
 }
 
--(void)setPackages:(WTMCollectionOfPackage*)packages{
+- (void)setPackages:(WTMCollectionOfPackage*)packages{
 	_packages=packages;
 }
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:self.rights forKey:@"rights"];
-	if(includeChildren){
-		[dictionary setValue:[self.localUsers dictionaryRepresentationWithChildren:includeChildren] forKey:@"localUsers"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.localUsers] forKey:@"localUsers"];
+	if(self.localUsers){
+		if(includeChildren){
+			[dictionary setValue:[self.localUsers dictionaryRepresentationWithChildren:includeChildren] forKey:@"localUsers"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.localUsers] forKey:@"localUsers"];
+		}
 	}
-	if(includeChildren){
-		[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.packages] forKey:@"packages"];
+	if(self.packages){
+		if(includeChildren){
+			[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.packages] forKey:@"packages"];
+		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -124,7 +118,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
@@ -145,7 +139,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

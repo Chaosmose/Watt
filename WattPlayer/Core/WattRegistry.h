@@ -53,4 +53,6 @@
 
 - (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix;
 
+#pragma mark - 
+
 @end

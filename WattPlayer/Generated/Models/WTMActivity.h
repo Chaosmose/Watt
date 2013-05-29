@@ -41,6 +41,4 @@
 
 - (WTMCollectionOfScene*)scenes_auto;
 
-+ (WTMActivity *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMActivity *)localized;
 @end

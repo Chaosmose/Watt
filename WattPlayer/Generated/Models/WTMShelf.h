@@ -37,6 +37,4 @@
 - (WTMCollectionOfUser*)localUsers_auto;
 - (WTMCollectionOfPackage*)packages_auto;
 
-+ (WTMShelf *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMShelf *)localized;
 @end

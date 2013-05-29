@@ -10,33 +10,36 @@
 
 @interface WattObjectAlias(){
 }
-- (id)initWithUinstID:(NSInteger)uinstID;
-- (id)initFromReference:(WattObject*)object;
+- (instancetype)initWithUinstID:(NSInteger)uinstID andClassName:(NSString*)className;
+- (instancetype)initFromReference:(WattObject*)object andClassName:(NSString*)className;
 @end
 
 
 @implementation WattObjectAlias{
     NSInteger _uinstID;
+    NSString* _aliasedClassName;
 }
 
-- (id)init{
+- (instancetype)init{
     [NSException raise:@"Core" format:@"WTMObjectAlias must be initialized using initWithUinstID:"];
     return nil;
 }
 
-- (id)initWithUinstID:(NSInteger)uinstID{
+- (instancetype)initWithUinstID:(NSInteger)uinstID andClassName:(NSString*)className{
     self=[super init];
     if(self){
         _uinstID=uinstID;
+        _aliasedClassName=className;
     }
     return self;
 }
 
-- (id)initFromReference:(WattObject*)object{
-    return [[WattObjectAlias alloc] initWithUinstID:object.uinstID];
+- (instancetype)initFromReference:(WattObject*)object andClassName:(NSString *)className{
+    return [[WattObjectAlias alloc] initWithUinstID:object.uinstID
+                                       andClassName:className];
 }
 
-- (id)initInRegistry:(WattRegistry*)registry{
+- (instancetype)initInRegistry:(WattRegistry*)registry{
     return nil;
 }
 
@@ -45,23 +48,32 @@
     return YES;
 }
 
+-(void)resolveAliases{
+    // Nothing to do
+}
+
 
 + (NSDictionary*)aliasDictionaryRepresentationFrom:(WattObject*)object{
-    return [[[WattObjectAlias alloc]initFromReference:object] dictionaryRepresentationWithChildren:NO];
+    return [[[WattObjectAlias alloc]initFromReference:object
+                                         andClassName:NSStringFromClass([object class])]
+            dictionaryRepresentationWithChildren:NO];
 }
 
 
 + (WattObjectAlias*)aliasFrom:(WattObject*)object{
-    return [[WattObjectAlias alloc] initFromReference:object];
+    return [[WattObjectAlias alloc] initFromReference:object andClassName:NSStringFromClass([object class])];
 }
 
 
-+ (id)instanceFromDictionary:(NSDictionary *)aDictionary{
++ (WattObjectAlias*)aliasFromDictionary:(NSDictionary *)aDictionary{
     NSNumber *uinstIDNb=[aDictionary objectForKey:__uinstID__];
-    if(uinstIDNb){
-        return [[WattObjectAlias alloc] initWithUinstID:[uinstIDNb integerValue]];
+    NSString *className=[aDictionary objectForKey:__className__];
+    if(uinstIDNb && className){
+        WattObjectAlias *alias=[[WattObjectAlias alloc] initWithUinstID:[uinstIDNb integerValue] andClassName:className];
+#warning  should we populate the collection with alias in case it is a collection ?
+        return alias;
     }else{
-        [NSException raise:@"WattObjectAlias" format:@"Attempt to instanciate from a dictionary with no __uinstID__ key"];
+        [NSException raise:@"WattObjectAlias" format:@"Attempt to instanciate from an inconsistent dictionary %@",aDictionary];
     }
     return nil;
 }
@@ -73,15 +85,14 @@
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithBool:YES] forKey:__isAliased__];
+	[wrapper setObject:_aliasedClassName forKey:__className__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }
 
--(NSString*)description{
-    return [NSString stringWithFormat:@"Alias of %i",self.uinstID];
+- (NSString*)description{
+    return [NSString stringWithFormat:@"Alias of %@(#%i)",_aliasedClassName,self.uinstID];
 }
 
 @end

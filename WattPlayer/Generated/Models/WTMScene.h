@@ -40,6 +40,4 @@
 
 - (WTMCollectionOfElement*)elements_auto;
 
-+ (WTMScene *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMScene *)localized;
 @end

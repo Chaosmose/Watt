@@ -25,7 +25,7 @@
 @implementation WTMCollectionOfPackage{
 }
 
--(id)initInRegistry:(WattRegistry*)registry{
+- (instancetype)initInRegistry:(WattRegistry*)registry{
     self=[super initInRegistry:registry];
     if(self){
         _collection=[NSMutableArray array];
@@ -33,21 +33,8 @@
     return self;
 }
 
-+ (WTMCollectionOfPackage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMCollectionOfPackage*)[WattCollectionOfObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:includeChildren];
-}
 
-- (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
-    return [super dictionaryRepresentationWithChildren:includeChildren];
-}
-
-- (WTMCollectionOfPackage*)localized{
-	[self localize];
-	return self;
-}
-
-
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
     [s appendFormat:@"Collection of %@\n",@"WTMPackage"];
     [s appendFormat:@"With of %i members\n",[_collection count]];

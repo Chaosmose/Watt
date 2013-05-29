@@ -31,6 +31,4 @@
 @property (nonatomic,copy) NSString * value;
 
 
-+ (WTMDatum *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMDatum *)localized;
 @end

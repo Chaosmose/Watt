@@ -28,30 +28,20 @@
 @synthesize uid=_uid;
 @synthesize groups=_groups;
 
-- (WTMUser *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMUser*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMUser*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"identity"]){
 		[super setValue:value forKey:@"identity"];
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"groups"]) {
-		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"groups"];
+		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
--(WTMCollectionOfGroup*)groups{
+- (WTMCollectionOfGroup*)groups{
 	if([_groups isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_groups;
 		_groups=(WTMCollectionOfGroup*)[_registry objectWithUinstID:alias.uinstID];
@@ -68,21 +58,23 @@
 	return _groups;
 }
 
--(void)setGroups:(WTMCollectionOfGroup*)groups{
+- (void)setGroups:(WTMCollectionOfGroup*)groups{
 	_groups=groups;
 }
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.identity forKey:@"identity"];
 	[dictionary setValue:self.uid forKey:@"uid"];
-	if(includeChildren){
-		[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.groups] forKey:@"groups"];
+	if(self.groups){
+		if(includeChildren){
+			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.groups] forKey:@"groups"];
+		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -90,7 +82,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"identity : %@\n",self.identity];
@@ -109,7 +101,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

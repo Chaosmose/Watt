@@ -40,16 +40,6 @@
 @synthesize libraries=_libraries;
 @synthesize rightsAssignees=_rightsAssignees;
 
-- (WTMPackage *)localized{
-    [self localize];
-     return self;
-}
-
-+ (WTMPackage*)instanceFromDictionary:(NSDictionary *)aDictionary inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren{
-	return (WTMPackage*)[WattObject instanceFromDictionary:aDictionary inRegistry:registry includeChildren:YES];;
-}
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
@@ -68,20 +58,20 @@
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"activities"]) {
-		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"activities"];
+		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
 	} else if ([key isEqualToString:@"langDictionaries"]) {
-		[super setValue:[WTMCollectionOfLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"langDictionaries"];
+		[super setValue:[WTMCollectionOfLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionaries"];
 	} else if ([key isEqualToString:@"libraries"]) {
-		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"libraries"];
+		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
 	} else if ([key isEqualToString:@"rightsAssignees"]) {
-		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:YES] forKey:@"rightsAssignees"];
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"rightsAssignees"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
--(WTMCollectionOfActivity*)activities{
+- (WTMCollectionOfActivity*)activities{
 	if([_activities isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_activities;
 		_activities=(WTMCollectionOfActivity*)[_registry objectWithUinstID:alias.uinstID];
@@ -98,11 +88,11 @@
 	return _activities;
 }
 
--(void)setActivities:(WTMCollectionOfActivity*)activities{
+- (void)setActivities:(WTMCollectionOfActivity*)activities{
 	_activities=activities;
 }
 
--(WTMCollectionOfLangDictionary*)langDictionaries{
+- (WTMCollectionOfLangDictionary*)langDictionaries{
 	if([_langDictionaries isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_langDictionaries;
 		_langDictionaries=(WTMCollectionOfLangDictionary*)[_registry objectWithUinstID:alias.uinstID];
@@ -119,11 +109,11 @@
 	return _langDictionaries;
 }
 
--(void)setLangDictionaries:(WTMCollectionOfLangDictionary*)langDictionaries{
+- (void)setLangDictionaries:(WTMCollectionOfLangDictionary*)langDictionaries{
 	_langDictionaries=langDictionaries;
 }
 
--(WTMCollectionOfLibrary*)libraries{
+- (WTMCollectionOfLibrary*)libraries{
 	if([_libraries isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_libraries;
 		_libraries=(WTMCollectionOfLibrary*)[_registry objectWithUinstID:alias.uinstID];
@@ -140,11 +130,11 @@
 	return _libraries;
 }
 
--(void)setLibraries:(WTMCollectionOfLibrary*)libraries{
+- (void)setLibraries:(WTMCollectionOfLibrary*)libraries{
 	_libraries=libraries;
 }
 
--(WTMCollectionOfUser*)rightsAssignees{
+- (WTMCollectionOfUser*)rightsAssignees{
 	if([_rightsAssignees isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_rightsAssignees;
 		_rightsAssignees=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
@@ -161,13 +151,13 @@
 	return _rightsAssignees;
 }
 
--(void)setRightsAssignees:(WTMCollectionOfUser*)rightsAssignees{
+- (void)setRightsAssignees:(WTMCollectionOfUser*)rightsAssignees{
 	_rightsAssignees=rightsAssignees;
 }
 
 
 
--(NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
@@ -178,25 +168,33 @@
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.shelfIndex] forKey:@"shelfIndex"];
 	[dictionary setValue:self.uid forKey:@"uid"];
-	if(includeChildren){
-		[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.activities] forKey:@"activities"];
+	if(self.activities){
+		if(includeChildren){
+			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.activities] forKey:@"activities"];
+		}
 	}
-	if(includeChildren){
-		[dictionary setValue:[self.langDictionaries dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionaries"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.langDictionaries] forKey:@"langDictionaries"];
+	if(self.langDictionaries){
+		if(includeChildren){
+			[dictionary setValue:[self.langDictionaries dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionaries"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.langDictionaries] forKey:@"langDictionaries"];
+		}
 	}
-	if(includeChildren){
-		[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"libraries"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.libraries] forKey:@"libraries"];
+	if(self.libraries){
+		if(includeChildren){
+			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"libraries"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.libraries] forKey:@"libraries"];
+		}
 	}
-	if(includeChildren){
-		[dictionary setValue:[self.rightsAssignees dictionaryRepresentationWithChildren:includeChildren] forKey:@"rightsAssignees"];
-	}else{
-		[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.rightsAssignees] forKey:@"rightsAssignees"];
+	if(self.rightsAssignees){
+		if(includeChildren){
+			[dictionary setValue:[self.rightsAssignees dictionaryRepresentationWithChildren:includeChildren] forKey:@"rightsAssignees"];
+		}else{
+			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.rightsAssignees] forKey:@"rightsAssignees"];
+		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -204,7 +202,7 @@
     return wrapper;
 }
 
--(NSString*)description{
+- (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
@@ -232,7 +230,7 @@
 }
 
 //@todo implement the validation process
--(BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
+- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
  
     // The name must not be nil, and must be at least two characters long.
     if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {

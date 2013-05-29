@@ -52,9 +52,10 @@ __LINE__ ,\
 #ifndef WT_CODING_KEYS
 #define WT_CODING_KEYS
 #define __uinstID__         @"i"
-#define __className__       @"cln"
+#define __className__       @"c"
 #define __properties__      @"p"
-#define __collection__      @"cll"
+#define __collection__      @"cl"
+#define __isAliased__       @"a"
 #endif
 
 #pragma mark - Runtime
@@ -69,16 +70,24 @@ __LINE__ ,\
 
 #import "WattRegistry.h"
 
-#pragma mark WattAliasing
 @protocol WattAliasing <NSObject>
 @required
 - (BOOL)isAnAlias;
-- (id)initInRegistry:(WattRegistry*)registry;
+- (instancetype)initInRegistry:(WattRegistry*)registry;
+- (void)resolveAliases;
+@end
+
+@protocol WattCoding <NSObject>
+@required
++ (instancetype)instanceFromDictionary:(NSDictionary *)aDictionary
+                            inRegistry:(WattRegistry*)registry
+                       includeChildren:(BOOL)includeChildren;
+
+- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
 @end
 
 
-
-@interface WattObject : NSObject<WattAliasing>{
+@interface WattObject : NSObject<WattAliasing,WattCoding>{
     @private
     NSString *_currentLocale;           // The locale that has been used for localization
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
@@ -93,48 +102,33 @@ __LINE__ ,\
 @property (readonly)NSInteger uinstID;
 @property (readonly)WattRegistry*registry;
 
-- (id)init; // Uses WattApi.defaultRegistry
+// You should normally not use those.
+// But WattCoding protocol constructor.
+
+// Uses WattApi.defaultRegistry
+- (instancetype)init; 
 
 // WattAliasing
-//- (id)initInRegistry:(WattRegistry*)registry;
+//- (instancetype)initInRegistry:(WattRegistry*)registry;
 
 // Do not call directly!
 // This selector is used during initialization.
 // If used twice will raise an exception "Attempt to re-identify an instance"
 - (void)identifyWithUinstId:(NSInteger)identifier;
 
-#pragma mark - pseudo protocol implementation 
-
-+ (WattObject*)instanceFromDictionary:(NSDictionary *)aDictionary
-                           inRegistry:(WattRegistry*)registry
-                      includeChildren:(BOOL)includeChildren;
+#pragma mark -
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 
-- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
+// Returns all the properties keys of the object.
+- (NSArray*)allPropertiesName;
 
 
 #pragma mark - localization
 
-- (WattObject*)localized; // Usually overriden for strong typing during Flexions
+- (instancetype)localized; 
 - (void)localize;
 - (BOOL)hasBeenLocalized;
 
-// Reflexion utility that is not as fast as NSFastEnumeration on the first call 
-// But this approach is much more flexible in our context KVC, inheritance & universal persistency.
-- (NSArray*)allPropertiesName;
+
 @end
-
-
-
-
-#pragma mark WattCoding
-@protocol WattCoding <NSObject>
-+ (WattObject*)instanceFromDictionary:(NSDictionary *)aDictionary
-                           inRegistry:(WattRegistry*)registry
-                      includeChildren:(BOOL)includeChildren; // Usually overriden to return strongly typed instances during Flexions
-
-- (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
-@end
-
-

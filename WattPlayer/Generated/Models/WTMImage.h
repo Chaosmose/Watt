@@ -30,6 +30,4 @@
 @property (nonatomic,assign) CGSize  size;
 
 
-+ (WTMImage *)instanceFromDictionary:(NSDictionary *)aDictionary  inRegistry:(WattRegistry*)registry includeChildren:(BOOL)includeChildren;
-- (WTMImage *)localized;
 @end
