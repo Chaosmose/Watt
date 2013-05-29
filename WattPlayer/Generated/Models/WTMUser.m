@@ -56,9 +56,6 @@
 		WattObjectAlias *alias=(WattObjectAlias*)_groups;
 		_groups=(WTMCollectionOfGroup*)[_registry objectWithUinstID:alias.uinstID];
 	}
-	if(!_groups){
-		_groups=[[WTMCollectionOfGroup alloc] initInRegistry:_registry];
-	}
 	return _groups;
 }
 

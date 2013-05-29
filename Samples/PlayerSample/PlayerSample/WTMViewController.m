@@ -57,7 +57,7 @@
     h.urlString=@"http://www.secouchermoinsbete.fr";
     [lib.members_auto addObject:h];
     
-    WTLog(@"r1 : %@",r1);
+    //WTLog(@"r1 : %@",r1);
     
     //2- We serialize the registry R1 to a linear structure a1
 
@@ -77,13 +77,14 @@
     WTMPackage*p2=[s2.packages lastObject];
     WTMLibrary*l2=[p2.libraries lastObject];
     WTMMember*m2=[l2.members lastObject];
-    WTLog(@"%@",m2);
+    WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
     
     
     WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class] andPrefix:@"WTM"];
     // Use the collection
     // ...
     WTLog(@"%@",members);
+    
     // And deregister the collection
     [r2 unRegisterObject:members];
     

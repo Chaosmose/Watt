@@ -80,9 +80,6 @@
 		WattObjectAlias *alias=(WattObjectAlias*)_scenes;
 		_scenes=(WTMCollectionOfScene*)[_registry objectWithUinstID:alias.uinstID];
 	}
-	if(!_scenes){
-		_scenes=[[WTMCollectionOfScene alloc] initInRegistry:_registry];
-	}
 	return _scenes;
 }
 

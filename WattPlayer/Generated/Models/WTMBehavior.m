@@ -57,9 +57,6 @@
 		WattObjectAlias *alias=(WattObjectAlias*)_action;
 		_action=(WTMAction*)[_registry objectWithUinstID:alias.uinstID];
 	}
-	if(!_action){
-		_action=[[WTMAction alloc] initInRegistry:_registry];
-	}
 	return _action;
 }
 
@@ -80,9 +77,6 @@
 	if([_trigger isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_trigger;
 		_trigger=(WTMRule*)[_registry objectWithUinstID:alias.uinstID];
-	}
-	if(!_trigger){
-		_trigger=[[WTMRule alloc] initInRegistry:_registry];
 	}
 	return _trigger;
 }

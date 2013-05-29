@@ -22,6 +22,7 @@
 
 #import "WattObject.h"
 #import "WattObjectAlias.h"
+#import "WattCollectionOfObject.h"
 #import "WattApi.h"
 #import <objc/runtime.h>
 
@@ -68,11 +69,13 @@
     }
 	if(!instance && [aDictionary objectForKey:__className__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-        if(theClass!=[WattObjectAlias class]){
+        if([theClass isSubclassOfClass:[WattCollectionOfObject class]]){
+            return (WattCollectionOfObject*)[theClass instanceFromDictionary:aDictionary inRegistry:registry includeChildren:includeChildren];;
+        }else if(theClass!=[WattObjectAlias class]){
             // We instantiate the class.
             id unCasted= [[theClass alloc] initInRegistry:registry];
             [unCasted setAttributesFromDictionary:aDictionary];
-            instance=(WattObject*)unCasted;
+            return (WattObject*)unCasted;
         }else{
             // We keep the alias for runtime resolution.
             // The resolution will occur once in the kvc selector valueForKey:

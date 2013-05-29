@@ -86,9 +86,6 @@
 		WattObjectAlias *alias=(WattObjectAlias*)_activities;
 		_activities=(WTMCollectionOfActivity*)[_registry objectWithUinstID:alias.uinstID];
 	}
-	if(!_activities){
-		_activities=[[WTMCollectionOfActivity alloc] initInRegistry:_registry];
-	}
 	return _activities;
 }
 
@@ -109,9 +106,6 @@
 	if([_langDictionaries isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_langDictionaries;
 		_langDictionaries=(WTMCollectionOfLangDictionary*)[_registry objectWithUinstID:alias.uinstID];
-	}
-	if(!_langDictionaries){
-		_langDictionaries=[[WTMCollectionOfLangDictionary alloc] initInRegistry:_registry];
 	}
 	return _langDictionaries;
 }
@@ -134,9 +128,6 @@
 		WattObjectAlias *alias=(WattObjectAlias*)_libraries;
 		_libraries=(WTMCollectionOfLibrary*)[_registry objectWithUinstID:alias.uinstID];
 	}
-	if(!_libraries){
-		_libraries=[[WTMCollectionOfLibrary alloc] initInRegistry:_registry];
-	}
 	return _libraries;
 }
 
@@ -157,9 +148,6 @@
 	if([_rightsAssignees isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_rightsAssignees;
 		_rightsAssignees=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
-	}
-	if(!_rightsAssignees){
-		_rightsAssignees=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
 	}
 	return _rightsAssignees;
 }

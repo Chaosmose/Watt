@@ -63,9 +63,6 @@
 		WattObjectAlias *alias=(WattObjectAlias*)_localUsers;
 		_localUsers=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
 	}
-	if(!_localUsers){
-		_localUsers=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
-	}
 	return _localUsers;
 }
 
@@ -86,9 +83,6 @@
 	if([_packages isAnAlias]){
 		WattObjectAlias *alias=(WattObjectAlias*)_packages;
 		_packages=(WTMCollectionOfPackage*)[_registry objectWithUinstID:alias.uinstID];
-	}
-	if(!_packages){
-		_packages=[[WTMCollectionOfPackage alloc] initInRegistry:_registry];
 	}
 	return _packages;
 }
