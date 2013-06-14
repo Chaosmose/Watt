@@ -31,7 +31,7 @@
 
 
 - (instancetype)init{
-    self=[self initInRegistry:wattAPI.defaultRegistry];
+    self=[self initInRegistry:nil];
     if (self) {
         
     }
@@ -42,13 +42,14 @@
 - (instancetype)initInRegistry:(WattRegistry*)registry{
     self=[super init];
     if(self){
+        _wapi=[WattApi sharedInstance];
+        _uinstID=0;// no registration
         if(registry){
             _registry=registry;
-            _wapi=[WattApi sharedInstance];
-            _uinstID=0;// no registration
             [_registry registerObject:self];
         }else{
-            [NSException raise:@"Core" format:@"Attempt to init a WattObject with a Nil  registry"];
+            // The registry is nil
+            // Used for temp collection for example.
         }
     }
     return self;
@@ -67,64 +68,16 @@
 	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
     if(wtuinstID<[registry count]){
         instance=[registry objectWithUinstID:wtuinstID];
-        
-        if(includeChildren){
-            if([instance isKindOfClass:[WattCollectionOfObject class]]){
-                WattCollectionOfObject*castedInstance=(WattCollectionOfObject*)instance;
-                NSArray*collectionOfAlias=[aDictionary objectForKey:__collection__];
-                for (NSDictionary*aliasDictionary in collectionOfAlias) {
-                    if([aliasDictionary objectForKey:__uinstID__]){
-                        NSInteger aliasUinstID=[[aliasDictionary objectForKey:__uinstID__] integerValue];
-                        if(aliasUinstID<[registry count]){
-                            NSUInteger idx=[castedInstance indexOfObjectWithID:aliasUinstID];
-                            if(idx!=NSNotFound){
-                                WattObject *currentCollectionInstance=[castedInstance objectAtIndex:idx];
-                                if([currentCollectionInstance isAnAlias]){
-                                    WattObject *registredInstance=[registry objectWithUinstID:aliasUinstID];
-                                    if(registredInstance){
-                                        [castedInstance replaceObjectAtIndex:idx withObject:registredInstance];
-                                    }
-                                }// else we keep the instance.
-                            }else{
-                                WattObject *registredInstance=[registry objectWithUinstID:aliasUinstID];
-                                if(registredInstance){
-                                    [castedInstance addObject:registredInstance];
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        return instance;
     }
-    
-    
-    /*
-     if(includeChildren && instance){
-     // We already have an instance.
-     // We can be performing a second pass deserialization
-     id properties=[aDictionary objectForKey:__properties__];
-     if([properties isKindOfClass:[NSDictionary class]]){
-     for (NSString *key in properties) {
-     id dictionaryPropertyValue=[properties objectForKey:key];
-     id propertyValue=[self valueForKey:key];
-     if(dictionaryPropertyValue && !propertyValue){
-     
-     [self setValue:dictionaryPropertyValue forKey:key];
-     }
-     }
-     }else{
-     [NSException raise:@"WTMAttributesException" format:@"properties is not a NSDictionary"];
-     }
-     
-     }
-     */
+
 	if(!instance && [aDictionary objectForKey:__className__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-        if([aDictionary objectForKey:__isAliased__]){
+        if([aDictionary objectForKey:__isAliased__] || [theClass isSubclassOfClass:[WattCollectionOfObject class]]){
             // We keep the alias for runtime resolution.
             // The resolution will occur once in the kvc selector valueForKey:
-            instance=(WattObject*)[WattObjectAlias aliasFromDictionary:aDictionary];
+            instance=[WattObjectAlias aliasOrCollectionOfAliasFromDictionary:aDictionary
+                                                                  inRegistry:registry];
         }else{
             // We instantiate the class.
             id unCasted= [[theClass alloc] initInRegistry:registry];
@@ -132,10 +85,7 @@
             instance=(WattObject*)unCasted;
         }
 	}
-    
-    
-    
-    
+
 	return instance;
 }
 
@@ -232,7 +182,7 @@
     Class currentClass=[self class];
     NSUInteger count;
     // (!) IMPORTANT
-    // Each class has its own set o property in the inheritance chain.
+    // Each class has its own set of property in the inheritance chain.
     // So we do perform while "currentClass" has a superClass
     while (currentClass) {
         objc_property_t *propList = class_copyPropertyList(currentClass, &count);
@@ -260,6 +210,7 @@
                     [self setValue:instance forKey:key];
                 }
             }else if([value conformsToProtocol:@protocol(WattAliasing)]){
+                // Recursive alias resolution
                 [value resolveAliases];
             }
         }

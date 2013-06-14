@@ -158,5 +158,8 @@
 }
 */
 
+-(void)resolveAliases{
+    [super resolveAliases];
+}
 
 @end

@@ -1,5 +1,19 @@
+// This file is part of "Watt"
 //
-//  WTMCollectionOfModel.m
+// "Watt" is free software: you can redistribute it and/or modify
+// it under the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// "Watt" is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU LESSER GENERAL PUBLIC LICENSE for more details.
+//
+// You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
+// along with "Watt"  If not, see <http://www.gnu.org/licenses/>
+//
+//  WattCollectionOfObject.m
 //  PlayerSample
 //
 //  Created by Benoit Pereira da Silva on 17/05/13.
@@ -13,7 +27,7 @@
 @implementation WattCollectionOfObject
 
 - (instancetype)init{
-    self=[self initInRegistry:wattAPI.defaultRegistry];
+    self=[super init];
     if (self) {
         _collection=[NSMutableArray array];
     }
@@ -41,7 +55,6 @@
 	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
 		return;
 	}
-	
     NSArray *a=[aDictionary objectForKey:__collection__];
     for (NSDictionary*objectDictionary in a) {
         Class c=NSClassFromString([objectDictionary objectForKey:__className__]);
@@ -50,13 +63,7 @@
     }
 }
 
-+ (WattCollectionOfObject*)instanceFromDictionary:(NSDictionary *)aDictionary
-                                       inRegistry:(WattRegistry*)registry
-                                  includeChildren:(BOOL)includeChildren{
-	return (WattCollectionOfObject*)[WattObject instanceFromDictionary:aDictionary
-                                                     inRegistry:registry
-                                                includeChildren:includeChildren];
-}
+
 
 - (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -115,6 +122,10 @@
     [_collection addObject:anObject];
 }
 
+- (void)addAlias:(WattObjectAlias*)anAlias{
+    [_collection addObject:anAlias];
+}
+
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
 	[_collection insertObject:anObject atIndex:index];
 }
@@ -140,7 +151,6 @@
     return NO;
 }
 
-
 - (NSUInteger)indexOfObjectWithID:(NSUInteger)uinstID{
     NSUInteger i=0;
     for (WattObject*o in _collection) {
@@ -159,6 +169,15 @@
 
 - (NSUInteger)indexOfObject:(WattObject *)object{
    return [_collection indexOfObject:object];
+}
+
+
+- (NSString*)description{
+	NSMutableString *s=[NSMutableString string];
+    Class theClass=(_collection && [_collection count]>0)?[[_collection objectAtIndex:0] class]:[NSNull class];
+    [s appendFormat:@"Collection of %@\n",NSStringFromClass(theClass)];
+    [s appendFormat:@"With of %i members\n",_collection?[_collection count]:0];
+	return s;
 }
 
 @end

@@ -14,7 +14,7 @@
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
 //
-//  WTMObjectsRegister.h
+//  WattRegistry.h
 //  PlayerSample
 //
 //  Created by Benoit Pereira da Silva on 22/05/13.
@@ -48,10 +48,15 @@
 #pragma mark - runtime object graph register
 
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID;
-- (void)registerObject:(WattObject*)reference;
+- (void)registerObject:(WattObject*)reference;       // Generates a unique id + add the reference to the registry
 - (void)unRegisterObject:(WattObject*)reference;
 
-- (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix;
+
+// The id must be already set and not conflicting with existing uinstID
+- (void)addObject:(WattObject *)reference;
+
+
+- (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix returningRegistry:(WattRegistry*)registry;
 
 #pragma mark - 
 

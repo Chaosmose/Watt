@@ -40,9 +40,9 @@
 // @todo DOCUMENT the _auto getter.
 //
 
-- (void)viewDidLoad{
-    [super viewDidLoad];
-
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
     // 1- We create a Graph of object within a WattRegistry (r1)
     
     WattRegistry*r1=[[WattRegistry alloc] init];
@@ -57,17 +57,14 @@
     h.urlString=@"http://www.secouchermoinsbete.fr";
     [lib.members_auto addObject:h];
     
-    //WTLog(@"r1 : %@",r1);
-    
     //2- We serialize the registry R1 to a linear structure a1
-
     NSArray *a1=[r1 arrayRepresentation];
     WTLog(@"%i element(s) ",[a1 count]);
     for (NSDictionary*d in a1) {
         WTLog(@"%@|%@",[d objectForKey:__uinstID__],d);
     }
 
-    //3- We regenerate a new Registry from a1 by deserializing
+    //3- We generate a new Registry (r2) from a1 by deserializing
     WattRegistry*r2=[WattRegistry instanceFromArray:a1];
     WTLog(@"r2 : %@",r2);
     
@@ -78,19 +75,21 @@
     WTMLibrary*l2=[p2.libraries lastObject];
     WTMMember*m2=[l2.members lastObject];
     WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
-    
+    WTLog(@"objectWithUinstID:7 %@",[r2 objectWithUinstID:7]);
+ 
+
     /*
     
-    
 #warning not tested 
-    
+
     // Request a collection of members.
-    WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class] andPrefix:@"WTM"];
+    WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class] andPrefix:@"WTM" returningRegistry:nil];// You can use r2 as returningRegistry to save the result
     // Use the collection
     // ...
     WTLog(@"%@",members);
-    // And deregister the collection
-    [r2 unRegisterObject:members];
+    WTLog(@"%@",[members lastObject]);
+    // And unRegisterObject the collection if from the register if necessary
+    //[r2 unRegisterObject:members];
     
     
     
@@ -112,7 +111,8 @@
      
    
     [s2 localize];
-     */
+    
+    */
 
 }
 
@@ -127,12 +127,6 @@
     
     // With one lang dictionary
     [p langDictionaries_auto];
-    
-    //Will instanciate a new Collection if nil
-    //  WTMCollectionOfLangDictionary *ld=[[WTMCollectionOfLangDictionary alloc] initInRegistry:registry];
-    //  p.langDictionaries=ld;
-    //OR
-    //Will replace the alias with a live object.
     
     // Containing one library
     WTMLibrary*castLib=[[WTMLibrary alloc] initInRegistry:registry];

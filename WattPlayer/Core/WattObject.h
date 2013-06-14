@@ -79,9 +79,7 @@ __LINE__ ,\
 
 @protocol WattCoding <NSObject>
 @required
-+ (instancetype)instanceFromDictionary:(NSDictionary *)aDictionary
-                            inRegistry:(WattRegistry*)registry
-                       includeChildren:(BOOL)includeChildren;
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
 @end
@@ -105,7 +103,7 @@ __LINE__ ,\
 // You should normally not use those.
 // But WattCoding protocol constructor.
 
-// Uses WattApi.defaultRegistry
+// There is no registry
 - (instancetype)init; 
 
 // WattAliasing
@@ -116,7 +114,14 @@ __LINE__ ,\
 // If used twice will raise an exception "Attempt to re-identify an instance"
 - (void)identifyWithUinstId:(NSInteger)identifier;
 
+
+
+
 #pragma mark -
+
++ (instancetype)instanceFromDictionary:(NSDictionary *)aDictionary
+                            inRegistry:(WattRegistry*)registry
+                       includeChildren:(BOOL)includeChildren;
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 
@@ -129,6 +134,5 @@ __LINE__ ,\
 - (instancetype)localized; 
 - (void)localize;
 - (BOOL)hasBeenLocalized;
-
 
 @end

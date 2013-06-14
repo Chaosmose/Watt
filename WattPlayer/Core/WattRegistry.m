@@ -14,7 +14,7 @@
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
 //
-//  WTMObjectsRegister.m
+//  WattRegistry.m
 //  PlayerSample
 //
 //  Created by Benoit Pereira da Silva on 22/05/13.
@@ -29,7 +29,10 @@
 @interface WattRegistry (){
 }
 // Call the selector on all the members of the registry
--(void)performSelectorOnMembers:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait;
+-(void)performSelectorOnMembers:(SEL)aSelector
+                       onThread:(NSThread *)thr
+                     withObject:(id)arg
+                  waitUntilDone:(BOOL)wait;
 @end
 
 @implementation WattRegistry{
@@ -38,7 +41,6 @@
     NSMutableArray          *_history;
     NSArray                *__sortedKeys;
 }
-
 
 - (id)init{
     self=[super init];
@@ -62,36 +64,52 @@
 + (WattRegistry*)instanceFromArray:(NSArray*)array{
     WattRegistry *r=[[WattRegistry alloc] init];
     
-    // Double pass deserialization
-    //
-    // First pass   :  deserialize the registry with aliases
-    // Second pass  :  resolves the aliases and compute the caches (keys, etc)
-    
+    // Double step deserialization
     // This process prevent from using runtime aliases resolution.
-    // and allows circular referencing
+    // and allows circular referencing any object graph can be serialized.
+    // First step   :  deserializes the registry with member's aliases
+    // Second step  :  resolves the aliases (and the force the caches computation)
     
-    int i=0;
+    WTLog(@"Register");
+    // First step :
+    int i=1;
     for (NSDictionary *d in array) {
-        //WTLog(@"%i|ID->%@ %@",i,[d objectForKey:__uinstID__],[d objectForKey:__className__]);
-        WattObject *liveObject=[WattObject instanceFromDictionary:d inRegistry:r includeChildren:NO];
+        WattObject *liveObject=[WattObject instanceFromDictionary:d
+                                                    inRegistry:r
+                                              includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
+            WTLog(@"%i %@",i,liveObject);
         }
         i++;
     }
     
+    // Second step :
     [r performSelectorOnMembers:@selector(resolveAliases)
                        onThread:[NSThread currentThread]
-                     withObject:nil waitUntilDone:NO];
+                     withObject:nil
+                  waitUntilDone:YES];
     
     return r;
 }
 
--(void)performSelectorOnMembers:(SEL)aSelector onThread:(NSThread *)thr withObject:(id)arg waitUntilDone:(BOOL)wait{
+-(void)performSelectorOnMembers:(SEL)aSelector
+                       onThread:(NSThread *)thr
+                     withObject:(id)arg waitUntilDone:(BOOL)wait{
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
         WattObject*o=[_registry objectForKey:key];
-        [o performSelector:aSelector onThread:thr withObject:arg waitUntilDone:wait];
+        
+        WTLog(@"Resolving aliases on  %@",o);
+        
+        if(o && [o respondsToSelector:aSelector]){
+            [o performSelector:aSelector
+                  onThread:thr
+                withObject:arg
+             waitUntilDone:wait];
+        }else{
+            WTLog(@"%@ do not respond to %@",o,NSStringFromSelector(aSelector));
+        }
     }
 }
 
@@ -159,7 +177,6 @@
     }
 }
 
-
 - (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary{
     NSInteger uinstID=[[dictionary objectForKey:__uinstID__] integerValue];
     WattObject*o=[self objectWithUinstID:uinstID];
@@ -169,7 +186,6 @@
         return [WattObject instanceFromDictionary:dictionary inRegistry:self includeChildren:YES];
     }
 }
-
 
 
 #pragma runtime object graph identification
@@ -190,7 +206,7 @@
 }
 
 
-- (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix{
+- (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix returningRegistry:(WattRegistry*)registry{
     NSString *collectionClassName;
     NSString *baseClassName=[NSStringFromClass(theClass) stringByReplacingOccurrencesOfString:prefix withString:@""];
     if(prefix){
@@ -201,7 +217,7 @@
     Class collectionClass=NSClassFromString(collectionClassName);
     if(!collectionClass)
         collectionClass=[WattCollectionOfObject class];
-    WattCollectionOfObject*collection=[[collectionClass alloc ]initInRegistry:self];
+    WattCollectionOfObject*collection=[[collectionClass alloc ]initInRegistry:registry];
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
         WattObject*o=[_registry objectForKey:key];
@@ -219,10 +235,9 @@
 
 
 - (void)registerObject:(WattObject*)reference{
-    [self _invalidateSortedKeys];
     if(reference.uinstID==0){
         [reference identifyWithUinstId:[self _createAnUinstID]];
-        [_registry setValue:reference forKey:[self _keyFrom:reference.uinstID]];
+        [self addObject:reference];
     }else if(_uinstIDCounter>reference.uinstID){
         if(![[self objectWithUinstID:reference.uinstID] isEqual:reference]){
             [NSException raise:@"Registry" format:@"Identity missmatch"];
@@ -234,6 +249,19 @@
     }
 }
 
+
+- (void)addObject:(WattObject *)reference{
+    [self _invalidateSortedKeys];
+    if(reference.uinstID>0 && ![self objectWithUinstID:reference.uinstID]){
+        [_registry setValue:reference forKey:[self _keyFrom:reference.uinstID]];
+        _uinstIDCounter=MAX(reference.uinstID, _uinstIDCounter);
+    }else{
+        [NSException raise:@"Registry" format:@"Unsuccessfull attempt to add a reference"];
+    }
+ 
+}
+
+
 - (void)unRegisterObject:(WattObject*)reference{
     [self _invalidateSortedKeys];
     [_registry removeObjectForKey:[self _keyFrom:reference.uinstID]];
@@ -243,7 +271,7 @@
 - (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
     [s appendFormat:@"Registry with %i members\n\n",[self count]];
-    int i=0;
+    int i=1;
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
         WattObject*o=[_registry objectForKey:key];
