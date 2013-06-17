@@ -72,10 +72,8 @@
         WTLog(@"%@|%@",[d objectForKey:__uinstID__],d);
     }
     
-
-
     //3- We generate a new Registry (r2) from a1 by deserializing
-    WattRegistry*r2=[WattRegistry instanceFromArray:a1];
+    WattRegistry*r2=[WattRegistry instanceFromArray:a1 resolveAliases:YES];
     WTLog(@"r2 : %@",r2);
     
     //4- We  grab the root object uinstID==1

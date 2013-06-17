@@ -34,7 +34,7 @@
 
 // If you want serialize / deserialize a registry
 // Including fully decoupled object.
-+ (WattRegistry*)instanceFromArray:(NSArray*)array;
++ (WattRegistry*)instanceFromArray:(NSArray*)array resolveAliases:(BOOL)resolveAliases;
 - (NSArray*)arrayRepresentation;
 
 // If you want just sub graphs

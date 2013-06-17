@@ -60,14 +60,15 @@
 // If you want serialize / deserialize the whole registry
 
 
-+ (WattRegistry*)instanceFromArray:(NSArray*)array{
++ (WattRegistry*)instanceFromArray:(NSArray*)array resolveAliases:(BOOL)resolveAliases{
     WattRegistry *r=[[WattRegistry alloc] init];
     
     // Double step deserialization
     // and allows circular referencing any object graph can be serialized.
     // First step   :  deserializes the registry with member's aliases
     // Second step  :  resolves the aliases (and the force the caches computation)
-    // The second step is optionnal (the generated getters can proceed to dealiasing (runtime aliases resolution)
+    // The second step is optionnal as the generated getters 
+    //  can proceed to dealiasing (runtime aliases resolution)
     
     WTLog(@"Register");
     // First step :
@@ -79,21 +80,20 @@
         if(liveObject){
             [r registerObject:liveObject];
             if([liveObject isKindOfClass:NSClassFromString(@"WTMShelf")]){
-              WTLog(@"%i %@",i,liveObject);
+                WTLog(@"%i %@",i,liveObject);
             }
-  
+            
         }
         i++;
     }
     
-
-    // Second step :
-    [r performSelectorOnMembers:@selector(resolveAliases)
-                       onThread:[NSThread currentThread]
-                     withObject:nil
-                  waitUntilDone:YES];
-
-    
+    if(resolveAliases){
+        // Second step :
+        [r performSelectorOnMembers:@selector(resolveAliases)
+                           onThread:[NSThread currentThread]
+                         withObject:nil
+                      waitUntilDone:YES];
+    }
     return r;
 }
 
