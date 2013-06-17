@@ -38,7 +38,6 @@
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array;
 
 - (void)addObject:(WattObject*)anObject;
-- (void)addAlias:(WattObjectAlias*)anAlias;
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index;
 - (void)removeLastObject;
 - (void)removeObjectAtIndex:(NSUInteger)index;

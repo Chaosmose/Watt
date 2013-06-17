@@ -21,7 +21,6 @@
 //
 
 #import "WattCollectionOfObject.h"
-#import "WattObjectAlias.h"
 #import "WattApi.h"
 
 @implementation WattCollectionOfObject
@@ -75,7 +74,7 @@
             [array addObject:oDictionary];
         }else{
             // We store an alias.
-            NSDictionary*oDictionary=[WattObjectAlias aliasDictionaryRepresentationFrom:o];
+            NSDictionary*oDictionary=[o aliasDictionaryRepresentation];
             [array addObject:oDictionary];
         }
     }
@@ -90,8 +89,7 @@
 - (WattObject *)objectAtIndex:(NSUInteger)index{
     WattObject*o=[_collection objectAtIndex:index];
     if([o isAnAlias]){
-        WattObjectAlias *alias=(WattObjectAlias*)o;
-        o=[_registry objectWithUinstID:alias.uinstID];
+        o=[_registry objectWithUinstID:o.uinstID];
         [_collection replaceObjectAtIndex:index withObject:o];
     }
     return o;
@@ -100,8 +98,7 @@
 - (WattObject *)lastObject{
     WattObject*o=[_collection lastObject];
     if([o isAnAlias]){
-        WattObjectAlias *alias=(WattObjectAlias*)o;
-        o=[_registry objectWithUinstID:alias.uinstID];
+        o=[_registry objectWithUinstID:o.uinstID];
         [_collection replaceObjectAtIndex:[_collection count]-1 withObject:o];
     }
     return o;
@@ -110,9 +107,8 @@
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array{
     WattObject*o=[_collection firstObjectCommonWithArray:array];
     if([o isAnAlias]){
-        WattObjectAlias *alias=(WattObjectAlias*)o;
         NSInteger index=[_collection indexOfObject:o];
-        o=[_registry objectWithUinstID:alias.uinstID];
+        o=[_registry objectWithUinstID:o.uinstID];
         [_collection replaceObjectAtIndex:index withObject:o];
     }
     return o;
@@ -122,9 +118,6 @@
     [_collection addObject:anObject];
 }
 
-- (void)addAlias:(WattObjectAlias*)anAlias{
-    [_collection addObject:anAlias];
-}
 
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
 	[_collection insertObject:anObject atIndex:index];
@@ -173,6 +166,8 @@
 
 
 - (NSString*)description{
+    if([self isAnAlias])
+        return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
     Class theClass=(_collection && [_collection count]>0)?[[_collection objectAtIndex:0] class]:[NSNull class];
     [s appendFormat:@"Collection of %@\n",NSStringFromClass(theClass)];

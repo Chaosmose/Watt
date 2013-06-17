@@ -43,8 +43,10 @@
 
 - (WTMCollectionOfGroup*)groups{
 	if([_groups isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_groups;
-		_groups=(WTMCollectionOfGroup*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_groups.uinstID];
+		if(o){
+			_groups=o;
+		}
 	}
 	return _groups;
 }
@@ -65,6 +67,8 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    if([self isAnAlias])
+        return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.identity forKey:@"identity"];
@@ -73,7 +77,7 @@
 		if(includeChildren){
 			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.groups] forKey:@"groups"];
+			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"groups"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -82,7 +86,10 @@
     return wrapper;
 }
 
+
 - (NSString*)description{
+    if([self isAnAlias])
+        return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"identity : %@\n",self.identity];
@@ -90,35 +97,5 @@
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	return s;
 }
-
-/*
-// @todo implement the default values? 
-- (void)setNilValueForKey:(NSString *)theKey{
-    if ([theKey isEqualToString:@"age"]) {
-        [self setValue:[NSNumber numberWithFloat:0.0] forKey:@"age"];
-    } else
-        [super setNilValueForKey:theKey];
-}
-
-//@todo implement the validation process
-- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
- 
-    // The name must not be nil, and must be at least two characters long.
-    if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {
-        if (outError != NULL) {
-            NSString *errorString = NSLocalizedString(
-                    @"A Person's name must be at least two characters long",
-                    @"validation: Person, too short name error");
-            NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
-            *outError = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN"
-                                                    code:1//PERSON_INVALID_NAME_CODE
-                                                userInfo:userInfoDict];
-        }
-        return NO;
-    }
-    return YES;
-}
-*/
-
 
 @end

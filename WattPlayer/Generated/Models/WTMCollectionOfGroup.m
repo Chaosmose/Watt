@@ -35,6 +35,8 @@
 
 
 - (NSString*)description{
+    if([self isAnAlias])
+        return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
     [s appendFormat:@"Collection of %@\n",@"WTMGroup"];
     [s appendFormat:@"With of %i members\n",[_collection count]];

@@ -49,6 +49,8 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    if([self isAnAlias])
+        return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
@@ -62,7 +64,10 @@
     return wrapper;
 }
 
+
 - (NSString*)description{
+    if([self isAnAlias])
+        return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
@@ -72,35 +77,5 @@
 	[s appendFormat:@"uid : %@\n",self.uid];
 	return s;
 }
-
-/*
-// @todo implement the default values? 
-- (void)setNilValueForKey:(NSString *)theKey{
-    if ([theKey isEqualToString:@"age"]) {
-        [self setValue:[NSNumber numberWithFloat:0.0] forKey:@"age"];
-    } else
-        [super setNilValueForKey:theKey];
-}
-
-//@todo implement the validation process
-- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
- 
-    // The name must not be nil, and must be at least two characters long.
-    if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {
-        if (outError != NULL) {
-            NSString *errorString = NSLocalizedString(
-                    @"A Person's name must be at least two characters long",
-                    @"validation: Person, too short name error");
-            NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
-            *outError = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN"
-                                                    code:1//PERSON_INVALID_NAME_CODE
-                                                userInfo:userInfoDict];
-        }
-        return NO;
-    }
-    return YES;
-}
-*/
-
 
 @end

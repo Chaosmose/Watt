@@ -73,8 +73,10 @@
 
 - (WTMCollectionOfActivity*)activities{
 	if([_activities isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_activities;
-		_activities=(WTMCollectionOfActivity*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_activities.uinstID];
+		if(o){
+			_activities=o;
+		}
 	}
 	return _activities;
 }
@@ -94,8 +96,10 @@
 
 - (WTMCollectionOfLangDictionary*)langDictionaries{
 	if([_langDictionaries isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_langDictionaries;
-		_langDictionaries=(WTMCollectionOfLangDictionary*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_langDictionaries.uinstID];
+		if(o){
+			_langDictionaries=o;
+		}
 	}
 	return _langDictionaries;
 }
@@ -115,8 +119,10 @@
 
 - (WTMCollectionOfLibrary*)libraries{
 	if([_libraries isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_libraries;
-		_libraries=(WTMCollectionOfLibrary*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_libraries.uinstID];
+		if(o){
+			_libraries=o;
+		}
 	}
 	return _libraries;
 }
@@ -136,8 +142,10 @@
 
 - (WTMCollectionOfUser*)rightsAssignees{
 	if([_rightsAssignees isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_rightsAssignees;
-		_rightsAssignees=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_rightsAssignees.uinstID];
+		if(o){
+			_rightsAssignees=o;
+		}
 	}
 	return _rightsAssignees;
 }
@@ -158,6 +166,8 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    if([self isAnAlias])
+        return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
@@ -172,28 +182,28 @@
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.activities] forKey:@"activities"];
+			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"activities"];
 		}
 	}
 	if(self.langDictionaries){
 		if(includeChildren){
 			[dictionary setValue:[self.langDictionaries dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionaries"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.langDictionaries] forKey:@"langDictionaries"];
+			[dictionary setValue:[self.langDictionaries aliasDictionaryRepresentation] forKey:@"langDictionaries"];
 		}
 	}
 	if(self.libraries){
 		if(includeChildren){
 			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"libraries"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.libraries] forKey:@"libraries"];
+			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"libraries"];
 		}
 	}
 	if(self.rightsAssignees){
 		if(includeChildren){
 			[dictionary setValue:[self.rightsAssignees dictionaryRepresentationWithChildren:includeChildren] forKey:@"rightsAssignees"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.rightsAssignees] forKey:@"rightsAssignees"];
+			[dictionary setValue:[self.rightsAssignees aliasDictionaryRepresentation] forKey:@"rightsAssignees"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -202,7 +212,10 @@
     return wrapper;
 }
 
+
 - (NSString*)description{
+    if([self isAnAlias])
+        return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
@@ -219,35 +232,5 @@
 	[s appendFormat:@"rightsAssignees : %@\n",NSStringFromClass([self.rightsAssignees class])];
 	return s;
 }
-
-/*
-// @todo implement the default values? 
-- (void)setNilValueForKey:(NSString *)theKey{
-    if ([theKey isEqualToString:@"age"]) {
-        [self setValue:[NSNumber numberWithFloat:0.0] forKey:@"age"];
-    } else
-        [super setNilValueForKey:theKey];
-}
-
-//@todo implement the validation process
-- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
- 
-    // The name must not be nil, and must be at least two characters long.
-    if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {
-        if (outError != NULL) {
-            NSString *errorString = NSLocalizedString(
-                    @"A Person's name must be at least two characters long",
-                    @"validation: Person, too short name error");
-            NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
-            *outError = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN"
-                                                    code:1//PERSON_INVALID_NAME_CODE
-                                                userInfo:userInfoDict];
-        }
-        return NO;
-    }
-    return YES;
-}
-*/
-
 
 @end

@@ -23,7 +23,6 @@
 
 #import "WattRegistry.h"
 #import "WattObject.h"
-#import "WattObjectAlias.h"
 #import "WattCollectionOfObject.h"
 
 @interface WattRegistry (){
@@ -65,30 +64,35 @@
     WattRegistry *r=[[WattRegistry alloc] init];
     
     // Double step deserialization
-    // This process prevent from using runtime aliases resolution.
     // and allows circular referencing any object graph can be serialized.
     // First step   :  deserializes the registry with member's aliases
     // Second step  :  resolves the aliases (and the force the caches computation)
+    // The second step is optionnal (the generated getters can proceed to dealiasing (runtime aliases resolution)
     
     WTLog(@"Register");
     // First step :
     int i=1;
     for (NSDictionary *d in array) {
         WattObject *liveObject=[WattObject instanceFromDictionary:d
-                                                    inRegistry:r
-                                              includeChildren:NO];
+                                                       inRegistry:r
+                                                  includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
-            WTLog(@"%i %@",i,liveObject);
+            if([liveObject isKindOfClass:NSClassFromString(@"WTMShelf")]){
+              WTLog(@"%i %@",i,liveObject);
+            }
+  
         }
         i++;
     }
     
+
     // Second step :
     [r performSelectorOnMembers:@selector(resolveAliases)
                        onThread:[NSThread currentThread]
                      withObject:nil
                   waitUntilDone:YES];
+
     
     return r;
 }
@@ -98,15 +102,15 @@
                      withObject:(id)arg waitUntilDone:(BOOL)wait{
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
-        WattObject*o=[_registry objectForKey:key];
+        id o=[_registry objectForKey:key];
         
         WTLog(@"Resolving aliases on  %@",o);
         
         if(o && [o respondsToSelector:aSelector]){
             [o performSelector:aSelector
-                  onThread:thr
-                withObject:arg
-             waitUntilDone:wait];
+                      onThread:thr
+                    withObject:arg
+                 waitUntilDone:wait];
         }else{
             WTLog(@"%@ do not respond to %@",o,NSStringFromSelector(aSelector));
         }
@@ -170,7 +174,7 @@
         }
     }
     if(inHistory){
-        return [WattObjectAlias aliasDictionaryRepresentationFrom:object];
+        return [object aliasDictionaryRepresentation];
     }else{
         [_history addObject:@(object.uinstID)];
         return [object dictionaryRepresentationWithChildren:YES];
@@ -198,7 +202,7 @@
 
 
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID{
-    if([_registry count]>uinstID){
+    if(uinstID<=[_registry count]){
         return [_registry objectForKey:[self _keyFrom:uinstID]];
     }else{
         return nil;
@@ -235,17 +239,21 @@
 
 
 - (void)registerObject:(WattObject*)reference{
-    if(reference.uinstID==0){
-        [reference identifyWithUinstId:[self _createAnUinstID]];
-        [self addObject:reference];
-    }else if(_uinstIDCounter>reference.uinstID){
-        if(![[self objectWithUinstID:reference.uinstID] isEqual:reference]){
-            [NSException raise:@"Registry" format:@"Identity missmatch"];
+    if(![reference isAnAlias]){
+        if(reference.uinstID==0){
+            [reference identifyWithUinstId:[self _createAnUinstID]];
+            [self addObject:reference];
+        }else if(_uinstIDCounter>reference.uinstID){
+            if(![[self objectWithUinstID:reference.uinstID] isEqual:reference]){
+                [NSException raise:@"Registry" format:@"Identity missmatch"];
+            }
+        }else{
+#if  !WT_ALLOW_MULTIPLE_REGISTRATION
+            [NSException raise:@"Registry" format:@"Identity overflow"];
+#endif
         }
     }else{
-#if  !WT_ALLOW_MULTIPLE_REGISTRATION
-        [NSException raise:@"Registry" format:@"Identity overflow"];
-#endif
+        [NSException raise:@"Registry" format:@"Attempt to register an alias"];
     }
 }
 
@@ -258,7 +266,7 @@
     }else{
         [NSException raise:@"Registry" format:@"Unsuccessfull attempt to add a reference"];
     }
- 
+    
 }
 
 

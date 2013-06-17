@@ -47,7 +47,8 @@
     
     WattRegistry*r1=[[WattRegistry alloc] init];
     WTMShelf *s=[self _createAShelfInRegistry:r1];
-    WTMPackage*p=[s.packages_auto lastObject];
+    s.comment=@"Comment #1 for test purposes";
+    WTMPackage*p=[s.packages lastObject];
     p.name=@"Package A";
     
     WTMLibrary*lib=[p.libraries_auto lastObject];
@@ -57,18 +58,26 @@
     h.urlString=@"http://www.secouchermoinsbete.fr";
     [lib.members_auto addObject:h];
     
+    WTMShelf *s1=(WTMShelf*)[r1 objectWithUinstID:1];
+    WTMPackage*p1=[s1.packages lastObject];
+    WTMLibrary*l1=[p1.libraries lastObject];
+    WTMMember*m1=[l1.members lastObject];
+    WTLog(@"p1:%@ l1:%@ m1:%@ ",p1,l1,m1);
+    
+
     //2- We serialize the registry R1 to a linear structure a1
     NSArray *a1=[r1 arrayRepresentation];
     WTLog(@"%i element(s) ",[a1 count]);
     for (NSDictionary*d in a1) {
         WTLog(@"%@|%@",[d objectForKey:__uinstID__],d);
     }
+    
+
 
     //3- We generate a new Registry (r2) from a1 by deserializing
     WattRegistry*r2=[WattRegistry instanceFromArray:a1];
     WTLog(@"r2 : %@",r2);
     
-
     //4- We  grab the root object uinstID==1
     WTMShelf *s2=(WTMShelf*)[r2 objectWithUinstID:1];
     WTMPackage*p2=[s2.packages lastObject];
@@ -76,7 +85,6 @@
     WTMMember*m2=[l2.members lastObject];
     WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
     WTLog(@"objectWithUinstID:7 %@",[r2 objectWithUinstID:7]);
- 
 
     /*
     

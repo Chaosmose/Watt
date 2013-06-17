@@ -23,7 +23,6 @@
 
 #import "WattApi.h"
 #import "WattObject.h"
-#import "WattObjectAlias.h"
 #import "WattCollectionOfObject.h"
 #import "WattRegistry.h"
 

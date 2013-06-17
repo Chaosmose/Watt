@@ -45,8 +45,6 @@
 		E5DE3ADD174CF797005937DC /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */; };
 		E5DE3AE0174CF797005937DC /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD5174CF797005937DC /* WattObject.m */; };
 		E5DE3AE1174CF797005937DC /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD5174CF797005937DC /* WattObject.m */; };
-		E5DE3AE2174CF797005937DC /* WattObjectAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD7174CF797005937DC /* WattObjectAlias.m */; };
-		E5DE3AE3174CF797005937DC /* WattObjectAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD7174CF797005937DC /* WattObjectAlias.m */; };
 		E5DE3AE4174CF797005937DC /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD9174CF797005937DC /* WattRegistry.m */; };
 		E5DE3AE5174CF797005937DC /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD9174CF797005937DC /* WattRegistry.m */; };
 		E5DE3B2F174CFCF9005937DC /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AE9174CFCF9005937DC /* WTMAction.m */; };
@@ -155,8 +153,6 @@
 		E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfObject.m; sourceTree = "<group>"; };
 		E5DE3AD4174CF797005937DC /* WattObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattObject.h; sourceTree = "<group>"; };
 		E5DE3AD5174CF797005937DC /* WattObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattObject.m; sourceTree = "<group>"; };
-		E5DE3AD6174CF797005937DC /* WattObjectAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattObjectAlias.h; sourceTree = "<group>"; };
-		E5DE3AD7174CF797005937DC /* WattObjectAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattObjectAlias.m; sourceTree = "<group>"; };
 		E5DE3AD8174CF797005937DC /* WattRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattRegistry.h; sourceTree = "<group>"; };
 		E5DE3AD9174CF797005937DC /* WattRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattRegistry.m; sourceTree = "<group>"; };
 		E5DE3AE8174CFCF9005937DC /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
@@ -373,8 +369,6 @@
 				E5DE3AD5174CF797005937DC /* WattObject.m */,
 				E5DE3AD0174CF797005937DC /* WattCollectionOfObject.h */,
 				E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */,
-				E5DE3AD6174CF797005937DC /* WattObjectAlias.h */,
-				E5DE3AD7174CF797005937DC /* WattObjectAlias.m */,
 				E5DE3AD8174CF797005937DC /* WattRegistry.h */,
 				E5DE3AD9174CF797005937DC /* WattRegistry.m */,
 			);
@@ -594,7 +588,6 @@
 				E5DE3ADB174CF797005937DC /* WattApi.m in Sources */,
 				E5DE3ADD174CF797005937DC /* WattCollectionOfObject.m in Sources */,
 				E5DE3AE1174CF797005937DC /* WattObject.m in Sources */,
-				E5DE3AE3174CF797005937DC /* WattObjectAlias.m in Sources */,
 				E5DE3AE5174CF797005937DC /* WattRegistry.m in Sources */,
 				E5DE3B30174CFCF9005937DC /* WTMAction.m in Sources */,
 				E5DE3B32174CFCF9005937DC /* WTMActivity.m in Sources */,
@@ -648,7 +641,6 @@
 				E5DE3ADA174CF797005937DC /* WattApi.m in Sources */,
 				E5DE3ADC174CF797005937DC /* WattCollectionOfObject.m in Sources */,
 				E5DE3AE0174CF797005937DC /* WattObject.m in Sources */,
-				E5DE3AE2174CF797005937DC /* WattObjectAlias.m in Sources */,
 				E5DE3AE4174CF797005937DC /* WattRegistry.m in Sources */,
 				E5DE3B2F174CFCF9005937DC /* WTMAction.m in Sources */,
 				E5DE3B31174CFCF9005937DC /* WTMActivity.m in Sources */,

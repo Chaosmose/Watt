@@ -70,13 +70,6 @@ __LINE__ ,\
 
 #import "WattRegistry.h"
 
-@protocol WattAliasing <NSObject>
-@required
-- (BOOL)isAnAlias;
-- (instancetype)initInRegistry:(WattRegistry*)registry;
-- (void)resolveAliases;
-@end
-
 @protocol WattCoding <NSObject>
 @required
 
@@ -85,7 +78,7 @@ __LINE__ ,\
 @end
 
 
-@interface WattObject : NSObject<WattAliasing,WattCoding>{
+@interface WattObject : NSObject<WattCoding>{
     @private
     NSString *_currentLocale;           // The locale that has been used for localization
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
@@ -93,6 +86,7 @@ __LINE__ ,\
     NSInteger _uinstID;
     @protected
     WattRegistry*_registry;
+    BOOL _isAnAlias;
 }
 
 #pragma mark - registry
@@ -100,14 +94,11 @@ __LINE__ ,\
 @property (readonly)NSInteger uinstID;
 @property (readonly)WattRegistry*registry;
 
-// You should normally not use those.
-// But WattCoding protocol constructor.
+// You should normally use only initInRegistry directly
 
-// There is no registry
 - (instancetype)init; 
-
-// WattAliasing
-//- (instancetype)initInRegistry:(WattRegistry*)registry;
+- (instancetype)initInRegistry:(WattRegistry*)registry;
+- (instancetype)initAsAliasWithidentifier:(NSInteger)identifier; // instanciate an alias 
 
 // Do not call directly!
 // This selector is used during initialization.
@@ -115,7 +106,13 @@ __LINE__ ,\
 - (void)identifyWithUinstId:(NSInteger)identifier;
 
 
+#pragma mark  Aliasing 
 
+- (BOOL)isAnAlias;
+- (void)resolveAliases;
+
+- (NSDictionary *)aliasDictionaryRepresentation;
+- (NSString*)aliasDescription;
 
 #pragma mark -
 

@@ -50,8 +50,10 @@
 
 - (WTMCollectionOfUser*)localUsers{
 	if([_localUsers isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_localUsers;
-		_localUsers=(WTMCollectionOfUser*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_localUsers.uinstID];
+		if(o){
+			_localUsers=o;
+		}
 	}
 	return _localUsers;
 }
@@ -71,8 +73,10 @@
 
 - (WTMCollectionOfPackage*)packages{
 	if([_packages isAnAlias]){
-		WattObjectAlias *alias=(WattObjectAlias*)_packages;
-		_packages=(WTMCollectionOfPackage*)[_registry objectWithUinstID:alias.uinstID];
+		id o=[_registry objectWithUinstID:_packages.uinstID];
+		if(o){
+			_packages=o;
+		}
 	}
 	return _packages;
 }
@@ -93,6 +97,8 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    if([self isAnAlias])
+        return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
@@ -102,14 +108,14 @@
 		if(includeChildren){
 			[dictionary setValue:[self.localUsers dictionaryRepresentationWithChildren:includeChildren] forKey:@"localUsers"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.localUsers] forKey:@"localUsers"];
+			[dictionary setValue:[self.localUsers aliasDictionaryRepresentation] forKey:@"localUsers"];
 		}
 	}
 	if(self.packages){
 		if(includeChildren){
 			[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
 		}else{
-			[dictionary setValue:[WattObjectAlias aliasDictionaryRepresentationFrom:self.packages] forKey:@"packages"];
+			[dictionary setValue:[self.packages aliasDictionaryRepresentation] forKey:@"packages"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -118,7 +124,10 @@
     return wrapper;
 }
 
+
 - (NSString*)description{
+    if([self isAnAlias])
+        return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
@@ -127,39 +136,6 @@
 	[s appendFormat:@"localUsers : %@\n",NSStringFromClass([self.localUsers class])];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
 	return s;
-}
-
-/*
-// @todo implement the default values? 
-- (void)setNilValueForKey:(NSString *)theKey{
-    if ([theKey isEqualToString:@"age"]) {
-        [self setValue:[NSNumber numberWithFloat:0.0] forKey:@"age"];
-    } else
-        [super setNilValueForKey:theKey];
-}
-
-//@todo implement the validation process
-- (BOOL)validateName:(id *)ioValue error:(NSError * __autoreleasing *)outError{
- 
-    // The name must not be nil, and must be at least two characters long.
-    if ((*ioValue == nil) || ([(NSString *)*ioValue length] < 2)) {
-        if (outError != NULL) {
-            NSString *errorString = NSLocalizedString(
-                    @"A Person's name must be at least two characters long",
-                    @"validation: Person, too short name error");
-            NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
-            *outError = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN"
-                                                    code:1//PERSON_INVALID_NAME_CODE
-                                                userInfo:userInfoDict];
-        }
-        return NO;
-    }
-    return YES;
-}
-*/
-
--(void)resolveAliases{
-    [super resolveAliases];
 }
 
 @end

@@ -21,7 +21,6 @@
 //
 
 #import "WattObject.h"
-#import "WattObjectAlias.h"
 #import "WattCollectionOfObject.h"
 #import "WattApi.h"
 #import <objc/runtime.h>
@@ -38,6 +37,15 @@
     return self;
 }
 
+- (instancetype)initAsAliasWithidentifier:(NSInteger)identifier{
+    self=[self initInRegistry:nil];
+    if (self) {
+        _uinstID=identifier;
+        _isAnAlias=YES;
+    }
+    return self;
+}
+
 
 - (instancetype)initInRegistry:(WattRegistry*)registry{
     self=[super init];
@@ -47,16 +55,18 @@
         if(registry){
             _registry=registry;
             [_registry registerObject:self];
+            _isAnAlias=NO;
         }else{
             // The registry is nil
             // Used for temp collection for example.
+            // Or for aliases.
         }
     }
     return self;
 }
 
 - (BOOL)isAnAlias{
-    return NO;
+    return _isAnAlias;
 }
 
 
@@ -73,16 +83,12 @@
 
 	if(!instance && [aDictionary objectForKey:__className__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-        if([aDictionary objectForKey:__isAliased__] || [theClass isSubclassOfClass:[WattCollectionOfObject class]]){
-            // We keep the alias for runtime resolution.
-            // The resolution will occur once in the kvc selector valueForKey:
-            instance=[WattObjectAlias aliasOrCollectionOfAliasFromDictionary:aDictionary
-                                                                  inRegistry:registry];
+        if([aDictionary objectForKey:__isAliased__] && [[aDictionary objectForKey:__isAliased__] boolValue]){
+                instance=[[theClass alloc] initAsAliasWithidentifier:wtuinstID];
         }else{
             // We instantiate the class.
-            id unCasted= [[theClass alloc] initInRegistry:registry];
-            [unCasted setAttributesFromDictionary:aDictionary];
-            instance=(WattObject*)unCasted;
+            instance= [[theClass alloc] initInRegistry:registry];
+            [instance setAttributesFromDictionary:aDictionary];
         }
 	}
 
@@ -201,7 +207,8 @@
 
 // Attempt to resolve the aliases
 - (void)resolveAliases{
-    for (NSString*key in [self allPropertiesName]) {
+    NSArray *p=[self allPropertiesName];
+    for (NSString*key in p) {
         id value=[self valueForKey:key];
         if(value){
             if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
@@ -209,7 +216,7 @@
                 if(instance){
                     [self setValue:instance forKey:key];
                 }
-            }else if([value conformsToProtocol:@protocol(WattAliasing)]){
+            }else if([value respondsToSelector:@selector(resolveAliases)]){
                 // Recursive alias resolution
                 [value resolveAliases];
             }
@@ -218,22 +225,18 @@
 }
 
 
+#pragma mark - alias mode 
 
-/*
- // KVC aliasing
- // We dynamicly resolve the reference.
- - (id)valueForKey:(NSString *)key{
- id<WattAliasing> value =[super valueForKey:key];
- // isAnAlias is a native method with no reflexion.
- if([value isAnAlias]){
- WattObjectAlias *alias=(WattObjectAlias*)value;
- id reference=[_registry objectWithUinstID:alias.uinstID];
- if(reference){
- return reference;
- }
- }
- return value;
- }
-*/
+- (NSDictionary *)aliasDictionaryRepresentation{
+	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    [wrapper setObject:[NSNumber numberWithBool:YES] forKey:__isAliased__];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+- (NSString*)aliasDescription{
+    return [NSString stringWithFormat:@"Alias of %@(#%i)",NSStringFromClass([self class]),self.uinstID];
+}
 
 @end

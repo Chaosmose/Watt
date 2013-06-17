@@ -20,7 +20,6 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 
-#import "WattObjectAlias.h"
 #import "WattObject.h"
 
 @interface WTMLangDictionary:WattObject<WattCoding>{
