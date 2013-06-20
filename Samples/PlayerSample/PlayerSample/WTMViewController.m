@@ -55,7 +55,7 @@
     lib.name=@"First Library";
     
     WTMHyperlink*h=[[WTMHyperlink alloc] initInRegistry:r1];
-    h.urlString=@"http://www.secouchermoinsbete.fr";
+    h.urlString=@"http://www.pereira-da-silva.com";
     [lib.members_auto addObject:h];
     
     WTMShelf *s1=(WTMShelf*)[r1 objectWithUinstID:1];
@@ -84,20 +84,19 @@
     WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
     WTLog(@"objectWithUinstID:7 %@",[r2 objectWithUinstID:7]);
 
-    /*
     
-#warning not tested 
+    // OTHER ATTEMPT : 
 
     // Request a collection of members.
-    WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class] andPrefix:@"WTM" returningRegistry:nil];// You can use r2 as returningRegistry to save the result
+    WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class]
+                                              andPrefix:@"WTM"
+                                      returningRegistry:nil];// You can use r2 as returningRegistry to save the result
     // Use the collection
     // ...
     WTLog(@"%@",members);
     WTLog(@"%@",[members lastObject]);
     // And unRegisterObject the collection if from the register if necessary
     //[r2 unRegisterObject:members];
-    
-    
     
     
     // ANY WattObject should be unRegisterObject to purge it from its register.
@@ -118,7 +117,7 @@
    
     [s2 localize];
     
-    */
+
 
 }
 
