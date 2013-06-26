@@ -20,6 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMActivity.h" 
+#import "WTMPicture.h"
 #import "WTMCollectionOfScene.h"
 
 @implementation WTMActivity 
@@ -34,6 +35,7 @@
 @synthesize shortName=_shortName;
 @synthesize title=_title;
 @synthesize uid=_uid;
+@synthesize picture=_picture;
 @synthesize scenes=_scenes;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -57,6 +59,8 @@
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"uid"]) {
 		[super setValue:value forKey:@"uid"];
+	} else if ([key isEqualToString:@"picture"]) {
+		[super setValue:[WTMPicture instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"scenes"]) {
 		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scenes"];
 	} else {
@@ -64,6 +68,29 @@
 	}
 }
 
+
+- (WTMPicture*)picture{
+	if([_picture isAnAlias]){
+		id o=[_registry objectWithUinstID:_picture.uinstID];
+		if(o){
+			_picture=o;
+		}
+	}
+	return _picture;
+}
+
+
+- (WTMPicture*)picture_auto{
+	_picture=[self picture];
+	if(!_picture){
+		_picture=[[WTMPicture alloc] initInRegistry:_registry];
+	}
+	return _picture;
+}
+
+- (void)setPicture:(WTMPicture*)picture{
+	_picture=picture;
+}
 
 - (WTMCollectionOfScene*)scenes{
 	if([_scenes isAnAlias]){
@@ -105,6 +132,13 @@
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	[dictionary setValue:self.uid forKey:@"uid"];
+	if(self.picture){
+		if(includeChildren){
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+		}else{
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
+		}
+	}
 	if(self.scenes){
 		if(includeChildren){
 			[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"scenes"];
@@ -134,6 +168,7 @@
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
 	return s;
 }

@@ -39,6 +39,8 @@
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
 		E5C5D94A174671F500A6A46F /* WattMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D949174671F500A6A46F /* WattMPackager.m */; };
+		E5DAA111177A000D00F456C2 /* WTMPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAA110177A000D00F456C2 /* WTMPicture.m */; };
+		E5DAA12A177A083900F456C2 /* WTMPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DAA110177A000D00F456C2 /* WTMPicture.m */; };
 		E5DE3ADA174CF797005937DC /* WattApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3ACF174CF797005937DC /* WattApi.m */; };
 		E5DE3ADB174CF797005937DC /* WattApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3ACF174CF797005937DC /* WattApi.m */; };
 		E5DE3ADC174CF797005937DC /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */; };
@@ -147,6 +149,8 @@
 		E5C5D9461746719200A6A46F /* WTMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
 		E5C5D948174671F500A6A46F /* WattMPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattMPackager.h; sourceTree = "<group>"; };
 		E5C5D949174671F500A6A46F /* WattMPackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattMPackager.m; sourceTree = "<group>"; };
+		E5DAA10F177A000D00F456C2 /* WTMPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPicture.h; sourceTree = "<group>"; };
+		E5DAA110177A000D00F456C2 /* WTMPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPicture.m; sourceTree = "<group>"; };
 		E5DE3ACE174CF797005937DC /* WattApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattApi.h; sourceTree = "<group>"; };
 		E5DE3ACF174CF797005937DC /* WattApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattApi.m; sourceTree = "<group>"; };
 		E5DE3AD0174CF797005937DC /* WattCollectionOfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfObject.h; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 		E5DE3AE7174CFCF9005937DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E5DAA10F177A000D00F456C2 /* WTMPicture.h */,
+				E5DAA110177A000D00F456C2 /* WTMPicture.m */,
 				E5DE3AE8174CFCF9005937DC /* WTMAction.h */,
 				E5DE3AE9174CFCF9005937DC /* WTMAction.m */,
 				E5DE3AEA174CFCF9005937DC /* WTMActivity.h */,
@@ -624,6 +630,7 @@
 				E5DE3B70174CFCF9005937DC /* WTMSound.m in Sources */,
 				E5DE3B72174CFCF9005937DC /* WTMUser.m in Sources */,
 				E5DE3B74174CFCF9005937DC /* WTMVideo.m in Sources */,
+				E5DAA12A177A083900F456C2 /* WTMPicture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +684,7 @@
 				E5DE3B6F174CFCF9005937DC /* WTMSound.m in Sources */,
 				E5DE3B71174CFCF9005937DC /* WTMUser.m in Sources */,
 				E5DE3B73174CFCF9005937DC /* WTMVideo.m in Sources */,
+				E5DAA111177A000D00F456C2 /* WTMPicture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

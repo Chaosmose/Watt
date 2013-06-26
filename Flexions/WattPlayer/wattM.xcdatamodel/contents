@@ -19,6 +19,7 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Picture" syncable="YES"/>
         <relationship name="scenes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES">
@@ -121,6 +122,10 @@
             </userInfo>
         </attribute>
     </entity>
+    <entity name="Picture" syncable="YES">
+        <attribute name="assetLibUID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="assetMemberIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Rule" representedClassName="Rule" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -168,18 +173,18 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
-        <element name="Activity" positionX="-6921" positionY="-4186" width="128" height="208"/>
+        <element name="Activity" positionX="-6887" positionY="-4194" width="128" height="223"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Behavior" positionX="-7434" positionY="-3652" width="128" height="88"/>
         <element name="Datum" positionX="-7866" positionY="-4284" width="128" height="88"/>
-        <element name="Element" positionX="-6536" positionY="-3964" width="128" height="178"/>
+        <element name="Element" positionX="-6563" positionY="-3886" width="128" height="178"/>
         <element name="Group" positionX="-7688" positionY="-3870" width="128" height="58"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
         <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
         <element name="LangDictionary" positionX="-7371" positionY="-4113" width="128" height="88"/>
-        <element name="Library" positionX="-7101" positionY="-3913" width="126" height="103"/>
+        <element name="Library" positionX="-7110" positionY="-3910" width="126" height="103"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
         <element name="Member" positionX="-7103" positionY="-3780" width="128" height="118"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
@@ -192,5 +197,6 @@
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7641" positionY="-4014" width="128" height="88"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
+        <element name="Picture" positionX="-6957" positionY="-3934" width="128" height="73"/>
     </elements>
 </model>
