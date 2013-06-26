@@ -30,6 +30,7 @@
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,assign) NSInteger  level;
+@property (nonatomic,copy) NSString * nature;
 @property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,assign) NSInteger  packageIndex;
 @property (nonatomic,assign) NSInteger  rating;

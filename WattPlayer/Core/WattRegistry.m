@@ -201,6 +201,18 @@
 }
 
 
+- (WattObject*)objectWithObjectName:(NSString*)objectName{
+    for (NSString*key in [self _sortedKeys]) {
+        WattObject*o=[_registry objectForKey:key];
+        if([[o objectName] isEqualToString:objectName]){
+            return o;
+        }
+    }
+    return nil;
+}
+
+
+
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID{
     if(uinstID<=[_registry count]){
         return [_registry objectForKey:[self _keyFrom:uinstID]];

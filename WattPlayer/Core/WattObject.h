@@ -89,6 +89,8 @@ __LINE__ ,\
     BOOL _isAnAlias;
 }
 
+@property (nonatomic)NSString *objectName;// Used to tag an instance with a defined name.
+
 #pragma mark - registry
 
 @property (readonly)NSInteger uinstID;

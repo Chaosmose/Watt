@@ -28,6 +28,7 @@
 @synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
 @synthesize level=_level;
+@synthesize nature=_nature;
 @synthesize ownerUserUID=_ownerUserUID;
 @synthesize packageIndex=_packageIndex;
 @synthesize rating=_rating;
@@ -45,6 +46,8 @@
 		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
+	} else if ([key isEqualToString:@"nature"]) {
+		[super setValue:value forKey:@"nature"];
 	} else if ([key isEqualToString:@"ownerUserUID"]) {
 		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"packageIndex"]) {
@@ -125,6 +128,7 @@
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
+	[dictionary setValue:self.nature forKey:@"nature"];
 	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
@@ -161,6 +165,7 @@
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
+	[s appendFormat:@"nature : %@\n",self.nature];
 	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];

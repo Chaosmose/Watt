@@ -12,6 +12,7 @@
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="nature" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerUserUID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -173,7 +174,7 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
-        <element name="Activity" positionX="-6887" positionY="-4194" width="128" height="223"/>
+        <element name="Activity" positionX="-6887" positionY="-4194" width="128" height="238"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Behavior" positionX="-7434" positionY="-3652" width="128" height="88"/>
         <element name="Datum" positionX="-7866" positionY="-4284" width="128" height="88"/>
@@ -191,12 +192,12 @@
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
         <element name="Package" positionX="-7103" positionY="-4219" width="128" height="223"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
+        <element name="Picture" positionX="-6957" positionY="-3934" width="128" height="73"/>
         <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="118"/>
         <element name="Scene" positionX="-6725" positionY="-4129" width="128" height="193"/>
         <element name="Shelf" positionX="-7398" positionY="-4285" width="128" height="118"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7641" positionY="-4014" width="128" height="88"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
-        <element name="Picture" positionX="-6957" positionY="-3934" width="128" height="73"/>
     </elements>
 </model>

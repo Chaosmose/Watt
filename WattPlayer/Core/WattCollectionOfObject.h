@@ -36,6 +36,10 @@
 - (WattObject *)objectAtIndex:(NSUInteger)index;
 - (WattObject *)lastObject;
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array;
+- (WattObject*)objectWithObjectName:(NSString*)objectName;
+- (WattObject*)objectWithUinstID:(NSInteger)uinstID;
+
+
 
 - (void)addObject:(WattObject*)anObject;
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index;

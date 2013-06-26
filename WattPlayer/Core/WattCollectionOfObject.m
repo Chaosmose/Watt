@@ -114,6 +114,25 @@
     return o;
 }
 
+- (WattObject*)objectWithObjectName:(NSString*)objectName{
+    for (WattObject*o in _collection) {
+        if([[o objectName] isEqualToString:objectName]){
+            return o;
+        }
+    }
+    return nil;
+}
+
+- (WattObject*)objectWithUinstID:(NSInteger)uinstID{
+    for (WattObject*o in _collection) {
+        if([o uinstID]==uinstID){
+            return o;
+        }
+    }
+    return nil;
+}
+
+
 - (void)addObject:(WattObject*)anObject{
     [_collection addObject:anObject];
 }
