@@ -60,11 +60,6 @@
         <relationship name="behavior" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Behavior" syncable="YES"/>
         <relationship name="scene" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
     </entity>
-    <entity name="Extra" syncable="YES">
-        <userInfo>
-            <entry key="parent" value="NSMutableDictionary"/>
-        </userInfo>
-    </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="groups" inverseEntity="User" syncable="YES"/>
@@ -228,6 +223,5 @@
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7803" positionY="-4149" width="128" height="73"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
-        <element name="Extra" positionX="-7722" positionY="-4453" width="128" height="43"/>
     </elements>
 </model>
