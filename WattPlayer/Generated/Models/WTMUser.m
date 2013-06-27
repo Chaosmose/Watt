@@ -25,14 +25,11 @@
 @implementation WTMUser 
 
 @synthesize identity=_identity;
-@synthesize uid=_uid;
 @synthesize groups=_groups;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"identity"]){
 		[super setValue:value forKey:@"identity"];
-	} else if ([key isEqualToString:@"uid"]) {
-		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"groups"]) {
 		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
 	} else {
@@ -72,7 +69,6 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.identity forKey:@"identity"];
-	[dictionary setValue:self.uid forKey:@"uid"];
 	if(self.groups){
 		if(includeChildren){
 			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
@@ -93,7 +89,6 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"identity : %@\n",self.identity];
-	[s appendFormat:@"uid : %@\n",self.uid];
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	return s;
 }

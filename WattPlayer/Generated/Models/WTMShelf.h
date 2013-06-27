@@ -21,19 +21,21 @@
  
 
 #import "WattObject.h"
-@class WTMCollectionOfUser;
+@class WTMImage;
 @class WTMCollectionOfPackage;
+@class WTMCollectionOfUser;
 
 @interface WTMShelf:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
-@property (nonatomic,copy) NSString * ownerUserUID;
-@property (nonatomic,copy) NSString * rights;
-@property (nonatomic,strong) WTMCollectionOfUser * localUsers;
+@property (nonatomic,strong) NSDictionary * extras;
+@property (nonatomic,strong) WTMImage * coverImage;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
+@property (nonatomic,strong) WTMCollectionOfUser * users;
 
-- (WTMCollectionOfUser*)localUsers_auto;
+- (WTMImage*)coverImage_auto;
 - (WTMCollectionOfPackage*)packages_auto;
+- (WTMCollectionOfUser*)users_auto;
 
 @end

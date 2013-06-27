@@ -20,19 +20,46 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMGroup.h" 
+#import "WTMCollectionOfUser.h"
 
 @implementation WTMGroup 
 
 @synthesize name=_name;
+@synthesize users=_users;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"users"]) {
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
+
+- (WTMCollectionOfUser*)users{
+	if([_users isAnAlias]){
+		id o=[_registry objectWithUinstID:_users.uinstID];
+		if(o){
+			_users=o;
+		}
+	}
+	return _users;
+}
+
+
+- (WTMCollectionOfUser*)users_auto{
+	_users=[self users];
+	if(!_users){
+		_users=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
+	}
+	return _users;
+}
+
+- (void)setUsers:(WTMCollectionOfUser*)users{
+	_users=users;
+}
 
 
 
@@ -42,6 +69,13 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.name forKey:@"name"];
+	if(self.users){
+		if(includeChildren){
+			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
+		}else{
+			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"users"];
+		}
+	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -55,6 +89,7 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	return s;
 }
 

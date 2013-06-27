@@ -157,17 +157,19 @@
 
 - (void)localize{
     if(![self hasBeenLocalized]){
+        _currentLocale=[[NSLocale currentLocale] localeIdentifier];
         NSArray *keys=[self allPropertiesName];
         for (NSString*key in keys) {
             id o=[self valueForKey:key];
-            if([o respondsToSelector:@selector(localize)]){
-                [o localize];
+            if([o respondsToSelector:@selector(localize)]&&[o respondsToSelector:@selector(hasBeenLocalized)]){
+                if(![o hasBeenLocalized])
+                    [o localize];
             }else{
                 [_wapi localize:self withKey:key andValue:o];
             }
         }
-        _currentLocale=[[NSLocale currentLocale] localeIdentifier];
     }
+    
 }
 
 

@@ -20,23 +20,22 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMActivity.h" 
-#import "WTMPicture.h"
+#import "WTMImage.h"
 #import "WTMCollectionOfScene.h"
 
 @implementation WTMActivity 
 
 @synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
+@synthesize extras=_extras;
 @synthesize level=_level;
 @synthesize nature=_nature;
-@synthesize ownerUserUID=_ownerUserUID;
 @synthesize packageIndex=_packageIndex;
 @synthesize rating=_rating;
 @synthesize rights=_rights;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
-@synthesize uid=_uid;
-@synthesize picture=_picture;
+@synthesize coverImage=_coverImage;
 @synthesize scenes=_scenes;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -44,12 +43,12 @@
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"controllerClass"]) {
 		[super setValue:value forKey:@"controllerClass"];
+	} else if ([key isEqualToString:@"extras"]) {
+		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
 	} else if ([key isEqualToString:@"nature"]) {
 		[super setValue:value forKey:@"nature"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"packageIndex"]) {
 		[super setValue:value forKey:@"packageIndex"];
 	} else if ([key isEqualToString:@"rating"]) {
@@ -60,10 +59,8 @@
 		[super setValue:value forKey:@"shortName"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
-	} else if ([key isEqualToString:@"uid"]) {
-		[super setValue:value forKey:@"uid"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMPicture instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+	} else if ([key isEqualToString:@"coverImage"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
 	} else if ([key isEqualToString:@"scenes"]) {
 		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scenes"];
 	} else {
@@ -72,27 +69,27 @@
 }
 
 
-- (WTMPicture*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
+- (WTMImage*)coverImage{
+	if([_coverImage isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverImage.uinstID];
 		if(o){
-			_picture=o;
+			_coverImage=o;
 		}
 	}
-	return _picture;
+	return _coverImage;
 }
 
 
-- (WTMPicture*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMPicture alloc] initInRegistry:_registry];
+- (WTMImage*)coverImage_auto{
+	_coverImage=[self coverImage];
+	if(!_coverImage){
+		_coverImage=[[WTMImage alloc] initInRegistry:_registry];
 	}
-	return _picture;
+	return _coverImage;
 }
 
-- (void)setPicture:(WTMPicture*)picture{
-	_picture=picture;
+- (void)setCoverImage:(WTMImage*)coverImage{
+	_coverImage=coverImage;
 }
 
 - (WTMCollectionOfScene*)scenes{
@@ -127,20 +124,19 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
+	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:self.nature forKey:@"nature"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
-	[dictionary setValue:self.uid forKey:@"uid"];
-	if(self.picture){
+	if(self.coverImage){
 		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+			[dictionary setValue:[self.coverImage dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverImage"];
 		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
+			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
 		}
 	}
 	if(self.scenes){
@@ -164,16 +160,15 @@
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
+	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"nature : %@\n",self.nature];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
-	[s appendFormat:@"uid : %@\n",self.uid];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
+	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
 	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
 	return s;
 }

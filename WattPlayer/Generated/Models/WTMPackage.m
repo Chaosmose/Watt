@@ -21,50 +21,55 @@
  
 #import "WTMPackage.h" 
 #import "WTMCollectionOfActivity.h"
-#import "WTMCollectionOfLangDictionary.h"
+#import "WTMImage.h"
+#import "WTMLangDictionary.h"
 #import "WTMCollectionOfLibrary.h"
-#import "WTMCollectionOfUser.h"
+#import "WTMUser.h"
+#import "WTMShelf.h"
 
 @implementation WTMPackage 
 
 @synthesize comment=_comment;
+@synthesize extras=_extras;
 @synthesize license=_license;
 @synthesize minEngineVersion=_minEngineVersion;
 @synthesize name=_name;
-@synthesize ownerUserUID=_ownerUserUID;
 @synthesize rights=_rights;
 @synthesize shelfIndex=_shelfIndex;
-@synthesize uid=_uid;
 @synthesize activities=_activities;
-@synthesize langDictionaries=_langDictionaries;
+@synthesize coverImage=_coverImage;
+@synthesize langDictionary=_langDictionary;
 @synthesize libraries=_libraries;
-@synthesize rightsAssignees=_rightsAssignees;
+@synthesize owner=_owner;
+@synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
+	} else if ([key isEqualToString:@"extras"]) {
+		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"license"]) {
 		[super setValue:value forKey:@"license"];
 	} else if ([key isEqualToString:@"minEngineVersion"]) {
 		[super setValue:value forKey:@"minEngineVersion"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"shelfIndex"]) {
 		[super setValue:value forKey:@"shelfIndex"];
-	} else if ([key isEqualToString:@"uid"]) {
-		[super setValue:value forKey:@"uid"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
-	} else if ([key isEqualToString:@"langDictionaries"]) {
-		[super setValue:[WTMCollectionOfLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionaries"];
+	} else if ([key isEqualToString:@"coverImage"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
+	} else if ([key isEqualToString:@"langDictionary"]) {
+		[super setValue:[WTMLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionary"];
 	} else if ([key isEqualToString:@"libraries"]) {
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
-	} else if ([key isEqualToString:@"rightsAssignees"]) {
-		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"rightsAssignees"];
+	} else if ([key isEqualToString:@"owner"]) {
+		[super setValue:[WTMUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"owner"];
+	} else if ([key isEqualToString:@"shelf"]) {
+		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -94,27 +99,50 @@
 	_activities=activities;
 }
 
-- (WTMCollectionOfLangDictionary*)langDictionaries{
-	if([_langDictionaries isAnAlias]){
-		id o=[_registry objectWithUinstID:_langDictionaries.uinstID];
+- (WTMImage*)coverImage{
+	if([_coverImage isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverImage.uinstID];
 		if(o){
-			_langDictionaries=o;
+			_coverImage=o;
 		}
 	}
-	return _langDictionaries;
+	return _coverImage;
 }
 
 
-- (WTMCollectionOfLangDictionary*)langDictionaries_auto{
-	_langDictionaries=[self langDictionaries];
-	if(!_langDictionaries){
-		_langDictionaries=[[WTMCollectionOfLangDictionary alloc] initInRegistry:_registry];
+- (WTMImage*)coverImage_auto{
+	_coverImage=[self coverImage];
+	if(!_coverImage){
+		_coverImage=[[WTMImage alloc] initInRegistry:_registry];
 	}
-	return _langDictionaries;
+	return _coverImage;
 }
 
-- (void)setLangDictionaries:(WTMCollectionOfLangDictionary*)langDictionaries{
-	_langDictionaries=langDictionaries;
+- (void)setCoverImage:(WTMImage*)coverImage{
+	_coverImage=coverImage;
+}
+
+- (WTMLangDictionary*)langDictionary{
+	if([_langDictionary isAnAlias]){
+		id o=[_registry objectWithUinstID:_langDictionary.uinstID];
+		if(o){
+			_langDictionary=o;
+		}
+	}
+	return _langDictionary;
+}
+
+
+- (WTMLangDictionary*)langDictionary_auto{
+	_langDictionary=[self langDictionary];
+	if(!_langDictionary){
+		_langDictionary=[[WTMLangDictionary alloc] initInRegistry:_registry];
+	}
+	return _langDictionary;
+}
+
+- (void)setLangDictionary:(WTMLangDictionary*)langDictionary{
+	_langDictionary=langDictionary;
 }
 
 - (WTMCollectionOfLibrary*)libraries{
@@ -140,27 +168,50 @@
 	_libraries=libraries;
 }
 
-- (WTMCollectionOfUser*)rightsAssignees{
-	if([_rightsAssignees isAnAlias]){
-		id o=[_registry objectWithUinstID:_rightsAssignees.uinstID];
+- (WTMUser*)owner{
+	if([_owner isAnAlias]){
+		id o=[_registry objectWithUinstID:_owner.uinstID];
 		if(o){
-			_rightsAssignees=o;
+			_owner=o;
 		}
 	}
-	return _rightsAssignees;
+	return _owner;
 }
 
 
-- (WTMCollectionOfUser*)rightsAssignees_auto{
-	_rightsAssignees=[self rightsAssignees];
-	if(!_rightsAssignees){
-		_rightsAssignees=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
+- (WTMUser*)owner_auto{
+	_owner=[self owner];
+	if(!_owner){
+		_owner=[[WTMUser alloc] initInRegistry:_registry];
 	}
-	return _rightsAssignees;
+	return _owner;
 }
 
-- (void)setRightsAssignees:(WTMCollectionOfUser*)rightsAssignees{
-	_rightsAssignees=rightsAssignees;
+- (void)setOwner:(WTMUser*)owner{
+	_owner=owner;
+}
+
+- (WTMShelf*)shelf{
+	if([_shelf isAnAlias]){
+		id o=[_registry objectWithUinstID:_shelf.uinstID];
+		if(o){
+			_shelf=o;
+		}
+	}
+	return _shelf;
+}
+
+
+- (WTMShelf*)shelf_auto{
+	_shelf=[self shelf];
+	if(!_shelf){
+		_shelf=[[WTMShelf alloc] initInRegistry:_registry];
+	}
+	return _shelf;
+}
+
+- (void)setShelf:(WTMShelf*)shelf{
+	_shelf=shelf;
 }
 
 
@@ -171,13 +222,12 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
+	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.license forKey:@"license"];
 	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
 	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.shelfIndex] forKey:@"shelfIndex"];
-	[dictionary setValue:self.uid forKey:@"uid"];
 	if(self.activities){
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
@@ -185,11 +235,18 @@
 			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"activities"];
 		}
 	}
-	if(self.langDictionaries){
+	if(self.coverImage){
 		if(includeChildren){
-			[dictionary setValue:[self.langDictionaries dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionaries"];
+			[dictionary setValue:[self.coverImage dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverImage"];
 		}else{
-			[dictionary setValue:[self.langDictionaries aliasDictionaryRepresentation] forKey:@"langDictionaries"];
+			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
+		}
+	}
+	if(self.langDictionary){
+		if(includeChildren){
+			[dictionary setValue:[self.langDictionary dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionary"];
+		}else{
+			[dictionary setValue:[self.langDictionary aliasDictionaryRepresentation] forKey:@"langDictionary"];
 		}
 	}
 	if(self.libraries){
@@ -199,11 +256,18 @@
 			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"libraries"];
 		}
 	}
-	if(self.rightsAssignees){
+	if(self.owner){
 		if(includeChildren){
-			[dictionary setValue:[self.rightsAssignees dictionaryRepresentationWithChildren:includeChildren] forKey:@"rightsAssignees"];
+			[dictionary setValue:[self.owner dictionaryRepresentationWithChildren:includeChildren] forKey:@"owner"];
 		}else{
-			[dictionary setValue:[self.rightsAssignees aliasDictionaryRepresentation] forKey:@"rightsAssignees"];
+			[dictionary setValue:[self.owner aliasDictionaryRepresentation] forKey:@"owner"];
+		}
+	}
+	if(self.shelf){
+		if(includeChildren){
+			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"shelf"];
+		}else{
+			[dictionary setValue:[self.shelf aliasDictionaryRepresentation] forKey:@"shelf"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -219,17 +283,18 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
+	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shelfIndex : %@\n",[NSNumber numberWithInteger:self.shelfIndex]];
-	[s appendFormat:@"uid : %@\n",self.uid];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
-	[s appendFormat:@"langDictionaries : %@\n",NSStringFromClass([self.langDictionaries class])];
+	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
+	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
-	[s appendFormat:@"rightsAssignees : %@\n",NSStringFromClass([self.rightsAssignees class])];
+	[s appendFormat:@"owner : %@\n",NSStringFromClass([self.owner class])];
+	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }
 

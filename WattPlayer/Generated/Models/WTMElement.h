@@ -21,19 +21,24 @@
  
 
 #import "WattObject.h"
+@class WTMAsset;
+@class WTMBehavior;
+@class WTMScene;
 
 @interface WTMElement:WattObject<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * assetLibUID;
-@property (nonatomic,assign) NSInteger  assetMemberIndex;
-@property (nonatomic,copy) NSString * behaviorLibUID;
-@property (nonatomic,assign) NSInteger  behaviorMemberIndex;
 @property (nonatomic,copy) NSString * controllerClass;
-@property (nonatomic,copy) NSString * ownerUserUID;
+@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) CGRect  rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
+@property (nonatomic,strong) WTMAsset * asset;
+@property (nonatomic,strong) WTMBehavior * behavior;
+@property (nonatomic,strong) WTMScene * scene;
 
+- (WTMAsset*)asset_auto;
+- (WTMBehavior*)behavior_auto;
+- (WTMScene*)scene_auto;
 
 @end

@@ -22,29 +22,34 @@
 
 #import "WattObject.h"
 @class WTMCollectionOfActivity;
-@class WTMCollectionOfLangDictionary;
+@class WTMImage;
+@class WTMLangDictionary;
 @class WTMCollectionOfLibrary;
-@class WTMCollectionOfUser;
+@class WTMUser;
+@class WTMShelf;
 
 @interface WTMPackage:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;
+@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * license;
 @property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  shelfIndex;
-@property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
-@property (nonatomic,strong) WTMCollectionOfLangDictionary * langDictionaries;
+@property (nonatomic,strong) WTMImage * coverImage;
+@property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
-@property (nonatomic,strong) WTMCollectionOfUser * rightsAssignees;
+@property (nonatomic,strong) WTMUser * owner;
+@property (nonatomic,strong) WTMShelf * shelf;
 
 - (WTMCollectionOfActivity*)activities_auto;
-- (WTMCollectionOfLangDictionary*)langDictionaries_auto;
+- (WTMImage*)coverImage_auto;
+- (WTMLangDictionary*)langDictionary_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
-- (WTMCollectionOfUser*)rightsAssignees_auto;
+- (WTMUser*)owner_auto;
+- (WTMShelf*)shelf_auto;
 
 @end

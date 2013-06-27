@@ -21,23 +21,27 @@
  
 #import "WTMLibrary.h" 
 #import "WTMCollectionOfMember.h"
+#import "WTMPackage.h"
 
 @implementation WTMLibrary 
 
+@synthesize extras=_extras;
 @synthesize name=_name;
-@synthesize ownerUserUID=_ownerUserUID;
 @synthesize rights=_rights;
 @synthesize members=_members;
+@synthesize package=_package;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"name"]){
+	if ([key isEqualToString:@"extras"]){
+		[super setValue:value forKey:@"extras"];
+	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"members"]) {
 		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"members"];
+	} else if ([key isEqualToString:@"package"]) {
+		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -67,6 +71,29 @@
 	_members=members;
 }
 
+- (WTMPackage*)package{
+	if([_package isAnAlias]){
+		id o=[_registry objectWithUinstID:_package.uinstID];
+		if(o){
+			_package=o;
+		}
+	}
+	return _package;
+}
+
+
+- (WTMPackage*)package_auto{
+	_package=[self package];
+	if(!_package){
+		_package=[[WTMPackage alloc] initInRegistry:_registry];
+	}
+	return _package;
+}
+
+- (void)setPackage:(WTMPackage*)package{
+	_package=package;
+}
+
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
@@ -74,14 +101,21 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	if(self.members){
 		if(includeChildren){
 			[dictionary setValue:[self.members dictionaryRepresentationWithChildren:includeChildren] forKey:@"members"];
 		}else{
 			[dictionary setValue:[self.members aliasDictionaryRepresentation] forKey:@"members"];
+		}
+	}
+	if(self.package){
+		if(includeChildren){
+			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"package"];
+		}else{
+			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"package"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -96,10 +130,11 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];
+	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
 	return s;
 }
 

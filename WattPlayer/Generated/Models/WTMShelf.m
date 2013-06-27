@@ -20,55 +20,56 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMShelf.h" 
-#import "WTMCollectionOfUser.h"
+#import "WTMImage.h"
 #import "WTMCollectionOfPackage.h"
+#import "WTMCollectionOfUser.h"
 
 @implementation WTMShelf 
 
 @synthesize comment=_comment;
-@synthesize ownerUserUID=_ownerUserUID;
-@synthesize rights=_rights;
-@synthesize localUsers=_localUsers;
+@synthesize extras=_extras;
+@synthesize coverImage=_coverImage;
 @synthesize packages=_packages;
+@synthesize users=_users;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
-	} else if ([key isEqualToString:@"rights"]) {
-		[super setValue:value forKey:@"rights"];
-	} else if ([key isEqualToString:@"localUsers"]) {
-		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"localUsers"];
+	} else if ([key isEqualToString:@"extras"]) {
+		[super setValue:value forKey:@"extras"];
+	} else if ([key isEqualToString:@"coverImage"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
 	} else if ([key isEqualToString:@"packages"]) {
 		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
+	} else if ([key isEqualToString:@"users"]) {
+		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
 
-- (WTMCollectionOfUser*)localUsers{
-	if([_localUsers isAnAlias]){
-		id o=[_registry objectWithUinstID:_localUsers.uinstID];
+- (WTMImage*)coverImage{
+	if([_coverImage isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverImage.uinstID];
 		if(o){
-			_localUsers=o;
+			_coverImage=o;
 		}
 	}
-	return _localUsers;
+	return _coverImage;
 }
 
 
-- (WTMCollectionOfUser*)localUsers_auto{
-	_localUsers=[self localUsers];
-	if(!_localUsers){
-		_localUsers=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
+- (WTMImage*)coverImage_auto{
+	_coverImage=[self coverImage];
+	if(!_coverImage){
+		_coverImage=[[WTMImage alloc] initInRegistry:_registry];
 	}
-	return _localUsers;
+	return _coverImage;
 }
 
-- (void)setLocalUsers:(WTMCollectionOfUser*)localUsers{
-	_localUsers=localUsers;
+- (void)setCoverImage:(WTMImage*)coverImage{
+	_coverImage=coverImage;
 }
 
 - (WTMCollectionOfPackage*)packages{
@@ -94,6 +95,29 @@
 	_packages=packages;
 }
 
+- (WTMCollectionOfUser*)users{
+	if([_users isAnAlias]){
+		id o=[_registry objectWithUinstID:_users.uinstID];
+		if(o){
+			_users=o;
+		}
+	}
+	return _users;
+}
+
+
+- (WTMCollectionOfUser*)users_auto{
+	_users=[self users];
+	if(!_users){
+		_users=[[WTMCollectionOfUser alloc] initInRegistry:_registry];
+	}
+	return _users;
+}
+
+- (void)setUsers:(WTMCollectionOfUser*)users{
+	_users=users;
+}
+
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
@@ -102,13 +126,12 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
-	[dictionary setValue:self.rights forKey:@"rights"];
-	if(self.localUsers){
+	[dictionary setValue:self.extras forKey:@"extras"];
+	if(self.coverImage){
 		if(includeChildren){
-			[dictionary setValue:[self.localUsers dictionaryRepresentationWithChildren:includeChildren] forKey:@"localUsers"];
+			[dictionary setValue:[self.coverImage dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverImage"];
 		}else{
-			[dictionary setValue:[self.localUsers aliasDictionaryRepresentation] forKey:@"localUsers"];
+			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
 		}
 	}
 	if(self.packages){
@@ -116,6 +139,13 @@
 			[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
 		}else{
 			[dictionary setValue:[self.packages aliasDictionaryRepresentation] forKey:@"packages"];
+		}
+	}
+	if(self.users){
+		if(includeChildren){
+			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
+		}else{
+			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"users"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -131,10 +161,10 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
-	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"localUsers : %@\n",NSStringFromClass([self.localUsers class])];
+	[s appendFormat:@"extras : %@\n",self.extras];
+	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
+	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	return s;
 }
 

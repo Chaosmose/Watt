@@ -20,43 +20,112 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMElement.h" 
+#import "WTMAsset.h"
+#import "WTMBehavior.h"
+#import "WTMScene.h"
 
 @implementation WTMElement 
 
-@synthesize assetLibUID=_assetLibUID;
-@synthesize assetMemberIndex=_assetMemberIndex;
-@synthesize behaviorLibUID=_behaviorLibUID;
-@synthesize behaviorMemberIndex=_behaviorMemberIndex;
 @synthesize controllerClass=_controllerClass;
-@synthesize ownerUserUID=_ownerUserUID;
+@synthesize extras=_extras;
 @synthesize rect=_rect;
 @synthesize rights=_rights;
 @synthesize sceneIndex=_sceneIndex;
+@synthesize asset=_asset;
+@synthesize behavior=_behavior;
+@synthesize scene=_scene;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"assetLibUID"]){
-		[super setValue:value forKey:@"assetLibUID"];
-	} else if ([key isEqualToString:@"assetMemberIndex"]) {
-		[super setValue:value forKey:@"assetMemberIndex"];
-	} else if ([key isEqualToString:@"behaviorLibUID"]) {
-		[super setValue:value forKey:@"behaviorLibUID"];
-	} else if ([key isEqualToString:@"behaviorMemberIndex"]) {
-		[super setValue:value forKey:@"behaviorMemberIndex"];
-	} else if ([key isEqualToString:@"controllerClass"]) {
+	if ([key isEqualToString:@"controllerClass"]){
 		[super setValue:value forKey:@"controllerClass"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
+	} else if ([key isEqualToString:@"extras"]) {
+		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"rect"]) {
 		[super setValue:value forKey:@"rect"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"sceneIndex"]) {
 		[super setValue:value forKey:@"sceneIndex"];
+	} else if ([key isEqualToString:@"asset"]) {
+		[super setValue:[WTMAsset instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"asset"];
+	} else if ([key isEqualToString:@"behavior"]) {
+		[super setValue:[WTMBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behavior"];
+	} else if ([key isEqualToString:@"scene"]) {
+		[super setValue:[WTMScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scene"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
+
+- (WTMAsset*)asset{
+	if([_asset isAnAlias]){
+		id o=[_registry objectWithUinstID:_asset.uinstID];
+		if(o){
+			_asset=o;
+		}
+	}
+	return _asset;
+}
+
+
+- (WTMAsset*)asset_auto{
+	_asset=[self asset];
+	if(!_asset){
+		_asset=[[WTMAsset alloc] initInRegistry:_registry];
+	}
+	return _asset;
+}
+
+- (void)setAsset:(WTMAsset*)asset{
+	_asset=asset;
+}
+
+- (WTMBehavior*)behavior{
+	if([_behavior isAnAlias]){
+		id o=[_registry objectWithUinstID:_behavior.uinstID];
+		if(o){
+			_behavior=o;
+		}
+	}
+	return _behavior;
+}
+
+
+- (WTMBehavior*)behavior_auto{
+	_behavior=[self behavior];
+	if(!_behavior){
+		_behavior=[[WTMBehavior alloc] initInRegistry:_registry];
+	}
+	return _behavior;
+}
+
+- (void)setBehavior:(WTMBehavior*)behavior{
+	_behavior=behavior;
+}
+
+- (WTMScene*)scene{
+	if([_scene isAnAlias]){
+		id o=[_registry objectWithUinstID:_scene.uinstID];
+		if(o){
+			_scene=o;
+		}
+	}
+	return _scene;
+}
+
+
+- (WTMScene*)scene_auto{
+	_scene=[self scene];
+	if(!_scene){
+		_scene=[[WTMScene alloc] initInRegistry:_registry];
+	}
+	return _scene;
+}
+
+- (void)setScene:(WTMScene*)scene{
+	_scene=scene;
+}
 
 
 
@@ -65,15 +134,32 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.assetLibUID forKey:@"assetLibUID"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.assetMemberIndex] forKey:@"assetMemberIndex"];
-	[dictionary setValue:self.behaviorLibUID forKey:@"behaviorLibUID"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.behaviorMemberIndex] forKey:@"behaviorMemberIndex"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
+	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.sceneIndex] forKey:@"sceneIndex"];
+	if(self.asset){
+		if(includeChildren){
+			[dictionary setValue:[self.asset dictionaryRepresentationWithChildren:includeChildren] forKey:@"asset"];
+		}else{
+			[dictionary setValue:[self.asset aliasDictionaryRepresentation] forKey:@"asset"];
+		}
+	}
+	if(self.behavior){
+		if(includeChildren){
+			[dictionary setValue:[self.behavior dictionaryRepresentationWithChildren:includeChildren] forKey:@"behavior"];
+		}else{
+			[dictionary setValue:[self.behavior aliasDictionaryRepresentation] forKey:@"behavior"];
+		}
+	}
+	if(self.scene){
+		if(includeChildren){
+			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"scene"];
+		}else{
+			[dictionary setValue:[self.scene aliasDictionaryRepresentation] forKey:@"scene"];
+		}
+	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -86,15 +172,14 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"assetLibUID : %@\n",self.assetLibUID];
-	[s appendFormat:@"assetMemberIndex : %@\n",[NSNumber numberWithInteger:self.assetMemberIndex]];
-	[s appendFormat:@"behaviorLibUID : %@\n",self.behaviorLibUID];
-	[s appendFormat:@"behaviorMemberIndex : %@\n",[NSNumber numberWithInteger:self.behaviorMemberIndex]];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
+	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
+	[s appendFormat:@"asset : %@\n",NSStringFromClass([self.asset class])];
+	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
+	[s appendFormat:@"scene : %@\n",NSStringFromClass([self.scene class])];
 	return s;
 }
 

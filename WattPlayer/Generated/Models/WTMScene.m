@@ -20,6 +20,8 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMScene.h" 
+#import "WTMActivity.h"
+#import "WTMBehavior.h"
 #import "WTMCollectionOfElement.h"
 
 @implementation WTMScene 
@@ -27,12 +29,13 @@
 @synthesize activityIndex=_activityIndex;
 @synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
+@synthesize extras=_extras;
 @synthesize number=_number;
-@synthesize ownerUserUID=_ownerUserUID;
 @synthesize rect=_rect;
 @synthesize rights=_rights;
 @synthesize title=_title;
-@synthesize uid=_uid;
+@synthesize activity=_activity;
+@synthesize behavior=_behavior;
 @synthesize elements=_elements;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -42,18 +45,20 @@
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"controllerClass"]) {
 		[super setValue:value forKey:@"controllerClass"];
+	} else if ([key isEqualToString:@"extras"]) {
+		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"number"]) {
 		[super setValue:value forKey:@"number"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rect"]) {
 		[super setValue:value forKey:@"rect"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
-	} else if ([key isEqualToString:@"uid"]) {
-		[super setValue:value forKey:@"uid"];
+	} else if ([key isEqualToString:@"activity"]) {
+		[super setValue:[WTMActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activity"];
+	} else if ([key isEqualToString:@"behavior"]) {
+		[super setValue:[WTMBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behavior"];
 	} else if ([key isEqualToString:@"elements"]) {
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
 	} else {
@@ -61,6 +66,52 @@
 	}
 }
 
+
+- (WTMActivity*)activity{
+	if([_activity isAnAlias]){
+		id o=[_registry objectWithUinstID:_activity.uinstID];
+		if(o){
+			_activity=o;
+		}
+	}
+	return _activity;
+}
+
+
+- (WTMActivity*)activity_auto{
+	_activity=[self activity];
+	if(!_activity){
+		_activity=[[WTMActivity alloc] initInRegistry:_registry];
+	}
+	return _activity;
+}
+
+- (void)setActivity:(WTMActivity*)activity{
+	_activity=activity;
+}
+
+- (WTMBehavior*)behavior{
+	if([_behavior isAnAlias]){
+		id o=[_registry objectWithUinstID:_behavior.uinstID];
+		if(o){
+			_behavior=o;
+		}
+	}
+	return _behavior;
+}
+
+
+- (WTMBehavior*)behavior_auto{
+	_behavior=[self behavior];
+	if(!_behavior){
+		_behavior=[[WTMBehavior alloc] initInRegistry:_registry];
+	}
+	return _behavior;
+}
+
+- (void)setBehavior:(WTMBehavior*)behavior{
+	_behavior=behavior;
+}
 
 - (WTMCollectionOfElement*)elements{
 	if([_elements isAnAlias]){
@@ -95,12 +146,25 @@
 	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
+	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.title forKey:@"title"];
-	[dictionary setValue:self.uid forKey:@"uid"];
+	if(self.activity){
+		if(includeChildren){
+			[dictionary setValue:[self.activity dictionaryRepresentationWithChildren:includeChildren] forKey:@"activity"];
+		}else{
+			[dictionary setValue:[self.activity aliasDictionaryRepresentation] forKey:@"activity"];
+		}
+	}
+	if(self.behavior){
+		if(includeChildren){
+			[dictionary setValue:[self.behavior dictionaryRepresentationWithChildren:includeChildren] forKey:@"behavior"];
+		}else{
+			[dictionary setValue:[self.behavior aliasDictionaryRepresentation] forKey:@"behavior"];
+		}
+	}
 	if(self.elements){
 		if(includeChildren){
 			[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"elements"];
@@ -123,12 +187,13 @@
 	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
+	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"title : %@\n",self.title];
-	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
+	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
 	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
 	return s;
 }

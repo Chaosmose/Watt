@@ -43,12 +43,19 @@
 
 
 - (void)localize{
-    for (WattObject*object in _collection) {
-        if([object respondsToSelector:@selector(localize)]){
-            [object localize];
+    if(![self hasBeenLocalized]){
+        _currentLocale=[[NSLocale currentLocale] localeIdentifier];
+        for (WattObject*object in _collection) {
+            if([object respondsToSelector:@selector(localize)]&& [object respondsToSelector:@selector(hasBeenLocalized)]){
+                if(![object hasBeenLocalized])
+                    [object localize];
+            }
         }
     }
 }
+
+
+
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
 	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
@@ -180,7 +187,7 @@
 }
 
 - (NSUInteger)indexOfObject:(WattObject *)object{
-   return [_collection indexOfObject:object];
+    return [_collection indexOfObject:object];
 }
 
 

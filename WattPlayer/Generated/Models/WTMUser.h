@@ -27,7 +27,6 @@
 }
 
 @property (nonatomic,copy) NSString * identity;
-@property (nonatomic,copy) NSString * uid;
 @property (nonatomic,strong) WTMCollectionOfGroup * groups;
 
 - (WTMCollectionOfGroup*)groups_auto;

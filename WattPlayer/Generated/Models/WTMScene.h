@@ -21,6 +21,8 @@
  
 
 #import "WattObject.h"
+@class WTMActivity;
+@class WTMBehavior;
 @class WTMCollectionOfElement;
 
 @interface WTMScene:WattObject<WattCoding>{
@@ -29,14 +31,17 @@
 @property (nonatomic,assign) NSInteger  activityIndex;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;
+@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  number;
-@property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,assign) CGRect  rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * title;
-@property (nonatomic,copy) NSString * uid;
+@property (nonatomic,strong) WTMActivity * activity;
+@property (nonatomic,strong) WTMBehavior * behavior;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
 
+- (WTMActivity*)activity_auto;
+- (WTMBehavior*)behavior_auto;
 - (WTMCollectionOfElement*)elements_auto;
 
 @end

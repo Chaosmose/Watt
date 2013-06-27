@@ -80,11 +80,11 @@ __LINE__ ,\
 
 @interface WattObject : NSObject<WattCoding>{
     @private
-    NSString *_currentLocale;           // The locale that has been used for localization
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
     WattApi *_wapi;
     NSInteger _uinstID;
     @protected
+    NSString *_currentLocale;           // The locale that has been used for localization
     WattRegistry*_registry;
     BOOL _isAnAlias;
 }

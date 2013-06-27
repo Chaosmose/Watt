@@ -20,31 +20,55 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMMember.h" 
+#import "WTMLibrary.h"
 
 @implementation WTMMember 
 
+@synthesize extras=_extras;
 @synthesize index=_index;
 @synthesize name=_name;
-@synthesize ownerUserUID=_ownerUserUID;
 @synthesize rights=_rights;
-@synthesize uid=_uid;
+@synthesize library=_library;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"index"]){
+	if ([key isEqualToString:@"extras"]){
+		[super setValue:value forKey:@"extras"];
+	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"ownerUserUID"]) {
-		[super setValue:value forKey:@"ownerUserUID"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
-	} else if ([key isEqualToString:@"uid"]) {
-		[super setValue:value forKey:@"uid"];
+	} else if ([key isEqualToString:@"library"]) {
+		[super setValue:[WTMLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"library"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
+
+- (WTMLibrary*)library{
+	if([_library isAnAlias]){
+		id o=[_registry objectWithUinstID:_library.uinstID];
+		if(o){
+			_library=o;
+		}
+	}
+	return _library;
+}
+
+
+- (WTMLibrary*)library_auto{
+	_library=[self library];
+	if(!_library){
+		_library=[[WTMLibrary alloc] initInRegistry:_registry];
+	}
+	return _library;
+}
+
+- (void)setLibrary:(WTMLibrary*)library{
+	_library=library;
+}
 
 
 
@@ -53,11 +77,17 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.ownerUserUID forKey:@"ownerUserUID"];
 	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:self.uid forKey:@"uid"];
+	if(self.library){
+		if(includeChildren){
+			[dictionary setValue:[self.library dictionaryRepresentationWithChildren:includeChildren] forKey:@"library"];
+		}else{
+			[dictionary setValue:[self.library aliasDictionaryRepresentation] forKey:@"library"];
+		}
+	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -70,11 +100,11 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"ownerUserUID : %@\n",self.ownerUserUID];
 	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"uid : %@\n",self.uid];
+	[s appendFormat:@"library : %@\n",NSStringFromClass([self.library class])];
 	return s;
 }
 

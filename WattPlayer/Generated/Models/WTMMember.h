@@ -21,15 +21,17 @@
  
 
 #import "WattObject.h"
+@class WTMLibrary;
 
 @interface WTMMember:WattObject<WattCoding>{
 }
 
+@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,copy) NSString * ownerUserUID;
 @property (nonatomic,copy) NSString * rights;
-@property (nonatomic,copy) NSString * uid;
+@property (nonatomic,strong) WTMLibrary * library;
 
+- (WTMLibrary*)library_auto;
 
 @end

@@ -57,6 +57,7 @@
     WTMHyperlink*h=[[WTMHyperlink alloc] initInRegistry:r1];
     h.urlString=@"http://www.pereira-da-silva.com";
     [lib.members_auto addObject:h];
+    h.library=lib;
     
     WTMShelf *s1=(WTMShelf*)[r1 objectWithUinstID:1];
     WTMPackage*p1=[s1.packages lastObject];
@@ -105,20 +106,19 @@
 
     // Graph representations
     WTLog(@"%@",[s dictionaryRepresentationWithChildren:NO]);     // Graph
-    WTLog(@"%@",[s dictionaryRepresentationWithChildren:YES]);     // Graph
+#warning dictionaryRepresentationWithChildren:YES can loop infinitely in case of reciprocity of relationship
+    //WTLog(@"%@",[s dictionaryRepresentationWithChildren:YES]);     // Graph
     
     
     NSDictionary* d=[s dictionaryRepresentationWithChildren:NO];
     WTMShelf *s3=[WTMShelf instanceFromDictionary:d inRegistry:r2 includeChildren:YES];
     
     WTLog(@"%@",r2);    // Registry
-    WTLog(@"%@",[s3 dictionaryRepresentationWithChildren:YES]);
+#warning dictionaryRepresentationWithChildren:YES can loop infinitely
+   // WTLog(@"%@",[s3 dictionaryRepresentationWithChildren:YES]);
      
-   
     [s2 localize];
     
-
-
 }
 
 
@@ -129,13 +129,15 @@
     // With one package
     WTMPackage *p=[[WTMPackage alloc]initInRegistry:registry];
     [shelf.packages_auto addObject:p];
+    p.shelf=shelf;// Reciprocity
     
     // With one lang dictionary
-    [p langDictionaries_auto];
+    [p langDictionary_auto];
     
     // Containing one library
     WTMLibrary*castLib=[[WTMLibrary alloc] initInRegistry:registry];
     [p.libraries_auto addObject:castLib];
+    castLib.package=p;// Reciprocity
     return shelf;
 }
 
