@@ -103,20 +103,20 @@
     // ANY WattObject should be unRegisterObject to purge it from its register.
     // OR you can "purge" the whole registry (Best practice)
 
-
+/*
     // Graph representations
     WTLog(@"%@",[s dictionaryRepresentationWithChildren:NO]);     // Graph
 #warning dictionaryRepresentationWithChildren:YES can loop infinitely in case of reciprocity of relationship
     //WTLog(@"%@",[s dictionaryRepresentationWithChildren:YES]);     // Graph
     
     
-    NSDictionary* d=[s dictionaryRepresentationWithChildren:NO];
-    WTMShelf *s3=[WTMShelf instanceFromDictionary:d inRegistry:r2 includeChildren:YES];
+  //  NSDictionary* d=[s dictionaryRepresentationWithChildren:NO];
+   // WTMShelf *s3=[WTMShelf instanceFromDictionary:d inRegistry:r2 includeChildren:YES];
     
     WTLog(@"%@",r2);    // Registry
 #warning dictionaryRepresentationWithChildren:YES can loop infinitely
    // WTLog(@"%@",[s3 dictionaryRepresentationWithChildren:YES]);
-     
+*/
     [s2 localize];
     
 }
