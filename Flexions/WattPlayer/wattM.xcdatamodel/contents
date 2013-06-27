@@ -9,6 +9,7 @@
         <attribute name="methodName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Activity" representedClassName="Activity" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
@@ -23,7 +24,7 @@
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="coverImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
+        <relationship name="coverPicture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="package" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Package" inverseName="activities" inverseEntity="Package" syncable="YES"/>
         <relationship name="scenes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Scene" inverseName="activity" inverseEntity="Scene" syncable="YES"/>
     </entity>
@@ -44,6 +45,7 @@
         </userInfo>
     </entity>
     <entity name="Element" representedClassName="Element" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -103,6 +105,7 @@
         <attribute name="relativePath" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Member" representedClassName="Member" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="type" value="dictionary"/>
@@ -120,6 +123,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Package" representedClassName="Package" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -132,7 +136,7 @@
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="shelfIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="package" inverseEntity="Activity" syncable="YES"/>
-        <relationship name="coverImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
+        <relationship name="coverPicture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="langDictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LangDictionary" syncable="YES"/>
         <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" inverseName="package" inverseEntity="Library" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
@@ -154,6 +158,7 @@
     </entity>
     <entity name="Scene" representedClassName="Scene" syncable="YES">
         <attribute name="activityIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
@@ -180,7 +185,7 @@
                 <entry key="type" value="dictionary"/>
             </userInfo>
         </attribute>
-        <relationship name="coverImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
+        <relationship name="coverPicture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="packages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Package" inverseName="shelf" inverseEntity="Package" syncable="YES"/>
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
     </entity>
@@ -200,11 +205,11 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
-        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="238"/>
+        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="253"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Behavior" positionX="-7344" positionY="-3679" width="128" height="88"/>
         <element name="Datum" positionX="-7904" positionY="-4482" width="128" height="90"/>
-        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="163"/>
+        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="180"/>
         <element name="Group" positionX="-7814" positionY="-4005" width="128" height="73"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
@@ -213,13 +218,13 @@
         <element name="LangDictionary" positionX="-7274" positionY="-4228" width="128" height="88"/>
         <element name="Library" positionX="-7101" positionY="-3915" width="126" height="118"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
-        <element name="Member" positionX="-7119" positionY="-3780" width="128" height="118"/>
+        <element name="Member" positionX="-7119" positionY="-3780" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
-        <element name="Package" positionX="-7139" positionY="-4228" width="128" height="238"/>
+        <element name="Package" positionX="-7139" positionY="-4228" width="128" height="253"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
         <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="118"/>
-        <element name="Scene" positionX="-6732" positionY="-3934" width="128" height="208"/>
+        <element name="Scene" positionX="-6732" positionY="-3934" width="128" height="223"/>
         <element name="Shelf" positionX="-7571" positionY="-4324" width="128" height="118"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7803" positionY="-4149" width="128" height="73"/>

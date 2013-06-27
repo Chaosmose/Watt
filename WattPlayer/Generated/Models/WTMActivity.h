@@ -28,6 +28,7 @@
 @interface WTMActivity:WattObject<WattCoding>{
 }
 
+@property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,strong) NSDictionary * extras;
@@ -38,11 +39,11 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
-@property (nonatomic,strong) WTMImage * coverImage;
+@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMPackage * package;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
 
-- (WTMImage*)coverImage_auto;
+- (WTMImage*)coverPicture_auto;
 - (WTMPackage*)package_auto;
 - (WTMCollectionOfScene*)scenes_auto;
 

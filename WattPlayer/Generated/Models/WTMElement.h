@@ -28,6 +28,7 @@
 @interface WTMElement:WattObject<WattCoding>{
 }
 
+@property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) CGRect  rect;

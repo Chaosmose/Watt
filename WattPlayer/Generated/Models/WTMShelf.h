@@ -30,11 +30,11 @@
 
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,strong) NSDictionary * extras;
-@property (nonatomic,strong) WTMImage * coverImage;
+@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
 @property (nonatomic,strong) WTMCollectionOfUser * users;
 
-- (WTMImage*)coverImage_auto;
+- (WTMImage*)coverPicture_auto;
 - (WTMCollectionOfPackage*)packages_auto;
 - (WTMCollectionOfUser*)users_auto;
 

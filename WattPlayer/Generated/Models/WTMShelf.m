@@ -28,7 +28,7 @@
 
 @synthesize comment=_comment;
 @synthesize extras=_extras;
-@synthesize coverImage=_coverImage;
+@synthesize coverPicture=_coverPicture;
 @synthesize packages=_packages;
 @synthesize users=_users;
 
@@ -37,8 +37,8 @@
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
-	} else if ([key isEqualToString:@"coverImage"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
+	} else if ([key isEqualToString:@"coverPicture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverPicture"];
 	} else if ([key isEqualToString:@"packages"]) {
 		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
 	} else if ([key isEqualToString:@"users"]) {
@@ -49,27 +49,27 @@
 }
 
 
-- (WTMImage*)coverImage{
-	if([_coverImage isAnAlias]){
-		id o=[_registry objectWithUinstID:_coverImage.uinstID];
+- (WTMImage*)coverPicture{
+	if([_coverPicture isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverPicture.uinstID];
 		if(o){
-			_coverImage=o;
+			_coverPicture=o;
 		}
 	}
-	return _coverImage;
+	return _coverPicture;
 }
 
 
-- (WTMImage*)coverImage_auto{
-	_coverImage=[self coverImage];
-	if(!_coverImage){
-		_coverImage=[[WTMImage alloc] initInRegistry:_registry];
+- (WTMImage*)coverPicture_auto{
+	_coverPicture=[self coverPicture];
+	if(!_coverPicture){
+		_coverPicture=[[WTMImage alloc] initInRegistry:_registry];
 	}
-	return _coverImage;
+	return _coverPicture;
 }
 
-- (void)setCoverImage:(WTMImage*)coverImage{
-	_coverImage=coverImage;
+- (void)setCoverPicture:(WTMImage*)coverPicture{
+	_coverPicture=coverPicture;
 }
 
 - (WTMCollectionOfPackage*)packages{
@@ -127,11 +127,11 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.extras forKey:@"extras"];
-	if(self.coverImage){
+	if(self.coverPicture){
 		if(includeChildren){
-			[dictionary setValue:[self.coverImage dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverImage"];
+			[dictionary setValue:[self.coverPicture dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverPicture"];
 		}else{
-			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
+			[dictionary setValue:[self.coverPicture aliasDictionaryRepresentation] forKey:@"coverPicture"];
 		}
 	}
 	if(self.packages){
@@ -162,7 +162,7 @@
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"extras : %@\n",self.extras];
-	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
+	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	return s;

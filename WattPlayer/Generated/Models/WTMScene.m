@@ -27,6 +27,7 @@
 @implementation WTMScene 
 
 @synthesize activityIndex=_activityIndex;
+@synthesize category=_category;
 @synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
 @synthesize extras=_extras;
@@ -41,6 +42,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"activityIndex"]){
 		[super setValue:value forKey:@"activityIndex"];
+	} else if ([key isEqualToString:@"category"]) {
+		[super setValue:value forKey:@"category"];
 	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"controllerClass"]) {
@@ -144,6 +147,7 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:[NSNumber numberWithInteger:self.activityIndex] forKey:@"activityIndex"];
+	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:self.extras forKey:@"extras"];
@@ -185,6 +189,7 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"activityIndex : %@\n",[NSNumber numberWithInteger:self.activityIndex]];
+	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"extras : %@\n",self.extras];

@@ -26,6 +26,7 @@
 
 @implementation WTMElement 
 
+@synthesize category=_category;
 @synthesize controllerClass=_controllerClass;
 @synthesize extras=_extras;
 @synthesize rect=_rect;
@@ -36,7 +37,9 @@
 @synthesize scene=_scene;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"controllerClass"]){
+	if ([key isEqualToString:@"category"]){
+		[super setValue:value forKey:@"category"];
+	} else if ([key isEqualToString:@"controllerClass"]) {
 		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
@@ -134,6 +137,7 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
@@ -172,6 +176,7 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];

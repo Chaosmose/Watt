@@ -31,6 +31,7 @@
 @interface WTMPackage:WattObject<WattCoding>{
 }
 
+@property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * license;
@@ -39,14 +40,14 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  shelfIndex;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
-@property (nonatomic,strong) WTMImage * coverImage;
+@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMUser * owner;
 @property (nonatomic,strong) WTMShelf * shelf;
 
 - (WTMCollectionOfActivity*)activities_auto;
-- (WTMImage*)coverImage_auto;
+- (WTMImage*)coverPicture_auto;
 - (WTMLangDictionary*)langDictionary_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
 - (WTMUser*)owner_auto;

@@ -24,6 +24,7 @@
 
 @implementation WTMMember 
 
+@synthesize category=_category;
 @synthesize extras=_extras;
 @synthesize index=_index;
 @synthesize name=_name;
@@ -31,7 +32,9 @@
 @synthesize library=_library;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"extras"]){
+	if ([key isEqualToString:@"category"]){
+		[super setValue:value forKey:@"category"];
+	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
@@ -77,6 +80,7 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.name forKey:@"name"];
@@ -100,6 +104,7 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"name : %@\n",self.name];

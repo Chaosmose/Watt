@@ -26,6 +26,7 @@
 
 @implementation WTMActivity 
 
+@synthesize category=_category;
 @synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
 @synthesize extras=_extras;
@@ -36,12 +37,14 @@
 @synthesize rights=_rights;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
-@synthesize coverImage=_coverImage;
+@synthesize coverPicture=_coverPicture;
 @synthesize package=_package;
 @synthesize scenes=_scenes;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"comment"]){
+	if ([key isEqualToString:@"category"]){
+		[super setValue:value forKey:@"category"];
+	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"controllerClass"]) {
 		[super setValue:value forKey:@"controllerClass"];
@@ -61,8 +64,8 @@
 		[super setValue:value forKey:@"shortName"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
-	} else if ([key isEqualToString:@"coverImage"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
+	} else if ([key isEqualToString:@"coverPicture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverPicture"];
 	} else if ([key isEqualToString:@"package"]) {
 		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
 	} else if ([key isEqualToString:@"scenes"]) {
@@ -73,27 +76,27 @@
 }
 
 
-- (WTMImage*)coverImage{
-	if([_coverImage isAnAlias]){
-		id o=[_registry objectWithUinstID:_coverImage.uinstID];
+- (WTMImage*)coverPicture{
+	if([_coverPicture isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverPicture.uinstID];
 		if(o){
-			_coverImage=o;
+			_coverPicture=o;
 		}
 	}
-	return _coverImage;
+	return _coverPicture;
 }
 
 
-- (WTMImage*)coverImage_auto{
-	_coverImage=[self coverImage];
-	if(!_coverImage){
-		_coverImage=[[WTMImage alloc] initInRegistry:_registry];
+- (WTMImage*)coverPicture_auto{
+	_coverPicture=[self coverPicture];
+	if(!_coverPicture){
+		_coverPicture=[[WTMImage alloc] initInRegistry:_registry];
 	}
-	return _coverImage;
+	return _coverPicture;
 }
 
-- (void)setCoverImage:(WTMImage*)coverImage{
-	_coverImage=coverImage;
+- (void)setCoverPicture:(WTMImage*)coverPicture{
+	_coverPicture=coverPicture;
 }
 
 - (WTMPackage*)package{
@@ -149,6 +152,7 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:self.extras forKey:@"extras"];
@@ -159,11 +163,11 @@
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
-	if(self.coverImage){
+	if(self.coverPicture){
 		if(includeChildren){
-			[dictionary setValue:[self.coverImage dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverImage"];
+			[dictionary setValue:[self.coverPicture dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverPicture"];
 		}else{
-			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
+			[dictionary setValue:[self.coverPicture aliasDictionaryRepresentation] forKey:@"coverPicture"];
 		}
 	}
 	if(self.package){
@@ -192,6 +196,7 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"extras : %@\n",self.extras];
@@ -202,7 +207,7 @@
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
-	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
+	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
 	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
 	return s;

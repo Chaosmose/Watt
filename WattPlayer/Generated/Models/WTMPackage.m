@@ -29,6 +29,7 @@
 
 @implementation WTMPackage 
 
+@synthesize category=_category;
 @synthesize comment=_comment;
 @synthesize extras=_extras;
 @synthesize license=_license;
@@ -37,14 +38,16 @@
 @synthesize rights=_rights;
 @synthesize shelfIndex=_shelfIndex;
 @synthesize activities=_activities;
-@synthesize coverImage=_coverImage;
+@synthesize coverPicture=_coverPicture;
 @synthesize langDictionary=_langDictionary;
 @synthesize libraries=_libraries;
 @synthesize owner=_owner;
 @synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"comment"]){
+	if ([key isEqualToString:@"category"]){
+		[super setValue:value forKey:@"category"];
+	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
@@ -60,8 +63,8 @@
 		[super setValue:value forKey:@"shelfIndex"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
-	} else if ([key isEqualToString:@"coverImage"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
+	} else if ([key isEqualToString:@"coverPicture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverPicture"];
 	} else if ([key isEqualToString:@"langDictionary"]) {
 		[super setValue:[WTMLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionary"];
 	} else if ([key isEqualToString:@"libraries"]) {
@@ -99,27 +102,27 @@
 	_activities=activities;
 }
 
-- (WTMImage*)coverImage{
-	if([_coverImage isAnAlias]){
-		id o=[_registry objectWithUinstID:_coverImage.uinstID];
+- (WTMImage*)coverPicture{
+	if([_coverPicture isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverPicture.uinstID];
 		if(o){
-			_coverImage=o;
+			_coverPicture=o;
 		}
 	}
-	return _coverImage;
+	return _coverPicture;
 }
 
 
-- (WTMImage*)coverImage_auto{
-	_coverImage=[self coverImage];
-	if(!_coverImage){
-		_coverImage=[[WTMImage alloc] initInRegistry:_registry];
+- (WTMImage*)coverPicture_auto{
+	_coverPicture=[self coverPicture];
+	if(!_coverPicture){
+		_coverPicture=[[WTMImage alloc] initInRegistry:_registry];
 	}
-	return _coverImage;
+	return _coverPicture;
 }
 
-- (void)setCoverImage:(WTMImage*)coverImage{
-	_coverImage=coverImage;
+- (void)setCoverPicture:(WTMImage*)coverPicture{
+	_coverPicture=coverPicture;
 }
 
 - (WTMLangDictionary*)langDictionary{
@@ -221,6 +224,7 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.license forKey:@"license"];
@@ -235,11 +239,11 @@
 			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"activities"];
 		}
 	}
-	if(self.coverImage){
+	if(self.coverPicture){
 		if(includeChildren){
-			[dictionary setValue:[self.coverImage dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverImage"];
+			[dictionary setValue:[self.coverPicture dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverPicture"];
 		}else{
-			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
+			[dictionary setValue:[self.coverPicture aliasDictionaryRepresentation] forKey:@"coverPicture"];
 		}
 	}
 	if(self.langDictionary){
@@ -282,6 +286,7 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"license : %@\n",self.license];
@@ -290,7 +295,7 @@
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shelfIndex : %@\n",[NSNumber numberWithInteger:self.shelfIndex]];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
-	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
+	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
 	[s appendFormat:@"owner : %@\n",NSStringFromClass([self.owner class])];
