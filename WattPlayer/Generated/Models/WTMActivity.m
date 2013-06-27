@@ -21,6 +21,7 @@
  
 #import "WTMActivity.h" 
 #import "WTMImage.h"
+#import "WTMPackage.h"
 #import "WTMCollectionOfScene.h"
 
 @implementation WTMActivity 
@@ -36,6 +37,7 @@
 @synthesize shortName=_shortName;
 @synthesize title=_title;
 @synthesize coverImage=_coverImage;
+@synthesize package=_package;
 @synthesize scenes=_scenes;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -61,6 +63,8 @@
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"coverImage"]) {
 		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverImage"];
+	} else if ([key isEqualToString:@"package"]) {
+		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
 	} else if ([key isEqualToString:@"scenes"]) {
 		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scenes"];
 	} else {
@@ -90,6 +94,29 @@
 
 - (void)setCoverImage:(WTMImage*)coverImage{
 	_coverImage=coverImage;
+}
+
+- (WTMPackage*)package{
+	if([_package isAnAlias]){
+		id o=[_registry objectWithUinstID:_package.uinstID];
+		if(o){
+			_package=o;
+		}
+	}
+	return _package;
+}
+
+
+- (WTMPackage*)package_auto{
+	_package=[self package];
+	if(!_package){
+		_package=[[WTMPackage alloc] initInRegistry:_registry];
+	}
+	return _package;
+}
+
+- (void)setPackage:(WTMPackage*)package{
+	_package=package;
 }
 
 - (WTMCollectionOfScene*)scenes{
@@ -139,6 +166,13 @@
 			[dictionary setValue:[self.coverImage aliasDictionaryRepresentation] forKey:@"coverImage"];
 		}
 	}
+	if(self.package){
+		if(includeChildren){
+			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"package"];
+		}else{
+			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"package"];
+		}
+	}
 	if(self.scenes){
 		if(includeChildren){
 			[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"scenes"];
@@ -169,6 +203,7 @@
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"coverImage : %@\n",NSStringFromClass([self.coverImage class])];
+	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
 	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
 	return s;
 }

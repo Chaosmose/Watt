@@ -24,6 +24,7 @@
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="coverImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
+        <relationship name="package" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Package" inverseName="activities" inverseEntity="Package" syncable="YES"/>
         <relationship name="scenes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Scene" inverseName="activity" inverseEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES">
@@ -130,7 +131,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="shelfIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="package" inverseEntity="Activity" syncable="YES"/>
         <relationship name="coverImage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="langDictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LangDictionary" syncable="YES"/>
         <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" inverseName="package" inverseEntity="Library" syncable="YES"/>
@@ -199,7 +200,7 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
-        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="223"/>
+        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="238"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Behavior" positionX="-7344" positionY="-3679" width="128" height="88"/>
         <element name="Datum" positionX="-7904" positionY="-4482" width="128" height="90"/>
