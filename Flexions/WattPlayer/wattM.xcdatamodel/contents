@@ -116,6 +116,16 @@
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="members" inverseEntity="Library" syncable="YES"/>
     </entity>
+    <entity name="Menu" syncable="YES">
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="dictionary"/>
+            </userInfo>
+        </attribute>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="parentMenu" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
+    </entity>
     <entity name="Operand" representedClassName="Operand" syncable="YES">
         <attribute name="expression" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -229,5 +239,6 @@
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7803" positionY="-4149" width="128" height="73"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
+        <element name="Menu" positionX="-7760" positionY="-4482" width="128" height="103"/>
     </elements>
 </model>

@@ -25,6 +25,7 @@
 #import "WTMLibrary.h"
 #import "WTMLinkedAsset.h"
 #import "WTMMember.h"
+#import "WTMMenu.h"
 #import "WTMOperand.h"
 #import "WTMOperator.h"
 #import "WTMCollectionOfActivity.h"

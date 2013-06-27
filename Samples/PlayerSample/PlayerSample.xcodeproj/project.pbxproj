@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E538835C177C8FE700A14201 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E538835B177C8FE700A14201 /* WTMMenu.m */; };
 		E53C6981173B881E00E135CA /* WTMActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6976173B881E00E135CA /* WTMActivityViewController.m */; };
 		E53C6982173B881E00E135CA /* WTMElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6978173B881E00E135CA /* WTMElementViewController.m */; };
 		E53C6985173B881E00E135CA /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
@@ -118,6 +119,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E538835A177C8FE700A14201 /* WTMMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenu.h; sourceTree = "<group>"; };
+		E538835B177C8FE700A14201 /* WTMMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenu.m; sourceTree = "<group>"; };
 		E53C6975173B881E00E135CA /* WTMActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivityViewController.h; sourceTree = "<group>"; };
 		E53C6976173B881E00E135CA /* WTMActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivityViewController.m; sourceTree = "<group>"; };
 		E53C6977173B881E00E135CA /* WTMElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElementViewController.h; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 		E542B935177C43B700B4F6C5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E538835A177C8FE700A14201 /* WTMMenu.h */,
+				E538835B177C8FE700A14201 /* WTMMenu.m */,
 				E542B9BF177C43B700B4F6C5 /* WTMAction.h */,
 				E542B9C0177C43B700B4F6C5 /* WTMAction.m */,
 				E542B9C1177C43B700B4F6C5 /* WTMActivity.h */,
@@ -669,6 +674,7 @@
 				E542BA47177C43B800B4F6C5 /* WTMSound.m in Sources */,
 				E542BA49177C43B800B4F6C5 /* WTMUser.m in Sources */,
 				E542BA4B177C43B800B4F6C5 /* WTMVideo.m in Sources */,
+				E538835C177C8FE700A14201 /* WTMMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
