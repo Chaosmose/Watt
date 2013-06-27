@@ -28,6 +28,7 @@
 
 @synthesize details=_details;
 @synthesize extras=_extras;
+@synthesize imageFileName=_imageFileName;
 @synthesize label=_label;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
@@ -38,6 +39,8 @@
 		[super setValue:value forKey:@"details"];
 	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
+	} else if ([key isEqualToString:@"imageFileName"]) {
+		[super setValue:value forKey:@"imageFileName"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
 	} else if ([key isEqualToString:@"childrens"]) {
@@ -130,6 +133,7 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.details forKey:@"details"];
 	[dictionary setValue:self.extras forKey:@"extras"];
+	[dictionary setValue:self.imageFileName forKey:@"imageFileName"];
 	[dictionary setValue:self.label forKey:@"label"];
 	if(self.childrens){
 		if(includeChildren){
@@ -166,6 +170,7 @@
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"extras : %@\n",self.extras];
+	[s appendFormat:@"imageFileName : %@\n",self.imageFileName];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
