@@ -21,6 +21,8 @@
  
 
 #import "WattObject.h"
+@class WTMCollectionOfMenu;
+@class WTMMenuSection;
 @class WTMMenu;
 
 @interface WTMMenu:WattObject<WattCoding>{
@@ -29,8 +31,12 @@
 @property (nonatomic,copy) NSString * details;
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * label;
-@property (nonatomic,strong) WTMMenu * parentMenu;
+@property (nonatomic,strong) WTMCollectionOfMenu * childrens;
+@property (nonatomic,strong) WTMMenuSection * menuSection;
+@property (nonatomic,strong) WTMMenu * parent;
 
-- (WTMMenu*)parentMenu_auto;
+- (WTMCollectionOfMenu*)childrens_auto;
+- (WTMMenuSection*)menuSection_auto;
+- (WTMMenu*)parent_auto;
 
 @end

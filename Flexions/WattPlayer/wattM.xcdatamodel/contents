@@ -124,7 +124,20 @@
             </userInfo>
         </attribute>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="parentMenu" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
+        <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
+        <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES"/>
+        <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
+    </entity>
+    <entity name="MenuSection" syncable="YES">
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="dictionary"/>
+            </userInfo>
+        </attribute>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="menus" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" inverseName="menuSection" inverseEntity="Menu" syncable="YES"/>
     </entity>
     <entity name="Operand" representedClassName="Operand" syncable="YES">
         <attribute name="expression" optional="YES" attributeType="String" syncable="YES"/>
@@ -229,6 +242,7 @@
         <element name="Library" positionX="-7101" positionY="-3915" width="126" height="118"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
         <element name="Member" positionX="-7119" positionY="-3780" width="128" height="133"/>
+        <element name="Menu" positionX="-7427" positionY="-4500" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
         <element name="Package" positionX="-7139" positionY="-4228" width="128" height="253"/>
@@ -239,6 +253,6 @@
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7803" positionY="-4149" width="128" height="73"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
-        <element name="Menu" positionX="-7760" positionY="-4482" width="128" height="103"/>
+        <element name="MenuSection" positionX="-7589" positionY="-4500" width="128" height="118"/>
     </elements>
 </model>

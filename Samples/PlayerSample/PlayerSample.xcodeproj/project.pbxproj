@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E538835C177C8FE700A14201 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E538835B177C8FE700A14201 /* WTMMenu.m */; };
+		E538835F177C95E300A14201 /* WTMCollectionOfMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E538835E177C95E300A14201 /* WTMCollectionOfMenu.m */; };
+		E5388362177C95EB00A14201 /* WTMMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5388361177C95EB00A14201 /* WTMMenuSection.m */; };
 		E53C6981173B881E00E135CA /* WTMActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6976173B881E00E135CA /* WTMActivityViewController.m */; };
 		E53C6982173B881E00E135CA /* WTMElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6978173B881E00E135CA /* WTMElementViewController.m */; };
 		E53C6985173B881E00E135CA /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
@@ -121,6 +123,10 @@
 /* Begin PBXFileReference section */
 		E538835A177C8FE700A14201 /* WTMMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenu.h; sourceTree = "<group>"; };
 		E538835B177C8FE700A14201 /* WTMMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenu.m; sourceTree = "<group>"; };
+		E538835D177C95E300A14201 /* WTMCollectionOfMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMenu.h; sourceTree = "<group>"; };
+		E538835E177C95E300A14201 /* WTMCollectionOfMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenu.m; sourceTree = "<group>"; };
+		E5388360177C95EB00A14201 /* WTMMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenuSection.h; sourceTree = "<group>"; };
+		E5388361177C95EB00A14201 /* WTMMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenuSection.m; sourceTree = "<group>"; };
 		E53C6975173B881E00E135CA /* WTMActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivityViewController.h; sourceTree = "<group>"; };
 		E53C6976173B881E00E135CA /* WTMActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivityViewController.m; sourceTree = "<group>"; };
 		E53C6977173B881E00E135CA /* WTMElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElementViewController.h; sourceTree = "<group>"; };
@@ -305,6 +311,10 @@
 		E542B935177C43B700B4F6C5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E5388360177C95EB00A14201 /* WTMMenuSection.h */,
+				E5388361177C95EB00A14201 /* WTMMenuSection.m */,
+				E538835D177C95E300A14201 /* WTMCollectionOfMenu.h */,
+				E538835E177C95E300A14201 /* WTMCollectionOfMenu.m */,
 				E538835A177C8FE700A14201 /* WTMMenu.h */,
 				E538835B177C8FE700A14201 /* WTMMenu.m */,
 				E542B9BF177C43B700B4F6C5 /* WTMAction.h */,
@@ -675,6 +685,8 @@
 				E542BA49177C43B800B4F6C5 /* WTMUser.m in Sources */,
 				E542BA4B177C43B800B4F6C5 /* WTMVideo.m in Sources */,
 				E538835C177C8FE700A14201 /* WTMMenu.m in Sources */,
+				E538835F177C95E300A14201 /* WTMCollectionOfMenu.m in Sources */,
+				E5388362177C95EB00A14201 /* WTMMenuSection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
