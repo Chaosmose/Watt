@@ -34,7 +34,7 @@
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  number;
-@property (nonatomic,assign) CGRect  rect;
+@property (nonatomic,copy) NSString * rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;

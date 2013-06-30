@@ -74,11 +74,7 @@
         <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
-        <attribute name="size" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="type" value="size"/>
-            </userInfo>
-        </attribute>
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Label" representedClassName="Label" parentEntity="Asset" syncable="YES">
         <attribute name="font" optional="YES" attributeType="String" syncable="YES"/>
@@ -168,11 +164,7 @@
         <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="packages" inverseEntity="Shelf" syncable="YES"/>
     </entity>
     <entity name="Pdf" representedClassName="Pdf" parentEntity="LinkedAsset" syncable="YES">
-        <attribute name="size" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="type" value="size"/>
-            </userInfo>
-        </attribute>
+        <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Rule" representedClassName="Rule" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
@@ -192,11 +184,7 @@
             </userInfo>
         </attribute>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="rect" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="type" value="rect"/>
-            </userInfo>
-        </attribute>
+        <attribute name="rect" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="scenes" inverseEntity="Activity" syncable="YES"/>

@@ -26,7 +26,7 @@
 @interface WTMImage:WTMLinkedAsset<WattCoding>{
 }
 
-@property (nonatomic,assign) CGSize  size;
+@property (nonatomic,copy) NSString * size;
 
 
 @end

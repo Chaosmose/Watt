@@ -152,7 +152,7 @@
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
-	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
+	[dictionary setValue:self.rect forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.activity){
@@ -194,7 +194,7 @@
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
-	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
+	[s appendFormat:@"rect : %@\n",self.rect];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];

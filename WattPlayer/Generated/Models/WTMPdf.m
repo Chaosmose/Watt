@@ -41,7 +41,7 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:[NSValue valueWithCGSize:self.size] forKey:@"size"];
+	[dictionary setValue:self.size forKey:@"size"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -54,7 +54,7 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"size : %@\n",[NSValue valueWithCGSize:self.size]];
+	[s appendFormat:@"size : %@\n",self.size];
 	return s;
 }
 
