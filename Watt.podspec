@@ -7,9 +7,9 @@ Pod::Spec.new do |s|
   s.source      = { :git => 'https://github.com/benoit-pereira-da-silva/Watt.git'}
   s.license     = { :type => "LGPL", :file => "LICENSE" }
 
-  s.platform = :ios, '5.0'
+  s.ios.deployment_target = '5.0'
+  s.osx.deployment_target = '10.7'
   s.requires_arc = true
   s.source_files =  'WattPlayer','WattPlayer/**/*.{h,m}'
   s.public_header_files = 'WattPlayer/**/*.h'
-  s.ios.deployment_target = '5.0'
 end
