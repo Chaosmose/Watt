@@ -26,7 +26,7 @@
 @interface WTMVideo:WTMLinkedAsset<WattCoding>{
 }
 
-@property (nonatomic,assign) CGSize  duration;
+@property (nonatomic,assign) NSInteger  duration;
 
 
 @end
