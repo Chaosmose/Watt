@@ -10,9 +10,6 @@
 		E538835C177C8FE700A14201 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E538835B177C8FE700A14201 /* WTMMenu.m */; };
 		E538835F177C95E300A14201 /* WTMCollectionOfMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E538835E177C95E300A14201 /* WTMCollectionOfMenu.m */; };
 		E5388362177C95EB00A14201 /* WTMMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5388361177C95EB00A14201 /* WTMMenuSection.m */; };
-		E53C6981173B881E00E135CA /* WTMActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6976173B881E00E135CA /* WTMActivityViewController.m */; };
-		E53C6982173B881E00E135CA /* WTMElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6978173B881E00E135CA /* WTMElementViewController.m */; };
-		E53C6985173B881E00E135CA /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
 		E542BA07177C43B800B4F6C5 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E542B9C0177C43B700B4F6C5 /* WTMAction.m */; };
 		E542BA08177C43B800B4F6C5 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E542B9C0177C43B700B4F6C5 /* WTMAction.m */; };
 		E542BA09177C43B800B4F6C5 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E542B9C2177C43B700B4F6C5 /* WTMActivity.m */; };
@@ -83,9 +80,6 @@
 		E542BA4C177C43B800B4F6C5 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E542BA04177C43B800B4F6C5 /* WTMVideo.m */; };
 		E5998FBD174CB1AA0066EFE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
 		E5998FBE174CB1AA0066EFE8 /* WTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462541732A4A000E654A1 /* WTMAppDelegate.m */; };
-		E5998FDC174CB1AA0066EFE8 /* WTMActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6976173B881E00E135CA /* WTMActivityViewController.m */; };
-		E5998FDD174CB1AA0066EFE8 /* WTMElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C6978173B881E00E135CA /* WTMElementViewController.m */; };
-		E5998FE0174CB1AA0066EFE8 /* WTMSceneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E53C697E173B881E00E135CA /* WTMSceneViewController.m */; };
 		E5998FE9174CB1AA0066EFE8 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
 		E5998FEA174CB1AA0066EFE8 /* WattMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D949174671F500A6A46F /* WattMPackager.m */; };
 		E5998FED174CB1AA0066EFE8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
@@ -127,12 +121,6 @@
 		E538835E177C95E300A14201 /* WTMCollectionOfMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenu.m; sourceTree = "<group>"; };
 		E5388360177C95EB00A14201 /* WTMMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenuSection.h; sourceTree = "<group>"; };
 		E5388361177C95EB00A14201 /* WTMMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenuSection.m; sourceTree = "<group>"; };
-		E53C6975173B881E00E135CA /* WTMActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivityViewController.h; sourceTree = "<group>"; };
-		E53C6976173B881E00E135CA /* WTMActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivityViewController.m; sourceTree = "<group>"; };
-		E53C6977173B881E00E135CA /* WTMElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElementViewController.h; sourceTree = "<group>"; };
-		E53C6978173B881E00E135CA /* WTMElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMElementViewController.m; sourceTree = "<group>"; };
-		E53C697D173B881E00E135CA /* WTMSceneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMSceneViewController.h; sourceTree = "<group>"; };
-		E53C697E173B881E00E135CA /* WTMSceneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMSceneViewController.m; sourceTree = "<group>"; };
 		E542B9BF177C43B700B4F6C5 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E542B9C0177C43B700B4F6C5 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E542B9C1177C43B700B4F6C5 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -284,12 +272,6 @@
 		E53C6974173B881E00E135CA /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
-				E53C6975173B881E00E135CA /* WTMActivityViewController.h */,
-				E53C6976173B881E00E135CA /* WTMActivityViewController.m */,
-				E53C6977173B881E00E135CA /* WTMElementViewController.h */,
-				E53C6978173B881E00E135CA /* WTMElementViewController.m */,
-				E53C697D173B881E00E135CA /* WTMSceneViewController.h */,
-				E53C697E173B881E00E135CA /* WTMSceneViewController.m */,
 			);
 			path = BaseClasses;
 			sourceTree = "<group>";
@@ -589,9 +571,6 @@
 			files = (
 				E5998FBD174CB1AA0066EFE8 /* main.m in Sources */,
 				E5998FBE174CB1AA0066EFE8 /* WTMAppDelegate.m in Sources */,
-				E5998FDC174CB1AA0066EFE8 /* WTMActivityViewController.m in Sources */,
-				E5998FDD174CB1AA0066EFE8 /* WTMElementViewController.m in Sources */,
-				E5998FE0174CB1AA0066EFE8 /* WTMSceneViewController.m in Sources */,
 				E5998FE9174CB1AA0066EFE8 /* WTMViewController.m in Sources */,
 				E5998FEA174CB1AA0066EFE8 /* WattMPackager.m in Sources */,
 				E5DE3ADB174CF797005937DC /* WattApi.m in Sources */,
@@ -641,9 +620,6 @@
 			files = (
 				E5B462511732A4A000E654A1 /* main.m in Sources */,
 				E5B462551732A4A000E654A1 /* WTMAppDelegate.m in Sources */,
-				E53C6981173B881E00E135CA /* WTMActivityViewController.m in Sources */,
-				E53C6982173B881E00E135CA /* WTMElementViewController.m in Sources */,
-				E53C6985173B881E00E135CA /* WTMSceneViewController.m in Sources */,
 				E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */,
 				E5C5D94A174671F500A6A46F /* WattMPackager.m in Sources */,
 				E5DE3ADA174CF797005937DC /* WattApi.m in Sources */,

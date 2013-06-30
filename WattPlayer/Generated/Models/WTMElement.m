@@ -140,7 +140,7 @@
 	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:self.extras forKey:@"extras"];
-	[dictionary setValue:[NSValue valueWithCGRect:self.rect] forKey:@"rect"];
+	[dictionary setValue:self.rect forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.sceneIndex] forKey:@"sceneIndex"];
 	if(self.asset){
@@ -179,7 +179,7 @@
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"extras : %@\n",self.extras];
-	[s appendFormat:@"rect : %@\n",[NSValue valueWithCGRect:self.rect]];
+	[s appendFormat:@"rect : %@\n",self.rect];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
 	[s appendFormat:@"asset : %@\n",NSStringFromClass([self.asset class])];

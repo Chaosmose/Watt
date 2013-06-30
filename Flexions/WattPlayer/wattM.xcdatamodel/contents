@@ -52,11 +52,7 @@
                 <entry key="type" value="dictionary"/>
             </userInfo>
         </attribute>
-        <attribute name="rect" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="type" value="rect"/>
-            </userInfo>
-        </attribute>
+        <attribute name="rect" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="sceneIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="asset" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Asset" syncable="YES"/>
@@ -222,7 +218,7 @@
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Behavior" positionX="-7344" positionY="-3679" width="128" height="88"/>
         <element name="Datum" positionX="-7904" positionY="-4482" width="128" height="90"/>
-        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="180"/>
+        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="178"/>
         <element name="Group" positionX="-7814" positionY="-4005" width="128" height="73"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>

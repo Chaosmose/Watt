@@ -31,7 +31,7 @@
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,strong) NSDictionary * extras;
-@property (nonatomic,assign) CGRect  rect;
+@property (nonatomic,copy) NSString * rect;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,assign) NSInteger  sceneIndex;
 @property (nonatomic,strong) WTMAsset * asset;
