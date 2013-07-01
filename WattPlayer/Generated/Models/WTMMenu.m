@@ -30,6 +30,7 @@
 @synthesize extras=_extras;
 @synthesize imageFileName=_imageFileName;
 @synthesize label=_label;
+@synthesize urlString=_urlString;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
 @synthesize parent=_parent;
@@ -43,6 +44,8 @@
 		[super setValue:value forKey:@"imageFileName"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
+	} else if ([key isEqualToString:@"urlString"]) {
+		[super setValue:value forKey:@"urlString"];
 	} else if ([key isEqualToString:@"childrens"]) {
 		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"childrens"];
 	} else if ([key isEqualToString:@"menuSection"]) {
@@ -135,6 +138,7 @@
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.imageFileName forKey:@"imageFileName"];
 	[dictionary setValue:self.label forKey:@"label"];
+	[dictionary setValue:self.urlString forKey:@"urlString"];
 	if(self.childrens){
 		if(includeChildren){
 			[dictionary setValue:[self.childrens dictionaryRepresentationWithChildren:includeChildren] forKey:@"childrens"];
@@ -172,6 +176,7 @@
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"imageFileName : %@\n",self.imageFileName];
 	[s appendFormat:@"label : %@\n",self.label];
+	[s appendFormat:@"urlString : %@\n",self.urlString];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
 	[s appendFormat:@"parent : %@\n",NSStringFromClass([self.parent class])];

@@ -188,7 +188,7 @@
         _propertiesKeys=[NSMutableArray array];
     }
     Class currentClass=[self class];
-    NSUInteger count;
+    unsigned int  count;
     // (!) IMPORTANT
     // Each class has its own set of property in the inheritance chain.
     // So we do perform while "currentClass" has a superClass

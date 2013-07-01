@@ -117,6 +117,7 @@
         </attribute>
         <attribute name="imageFileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
         <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES"/>
         <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
@@ -224,7 +225,7 @@
         <element name="Library" positionX="-7101" positionY="-3915" width="126" height="118"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
         <element name="Member" positionX="-7119" positionY="-3780" width="128" height="133"/>
-        <element name="Menu" positionX="-7418" positionY="-4500" width="128" height="148"/>
+        <element name="Menu" positionX="-7418" positionY="-4500" width="128" height="165"/>
         <element name="MenuSection" positionX="-7589" positionY="-4500" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
