@@ -106,6 +106,7 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
+        <attribute name="thumbnailPath" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="members" inverseEntity="Library" syncable="YES"/>
     </entity>
     <entity name="Menu" syncable="YES">
@@ -224,7 +225,7 @@
         <element name="LangDictionary" positionX="-7274" positionY="-4228" width="128" height="88"/>
         <element name="Library" positionX="-7101" positionY="-3915" width="126" height="118"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
-        <element name="Member" positionX="-7119" positionY="-3780" width="128" height="133"/>
+        <element name="Member" positionX="-7128" positionY="-3771" width="128" height="148"/>
         <element name="Menu" positionX="-7418" positionY="-4500" width="128" height="165"/>
         <element name="MenuSection" positionX="-7589" positionY="-4500" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>

@@ -29,6 +29,7 @@
 @synthesize index=_index;
 @synthesize name=_name;
 @synthesize rights=_rights;
+@synthesize thumbnailPath=_thumbnailPath;
 @synthesize library=_library;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -42,6 +43,8 @@
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
+	} else if ([key isEqualToString:@"thumbnailPath"]) {
+		[super setValue:value forKey:@"thumbnailPath"];
 	} else if ([key isEqualToString:@"library"]) {
 		[super setValue:[WTMLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"library"];
 	} else {
@@ -85,6 +88,7 @@
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.name forKey:@"name"];
 	[dictionary setValue:self.rights forKey:@"rights"];
+	[dictionary setValue:self.thumbnailPath forKey:@"thumbnailPath"];
 	if(self.library){
 		if(includeChildren){
 			[dictionary setValue:[self.library dictionaryRepresentationWithChildren:includeChildren] forKey:@"library"];
@@ -109,6 +113,7 @@
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"rights : %@\n",self.rights];
+	[s appendFormat:@"thumbnailPath : %@\n",self.thumbnailPath];
 	[s appendFormat:@"library : %@\n",NSStringFromClass([self.library class])];
 	return s;
 }

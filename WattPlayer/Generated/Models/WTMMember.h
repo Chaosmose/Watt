@@ -31,6 +31,7 @@
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,copy) NSString * rights;
+@property (nonatomic,copy) NSString * thumbnailPath;
 @property (nonatomic,strong) WTMLibrary * library;
 
 - (WTMLibrary*)library_auto;
