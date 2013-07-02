@@ -19,7 +19,6 @@
         </attribute>
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="nature" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="packageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,7 +51,6 @@
         </attribute>
         <attribute name="rect" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
-        <attribute name="sceneIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="asset" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Asset" syncable="YES"/>
         <relationship name="behavior" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Behavior" syncable="YES"/>
         <relationship name="scene" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
@@ -103,7 +101,6 @@
                 <entry key="type" value="dictionary"/>
             </userInfo>
         </attribute>
-        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
         <attribute name="thumbnailPath" optional="YES" attributeType="String" syncable="YES"/>
@@ -158,7 +155,6 @@
         <attribute name="minEngineVersion" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="String" defaultValueString="RWX-RWX-RWX" syncable="YES"/>
-        <attribute name="shelfIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="package" inverseEntity="Activity" syncable="YES"/>
         <relationship name="coverPicture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="langDictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LangDictionary" syncable="YES"/>
@@ -177,7 +173,6 @@
         <relationship name="operator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operator" syncable="YES"/>
     </entity>
     <entity name="Scene" representedClassName="Scene" syncable="YES">
-        <attribute name="activityIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
@@ -218,10 +213,11 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="73"/>
-        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="253"/>
+        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="238"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
+        <element name="Band" positionX="-7389" positionY="-3865" width="128" height="103"/>
         <element name="Behavior" positionX="-7389" positionY="-3636" width="128" height="88"/>
-        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="178"/>
+        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="163"/>
         <element name="Group" positionX="-7814" positionY="-4005" width="128" height="73"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="60"/>
@@ -230,19 +226,18 @@
         <element name="LangDictionary" positionX="-7274" positionY="-4228" width="128" height="88"/>
         <element name="Library" positionX="-7119" positionY="-3951" width="126" height="148"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="73"/>
-        <element name="Member" positionX="-7128" positionY="-3771" width="128" height="148"/>
+        <element name="Member" positionX="-7137" positionY="-3771" width="128" height="133"/>
         <element name="Menu" positionX="-7020" positionY="-4464" width="128" height="178"/>
         <element name="MenuSection" positionX="-7220" positionY="-4464" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
-        <element name="Package" positionX="-7139" positionY="-4228" width="128" height="253"/>
+        <element name="Package" positionX="-7139" positionY="-4228" width="128" height="238"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
         <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="118"/>
-        <element name="Scene" positionX="-6606" positionY="-4027" width="128" height="238"/>
+        <element name="Scene" positionX="-6606" positionY="-4027" width="128" height="223"/>
         <element name="Shelf" positionX="-7571" positionY="-4324" width="128" height="118"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7803" positionY="-4149" width="128" height="73"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
-        <element name="Band" positionX="-7346" positionY="-3937" width="128" height="103"/>
     </elements>
 </model>

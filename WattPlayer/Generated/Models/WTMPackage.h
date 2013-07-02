@@ -38,7 +38,6 @@
 @property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,copy) NSString * rights;
-@property (nonatomic,assign) NSInteger  shelfIndex;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMLangDictionary * langDictionary;

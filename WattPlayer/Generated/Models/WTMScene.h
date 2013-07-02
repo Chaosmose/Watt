@@ -29,7 +29,6 @@
 @interface WTMScene:WattObject<WattCoding>{
 }
 
-@property (nonatomic,assign) NSInteger  activityIndex;
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;

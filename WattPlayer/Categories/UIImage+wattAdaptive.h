@@ -25,7 +25,6 @@
 
 @interface UIImage(wattAdaptive)
 
-#warning todo add localization ? 
 /*
  Support of multiple modifiers
  

@@ -33,7 +33,6 @@
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * rect;
 @property (nonatomic,copy) NSString * rights;
-@property (nonatomic,assign) NSInteger  sceneIndex;
 @property (nonatomic,strong) WTMAsset * asset;
 @property (nonatomic,strong) WTMBehavior * behavior;
 @property (nonatomic,strong) WTMScene * scene;

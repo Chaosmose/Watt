@@ -36,7 +36,6 @@
 @synthesize minEngineVersion=_minEngineVersion;
 @synthesize name=_name;
 @synthesize rights=_rights;
-@synthesize shelfIndex=_shelfIndex;
 @synthesize activities=_activities;
 @synthesize coverPicture=_coverPicture;
 @synthesize langDictionary=_langDictionary;
@@ -59,8 +58,6 @@
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
-	} else if ([key isEqualToString:@"shelfIndex"]) {
-		[super setValue:value forKey:@"shelfIndex"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
 	} else if ([key isEqualToString:@"coverPicture"]) {
@@ -231,7 +228,6 @@
 	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
 	[dictionary setValue:self.name forKey:@"name"];
 	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.shelfIndex] forKey:@"shelfIndex"];
 	if(self.activities){
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
@@ -293,7 +289,6 @@
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"shelfIndex : %@\n",[NSNumber numberWithInteger:self.shelfIndex]];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
 	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];

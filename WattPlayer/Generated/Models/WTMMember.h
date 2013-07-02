@@ -28,7 +28,6 @@
 
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,strong) NSDictionary * extras;
-@property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * thumbnailPath;

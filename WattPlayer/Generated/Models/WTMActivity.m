@@ -32,7 +32,6 @@
 @synthesize extras=_extras;
 @synthesize level=_level;
 @synthesize nature=_nature;
-@synthesize packageIndex=_packageIndex;
 @synthesize rating=_rating;
 @synthesize rights=_rights;
 @synthesize shortName=_shortName;
@@ -54,8 +53,6 @@
 		[super setValue:value forKey:@"level"];
 	} else if ([key isEqualToString:@"nature"]) {
 		[super setValue:value forKey:@"nature"];
-	} else if ([key isEqualToString:@"packageIndex"]) {
-		[super setValue:value forKey:@"packageIndex"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
 	} else if ([key isEqualToString:@"rights"]) {
@@ -158,7 +155,6 @@
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:self.nature forKey:@"nature"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.packageIndex] forKey:@"packageIndex"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
 	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
@@ -202,7 +198,6 @@
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"nature : %@\n",self.nature];
-	[s appendFormat:@"packageIndex : %@\n",[NSNumber numberWithInteger:self.packageIndex]];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shortName : %@\n",self.shortName];

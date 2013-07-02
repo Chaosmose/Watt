@@ -34,7 +34,6 @@
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  level;
 @property (nonatomic,copy) NSString * nature;
-@property (nonatomic,assign) NSInteger  packageIndex;
 @property (nonatomic,assign) NSInteger  rating;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * shortName;

@@ -31,7 +31,6 @@
 @synthesize extras=_extras;
 @synthesize rect=_rect;
 @synthesize rights=_rights;
-@synthesize sceneIndex=_sceneIndex;
 @synthesize asset=_asset;
 @synthesize behavior=_behavior;
 @synthesize scene=_scene;
@@ -47,8 +46,6 @@
 		[super setValue:value forKey:@"rect"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
-	} else if ([key isEqualToString:@"sceneIndex"]) {
-		[super setValue:value forKey:@"sceneIndex"];
 	} else if ([key isEqualToString:@"asset"]) {
 		[super setValue:[WTMAsset instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"asset"];
 	} else if ([key isEqualToString:@"behavior"]) {
@@ -142,7 +139,6 @@
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.rect forKey:@"rect"];
 	[dictionary setValue:self.rights forKey:@"rights"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.sceneIndex] forKey:@"sceneIndex"];
 	if(self.asset){
 		if(includeChildren){
 			[dictionary setValue:[self.asset dictionaryRepresentationWithChildren:includeChildren] forKey:@"asset"];
@@ -181,7 +177,6 @@
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"rect : %@\n",self.rect];
 	[s appendFormat:@"rights : %@\n",self.rights];
-	[s appendFormat:@"sceneIndex : %@\n",[NSNumber numberWithInteger:self.sceneIndex]];
 	[s appendFormat:@"asset : %@\n",NSStringFromClass([self.asset class])];
 	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
 	[s appendFormat:@"scene : %@\n",NSStringFromClass([self.scene class])];
