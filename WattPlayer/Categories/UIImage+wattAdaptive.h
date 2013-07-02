@@ -20,12 +20,12 @@
 //  Copyright (c) 2013 Azurgate. All rights reserved.
 //
 
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 
 @interface UIImage(wattAdaptive)
 
 #warning todo add localization ? 
-
 /*
  Support of multiple modifiers
  
@@ -35,3 +35,4 @@
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
 
 @end
+#endif

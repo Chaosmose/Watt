@@ -21,22 +21,26 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 #import "WattApi.h"
 #import "WattObject.h"
 #import "WattMPackager.h"
 #import "WattCollectionOfObject.h"
 #import "WattRegistry.h"
-#import "UIImage+wattAdaptive.h"
 
 //Import of flexion generated classes
 #import "WTMModelsImports.h"
-
 
 #ifndef WT_MACROS
 #define WT_CODING_KEYS
 #define wattAPI [WattApi sharedInstance]
 #define wattPackager [WattMPackager sharedInstance]
+
+#if TARGET_OS_IPHONE
+#define currentOrientation() [[UIApplication sharedApplication] statusBarOrientation]
+#define isLandscapeOrientation() UIDeviceOrientationIsLandscape(currentOrientation())
+#import "UIImage+wattAdaptive.h"
 #endif
 
-
-
+#endif
