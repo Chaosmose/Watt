@@ -32,7 +32,7 @@
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * imageFileName;
 @property (nonatomic,copy) NSString * label;
-@property (nonatomic,assign) NSInteger  referenceID;
+@property (nonatomic,assign) id  reference;
 @property (nonatomic,copy) NSString * urlString;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
 @property (nonatomic,strong) WTMMenuSection * menuSection;

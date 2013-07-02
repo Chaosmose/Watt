@@ -22,6 +22,7 @@
 #import "WTMScene.h" 
 #import "WTMActivity.h"
 #import "WTMBehavior.h"
+#import "WTMImage.h"
 #import "WTMCollectionOfElement.h"
 
 @implementation WTMScene 
@@ -37,6 +38,7 @@
 @synthesize title=_title;
 @synthesize activity=_activity;
 @synthesize behavior=_behavior;
+@synthesize coverPicture=_coverPicture;
 @synthesize elements=_elements;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -62,6 +64,8 @@
 		[super setValue:[WTMActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activity"];
 	} else if ([key isEqualToString:@"behavior"]) {
 		[super setValue:[WTMBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behavior"];
+	} else if ([key isEqualToString:@"coverPicture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverPicture"];
 	} else if ([key isEqualToString:@"elements"]) {
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
 	} else {
@@ -114,6 +118,29 @@
 
 - (void)setBehavior:(WTMBehavior*)behavior{
 	_behavior=behavior;
+}
+
+- (WTMImage*)coverPicture{
+	if([_coverPicture isAnAlias]){
+		id o=[_registry objectWithUinstID:_coverPicture.uinstID];
+		if(o){
+			_coverPicture=o;
+		}
+	}
+	return _coverPicture;
+}
+
+
+- (WTMImage*)coverPicture_auto{
+	_coverPicture=[self coverPicture];
+	if(!_coverPicture){
+		_coverPicture=[[WTMImage alloc] initInRegistry:_registry];
+	}
+	return _coverPicture;
+}
+
+- (void)setCoverPicture:(WTMImage*)coverPicture{
+	_coverPicture=coverPicture;
 }
 
 - (WTMCollectionOfElement*)elements{
@@ -169,6 +196,13 @@
 			[dictionary setValue:[self.behavior aliasDictionaryRepresentation] forKey:@"behavior"];
 		}
 	}
+	if(self.coverPicture){
+		if(includeChildren){
+			[dictionary setValue:[self.coverPicture dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverPicture"];
+		}else{
+			[dictionary setValue:[self.coverPicture aliasDictionaryRepresentation] forKey:@"coverPicture"];
+		}
+	}
 	if(self.elements){
 		if(includeChildren){
 			[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"elements"];
@@ -199,6 +233,7 @@
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
 	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
+	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
 	return s;
 }

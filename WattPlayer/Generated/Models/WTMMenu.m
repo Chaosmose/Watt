@@ -30,7 +30,7 @@
 @synthesize extras=_extras;
 @synthesize imageFileName=_imageFileName;
 @synthesize label=_label;
-@synthesize referenceID=_referenceID;
+@synthesize reference=_reference;
 @synthesize urlString=_urlString;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
@@ -45,8 +45,8 @@
 		[super setValue:value forKey:@"imageFileName"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
-	} else if ([key isEqualToString:@"referenceID"]) {
-		[super setValue:value forKey:@"referenceID"];
+	} else if ([key isEqualToString:@"reference"]) {
+		[super setValue:value forKey:@"reference"];
 	} else if ([key isEqualToString:@"urlString"]) {
 		[super setValue:value forKey:@"urlString"];
 	} else if ([key isEqualToString:@"childrens"]) {
@@ -141,7 +141,7 @@
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.imageFileName forKey:@"imageFileName"];
 	[dictionary setValue:self.label forKey:@"label"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.referenceID] forKey:@"referenceID"];
+	[dictionary setValue:self.reference forKey:@"reference"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
 	if(self.childrens){
 		if(includeChildren){
@@ -180,7 +180,7 @@
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"imageFileName : %@\n",self.imageFileName];
 	[s appendFormat:@"label : %@\n",self.label];
-	[s appendFormat:@"referenceID : %@\n",[NSNumber numberWithInteger:self.referenceID]];
+	[s appendFormat:@"reference : %@\n",self.reference];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
