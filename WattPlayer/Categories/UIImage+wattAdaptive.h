@@ -13,20 +13,25 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
-//  WTMPackager.h
-//  PlayerSample
+//  UIImage+adaptive.h
+//  
 //
-//  Created by Benoit Pereira da Silva on 17/05/13.
-//  Copyright (c) 2013 Pereira da Silva. All rights reserved.
+//  Created by Benoit Pereira da Silva on 05/04/13.
+//  Copyright (c) 2013 Azurgate. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-#define documentPath 
+@interface UIImage(wattAdaptive)
 
-@interface WattMPackager : NSObject
+#warning todo add localization ? 
 
-// WTMPackager singleton accessor
-+ (WattMPackager*)sharedInstance;
+/*
+ Support of multiple modifiers
+ 
+ Standard <ImageName><orientation_modifier><device_modifier>.<filename_extension>
+ Retina <ImageName><orientation_modifier>@2x<device_modifier>.<filename_extension>
+ */
++(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
 
 @end

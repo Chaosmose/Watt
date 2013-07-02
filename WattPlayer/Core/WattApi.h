@@ -22,6 +22,7 @@
 #import "WattObject.h"
 #import "WattRegistry.h"
 
+
 #pragma mark - WattApi
 
 @protocol WTMlocalizationDelegateProtocol;
@@ -34,6 +35,10 @@
 
 // WattMApi singleton accessor
 + (WattApi*)sharedInstance;
+
+#pragma mark facility
+
+- (NSString *) applicationDocumentsDirectory;
 
 #pragma mark localization
 
@@ -52,7 +57,4 @@
 - (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value;
 @end
 
-#ifndef WTM_API
-//Singleton accessor alias
-#define wattAPI [WattApi sharedInstance]
-#endif
+#
