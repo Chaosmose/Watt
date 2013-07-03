@@ -42,6 +42,21 @@
 }
 
 
+- (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
+    NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
+    if(array && [array count]>0){
+        Class currentClass=[self class];
+        id instance=[[currentClass alloc]initInRegistry:nil];
+        for (id o in array) {
+            [instance addObject:o];
+        }
+        return instance;
+    }
+    return nil;
+}
+
+
+
 - (void)localize{
     if(![self hasBeenLocalized]){
         _currentLocale=[[NSLocale currentLocale] localeIdentifier];

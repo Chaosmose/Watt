@@ -43,6 +43,9 @@
 	return s;
 }
 
+- (WTMCollectionOfScene*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
+	return (WTMCollectionOfScene*)[super filteredCollectionUsingPredicate:predicate withRegistry:registry];
+}
 
 - (NSUInteger)count{
     return [_collection count];

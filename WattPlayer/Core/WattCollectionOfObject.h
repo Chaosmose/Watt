@@ -26,10 +26,15 @@
 @class WattObjectAlias;
 
 @interface WattCollectionOfObject : WattObject {
-    @protected
+@protected
     NSMutableArray* _collection;
 }
 
+/*
+ Returns a collection filtered.
+ Commonly you pass nil as registry to make the collection un persistent.
+ */
+-(WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 
 // Accessors
 

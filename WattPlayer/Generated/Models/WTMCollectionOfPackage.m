@@ -43,6 +43,9 @@
 	return s;
 }
 
+- (WTMCollectionOfPackage*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
+	return (WTMCollectionOfPackage*)[super filteredCollectionUsingPredicate:predicate withRegistry:registry];
+}
 
 - (NSUInteger)count{
     return [_collection count];

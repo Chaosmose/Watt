@@ -25,7 +25,7 @@
 @interface WTMCollectionOfLibrary:WattCollectionOfObject <WattCoding>{
 }
 
-
+- (WTMCollectionOfLibrary*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMLibrary *)objectAtIndex:(NSUInteger)index;
 - (WTMLibrary *)lastObject;
