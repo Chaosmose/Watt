@@ -27,7 +27,7 @@
 }
 
 @property (nonatomic,copy) NSString * font;
-@property (nonatomic,copy) NSString * value;
+@property (nonatomic,copy) NSString * text;
 
 
 @end

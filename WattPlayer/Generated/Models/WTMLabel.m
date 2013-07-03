@@ -24,13 +24,13 @@
 @implementation WTMLabel 
 
 @synthesize font=_font;
-@synthesize value=_value;
+@synthesize text=_text;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"font"]){
 		[super setValue:value forKey:@"font"];
-	} else if ([key isEqualToString:@"value"]) {
-		[super setValue:value forKey:@"value"];
+	} else if ([key isEqualToString:@"text"]) {
+		[super setValue:value forKey:@"text"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -45,7 +45,7 @@
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.font forKey:@"font"];
-	[dictionary setValue:self.value forKey:@"value"];
+	[dictionary setValue:self.text forKey:@"text"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -59,7 +59,7 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"font : %@\n",self.font];
-	[s appendFormat:@"value : %@\n",self.value];
+	[s appendFormat:@"text : %@\n",self.text];
 	return s;
 }
 

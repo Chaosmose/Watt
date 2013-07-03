@@ -23,13 +23,10 @@
 
 @implementation WTMLinkedAsset 
 
-@synthesize fileName=_fileName;
 @synthesize relativePath=_relativePath;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"fileName"]){
-		[super setValue:value forKey:@"fileName"];
-	} else if ([key isEqualToString:@"relativePath"]) {
+	if ([key isEqualToString:@"relativePath"]){
 		[super setValue:value forKey:@"relativePath"];
 	} else {
 		[super setValue:value forKey:key];
@@ -44,7 +41,6 @@
         return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
-	[dictionary setValue:self.fileName forKey:@"fileName"];
 	[dictionary setValue:self.relativePath forKey:@"relativePath"];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
@@ -58,7 +54,6 @@
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
-	[s appendFormat:@"fileName : %@\n",self.fileName];
 	[s appendFormat:@"relativePath : %@\n",self.relativePath];
 	return s;
 }

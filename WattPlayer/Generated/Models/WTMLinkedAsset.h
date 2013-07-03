@@ -26,7 +26,6 @@
 @interface WTMLinkedAsset:WTMAsset<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * fileName;
 @property (nonatomic,copy) NSString * relativePath;
 
 
