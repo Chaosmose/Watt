@@ -21,29 +21,30 @@
  
 #import "WTMMenuSection.h" 
 #import "WTMCollectionOfMenu.h"
+#import "WTMImage.h"
 
 @implementation WTMMenuSection 
 
 @synthesize details=_details;
 @synthesize extras=_extras;
-@synthesize imageFileName=_imageFileName;
 @synthesize index=_index;
 @synthesize label=_label;
 @synthesize menus=_menus;
+@synthesize picture=_picture;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
 		[super setValue:value forKey:@"details"];
 	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
-	} else if ([key isEqualToString:@"imageFileName"]) {
-		[super setValue:value forKey:@"imageFileName"];
 	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
 	} else if ([key isEqualToString:@"menus"]) {
 		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menus"];
+	} else if ([key isEqualToString:@"picture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -73,6 +74,29 @@
 	_menus=menus;
 }
 
+- (WTMImage*)picture{
+	if([_picture isAnAlias]){
+		id o=[_registry objectWithUinstID:_picture.uinstID];
+		if(o){
+			_picture=o;
+		}
+	}
+	return _picture;
+}
+
+
+- (WTMImage*)picture_auto{
+	_picture=[self picture];
+	if(!_picture){
+		_picture=[[WTMImage alloc] initInRegistry:_registry];
+	}
+	return _picture;
+}
+
+- (void)setPicture:(WTMImage*)picture{
+	_picture=picture;
+}
+
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
@@ -82,7 +106,6 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.details forKey:@"details"];
 	[dictionary setValue:self.extras forKey:@"extras"];
-	[dictionary setValue:self.imageFileName forKey:@"imageFileName"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.label forKey:@"label"];
 	if(self.menus){
@@ -90,6 +113,13 @@
 			[dictionary setValue:[self.menus dictionaryRepresentationWithChildren:includeChildren] forKey:@"menus"];
 		}else{
 			[dictionary setValue:[self.menus aliasDictionaryRepresentation] forKey:@"menus"];
+		}
+	}
+	if(self.picture){
+		if(includeChildren){
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+		}else{
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -106,10 +136,10 @@
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"extras : %@\n",self.extras];
-	[s appendFormat:@"imageFileName : %@\n",self.imageFileName];
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"menus : %@\n",NSStringFromClass([self.menus class])];
+	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	return s;
 }
 

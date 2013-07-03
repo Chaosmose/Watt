@@ -22,10 +22,10 @@
 
 #import "WattObject.h"
 @class WTMCollectionOfActivity;
-@class WTMImage;
 @class WTMLangDictionary;
 @class WTMCollectionOfLibrary;
 @class WTMUser;
+@class WTMImage;
 @class WTMShelf;
 
 @interface WTMPackage:WattObject<WattCoding>{
@@ -39,17 +39,17 @@
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
-@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMUser * owner;
+@property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMShelf * shelf;
 
 - (WTMCollectionOfActivity*)activities_auto;
-- (WTMImage*)coverPicture_auto;
 - (WTMLangDictionary*)langDictionary_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
 - (WTMUser*)owner_auto;
+- (WTMImage*)picture_auto;
 - (WTMShelf*)shelf_auto;
 
 @end

@@ -22,8 +22,8 @@
 #import "WTMScene.h" 
 #import "WTMActivity.h"
 #import "WTMBehavior.h"
-#import "WTMImage.h"
 #import "WTMCollectionOfElement.h"
+#import "WTMImage.h"
 
 @implementation WTMScene 
 
@@ -37,8 +37,8 @@
 @synthesize title=_title;
 @synthesize activity=_activity;
 @synthesize behavior=_behavior;
-@synthesize coverPicture=_coverPicture;
 @synthesize elements=_elements;
+@synthesize picture=_picture;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"category"]){
@@ -61,10 +61,10 @@
 		[super setValue:[WTMActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activity"];
 	} else if ([key isEqualToString:@"behavior"]) {
 		[super setValue:[WTMBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behavior"];
-	} else if ([key isEqualToString:@"coverPicture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverPicture"];
 	} else if ([key isEqualToString:@"elements"]) {
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
+	} else if ([key isEqualToString:@"picture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -117,29 +117,6 @@
 	_behavior=behavior;
 }
 
-- (WTMImage*)coverPicture{
-	if([_coverPicture isAnAlias]){
-		id o=[_registry objectWithUinstID:_coverPicture.uinstID];
-		if(o){
-			_coverPicture=o;
-		}
-	}
-	return _coverPicture;
-}
-
-
-- (WTMImage*)coverPicture_auto{
-	_coverPicture=[self coverPicture];
-	if(!_coverPicture){
-		_coverPicture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _coverPicture;
-}
-
-- (void)setCoverPicture:(WTMImage*)coverPicture{
-	_coverPicture=coverPicture;
-}
-
 - (WTMCollectionOfElement*)elements{
 	if([_elements isAnAlias]){
 		id o=[_registry objectWithUinstID:_elements.uinstID];
@@ -161,6 +138,29 @@
 
 - (void)setElements:(WTMCollectionOfElement*)elements{
 	_elements=elements;
+}
+
+- (WTMImage*)picture{
+	if([_picture isAnAlias]){
+		id o=[_registry objectWithUinstID:_picture.uinstID];
+		if(o){
+			_picture=o;
+		}
+	}
+	return _picture;
+}
+
+
+- (WTMImage*)picture_auto{
+	_picture=[self picture];
+	if(!_picture){
+		_picture=[[WTMImage alloc] initInRegistry:_registry];
+	}
+	return _picture;
+}
+
+- (void)setPicture:(WTMImage*)picture{
+	_picture=picture;
 }
 
 
@@ -192,18 +192,18 @@
 			[dictionary setValue:[self.behavior aliasDictionaryRepresentation] forKey:@"behavior"];
 		}
 	}
-	if(self.coverPicture){
-		if(includeChildren){
-			[dictionary setValue:[self.coverPicture dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverPicture"];
-		}else{
-			[dictionary setValue:[self.coverPicture aliasDictionaryRepresentation] forKey:@"coverPicture"];
-		}
-	}
 	if(self.elements){
 		if(includeChildren){
 			[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"elements"];
 		}else{
 			[dictionary setValue:[self.elements aliasDictionaryRepresentation] forKey:@"elements"];
+		}
+	}
+	if(self.picture){
+		if(includeChildren){
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+		}else{
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
@@ -228,8 +228,8 @@
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
 	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
-	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
+	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	return s;
 }
 

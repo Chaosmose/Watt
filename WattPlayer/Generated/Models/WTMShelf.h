@@ -21,8 +21,8 @@
  
 
 #import "WattObject.h"
-@class WTMImage;
 @class WTMCollectionOfPackage;
+@class WTMImage;
 @class WTMCollectionOfUser;
 
 @interface WTMShelf:WattObject<WattCoding>{
@@ -30,12 +30,12 @@
 
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,strong) NSDictionary * extras;
-@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
+@property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMCollectionOfUser * users;
 
-- (WTMImage*)coverPicture_auto;
 - (WTMCollectionOfPackage*)packages_auto;
+- (WTMImage*)picture_auto;
 - (WTMCollectionOfUser*)users_auto;
 
 @end

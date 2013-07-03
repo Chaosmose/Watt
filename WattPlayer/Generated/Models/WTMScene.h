@@ -23,8 +23,8 @@
 #import "WattObject.h"
 @class WTMActivity;
 @class WTMBehavior;
-@class WTMImage;
 @class WTMCollectionOfElement;
+@class WTMImage;
 
 @interface WTMScene:WattObject<WattCoding>{
 }
@@ -39,12 +39,12 @@
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;
 @property (nonatomic,strong) WTMBehavior * behavior;
-@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
+@property (nonatomic,strong) WTMImage * picture;
 
 - (WTMActivity*)activity_auto;
 - (WTMBehavior*)behavior_auto;
-- (WTMImage*)coverPicture_auto;
 - (WTMCollectionOfElement*)elements_auto;
+- (WTMImage*)picture_auto;
 
 @end

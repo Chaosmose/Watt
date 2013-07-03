@@ -24,22 +24,24 @@
 @class WTMCollectionOfMenu;
 @class WTMMenuSection;
 @class WTMMenu;
+@class WTMImage;
 
 @interface WTMMenu:WattObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * details;
 @property (nonatomic,strong) NSDictionary * extras;
-@property (nonatomic,copy) NSString * imageFileName;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,assign) id  reference;
 @property (nonatomic,copy) NSString * urlString;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
 @property (nonatomic,strong) WTMMenuSection * menuSection;
 @property (nonatomic,strong) WTMMenu * parent;
+@property (nonatomic,strong) WTMImage * picture;
 
 - (WTMCollectionOfMenu*)childrens_auto;
 - (WTMMenuSection*)menuSection_auto;
 - (WTMMenu*)parent_auto;
+- (WTMImage*)picture_auto;
 
 @end

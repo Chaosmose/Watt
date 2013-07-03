@@ -23,26 +23,25 @@
 #import "WTMCollectionOfMenu.h"
 #import "WTMMenuSection.h"
 #import "WTMMenu.h"
+#import "WTMImage.h"
 
 @implementation WTMMenu 
 
 @synthesize details=_details;
 @synthesize extras=_extras;
-@synthesize imageFileName=_imageFileName;
 @synthesize label=_label;
 @synthesize reference=_reference;
 @synthesize urlString=_urlString;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
 @synthesize parent=_parent;
+@synthesize picture=_picture;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
 		[super setValue:value forKey:@"details"];
 	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
-	} else if ([key isEqualToString:@"imageFileName"]) {
-		[super setValue:value forKey:@"imageFileName"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
 	} else if ([key isEqualToString:@"reference"]) {
@@ -55,6 +54,8 @@
 		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menuSection"];
 	} else if ([key isEqualToString:@"parent"]) {
 		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"parent"];
+	} else if ([key isEqualToString:@"picture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -130,6 +131,29 @@
 	_parent=parent;
 }
 
+- (WTMImage*)picture{
+	if([_picture isAnAlias]){
+		id o=[_registry objectWithUinstID:_picture.uinstID];
+		if(o){
+			_picture=o;
+		}
+	}
+	return _picture;
+}
+
+
+- (WTMImage*)picture_auto{
+	_picture=[self picture];
+	if(!_picture){
+		_picture=[[WTMImage alloc] initInRegistry:_registry];
+	}
+	return _picture;
+}
+
+- (void)setPicture:(WTMImage*)picture{
+	_picture=picture;
+}
+
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
@@ -139,7 +163,6 @@
     NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[dictionary setValue:self.details forKey:@"details"];
 	[dictionary setValue:self.extras forKey:@"extras"];
-	[dictionary setValue:self.imageFileName forKey:@"imageFileName"];
 	[dictionary setValue:self.label forKey:@"label"];
 	[dictionary setValue:self.reference forKey:@"reference"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
@@ -164,6 +187,13 @@
 			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"parent"];
 		}
 	}
+	if(self.picture){
+		if(includeChildren){
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+		}else{
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
+		}
+	}
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:dictionary forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
@@ -178,13 +208,13 @@
 	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"extras : %@\n",self.extras];
-	[s appendFormat:@"imageFileName : %@\n",self.imageFileName];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"reference : %@\n",self.reference];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
 	[s appendFormat:@"parent : %@\n",NSStringFromClass([self.parent class])];
+	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	return s;
 }
 

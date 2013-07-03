@@ -30,7 +30,7 @@
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,copy) NSString * rights;
-@property (nonatomic,copy) NSString * thumbnailPath;
+@property (nonatomic,copy) NSString * thumbnailRelativePath;
 @property (nonatomic,strong) WTMLibrary * library;
 
 - (WTMLibrary*)library_auto;

@@ -21,8 +21,8 @@
  
 
 #import "WattObject.h"
-@class WTMImage;
 @class WTMPackage;
+@class WTMImage;
 @class WTMCollectionOfScene;
 
 @interface WTMActivity:WattObject<WattCoding>{
@@ -38,12 +38,12 @@
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
-@property (nonatomic,strong) WTMImage * coverPicture;
 @property (nonatomic,strong) WTMPackage * package;
+@property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
 
-- (WTMImage*)coverPicture_auto;
 - (WTMPackage*)package_auto;
+- (WTMImage*)picture_auto;
 - (WTMCollectionOfScene*)scenes_auto;
 
 @end

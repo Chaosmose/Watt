@@ -21,10 +21,10 @@
  
 #import "WTMPackage.h" 
 #import "WTMCollectionOfActivity.h"
-#import "WTMImage.h"
 #import "WTMLangDictionary.h"
 #import "WTMCollectionOfLibrary.h"
 #import "WTMUser.h"
+#import "WTMImage.h"
 #import "WTMShelf.h"
 
 @implementation WTMPackage 
@@ -37,10 +37,10 @@
 @synthesize name=_name;
 @synthesize rights=_rights;
 @synthesize activities=_activities;
-@synthesize coverPicture=_coverPicture;
 @synthesize langDictionary=_langDictionary;
 @synthesize libraries=_libraries;
 @synthesize owner=_owner;
+@synthesize picture=_picture;
 @synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -60,14 +60,14 @@
 		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
-	} else if ([key isEqualToString:@"coverPicture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"coverPicture"];
 	} else if ([key isEqualToString:@"langDictionary"]) {
 		[super setValue:[WTMLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionary"];
 	} else if ([key isEqualToString:@"libraries"]) {
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
 	} else if ([key isEqualToString:@"owner"]) {
 		[super setValue:[WTMUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"owner"];
+	} else if ([key isEqualToString:@"picture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"shelf"]) {
 		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
@@ -97,29 +97,6 @@
 
 - (void)setActivities:(WTMCollectionOfActivity*)activities{
 	_activities=activities;
-}
-
-- (WTMImage*)coverPicture{
-	if([_coverPicture isAnAlias]){
-		id o=[_registry objectWithUinstID:_coverPicture.uinstID];
-		if(o){
-			_coverPicture=o;
-		}
-	}
-	return _coverPicture;
-}
-
-
-- (WTMImage*)coverPicture_auto{
-	_coverPicture=[self coverPicture];
-	if(!_coverPicture){
-		_coverPicture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _coverPicture;
-}
-
-- (void)setCoverPicture:(WTMImage*)coverPicture{
-	_coverPicture=coverPicture;
 }
 
 - (WTMLangDictionary*)langDictionary{
@@ -191,6 +168,29 @@
 	_owner=owner;
 }
 
+- (WTMImage*)picture{
+	if([_picture isAnAlias]){
+		id o=[_registry objectWithUinstID:_picture.uinstID];
+		if(o){
+			_picture=o;
+		}
+	}
+	return _picture;
+}
+
+
+- (WTMImage*)picture_auto{
+	_picture=[self picture];
+	if(!_picture){
+		_picture=[[WTMImage alloc] initInRegistry:_registry];
+	}
+	return _picture;
+}
+
+- (void)setPicture:(WTMImage*)picture{
+	_picture=picture;
+}
+
 - (WTMShelf*)shelf{
 	if([_shelf isAnAlias]){
 		id o=[_registry objectWithUinstID:_shelf.uinstID];
@@ -235,13 +235,6 @@
 			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"activities"];
 		}
 	}
-	if(self.coverPicture){
-		if(includeChildren){
-			[dictionary setValue:[self.coverPicture dictionaryRepresentationWithChildren:includeChildren] forKey:@"coverPicture"];
-		}else{
-			[dictionary setValue:[self.coverPicture aliasDictionaryRepresentation] forKey:@"coverPicture"];
-		}
-	}
 	if(self.langDictionary){
 		if(includeChildren){
 			[dictionary setValue:[self.langDictionary dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionary"];
@@ -261,6 +254,13 @@
 			[dictionary setValue:[self.owner dictionaryRepresentationWithChildren:includeChildren] forKey:@"owner"];
 		}else{
 			[dictionary setValue:[self.owner aliasDictionaryRepresentation] forKey:@"owner"];
+		}
+	}
+	if(self.picture){
+		if(includeChildren){
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+		}else{
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
 	if(self.shelf){
@@ -290,10 +290,10 @@
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
-	[s appendFormat:@"coverPicture : %@\n",NSStringFromClass([self.coverPicture class])];
 	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
 	[s appendFormat:@"owner : %@\n",NSStringFromClass([self.owner class])];
+	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }
