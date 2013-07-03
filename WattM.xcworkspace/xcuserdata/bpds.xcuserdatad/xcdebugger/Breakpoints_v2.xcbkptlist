@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
             endingLineNumber = "145"
-            landmarkName = "-identifyWithUinstId:"
+            landmarkName = "-uinstID"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
