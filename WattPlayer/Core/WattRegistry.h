@@ -23,6 +23,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kRootUinstID 1
+
 @class WattObject;
 @class WattCollectionOfObject;
 
