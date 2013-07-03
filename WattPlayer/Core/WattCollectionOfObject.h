@@ -57,5 +57,6 @@
 
 - (NSUInteger)count;
 - (NSUInteger)indexOfObject:(WattObject *)object;
+- (void)removeObject:(WattObject*)object;
 
 @end

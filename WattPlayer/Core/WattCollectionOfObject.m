@@ -172,6 +172,12 @@
     [_collection removeObjectAtIndex:index];
 }
 
+
+- (void)removeObject:(WattObject*)object{
+    [_collection removeObject:object];
+    [_registry unRegisterObject:object];
+}
+
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject{
     [_collection replaceObjectAtIndex:index withObject:anObject];
 }
