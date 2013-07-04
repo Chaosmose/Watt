@@ -37,7 +37,6 @@
 	}
 }
 
-
 - (WTMCollectionOfGroup*)groups{
 	if([_groups isAnAlias]){
 		id o=[_registry objectWithUinstID:_groups.uinstID];
@@ -62,12 +61,16 @@
 }
 
 
-
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
-    if([self isAnAlias])
-        return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:[self dictionaryOfPropertiesWithChildren:includeChildren] forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+- (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
+    NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.identity forKey:@"identity"];
 	if(self.groups){
 		if(includeChildren){
@@ -76,10 +79,7 @@
 			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"groups"];
 		}
 	}
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
+    return dictionary;
 }
 
 

@@ -61,7 +61,6 @@
 	}
 }
 
-
 - (WTMCollectionOfMenu*)childrens{
 	if([_childrens isAnAlias]){
 		id o=[_registry objectWithUinstID:_childrens.uinstID];
@@ -155,12 +154,16 @@
 }
 
 
-
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
-    if([self isAnAlias])
-        return [super aliasDictionaryRepresentation];
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
+	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    [wrapper setObject:[self dictionaryOfPropertiesWithChildren:includeChildren] forKey:__properties__];
+    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
+    return wrapper;
+}
+
+- (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
+    NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.details forKey:@"details"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.label forKey:@"label"];
@@ -194,10 +197,7 @@
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
-    [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
-    return wrapper;
+    return dictionary;
 }
 
 

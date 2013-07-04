@@ -127,13 +127,16 @@
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    NSMutableDictionary *dictionary=[NSMutableDictionary dictionary];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
-    [wrapper setObject:dictionary forKey:__properties__];
+    [wrapper setObject:[self dictionaryOfPropertiesWithChildren:includeChildren] forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }
 
+
+- (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
+     return [NSMutableDictionary dictionary];
+}
 
 
 - (instancetype)localized{
@@ -158,7 +161,7 @@
 - (void)localize{
     if(![self hasBeenLocalized]){
         _currentLocale=[[NSLocale currentLocale] localeIdentifier];
-        NSArray *keys=[self allPropertiesName];
+        NSArray *keys=[self propertiesKeys];
         for (NSString*key in keys) {
             id o=[self valueForKey:key];
             if([o respondsToSelector:@selector(localize)]&&[o respondsToSelector:@selector(hasBeenLocalized)]){
@@ -180,7 +183,7 @@
 
 // _keys dictionary caches the responses for future uses.
 // the seconds invocation for a given class is costless.
-- (NSArray*)allPropertiesName{
+- (NSArray*)propertiesKeys{
     if(_propertiesKeys){
         // If the keys have allready been computed
         return _propertiesKeys;
@@ -209,7 +212,7 @@
 
 // Attempt to resolve the aliases
 - (void)resolveAliases{
-    NSArray *p=[self allPropertiesName];
+    NSArray *p=[self propertiesKeys];
     for (NSString*key in p) {
         id value=[self valueForKey:key];
         if(value){

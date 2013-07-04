@@ -71,9 +71,8 @@ __LINE__ ,\
 
 @protocol WattCoding <NSObject>
 @required
-
-
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
+- (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren;
 @end
 
 
@@ -124,7 +123,7 @@ __LINE__ ,\
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary;
 
 // Returns all the properties keys of the object.
-- (NSArray*)allPropertiesName;
+- (NSArray*)propertiesKeys;
 
 
 #pragma mark - localization

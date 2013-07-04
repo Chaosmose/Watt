@@ -70,7 +70,7 @@
     // The second step is optionnal as the generated getters 
     //  can proceed to dealiasing (runtime aliases resolution)
     
-    WTLog(@"Register");
+    //WTLog(@"Register");
     // First step :
     int i=1;
     for (NSDictionary *d in array) {
@@ -80,7 +80,7 @@
         if(liveObject){
             [r registerObject:liveObject];
             if([liveObject isKindOfClass:NSClassFromString(@"WTMShelf")]){
-                WTLog(@"%i %@",i,liveObject);
+               // WTLog(@"%i %@",i,liveObject);
             }
             
         }
@@ -104,7 +104,7 @@
     for (NSString*key in sortedKeys) {
         id o=[_registry objectForKey:key];
         
-        WTLog(@"Resolving aliases on  %@",o);
+       // WTLog(@"Resolving aliases on  %@",o);
         
         if(o && [o respondsToSelector:aSelector]){
             [o performSelector:aSelector
