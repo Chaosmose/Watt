@@ -36,7 +36,7 @@
     NSArray *extensions=nil;
     
     // Clean up the basename
-
+    
     baseRelativePath=[baseRelativePath stringByDeletingPathExtension];
     for (NSString*deviceModifier in  device_modifiers) {
         baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:deviceModifier withString:@""];
@@ -80,7 +80,7 @@
                 for (NSString*extension in  extensions) {
                     NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
                     // DOCUMENT DIRECTORY
-                     NSString *pth=[NSString stringWithFormat:@"%@%@",[wattAPI applicationDocumentsDirectory],component];
+                    NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[wattAPI applicationDocumentsDirectory],component,extension];
                     if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
                         return [UIImage imageWithContentsOfFile:pth];
                     }
