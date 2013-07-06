@@ -30,7 +30,7 @@
 @synthesize details=_details;
 @synthesize extras=_extras;
 @synthesize label=_label;
-@synthesize reference=_reference;
+@synthesize referenceUinstID=_referenceUinstID;
 @synthesize urlString=_urlString;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
@@ -44,8 +44,8 @@
 		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
-	} else if ([key isEqualToString:@"reference"]) {
-		[super setValue:value forKey:@"reference"];
+	} else if ([key isEqualToString:@"referenceUinstID"]) {
+		[super setValue:value forKey:@"referenceUinstID"];
 	} else if ([key isEqualToString:@"urlString"]) {
 		[super setValue:value forKey:@"urlString"];
 	} else if ([key isEqualToString:@"childrens"]) {
@@ -167,7 +167,7 @@
 	[dictionary setValue:self.details forKey:@"details"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.label forKey:@"label"];
-	[dictionary setValue:self.reference forKey:@"reference"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.referenceUinstID] forKey:@"referenceUinstID"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
 	if(self.childrens){
 		if(includeChildren){
@@ -209,7 +209,7 @@
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"label : %@\n",self.label];
-	[s appendFormat:@"reference : %@\n",self.reference];
+	[s appendFormat:@"referenceUinstID : %@\n",[NSNumber numberWithInteger:self.referenceUinstID]];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];

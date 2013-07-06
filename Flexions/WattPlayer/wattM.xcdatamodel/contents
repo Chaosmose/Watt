@@ -113,11 +113,7 @@
             </userInfo>
         </attribute>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="reference" optional="YES" attributeType="String" syncable="YES">
-            <userInfo>
-                <entry key="type" value="any"/>
-            </userInfo>
-        </attribute>
+        <attribute name="referenceUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
         <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES"/>
