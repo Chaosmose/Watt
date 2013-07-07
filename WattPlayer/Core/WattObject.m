@@ -191,13 +191,13 @@
         _propertiesKeys=[NSMutableArray array];
     }
     Class currentClass=[self class];
-    unsigned int  count;
+    NSUInteger  count;
     // (!) IMPORTANT
     // Each class has its own set of property in the inheritance chain.
     // So we do perform while "currentClass" has a superClass
     while (currentClass) {
         objc_property_t *propList = class_copyPropertyList(currentClass, &count);
-        for ( int i = 0; i < count; i++ ){
+        for ( NSUInteger i = 0; i < count; i++ ){
             objc_property_t property = propList[i];
             const char *propName = property_getName(property);
             NSString*keyString=[NSString stringWithCString:propName encoding:NSASCIIStringEncoding];

@@ -72,7 +72,7 @@
     
     //WTLog(@"Register");
     // First step :
-    int i=1;
+    NSUInteger i=1;
     for (NSDictionary *d in array) {
         WattObject *liveObject=[WattObject instanceFromDictionary:d
                                                        inRegistry:r
@@ -291,7 +291,7 @@
 - (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
     [s appendFormat:@"Registry with %i members\n\n",[self count]];
-    int i=1;
+    NSUInteger i=1;
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
         WattObject*o=[_registry objectForKey:key];
