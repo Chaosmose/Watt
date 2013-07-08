@@ -27,11 +27,7 @@
 
 @interface WattRegistry (){
 }
-// Call the selector on all the members of the registry
--(void)performSelectorOnMembers:(SEL)aSelector
-                       onThread:(NSThread *)thr
-                     withObject:(id)arg
-                  waitUntilDone:(BOOL)wait;
+
 @end
 
 @implementation WattRegistry{
@@ -89,32 +85,12 @@
     
     if(resolveAliases){
         // Second step :
-        [r performSelectorOnMembers:@selector(resolveAliases)
-                           onThread:[NSThread currentThread]
-                         withObject:nil
-                      waitUntilDone:YES];
+        [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+            [obj resolveAliases];
+          
+        }];
     }
     return r;
-}
-
--(void)performSelectorOnMembers:(SEL)aSelector
-                       onThread:(NSThread *)thr
-                     withObject:(id)arg waitUntilDone:(BOOL)wait{
-    NSArray *sortedKeys=[self _sortedKeys];
-    for (NSString*key in sortedKeys) {
-        id o=[_registry objectForKey:key];
-        
-       // WTLog(@"Resolving aliases on  %@",o);
-        
-        if(o && [o respondsToSelector:aSelector]){
-            [o performSelector:aSelector
-                      onThread:thr
-                    withObject:arg
-                 waitUntilDone:wait];
-        }else{
-            WTLog(@"%@ do not respond to %@",o,NSStringFromSelector(aSelector));
-        }
-    }
 }
 
 
@@ -299,6 +275,21 @@
         i++;
     }
 	return s;
+}
+
+#pragma  mark - Enumeration
+
+
+- (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block{
+    NSUInteger idx = 0;
+    BOOL stop = NO;
+    NSArray *sortedKeys=[self _sortedKeys];
+    for(NSString*key  in sortedKeys){
+        WattObject*obj =[_registry objectForKey:key];
+        block(obj, idx++, &stop);
+        if( stop )
+            break;
+    }
 }
 
 

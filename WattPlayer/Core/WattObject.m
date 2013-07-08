@@ -214,7 +214,6 @@
 
 // Attempt to resolve the aliases
 - (void)resolveAliases{
-    _isAnAlias=NO;
     NSArray *p=[self propertiesKeys];
     for (NSString*key in p) {
         id value=[self valueForKey:key];

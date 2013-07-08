@@ -159,7 +159,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];

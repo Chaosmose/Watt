@@ -81,10 +81,16 @@
 
 
 -(void)resolveAliases{
-    _isAnAlias=NO;
-    for (WattObject*o in _collection) {
-        if([o isAnAlias])
-            [o resolveAliases];
+    // We need eventually to replace the alias within the collection by real instances
+    NSInteger nb=[_collection count]-1;
+    for (NSInteger idx=nb;idx>=0;idx--) {
+        WattObject*o=[_collection objectAtIndex:idx];
+        if([o isAnAlias]){
+            WattObject*instance=(WattObject*)[_registry objectWithUinstID:o.uinstID];
+            if(instance){
+                [_collection replaceObjectAtIndex:idx withObject:instance];
+            }
+        }
     }
 }
 

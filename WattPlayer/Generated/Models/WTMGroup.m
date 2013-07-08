@@ -87,7 +87,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	return s;

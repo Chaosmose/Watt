@@ -68,6 +68,7 @@
 
     //2- We serialize the registry R1 to a linear structure a1
     NSArray *a1=[r1 arrayRepresentation];
+    
     WTLog(@"%i element(s) ",[a1 count]);
     for (NSDictionary*d in a1) {
         WTLog(@"%@|%@",[d objectForKey:__uinstID__],d);
@@ -85,7 +86,7 @@
     WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
     WTLog(@"objectWithUinstID:7 %@",[r2 objectWithUinstID:7]);
 
-    
+    /*
     // OTHER ATTEMPT : 
 
     // Request a collection of members.
@@ -96,6 +97,8 @@
     // ...
     WTLog(@"%@",members);
     WTLog(@"%@",[members lastObject]);
+    */
+    
     // And unRegisterObject the collection if from the register if necessary
     //[r2 unRegisterObject:members];
     

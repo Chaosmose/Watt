@@ -121,7 +121,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ :\n",NSStringFromClass([self class])];
+	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"action : %@\n",NSStringFromClass([self.action class])];
 	[s appendFormat:@"trigger : %@\n",NSStringFromClass([self.trigger class])];
