@@ -43,6 +43,16 @@
 	return s;
 }
 
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMBand *obj, NSUInteger idx, BOOL *stop))block{
+	 NSUInteger idx = 0;
+    BOOL stop = NO;
+    for( WTMBand* obj in _collection ){
+        block(obj, idx++, &stop);
+        if( stop )
+            break;
+    }
+}
+
 - (WTMCollectionOfBand*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
 	return (WTMCollectionOfBand*)[super filteredCollectionUsingPredicate:predicate withRegistry:registry];
 }

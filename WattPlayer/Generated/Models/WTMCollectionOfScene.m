@@ -43,6 +43,16 @@
 	return s;
 }
 
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMScene *obj, NSUInteger idx, BOOL *stop))block{
+	 NSUInteger idx = 0;
+    BOOL stop = NO;
+    for( WTMScene* obj in _collection ){
+        block(obj, idx++, &stop);
+        if( stop )
+            break;
+    }
+}
+
 - (WTMCollectionOfScene*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
 	return (WTMCollectionOfScene*)[super filteredCollectionUsingPredicate:predicate withRegistry:registry];
 }

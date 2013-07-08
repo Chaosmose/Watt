@@ -24,7 +24,7 @@
 
 @interface WTMCollectionOfUser:WattCollectionOfObject <WattCoding>{
 }
-
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMUser *obj, NSUInteger idx, BOOL *stop))block;
 - (WTMCollectionOfUser*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMUser *)objectAtIndex:(NSUInteger)index;

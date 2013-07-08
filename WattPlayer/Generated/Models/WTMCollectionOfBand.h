@@ -24,7 +24,7 @@
 
 @interface WTMCollectionOfBand:WattCollectionOfObject <WattCoding>{
 }
-
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMBand *obj, NSUInteger idx, BOOL *stop))block;
 - (WTMCollectionOfBand*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMBand *)objectAtIndex:(NSUInteger)index;

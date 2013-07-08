@@ -69,7 +69,15 @@
     }
 }
 
-
+- (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block{
+    NSUInteger idx = 0;
+    BOOL stop = NO;
+    for( WattObject* obj in _collection ){
+        block(obj, idx++, &stop);
+        if( stop )
+            break;
+    }
+}
 
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{

@@ -44,7 +44,7 @@
 - (WattObject*)objectWithObjectName:(NSString*)objectName;
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID;
 
-
+- (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block;
 
 - (void)addObject:(WattObject*)anObject;
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index;
