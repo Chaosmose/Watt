@@ -29,6 +29,7 @@
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,assign) NSInteger  refererCounter;
 @property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * thumbnailRelativePath;
 @property (nonatomic,strong) WTMLibrary * library;
