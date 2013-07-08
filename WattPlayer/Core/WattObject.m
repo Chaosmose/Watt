@@ -65,6 +65,8 @@
     return self;
 }
 
+
+
 - (BOOL)isAnAlias{
     return _isAnAlias;
 }
@@ -80,18 +82,18 @@
         instance=[registry objectWithUinstID:wtuinstID];
         return instance;
     }
-
+    
 	if(!instance && [aDictionary objectForKey:__className__]){
 		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
         if([aDictionary objectForKey:__isAliased__] && [[aDictionary objectForKey:__isAliased__] boolValue]){
-                instance=[[theClass alloc] initAsAliasWithidentifier:wtuinstID];
+            instance=[[theClass alloc] initAsAliasWithidentifier:wtuinstID];
         }else{
             // We instantiate the class.
             instance= [[theClass alloc] initInRegistry:registry];
             [instance setAttributesFromDictionary:aDictionary];
         }
 	}
-
+    
 	return instance;
 }
 
@@ -135,7 +137,7 @@
 
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
-     return [NSMutableDictionary dictionary];
+    return [NSMutableDictionary dictionary];
 }
 
 
@@ -206,31 +208,34 @@
         free(propList);
         currentClass=[currentClass superclass];
     }
-    return [NSArray arrayWithArray:_propertiesKeys];    
+    return [NSArray arrayWithArray:_propertiesKeys];
 }
 
 
 // Attempt to resolve the aliases
 - (void)resolveAliases{
-    NSArray *p=[self propertiesKeys];
-    for (NSString*key in p) {
-        id value=[self valueForKey:key];
-        if(value){
-            if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
-                id instance=[_registry objectWithUinstID:[value uinstID]];
-                if(instance){
-                    [self setValue:instance forKey:key];
+    if([self isAnAlias]){
+        NSArray *p=[self propertiesKeys];
+        for (NSString*key in p) {
+            id value=[self valueForKey:key];
+            if(value){
+                if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
+                    id instance=[_registry objectWithUinstID:[value uinstID]];
+                    if(instance){
+                        [self setValue:instance forKey:key];
+                    }
+                }else if([value respondsToSelector:@selector(resolveAliases)]){
+                    // Recursive alias resolution
+                    [value resolveAliases];
                 }
-            }else if([value respondsToSelector:@selector(resolveAliases)]){
-                // Recursive alias resolution
-                [value resolveAliases];
             }
         }
     }
+    _isAnAlias=NO;
 }
 
 
-#pragma mark - alias mode 
+#pragma mark - alias mode
 
 - (NSDictionary *)aliasDictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
