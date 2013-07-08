@@ -214,21 +214,22 @@
 
 // Attempt to resolve the aliases
 - (void)resolveAliases{
-        NSArray *p=[self propertiesKeys];
-        for (NSString*key in p) {
-            id value=[self valueForKey:key];
-            if(value){
-                if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
-                    id instance=[_registry objectWithUinstID:[value uinstID]];
-                    if(instance){
-                        [self setValue:instance forKey:key];
-                    }
-                }else if([value respondsToSelector:@selector(resolveAliases)]){
-                    // Recursive alias resolution
-                    [value resolveAliases];
+    _isAnAlias=NO;
+    NSArray *p=[self propertiesKeys];
+    for (NSString*key in p) {
+        id value=[self valueForKey:key];
+        if(value){
+            if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
+                id instance=[_registry objectWithUinstID:[value uinstID]];
+                if(instance){
+                    [self setValue:instance forKey:key];
                 }
+            }else if([value respondsToSelector:@selector(resolveAliases)]){
+                // Recursive alias resolution
+                [value resolveAliases];
             }
         }
+    }
 }
 
 

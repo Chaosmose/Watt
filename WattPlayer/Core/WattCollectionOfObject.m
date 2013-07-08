@@ -80,6 +80,16 @@
 }
 
 
+-(void)resolveAliases{
+    _isAnAlias=NO;
+    for (WattObject*o in _collection) {
+        if([o isAnAlias])
+            [o resolveAliases];
+    }
+}
+
+
+
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
 	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
 		return;
