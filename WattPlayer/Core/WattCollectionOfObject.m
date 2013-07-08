@@ -42,13 +42,6 @@
 }
 
 
--(void)resolveAliases{
-    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        [obj resolveAliases];
-    }];
-}
-
-
 - (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
     if(array && [array count]>0){
