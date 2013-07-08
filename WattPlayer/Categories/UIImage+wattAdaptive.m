@@ -28,12 +28,29 @@
 @implementation UIImage(wattAdaptive)
 
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath{
+    NSString *p=[UIImage absolutePathFromRelativePath:relativePath];
+    if(p)
+        return [UIImage imageWithContentsOfFile:p];
+    return nil;
+}
+
+
++(NSString*)absolutePathFromRelativePath:(NSString *)relativePath{
+    NSArray *r=[UIImage absolutePathsFromRelativePath:relativePath all:NO];
+    if([r count]>0)
+        return [r objectAtIndex:0];
+    return nil;
+}
+
++(NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
     
     NSString *baseRelativePath = [relativePath copy];
     NSArray *orientation_modifiers=@[@"-Landscape",@"-Portrait",@""];
     NSArray *device_modifiers=@[@"~ipad",@"~iphone5",@"~iphone",@""];
     NSArray *pixel_density_modifiers=@[@"@2x",@""];
     NSArray *extensions=nil;
+    
+    NSMutableArray *result=[NSMutableArray array];
     
     // Clean up the basename
     
@@ -82,22 +99,23 @@
                     // DOCUMENT DIRECTORY
                     NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[wattAPI applicationDocumentsDirectory],component,extension];
                     if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
-                        return [UIImage imageWithContentsOfFile:pth];
+                        [result addObject:pth];
+                        if(!returnAll)
+                            return result;
                     }
                     // BUNDLE ATTEMPT
                     pth=[[NSBundle mainBundle] pathForResource:component ofType:extension];
                     if(pth && [pth length]>1){
-                        // Take the most relevant image.
-                        return [UIImage imageWithContentsOfFile:pth];
+                        [result addObject:pth];
+                        if(!returnAll)
+                            return result;
                     }
                 }
             }
         }
     }
-    
-    return nil;
+    return result;
 }
-
 
 
 

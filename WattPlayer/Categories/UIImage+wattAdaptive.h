@@ -14,7 +14,7 @@
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
 //  UIImage+adaptive.h
-//  
+//
 //
 //  Created by Benoit Pereira da Silva on 05/04/13.
 //  Copyright (c) 2013 Azurgate. All rights reserved.
@@ -32,6 +32,8 @@
  Retina <ImageName><orientation_modifier>@2x<device_modifier>.<filename_extension>
  */
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
++(NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
++(NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
 
 @end
 #endif
