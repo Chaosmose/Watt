@@ -62,7 +62,21 @@ __LINE__ ,\
 #ifndef WT_RUNTIME_CONFIGURATION
 #define WT_RUNTIME_CONFIGURATION
 #define WT_ALLOW_MULTIPLE_REGISTRATION 1
+
+#if TARGET_OS_IPHONE
+#define currentOrientation() [[UIApplication sharedApplication] statusBarOrientation]
+#define isLandscapeOrientation() UIDeviceOrientationIsLandscape(currentOrientation())
+#define isIpad()(UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
+#define isWidePhone() ([UIScreen mainScreen].scale == 2.f && [UIScreen mainScreen].bounds.size.height == 568.0f)
+#define scale() [UIScreen mainScreen].scale
+#import "UIImage+wattAdaptive.h"
 #endif
+
+#endif
+
+
+
+
 
 @class WattObject;
 @class WattApi;
@@ -99,6 +113,8 @@ __LINE__ ,\
 - (instancetype)init; 
 - (instancetype)initInRegistry:(WattRegistry*)registry;
 - (instancetype)initAsAliasWithidentifier:(NSInteger)identifier; // instanciate an alias 
+
+-(void)autoUnRegister;
 
 // Do not call directly!
 // This selector is used during initialization.

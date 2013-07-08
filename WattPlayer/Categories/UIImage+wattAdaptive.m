@@ -23,100 +23,14 @@
 
 
 #import "UIImage+wattAdaptive.h"
-#import "WattM.h"
 
 @implementation UIImage(wattAdaptive)
 
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath{
-    NSString *p=[UIImage absolutePathFromRelativePath:relativePath];
+    NSString *p=[wattAPI absolutePathFromRelativePath:relativePath];
     if(p)
         return [UIImage imageWithContentsOfFile:p];
     return nil;
 }
-
-
-+(NSString*)absolutePathFromRelativePath:(NSString *)relativePath{
-    NSArray *r=[UIImage absolutePathsFromRelativePath:relativePath all:NO];
-    if([r count]>0)
-        return [r objectAtIndex:0];
-    return nil;
-}
-
-+(NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
-    
-    NSString *baseRelativePath = [relativePath copy];
-    NSArray *orientation_modifiers=@[@"-Landscape",@"-Portrait",@""];
-    NSArray *device_modifiers=@[@"~ipad",@"~iphone5",@"~iphone",@""];
-    NSArray *pixel_density_modifiers=@[@"@2x",@""];
-    NSArray *extensions=nil;
-    
-    NSMutableArray *result=[NSMutableArray array];
-    
-    // Clean up the basename
-    
-    baseRelativePath=[baseRelativePath stringByDeletingPathExtension];
-    for (NSString*deviceModifier in  device_modifiers) {
-        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:deviceModifier withString:@""];
-    }
-    
-    for (NSString*orientationModifier in  orientation_modifiers) {
-        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:orientationModifier withString:@""];
-    }
-    
-    for (NSString*pixelDensity in  pixel_density_modifiers) {
-        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:pixelDensity withString:@""];
-    }
-    
-    
-    // Define the current context
-    
-    NSString *currentExtension = [baseRelativePath pathExtension];
-    if([currentExtension length]>1){
-        extensions=@[currentExtension];
-    }else{
-        extensions=@[@"png",@"jpg"];
-    }
-    if(isLandscapeOrientation()){
-        orientation_modifiers=@[@"-Landscape",@""];
-    }else{
-        orientation_modifiers=@[@"-Portrait",@""];
-    }
-    if(isIpad()){
-        device_modifiers=@[@"~ipad",@""];
-    }else if(isWidePhone()){
-        device_modifiers=@[@"~iphone5",@"~iphone",@""];
-    }else{
-        device_modifiers=@[@"~iphone",@""];
-    }
-    
-    // Find the most relevant image
-    
-    for (NSString*orientationModifier in  orientation_modifiers) {
-        for (NSString*deviceModifier in  device_modifiers) {
-            for (NSString*pixelDensity in  pixel_density_modifiers) {
-                for (NSString*extension in  extensions) {
-                    NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
-                    // DOCUMENT DIRECTORY
-                    NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[wattAPI applicationDocumentsDirectory],component,extension];
-                    if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
-                        [result addObject:pth];
-                        if(!returnAll)
-                            return result;
-                    }
-                    // BUNDLE ATTEMPT
-                    pth=[[NSBundle mainBundle] pathForResource:component ofType:extension];
-                    if(pth && [pth length]>1){
-                        [result addObject:pth];
-                        if(!returnAll)
-                            return result;
-                    }
-                }
-            }
-        }
-    }
-    return result;
-}
-
-
 
 @end

@@ -32,8 +32,5 @@
  Retina <ImageName><orientation_modifier>@2x<device_modifier>.<filename_extension>
  */
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
-+(NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
-+(NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
-
 @end
 #endif

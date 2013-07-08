@@ -20,8 +20,7 @@
 //
 
 #import "WattObject.h"
-#import "WattRegistry.h"
-
+#import "WTMModelsImports.h"
 
 #pragma mark - WattApi
 
@@ -31,14 +30,8 @@
 
 @property (nonatomic,assign)id<WTMlocalizationDelegateProtocol>localizationDelegate;
 
-@property (readonly)WattRegistry*defaultRegistry;
-
 // WattMApi singleton accessor
 + (WattApi*)sharedInstance;
-
-#pragma mark facility
-
-- (NSString *) applicationDocumentsDirectory;
 
 #pragma mark localization
 
@@ -46,6 +39,20 @@
 //This method is called from WTMObject from the @selector(localize) implementation.
 //Calls the localizationDelegate if it is set or invokes the default implementation
 - (void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
+
+#pragma mark - relative path and path discovery
+
+- (NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
+
+- (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
+
+- (NSString*)applicationDocumentsDirectory;
+
+#pragma mark - linked asset dependencies management 
+
+// A facility that deals with the refererCounter to decide if the member should be deleted;
+// It also delete the linked files if necessary
+- (void)purgeMemberIfNecessary:(WTMMember*)member;
 
 @end
 

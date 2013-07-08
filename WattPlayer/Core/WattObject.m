@@ -66,6 +66,11 @@
 }
 
 
+-(void)autoUnRegister{
+    [_registry unRegisterObject:self];
+}
+
+
 
 - (BOOL)isAnAlias{
     return _isAnAlias;

@@ -37,14 +37,6 @@
 #define wattAPI [WattApi sharedInstance]
 #define wattPackager [WattMPackager sharedInstance]
 
-#if TARGET_OS_IPHONE
-#define currentOrientation() [[UIApplication sharedApplication] statusBarOrientation]
-#define isLandscapeOrientation() UIDeviceOrientationIsLandscape(currentOrientation())
-#define isIpad()(UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
-#define isWidePhone() ([UIScreen mainScreen].scale == 2.f && [UIScreen mainScreen].bounds.size.height == 568.0f)
-#define scale() [UIScreen mainScreen].scale
-#import "UIImage+wattAdaptive.h"
-#endif
 
 
 

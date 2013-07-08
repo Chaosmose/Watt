@@ -22,7 +22,6 @@
 #import "WattApi.h"
 
 @implementation WattApi{
-    WattRegistry*_defaultRegistry;
 }
 
 + (WattApi*)sharedInstance {
@@ -32,22 +31,6 @@
         sharedInstance = [[self alloc] init];
     });
     return sharedInstance;
-}
-
-- (id)init{
-    self=[super init];
-    if(self){
-        _defaultRegistry=[[WattRegistry alloc] init];
-    }
-    return self;
-}
-
-#pragma mark - facilities 
-
-- (NSString *) applicationDocumentsDirectory{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    return basePath;
 }
 
 
@@ -62,7 +45,119 @@
     }
 }
 
-#pragma mark - serialization 
+
+#pragma mark - relative path and path discovery
+
+
+-(NSString*)absolutePathFromRelativePath:(NSString *)relativePath{
+    NSArray *r=[self absolutePathsFromRelativePath:relativePath all:NO];
+    if([r count]>0)
+        return [r objectAtIndex:0];
+    return nil;
+}
+
+-(NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
+    
+    NSString *baseRelativePath = [relativePath copy];
+    NSArray *orientation_modifiers=@[@"-Landscape",@"-Portrait",@""];
+    NSArray *device_modifiers=@[@"~ipad",@"~iphone5",@"~iphone",@""];
+    NSArray *pixel_density_modifiers=@[@"@2x",@""];
+    NSString *extension = [baseRelativePath pathExtension];
+    NSMutableArray *result=[NSMutableArray array];
+    
+    // Clean up the basename
+    
+    baseRelativePath=[baseRelativePath stringByDeletingPathExtension];
+    for (NSString*deviceModifier in  device_modifiers) {
+        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:deviceModifier withString:@""];
+    }
+    
+    for (NSString*orientationModifier in  orientation_modifiers) {
+        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:orientationModifier withString:@""];
+    }
+    
+    for (NSString*pixelDensity in  pixel_density_modifiers) {
+        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:pixelDensity withString:@""];
+    }
+    
+    if(isLandscapeOrientation()){
+        orientation_modifiers=@[@"-Landscape",@""];
+    }else{
+        orientation_modifiers=@[@"-Portrait",@""];
+    }
+    if(isIpad()){
+        device_modifiers=@[@"~ipad",@""];
+    }else if(isWidePhone()){
+        device_modifiers=@[@"~iphone5",@"~iphone",@""];
+    }else{
+        device_modifiers=@[@"~iphone",@""];
+    }
+    
+    // Find the most relevant asset
+    
+    for (NSString*orientationModifier in  orientation_modifiers) {
+        for (NSString*deviceModifier in  device_modifiers) {
+            for (NSString*pixelDensity in  pixel_density_modifiers) {
+                NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
+                // DOCUMENT DIRECTORY
+                NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[self applicationDocumentsDirectory],component,extension?extension:@""];
+                if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
+                    [result addObject:pth];
+                    if(!returnAll)
+                        return result;
+                }
+                // BUNDLE ATTEMPT
+                pth=[[NSBundle mainBundle] pathForResource:component ofType:extension];
+                if(pth && [pth length]>1){
+                    [result addObject:pth];
+                    if(!returnAll)
+                        return result;
+                }
+            }
+            
+        }
+    }
+    return result;
+}
+
+
+- (NSString *) applicationDocumentsDirectory{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
+#pragma mark - relative path and path discovery
+#pragma mark -
+
+
+// A facility that deals with the refererCounter to decide if the member should be deleted;
+- (void)purgeMemberIfNecessary:(WTMMember*)member{
+    member.refererCounter--;
+    if(member.refererCounter<=0){
+        if([member respondsToSelector:@selector(relativePath)]){
+            NSString *relativePath=[member performSelector:@selector(relativePath)];
+            if(relativePath){
+                NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
+                                                                          all:YES];
+                for (NSString *pathToDelete in absolutePaths) {
+                    NSError *error=nil;
+                    [[NSFileManager defaultManager] removeItemAtPath:pathToDelete
+                                                               error:&error];
+                    if(error){
+                        WTLog(@"Impossible to delete %@",pathToDelete);
+                    }
+                }
+            }
+        }
+        [member autoUnRegister];
+    }
+    
+}
+
+
+
+#pragma mark - serialization
 
 - (BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
     NSString*path=[self _pathForFileName:fileName];
