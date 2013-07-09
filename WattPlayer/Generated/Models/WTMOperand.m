@@ -52,8 +52,8 @@
 - (NSString*)description{
     if([self isAnAlias])
         return [super aliasDescription];
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
+    NSMutableString *s=[NSMutableString stringWithString:[super description]];
+	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMOperand ",self.uinstID];
 	[s appendFormat:@"expression : %@\n",self.expression];
 	return s;
 }

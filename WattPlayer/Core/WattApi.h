@@ -62,6 +62,14 @@ typedef enum watt_Actions{
 
 #pragma mark - MULTIMEDIA API
 
+
+
+#pragma mark - ACL
+
+- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WTMModel*)object;
+
+#pragma mark - Package
+
 #pragma mark -Shelf
 
 // Creates a shelf, a user , the local group, a package with a shared lib ...
@@ -79,12 +87,6 @@ typedef enum watt_Actions{
 - (void)removeGroup;
 
 
-#pragma mark - ACL 
-
-- (WTMUser*)me;
-- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WattObject*)object;
-
-#pragma mark - Package
 
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;
 - (void)removePackage:(WTMPackage*)package;

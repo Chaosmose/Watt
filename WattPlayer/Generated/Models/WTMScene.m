@@ -208,8 +208,8 @@
 - (NSString*)description{
     if([self isAnAlias])
         return [super aliasDescription];
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
+    NSMutableString *s=[NSMutableString stringWithString:[super description]];
+	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMScene ",self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];

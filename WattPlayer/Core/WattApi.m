@@ -38,49 +38,16 @@
 #pragma mark - Registry
 
 - (void)mergeRegistry:(WattRegistry*)sourceRegistry
-                into:(WattRegistry*)destinationRegistry{
+                 into:(WattRegistry*)destinationRegistry{
     
 }
 
 #pragma mark - MULTIMEDIA API
 
-#pragma mark -Shelf
-
-
-- (WTMShelf*)createShelfWithName:(NSString*)name{
-    return nil;
-}
-
-- (void)removeShelf:(WTMShelf*)shelf{
-}
-
-#pragma mark - User and groups
-
-- (WTMUser*)createUserInShelf:(WTMShelf*)shelf{
-     return nil;
-}
-
-- (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf{
-     return nil;
-}
-
-- (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group{
-    
-}
-
-- (void)removeUser:(WTMUser*)User fromGroup:(WTMGroup*)group{
-    
-}
-
-- (void)removeGroup{
-    
-}
-
-
 #pragma mark - ACL
 
 
-- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WattObject*)object{
+- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WTMModel*)object{
     BOOL authorized=YES;
     if((!_me)||(!object)){
         authorized=NO;
@@ -99,6 +66,41 @@
     return authorized;
 }
 
+
+#pragma mark -Shelf
+
+
+- (WTMShelf*)createShelfWithName:(NSString*)name{
+    return nil;
+}
+
+- (void)removeShelf:(WTMShelf*)shelf{
+}
+
+#pragma mark - User and groups
+
+- (WTMUser*)createUserInShelf:(WTMShelf*)shelf{
+    return nil;
+}
+
+- (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf{
+    return nil;
+}
+
+- (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group{
+    
+}
+
+- (void)removeUser:(WTMUser*)User fromGroup:(WTMGroup*)group{
+    
+}
+
+- (void)removeGroup{
+    
+}
+
+
+
 #pragma mark - Package
 
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf{
@@ -107,9 +109,9 @@
 
 - (void)removePackage:(WTMPackage*)package{
     if([self user:_me
-    canPerform:WattWRITE
+       canPerform:WattWRITE
          onObject:package]){
-    
+        
         
     }
 }
@@ -189,18 +191,22 @@
 #pragma mark - Element
 
 - (WTMElement*)createElementInScene:(WTMScene*)scene
-                         withAsset:(WTMAsset*)asset
-                       andBehavior:(WTMBehavior*)behavior{
+                          withAsset:(WTMAsset*)asset
+                        andBehavior:(WTMBehavior*)behavior{
     if([self user:_me
        canPerform:WattWRITE
          onObject:scene.activity]){
         
         
     }
-     return nil;
+    return nil;
 }
 
 - (void)removeElement:(WTMElement*)element{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:element]){
+    }
     
 }
 
@@ -209,11 +215,18 @@
 // Bands
 - (WTMBand*)createBandInLibrary:(WTMLibrary*)library
                     withMembers:(NSArray*)members{
-     return nil;
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:library]){
+    }
+    return nil;
 }
 
 - (void)purgeBandIfNecessary:(WTMBand*)band{
-    
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:band]){
+    }
 }
 
 
@@ -232,6 +245,10 @@
 
 - (void)addMember:(WTMMember*)member
         toLibrary:(WTMLibrary*)library {
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:library]){
+    }
     
 }
 
@@ -239,24 +256,29 @@
 // A facility that deals with the refererCounter to decide if the member should be deleted;
 // It also delete the linked files if necessary
 - (void)purgeMemberIfNecessary:(WTMMember*)member{
-    member.refererCounter--;
-    if(member.refererCounter<=0){
-        if([member respondsToSelector:@selector(relativePath)]){
-            NSString *relativePath=[member performSelector:@selector(relativePath)];
-            if(relativePath){
-                NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
-                                                                          all:YES];
-                for (NSString *pathToDelete in absolutePaths) {
-                    NSError *error=nil;
-                    [[NSFileManager defaultManager] removeItemAtPath:pathToDelete
-                                                               error:&error];
-                    if(error){
-                        WTLog(@"Impossible to delete %@",pathToDelete);
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:member]){
+        
+        member.refererCounter--;
+        if(member.refererCounter<=0){
+            if([member respondsToSelector:@selector(relativePath)]){
+                NSString *relativePath=[member performSelector:@selector(relativePath)];
+                if(relativePath){
+                    NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
+                                                                           all:YES];
+                    for (NSString *pathToDelete in absolutePaths) {
+                        NSError *error=nil;
+                        [[NSFileManager defaultManager] removeItemAtPath:pathToDelete
+                                                                   error:&error];
+                        if(error){
+                            WTLog(@"Impossible to delete %@",pathToDelete);
+                        }
                     }
                 }
             }
+            [member autoUnRegister];
         }
-        [member autoUnRegister];
     }
 }
 

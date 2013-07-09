@@ -60,8 +60,8 @@
 - (NSString*)description{
     if([self isAnAlias])
         return [super aliasDescription];
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
+    NSMutableString *s=[NSMutableString stringWithString:[super description]];
+	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMLangDictionary ",self.uinstID];
 	[s appendFormat:@"key : %@\n",self.key];
 	[s appendFormat:@"locale : %@\n",self.locale];
 	[s appendFormat:@"value : %@\n",self.value];

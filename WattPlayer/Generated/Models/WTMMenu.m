@@ -200,8 +200,8 @@
 - (NSString*)description{
     if([self isAnAlias])
         return [super aliasDescription];
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
+    NSMutableString *s=[NSMutableString stringWithString:[super description]];
+	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMenu ",self.uinstID];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"referenceUinstID : %@\n",[NSNumber numberWithInteger:self.referenceUinstID]];

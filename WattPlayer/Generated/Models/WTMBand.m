@@ -124,8 +124,8 @@
 - (NSString*)description{
     if([self isAnAlias])
         return [super aliasDescription];
-	NSMutableString *s=[NSMutableString string];
-	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
+    NSMutableString *s=[NSMutableString stringWithString:[super description]];
+	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMBand ",self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"library : %@\n",NSStringFromClass([self.library class])];
