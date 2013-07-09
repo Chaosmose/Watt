@@ -33,11 +33,7 @@
 #import "WTMModelsImports.h"
 
 #ifndef WT_MACROS
-#define WT_CODING_KEYS
+#define WT_MACROS
 #define wattAPI [WattApi sharedInstance]
 #define wattPackager [WattMPackager sharedInstance]
-
-
-
-
 #endif

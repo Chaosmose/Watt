@@ -21,6 +21,7 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 @class WTMCollectionOfActivity;
 @class WTMLangDictionary;
 @class WTMCollectionOfLibrary;
@@ -28,16 +29,14 @@
 @class WTMImage;
 @class WTMShelf;
 
-@interface WTMPackage:WattObject<WattCoding>{
+@interface WTMPackage:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
-@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * license;
 @property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;

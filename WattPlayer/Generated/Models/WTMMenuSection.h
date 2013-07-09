@@ -21,14 +21,14 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 @class WTMCollectionOfMenu;
 @class WTMImage;
 
-@interface WTMMenuSection:WattObject<WattCoding>{
+@interface WTMMenuSection:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * details;
-@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,strong) WTMCollectionOfMenu * menus;

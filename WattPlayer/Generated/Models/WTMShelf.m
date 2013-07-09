@@ -20,14 +20,16 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMShelf.h" 
+#import "WTMGroup.h"
 #import "WTMCollectionOfPackage.h"
-#import "WTMImage.h"
+#import "WTMCollectionOfImage.h"
 #import "WTMCollectionOfUser.h"
 
 @implementation WTMShelf 
 
 @synthesize comment=_comment;
-@synthesize extras=_extras;
+@synthesize name=_name;
+@synthesize groups=_groups;
 @synthesize packages=_packages;
 @synthesize picture=_picture;
 @synthesize users=_users;
@@ -35,17 +37,42 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
+	} else if ([key isEqualToString:@"name"]) {
+		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"groups"]) {
+		[super setValue:[WTMGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
 	} else if ([key isEqualToString:@"packages"]) {
 		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
 	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+		[super setValue:[WTMCollectionOfImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"users"]) {
 		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+- (WTMGroup*)groups{
+	if([_groups isAnAlias]){
+		id o=[_registry objectWithUinstID:_groups.uinstID];
+		if(o){
+			_groups=o;
+		}
+	}
+	return _groups;
+}
+
+
+- (WTMGroup*)groups_auto{
+	_groups=[self groups];
+	if(!_groups){
+		_groups=[[WTMGroup alloc] initInRegistry:_registry];
+	}
+	return _groups;
+}
+
+- (void)setGroups:(WTMGroup*)groups{
+	_groups=groups;
 }
 
 - (WTMCollectionOfPackage*)packages{
@@ -71,7 +98,7 @@
 	_packages=packages;
 }
 
-- (WTMImage*)picture{
+- (WTMCollectionOfImage*)picture{
 	if([_picture isAnAlias]){
 		id o=[_registry objectWithUinstID:_picture.uinstID];
 		if(o){
@@ -82,15 +109,15 @@
 }
 
 
-- (WTMImage*)picture_auto{
+- (WTMCollectionOfImage*)picture_auto{
 	_picture=[self picture];
 	if(!_picture){
-		_picture=[[WTMImage alloc] initInRegistry:_registry];
+		_picture=[[WTMCollectionOfImage alloc] initInRegistry:_registry];
 	}
 	return _picture;
 }
 
-- (void)setPicture:(WTMImage*)picture{
+- (void)setPicture:(WTMCollectionOfImage*)picture{
 	_picture=picture;
 }
 
@@ -129,7 +156,14 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.extras forKey:@"extras"];
+	[dictionary setValue:self.name forKey:@"name"];
+	if(self.groups){
+		if(includeChildren){
+			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
+		}else{
+			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"groups"];
+		}
+	}
 	if(self.packages){
 		if(includeChildren){
 			[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
@@ -161,7 +195,8 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"extras : %@\n",self.extras];
+	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];

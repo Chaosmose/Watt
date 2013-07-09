@@ -21,17 +21,16 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 @class WTMCollectionOfBand;
 @class WTMCollectionOfMember;
 @class WTMPackage;
 
-@interface WTMLibrary:WattObject<WattCoding>{
+@interface WTMLibrary:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * category;
-@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,copy) NSString * rights;
 @property (nonatomic,strong) WTMCollectionOfBand * bands;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
 @property (nonatomic,strong) WTMPackage * package;

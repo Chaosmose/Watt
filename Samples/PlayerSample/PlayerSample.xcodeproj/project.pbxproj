@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5298F8A178C1A2E00DA14BE /* WTMCollectionOfImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5298F89178C1A2E00DA14BE /* WTMCollectionOfImage.m */; };
+		E5298F8D178C501F00DA14BE /* WTMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5298F8C178C501F00DA14BE /* WTMModel.m */; };
+		E5298F8E178C501F00DA14BE /* WTMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5298F8C178C501F00DA14BE /* WTMModel.m */; };
+		E5298F8F178C502900DA14BE /* WTMCollectionOfImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5298F89178C1A2E00DA14BE /* WTMCollectionOfImage.m */; };
 		E530CBCF1784268600672CF3 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E530CB851784268600672CF3 /* WTMAction.m */; };
 		E530CBD01784268600672CF3 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E530CB851784268600672CF3 /* WTMAction.m */; };
 		E530CBD11784268600672CF3 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E530CB871784268600672CF3 /* WTMActivity.m */; };
@@ -119,6 +123,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E5298F88178C1A2E00DA14BE /* WTMCollectionOfImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfImage.h; sourceTree = "<group>"; };
+		E5298F89178C1A2E00DA14BE /* WTMCollectionOfImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfImage.m; sourceTree = "<group>"; };
+		E5298F8B178C501F00DA14BE /* WTMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModel.h; sourceTree = "<group>"; };
+		E5298F8C178C501F00DA14BE /* WTMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMModel.m; sourceTree = "<group>"; };
 		E530CB841784268600672CF3 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E530CB851784268600672CF3 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E530CB861784268600672CF3 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -279,6 +287,10 @@
 		E530CB831784268600672CF3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E5298F8B178C501F00DA14BE /* WTMModel.h */,
+				E5298F8C178C501F00DA14BE /* WTMModel.m */,
+				E5298F88178C1A2E00DA14BE /* WTMCollectionOfImage.h */,
+				E5298F89178C1A2E00DA14BE /* WTMCollectionOfImage.m */,
 				E530CB841784268600672CF3 /* WTMAction.h */,
 				E530CB851784268600672CF3 /* WTMAction.m */,
 				E530CB861784268600672CF3 /* WTMActivity.h */,
@@ -630,6 +642,8 @@
 				E530CC141784268600672CF3 /* WTMSound.m in Sources */,
 				E530CC161784268600672CF3 /* WTMUser.m in Sources */,
 				E530CC181784268600672CF3 /* WTMVideo.m in Sources */,
+				E5298F8E178C501F00DA14BE /* WTMModel.m in Sources */,
+				E5298F8F178C502900DA14BE /* WTMCollectionOfImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +697,8 @@
 				E530CC131784268600672CF3 /* WTMSound.m in Sources */,
 				E530CC151784268600672CF3 /* WTMUser.m in Sources */,
 				E530CC171784268600672CF3 /* WTMVideo.m in Sources */,
+				E5298F8A178C1A2E00DA14BE /* WTMCollectionOfImage.m in Sources */,
+				E5298F8D178C501F00DA14BE /* WTMModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

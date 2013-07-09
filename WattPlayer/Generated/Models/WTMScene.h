@@ -21,21 +21,20 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 @class WTMActivity;
 @class WTMBehavior;
 @class WTMCollectionOfElement;
 @class WTMImage;
 
-@interface WTMScene:WattObject<WattCoding>{
+@interface WTMScene:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;
-@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  number;
 @property (nonatomic,copy) NSString * rect;
-@property (nonatomic,copy) NSString * rights;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;
 @property (nonatomic,strong) WTMBehavior * behavior;

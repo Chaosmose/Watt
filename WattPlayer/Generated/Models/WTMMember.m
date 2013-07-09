@@ -25,24 +25,18 @@
 @implementation WTMMember 
 
 @synthesize category=_category;
-@synthesize extras=_extras;
 @synthesize name=_name;
 @synthesize refererCounter=_refererCounter;
-@synthesize rights=_rights;
 @synthesize thumbnailRelativePath=_thumbnailRelativePath;
 @synthesize library=_library;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"category"]){
 		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"refererCounter"]) {
 		[super setValue:value forKey:@"refererCounter"];
-	} else if ([key isEqualToString:@"rights"]) {
-		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"thumbnailRelativePath"]) {
 		[super setValue:value forKey:@"thumbnailRelativePath"];
 	} else if ([key isEqualToString:@"library"]) {
@@ -87,10 +81,8 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.category forKey:@"category"];
-	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.name forKey:@"name"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.refererCounter] forKey:@"refererCounter"];
-	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.thumbnailRelativePath forKey:@"thumbnailRelativePath"];
 	if(self.library){
 		if(includeChildren){
@@ -109,10 +101,8 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
-	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"refererCounter : %@\n",[NSNumber numberWithInteger:self.refererCounter]];
-	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"thumbnailRelativePath : %@\n",self.thumbnailRelativePath];
 	[s appendFormat:@"library : %@\n",NSStringFromClass([self.library class])];
 	return s;

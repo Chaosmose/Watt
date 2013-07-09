@@ -27,9 +27,7 @@
 @implementation WTMLibrary 
 
 @synthesize category=_category;
-@synthesize extras=_extras;
 @synthesize name=_name;
-@synthesize rights=_rights;
 @synthesize bands=_bands;
 @synthesize members=_members;
 @synthesize package=_package;
@@ -37,12 +35,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"category"]){
 		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"rights"]) {
-		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"bands"]) {
 		[super setValue:[WTMCollectionOfBand instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"bands"];
 	} else if ([key isEqualToString:@"members"]) {
@@ -135,9 +129,7 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.category forKey:@"category"];
-	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.rights forKey:@"rights"];
 	if(self.bands){
 		if(includeChildren){
 			[dictionary setValue:[self.bands dictionaryRepresentationWithChildren:includeChildren] forKey:@"bands"];
@@ -169,9 +161,7 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
-	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"bands : %@\n",NSStringFromClass([self.bands class])];
 	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];

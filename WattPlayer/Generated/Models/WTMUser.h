@@ -21,9 +21,10 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 @class WTMCollectionOfGroup;
 
-@interface WTMUser:WattObject<WattCoding>{
+@interface WTMUser:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * identity;

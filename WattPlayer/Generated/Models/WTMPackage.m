@@ -31,11 +31,9 @@
 
 @synthesize category=_category;
 @synthesize comment=_comment;
-@synthesize extras=_extras;
 @synthesize license=_license;
 @synthesize minEngineVersion=_minEngineVersion;
 @synthesize name=_name;
-@synthesize rights=_rights;
 @synthesize activities=_activities;
 @synthesize langDictionary=_langDictionary;
 @synthesize libraries=_libraries;
@@ -48,16 +46,12 @@
 		[super setValue:value forKey:@"category"];
 	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"license"]) {
 		[super setValue:value forKey:@"license"];
 	} else if ([key isEqualToString:@"minEngineVersion"]) {
 		[super setValue:value forKey:@"minEngineVersion"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"rights"]) {
-		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
 	} else if ([key isEqualToString:@"langDictionary"]) {
@@ -226,11 +220,9 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.license forKey:@"license"];
 	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
 	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.rights forKey:@"rights"];
 	if(self.activities){
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
@@ -284,11 +276,9 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
 	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];

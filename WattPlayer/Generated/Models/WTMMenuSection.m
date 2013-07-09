@@ -26,7 +26,6 @@
 @implementation WTMMenuSection 
 
 @synthesize details=_details;
-@synthesize extras=_extras;
 @synthesize index=_index;
 @synthesize label=_label;
 @synthesize menus=_menus;
@@ -35,8 +34,6 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
 		[super setValue:value forKey:@"details"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"label"]) {
@@ -108,7 +105,6 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.details forKey:@"details"];
-	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.label forKey:@"label"];
 	if(self.menus){
@@ -135,7 +131,6 @@
 	NSMutableString *s=[NSMutableString string];
 	[s appendFormat:@"Instance of %@ (%i) :\n",NSStringFromClass([self class]),self.uinstID];
 	[s appendFormat:@"details : %@\n",self.details];
-	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"menus : %@\n",NSStringFromClass([self.menus class])];

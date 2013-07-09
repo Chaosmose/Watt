@@ -29,11 +29,9 @@
 @synthesize category=_category;
 @synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
-@synthesize extras=_extras;
 @synthesize level=_level;
 @synthesize nature=_nature;
 @synthesize rating=_rating;
-@synthesize rights=_rights;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
 @synthesize package=_package;
@@ -47,16 +45,12 @@
 		[super setValue:value forKey:@"comment"];
 	} else if ([key isEqualToString:@"controllerClass"]) {
 		[super setValue:value forKey:@"controllerClass"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
 	} else if ([key isEqualToString:@"nature"]) {
 		[super setValue:value forKey:@"nature"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
-	} else if ([key isEqualToString:@"rights"]) {
-		[super setValue:value forKey:@"rights"];
 	} else if ([key isEqualToString:@"shortName"]) {
 		[super setValue:value forKey:@"shortName"];
 	} else if ([key isEqualToString:@"title"]) {
@@ -155,11 +149,9 @@
 	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
-	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:self.nature forKey:@"nature"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
-	[dictionary setValue:self.rights forKey:@"rights"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.package){
@@ -195,11 +187,9 @@
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
-	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"nature : %@\n",self.nature];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
-	[s appendFormat:@"rights : %@\n",self.rights];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
