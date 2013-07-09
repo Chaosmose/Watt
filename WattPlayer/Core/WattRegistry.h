@@ -53,9 +53,6 @@
 - (void)registerObject:(WattObject*)reference;       // Generates a unique id + add the reference to the registry
 - (void)unRegisterObject:(WattObject*)reference;
 
-- (WattObject*)objectWithObjectName:(NSString*)objectName;
-
-
 // The id must be already set and not conflicting with existing uinstID
 - (void)addObject:(WattObject *)reference;
 

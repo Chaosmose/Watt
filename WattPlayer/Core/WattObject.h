@@ -19,9 +19,6 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-
-#pragma mark - log macros
-
 #ifndef WT_LOG
 #define WT_LOG 1 // You can set up WT_LOG to 1 or 0
 typedef enum logNatures{
@@ -101,7 +98,6 @@ __LINE__ ,\
     BOOL _isAnAlias;
 }
 
-@property (nonatomic)NSString *objectName;// Used to tag an instance with a defined name.
 
 #pragma mark - registry
 

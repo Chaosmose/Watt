@@ -41,7 +41,6 @@
 - (WattObject *)objectAtIndex:(NSUInteger)index;
 - (WattObject *)lastObject;
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array;
-- (WattObject*)objectWithObjectName:(NSString*)objectName;
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID;
 
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block;

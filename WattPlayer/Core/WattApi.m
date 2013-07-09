@@ -35,103 +35,209 @@
 
 
 
-#pragma mark - localization
+#pragma mark - Registry
 
-- (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
-    if(_localizationDelegate){
-        [_localizationDelegate localize:reference withKey:key andValue:value];
-    }else{
-        // Default localization policy
-    }
+- (void)mergeRegistry:(WattRegistry*)sourceRegistry
+                into:(WattRegistry*)destinationRegistry{
+    
 }
 
+#pragma mark - MULTIMEDIA API
 
-#pragma mark - relative path and path discovery
+#pragma mark -Shelf
 
 
--(NSString*)absolutePathFromRelativePath:(NSString *)relativePath{
-    NSArray *r=[self absolutePathsFromRelativePath:relativePath all:NO];
-    if([r count]>0)
-        return [r objectAtIndex:0];
+- (WTMShelf*)createShelfWithName:(NSString*)name{
     return nil;
 }
 
--(NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
+- (void)removeShelf:(WTMShelf*)shelf{
+}
+
+#pragma mark - User and groups
+
+- (WTMUser*)createUserInShelf:(WTMShelf*)shelf{
+     return nil;
+}
+
+- (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf{
+     return nil;
+}
+
+- (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group{
     
-    NSString *baseRelativePath = [relativePath copy];
-    NSArray *orientation_modifiers=@[@"-Landscape",@"-Portrait",@""];
-    NSArray *device_modifiers=@[@"~ipad",@"~iphone5",@"~iphone",@""];
-    NSArray *pixel_density_modifiers=@[@"@2x",@""];
-    NSString *extension = [baseRelativePath pathExtension];
-    NSMutableArray *result=[NSMutableArray array];
+}
+
+- (void)removeUser:(WTMUser*)User fromGroup:(WTMGroup*)group{
     
-    // Clean up the basename
+}
+
+- (void)removeGroup{
     
-    baseRelativePath=[baseRelativePath stringByDeletingPathExtension];
-    for (NSString*deviceModifier in  device_modifiers) {
-        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:deviceModifier withString:@""];
-    }
-    
-    for (NSString*orientationModifier in  orientation_modifiers) {
-        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:orientationModifier withString:@""];
-    }
-    
-    for (NSString*pixelDensity in  pixel_density_modifiers) {
-        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:pixelDensity withString:@""];
-    }
-    
-    if(isLandscapeOrientation()){
-        orientation_modifiers=@[@"-Landscape",@""];
-    }else{
-        orientation_modifiers=@[@"-Portrait",@""];
-    }
-    if(isIpad()){
-        device_modifiers=@[@"~ipad",@""];
-    }else if(isWidePhone()){
-        device_modifiers=@[@"~iphone5",@"~iphone",@""];
-    }else{
-        device_modifiers=@[@"~iphone",@""];
-    }
-    
-    // Find the most relevant asset
-    
-    for (NSString*orientationModifier in  orientation_modifiers) {
-        for (NSString*deviceModifier in  device_modifiers) {
-            for (NSString*pixelDensity in  pixel_density_modifiers) {
-                NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
-                // DOCUMENT DIRECTORY
-                NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[self applicationDocumentsDirectory],component,extension?extension:@""];
-                if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
-                    [result addObject:pth];
-                    if(!returnAll)
-                        return result;
-                }
-                // BUNDLE ATTEMPT
-                pth=[[NSBundle mainBundle] pathForResource:component ofType:extension];
-                if(pth && [pth length]>1){
-                    [result addObject:pth];
-                    if(!returnAll)
-                        return result;
-                }
-            }
-            
-        }
-    }
-    return result;
 }
 
 
-- (NSString *) applicationDocumentsDirectory{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    return basePath;
+#pragma mark - ACL
+
+
+- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WattObject*)object{
+    BOOL authorized=YES;
+    if((!_me)||(!object)){
+        authorized=NO;
+    }
+    
+    if([object valueForKey:@"rights"]){
+        
+    }
+    
+    if(!authorized){
+        [[NSNotificationCenter defaultCenter] postNotificationName:WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME
+                                                            object:self
+                                                          userInfo:@{@"reference":object,@"action":[NSNumber numberWithInteger:action]}];
+    }
+    // Return if the action is authorized or not.
+    return authorized;
 }
 
-#pragma mark - relative path and path discovery
-#pragma mark -
+#pragma mark - Package
+
+- (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf{
+    return nil;
+}
+
+- (void)removePackage:(WTMPackage*)package{
+    if([self user:_me
+    canPerform:WattWRITE
+         onObject:package]){
+    
+        
+    }
+}
+
+// Immport process this method can move a package from a registry to another
+// Producing renamming of assets and performing re-identification
+- (void)addPackage:(WTMPackage*)package
+           toShelf:(WTMShelf*)shelf{
+}
+
+
+#pragma mark - Library
+
+- (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:package]){
+        
+        
+    }
+    return nil;
+}
+
+- (void)removeLibrary:(WTMLibrary*)library{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:library.package]){
+        
+        
+    }
+}
+
+
+#pragma mark - Activity
+
+- (WTMActivity*)createActivityInPackage:(WTMPackage*)package{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:package]){
+        
+        
+    }
+    return nil;
+}
+
+- (void)removeActivity:(WTMActivity*)activity{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:activity]){
+        
+        
+    }
+}
+
+
+#pragma mark - Scene
+
+- (WTMScene*)createSceneInActivity:(WTMActivity*)activity{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:activity]){
+        
+        
+    }
+    return nil;
+}
+
+- (void)removeScene:(WTMScene*)scene{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:scene]){
+        
+        
+    }
+}
+
+#pragma mark - Element
+
+- (WTMElement*)createElementInScene:(WTMScene*)scene
+                         withAsset:(WTMAsset*)asset
+                       andBehavior:(WTMBehavior*)behavior{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:scene.activity]){
+        
+        
+    }
+     return nil;
+}
+
+- (void)removeElement:(WTMElement*)element{
+    
+}
+
+#pragma mark -  Bands
+
+// Bands
+- (WTMBand*)createBandInLibrary:(WTMLibrary*)library
+                    withMembers:(NSArray*)members{
+     return nil;
+}
+
+- (void)purgeBandIfNecessary:(WTMBand*)band{
+    
+}
+
+
+#pragma mark -  Members
+
+// Use this section of the api to add member.
+// The underlining refererCounter is automaticly managed
+// Purging  a member or band from a library can automatically delete the linked files
+
+// Linked assets dependencies
+// Library 1<->n member
+
+// Band n<->n member
+// Library 1<->n member
+
+
+- (void)addMember:(WTMMember*)member
+        toLibrary:(WTMLibrary*)library {
+    
+}
 
 
 // A facility that deals with the refererCounter to decide if the member should be deleted;
+// It also delete the linked files if necessary
 - (void)purgeMemberIfNecessary:(WTMMember*)member{
     member.refererCounter--;
     if(member.refererCounter<=0){
@@ -152,16 +258,14 @@
         }
         [member autoUnRegister];
     }
-    
 }
-
 
 
 #pragma mark - serialization
 
 - (BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
     NSString*path=[self _pathForFileName:fileName];
-    if([self _createRequirePaths:path]){
+    if([self _createRequiredPaths:path]){
         NSError*errorJson=nil;
         NSData *data=nil;
         @try {
@@ -209,8 +313,95 @@
 
 
 
-- (BOOL)_createRequirePaths:(NSString*)path{
-    if([path rangeOfString:[self _applicationDocumentPath]].location==NSNotFound){
+
+
+
+#pragma mark - relative path and path discovery
+
+
+- (NSString*)absolutePathFromRelativePath:(NSString *)relativePath{
+    NSArray *r=[self absolutePathsFromRelativePath:relativePath all:NO];
+    if([r count]>0)
+        return [r objectAtIndex:0];
+    return nil;
+}
+
+- (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
+    
+    NSString *baseRelativePath = [relativePath copy];
+    NSArray *orientation_modifiers=@[@""];
+    NSArray *device_modifiers=@[@""];
+    NSArray *pixel_density_modifiers=@[@"@2x",@""];
+    NSString *extension = [baseRelativePath pathExtension];
+    NSMutableArray *result=[NSMutableArray array];
+    
+    // Clean up the basename
+    
+    baseRelativePath=[baseRelativePath stringByDeletingPathExtension];
+    for (NSString*deviceModifier in  device_modifiers) {
+        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:deviceModifier withString:@""];
+    }
+    
+    for (NSString*orientationModifier in  orientation_modifiers) {
+        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:orientationModifier withString:@""];
+    }
+    
+    for (NSString*pixelDensity in  pixel_density_modifiers) {
+        baseRelativePath=[baseRelativePath stringByReplacingOccurrencesOfString:pixelDensity withString:@""];
+    }
+#if TARGET_OS_IPHONE
+    if(isLandscapeOrientation()){
+        orientation_modifiers=@[@"-Landscape",@""];
+    }else{
+        orientation_modifiers=@[@"-Portrait",@""];
+    }
+    if(isIpad()){
+        device_modifiers=@[@"~ipad",@""];
+    }else if(isWidePhone()){
+        device_modifiers=@[@"~iphone5",@"~iphone",@""];
+    }else{
+        device_modifiers=@[@"~iphone",@""];
+    }
+#endif
+    // Find the most relevant asset
+    
+    for (NSString*orientationModifier in  orientation_modifiers) {
+        for (NSString*deviceModifier in  device_modifiers) {
+            for (NSString*pixelDensity in  pixel_density_modifiers) {
+                NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
+                // DOCUMENT DIRECTORY
+                NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[self applicationDocumentsDirectory],component,extension?extension:@""];
+                if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
+                    [result addObject:pth];
+                    if(!returnAll)
+                        return result;
+                }
+                // BUNDLE ATTEMPT
+                pth=[[NSBundle mainBundle] pathForResource:component ofType:extension];
+                if(pth && [pth length]>1){
+                    [result addObject:pth];
+                    if(!returnAll)
+                        return result;
+                }
+            }
+            
+        }
+    }
+    return result;
+}
+
+
+- (NSString *) applicationDocumentsDirectory{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+    return basePath;
+}
+
+
+#pragma mark - Paths
+
+- (BOOL)_createRequiredPaths:(NSString*)path{
+    if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
         NSLog(@"Illegal path %@", path);
         return NO;
     }
@@ -231,15 +422,21 @@
 }
 
 
+
 - (NSString*)_pathForFileName:(NSString*)fileName{
-    return [[self _applicationDocumentPath ] stringByAppendingFormat:@"%@",fileName];
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"/%@",fileName];
 }
 
-- (NSString*)_applicationDocumentPath{
-    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path=[searchPaths objectAtIndex:0];
-    return [path stringByAppendingFormat:@"/"];
+#pragma mark - localization
+
+- (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
+    if(_localizationDelegate){
+        [_localizationDelegate localize:reference withKey:key andValue:value];
+    }else{
+        // Default localization policy
+    }
 }
+
 
 
 @end
