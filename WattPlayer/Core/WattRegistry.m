@@ -75,10 +75,7 @@
                                                   includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
-            if([liveObject isKindOfClass:NSClassFromString(@"WTMShelf")]){
-               // WTLog(@"%i %@",i,liveObject);
-            }
-            
+            WTLog(@"%i %@",i,liveObject);
         }
         i++;
     }

@@ -88,12 +88,12 @@
         return instance;
     }
     
-	if(!instance && [aDictionary objectForKey:__className__]){
-		Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-        if([aDictionary objectForKey:__isAliased__] && [[aDictionary objectForKey:__isAliased__] boolValue]){
-            instance=[[theClass alloc] initAsAliasWithidentifier:wtuinstID];
+	if(!instance  ){
+        if(![aDictionary objectForKey:__className__]){
+            instance=[[WattObject alloc] initAsAliasWithidentifier:wtuinstID];
         }else{
             // We instantiate the class.
+            Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
             instance= [[theClass alloc] initInRegistry:registry];
             [instance setAttributesFromDictionary:aDictionary];
         }
@@ -241,8 +241,6 @@
 
 - (NSDictionary *)aliasDictionaryRepresentation{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-    [wrapper setObject:[NSNumber numberWithBool:YES] forKey:__isAliased__];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }

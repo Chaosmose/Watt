@@ -102,9 +102,11 @@
 	}
     NSArray *a=[aDictionary objectForKey:__collection__];
     for (NSDictionary*objectDictionary in a) {
-        Class c=NSClassFromString([objectDictionary objectForKey:__className__]);
-        id o=[c instanceFromDictionary:objectDictionary inRegistry:_registry includeChildren:YES];
-        [_collection addObject:o];
+            Class c=[objectDictionary objectForKey:__className__]?NSClassFromString([objectDictionary objectForKey:__className__]):[WattObject class];
+            id o=[c instanceFromDictionary:objectDictionary
+                            inRegistry:_registry
+                       includeChildren:YES];
+            [_collection addObject:o];
     }
 }
 
