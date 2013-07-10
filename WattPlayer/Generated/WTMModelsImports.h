@@ -40,6 +40,7 @@
 #import "WTMScene.h"
 #import "WTMCollectionOfPackage.h"
 #import "WTMCollectionOfImage.h"
+#import "WTMCollectionOfMenuSection.h"
 #import "WTMShelf.h"
 #import "WTMSound.h"
 #import "WTMCollectionOfGroup.h"

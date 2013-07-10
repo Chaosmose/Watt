@@ -50,7 +50,9 @@ typedef enum watt_Actions{
 @property (nonatomic,assign)id<WTMlocalizationDelegateProtocol>localizationDelegate;
 @property (nonatomic,strong)  WattRegistry *currentRegistry;
 @property (nonatomic,strong)  WTMUser *me;
-
+//
+@property (nonatomic,readonly)  WTMUser *system;
+@property (nonatomic,readonly)  WTMGroup *systemGroup;
 
 // WattMApi singleton accessor
 + (WattApi*)sharedInstance;

@@ -22,6 +22,8 @@
 #import "WattApi.h"
 
 @implementation WattApi{
+    WTMUser *_system;
+    WTMGroup *_systemGroup;
 }
 
 + (WattApi*)sharedInstance {
@@ -53,8 +55,8 @@
         authorized=NO;
     }
     
-    if([object valueForKey:@"rights"]){
-        
+    if([object rights]){
+       //
     }
     
     if(!authorized){
@@ -64,6 +66,20 @@
     }
     // Return if the action is authorized or not.
     return authorized;
+}
+
+-(WTMUser*)system{
+    if(!_system){
+        _system=[[WTMUser alloc] initInRegistry:self.currentRegistry];
+    }
+    return _system;
+}
+
+-(WTMGroup*)systemGroup{
+    if(_systemGroup){
+        _systemGroup=[[WTMGroup alloc] initInRegistry:self.currentRegistry];
+    }
+    return _systemGroup;
 }
 
 

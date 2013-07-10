@@ -23,6 +23,7 @@
 #import "WTMGroup.h"
 #import "WTMCollectionOfPackage.h"
 #import "WTMCollectionOfImage.h"
+#import "WTMCollectionOfMenuSection.h"
 #import "WTMCollectionOfUser.h"
 
 @implementation WTMShelf 
@@ -32,6 +33,7 @@
 @synthesize groups=_groups;
 @synthesize packages=_packages;
 @synthesize picture=_picture;
+@synthesize sections=_sections;
 @synthesize users=_users;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
@@ -45,6 +47,8 @@
 		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
 	} else if ([key isEqualToString:@"picture"]) {
 		[super setValue:[WTMCollectionOfImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+	} else if ([key isEqualToString:@"sections"]) {
+		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"sections"];
 	} else if ([key isEqualToString:@"users"]) {
 		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
 	} else {
@@ -121,6 +125,29 @@
 	_picture=picture;
 }
 
+- (WTMCollectionOfMenuSection*)sections{
+	if([_sections isAnAlias]){
+		id o=[_registry objectWithUinstID:_sections.uinstID];
+		if(o){
+			_sections=o;
+		}
+	}
+	return _sections;
+}
+
+
+- (WTMCollectionOfMenuSection*)sections_auto{
+	_sections=[self sections];
+	if(!_sections){
+		_sections=[[WTMCollectionOfMenuSection alloc] initInRegistry:_registry];
+	}
+	return _sections;
+}
+
+- (void)setSections:(WTMCollectionOfMenuSection*)sections{
+	_sections=sections;
+}
+
 - (WTMCollectionOfUser*)users{
 	if([_users isAnAlias]){
 		id o=[_registry objectWithUinstID:_users.uinstID];
@@ -178,6 +205,13 @@
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
+	if(self.sections){
+		if(includeChildren){
+			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"sections"];
+		}else{
+			[dictionary setValue:[self.sections aliasDictionaryRepresentation] forKey:@"sections"];
+		}
+	}
 	if(self.users){
 		if(includeChildren){
 			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
@@ -199,6 +233,7 @@
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
+	[s appendFormat:@"sections : %@\n",NSStringFromClass([self.sections class])];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	return s;
 }

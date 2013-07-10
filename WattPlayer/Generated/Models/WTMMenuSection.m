@@ -22,6 +22,7 @@
 #import "WTMMenuSection.h" 
 #import "WTMCollectionOfMenu.h"
 #import "WTMImage.h"
+#import "WTMShelf.h"
 
 @implementation WTMMenuSection 
 
@@ -30,6 +31,7 @@
 @synthesize label=_label;
 @synthesize menus=_menus;
 @synthesize picture=_picture;
+@synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
@@ -42,6 +44,8 @@
 		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menus"];
 	} else if ([key isEqualToString:@"picture"]) {
 		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+	} else if ([key isEqualToString:@"shelf"]) {
+		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -93,6 +97,29 @@
 	_picture=picture;
 }
 
+- (WTMShelf*)shelf{
+	if([_shelf isAnAlias]){
+		id o=[_registry objectWithUinstID:_shelf.uinstID];
+		if(o){
+			_shelf=o;
+		}
+	}
+	return _shelf;
+}
+
+
+- (WTMShelf*)shelf_auto{
+	_shelf=[self shelf];
+	if(!_shelf){
+		_shelf=[[WTMShelf alloc] initInRegistry:_registry];
+	}
+	return _shelf;
+}
+
+- (void)setShelf:(WTMShelf*)shelf{
+	_shelf=shelf;
+}
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -121,6 +148,13 @@
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
+	if(self.shelf){
+		if(includeChildren){
+			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"shelf"];
+		}else{
+			[dictionary setValue:[self.shelf aliasDictionaryRepresentation] forKey:@"shelf"];
+		}
+	}
     return dictionary;
 }
 
@@ -135,6 +169,7 @@
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"menus : %@\n",NSStringFromClass([self.menus class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
+	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }
 

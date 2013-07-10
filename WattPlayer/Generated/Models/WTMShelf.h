@@ -25,6 +25,7 @@
 @class WTMGroup;
 @class WTMCollectionOfPackage;
 @class WTMCollectionOfImage;
+@class WTMCollectionOfMenuSection;
 @class WTMCollectionOfUser;
 
 @interface WTMShelf:WTMModel<WattCoding>{
@@ -35,11 +36,13 @@
 @property (nonatomic,strong) WTMGroup * groups;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
 @property (nonatomic,strong) WTMCollectionOfImage * picture;
+@property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 @property (nonatomic,strong) WTMCollectionOfUser * users;
 
 - (WTMGroup*)groups_auto;
 - (WTMCollectionOfPackage*)packages_auto;
 - (WTMCollectionOfImage*)picture_auto;
+- (WTMCollectionOfMenuSection*)sections_auto;
 - (WTMCollectionOfUser*)users_auto;
 
 @end
