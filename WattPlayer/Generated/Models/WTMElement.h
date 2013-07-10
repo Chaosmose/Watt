@@ -29,7 +29,6 @@
 @interface WTMElement:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,copy) NSString * rect;
 @property (nonatomic,strong) WTMAsset * asset;

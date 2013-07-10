@@ -25,15 +25,12 @@
 
 @implementation WTMBand 
 
-@synthesize category=_category;
 @synthesize name=_name;
 @synthesize library=_library;
 @synthesize members=_members;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"category"]){
-		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"name"]) {
+	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"library"]) {
 		[super setValue:[WTMLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"library"];
@@ -101,7 +98,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.name forKey:@"name"];
 	if(self.library){
 		if(includeChildren){
@@ -126,7 +122,6 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMBand ",self.uinstID];
-	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"library : %@\n",NSStringFromClass([self.library class])];
 	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];

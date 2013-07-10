@@ -25,29 +25,24 @@
 @class WTMCollectionOfActivity;
 @class WTMLangDictionary;
 @class WTMCollectionOfLibrary;
-@class WTMUser;
 @class WTMImage;
 @class WTMShelf;
 
 @interface WTMPackage:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * category;
-@property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * license;
 @property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
-@property (nonatomic,strong) WTMUser * owner;
 @property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMShelf * shelf;
 
 - (WTMCollectionOfActivity*)activities_auto;
 - (WTMLangDictionary*)langDictionary_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
-- (WTMUser*)owner_auto;
 - (WTMImage*)picture_auto;
 - (WTMShelf*)shelf_auto;
 

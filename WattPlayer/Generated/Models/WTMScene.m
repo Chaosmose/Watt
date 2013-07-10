@@ -27,8 +27,6 @@
 
 @implementation WTMScene 
 
-@synthesize category=_category;
-@synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
 @synthesize number=_number;
 @synthesize rect=_rect;
@@ -39,11 +37,7 @@
 @synthesize picture=_picture;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"category"]){
-		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"comment"]) {
-		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"controllerClass"]) {
+	if ([key isEqualToString:@"controllerClass"]){
 		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"number"]) {
 		[super setValue:value forKey:@"number"];
@@ -167,8 +161,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"category"];
-	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
 	[dictionary setValue:self.rect forKey:@"rect"];
@@ -210,8 +202,6 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMScene ",self.uinstID];
-	[s appendFormat:@"category : %@\n",self.category];
-	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
 	[s appendFormat:@"rect : %@\n",self.rect];

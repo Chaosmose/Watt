@@ -31,7 +31,6 @@
 @interface WTMShelf:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMGroup * groups;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;

@@ -24,16 +24,13 @@
 
 @implementation WTMMember 
 
-@synthesize category=_category;
 @synthesize name=_name;
 @synthesize refererCounter=_refererCounter;
 @synthesize thumbnailRelativePath=_thumbnailRelativePath;
 @synthesize library=_library;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"category"]){
-		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"name"]) {
+	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"refererCounter"]) {
 		[super setValue:value forKey:@"refererCounter"];
@@ -80,7 +77,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.name forKey:@"name"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.refererCounter] forKey:@"refererCounter"];
 	[dictionary setValue:self.thumbnailRelativePath forKey:@"thumbnailRelativePath"];
@@ -100,7 +96,6 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMember ",self.uinstID];
-	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"refererCounter : %@\n",[NSNumber numberWithInteger:self.refererCounter]];
 	[s appendFormat:@"thumbnailRelativePath : %@\n",self.thumbnailRelativePath];

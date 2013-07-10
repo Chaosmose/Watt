@@ -29,8 +29,6 @@
 @interface WTMActivity:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * category;
-@property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,assign) NSInteger  level;
 @property (nonatomic,copy) NSString * nature;

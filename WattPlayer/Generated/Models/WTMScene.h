@@ -30,8 +30,6 @@
 @interface WTMScene:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * category;
-@property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * controllerClass;
 @property (nonatomic,assign) NSInteger  number;
 @property (nonatomic,copy) NSString * rect;

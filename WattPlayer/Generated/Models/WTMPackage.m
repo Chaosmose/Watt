@@ -23,30 +23,22 @@
 #import "WTMCollectionOfActivity.h"
 #import "WTMLangDictionary.h"
 #import "WTMCollectionOfLibrary.h"
-#import "WTMUser.h"
 #import "WTMImage.h"
 #import "WTMShelf.h"
 
 @implementation WTMPackage 
 
-@synthesize category=_category;
-@synthesize comment=_comment;
 @synthesize license=_license;
 @synthesize minEngineVersion=_minEngineVersion;
 @synthesize name=_name;
 @synthesize activities=_activities;
 @synthesize langDictionary=_langDictionary;
 @synthesize libraries=_libraries;
-@synthesize owner=_owner;
 @synthesize picture=_picture;
 @synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"category"]){
-		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"comment"]) {
-		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"license"]) {
+	if ([key isEqualToString:@"license"]){
 		[super setValue:value forKey:@"license"];
 	} else if ([key isEqualToString:@"minEngineVersion"]) {
 		[super setValue:value forKey:@"minEngineVersion"];
@@ -58,8 +50,6 @@
 		[super setValue:[WTMLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionary"];
 	} else if ([key isEqualToString:@"libraries"]) {
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
-	} else if ([key isEqualToString:@"owner"]) {
-		[super setValue:[WTMUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"owner"];
 	} else if ([key isEqualToString:@"picture"]) {
 		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"shelf"]) {
@@ -138,29 +128,6 @@
 	_libraries=libraries;
 }
 
-- (WTMUser*)owner{
-	if([_owner isAnAlias]){
-		id o=[_registry objectWithUinstID:_owner.uinstID];
-		if(o){
-			_owner=o;
-		}
-	}
-	return _owner;
-}
-
-
-- (WTMUser*)owner_auto{
-	_owner=[self owner];
-	if(!_owner){
-		_owner=[[WTMUser alloc] initInRegistry:_registry];
-	}
-	return _owner;
-}
-
-- (void)setOwner:(WTMUser*)owner{
-	_owner=owner;
-}
-
 - (WTMImage*)picture{
 	if([_picture isAnAlias]){
 		id o=[_registry objectWithUinstID:_picture.uinstID];
@@ -218,8 +185,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"category"];
-	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.license forKey:@"license"];
 	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
 	[dictionary setValue:self.name forKey:@"name"];
@@ -242,13 +207,6 @@
 			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"libraries"];
 		}else{
 			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"libraries"];
-		}
-	}
-	if(self.owner){
-		if(includeChildren){
-			[dictionary setValue:[self.owner dictionaryRepresentationWithChildren:includeChildren] forKey:@"owner"];
-		}else{
-			[dictionary setValue:[self.owner aliasDictionaryRepresentation] forKey:@"owner"];
 		}
 	}
 	if(self.picture){
@@ -274,15 +232,12 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMPackage ",self.uinstID];
-	[s appendFormat:@"category : %@\n",self.category];
-	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
 	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
-	[s appendFormat:@"owner : %@\n",NSStringFromClass([self.owner class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;

@@ -26,8 +26,6 @@
 
 @implementation WTMActivity 
 
-@synthesize category=_category;
-@synthesize comment=_comment;
 @synthesize controllerClass=_controllerClass;
 @synthesize level=_level;
 @synthesize nature=_nature;
@@ -39,11 +37,7 @@
 @synthesize scenes=_scenes;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"category"]){
-		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"comment"]) {
-		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"controllerClass"]) {
+	if ([key isEqualToString:@"controllerClass"]){
 		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
@@ -146,8 +140,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"category"];
-	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:self.nature forKey:@"nature"];
@@ -184,8 +176,6 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMActivity ",self.uinstID];
-	[s appendFormat:@"category : %@\n",self.category];
-	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"nature : %@\n",self.nature];

@@ -20,23 +20,83 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMModel.h" 
+#import "WTMGroup.h"
+#import "WTMUser.h"
 
 @implementation WTMModel 
 
+@synthesize category=_category;
+@synthesize comment=_comment;
 @synthesize extras=_extras;
 @synthesize objectName=_objectName;
 @synthesize rights=_rights;
+@synthesize group=_group;
+@synthesize owner=_owner;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"extras"]){
+	if ([key isEqualToString:@"category"]){
+		[super setValue:value forKey:@"category"];
+	} else if ([key isEqualToString:@"comment"]) {
+		[super setValue:value forKey:@"comment"];
+	} else if ([key isEqualToString:@"extras"]) {
 		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"objectName"]) {
 		[super setValue:value forKey:@"objectName"];
 	} else if ([key isEqualToString:@"rights"]) {
 		[super setValue:value forKey:@"rights"];
+	} else if ([key isEqualToString:@"group"]) {
+		[super setValue:[WTMGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"group"];
+	} else if ([key isEqualToString:@"owner"]) {
+		[super setValue:[WTMUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"owner"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+- (WTMGroup*)group{
+	if([_group isAnAlias]){
+		id o=[_registry objectWithUinstID:_group.uinstID];
+		if(o){
+			_group=o;
+		}
+	}
+	return _group;
+}
+
+
+- (WTMGroup*)group_auto{
+	_group=[self group];
+	if(!_group){
+		_group=[[WTMGroup alloc] initInRegistry:_registry];
+	}
+	return _group;
+}
+
+- (void)setGroup:(WTMGroup*)group{
+	_group=group;
+}
+
+- (WTMUser*)owner{
+	if([_owner isAnAlias]){
+		id o=[_registry objectWithUinstID:_owner.uinstID];
+		if(o){
+			_owner=o;
+		}
+	}
+	return _owner;
+}
+
+
+- (WTMUser*)owner_auto{
+	_owner=[self owner];
+	if(!_owner){
+		_owner=[[WTMUser alloc] initInRegistry:_registry];
+	}
+	return _owner;
+}
+
+- (void)setOwner:(WTMUser*)owner{
+	_owner=owner;
 }
 
 
@@ -50,9 +110,25 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
+	[dictionary setValue:self.category forKey:@"category"];
+	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:self.objectName forKey:@"objectName"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rights] forKey:@"rights"];
+	if(self.group){
+		if(includeChildren){
+			[dictionary setValue:[self.group dictionaryRepresentationWithChildren:includeChildren] forKey:@"group"];
+		}else{
+			[dictionary setValue:[self.group aliasDictionaryRepresentation] forKey:@"group"];
+		}
+	}
+	if(self.owner){
+		if(includeChildren){
+			[dictionary setValue:[self.owner dictionaryRepresentationWithChildren:includeChildren] forKey:@"owner"];
+		}else{
+			[dictionary setValue:[self.owner aliasDictionaryRepresentation] forKey:@"owner"];
+		}
+	}
     return dictionary;
 }
 
@@ -62,9 +138,13 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMModel ",self.uinstID];
+	[s appendFormat:@"category : %@\n",self.category];
+	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"objectName : %@\n",self.objectName];
 	[s appendFormat:@"rights : %@\n",[NSNumber numberWithInteger:self.rights]];
+	[s appendFormat:@"group : %@\n",NSStringFromClass([self.group class])];
+	[s appendFormat:@"owner : %@\n",NSStringFromClass([self.owner class])];
 	return s;
 }
 

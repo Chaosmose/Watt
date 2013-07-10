@@ -24,21 +24,8 @@
 
 
 #import "WattObject.h"
+#import "WattAcl.h"
 #import "WTMModelsImports.h"
-
-
-typedef enum watt_Actions{    
-    WattREAD=0,     //view the file
-    WattWRITE=1,    //create, edit or delete
-    WattEXECUTE=2   //run a script or enter a directory ?
-}Watt_Action;
-// http://mason.gmu.edu/~montecin/UNIXpermiss.htm
-
-#ifndef WTAPI_CONST
-#define WTAPI_CONST
-#define WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME @"WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME"
-#endif
-
 
 
 #pragma mark - WattApi
@@ -86,9 +73,17 @@ typedef enum watt_Actions{
 - (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf;
 - (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group;
 - (void)removeUser:(WTMUser*)User fromGroup:(WTMGroup*)group;
-- (void)removeGroup;
+- (void)removeGroup:(WTMGroup*)group;
 
 
+#pragma mark - Menus & section 
+
+- (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf;
+- (void)removeSection:(WTMMenuSection*)section fromShelf:(WTMShelf*)shelf;
+- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section;
+- (void)removeMenu:(WTMMenu*)menu;
+
+#pragma mark - Package
 
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;
 - (void)removePackage:(WTMPackage*)package;

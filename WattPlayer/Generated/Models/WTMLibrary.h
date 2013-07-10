@@ -29,7 +29,6 @@
 @interface WTMLibrary:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMCollectionOfBand * bands;
 @property (nonatomic,strong) WTMCollectionOfMember * members;

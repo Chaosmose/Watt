@@ -87,6 +87,7 @@
 		E530CC181784268600672CF3 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E530CBCD1784268600672CF3 /* WTMVideo.m */; };
 		E5773EDC178D49F100F5A857 /* WTMCollectionOfMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5773EDB178D49F100F5A857 /* WTMCollectionOfMenuSection.m */; };
 		E5773EDD178D4EBC00F5A857 /* WTMCollectionOfMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5773EDB178D49F100F5A857 /* WTMCollectionOfMenuSection.m */; };
+		E5773EE3178D540F00F5A857 /* WattAcl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5773EE2178D540F00F5A857 /* WattAcl.m */; };
 		E5998FBD174CB1AA0066EFE8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
 		E5998FBE174CB1AA0066EFE8 /* WTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462541732A4A000E654A1 /* WTMAppDelegate.m */; };
 		E5998FE9174CB1AA0066EFE8 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
@@ -206,6 +207,8 @@
 		E530CBCE1784268600672CF3 /* WTMModelsImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModelsImports.h; sourceTree = "<group>"; };
 		E5773EDA178D49F100F5A857 /* WTMCollectionOfMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMenuSection.h; sourceTree = "<group>"; };
 		E5773EDB178D49F100F5A857 /* WTMCollectionOfMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenuSection.m; sourceTree = "<group>"; };
+		E5773EE1178D540F00F5A857 /* WattAcl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattAcl.h; sourceTree = "<group>"; };
+		E5773EE2178D540F00F5A857 /* WattAcl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattAcl.m; sourceTree = "<group>"; };
 		E5998FFA174CB1AA0066EFE8 /* PlayerSample copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PlayerSample copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462411732A4A000E654A1 /* PlayerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462441732A4A000E654A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -473,6 +476,8 @@
 				E5DE3AD1174CF797005937DC /* WattCollectionOfObject.m */,
 				E5DE3AD8174CF797005937DC /* WattRegistry.h */,
 				E5DE3AD9174CF797005937DC /* WattRegistry.m */,
+				E5773EE1178D540F00F5A857 /* WattAcl.h */,
+				E5773EE2178D540F00F5A857 /* WattAcl.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -707,6 +712,7 @@
 				E5298F8A178C1A2E00DA14BE /* WTMCollectionOfImage.m in Sources */,
 				E5298F8D178C501F00DA14BE /* WTMModel.m in Sources */,
 				E5773EDC178D49F100F5A857 /* WTMCollectionOfMenuSection.m in Sources */,
+				E5773EE3178D540F00F5A857 /* WattAcl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

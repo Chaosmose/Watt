@@ -27,7 +27,6 @@
 @interface WTMMember:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,assign) NSInteger  refererCounter;
 @property (nonatomic,copy) NSString * thumbnailRelativePath;

@@ -111,7 +111,39 @@
     
 }
 
-- (void)removeGroup{
+- (void)removeGroup:(WTMGroup*)group{
+    
+}
+
+#pragma mark - Menus & section
+
+
+- (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:shelf]){
+        
+        
+    }
+    return nil;
+}
+
+- (void)removeSection:(WTMMenuSection*)section fromShelf:(WTMShelf*)shelf{
+    
+}
+
+- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:section]){
+        
+        
+    }
+    return nil;
+}
+
+
+- (void)removeMenu:(WTMMenu*)menu{
     
 }
 
