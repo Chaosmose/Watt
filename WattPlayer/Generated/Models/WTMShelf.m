@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMShelf.h" 
-#import "WTMGroup.h"
+#import "WTMCollectionOfGroup.h"
 #import "WTMCollectionOfPackage.h"
 #import "WTMCollectionOfImage.h"
 #import "WTMCollectionOfMenuSection.h"
@@ -39,7 +39,7 @@
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"groups"]) {
-		[super setValue:[WTMGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
+		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
 	} else if ([key isEqualToString:@"packages"]) {
 		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
 	} else if ([key isEqualToString:@"picture"]) {
@@ -53,7 +53,7 @@
 	}
 }
 
-- (WTMGroup*)groups{
+- (WTMCollectionOfGroup*)groups{
 	if([_groups isAnAlias]){
 		id o=[_registry objectWithUinstID:_groups.uinstID];
 		if(o){
@@ -64,15 +64,15 @@
 }
 
 
-- (WTMGroup*)groups_auto{
+- (WTMCollectionOfGroup*)groups_auto{
 	_groups=[self groups];
 	if(!_groups){
-		_groups=[[WTMGroup alloc] initInRegistry:_registry];
+		_groups=[[WTMCollectionOfGroup alloc] initInRegistry:_registry];
 	}
 	return _groups;
 }
 
-- (void)setGroups:(WTMGroup*)groups{
+- (void)setGroups:(WTMCollectionOfGroup*)groups{
 	_groups=groups;
 }
 

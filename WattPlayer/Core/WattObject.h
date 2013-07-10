@@ -45,15 +45,6 @@ __LINE__ ,\
 
 #pragma mark - WattCoding
 
-#ifndef WT_CODING_KEYS
-#define WT_CODING_KEYS
-#define __uinstID__         @"i"
-#define __className__       @"c"
-#define __properties__      @"p"
-#define __collection__      @"cl"
-#define __isAliased__       @"a"
-#endif
-
 #pragma mark - Runtime
 
 #ifndef WT_RUNTIME_CONFIGURATION
@@ -68,12 +59,7 @@ __LINE__ ,\
 #define scale() [UIScreen mainScreen].scale
 #import "UIImage+wattAdaptive.h"
 #endif
-
 #endif
-
-
-
-
 
 @class WattObject;
 @class WattApi;

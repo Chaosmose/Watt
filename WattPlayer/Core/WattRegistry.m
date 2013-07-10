@@ -31,10 +31,10 @@
 @end
 
 @implementation WattRegistry{
-    NSInteger               _uinstIDCounter;
-    NSMutableDictionary     *_registry;
-    NSMutableArray          *_history;
-    NSArray                *__sortedKeys;
+    NSInteger             _uinstIDCounter;
+    NSMutableDictionary    *_registry;
+    NSMutableArray         *_history;
+    NSArray               *__sortedKeys;
 }
 
 - (id)init{

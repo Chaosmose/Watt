@@ -22,7 +22,7 @@
 
 #import "WattObject.h"
 #import "WTMModel.h"
-@class WTMGroup;
+@class WTMCollectionOfGroup;
 @class WTMCollectionOfPackage;
 @class WTMCollectionOfImage;
 @class WTMCollectionOfMenuSection;
@@ -32,13 +32,13 @@
 }
 
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,strong) WTMGroup * groups;
+@property (nonatomic,strong) WTMCollectionOfGroup * groups;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
 @property (nonatomic,strong) WTMCollectionOfImage * picture;
 @property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 @property (nonatomic,strong) WTMCollectionOfUser * users;
 
-- (WTMGroup*)groups_auto;
+- (WTMCollectionOfGroup*)groups_auto;
 - (WTMCollectionOfPackage*)packages_auto;
 - (WTMCollectionOfImage*)picture_auto;
 - (WTMCollectionOfMenuSection*)sections_auto;

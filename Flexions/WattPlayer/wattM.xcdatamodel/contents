@@ -145,7 +145,7 @@
     </entity>
     <entity name="Shelf" representedClassName="Shelf" parentEntity="Model" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="groups" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
         <relationship name="packages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Package" inverseName="shelf" inverseEntity="Package" syncable="YES"/>
         <relationship name="picture" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="sections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="shelf" inverseEntity="MenuSection" syncable="YES"/>

@@ -37,3 +37,19 @@
 #define wattAPI [WattApi sharedInstance]
 #define wattPackager [WattMPackager sharedInstance]
 #endif
+
+#ifndef WT_CODING_KEYS
+#define WT_CODING_KEYS
+#define __uinstID__         @"i"
+#define __className__       @"c"
+#define __properties__      @"p"
+#define __collection__      @"cl"
+#define __isAliased__       @"a"
+#endif
+
+#ifndef WT_CONST
+#define WT_CONST
+#define kWattAPIExecptionName   @"WattAPIException"
+#define kCategoryNameShared     @"shared"
+#define kDefaultName            @"default"
+#endif

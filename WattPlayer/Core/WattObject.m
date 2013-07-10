@@ -50,7 +50,7 @@
 - (instancetype)initInRegistry:(WattRegistry*)registry{
     self=[super init];
     if(self){
-        _wapi=[WattApi sharedInstance];
+        _wapi=wattAPI;
         _uinstID=0;// no registration
         if(registry){
             _registry=registry;

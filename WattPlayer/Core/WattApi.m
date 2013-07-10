@@ -21,9 +21,12 @@
 
 #import "WattApi.h"
 
+@interface WattApi()
+@end
+
 @implementation WattApi{
-    WTMUser *_system;
-    WTMGroup *_systemGroup;
+    WTMUser      *  _system;
+    WTMGroup     * _systemGroup;
 }
 
 + (WattApi*)sharedInstance {
@@ -37,11 +40,49 @@
 
 
 
+/* 
+ 
+ Best Pratices ?
+
+ The Model are generated using Flexions so the code quality is constant and fix can be done by re-generating
+ The api should be absolutely waterproof i ve listed a few rules to respect.
+
+ 1- Any required argument that is not set should raise :
+    if(!arg)
+        [self raiseExceptionWithFormat:@"arg is nil in %@",NSStringFromSelector(@selector(selectorName:))];
+ 
+ 2- Most of the calls should begin with an ACL Control
+    if([self user:_me canPerform:WattWRITE onObject:object]){
+    }
+    return nil;
+ 
+ */
+
+
 #pragma mark - Registry
 
+
 - (void)mergeRegistry:(WattRegistry*)sourceRegistry
-                 into:(WattRegistry*)destinationRegistry{
+                 into:(WattRegistry*)destinationRegistry
+       reIndexUinstID:(BOOL)index{
+    NSMutableDictionary *idsIndex=[NSMutableDictionary dictionary];
+    [sourceRegistry enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        NSInteger olderUinstID=obj.uinstID;
+        [destinationRegistry registerObject:obj];
+        NSInteger newUinstID=obj.uinstID;
+        // we save the older
+        [idsIndex setValue:[NSNumber numberWithInteger:newUinstID]
+                    forKey:[NSString stringWithFormat:@"%i",olderUinstID]];
+    }];
+    if(index){
+        [sourceRegistry enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+            
+        }];
+        //_idIndex;
+    }
     
+    sourceRegistry=nil;
+
 }
 
 #pragma mark - MULTIMEDIA API
@@ -56,7 +97,7 @@
     }
     
     if([object rights]){
-       //
+        //
     }
     
     if(!authorized){
@@ -70,14 +111,14 @@
 
 -(WTMUser*)system{
     if(!_system){
-        _system=[[WTMUser alloc] initInRegistry:self.currentRegistry];
+        _system=[[WTMUser alloc] initInRegistry:_currentRegistry];
     }
     return _system;
 }
 
 -(WTMGroup*)systemGroup{
     if(_systemGroup){
-        _systemGroup=[[WTMGroup alloc] initInRegistry:self.currentRegistry];
+        _systemGroup=[[WTMGroup alloc] initInRegistry:_currentRegistry];
     }
     return _systemGroup;
 }
@@ -87,31 +128,70 @@
 
 
 - (WTMShelf*)createShelfWithName:(NSString*)name{
-    return nil;
+    
+    WTMShelf *shelf=[[WTMShelf alloc] initInRegistry:_currentRegistry];
+    shelf.name=name;
+    
+    if(!_me){
+        self.me=[self createUserInShelf:shelf];
+        WTMGroup *group=[self createGroupInShelf:shelf];
+        group.name=@"me";
+        [self addUser:_me toGroup:group];
+    }
+    
+    
+    WTMPackage*package=[self createPackageInShelf:shelf];
+    package.category=kCategoryNameShared;
+    
+    
+    WTMLibrary*library=[self createLibraryInPackage:package];
+    library.category=kCategoryNameShared;
+    
+    return shelf;
 }
 
 - (void)removeShelf:(WTMShelf*)shelf{
+    //
+    
 }
 
 #pragma mark - User and groups
 
 - (WTMUser*)createUserInShelf:(WTMShelf*)shelf{
-    return nil;
+    if(!shelf)
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createUserInShelf:))];
+    
+    WTMUser *user=[[WTMUser alloc]initInRegistry:_currentRegistry];
+    [shelf.users_auto addObject:user];
+    user.identity=[self uuidString];
+    
+    return user;
 }
 
 - (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf{
-    return nil;
+    if(!shelf)
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createGroupInShelf:))];
+    
+    WTMGroup *group=[[WTMGroup alloc]initInRegistry:_currentRegistry];
+    [shelf.groups_auto addObject:group];
+    
+    return group;
 }
 
 - (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group{
+    if(!user || !group)
+        [self raiseExceptionWithFormat:@"user or group is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
     
+    [group.users_auto addObject:user];
+    [user.groups_auto addObject:group];
 }
 
-- (void)removeUser:(WTMUser*)User fromGroup:(WTMGroup*)group{
-    
+- (void)removeUser:(WTMUser*)user fromGroup:(WTMGroup*)group{
+    [group.users_auto removeObject:user];
 }
 
 - (void)removeGroup:(WTMGroup*)group{
+    //
     
 }
 
@@ -152,8 +232,20 @@
 #pragma mark - Package
 
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf{
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:shelf]){
+        if(!shelf)
+            [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
+        WTMPackage *package=[[WTMPackage alloc] initInRegistry:_currentRegistry];
+        [shelf.packages_auto addObject:package];
+        [package langDictionary_auto];
+        package.shelf=shelf;
+        return package;
+    }
     return nil;
 }
+
 
 - (void)removePackage:(WTMPackage*)package{
     if([self user:_me
@@ -165,10 +257,20 @@
 }
 
 // Immport process this method can move a package from a registry to another
-// Producing renamming of assets and performing re-identification
+// Producing renamming of assets and performing re-identification including ACL 
 - (void)addPackage:(WTMPackage*)package
            toShelf:(WTMShelf*)shelf{
 }
+
+
+- (NSArray*)dependenciesPathForPackage:(WTMPackage*)package{
+    NSMutableArray *array=[NSMutableArray array];
+    [package.libraries_auto enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
+        [array addObjectsFromArray:[wattAPI dependenciesPathForLibrary:obj]];
+    }];
+    return array;
+}
+
 
 
 #pragma mark - Library
@@ -177,8 +279,10 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:package]){
-        
-        
+        WTMLibrary *library=[[WTMLibrary alloc] initInRegistry:_currentRegistry];
+        [package.libraries_auto addObject:library];
+        [library setPackage:package];
+        return library;
     }
     return nil;
 }
@@ -190,6 +294,23 @@
         
         
     }
+}
+
+- (NSArray*)dependenciesPathForLibrary:(WTMLibrary*)library{
+    NSMutableArray *array=[NSMutableArray array];
+    [library.members_auto enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
+        NSArray *pths=[wattAPI absolutePathsFromRelativePath:obj.thumbnailRelativePath all:YES];
+        if(pths){
+            [array addObjectsFromArray:pths];
+        }
+        if([[obj propertiesKeys] indexOfObject:@"relativePath"]!=NSNotFound){
+            pths=[wattAPI absolutePathsFromRelativePath:[obj valueForKey:@"relativePath"] all:YES];
+            if(pths){
+                [array addObjectsFromArray:pths];
+            }
+        }
+    }];
+    return array;
 }
 
 
@@ -296,6 +417,13 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:library]){
+        
+        if(!member|| !library){
+            [self raiseExceptionWithFormat:@"member or library is nil in %@",NSStringFromSelector(@selector(addMember:toLibrary:))];
+        }
+        [library.members_auto addObject:member];
+        member.library=library;
+        member.refererCounter++;
     }
     
 }
@@ -497,6 +625,32 @@
     return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"/%@",fileName];
 }
 
+
+#pragma mark - files management
+
+-(BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path{
+    if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
+        return NO;
+    }
+    if(![[path substringFromIndex:path.length-1] isEqualToString:@"/"])
+        path=[path stringByDeletingLastPathComponent];
+    
+    if(![[NSFileManager defaultManager] fileExistsAtPath:path]){
+        NSError *error=nil;
+        [[NSFileManager defaultManager]  createDirectoryAtPath:path
+                                   withIntermediateDirectories:YES
+                                                    attributes:nil
+                                                         error:&error];
+        if(error){
+            //CSLogNF(CS_LOG_DEBUG,@"Error on path creation  %@ %@", path,[error localizedDescription]);
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+
 #pragma mark - localization
 
 - (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
@@ -505,6 +659,29 @@
     }else{
         // Default localization policy
     }
+}
+
+#pragma mark -utilities 
+
+- (void)raiseExceptionWithFormat:(NSString *)format, ...{
+    va_list args;
+    va_start(args, format);
+    NSString *s = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    if(s)
+        [NSException raise:kWattAPIExecptionName format:@"%@",s];
+    else
+        [NSException raise:kWattAPIExecptionName format:@"Internal error"];
+    
+}
+
+
+- (NSString*)uuidString {
+    // Returns a UUID
+    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+    NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
+    CFRelease(uuid);
+    return uuidStr;
 }
 
 

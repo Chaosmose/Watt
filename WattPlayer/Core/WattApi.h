@@ -20,9 +20,14 @@
 //
 
 // This is a cross platform authoring and runtime api
+// to developp multimedia project
 // That intent to be fully supported by mac os x and IOS
 
+// Port to Java targetting Android & non android system is possible.
+// Watt is a model driven framework relying on files.
 
+
+#import "WattM.h"
 #import "WattObject.h"
 #import "WattAcl.h"
 #import "WTMModelsImports.h"
@@ -34,24 +39,25 @@
 
 @interface WattApi : NSObject
 
-@property (nonatomic,assign)id<WTMlocalizationDelegateProtocol>localizationDelegate;
-@property (nonatomic,strong)  WattRegistry *currentRegistry;
-@property (nonatomic,strong)  WTMUser *me;
-//
+@property (nonatomic,assign)    id<WTMlocalizationDelegateProtocol>localizationDelegate;
+@property (nonatomic,strong)    WTMUser *me;
+@property (nonatomic,strong)    WattRegistry *currentRegistry; // Used to register & create object ( you can change its reference at runtime)
 @property (nonatomic,readonly)  WTMUser *system;
 @property (nonatomic,readonly)  WTMGroup *systemGroup;
+
 
 // WattMApi singleton accessor
 + (WattApi*)sharedInstance;
 
+
 #pragma mark - Registry 
 
--(void)mergeRegistry:(WattRegistry*)sourceRegistry
-                into:(WattRegistry*)destinationRegistry;
+
+- (void)mergeRegistry:(WattRegistry*)sourceRegistry
+                 into:(WattRegistry*)destinationRegistry
+       reIndexUinstID:(BOOL)index;
 
 #pragma mark - MULTIMEDIA API
-
-
 
 #pragma mark - ACL
 
@@ -72,7 +78,7 @@
 - (WTMUser*)createUserInShelf:(WTMShelf*)shelf;
 - (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf;
 - (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group;
-- (void)removeUser:(WTMUser*)User fromGroup:(WTMGroup*)group;
+- (void)removeUser:(WTMUser*)user fromGroup:(WTMGroup*)group;
 - (void)removeGroup:(WTMGroup*)group;
 
 
@@ -93,12 +99,15 @@
 - (void)addPackage:(WTMPackage*)package
           toShelf:(WTMShelf*)shelf;
 
+- (NSArray*)dependenciesPathForPackage:(WTMPackage*)package;
+
 
 #pragma mark - Library
 
 - (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package;
 - (void)removeLibrary:(WTMLibrary*)library;
 
+- (NSArray*)dependenciesPathForLibrary:(WTMLibrary*)library;
 
 #pragma mark - Activity
 
@@ -153,13 +162,20 @@
 //Calls the localizationDelegate if it is set or invokes the default implementation
 - (void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
 
-
 #pragma mark - Paths 
 #pragma mark - relative path and path discovery
 
 - (NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
 - (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
 - (NSString*)applicationDocumentsDirectory;
+
+#pragma mark - files 
+
+- (BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path;
+
+#pragma mark - utilities 
+- (NSString *)uuidString;
+- (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
 @end
 
