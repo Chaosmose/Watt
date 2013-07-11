@@ -32,6 +32,13 @@
 #import "WattAcl.h"
 #import "WTMModelsImports.h"
 
+typedef enum watt_F_TYPES{
+    WattJx=0,   // Json + soup      * Default
+    WattJ=1,    // Json  + no soup
+    WattPx=2,   // Plist + soup
+    WattP=3     // Plist + no soup
+}Watt_F_TYPE;
+
 
 #pragma mark - WattApi
 
@@ -45,6 +52,10 @@
 @property (nonatomic,readonly)  WTMUser *system;
 @property (nonatomic,readonly)  WTMGroup *systemGroup;
 
+//Advanced runtime configuration
+//That defines the format & soup behaviour
+-(void)use:(Watt_F_TYPE)ftype;
+
 
 // WattMApi singleton accessor
 + (WattApi*)sharedInstance;
@@ -57,13 +68,12 @@
                  into:(WattRegistry*)destinationRegistry
        reIndexUinstID:(BOOL)index;
 
-#pragma mark - MULTIMEDIA API
+
+#pragma mark - /// MULTIMEDIA API ///
 
 #pragma mark - ACL
 
 - (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WTMModel*)object;
-
-#pragma mark - Package
 
 #pragma mark -Shelf
 
@@ -162,21 +172,40 @@
 //Calls the localizationDelegate if it is set or invokes the default implementation
 - (void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
 
-#pragma mark - Paths 
+
 #pragma mark - relative path and path discovery
 
 - (NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
 - (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
+
+#pragma  mark - file paths 
+
+// The current applicationDocumentDirectory
 - (NSString*)applicationDocumentsDirectory;
+
+// The absolute of the registry file
+- (NSString*)absolutePathForRegistryFileWithName:(NSString*)name;
+    
+// The absolute path of the registry bundle 
+- (NSString*)absolutePathForRegistryBundleWithName:(NSString*)name;
+
 
 #pragma mark - files 
 
-- (BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path;
+- (BOOL)writeData:(NSData*)data toPath:(NSString*)path;
+- (NSData*)readDataFromPath:(NSString*)path;
+
+#pragma mark - File serialization / deserialization
+
+-(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path;
+-(WattRegistry*)readRegistryFromFile:(NSString*)path;
+
+
 
 #pragma mark - utilities 
 - (NSString *)uuidString;
-- (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
+- (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 @end
 
 #pragma mark localization delegate prototocol

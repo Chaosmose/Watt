@@ -31,6 +31,9 @@
  Standard <ImageName><orientation_modifier><device_modifier>.<filename_extension>
  Retina <ImageName><orientation_modifier>@2x<device_modifier>.<filename_extension>
  */
-+(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
++ (UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
+- (BOOL)writePNGToAbsolutePath:(NSString*)path;
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path;
+
 @end
 #endif

@@ -30,6 +30,11 @@
 
 @interface WattRegistry : NSObject
 
+// The registry name is used for external purpose
+// eg : defining a file path to store serialized registry and associated bundle
+// Notice that the mane is never serialized.
+@property (nonatomic,copy)NSString* name; 
+
 - (NSUInteger)count;
 
 #pragma mark - Serialization/Deserialization facilities

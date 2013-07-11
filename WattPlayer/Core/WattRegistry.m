@@ -75,7 +75,6 @@
                                                   includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
-            WTLog(@"%i %@",i,liveObject);
         }
         i++;
     }

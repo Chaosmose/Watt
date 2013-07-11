@@ -28,9 +28,30 @@
 
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath{
     NSString *p=[wattAPI absolutePathFromRelativePath:relativePath];
-    if(p)
-        return [UIImage imageWithContentsOfFile:p];
+    if(p){
+        if ([p rangeOfString:[wattAPI applicationDocumentsDirectory]].location!=NSNotFound) {
+            //Unsoup if necessary
+            NSData *data=[wattAPI readDataFromPath:p];
+            return [UIImage imageWithData:data];
+        }else{
+            //It is bundled asset.
+            //No soup there.
+            return [UIImage imageWithContentsOfFile:p];
+        }
+    }
     return nil;
 }
+
+- (BOOL)writePNGToAbsolutePath:(NSString*)path{
+    NSData *data=UIImagePNGRepresentation(self);
+    return [wattAPI writeData:data toPath:path];
+}
+
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path{
+    NSData *data=UIImageJPEGRepresentation(self, 0.5f);
+    return [wattAPI writeData:data toPath:path];
+}
+
+
 
 @end

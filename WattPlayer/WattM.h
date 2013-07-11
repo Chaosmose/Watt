@@ -49,7 +49,10 @@
 
 #ifndef WT_CONST
 #define WT_CONST
-#define kWattAPIExecptionName   @"WattAPIException"
-#define kCategoryNameShared     @"shared"
-#define kDefaultName            @"default"
+#define kWattAPIExecptionName       @"WattAPIException"
+#define kCategoryNameShared         @"shared"
+#define kDefaultName                @"default"
+#define kRegistryFileName           @"registry"
+#define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
+
 #endif

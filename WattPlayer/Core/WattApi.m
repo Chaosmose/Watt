@@ -25,8 +25,14 @@
 @end
 
 @implementation WattApi{
-    WTMUser      *  _system;
-    WTMGroup     * _systemGroup;
+    WTMUser     *  _system;
+    WTMGroup    * _systemGroup;
+    Watt_F_TYPE  _ftype;
+    NSString    *_applicationDocumentsDirectory;
+}
+
+-(void)use:(Watt_F_TYPE)ftype{
+    _ftype=ftype;
 }
 
 + (WattApi*)sharedInstance {
@@ -39,22 +45,21 @@
 }
 
 
-
-/* 
+/*
  
  Best Pratices ?
-
+ 
  The Model are generated using Flexions so the code quality is constant and fix can be done by re-generating
  The api should be absolutely waterproof i ve listed a few rules to respect.
-
+ 
  1- Any required argument that is not set should raise :
-    if(!arg)
-        [self raiseExceptionWithFormat:@"arg is nil in %@",NSStringFromSelector(@selector(selectorName:))];
+ if(!arg)
+ [self raiseExceptionWithFormat:@"arg is nil in %@",NSStringFromSelector(@selector(selectorName:))];
  
  2- Most of the calls should begin with an ACL Control
-    if([self user:_me canPerform:WattWRITE onObject:object]){
-    }
-    return nil;
+ if([self user:_me canPerform:WattWRITE onObject:object]){
+ }
+ return nil;
  
  */
 
@@ -82,7 +87,7 @@
     }
     
     sourceRegistry=nil;
-
+    
 }
 
 #pragma mark - MULTIMEDIA API
@@ -257,7 +262,7 @@
 }
 
 // Immport process this method can move a package from a registry to another
-// Producing renamming of assets and performing re-identification including ACL 
+// Producing renamming of assets and performing re-identification including ACL
 - (void)addPackage:(WTMPackage*)package
            toShelf:(WTMShelf*)shelf{
 }
@@ -459,61 +464,6 @@
 }
 
 
-#pragma mark - serialization
-
-- (BOOL)serialize:(id)reference toFileName:(NSString*)fileName{
-    NSString*path=[self _pathForFileName:fileName];
-    if([self _createRequiredPaths:path]){
-        NSError*errorJson=nil;
-        NSData *data=nil;
-        @try {
-            data=[NSJSONSerialization dataWithJSONObject:reference
-                                                 options:NSJSONWritingPrettyPrinted error:&errorJson];
-            
-        }
-        @catch (NSException *exception) {
-            return NO;
-        }
-        @finally {
-        }
-        if(data){
-            return [data writeToFile:path atomically:YES];
-        }else{
-            return NO;
-        }
-    }
-}
-
-- (id)deserializeFromFileName:(NSString*)fileName{
-    NSString *path=[self _pathForFileName:fileName];
-    if(path){
-        NSData *data=[NSData dataWithContentsOfFile:path];
-        NSError*errorJson=nil;
-        @try {
-            // We use mutable containers and leaves by default.
-            id result=[NSJSONSerialization JSONObjectWithData:data
-                                                      options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments
-                                                        error:&errorJson];
-            if([result respondsToSelector:@selector(mutableCopy)]){
-                return [result mutableCopy];
-            }
-            return result;
-        }
-        @catch (NSException *exception) {
-            return nil;
-        }
-        @finally {
-        }
-    }else{
-        return nil;
-    }
-}
-
-
-
-
-
-
 #pragma mark - relative path and path discovery
 
 
@@ -524,8 +474,8 @@
     return nil;
 }
 
+
 - (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
-    
     NSString *baseRelativePath = [relativePath copy];
     NSArray *orientation_modifiers=@[@""];
     NSArray *device_modifiers=@[@""];
@@ -567,14 +517,24 @@
         for (NSString*deviceModifier in  device_modifiers) {
             for (NSString*pixelDensity in  pixel_density_modifiers) {
                 NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
-                // DOCUMENT DIRECTORY
-                NSString *pth=[NSString stringWithFormat:@"%@/%@.%@",[self applicationDocumentsDirectory],component,extension?extension:@""];
+                
+               
+                NSString *pth=nil;
+                if(self.currentRegistry.name){
+                    // We use the current registry bundle
+                    pth=[NSString stringWithFormat:@"%@%@.%@",[self absolutePathForRegistryBundleWithName:self.currentRegistry.name],component,extension?extension:@""];
+                }else{
+                    //
+                    pth=[NSString stringWithFormat:@"%@%@.%@",[self applicationDocumentsDirectory],component,extension?extension:@""];
+                }
+                
                 if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
                     [result addObject:pth];
                     if(!returnAll)
                         return result;
                 }
-                // BUNDLE ATTEMPT
+                
+                // APPLICATION BUNDLE ATTEMPT
                 pth=[[NSBundle mainBundle] pathForResource:component ofType:extension];
                 if(pth && [pth length]>1){
                     [result addObject:pth];
@@ -589,14 +549,45 @@
 }
 
 
+#pragma  mark - file paths 
+
+
 - (NSString *) applicationDocumentsDirectory{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-    return basePath;
+    if(!_applicationDocumentsDirectory){
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        _applicationDocumentsDirectory=[basePath stringByAppendingString:@"/"];
+    }
+    return _applicationDocumentsDirectory;
+}
+
+- (NSString*)absolutePathForRegistryFileWithName:(NSString*)name{
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self _wattRegistryFileRelativePathWithName:name]] ;
 }
 
 
-#pragma mark - Paths
+- (NSString *)absolutePathForRegistryBundleWithName:(NSString*)name{
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self _wattBundleRelativePathWithName:name]] ;
+}
+
+- (NSString*)_wattBundleRelativePathWithName:(NSString *)name{
+    if(!name)
+        name=kDefaultName;
+    return [NSString stringWithFormat:@"%@-%@.bundle/",name,[self _suffix]];
+}
+
+- (NSString *)_wattRegistryFileRelativePathWithName:(NSString*)name{
+    if(!name)
+        name=kDefaultName;
+    NSString *bPath=[self _wattBundleRelativePathWithName:name];
+    return [bPath stringByAppendingFormat:@"%@.%@",name,[self _suffix]];
+}
+
+- (NSString*)_suffix{
+    NSArray *suffixes=@[@"jx",@"j",@"px",@"p"];
+    return [suffixes objectAtIndex:_ftype];
+}
+
 
 - (BOOL)_createRequiredPaths:(NSString*)path{
     if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
@@ -620,7 +611,6 @@
 }
 
 
-
 - (NSString*)_pathForFileName:(NSString*)fileName{
     return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"/%@",fileName];
 }
@@ -628,7 +618,41 @@
 
 #pragma mark - files management
 
--(BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path{
+
+-(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
+    [self _createRecursivelyRequiredFolderForPath:path];
+    data=[self _dataSoup:data mix:((_ftype==WattJx)||(_ftype==WattPx))];
+    return [data writeToFile:path atomically:YES];
+}
+
+-(NSData*)readDataFromPath:(NSString*)path{
+    NSData *data=[NSData dataWithContentsOfFile:path];
+    data=[self _dataSoup:data mix:((_ftype==WattJx)||(_ftype==WattPx))];
+    return data;
+}
+
+//The data soup method is a simple and fast encoding / decoding method.
+//That reverses the bytes array and reverse each byte value.
+//It is a simple symetric encoding to prevent from manual editing.
+//It is not a securized crypto method !
+-(NSData*)_dataSoup:(NSData*)data  mix:(BOOL)mix{
+    if(mix){
+        const char *bytes = [data bytes];
+        char *reverseBytes = malloc(sizeof(char) * [data length]);
+        int index = [data length] - 1;
+        for (int i = 0; i < [data length]; i++){
+            reverseBytes[index--] = (~ bytes[i]); // double reverse
+        }
+        NSData *reversedData = [NSData dataWithBytes:reverseBytes length:[data length]];
+        free(reverseBytes);
+        return reversedData;
+    }else{
+        return data;
+    }
+}
+
+
+-(BOOL)_createRecursivelyRequiredFolderForPath:(NSString*)path{
     if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
         return NO;
     }
@@ -651,6 +675,72 @@
 
 
 
+#pragma mark -  serialization
+
+
+-(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path{
+    NSArray *array=[registry arrayRepresentation];
+    if(((_ftype==WattJx)||(_ftype==WattJ))){
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array];
+        return [self writeData:data toPath:path];
+    }else{
+        return [self _serializeToJson:array toPath:path];
+    }
+    
+}
+
+-(WattRegistry*)readRegistryFromFile:(NSString*)path{
+    if(((_ftype==WattJx)||(_ftype==WattJ))){
+        NSData *data=[self readDataFromPath:path];
+        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        return [WattRegistry instanceFromArray:array resolveAliases:YES];
+    }else{
+        NSArray *array=[self _deserializeFromJsonWithPath:path];
+        if(array)
+            return [WattRegistry instanceFromArray:array resolveAliases:YES];
+    }
+    return nil;
+}
+
+// JSON private methods
+
+- (BOOL)_serializeToJson:(id)reference toPath:(NSString*)path{
+    NSError*errorJson=nil;
+    NSData *data=nil;
+    @try {
+        data=[NSJSONSerialization dataWithJSONObject:reference
+                                             options:NSJSONWritingPrettyPrinted error:&errorJson];
+    }
+    @catch (NSException *exception) {
+        return NO;
+    }
+    @finally {
+    }
+    if(data){
+        [self writeData:data toPath:path];
+    }else{
+        return NO;
+    }
+}
+
+- (id)_deserializeFromJsonWithPath:(NSString*)path{
+    NSData *data=[self readDataFromPath:path];
+    NSError*errorJson=nil;
+    @try {
+        // We use mutable containers and leaves by default.
+        id result=[NSJSONSerialization JSONObjectWithData:data
+                                                  options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments
+                                                    error:&errorJson];
+        return result;
+    }
+    @catch (NSException *exception) {
+    }
+    @finally {
+    }
+    return nil;
+}
+
+
 #pragma mark - localization
 
 - (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
@@ -661,7 +751,7 @@
     }
 }
 
-#pragma mark -utilities 
+#pragma mark -utilities
 
 - (void)raiseExceptionWithFormat:(NSString *)format, ...{
     va_list args;
