@@ -51,6 +51,7 @@ typedef enum watt_F_TYPES{
 @property (nonatomic,strong)    WattRegistry *currentRegistry; // Used to register & create object ( you can change its reference at runtime)
 @property (nonatomic,readonly)  WTMUser *system;
 @property (nonatomic,readonly)  WTMGroup *systemGroup;
+@property (nonatomic,strong)    NSFileManager *fileManager;
 
 //Advanced runtime configuration
 //That defines the format & soup behaviour
@@ -194,6 +195,7 @@ typedef enum watt_F_TYPES{
 
 - (BOOL)writeData:(NSData*)data toPath:(NSString*)path;
 - (NSData*)readDataFromPath:(NSString*)path;
+- (BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path;
 
 #pragma mark - File serialization / deserialization
 

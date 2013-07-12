@@ -40,6 +40,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
+        sharedInstance.fileManager=[[NSFileManager alloc] init];
     });
     return sharedInstance;
 }
@@ -450,7 +451,7 @@
                                                                            all:YES];
                     for (NSString *pathToDelete in absolutePaths) {
                         NSError *error=nil;
-                        [[NSFileManager defaultManager] removeItemAtPath:pathToDelete
+                        [wattAPI.fileManager removeItemAtPath:pathToDelete
                                                                    error:&error];
                         if(error){
                             WTLog(@"Impossible to delete %@",pathToDelete);
@@ -528,7 +529,7 @@
                     pth=[NSString stringWithFormat:@"%@%@.%@",[self applicationDocumentsDirectory],component,extension?extension:@""];
                 }
                 
-                if([[NSFileManager defaultManager] fileExistsAtPath:pth]){
+                if([wattAPI.fileManager fileExistsAtPath:pth]){
                     [result addObject:pth];
                     if(!returnAll)
                         return result;
@@ -589,26 +590,6 @@
 }
 
 
-- (BOOL)_createRequiredPaths:(NSString*)path{
-    if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
-        NSLog(@"Illegal path %@", path);
-        return NO;
-    }
-    if(![[path substringFromIndex:path.length-1] isEqualToString:@"/"])
-        path=[path stringByDeletingLastPathComponent];
-    
-    if(![[NSFileManager defaultManager] fileExistsAtPath:path]){
-        NSError *error=nil;
-        [[NSFileManager defaultManager] createDirectoryAtPath:path
-                                  withIntermediateDirectories:YES
-                                                   attributes:nil error:&error];
-        if(error){
-            NSLog(@"Error on path creation  %@ %@", path,[error localizedDescription]);
-            return NO;
-        }
-    }
-    return YES;
-}
 
 
 - (NSString*)_pathForFileName:(NSString*)fileName{
@@ -620,7 +601,7 @@
 
 
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
-    [self _createRecursivelyRequiredFolderForPath:path];
+    [self createRecursivelyRequiredFolderForPath:path];
     data=[self _dataSoup:data mix:((_ftype==WattJx)||(_ftype==WattPx))];
     return [data writeToFile:path atomically:YES];
 }
@@ -652,21 +633,22 @@
 }
 
 
--(BOOL)_createRecursivelyRequiredFolderForPath:(NSString*)path{
+
+
+-(BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path{
     if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
         return NO;
     }
     if(![[path substringFromIndex:path.length-1] isEqualToString:@"/"])
         path=[path stringByDeletingLastPathComponent];
     
-    if(![[NSFileManager defaultManager] fileExistsAtPath:path]){
+    if(![wattAPI.fileManager fileExistsAtPath:path]){
         NSError *error=nil;
-        [[NSFileManager defaultManager]  createDirectoryAtPath:path
+        [wattAPI.fileManager createDirectoryAtPath:path
                                    withIntermediateDirectories:YES
                                                     attributes:nil
                                                          error:&error];
         if(error){
-            //CSLogNF(CS_LOG_DEBUG,@"Error on path creation  %@ %@", path,[error localizedDescription]);
             return NO;
         }
     }

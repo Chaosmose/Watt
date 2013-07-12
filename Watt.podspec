@@ -12,4 +12,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files =  'WattPlayer','WattPlayer/**/*.{h,m}'
   s.public_header_files = 'WattPlayer/**/*.h'
+  s.dependency 'ZipArchive','~> 1.1.1'
+  s.dependency 'AFNetworking','~> 1.3.1'
 end
