@@ -8,6 +8,9 @@
       location = "group:Samples/PlayerSample/Podfile">
    </FileRef>
    <FileRef
+      location = "group:Watt.podspec">
+   </FileRef>
+   <FileRef
       location = "group:Samples/PlayerSample/PlayerSample.xcodeproj">
    </FileRef>
 </Workspace>
