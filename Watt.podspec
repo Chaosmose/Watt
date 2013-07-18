@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = 'Watt'
-  s.version     = '0.1'
+  s.version     = '0.2'
   s.authors     = { 'Benoit Pereira da Silva' => 'benoit@pereira-da-silva.com' }
   s.homepage    = 'https://https://github.com/benoit-pereira-da-silva/Watt'
   s.summary     = 'A multimedia - hypermedia engine'
@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.public_header_files = 'WattPlayer/**/*.h'
   s.dependency 'ZipArchive','~> 1.1.1'
   s.dependency 'AFNetworking','~> 1.3.1'
+  s.ios.dependency 'SVProgressHUD'
 end
