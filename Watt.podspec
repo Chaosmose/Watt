@@ -10,8 +10,8 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '5.0'
   s.osx.deployment_target = '10.7'
   s.requires_arc = true
-  s.source_files =  'WattPlayer','WattPlayer/**/*.{h,m}'
-  s.public_header_files = 'WattPlayer/**/*.h'
+  s.source_files =  'Watt','Watt/**/*.{h,m}'
+  s.public_header_files = 'Watt/**/*.h'
   s.dependency 'SSZipArchive','~> 0.2.2'
   s.dependency 'AFNetworking','~> 1.3.1'
   s.ios.dependency 'SVProgressHUD'
