@@ -27,7 +27,7 @@
 // Watt is a model driven framework relying on files.
 
 
-#import "WattM.h"
+#import "Watt.h"
 #import "WattObject.h"
 #import "WattAcl.h"
 #import "WTMModelsImports.h"

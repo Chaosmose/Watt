@@ -13,17 +13,26 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
+//  WattTM.h
 //
-//  WTMViewController.h
-//  PlayerSample
-//
-//  Created by Benoit Pereira da Silva on 09/05/13.
+//  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
-//
 
-#import <UIKit/UIKit.h>
-#import "Watt.h"
 
-@interface WTMViewController : UIViewController
+#import <Foundation/Foundation.h>
 
-@end
+#import "WattApi.h"
+#import "WattObject.h"
+#import "WattMPackager.h"
+#import "WattCollectionOfObject.h"
+#import "WattRegistry.h"
+
+//Import of flexion generated classes
+#import "WTMModelsImports.h"
+
+#ifndef WT_MACROS
+#define WT_MACROS
+#define wattAPI [WattApi sharedInstance]
+#define wattPackager [WattMPackager sharedInstance]
+#endif
+

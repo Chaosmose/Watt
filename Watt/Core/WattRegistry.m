@@ -22,8 +22,7 @@
 //
 
 #import "WattRegistry.h"
-#import "WattObject.h"
-#import "WattCollectionOfObject.h"
+#import "Watt.h"
 
 @interface WattRegistry (){
 }

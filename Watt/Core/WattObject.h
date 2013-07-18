@@ -51,6 +51,29 @@ __LINE__ ,\
 #define WT_RUNTIME_CONFIGURATION
 #define WT_ALLOW_MULTIPLE_REGISTRATION 1
 
+
+
+#ifndef WT_CODING_KEYS
+#define WT_CODING_KEYS
+#define __uinstID__         @"i"
+#define __className__       @"c"
+#define __properties__      @"p"
+#define __collection__      @"cl"
+#define __isAliased__       @"a"
+#endif
+
+#ifndef WT_CONST
+#define WT_CONST
+#define kWattAPIExecptionName       @"WattAPIException"
+#define kCategoryNameShared         @"shared"
+#define kDefaultName                @"default"
+#define kRegistryFileName           @"registry"
+#define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
+
+#endif
+
+#import "WattRegistry.h"
+
 #if TARGET_OS_IPHONE
 #define currentOrientation() [[UIApplication sharedApplication] statusBarOrientation]
 #define isLandscapeOrientation() UIDeviceOrientationIsLandscape(currentOrientation())
@@ -64,7 +87,7 @@ __LINE__ ,\
 @class WattObject;
 @class WattApi;
 
-#import "WattRegistry.h"
+
 
 @protocol WattCoding <NSObject>
 @required

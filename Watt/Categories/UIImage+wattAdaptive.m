@@ -23,6 +23,7 @@
 
 
 #import "UIImage+wattAdaptive.h"
+#import "Watt.h"
 
 @implementation UIImage(wattAdaptive)
 
