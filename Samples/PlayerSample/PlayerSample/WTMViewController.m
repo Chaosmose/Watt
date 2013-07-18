@@ -22,7 +22,6 @@
 //
 
 #import "WTMViewController.h"
-#import "WTMModelsImports.h"
 
 @interface WTMViewController ()
 
