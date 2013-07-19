@@ -22,14 +22,17 @@
 
 #import "WattObject.h"
 #import "WTMModel.h"
+@class WTMShelf;
 @class WTMCollectionOfUser;
 
 @interface WTMGroup:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,strong) WTMShelf * shelf;
 @property (nonatomic,strong) WTMCollectionOfUser * users;
 
+- (WTMShelf*)shelf_auto;
 - (WTMCollectionOfUser*)users_auto;
 
 @end

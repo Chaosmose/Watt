@@ -36,7 +36,7 @@ descriptor="watt.xcdatamodel/contents"
 
 #You can specify a destination folder
 #If not it will  generate in the out/ folder
-destination="../../Generated/"
+destination="../Watt/Generated/"
 
 ###############
 # Invoke flexions 

@@ -23,13 +23,16 @@
 #import "WattObject.h"
 #import "WTMModel.h"
 @class WTMCollectionOfGroup;
+@class WTMShelf;
 
 @interface WTMUser:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * identity;
 @property (nonatomic,strong) WTMCollectionOfGroup * groups;
+@property (nonatomic,strong) WTMShelf * shelf;
 
 - (WTMCollectionOfGroup*)groups_auto;
+- (WTMShelf*)shelf_auto;
 
 @end

@@ -21,17 +21,21 @@
  
 #import "WTMUser.h" 
 #import "WTMCollectionOfGroup.h"
+#import "WTMShelf.h"
 
 @implementation WTMUser 
 
 @synthesize identity=_identity;
 @synthesize groups=_groups;
+@synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"identity"]){
 		[super setValue:value forKey:@"identity"];
 	} else if ([key isEqualToString:@"groups"]) {
 		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
+	} else if ([key isEqualToString:@"shelf"]) {
+		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -60,6 +64,29 @@
 	_groups=groups;
 }
 
+- (WTMShelf*)shelf{
+	if([_shelf isAnAlias]){
+		id o=[_registry objectWithUinstID:_shelf.uinstID];
+		if(o){
+			_shelf=o;
+		}
+	}
+	return _shelf;
+}
+
+
+- (WTMShelf*)shelf_auto{
+	_shelf=[self shelf];
+	if(!_shelf){
+		_shelf=[[WTMShelf alloc] initInRegistry:_registry];
+	}
+	return _shelf;
+}
+
+- (void)setShelf:(WTMShelf*)shelf{
+	_shelf=shelf;
+}
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -79,6 +106,13 @@
 			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"groups"];
 		}
 	}
+	if(self.shelf){
+		if(includeChildren){
+			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"shelf"];
+		}else{
+			[dictionary setValue:[self.shelf aliasDictionaryRepresentation] forKey:@"shelf"];
+		}
+	}
     return dictionary;
 }
 
@@ -90,6 +124,7 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMUser ",self.uinstID];
 	[s appendFormat:@"identity : %@\n",self.identity];
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
+	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }
 

@@ -20,21 +20,48 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMGroup.h" 
+#import "WTMShelf.h"
 #import "WTMCollectionOfUser.h"
 
 @implementation WTMGroup 
 
 @synthesize name=_name;
+@synthesize shelf=_shelf;
 @synthesize users=_users;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"shelf"]) {
+		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else if ([key isEqualToString:@"users"]) {
 		[super setValue:[WTMCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+- (WTMShelf*)shelf{
+	if([_shelf isAnAlias]){
+		id o=[_registry objectWithUinstID:_shelf.uinstID];
+		if(o){
+			_shelf=o;
+		}
+	}
+	return _shelf;
+}
+
+
+- (WTMShelf*)shelf_auto{
+	_shelf=[self shelf];
+	if(!_shelf){
+		_shelf=[[WTMShelf alloc] initInRegistry:_registry];
+	}
+	return _shelf;
+}
+
+- (void)setShelf:(WTMShelf*)shelf{
+	_shelf=shelf;
 }
 
 - (WTMCollectionOfUser*)users{
@@ -72,6 +99,13 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.name forKey:@"name"];
+	if(self.shelf){
+		if(includeChildren){
+			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"shelf"];
+		}else{
+			[dictionary setValue:[self.shelf aliasDictionaryRepresentation] forKey:@"shelf"];
+		}
+	}
 	if(self.users){
 		if(includeChildren){
 			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
@@ -89,6 +123,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMGroup ",self.uinstID];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	return s;
 }
