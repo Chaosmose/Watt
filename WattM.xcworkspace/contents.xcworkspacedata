@@ -2,13 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Flexions/WattPlayer/wattM.xcdatamodel">
+      location = "group:Flexions/watt.xcdatamodel">
+   </FileRef>
+   <FileRef
+      location = "group:Watt.podspec">
    </FileRef>
    <FileRef
       location = "group:Samples/PlayerSample/Podfile">
    </FileRef>
    <FileRef
-      location = "group:Watt.podspec">
+      location = "group:Samples/PlayerSample/Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Samples/PlayerSample/PlayerSample.xcodeproj">

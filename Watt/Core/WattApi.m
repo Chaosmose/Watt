@@ -574,7 +574,7 @@
 - (NSString*)wattBundleRelativePathWithName:(NSString *)name{
     if(!name)
         name=kDefaultName;
-    return [NSString stringWithFormat:@"%@-%@.bundle/",name,[self _suffix]];
+    return [NSString stringWithFormat:@"%@-%@%@/",name,[self _suffix],kWattBundle];
 }
 
 - (NSString *)_wattRegistryFileRelativePathWithName:(NSString*)name{

@@ -645,7 +645,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../Flexions/WattPlayer/\n. flexions.sh";
+			shellScript = "cd ../../Flexions/\n. flexions.sh";
 		};
 		E5A9EBEF1799242F00976997 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

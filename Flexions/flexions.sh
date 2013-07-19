@@ -24,7 +24,7 @@
 ########################
 
 # We define the  path to the flexions folder. 
-flexionsFolder="../../../Flexions/"
+flexionsFolder="../../Flexions/"
 
 . ${flexionsFolder}default.flx
 
@@ -32,11 +32,11 @@ flexionsFolder="../../../Flexions/"
 # templates, pre , post, destination
 
 # We setup the descriptor  
-descriptor="wattM.xcdatamodel/contents"
+descriptor="watt.xcdatamodel/contents"
 
 #You can specify a destination folder
 #If not it will  generate in the out/ folder
-destination="../../WattPlayer/Generated/"
+destination="../../Generated/"
 
 ###############
 # Invoke flexions 
