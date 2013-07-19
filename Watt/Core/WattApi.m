@@ -156,12 +156,6 @@
     return shelf;
 }
 
-- (void)removeShelf:(WTMShelf*)shelf{
-    //
-    
-}
-
-
 // A facility to generate symboliclink for package and libraries
 - (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf{
     if(shelf){
@@ -238,14 +232,6 @@
     [user.groups_auto addObject:group];
 }
 
-- (void)removeUser:(WTMUser*)user fromGroup:(WTMGroup*)group{
-    [group.users_auto removeObject:user];
-}
-
-- (void)removeGroup:(WTMGroup*)group{
-    //
-    
-}
 
 #pragma mark - Menus & section
 
@@ -386,8 +372,9 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:package]){
-        
-        
+        WTMActivity *activity=[[WTMActivity alloc] initInRegistry:_currentRegistry];
+        [package.activities_auto addObject:activity];
+        activity.package=package;
     }
     return nil;
 }
@@ -396,8 +383,8 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:activity]){
-        
-        
+        [activity.package.activities removeObject:activity];
+        [activity autoUnRegister];
     }
 }
 
@@ -408,7 +395,9 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:activity]){
-        
+        WTMScene*scene=[[WTMScene alloc]initInRegistry:_currentRegistry];
+        [activity.scenes_auto addObject:scene];
+        scene.activity=activity;
         
     }
     return nil;
@@ -418,8 +407,8 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:scene]){
-        
-        
+        [scene.activity.scenes removeObject:scene];
+        [scene autoUnRegister];
     }
 }
 
@@ -816,6 +805,10 @@
     return uuidStr;
 }
 
-
+-(void)wattTodo:(NSString*)message{
+    if(!message)
+        message=@"todo";
+    [self raiseExceptionWithFormat:@"%@",message];
+}
 
 @end

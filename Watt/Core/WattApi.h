@@ -81,20 +81,18 @@ typedef enum watt_F_TYPES{
 // Creates a shelf, a user , the local group, a package with a shared lib ...
 -(WTMShelf*)createShelfWithName:(NSString*)name;
 
-// Will remove the shelf folder including all data
--(void)removeShelf:(WTMShelf*)shelf;
-
 // A facility to generate symboliclink for package and libraries
 - (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf;
+
+// No remove method actually (need to be analyzed)
 
 #pragma mark - User and groups
 
 - (WTMUser*)createUserInShelf:(WTMShelf*)shelf;
 - (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf;
 - (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group;
-- (void)removeUser:(WTMUser*)user fromGroup:(WTMGroup*)group;
-- (void)removeGroup:(WTMGroup*)group;
 
+// No remove method actually (need to be analyzed) 
 
 #pragma mark - Menus & section 
 
@@ -211,6 +209,8 @@ typedef enum watt_F_TYPES{
 - (NSString *)uuidString;
 
 - (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
+
+- (void)wattTodo:(NSString*)message; // A way to mark the job to be done;
 @end
 
 #pragma mark localization delegate prototocol
