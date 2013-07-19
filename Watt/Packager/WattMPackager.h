@@ -34,16 +34,14 @@
 // WTMPackager singleton accessor
 + (WattMPackager*)sharedInstance;
 
-#pragma mark - ZIP / UNZIP
 
--(void)unZip:(NSString*)zipSourcePath
-          to:(NSString*)destinationFolder
-   withBlock:(void (^)(BOOL success))block;
+#pragma mark - packaging
 
--(void)zip:(NSString*)sourcePath
-        to:(NSString*)destinationZipFilePath
- withBlock:(void (^)(BOOL success))block;
+-(void)packWattBundleWithName:(NSString*)name
+                    withBlock:(void (^)(BOOL success))block;
 
+-(void)unPackWattBundleWithName:(NSString*)name
+                  withBlock:(void (^)(BOOL success))block;
 
 
 @end

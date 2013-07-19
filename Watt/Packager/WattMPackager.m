@@ -23,9 +23,20 @@
 #import "WattMPackager.h"
 
 @interface WattMPackager()<SSZipArchiveDelegate>{
+    
 }
 @property (nonatomic,strong) NSMutableArray *objectPool; // This object pool is used to retain ZipArchives during background NSOperation.
 @property (nonatomic,strong) NSOperationQueue *queue;
+
+#pragma mark - ZIP / UNZIP
+
+-(void)unZip:(NSString*)zipSourcePath
+          to:(NSString*)destinationFolder
+   withBlock:(void (^)(BOOL success))block;
+
+-(void)zip:(NSString*)sourcePath
+        to:(NSString*)destinationZipFilePath
+ withBlock:(void (^)(BOOL success))block;
 
 @end
 @implementation WattMPackager
@@ -42,6 +53,55 @@
     });
     return sharedInstance;
 }
+
+
+#pragma mark - packaging 
+
+
+
+-(void)packWattBundleWithName:(NSString*)name
+                    withBlock:(void (^)(BOOL success))block{
+    NSString *sourceFolderPath=[wattAPI absolutePathForRegistryBundleWithName:name];
+    sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
+    NSString *destinationFilePath=[sourceFolderPath stringByAppendingString:@".zip"];;
+    NSInteger c=0;
+    while ([wattAPI.fileManager fileExistsAtPath:destinationFilePath]) {
+        destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.zip",c];
+        c++;
+    }
+    [self zip:sourceFolderPath
+                   to:destinationFilePath
+            withBlock:^(BOOL success) {
+                block(success);
+            }];
+}
+
+
+
+-(void)unPackWattBundleWithName:(NSString*)name
+                  withBlock:(void (^)(BOOL success))block{
+    
+    NSString *p=[[[wattAPI absolutePathForRegistryBundleWithName:name] lastPathComponent] stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    NSString *zipSourcePath=[[NSBundle mainBundle] pathForResource:p ofType:@".zip"];
+    NSString *folderName=[[zipSourcePath lastPathComponent] stringByReplacingOccurrencesOfString:@".zip" withString:@""];
+    NSString *destinationFolder=[[wattAPI applicationDocumentsDirectory] stringByAppendingString:folderName];
+    if(![wattAPI.fileManager fileExistsAtPath:zipSourcePath]){
+        zipSourcePath=[[wattAPI applicationDocumentsDirectory] stringByAppendingString:[zipSourcePath lastPathComponent]];
+    }
+    if(![wattAPI.fileManager fileExistsAtPath:zipSourcePath]){
+        WTLog(@"%@ do not exist",zipSourcePath);
+    }else{
+        [wattAPI createRecursivelyRequiredFolderForPath:destinationFolder];
+        [self unZip:zipSourcePath
+                         to:destinationFolder
+                  withBlock:^(BOOL success) {
+                      block(success);
+                  }];
+    }
+    
+}
+
+
 
 #pragma mark - ZIP / UNZIP
 
@@ -76,15 +136,16 @@
 #pragma mark SSZipArchiveDelegate
 
 - (void)zipArchiveWillUnzipFileAtIndex:(NSInteger)fileIndex totalFiles:(NSInteger)totalFiles archivePath:(NSString *)archivePath fileInfo:(unz_file_info)fileInfo{
+    /*
     CGFloat progress=(CGFloat)fileIndex/(CGFloat)totalFiles;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        /*
+       
         [SVProgressHUD showProgress:progress
                              status:@"UNZIP"
                            maskType:SVProgressHUDMaskTypeBlack];
-         */
+       
     });
-    
+    */
 }
 
 

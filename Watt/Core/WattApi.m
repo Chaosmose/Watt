@@ -161,6 +161,52 @@
     
 }
 
+
+// A facility to generate symboliclink for package and libraries
+- (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf{
+    if(shelf){
+        [shelf.packages enumerateObjectsUsingBlock:^(WTMPackage *obj, NSUInteger idx, BOOL *stop) {
+            if(obj.name && obj.objectName){
+                NSError *error=nil;
+                NSString *pb=[wattAPI absolutePathForRegistryBundleWithName:wattAPI.currentRegistry.name];
+                
+                NSString *s=[pb stringByAppendingString:obj.objectName ];
+                NSString *d=[pb stringByAppendingString:[obj.name stringByReplacingOccurrencesOfString:@" " withString:@"-"] ];
+                
+                if([wattAPI.fileManager fileExistsAtPath:s] && ![wattAPI.fileManager fileExistsAtPath:d]){
+                    // WTLog(@"Hardlinking :\nS: %@\nD:%@",s,d)
+                    [wattAPI.fileManager createSymbolicLinkAtPath:d
+                                              withDestinationPath:s
+                                                            error:&error];
+                    if(error){
+                        WTLog(@"Error :%@",[error localizedDescription]);
+                    }
+                }
+                // Libraries
+                [obj.libraries enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
+                    NSError *error=nil;
+                    NSString *ls=[s stringByAppendingFormat:@"/%@",obj.objectName];
+                    NSString *ld=[d stringByAppendingFormat:@"/%@",[obj.name stringByReplacingOccurrencesOfString:@" " withString:@"-"]];
+                    WTLog(@"Hardlinking :\nLS: %@\nLD:%@",ls,ld)
+                    if([wattAPI.fileManager fileExistsAtPath:ls] && ![wattAPI.fileManager fileExistsAtPath:ld]){
+                        
+                        [wattAPI.fileManager createSymbolicLinkAtPath:ld
+                                                  withDestinationPath:ls
+                                                                error:&error];
+                        if(error){
+                            WTLog(@"Error :%@",[error localizedDescription]);
+                        }
+                    }
+                    
+                }];
+                
+            }
+        }];
+    }
+}
+
+
+
 #pragma mark - User and groups
 
 - (WTMUser*)createUserInShelf:(WTMShelf*)shelf{
@@ -208,14 +254,22 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:shelf]){
-        
-        
+        WTMMenuSection *section=[[WTMMenuSection alloc]initInRegistry:_currentRegistry];
+        section.index=[shelf.sections_auto count];//We compute the index 
+        [shelf.sections_auto addObject:section];
+        section.shelf=shelf;
+        return section;
     }
     return nil;
 }
 
-- (void)removeSection:(WTMMenuSection*)section fromShelf:(WTMShelf*)shelf{
-    
+- (void)removeSection:(WTMMenuSection*)section{
+    [section.shelf.sections_auto removeObject:section];
+    [section.menus enumerateObjectsUsingBlock:^(WTMMenu *obj, NSUInteger idx, BOOL *stop) {
+        [self removeMenu:obj];
+    }];
+    section.shelf=nil;
+    [section autoUnRegister];
 }
 
 - (WTMMenu*)createMenuInSection:(WTMMenuSection*)section{
@@ -223,14 +277,18 @@
        canPerform:WattWRITE
          onObject:section]){
         
-        
+        WTMMenu *menu=[[WTMMenu alloc] initInRegistry:_currentRegistry];
+        [section.menus_auto addObject:menu];
+        menu.menuSection=section;
+        return menu;
     }
     return nil;
 }
 
 
 - (void)removeMenu:(WTMMenu*)menu{
-    
+    [menu.menuSection.menus removeObject:menu];
+    [menu autoUnRegister];
 }
 
 
@@ -244,6 +302,7 @@
         if(!shelf)
             [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
         WTMPackage *package=[[WTMPackage alloc] initInRegistry:_currentRegistry];
+        package.objectName=[self uuidString];// We create a uuid for each package and library to deal with linked assets
         [shelf.packages_auto addObject:package];
         [package langDictionary_auto];
         package.shelf=shelf;
@@ -286,6 +345,7 @@
        canPerform:WattWRITE
          onObject:package]){
         WTMLibrary *library=[[WTMLibrary alloc] initInRegistry:_currentRegistry];
+        library.objectName=[self uuidString];// We create a uuid for each package and library to deal with linked assets
         [package.libraries_auto addObject:library];
         [library setPackage:package];
         return library;
@@ -568,10 +628,10 @@
 
 
 - (NSString *)absolutePathForRegistryBundleWithName:(NSString*)name{
-    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self wattBundleRelativePathWithName:name]] ;
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self _wattBundleRelativePathWithName:name]] ;
 }
 
-- (NSString*)wattBundleRelativePathWithName:(NSString *)name{
+- (NSString*)_wattBundleRelativePathWithName:(NSString *)name{
     if(!name)
         name=kDefaultName;
     return [NSString stringWithFormat:@"%@-%@%@/",name,[self _suffix],kWattBundle];
@@ -580,7 +640,7 @@
 - (NSString *)_wattRegistryFileRelativePathWithName:(NSString*)name{
     if(!name)
         name=kDefaultName;
-    NSString *bPath=[self wattBundleRelativePathWithName:name];
+    NSString *bPath=[self _wattBundleRelativePathWithName:name];
     return [bPath stringByAppendingFormat:@"%@.%@",name,[self _suffix]];
 }
 

@@ -84,6 +84,9 @@ typedef enum watt_F_TYPES{
 // Will remove the shelf folder including all data
 -(void)removeShelf:(WTMShelf*)shelf;
 
+// A facility to generate symboliclink for package and libraries
+- (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf;
+
 #pragma mark - User and groups
 
 - (WTMUser*)createUserInShelf:(WTMShelf*)shelf;
@@ -96,7 +99,7 @@ typedef enum watt_F_TYPES{
 #pragma mark - Menus & section 
 
 - (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf;
-- (void)removeSection:(WTMMenuSection*)section fromShelf:(WTMShelf*)shelf;
+- (void)removeSection:(WTMMenuSection*)section;
 - (WTMMenu*)createMenuInSection:(WTMMenuSection*)section;
 - (void)removeMenu:(WTMMenu*)menu;
 
@@ -190,8 +193,6 @@ typedef enum watt_F_TYPES{
 // The absolute path of the registry bundle 
 - (NSString*)absolutePathForRegistryBundleWithName:(NSString*)name;
 
-// Returns the relative path of the watt bundle
-- (NSString*)wattBundleRelativePathWithName:(NSString *)name;
 
 #pragma mark - files 
 
