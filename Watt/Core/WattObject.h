@@ -69,7 +69,7 @@ __LINE__ ,\
 #define kDefaultName                @"default"
 #define kRegistryFileName           @"registry"
 #define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
-#define kWattBundle                 @".package"
+#define kWattBundle                 @".watt"
 #endif
 
 #import "WattRegistry.h"
