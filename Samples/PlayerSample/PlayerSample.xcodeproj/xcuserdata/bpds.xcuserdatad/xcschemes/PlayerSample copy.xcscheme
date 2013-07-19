@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E5998FBA174CB1AA0066EFE8"
+               BlueprintIdentifier = "E5A9EBED1799242F00976997"
                BuildableName = "PlayerSample copy.app"
-               BlueprintName = "Flexions+PlayerSample"
+               BlueprintName = "PlayerSample+Flexions"
                ReferencedContainer = "container:PlayerSample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E5998FBA174CB1AA0066EFE8"
+            BlueprintIdentifier = "E5A9EBED1799242F00976997"
             BuildableName = "PlayerSample copy.app"
-            BlueprintName = "Flexions+PlayerSample"
+            BlueprintName = "PlayerSample+Flexions"
             ReferencedContainer = "container:PlayerSample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -51,9 +51,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E5998FBA174CB1AA0066EFE8"
+            BlueprintIdentifier = "E5A9EBED1799242F00976997"
             BuildableName = "PlayerSample copy.app"
-            BlueprintName = "Flexions+PlayerSample"
+            BlueprintName = "PlayerSample+Flexions"
             ReferencedContainer = "container:PlayerSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -69,9 +69,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E5998FBA174CB1AA0066EFE8"
+            BlueprintIdentifier = "E5A9EBED1799242F00976997"
             BuildableName = "PlayerSample copy.app"
-            BlueprintName = "Flexions+PlayerSample"
+            BlueprintName = "PlayerSample+Flexions"
             ReferencedContainer = "container:PlayerSample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

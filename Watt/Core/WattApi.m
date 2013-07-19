@@ -568,10 +568,10 @@
 
 
 - (NSString *)absolutePathForRegistryBundleWithName:(NSString*)name{
-    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self _wattBundleRelativePathWithName:name]] ;
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self wattBundleRelativePathWithName:name]] ;
 }
 
-- (NSString*)_wattBundleRelativePathWithName:(NSString *)name{
+- (NSString*)wattBundleRelativePathWithName:(NSString *)name{
     if(!name)
         name=kDefaultName;
     return [NSString stringWithFormat:@"%@-%@.bundle/",name,[self _suffix]];
@@ -580,7 +580,7 @@
 - (NSString *)_wattRegistryFileRelativePathWithName:(NSString*)name{
     if(!name)
         name=kDefaultName;
-    NSString *bPath=[self _wattBundleRelativePathWithName:name];
+    NSString *bPath=[self wattBundleRelativePathWithName:name];
     return [bPath stringByAppendingFormat:@"%@.%@",name,[self _suffix]];
 }
 

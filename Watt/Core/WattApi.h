@@ -190,6 +190,8 @@ typedef enum watt_F_TYPES{
 // The absolute path of the registry bundle 
 - (NSString*)absolutePathForRegistryBundleWithName:(NSString*)name;
 
+// Returns the relative path of the watt bundle
+- (NSString*)wattBundleRelativePathWithName:(NSString *)name;
 
 #pragma mark - files 
 

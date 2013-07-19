@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Flexions+PlayerSample.xcscheme</key>
+		<key>PlayerSample copy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>5</integer>
 		</dict>
 		<key>PlayerSample.xcscheme</key>
 		<dict>
@@ -18,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>E5998FBA174CB1AA0066EFE8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5A9EBED1799242F00976997</key>
 		<dict>
 			<key>primary</key>
 			<true/>

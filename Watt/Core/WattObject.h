@@ -82,6 +82,16 @@ __LINE__ ,\
 #define scale() [UIScreen mainScreen].scale
 #import "UIImage+wattAdaptive.h"
 #endif
+
+
+#ifndef WT_MACROS
+#define WT_MACROS
+#define wattAPI [WattApi sharedInstance]
+#define wattPackager [WattMPackager sharedInstance]
+#endif
+
+
+
 #endif
 
 @class WattObject;
