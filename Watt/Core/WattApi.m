@@ -535,7 +535,7 @@
         for (WTMMember *member in members) {
             // We do verify the casting
             if([member isKindOfClass:[WTMMember class]]){
-                [band.members addObject:member];
+                [band.members_auto addObject:member];
             }else{
                 [self raiseExceptionWithFormat:@"Attempt to add %@ in a non WTM Member %@",member,NSStringFromSelector(@selector(createBandInLibrary:withMembers:))];
             }
