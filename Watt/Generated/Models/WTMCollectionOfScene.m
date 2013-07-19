@@ -69,6 +69,10 @@
     return  (WTMScene*)[super lastObject];
 }
 
+- (WTMScene *)firstObject{
+    return  (WTMScene*)[super firstObject];
+}
+
 - (WTMScene *)firstObjectCommonWithArray:(NSArray*)array{
     return (WTMScene*)[super firstObjectCommonWithArray:array];
 }

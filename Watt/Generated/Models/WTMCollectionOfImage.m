@@ -69,6 +69,10 @@
     return  (WTMImage*)[super lastObject];
 }
 
+- (WTMImage *)firstObject{
+    return  (WTMImage*)[super firstObject];
+}
+
 - (WTMImage *)firstObjectCommonWithArray:(NSArray*)array{
     return (WTMImage*)[super firstObjectCommonWithArray:array];
 }

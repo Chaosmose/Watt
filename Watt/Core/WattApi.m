@@ -145,13 +145,10 @@
         [self addUser:_me toGroup:group];
     }
     
-    
     WTMPackage*package=[self createPackageInShelf:shelf];
     package.category=kCategoryNameShared;
     
-    
-    WTMLibrary*library=[self createLibraryInPackage:package];
-    library.category=kCategoryNameShared;
+
     
     return shelf;
 }
@@ -168,7 +165,6 @@
                 NSString *d=[pb stringByAppendingString:[obj.name stringByReplacingOccurrencesOfString:@" " withString:@"-"] ];
                 
                 if([wattAPI.fileManager fileExistsAtPath:s] && ![wattAPI.fileManager fileExistsAtPath:d]){
-                    // WTLog(@"Hardlinking :\nS: %@\nD:%@",s,d)
                     [wattAPI.fileManager createSymbolicLinkAtPath:d
                                               withDestinationPath:s
                                                             error:&error];
@@ -181,7 +177,6 @@
                     NSError *error=nil;
                     NSString *ls=[s stringByAppendingFormat:@"/%@",obj.objectName];
                     NSString *ld=[d stringByAppendingFormat:@"/%@",[obj.name stringByReplacingOccurrencesOfString:@" " withString:@"-"]];
-                    WTLog(@"Hardlinking :\nLS: %@\nLD:%@",ls,ld)
                     if([wattAPI.fileManager fileExistsAtPath:ls] && ![wattAPI.fileManager fileExistsAtPath:ld]){
                         
                         [wattAPI.fileManager createSymbolicLinkAtPath:ld
@@ -210,6 +205,7 @@
     WTMUser *user=[[WTMUser alloc]initInRegistry:_currentRegistry];
     [shelf.users_auto addObject:user];
     user.identity=[self uuidString];
+    user.shelf=shelf;
     
     return user;
 }
@@ -220,13 +216,16 @@
     
     WTMGroup *group=[[WTMGroup alloc]initInRegistry:_currentRegistry];
     [shelf.groups_auto addObject:group];
+    group.shelf=shelf;
     
     return group;
 }
 
 - (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group{
-    if(!user || !group)
-        [self raiseExceptionWithFormat:@"user or group is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
+    if(!user)
+        [self raiseExceptionWithFormat:@"user is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
+    if(!group)
+        [self raiseExceptionWithFormat:@"group is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
     
     [group.users_auto addObject:user];
     [user.groups_auto addObject:group];
@@ -237,11 +236,14 @@
 
 
 - (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf{
+    if(!shelf)
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createSectionInShelf:))];
+    
     if([self user:_me
        canPerform:WattWRITE
          onObject:shelf]){
         WTMMenuSection *section=[[WTMMenuSection alloc]initInRegistry:_currentRegistry];
-        section.index=[shelf.sections_auto count];//We compute the index 
+        section.index=[shelf.sections_auto count];//We compute the index
         [shelf.sections_auto addObject:section];
         section.shelf=shelf;
         return section;
@@ -250,12 +252,16 @@
 }
 
 - (void)removeSection:(WTMMenuSection*)section{
-    [section.shelf.sections_auto removeObject:section];
-    [section.menus enumerateObjectsUsingBlock:^(WTMMenu *obj, NSUInteger idx, BOOL *stop) {
-        [self removeMenu:obj];
-    }];
-    section.shelf=nil;
-    [section autoUnRegister];
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:section]){
+        [section.shelf.sections removeObject:section];
+        [section.menus enumerateObjectsUsingBlock:^(WTMMenu *obj, NSUInteger idx, BOOL *stop) {
+            [self removeMenu:obj];
+        }];
+        section.shelf=nil;
+        [section autoUnRegister];
+    }
 }
 
 - (WTMMenu*)createMenuInSection:(WTMMenuSection*)section{
@@ -273,8 +279,12 @@
 
 
 - (void)removeMenu:(WTMMenu*)menu{
-    [menu.menuSection.menus removeObject:menu];
-    [menu autoUnRegister];
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:menu]){
+        [menu.menuSection.menus removeObject:menu];
+        [menu autoUnRegister];
+    }
 }
 
 
@@ -282,6 +292,8 @@
 #pragma mark - Package
 
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf{
+    if(!shelf)
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
     if([self user:_me
        canPerform:WattWRITE
          onObject:shelf]){
@@ -292,6 +304,11 @@
         [shelf.packages_auto addObject:package];
         [package langDictionary_auto];
         package.shelf=shelf;
+        
+        // We create a default library
+        WTMLibrary*library=[self createLibraryInPackage:package];
+        library.category=kCategoryNameShared;
+        
         return package;
     }
     return nil;
@@ -303,7 +320,22 @@
        canPerform:WattWRITE
          onObject:package]){
         
+        if(package.picture)
+            [self purgeMemberIfNecessary:package.picture];
         
+        [package.activities enumerateObjectsUsingBlock:^(WTMActivity *obj, NSUInteger idx, BOOL *stop) {
+            [self removeActivity:obj];
+        }];
+        
+        [package.libraries enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
+            [self removeLibrary:obj];
+        }];
+        
+        [package.langDictionary autoUnRegister];
+        
+        [package.shelf.packages removeObject:package];
+        package.shelf=nil;
+        [package autoUnRegister];
     }
 }
 
@@ -311,8 +343,18 @@
 // Producing renamming of assets and performing re-identification including ACL
 - (void)addPackage:(WTMPackage*)package
            toShelf:(WTMShelf*)shelf{
+    wattTodo(@"");
+    if(!package)
+        [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
+    if(!shelf)
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
+    if([self user:_me
+       canPerform:WattWRITE
+         onObject:shelf]){
+        
+        
+    }
 }
-
 
 - (NSArray*)dependenciesPathForPackage:(WTMPackage*)package{
     NSMutableArray *array=[NSMutableArray array];
@@ -327,6 +369,8 @@
 #pragma mark - Library
 
 - (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package{
+    if(!package)
+        [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createLibraryInPackage:))];
     if([self user:_me
        canPerform:WattWRITE
          onObject:package]){
@@ -339,16 +383,28 @@
     return nil;
 }
 
+
 - (void)removeLibrary:(WTMLibrary*)library{
     if([self user:_me
        canPerform:WattWRITE
          onObject:library.package]){
         
+        [library.bands enumerateObjectsUsingBlock:^(WTMBand *obj, NSUInteger idx, BOOL *stop) {
+            [self removeBand:obj];
+        }];
         
+        [library.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
+            [self removeMember:obj];
+        }];
+        
+        [library.package.libraries removeObject:library];
+        [library autoUnRegister];
     }
 }
 
 - (NSArray*)dependenciesPathForLibrary:(WTMLibrary*)library{
+    if(!library)
+        [self raiseExceptionWithFormat:@"library is nil in %@",NSStringFromSelector(@selector(dependenciesPathForLibrary:))];
     NSMutableArray *array=[NSMutableArray array];
     [library.members_auto enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
         NSArray *pths=[wattAPI absolutePathsFromRelativePath:obj.thumbnailRelativePath all:YES];
@@ -369,6 +425,8 @@
 #pragma mark - Activity
 
 - (WTMActivity*)createActivityInPackage:(WTMPackage*)package{
+    if(!package)
+        [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createActivityInPackage:))];
     if([self user:_me
        canPerform:WattWRITE
          onObject:package]){
@@ -392,6 +450,8 @@
 #pragma mark - Scene
 
 - (WTMScene*)createSceneInActivity:(WTMActivity*)activity{
+    if(!activity)
+        [self raiseExceptionWithFormat:@"activity is nil in %@",NSStringFromSelector(@selector(createSceneInActivity:))];
     if([self user:_me
        canPerform:WattWRITE
          onObject:activity]){
@@ -407,8 +467,17 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:scene]){
+        if(scene.picture)
+            [self purgeMemberIfNecessary:scene.picture];
+        [scene.elements enumerateObjectsUsingBlock:^(WTMElement *obj, NSUInteger idx, BOOL *stop) {
+            [self removeElement:obj];
+        }];
         [scene.activity.scenes removeObject:scene];
         [scene autoUnRegister];
+        if(scene.behavior){
+            [self purgeMemberIfNecessary:scene.behavior];
+        }
+        
     }
 }
 
@@ -417,21 +486,39 @@
 - (WTMElement*)createElementInScene:(WTMScene*)scene
                           withAsset:(WTMAsset*)asset
                         andBehavior:(WTMBehavior*)behavior{
+    if(!scene)
+        [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createElementInScene:withAsset:andBehavior:))];
+    if(!asset)
+        [self raiseExceptionWithFormat:@"asset is nil in %@",NSStringFromSelector(@selector(createElementInScene:withAsset:andBehavior:))];
+    // Behavior is optionnal
+    
     if([self user:_me
        canPerform:WattWRITE
          onObject:scene.activity]){
-        
-        
+        WTMElement *element=[[WTMElement alloc] initInRegistry:_currentRegistry];
+        element.scene=scene;
+        element.asset=asset;
+        if(behavior){
+            element.behavior=behavior;
+            element.behavior.refererCounter++;
+        }
+        asset.refererCounter++;
+        [scene.elements addObject:element];
     }
     return nil;
 }
+
 
 - (void)removeElement:(WTMElement*)element{
     if([self user:_me
        canPerform:WattWRITE
          onObject:element]){
+        [element.scene.elements removeObject:element];
+        element.scene=nil;
+        [self purgeMemberIfNecessary:element.asset];
+        [self purgeMemberIfNecessary:element.behavior];
+        [element autoUnRegister];
     }
-    
 }
 
 #pragma mark -  Bands
@@ -442,6 +529,18 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:library]){
+        WTMBand *band=[[WTMBand alloc] initInRegistry:_currentRegistry];
+        band.library=library;
+        [library.bands_auto addObject:band];
+        for (WTMMember *member in members) {
+            // We do verify the casting
+            if([member isKindOfClass:[WTMMember class]]){
+                [band.members addObject:member];
+            }else{
+                [self raiseExceptionWithFormat:@"Attempt to add %@ in a non WTM Member %@",member,NSStringFromSelector(@selector(createBandInLibrary:withMembers:))];
+            }
+        }
+        return band;
     }
     return nil;
 }
@@ -450,8 +549,26 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:band]){
+        [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
+            [self purgeMemberIfNecessary:obj];
+        }];
+        [band.library.bands removeObject:band];
+        band.members=nil;
+        [band autoUnRegister];
     }
 }
+
+
+// Removing band  will remove and force the purge.
+- (void)removeBand:(WTMBand*)band{
+    [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
+        [self removeMember:obj];
+    }];
+    [band.library.bands removeObject:band];
+    band.members=nil;
+    [band autoUnRegister];
+}
+
 
 
 #pragma mark -  Members
@@ -473,9 +590,11 @@
        canPerform:WattWRITE
          onObject:library]){
         
-        if(!member|| !library){
-            [self raiseExceptionWithFormat:@"member or library is nil in %@",NSStringFromSelector(@selector(addMember:toLibrary:))];
-        }
+        if(!member)
+            [self raiseExceptionWithFormat:@"member  is nil in %@",NSStringFromSelector(@selector(addMember:toLibrary:))];
+        if(!library)
+            [self raiseExceptionWithFormat:@"library  is nil in %@",NSStringFromSelector(@selector(addMember:toLibrary:))];
+        
         [library.members_auto addObject:member];
         member.library=library;
         member.refererCounter++;
@@ -493,26 +612,43 @@
         
         member.refererCounter--;
         if(member.refererCounter<=0){
-            if([member respondsToSelector:@selector(relativePath)]){
-                NSString *relativePath=[member performSelector:@selector(relativePath)];
-                if(relativePath){
-                    NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
-                                                                           all:YES];
-                    for (NSString *pathToDelete in absolutePaths) {
-                        NSError *error=nil;
-                        [wattAPI.fileManager removeItemAtPath:pathToDelete
-                                                                   error:&error];
-                        if(error){
-                            WTLog(@"Impossible to delete %@",pathToDelete);
-                        }
-                    }
-                }
-            }
-            [member autoUnRegister];
+            [self removeMember:member];
         }
     }
 }
 
+
+
+// Removing member  will remove and force the purge.
+- (void)removeMember:(WTMMember*)member{
+    
+    // Deletion of dependent files
+    if([member respondsToSelector:@selector(relativePath)]){
+        NSString *relativePath=[member performSelector:@selector(relativePath)];
+        if(relativePath){
+            NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
+                                                                   all:YES];
+            for (NSString *pathToDelete in absolutePaths) {
+                NSError *error=nil;
+                [wattAPI.fileManager removeItemAtPath:pathToDelete
+                                                error:&error];
+                if(error){
+                    WTLog(@"Impossible to delete %@",pathToDelete);
+                }
+            }
+        }
+    }
+    [member.library.bands enumerateObjectsUsingBlock:^(WTMBand *obj, NSUInteger idx, BOOL *stop) {
+        // We remov from the referencing band (but donnot delete the band it self)
+        if([obj.members containsAnObjectWithID:member.uinstID]){
+            [obj.members removeObject:member];
+        }
+    }];
+    
+    [member.library.members removeObject:member];
+    [member autoUnRegister];
+    
+}
 
 #pragma mark - relative path and path discovery
 
@@ -568,7 +704,7 @@
             for (NSString*pixelDensity in  pixel_density_modifiers) {
                 NSString *component=[NSString stringWithFormat:@"%@%@%@%@",baseRelativePath,orientationModifier,pixelDensity,deviceModifier];
                 
-               
+                
                 NSString *pth=nil;
                 if(self.currentRegistry.name){
                     // We use the current registry bundle
@@ -599,7 +735,7 @@
 }
 
 
-#pragma  mark - file paths 
+#pragma  mark - file paths
 
 
 - (NSString *) applicationDocumentsDirectory{
@@ -694,9 +830,9 @@
     if(![wattAPI.fileManager fileExistsAtPath:path]){
         NSError *error=nil;
         [wattAPI.fileManager createDirectoryAtPath:path
-                                   withIntermediateDirectories:YES
-                                                    attributes:nil
-                                                         error:&error];
+                       withIntermediateDirectories:YES
+                                        attributes:nil
+                                             error:&error];
         if(error){
             return NO;
         }

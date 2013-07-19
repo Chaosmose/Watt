@@ -28,6 +28,7 @@
 - (WTMCollectionOfBand*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMBand *)objectAtIndex:(NSUInteger)index;
+- (WTMBand *)firstObject;
 - (WTMBand *)lastObject;
 - (WTMBand *)firstObjectCommonWithArray:(NSArray*)array;
 - (void)addObject:(WTMBand*)anObject;

@@ -69,6 +69,10 @@
     return  (WTMActivity*)[super lastObject];
 }
 
+- (WTMActivity *)firstObject{
+    return  (WTMActivity*)[super firstObject];
+}
+
 - (WTMActivity *)firstObjectCommonWithArray:(NSArray*)array{
     return (WTMActivity*)[super firstObjectCommonWithArray:array];
 }

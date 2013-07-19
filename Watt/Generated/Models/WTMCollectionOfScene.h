@@ -28,6 +28,7 @@
 - (WTMCollectionOfScene*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMScene *)objectAtIndex:(NSUInteger)index;
+- (WTMScene *)firstObject;
 - (WTMScene *)lastObject;
 - (WTMScene *)firstObjectCommonWithArray:(NSArray*)array;
 - (void)addObject:(WTMScene*)anObject;

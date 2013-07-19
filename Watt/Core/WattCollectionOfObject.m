@@ -143,6 +143,13 @@
     return o;
 }
 
+- (WattObject *)firstObject{
+    if([_collection count]>0){
+        return [_collection objectAtIndex:0];
+    }
+    return nil;
+}
+
 - (WattObject *)lastObject{
     WattObject*o=[_collection lastObject];
     if([o isAnAlias]){

@@ -69,6 +69,10 @@
     return  (WTMBand*)[super lastObject];
 }
 
+- (WTMBand *)firstObject{
+    return  (WTMBand*)[super firstObject];
+}
+
 - (WTMBand *)firstObjectCommonWithArray:(NSArray*)array{
     return (WTMBand*)[super firstObjectCommonWithArray:array];
 }

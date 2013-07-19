@@ -28,6 +28,7 @@
 - (WTMCollectionOfElement*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMElement *)objectAtIndex:(NSUInteger)index;
+- (WTMElement *)firstObject;
 - (WTMElement *)lastObject;
 - (WTMElement *)firstObjectCommonWithArray:(NSArray*)array;
 - (void)addObject:(WTMElement*)anObject;

@@ -69,6 +69,10 @@
     return  (WTMUser*)[super lastObject];
 }
 
+- (WTMUser *)firstObject{
+    return  (WTMUser*)[super firstObject];
+}
+
 - (WTMUser *)firstObjectCommonWithArray:(NSArray*)array{
     return (WTMUser*)[super firstObjectCommonWithArray:array];
 }

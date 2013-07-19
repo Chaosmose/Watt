@@ -88,7 +88,7 @@ __LINE__ ,\
 #define WT_MACROS
 #define wattAPI [WattApi sharedInstance]
 #define wattPackager [WattMPackager sharedInstance]
-#define wattTodo(message) [WattApi wattTodo:message]
+#define wattTodo(message) [wattAPI wattTodo:message]
 #endif
 
 

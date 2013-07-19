@@ -69,6 +69,10 @@
     return  (WTMLibrary*)[super lastObject];
 }
 
+- (WTMLibrary *)firstObject{
+    return  (WTMLibrary*)[super firstObject];
+}
+
 - (WTMLibrary *)firstObjectCommonWithArray:(NSArray*)array{
     return (WTMLibrary*)[super firstObjectCommonWithArray:array];
 }

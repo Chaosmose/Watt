@@ -39,6 +39,7 @@
 // Accessors
 
 - (WattObject *)objectAtIndex:(NSUInteger)index;
+- (WattObject *)firstObject;
 - (WattObject *)lastObject;
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array;
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID;

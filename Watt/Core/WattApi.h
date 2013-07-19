@@ -103,7 +103,9 @@ typedef enum watt_F_TYPES{
 
 #pragma mark - Package
 
+// Create a package and it default library
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;
+
 - (void)removePackage:(WTMPackage*)package;
 
 // Immport process this method can move a package from a registry to another
@@ -134,6 +136,8 @@ typedef enum watt_F_TYPES{
 
 #pragma mark - Element 
 
+// scene & asset must not be nil
+// behavior is optionnal
 -(WTMElement*)createElementInScene:(WTMScene*)scene
                          withAsset:(WTMAsset*)asset
                        andBehavior:(WTMBehavior*)behavior;
@@ -146,7 +150,13 @@ typedef enum watt_F_TYPES{
 - (WTMBand*)createBandInLibrary:(WTMLibrary*)library
              withMembers:(NSArray*)members;
 
+
+// Call purgeMemberIfNecessary on any member.
+
 - (void)purgeBandIfNecessary:(WTMBand*)band;
+
+// Removing band  will remove and force the purge.
+- (void)removeBand:(WTMBand*)band;
 
 
 #pragma mark -  Members
@@ -161,11 +171,14 @@ typedef enum watt_F_TYPES{
 // Band n<->n member
 // Library 1<->n member
 
-
 - (void)addMember:(WTMMember*)member
         toLibrary:(WTMLibrary*)library;
 
 - (void)purgeMemberIfNecessary:(WTMMember*)member;
+
+// Removing member  will remove and force the purge.
+- (void)removeMember:(WTMMember*)member;
+
 
 #pragma mark localization
 

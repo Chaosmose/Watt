@@ -28,6 +28,7 @@
 - (WTMCollectionOfMenuSection*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WTMMenuSection *)objectAtIndex:(NSUInteger)index;
+- (WTMMenuSection *)firstObject;
 - (WTMMenuSection *)lastObject;
 - (WTMMenuSection *)firstObjectCommonWithArray:(NSArray*)array;
 - (void)addObject:(WTMMenuSection*)anObject;
