@@ -119,8 +119,6 @@
                        includeChildren:YES];
             [_collection addObject:o];
     }
-    
-    WTLog(@"%@",self);
 }
 
 

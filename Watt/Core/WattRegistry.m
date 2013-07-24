@@ -66,21 +66,14 @@
     // First step :
     NSUInteger i=1;
     for (NSDictionary *d in array) {
-        if([[d objectForKey:__className__] isEqualToString:NSStringFromClass([WTMCollectionOfPackage class])]){
-            WTLog(@"***");
-        }
         WattObject *liveObject=[WattObject instanceFromDictionary:d
                                                        inRegistry:r
                                                   includeChildren:NO];
         if(liveObject){
-            WTLog(@"%@",liveObject);
             [r registerObject:liveObject];
         }
         i++;
     }
-    
-     WTLog(@"_uinstIDCounter=%@",[r valueForKey:@"_uinstIDCounter"]);
-    
     if(resolveAliases){
         // Second step :
         [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
@@ -88,8 +81,6 @@
           
         }];
     }
-    
-     WTLog(@"r=%@",r);
     
     return r;
 }
