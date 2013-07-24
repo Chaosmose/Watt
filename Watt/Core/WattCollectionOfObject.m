@@ -42,6 +42,17 @@
 }
 
 
+- (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier{
+    self=[super initInRegistry:registry withPresetIdentifier:identifier];
+    if(self){
+         _collection=[NSMutableArray array];
+    }
+    return self;
+}
+
+
+
+
 - (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
     if(array && [array count]>0){
@@ -108,6 +119,8 @@
                        includeChildren:YES];
             [_collection addObject:o];
     }
+    
+    WTLog(@"%@",self);
 }
 
 

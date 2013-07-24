@@ -35,7 +35,6 @@
 // Notice that the mane is never serialized.
 @property (nonatomic,copy)NSString* name; 
 
-- (NSUInteger)count;
 
 #pragma mark - Serialization/Deserialization facilities
 
@@ -65,7 +64,5 @@
 - (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix returningRegistry:(WattRegistry*)registry;
 
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block;
-
-#pragma mark - 
 
 @end

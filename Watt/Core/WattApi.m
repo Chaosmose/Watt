@@ -140,8 +140,10 @@
     
     if(!_me){
         self.me=[self createUserInShelf:shelf];
+        self.me.objectName=kWattMe;
         WTMGroup *group=[self createGroupInShelf:shelf];
-        group.name=@"me";
+        group.name=kWattMyGroupName;
+        group.objectName=kWattMyGroup;
         [self addUser:_me toGroup:group];
     }
     
@@ -638,12 +640,6 @@
             }
         }
     }
-    [member.library.bands enumerateObjectsUsingBlock:^(WTMBand *obj, NSUInteger idx, BOOL *stop) {
-        // We remov from the referencing band (but donnot delete the band it self)
-        if([obj.members containsAnObjectWithID:member.uinstID]){
-            [obj.members removeObject:member];
-        }
-    }];
     
     [member.library.members removeObject:member];
     [member autoUnRegister];
@@ -847,7 +843,7 @@
 
 -(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path{
     NSArray *array=[registry arrayRepresentation];
-    if(((_ftype==WattJx)||(_ftype==WattJ))){
+    if(((_ftype==WattPx)||(_ftype==WattP))){
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array];
         return [self writeData:data toPath:path];
     }else{
@@ -857,7 +853,10 @@
 }
 
 -(WattRegistry*)readRegistryFromFile:(NSString*)path{
-    if(((_ftype==WattJx)||(_ftype==WattJ))){
+    if(![self.fileManager fileExistsAtPath:path]){
+        [self raiseExceptionWithFormat:@"Unexisting registry path %@",path];
+    }
+    if(((_ftype==WattPx)||(_ftype==WattP))){
         NSData *data=[self readDataFromPath:path];
         NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         return [WattRegistry instanceFromArray:array resolveAliases:YES];
@@ -868,6 +867,7 @@
     }
     return nil;
 }
+
 
 // JSON private methods
 

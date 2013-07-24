@@ -49,9 +49,6 @@ __LINE__ ,\
 
 #ifndef WT_RUNTIME_CONFIGURATION
 #define WT_RUNTIME_CONFIGURATION
-#define WT_ALLOW_MULTIPLE_REGISTRATION 1
-
-
 
 #ifndef WT_CODING_KEYS
 #define WT_CODING_KEYS
@@ -70,6 +67,11 @@ __LINE__ ,\
 #define kRegistryFileName           @"registry"
 #define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
 #define kWattBundle                 @".watt"
+
+#define kWattMe                     @"user-me"
+#define kWattMyGroup                @"my-group"
+#define kWattMyGroupName            @"users"
+
 #endif
 
 #import "WattRegistry.h"
@@ -128,7 +130,8 @@ __LINE__ ,\
 
 - (instancetype)init; 
 - (instancetype)initInRegistry:(WattRegistry*)registry;
-- (instancetype)initAsAliasWithidentifier:(NSInteger)identifier; // instanciate an alias 
+- (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier; //Used for reinstanciation from a device to another
+- (instancetype)initAsAliasWithIdentifier:(NSInteger)identifier; // instanciate an alias
 
 -(void)autoUnRegister;
 

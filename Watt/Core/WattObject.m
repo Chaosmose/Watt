@@ -37,7 +37,7 @@
     return self;
 }
 
-- (instancetype)initAsAliasWithidentifier:(NSInteger)identifier{
+- (instancetype)initAsAliasWithIdentifier:(NSInteger)identifier{
     self=[self initInRegistry:nil];
     if (self) {
         _uinstID=identifier;
@@ -48,10 +48,15 @@
 
 
 - (instancetype)initInRegistry:(WattRegistry*)registry{
+    return [self initInRegistry:registry withPresetIdentifier:0];
+}
+
+
+- (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier{
     self=[super init];
     if(self){
         _wapi=wattAPI;
-        _uinstID=0;// no registration
+        _uinstID=identifier;// no registration
         if(registry){
             _registry=registry;
             [_registry registerObject:self];
@@ -64,6 +69,9 @@
     }
     return self;
 }
+
+
+
 
 
 -(void)autoUnRegister{
@@ -80,25 +88,20 @@
 + (instancetype)instanceFromDictionary:(NSDictionary *)aDictionary
                             inRegistry:(WattRegistry*)registry
                        includeChildren:(BOOL)includeChildren{
-    
-	WattObject*instance = nil;
-	NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
-    if(wtuinstID<[registry count]){
-        instance=[registry objectWithUinstID:wtuinstID];
+    NSInteger wtuinstID=[[aDictionary objectForKey:__uinstID__] integerValue];
+    WattObject*instance =[registry objectWithUinstID:wtuinstID];
+    if(instance){
         return instance;
-    }
-    
-	if(!instance  ){
+    }else{
         if(![aDictionary objectForKey:__className__]){
-            instance=[[WattObject alloc] initAsAliasWithidentifier:wtuinstID];
+            instance=[[WattObject alloc] initAsAliasWithIdentifier:wtuinstID];
         }else{
             // We instantiate the class.
             Class theClass=NSClassFromString([aDictionary objectForKey:__className__]);
-            instance= [[theClass alloc] initInRegistry:registry];
+            instance= [[theClass alloc] initInRegistry:registry withPresetIdentifier:wtuinstID];
             [instance setAttributesFromDictionary:aDictionary];
         }
 	}
-    
 	return instance;
 }
 
@@ -248,5 +251,6 @@
 - (NSString*)aliasDescription{
     return [NSString stringWithFormat:@"Alias of %@(#%i)",NSStringFromClass([self class]),self.uinstID];
 }
+
 
 @end

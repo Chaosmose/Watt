@@ -45,9 +45,6 @@
     return self;
 }
 
-- (NSUInteger)count{
-    return _uinstIDCounter;
-}
 
 #pragma mark - Serialization/Deserialization facilities
 
@@ -69,14 +66,20 @@
     // First step :
     NSUInteger i=1;
     for (NSDictionary *d in array) {
+        if([[d objectForKey:__className__] isEqualToString:NSStringFromClass([WTMCollectionOfPackage class])]){
+            WTLog(@"***");
+        }
         WattObject *liveObject=[WattObject instanceFromDictionary:d
                                                        inRegistry:r
                                                   includeChildren:NO];
         if(liveObject){
+            WTLog(@"%@",liveObject);
             [r registerObject:liveObject];
         }
         i++;
     }
+    
+     WTLog(@"_uinstIDCounter=%@",[r valueForKey:@"_uinstIDCounter"]);
     
     if(resolveAliases){
         // Second step :
@@ -85,6 +88,9 @@
           
         }];
     }
+    
+     WTLog(@"r=%@",r);
+    
     return r;
 }
 
@@ -172,11 +178,7 @@
 }
 
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID{
-    if(uinstID<=[_registry count]){
-        return [_registry objectForKey:[self _keyFrom:uinstID]];
-    }else{
-        return nil;
-    }
+    return [_registry objectForKey:[self _keyFrom:uinstID]];
 }
 
 
@@ -212,31 +214,31 @@
     if(![reference isAnAlias]){
         if(reference.uinstID==0){
             [reference identifyWithUinstId:[self _createAnUinstID]];
-            [self addObject:reference];
-        }else if(_uinstIDCounter>reference.uinstID){
-            if(![[self objectWithUinstID:reference.uinstID] isEqual:reference]){
-                [NSException raise:@"Registry" format:@"Identity missmatch"];
-            }
-        }else{
-#if  !WT_ALLOW_MULTIPLE_REGISTRATION
-            [NSException raise:@"Registry" format:@"Identity overflow"];
-#endif
         }
-    }else{
-        [NSException raise:@"Registry" format:@"Attempt to register an alias"];
+        _uinstIDCounter=MAX(reference.uinstID, _uinstIDCounter);
+        [self addObject:reference];
     }
 }
 
-
 - (void)addObject:(WattObject *)reference{
+    if(reference.uinstID>0){
+        NSString*referenceKey=[self _keyFrom:reference.uinstID];
+        if([[self _sortedKeys] indexOfObject:referenceKey]!=NSNotFound){
+            // The reference is already Registred.
+            if([[_registry objectForKey:referenceKey] isEqual:reference]){
+                // we do nothing ..
+                return;
+            }else{
+                 [NSException raise:@"Registry" format:@"Reference missmatch"];
+            }
+        }
+    }
     [self _invalidateSortedKeys];
-    if(reference.uinstID>0 && ![self objectWithUinstID:reference.uinstID]){
+    if(reference.uinstID>0){
         [_registry setValue:reference forKey:[self _keyFrom:reference.uinstID]];
-        _uinstIDCounter=MAX(reference.uinstID, _uinstIDCounter);
     }else{
         [NSException raise:@"Registry" format:@"Unsuccessfull attempt to add a reference"];
     }
-    
 }
 
 
@@ -248,7 +250,7 @@
 
 - (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-    [s appendFormat:@"Registry with %i members\n\n",[self count]];
+    [s appendFormat:@"Registry with %i members\n\n",[[self _sortedKeys] count]];
     NSUInteger i=1;
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
@@ -273,6 +275,9 @@
             break;
     }
 }
+
+
+
 
 
 @end
