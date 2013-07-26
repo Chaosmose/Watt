@@ -59,6 +59,8 @@ __LINE__ ,\
 #define __isAliased__       @"a"
 #endif
 
+ 
+
 #ifndef WT_CONST
 #define WT_CONST
 #define kWattAPIExecptionName       @"WattAPIException"
@@ -67,6 +69,8 @@ __LINE__ ,\
 #define kRegistryFileName           @"registry"
 #define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
 #define kWattBundle                 @".watt"
+
+#define kWattClassPrefix            @"WTM"
 
 #define kWattMe                     @"user-me"
 #define kWattMyGroup                @"my-group"

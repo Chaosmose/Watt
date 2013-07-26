@@ -173,8 +173,22 @@ typedef enum watt_F_TYPES{
 // Band n<->n member
 // Library 1<->n member
 
-- (void)addMember:(WTMMember*)member
-        toLibrary:(WTMLibrary*)library;
+
+- (WTMBehavior*)createBehaviorMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMHtml*)createHtmlMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMVideo*)createVideoMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMImage*)createImageMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMSound*)createSoundMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMPdf*)createPdfMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMHyperlink*)createHyperlinkMemberInLibrary:(WTMLibrary*)library;
+
+- (WTMLabel*)createLabelMemberInLibrary:(WTMLibrary*)library;
 
 - (void)purgeMemberIfNecessary:(WTMMember*)member;
 

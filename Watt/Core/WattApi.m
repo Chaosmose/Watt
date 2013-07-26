@@ -270,7 +270,6 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:section]){
-        
         WTMMenu *menu=[[WTMMenu alloc] initInRegistry:_currentRegistry];
         [section.menus_auto addObject:menu];
         menu.menuSection=section;
@@ -284,6 +283,9 @@
     if([self user:_me
        canPerform:WattWRITE
          onObject:menu]){
+        if(menu.picture){
+            [self purgeMemberIfNecessary:menu.picture];
+        }
         [menu.menuSection.menus removeObject:menu];
         [menu autoUnRegister];
     }
@@ -586,22 +588,69 @@
 // Library 1<->n member
 
 
-- (void)addMember:(WTMMember*)member
+- (WTMBehavior*)createBehaviorMemberInLibrary:(WTMLibrary*)library{
+    WTMBehavior *instance=[[WTMBehavior alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMHtml*)createHtmlMemberInLibrary:(WTMLibrary*)library{
+    WTMHtml *instance=[[WTMHtml alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMVideo*)createVideoMemberInLibrary:(WTMLibrary*)library{
+    WTMVideo *instance=[[WTMVideo alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMImage*)createImageMemberInLibrary:(WTMLibrary*)library{
+    WTMImage *instance=[[WTMImage alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMSound*)createSoundMemberInLibrary:(WTMLibrary*)library{
+    WTMSound *instance=[[WTMSound alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMPdf*)createPdfMemberInLibrary:(WTMLibrary*)library{
+    WTMPdf *instance=[[WTMPdf alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMHyperlink*)createHyperlinkMemberInLibrary:(WTMLibrary*)library{
+    WTMHyperlink *instance=[[WTMHyperlink alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+- (WTMLabel*)createLabelMemberInLibrary:(WTMLibrary*)library{
+    WTMLabel *instance=[[WTMLabel alloc]initInRegistry:library.registry];
+    [self _addMember:instance toLibrary:library];
+    return instance;
+}
+
+
+- (void)_addMember:(WTMMember*)member
         toLibrary:(WTMLibrary*)library {
     if([self user:_me
        canPerform:WattWRITE
          onObject:library]){
-        
         if(!member)
-            [self raiseExceptionWithFormat:@"member  is nil in %@",NSStringFromSelector(@selector(addMember:toLibrary:))];
+            [self raiseExceptionWithFormat:@"member  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
         if(!library)
-            [self raiseExceptionWithFormat:@"library  is nil in %@",NSStringFromSelector(@selector(addMember:toLibrary:))];
+            [self raiseExceptionWithFormat:@"library  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
         
         [library.members_auto addObject:member];
         member.library=library;
         member.refererCounter++;
     }
-    
 }
 
 
@@ -618,7 +667,6 @@
         }
     }
 }
-
 
 
 // Removing member  will remove and force the purge.
@@ -640,7 +688,6 @@
             }
         }
     }
-    
     [member.library.members removeObject:member];
     [member autoUnRegister];
     
