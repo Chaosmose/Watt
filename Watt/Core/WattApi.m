@@ -42,6 +42,7 @@
         sharedInstance = [[self alloc] init];
         sharedInstance.fileManager=[[NSFileManager alloc] init];
         sharedInstance.mixableExtensions=[NSMutableArray array];
+        sharedInstance.forcedSoupPaths=[NSMutableArray array];
     });
     return sharedInstance;
 }
@@ -844,6 +845,9 @@
 }
 
 -(BOOL)_shouldMixPath:(NSString*)path{
+    if([_forcedSoupPaths indexOfObject:path]!=NSNotFound){
+        return YES;
+    }
     BOOL modeAllowsToMix=((_ftype==WattJx)||(_ftype==WattPx));
     if(modeAllowsToMix){
         if([_mixableExtensions indexOfObject:[path pathExtension]]!=NSNotFound ||

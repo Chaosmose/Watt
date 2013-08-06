@@ -59,6 +59,9 @@ typedef enum watt_F_TYPES{
 // You can add any binary format by adding its extension to mixableExtensions
 @property (nonatomic,strong)    NSMutableArray *mixableExtensions;
 
+// You can add paths that you want to be mixed (for DRM purposes)
+@property (nonatomic,strong)    NSMutableArray *forcedSoupPaths;
+
 
 //Advanced runtime configuration
 //That defines the format & soup behaviour
