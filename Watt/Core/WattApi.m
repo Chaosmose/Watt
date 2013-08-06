@@ -437,6 +437,7 @@
         WTMActivity *activity=[[WTMActivity alloc] initInRegistry:_currentRegistry];
         [package.activities_auto addObject:activity];
         activity.package=package;
+        return activity;
     }
     return nil;
 }
@@ -462,6 +463,7 @@
         WTMScene*scene=[[WTMScene alloc]initInRegistry:_currentRegistry];
         [activity.scenes_auto addObject:scene];
         scene.activity=activity;
+        return scene;
         
     }
     return nil;
