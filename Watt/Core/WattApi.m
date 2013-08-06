@@ -41,6 +41,7 @@
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
         sharedInstance.fileManager=[[NSFileManager alloc] init];
+        sharedInstance.mixableExtensions=[NSMutableArray array];
     });
     return sharedInstance;
 }
@@ -832,14 +833,26 @@
 
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
     [self createRecursivelyRequiredFolderForPath:path];
-    data=[self _dataSoup:data mix:((_ftype==WattJx)||(_ftype==WattPx))];
+    data=[self _dataSoup:data mix:[self _shouldMixPath:path]];
     return [data writeToFile:path atomically:YES];
 }
 
 -(NSData*)readDataFromPath:(NSString*)path{
     NSData *data=[NSData dataWithContentsOfFile:path];
-    data=[self _dataSoup:data mix:((_ftype==WattJx)||(_ftype==WattPx))];
+    data=[self _dataSoup:data mix:[self _shouldMixPath:path]];
     return data;
+}
+
+-(BOOL)_shouldMixPath:(NSString*)path{
+    BOOL modeAllowsToMix=((_ftype==WattJx)||(_ftype==WattPx));
+    if(modeAllowsToMix){
+        if([_mixableExtensions indexOfObject:[path pathExtension]]!=NSNotFound ||
+           [[self _suffix] isEqualToString:@"jx"]||
+           [[self _suffix] isEqualToString:@"px"]){
+            return YES;
+        }
+    }
+    return NO;
 }
 
 //The data soup method is a simple and fast encoding / decoding method.
