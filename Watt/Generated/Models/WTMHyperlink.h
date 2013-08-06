@@ -26,6 +26,7 @@
 @interface WTMHyperlink:WTMAsset<WattCoding>{
 }
 
+@property (nonatomic,assign) BOOL  allowExploration;
 @property (nonatomic,copy) NSString * urlString;
 
 
