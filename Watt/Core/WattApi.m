@@ -851,8 +851,8 @@
     BOOL modeAllowsToMix=((_ftype==WattJx)||(_ftype==WattPx));
     if(modeAllowsToMix){
         if([_mixableExtensions indexOfObject:[path pathExtension]]!=NSNotFound ||
-           [[self _suffix] isEqualToString:@"jx"]||
-           [[self _suffix] isEqualToString:@"px"]){
+           [[path pathExtension] isEqualToString:@"jx"]||
+           [[path pathExtension] isEqualToString:@"px"]){
             return YES;
         }
     }
