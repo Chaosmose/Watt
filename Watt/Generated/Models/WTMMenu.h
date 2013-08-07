@@ -31,6 +31,7 @@
 }
 
 @property (nonatomic,copy) NSString * details;
+@property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,assign) NSInteger  referenceUinstID;
 @property (nonatomic,copy) NSString * urlString;

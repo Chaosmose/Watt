@@ -28,6 +28,7 @@
 @implementation WTMMenu 
 
 @synthesize details=_details;
+@synthesize index=_index;
 @synthesize label=_label;
 @synthesize referenceUinstID=_referenceUinstID;
 @synthesize urlString=_urlString;
@@ -39,6 +40,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
 		[super setValue:value forKey:@"details"];
+	} else if ([key isEqualToString:@"index"]) {
+		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
 	} else if ([key isEqualToString:@"referenceUinstID"]) {
@@ -162,6 +165,7 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.details forKey:@"details"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.label forKey:@"label"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.referenceUinstID] forKey:@"referenceUinstID"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
@@ -203,6 +207,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMenu ",self.uinstID];
 	[s appendFormat:@"details : %@\n",self.details];
+	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"referenceUinstID : %@\n",[NSNumber numberWithInteger:self.referenceUinstID]];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
