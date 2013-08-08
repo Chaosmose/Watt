@@ -21,8 +21,9 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 
-@interface WTMAction:WattObject<WattCoding>{
+@interface WTMAction:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,strong) NSDictionary * arguments;

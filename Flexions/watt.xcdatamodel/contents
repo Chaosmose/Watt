@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Action" representedClassName="Action" syncable="YES">
+    <entity name="Action" representedClassName="Action" parentEntity="Model" syncable="YES">
         <attribute name="arguments" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="type" value="dictionary"/>
@@ -58,7 +58,7 @@
         <attribute name="font" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="LangDictionary" representedClassName="LangDictionary" syncable="YES">
+    <entity name="LangDictionary" representedClassName="LangDictionary" parentEntity="Model" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="locale" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="String" syncable="YES"/>
@@ -110,10 +110,10 @@
         <relationship name="group" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
         <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
     </entity>
-    <entity name="Operand" representedClassName="Operand" syncable="YES">
+    <entity name="Operand" representedClassName="Operand" parentEntity="Model" syncable="YES">
         <attribute name="expression" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Operator" representedClassName="Operator" syncable="YES">
+    <entity name="Operator" representedClassName="Operator" parentEntity="Model" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Package" representedClassName="Package" parentEntity="Model" syncable="YES">
@@ -129,8 +129,7 @@
     <entity name="Pdf" representedClassName="Pdf" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Rule" representedClassName="Rule" syncable="YES">
-        <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="Rule" representedClassName="Rule" parentEntity="Model" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="operandsA" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operand" syncable="YES"/>
         <relationship name="operandsB" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operand" syncable="YES"/>
@@ -188,7 +187,7 @@
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
         <element name="Package" positionX="-7139" positionY="-4228" width="128" height="163"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
-        <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="118"/>
+        <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="103"/>
         <element name="Scene" positionX="-6606" positionY="-4027" width="128" height="163"/>
         <element name="Shelf" positionX="-7571" positionY="-4324" width="128" height="133"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>

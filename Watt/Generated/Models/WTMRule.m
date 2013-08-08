@@ -26,16 +26,13 @@
 
 @implementation WTMRule 
 
-@synthesize comment=_comment;
 @synthesize name=_name;
 @synthesize operandsA=_operandsA;
 @synthesize operandsB=_operandsB;
 @synthesize operator=_operator;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"comment"]){
-		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"name"]) {
+	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"operandsA"]) {
 		[super setValue:[WTMOperand instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"operandsA"];
@@ -128,7 +125,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.comment forKey:@"comment"];
 	[dictionary setValue:self.name forKey:@"name"];
 	if(self.operandsA){
 		if(includeChildren){
@@ -160,7 +156,6 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMRule ",self.uinstID];
-	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"operandsA : %@\n",NSStringFromClass([self.operandsA class])];
 	[s appendFormat:@"operandsB : %@\n",NSStringFromClass([self.operandsB class])];

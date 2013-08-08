@@ -21,14 +21,14 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 @class WTMOperand;
 @class WTMOperand;
 @class WTMOperator;
 
-@interface WTMRule:WattObject<WattCoding>{
+@interface WTMRule:WTMModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * comment;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMOperand * operandsA;
 @property (nonatomic,strong) WTMOperand * operandsB;

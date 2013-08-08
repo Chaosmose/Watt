@@ -21,8 +21,9 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 
-@interface WTMLangDictionary:WattObject<WattCoding>{
+@interface WTMLangDictionary:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * key;

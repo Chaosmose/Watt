@@ -21,8 +21,9 @@
  
 
 #import "WattObject.h"
+#import "WTMModel.h"
 
-@interface WTMOperand:WattObject<WattCoding>{
+@interface WTMOperand:WTMModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * expression;

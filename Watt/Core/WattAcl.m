@@ -8,6 +8,10 @@
 
 #import "WattAcl.h"
 
+#import "WTMModel.h"
+#import "WTMGroup.h"
+#import "WattApi.h"
+
 @implementation WattAcl
 
 /*
@@ -21,7 +25,7 @@
  */
 
 
-+(NSString*)stringRightsFrom:(NSUInteger)numericRights{
++ (NSString*)stringRightsFrom:(NSUInteger)numericRights{
     
     if(numericRights>777){
         numericRights=0;
@@ -54,7 +58,7 @@
     return rights;
 }
 
-+(NSUInteger)numericRightsFromString:(NSString*)stringRights{
++ (NSUInteger)numericRightsFromString:(NSString*)stringRights{
 
     while ([stringRights length]<9) {
         stringRights=[NSString stringWithFormat:@"-%@",stringRights];
@@ -85,8 +89,17 @@
     return rights;
 }
 
+// The acl method
++ (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model{
+    
+    return [WattAcl actionIsAllowed:action
+                         withRights:model.rights
+                         imTheOwner:[WattAcl mIOwnerOf:model]
+                  imInTheOwnerGroup:[WattAcl mIIntheGroup:model.group]];
+}
 
-+(BOOL)actionIsAllowed:(Watt_Action)action
+
++ (BOOL)actionIsAllowed:(Watt_Action)action
             withRights:(NSUInteger)rights
             imTheOwner:(BOOL)owned
      imInTheOwnerGroup:(BOOL)inTheGroup{
@@ -135,6 +148,20 @@
     return NO;
 }
 
++ (BOOL)mIOwnerOf:(WTMModel*)model{
+    if(model.owner && [wattAPI me]){
+        return [model.owner.identity isEqualToString:[wattAPI me].identity];
+    }
+    return NO;
+}
+
++ (BOOL)mIIntheGroup:(WTMGroup*)group{
+    if(!group){
+        return YES;
+    }else{
+        return [[wattAPI me].groups_auto indexOfObject:group]!=NSNotFound;
+    }
+}
 
 
 @end
