@@ -24,7 +24,13 @@ typedef enum watt_Actions{
 
 @interface WattAcl : NSObject
 
--(NSString*)stringRightsFrom:(NSUInteger)numericRights;
--(NSUInteger*)numericRightsFromString:(NSString*)stringRights;
++(NSString*)stringRightsFrom:(NSUInteger)numericRights;
+
++(NSUInteger)numericRightsFromString:(NSString*)stringRights;
+
++(BOOL)actionIsAllowed:(Watt_Action)action
+            withRights:(NSUInteger)rights
+            imTheOwner:(BOOL)owned
+            imInTheOwnerGroup:(BOOL)inTheGroup;
 
 @end
