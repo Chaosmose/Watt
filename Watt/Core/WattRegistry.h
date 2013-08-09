@@ -53,7 +53,7 @@
 
 #pragma mark - runtime object graph register
 
-- (WattObject*)objectWithUinstID:(NSInteger)uinstID;
+- (id)objectWithUinstID:(NSInteger)uinstID;
 - (void)registerObject:(WattObject*)reference;       // Generates a unique id + add the reference to the registry
 - (void)unRegisterObject:(WattObject*)reference;
 

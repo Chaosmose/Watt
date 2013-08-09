@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		447087F9105E44D19142000C /* libPods-PlayerSampleFlexions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */; };
+		E53234E017B4CFA8001C0C39 /* WTMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E53234DF17B4CFA8001C0C39 /* WTMObject.m */; };
+		E53234E117B4CFA8001C0C39 /* WTMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E53234DF17B4CFA8001C0C39 /* WTMObject.m */; };
 		E5A9EBF11799242F00976997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
 		E5A9EBF21799242F00976997 /* WTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462541732A4A000E654A1 /* WTMAppDelegate.m */; };
 		E5A9EBF31799242F00976997 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
@@ -134,6 +136,8 @@
 		B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSample.xcconfig"; path = "../Pods/Pods-PlayerSample.xcconfig"; sourceTree = SOURCE_ROOT; };
 		D8890FBD9D4042C081050B0D /* Pods-PlayerSampleFlexions.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSampleFlexions.xcconfig"; path = "../Pods/Pods-PlayerSampleFlexions.xcconfig"; sourceTree = SOURCE_ROOT; };
 		DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlayerSampleFlexions.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E53234DE17B4CFA8001C0C39 /* WTMObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMObject.h; sourceTree = "<group>"; };
+		E53234DF17B4CFA8001C0C39 /* WTMObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMObject.m; sourceTree = "<group>"; };
 		E5A9EC331799242F00976997 /* PlayerSampleFlexions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSampleFlexions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462411732A4A000E654A1 /* PlayerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462441732A4A000E654A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -409,6 +413,8 @@
 		E5CAD22D1799A1A400D22369 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E53234DE17B4CFA8001C0C39 /* WTMObject.h */,
+				E53234DF17B4CFA8001C0C39 /* WTMObject.m */,
 				E5CAD22E1799A1A400D22369 /* WTMAction.h */,
 				E5CAD22F1799A1A400D22369 /* WTMAction.m */,
 				E5CAD2301799A1A400D22369 /* WTMActivity.h */,
@@ -740,6 +746,7 @@
 				E5CAD2DD1799A1A400D22369 /* WTMUser.m in Sources */,
 				E5CAD2DF1799A1A400D22369 /* WTMVideo.m in Sources */,
 				E5CAD2E11799A1A400D22369 /* WattMPackager.m in Sources */,
+				E53234E117B4CFA8001C0C39 /* WTMObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,6 +804,7 @@
 				E5CAD2DC1799A1A400D22369 /* WTMUser.m in Sources */,
 				E5CAD2DE1799A1A400D22369 /* WTMVideo.m in Sources */,
 				E5CAD2E01799A1A400D22369 /* WattMPackager.m in Sources */,
+				E53234E017B4CFA8001C0C39 /* WTMObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

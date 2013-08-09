@@ -20,20 +20,20 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMUser.h" 
-#import "WTMCollectionOfGroup.h"
+#import "WTMGroup.h"
 #import "WTMShelf.h"
 
 @implementation WTMUser 
 
 @synthesize identity=_identity;
-@synthesize groups=_groups;
+@synthesize group=_group;
 @synthesize shelf=_shelf;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"identity"]){
 		[super setValue:value forKey:@"identity"];
-	} else if ([key isEqualToString:@"groups"]) {
-		[super setValue:[WTMCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
+	} else if ([key isEqualToString:@"group"]) {
+		[super setValue:[WTMGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"group"];
 	} else if ([key isEqualToString:@"shelf"]) {
 		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
@@ -41,27 +41,27 @@
 	}
 }
 
-- (WTMCollectionOfGroup*)groups{
-	if([_groups isAnAlias]){
-		id o=[_registry objectWithUinstID:_groups.uinstID];
+- (WTMGroup*)group{
+	if([_group isAnAlias]){
+		id o=[_registry objectWithUinstID:_group.uinstID];
 		if(o){
-			_groups=o;
+			_group=o;
 		}
 	}
-	return _groups;
+	return _group;
 }
 
 
-- (WTMCollectionOfGroup*)groups_auto{
-	_groups=[self groups];
-	if(!_groups){
-		_groups=[[WTMCollectionOfGroup alloc] initInRegistry:_registry];
+- (WTMGroup*)group_auto{
+	_group=[self group];
+	if(!_group){
+		_group=[[WTMGroup alloc] initInRegistry:_registry];
 	}
-	return _groups;
+	return _group;
 }
 
-- (void)setGroups:(WTMCollectionOfGroup*)groups{
-	_groups=groups;
+- (void)setGroup:(WTMGroup*)group{
+	_group=group;
 }
 
 - (WTMShelf*)shelf{
@@ -99,11 +99,11 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.identity forKey:@"identity"];
-	if(self.groups){
+	if(self.group){
 		if(includeChildren){
-			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
+			[dictionary setValue:[self.group dictionaryRepresentationWithChildren:includeChildren] forKey:@"group"];
 		}else{
-			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"groups"];
+			[dictionary setValue:[self.group aliasDictionaryRepresentation] forKey:@"group"];
 		}
 	}
 	if(self.shelf){
@@ -123,7 +123,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMUser ",self.uinstID];
 	[s appendFormat:@"identity : %@\n",self.identity];
-	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
+	[s appendFormat:@"group : %@\n",NSStringFromClass([self.group class])];
 	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }

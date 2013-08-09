@@ -54,6 +54,7 @@ typedef enum watt_F_TYPES{
 @property (nonatomic,readonly)  WTMUser *system;
 @property (nonatomic,readonly)  WTMGroup *systemGroup;
 @property (nonatomic,strong)    NSFileManager *fileManager;
+@property (nonatomic,strong)    WattAcl *acl;
 
 // The files with those extensions can be mixed in the soup
 // You can add any binary format by adding its extension to mixableExtensions

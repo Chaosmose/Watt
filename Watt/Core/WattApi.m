@@ -43,6 +43,7 @@
         sharedInstance.fileManager=[[NSFileManager alloc] init];
         sharedInstance.mixableExtensions=[NSMutableArray array];
         sharedInstance.forcedSoupPaths=[NSMutableArray array];
+        sharedInstance.acl=[[WattAcl alloc] init];
     });
     return sharedInstance;
 }
@@ -232,7 +233,7 @@
         [self raiseExceptionWithFormat:@"group is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
     
     [group.users_auto addObject:user];
-    [user.groups_auto addObject:group];
+    [user setGroup:group];
 }
 
 

@@ -25,7 +25,7 @@
  */
 
 
-+ (NSString*)stringRightsFrom:(NSUInteger)numericRights{
+- (NSString*)stringRightsFrom:(NSUInteger)numericRights{
     
     if(numericRights>777){
         numericRights=0;
@@ -58,7 +58,7 @@
     return rights;
 }
 
-+ (NSUInteger)numericRightsFromString:(NSString*)stringRights{
+- (NSUInteger)numericRightsFromString:(NSString*)stringRights{
 
     while ([stringRights length]<9) {
         stringRights=[NSString stringWithFormat:@"-%@",stringRights];
@@ -90,16 +90,16 @@
 }
 
 // The acl method
-+ (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model{
-    
-    return [WattAcl actionIsAllowed:action
+- (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model{
+        WTMGroup*modelGroup=(WTMGroup*)[model.registry objectWithUinstID:model.groupID];
+        return [self actionIsAllowed:action
                          withRights:model.rights
-                         imTheOwner:[WattAcl mIOwnerOf:model]
-                  imInTheOwnerGroup:[WattAcl mIIntheGroup:model.group]];
+                         imTheOwner:[self mIOwnerOf:model]
+                  imInTheOwnerGroup:[self mIIntheGroup:modelGroup]];
 }
 
 
-+ (BOOL)actionIsAllowed:(Watt_Action)action
+- (BOOL)actionIsAllowed:(Watt_Action)action
             withRights:(NSUInteger)rights
             imTheOwner:(BOOL)owned
      imInTheOwnerGroup:(BOOL)inTheGroup{
@@ -148,18 +148,19 @@
     return NO;
 }
 
-+ (BOOL)mIOwnerOf:(WTMModel*)model{
-    if(model.owner && [wattAPI me]){
-        return [model.owner.identity isEqualToString:[wattAPI me].identity];
+- (BOOL)mIOwnerOf:(WTMModel*)model{
+    WTMUser*owner=(WTMUser*)[model.registry objectWithUinstID:model.groupID];
+    if(owner && [wattAPI me]){
+        return [owner.identity isEqualToString:[wattAPI me].identity];
     }
     return NO;
 }
 
-+ (BOOL)mIIntheGroup:(WTMGroup*)group{
+- (BOOL)mIIntheGroup:(WTMGroup*)group{
     if(!group){
         return YES;
     }else{
-        return [[wattAPI me].groups_auto indexOfObject:group]!=NSNotFound;
+        return [[wattAPI me].group isEqual:group];
     }
 }
 

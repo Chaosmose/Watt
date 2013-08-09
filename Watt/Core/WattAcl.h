@@ -34,21 +34,21 @@ typedef enum watt_Actions{
 
 @interface WattAcl : NSObject
 
-+ (NSString*)stringRightsFrom:(NSUInteger)numericRights;
+- (NSString*)stringRightsFrom:(NSUInteger)numericRights;
 
-+ (NSUInteger)numericRightsFromString:(NSString*)stringRights;
+- (NSUInteger)numericRightsFromString:(NSString*)stringRights;
 
 // The acl method
-+ (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model;
+- (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model;
 
-+ (BOOL)actionIsAllowed:(Watt_Action)action
+- (BOOL)actionIsAllowed:(Watt_Action)action
             withRights:(NSUInteger)rights
             imTheOwner:(BOOL)owned
             imInTheOwnerGroup:(BOOL)inTheGroup;
 
 
-+ (BOOL)mIOwnerOf:(WTMModel*)model;
-+ (BOOL)mIIntheGroup:(WTMGroup*)group;
+- (BOOL)mIOwnerOf:(WTMModel*)model;
+- (BOOL)mIIntheGroup:(WTMGroup*)group;
 
 
 @end

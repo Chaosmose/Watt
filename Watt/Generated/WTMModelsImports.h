@@ -29,6 +29,7 @@
 #import "WTMMenu.h"
 #import "WTMMenuSection.h"
 #import "WTMModel.h"
+#import "WTMObject.h"
 #import "WTMOperand.h"
 #import "WTMOperator.h"
 #import "WTMCollectionOfActivity.h"

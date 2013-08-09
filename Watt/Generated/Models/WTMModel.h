@@ -21,21 +21,17 @@
  
 
 #import "WattObject.h"
-@class WTMGroup;
-@class WTMUser;
+#import "WTMObject.h"
 
-@interface WTMModel:WattObject<WattCoding>{
+@interface WTMModel:WTMObject<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
 @property (nonatomic,strong) NSDictionary * extras;
-@property (nonatomic,copy) NSString * objectName;
+@property (nonatomic,assign) NSInteger  groupID;
+@property (nonatomic,assign) NSInteger  ownerID;
 @property (nonatomic,assign) NSInteger  rights;
-@property (nonatomic,strong) WTMGroup * group;
-@property (nonatomic,strong) WTMUser * owner;
 
-- (WTMGroup*)group_auto;
-- (WTMUser*)owner_auto;
 
 @end

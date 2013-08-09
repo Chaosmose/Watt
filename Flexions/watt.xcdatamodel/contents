@@ -39,10 +39,10 @@
         <relationship name="behavior" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Behavior" syncable="YES"/>
         <relationship name="scene" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
     </entity>
-    <entity name="Group" representedClassName="Group" parentEntity="Model" syncable="YES">
+    <entity name="Group" representedClassName="Group" parentEntity="Object" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="groups" inverseEntity="Shelf" syncable="YES"/>
-        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="groups" inverseEntity="User" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="User" inverseName="group" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="Html" representedClassName="Html" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
@@ -97,7 +97,7 @@
         <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
         <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="sections" inverseEntity="Shelf" syncable="YES"/>
     </entity>
-    <entity name="Model" syncable="YES">
+    <entity name="Model" parentEntity="Object" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="extras" optional="YES" attributeType="String" syncable="YES">
@@ -105,10 +105,12 @@
                 <entry key="type" value="dictionary"/>
             </userInfo>
         </attribute>
-        <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="groupID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="ownerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="group" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
-        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Object" syncable="YES">
+        <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Operand" representedClassName="Operand" parentEntity="Model" syncable="YES">
         <attribute name="expression" optional="YES" attributeType="String" syncable="YES"/>
@@ -156,9 +158,9 @@
     <entity name="Sound" representedClassName="Sound" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
-    <entity name="User" representedClassName="User" parentEntity="Model" syncable="YES">
+    <entity name="User" representedClassName="User" parentEntity="Object" syncable="YES">
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="users" inverseEntity="Group" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="users" inverseEntity="Group" syncable="YES"/>
         <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="users" inverseEntity="Shelf" syncable="YES"/>
     </entity>
     <entity name="Video" representedClassName="Video" parentEntity="LinkedAsset" syncable="YES">
@@ -171,7 +173,7 @@
         <element name="Band" positionX="-7346" positionY="-3946" width="128" height="88"/>
         <element name="Behavior" positionX="-7389" positionY="-3636" width="128" height="88"/>
         <element name="Element" positionX="-6417" positionY="-3748" width="128" height="118"/>
-        <element name="Group" positionX="-7877" positionY="-4302" width="128" height="88"/>
+        <element name="Group" positionX="-7958" positionY="-4291" width="128" height="88"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="73"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
@@ -182,7 +184,7 @@
         <element name="Member" positionX="-7137" positionY="-3771" width="128" height="103"/>
         <element name="Menu" positionX="-6975" positionY="-4464" width="128" height="178"/>
         <element name="MenuSection" positionX="-7220" positionY="-4464" width="128" height="133"/>
-        <element name="Model" positionX="-7580" positionY="-4536" width="128" height="148"/>
+        <element name="Model" positionX="-7659" positionY="-4612" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
         <element name="Package" positionX="-7139" positionY="-4228" width="128" height="163"/>
@@ -193,5 +195,6 @@
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="User" positionX="-7803" positionY="-4149" width="128" height="88"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
+        <element name="Object" positionX="-7848" positionY="-4554" width="128" height="58"/>
     </elements>
 </model>

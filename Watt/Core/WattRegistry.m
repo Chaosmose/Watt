@@ -168,7 +168,7 @@
     return _uinstIDCounter;
 }
 
-- (WattObject*)objectWithUinstID:(NSInteger)uinstID{
+- (id)objectWithUinstID:(NSInteger)uinstID{
     return [_registry objectForKey:[self _keyFrom:uinstID]];
 }
 
