@@ -83,9 +83,6 @@ typedef enum watt_F_TYPES{
 
 #pragma mark - /// MULTIMEDIA API ///
 
-#pragma mark - ACL
-
-- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WTMModel*)object;
 
 #pragma mark -Shelf
 

@@ -17,9 +17,9 @@
 
 #pragma mark - rights facilities
 
-- (void)setUpRights:(NSUInteger)rights
+- (void)applyRights:(NSUInteger)rights
            andOwner:(WTMUser*)owner
-                for:(WTMModel*)model{
+                on:(WTMModel*)model{
     if(!model)
         [wattAPI raiseExceptionWithFormat:@"WattAcl attempt to setup rights on void model"];
     model.rights=rights;
@@ -74,7 +74,7 @@
 }
 
 - (NSUInteger)rightsFromString:(NSString*)stringRights{
-
+    
     while ([stringRights length]<9) {
         stringRights=[NSString stringWithFormat:@"-%@",stringRights];
     }
@@ -104,71 +104,94 @@
     return rights;
 }
 
-#pragma  mark - access control 
+#pragma  mark - access control
 
 // The acl method
 - (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model{
-        WTMGroup*modelGroup=(WTMGroup*)[model.registry objectWithUinstID:model.groupID];
-        return [self actionIsAllowed:action
-                         withRights:model.rights
-                         imTheOwner:[self mIOwnerOf:model]
-                  imInTheOwnerGroup:[self mIIntheGroup:modelGroup]];
+    WTMGroup*modelGroup=(WTMGroup*)[model.registry objectWithUinstID:model.groupID];
+    if(model.groupID==0 && model.ownerID==0){
+        return YES; // If ownerID and groupID are not defined the operation is allowed.
+    }else{
+        BOOL authorized=[self actionIsAllowed:action
+                                   withRights:model.rights
+                                   imTheOwner:[self mIOwnerOf:model]
+                            imInTheOwnerGroup:[self mIIntheGroup:modelGroup]];
+        
+        if(!authorized){
+            [[NSNotificationCenter defaultCenter] postNotificationName:WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME
+                                                                object:self
+                                                              userInfo:@{@"reference":model,@"action":[NSNumber numberWithInteger:action]}];
+        }
+        
+        
+        return authorized;
+    }
 }
 
 
 - (BOOL)actionIsAllowed:(Watt_Action)action
-            withRights:(NSUInteger)rights
-            imTheOwner:(BOOL)owned
-     imInTheOwnerGroup:(BOOL)inTheGroup{
-         
-         NSInteger values[9];
-         values[0]=400;
-         values[1]=200;
-         values[2]=100;
-         values[3]=40;
-         values[4]=20;
-         values[5]=10;
-         values[6]=4;
-         values[7]=2;
-         values[8]=1;
-         
-         NSInteger hasTheRight[9];
-         NSInteger nRights=rights;
-         NSUInteger castedAction=(NSUInteger)action;
-         
-         for (NSInteger i=0; i<9; i++) {
-             if(nRights-values[i]>=0){
-                 nRights=nRights-values[i];
-                 hasTheRight[i]=1;
-             }else{
-                 hasTheRight[i]=0;
-             }
-         }
-        
-         if(owned){
-             // The user is the owner
-             if(hasTheRight[castedAction+0]==1){
-                 return YES;
-             }
-         }else if(inTheGroup){
-             // In the group
-             if(hasTheRight[castedAction+3]==1){
-                 return YES;
-             }
-         }else{
-             // Public
-             if(hasTheRight[castedAction+6]==1){
-                 return YES;
-             }
-         }
-         
+             withRights:(NSUInteger)rights
+             imTheOwner:(BOOL)owned
+      imInTheOwnerGroup:(BOOL)inTheGroup{
+    
+    WTLog(@"Rights %@ (%i) action %i",[self rightsFromInteger:rights],rights,action);
+    
+    NSInteger values[9];
+    values[0]=400;
+    values[1]=200;
+    values[2]=100;
+    values[3]=40;
+    values[4]=20;
+    values[5]=10;
+    values[6]=4;
+    values[7]=2;
+    values[8]=1;
+    
+    NSInteger hasTheRight[9];
+    NSInteger nRights=rights;
+    NSUInteger castedAction=(NSUInteger)action;
+    
+    for (NSInteger i=0; i<9; i++) {
+        if(nRights-values[i]>=0){
+            nRights=nRights-values[i];
+            hasTheRight[i]=1;
+        }else{
+            hasTheRight[i]=0;
+        }
+    }
+    
+    if(owned){
+        // The user is the owner
+        if(hasTheRight[castedAction+0]==1){
+            return YES;
+        }
+    }else if(inTheGroup){
+        // In the group
+        if(hasTheRight[castedAction+3]==1){
+            return YES;
+        }
+    }else{
+        // Public
+        if(hasTheRight[castedAction+6]==1){
+            return YES;
+        }
+    }
+    
     return NO;
 }
 
 - (BOOL)mIOwnerOf:(WTMModel*)model{
-    WTMUser*owner=(WTMUser*)[model.registry objectWithUinstID:model.groupID];
+    if(model.ownerID==0 || model.groupID==0){
+        return YES;
+    }
+    WTMUser*owner=nil;
+    if (model.groupID==wattAPI.system.uinstID) {
+        owner=wattAPI.system;
+    }else{
+        owner=(WTMUser*)[model.registry objectWithUinstID:model.groupID];
+    }
     if(owner && [wattAPI me]){
-        return [owner.identity isEqualToString:[wattAPI me].identity];
+        return [owner isEqual:[wattAPI me]];
     }
     return NO;
 }
@@ -176,7 +199,7 @@
 - (BOOL)mIIntheGroup:(WTMGroup*)group{
     if(!group){
         return YES;
-    }else{
+    }else {
         return [[wattAPI me].group isEqual:group];
     }
 }

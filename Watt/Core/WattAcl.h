@@ -22,6 +22,15 @@ typedef enum watt_Actions{
 // Owned object are used only if complex workflows can apply.
 // By default a user owns mosts of the objects.
 
+/* 
+ 
+ A classic approach to protect an object is to use the "system" user
+
+ 
+ [wattAPI.acl applyRights:[wattAPI.acl rightsFromString:@"RWXR--R--"]
+                 andOwner:wattAPI.system
+                       on:objectReference];
+*/
 
 #ifndef WTAPI_CONST
 #define WTAPI_CONST
@@ -37,9 +46,9 @@ typedef enum watt_Actions{
 
 #pragma mark - rights facilities 
 
-- (void)setUpRights:(NSUInteger)rights
+- (void)applyRights:(NSUInteger)rights
            andOwner:(WTMUser*)owner
-                for:(WTMModel*)model;
+                on:(WTMModel*)model;
 
 - (NSString*)rightsFromInteger:(NSUInteger)numericRights;
 

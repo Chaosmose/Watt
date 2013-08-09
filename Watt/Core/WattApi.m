@@ -96,38 +96,22 @@
 
 #pragma mark - MULTIMEDIA API
 
-#pragma mark - ACL
-
-
-- (BOOL)user:(WTMUser*)user canPerform:(Watt_Action)action onObject:(WTMModel*)object{
-    BOOL authorized=YES;
-    if((!_me)||(!object)){
-        authorized=NO;
-    }
-    
-    if([object rights]){
-        //
-    }
-    
-    if(!authorized){
-        [[NSNotificationCenter defaultCenter] postNotificationName:WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME
-                                                            object:self
-                                                          userInfo:@{@"reference":object,@"action":[NSNumber numberWithInteger:action]}];
-    }
-    // Return if the action is authorized or not.
-    return authorized;
-}
+// system and systemGroup are not in any registry
+// Their uinstID is NSIntegerMax
 
 -(WTMUser*)system{
     if(!_system){
-        _system=[[WTMUser alloc] initInRegistry:_currentRegistry];
+        _system=[[WTMUser alloc] initInRegistry:nil
+                                 withPresetIdentifier:NSIntegerMax];
+        _system.group=[self systemGroup];
     }
     return _system;
 }
 
 -(WTMGroup*)systemGroup{
-    if(_systemGroup){
-        _systemGroup=[[WTMGroup alloc] initInRegistry:_currentRegistry];
+    if(!_systemGroup){
+        _systemGroup=[[WTMGroup alloc] initInRegistry:nil
+                                 withPresetIdentifier:NSIntegerMax];
     }
     return _systemGroup;
 }
@@ -244,9 +228,7 @@
     if(!shelf)
         [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createSectionInShelf:))];
     
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:shelf]){
+    if([self.acl actionIsAllowed:WattWRITE on:shelf]){
         WTMMenuSection *section=[[WTMMenuSection alloc]initInRegistry:_currentRegistry];
         section.index=[shelf.sections_auto count];//We compute the index
         [shelf.sections_auto addObject:section];
@@ -257,9 +239,7 @@
 }
 
 - (void)removeSection:(WTMMenuSection*)section{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:section]){
+    if([self.acl actionIsAllowed:WattWRITE on:section]){
         [section.shelf.sections removeObject:section];
         [section.menus enumerateObjectsUsingBlock:^(WTMMenu *obj, NSUInteger idx, BOOL *stop) {
             [self removeMenu:obj];
@@ -270,9 +250,7 @@
 }
 
 - (WTMMenu*)createMenuInSection:(WTMMenuSection*)section{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:section]){
+    if([self.acl actionIsAllowed:WattWRITE on:section]){
         WTMMenu *menu=[[WTMMenu alloc] initInRegistry:_currentRegistry];
         [section.menus_auto addObject:menu];
         menu.menuSection=section;
@@ -283,9 +261,7 @@
 
 
 - (void)removeMenu:(WTMMenu*)menu{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:menu]){
+    if([self.acl actionIsAllowed:WattWRITE on:menu]){
         if(menu.picture){
             [self purgeMemberIfNecessary:menu.picture];
         }
@@ -301,9 +277,7 @@
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf{
     if(!shelf)
         [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:shelf]){
+    if([self.acl actionIsAllowed:WattWRITE on:shelf]){
         if(!shelf)
             [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
         WTMPackage *package=[[WTMPackage alloc] initInRegistry:_currentRegistry];
@@ -323,9 +297,7 @@
 
 
 - (void)removePackage:(WTMPackage*)package{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:package]){
+    if([self.acl actionIsAllowed:WattWRITE on:package]){
         
         if(package.picture)
             [self purgeMemberIfNecessary:package.picture];
@@ -355,9 +327,7 @@
         [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
     if(!shelf)
         [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:shelf]){
+    if([self.acl actionIsAllowed:WattWRITE on:shelf]){
         
         
     }
@@ -378,9 +348,7 @@
 - (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package{
     if(!package)
         [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createLibraryInPackage:))];
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:package]){
+    if([self.acl actionIsAllowed:WattWRITE on:package]){
         WTMLibrary *library=[[WTMLibrary alloc] initInRegistry:_currentRegistry];
         library.objectName=[self uuidString];// We create a uuid for each package and library to deal with linked assets
         [package.libraries_auto addObject:library];
@@ -392,9 +360,7 @@
 
 
 - (void)removeLibrary:(WTMLibrary*)library{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:library.package]){
+    if([self.acl actionIsAllowed:WattWRITE on:library.package]){
         
         [library.bands enumerateObjectsUsingBlock:^(WTMBand *obj, NSUInteger idx, BOOL *stop) {
             [self removeBand:obj];
@@ -434,9 +400,7 @@
 - (WTMActivity*)createActivityInPackage:(WTMPackage*)package{
     if(!package)
         [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createActivityInPackage:))];
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:package]){
+    if([self.acl actionIsAllowed:WattWRITE on:package]){
         WTMActivity *activity=[[WTMActivity alloc] initInRegistry:_currentRegistry];
         [package.activities_auto addObject:activity];
         activity.package=package;
@@ -446,9 +410,7 @@
 }
 
 - (void)removeActivity:(WTMActivity*)activity{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:activity]){
+    if([self.acl actionIsAllowed:WattWRITE on:activity]){
         [activity.package.activities removeObject:activity];
         [activity autoUnRegister];
     }
@@ -460,9 +422,7 @@
 - (WTMScene*)createSceneInActivity:(WTMActivity*)activity{
     if(!activity)
         [self raiseExceptionWithFormat:@"activity is nil in %@",NSStringFromSelector(@selector(createSceneInActivity:))];
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:activity]){
+    if([self.acl actionIsAllowed:WattWRITE on:activity]){
         WTMScene*scene=[[WTMScene alloc]initInRegistry:_currentRegistry];
         [activity.scenes_auto addObject:scene];
         scene.activity=activity;
@@ -473,9 +433,7 @@
 }
 
 - (void)removeScene:(WTMScene*)scene{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:scene]){
+    if([self.acl actionIsAllowed:WattWRITE on:scene]){
         if(scene.picture)
             [self purgeMemberIfNecessary:scene.picture];
         [scene.elements enumerateObjectsUsingBlock:^(WTMElement *obj, NSUInteger idx, BOOL *stop) {
@@ -501,9 +459,7 @@
         [self raiseExceptionWithFormat:@"asset is nil in %@",NSStringFromSelector(@selector(createElementInScene:withAsset:andBehavior:))];
     // Behavior is optionnal
     
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:scene.activity]){
+    if([self.acl actionIsAllowed:WattWRITE on:scene.activity]){
         WTMElement *element=[[WTMElement alloc] initInRegistry:_currentRegistry];
         element.scene=scene;
         element.asset=asset;
@@ -519,9 +475,7 @@
 
 
 - (void)removeElement:(WTMElement*)element{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:element]){
+    if([self.acl actionIsAllowed:WattWRITE on:element]){
         [element.scene.elements removeObject:element];
         element.scene=nil;
         [self purgeMemberIfNecessary:element.asset];
@@ -535,9 +489,7 @@
 // Bands
 - (WTMBand*)createBandInLibrary:(WTMLibrary*)library
                     withMembers:(NSArray*)members{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:library]){
+    if([self.acl actionIsAllowed:WattWRITE on:library]){
         WTMBand *band=[[WTMBand alloc] initInRegistry:_currentRegistry];
         band.library=library;
         [library.bands_auto addObject:band];
@@ -555,9 +507,7 @@
 }
 
 - (void)purgeBandIfNecessary:(WTMBand*)band{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:band]){
+    if([self.acl actionIsAllowed:WattWRITE on:band]){
         [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
             [self purgeMemberIfNecessary:obj];
         }];
@@ -644,9 +594,7 @@
 
 - (void)_addMember:(WTMMember*)member
         toLibrary:(WTMLibrary*)library {
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:library]){
+    if([self.acl actionIsAllowed:WattWRITE on:library]){
         if(!member)
             [self raiseExceptionWithFormat:@"member  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
         if(!library)
@@ -662,10 +610,7 @@
 // A facility that deals with the refererCounter to decide if the member should be deleted;
 // It also delete the linked files if necessary
 - (void)purgeMemberIfNecessary:(WTMMember*)member{
-    if([self user:_me
-       canPerform:WattWRITE
-         onObject:member]){
-        
+    if([self.acl actionIsAllowed:WattWRITE on:member]){
         member.refererCounter--;
         if(member.refererCounter<=0){
             [self removeMember:member];
