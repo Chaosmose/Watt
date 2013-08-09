@@ -14,6 +14,21 @@
 
 @implementation WattAcl
 
+
+#pragma mark - rights facilities
+
+- (void)setUpRights:(NSUInteger)rights
+           andOwner:(WTMUser*)owner
+                for:(WTMModel*)model{
+    if(!model)
+        [wattAPI raiseExceptionWithFormat:@"WattAcl attempt to setup rights on void model"];
+    model.rights=rights;
+    if(owner){
+        model.ownerID=owner.uinstID;
+        model.groupID=owner.group.uinstID;
+    }
+}
+
 /*
  
  @"RWXRWXRWX"
@@ -25,7 +40,7 @@
  */
 
 
-- (NSString*)stringRightsFrom:(NSUInteger)numericRights{
+- (NSString*)rightsFromInteger:(NSUInteger)numericRights{
     
     if(numericRights>777){
         numericRights=0;
@@ -58,7 +73,7 @@
     return rights;
 }
 
-- (NSUInteger)numericRightsFromString:(NSString*)stringRights{
+- (NSUInteger)rightsFromString:(NSString*)stringRights{
 
     while ([stringRights length]<9) {
         stringRights=[NSString stringWithFormat:@"-%@",stringRights];
@@ -88,6 +103,8 @@
     
     return rights;
 }
+
+#pragma  mark - access control 
 
 // The acl method
 - (BOOL)actionIsAllowed:(Watt_Action)action on:(WTMModel*)model{
