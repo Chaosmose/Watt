@@ -2,10 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Flexions/watt.xcdatamodel">
+      location = "group:FlexionsWTM/WTM.xcdatamodel">
+   </FileRef>
+   <FileRef
+      location = "group:FlexionsWatt/watt.xcdatamodel">
    </FileRef>
    <FileRef
       location = "group:Watt.podspec">
+   </FileRef>
+   <FileRef
+      location = "group:WTM.podspec">
    </FileRef>
    <FileRef
       location = "group:Podfile">

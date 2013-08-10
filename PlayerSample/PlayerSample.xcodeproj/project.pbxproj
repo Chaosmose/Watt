@@ -8,8 +8,98 @@
 
 /* Begin PBXBuildFile section */
 		447087F9105E44D19142000C /* libPods-PlayerSampleFlexions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */; };
-		E53234E017B4CFA8001C0C39 /* WTMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E53234DF17B4CFA8001C0C39 /* WTMObject.m */; };
-		E53234E117B4CFA8001C0C39 /* WTMObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E53234DF17B4CFA8001C0C39 /* WTMObject.m */; };
+		E50003F717B63EEC00E50D70 /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F417B63EEC00E50D70 /* WattDelta.m */; };
+		E50003F817B63EEC00E50D70 /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F417B63EEC00E50D70 /* WattDelta.m */; };
+		E50003F917B63EEC00E50D70 /* WattDeltaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */; };
+		E50003FA17B63EEC00E50D70 /* WattDeltaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */; };
+		E500045017B645C200E50D70 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040017B645C200E50D70 /* WTMAction.m */; };
+		E500045117B645C200E50D70 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040017B645C200E50D70 /* WTMAction.m */; };
+		E500045217B645C200E50D70 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040217B645C200E50D70 /* WTMActivity.m */; };
+		E500045317B645C200E50D70 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040217B645C200E50D70 /* WTMActivity.m */; };
+		E500045417B645C200E50D70 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040417B645C200E50D70 /* WTMAsset.m */; };
+		E500045517B645C200E50D70 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040417B645C200E50D70 /* WTMAsset.m */; };
+		E500045617B645C200E50D70 /* WTMBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040617B645C200E50D70 /* WTMBand.m */; };
+		E500045717B645C200E50D70 /* WTMBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040617B645C200E50D70 /* WTMBand.m */; };
+		E500045817B645C200E50D70 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040817B645C200E50D70 /* WTMBehavior.m */; };
+		E500045917B645C200E50D70 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040817B645C200E50D70 /* WTMBehavior.m */; };
+		E500045A17B645C200E50D70 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040A17B645C200E50D70 /* WTMCollectionOfActivity.m */; };
+		E500045B17B645C200E50D70 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040A17B645C200E50D70 /* WTMCollectionOfActivity.m */; };
+		E500045C17B645C200E50D70 /* WTMCollectionOfBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040C17B645C200E50D70 /* WTMCollectionOfBand.m */; };
+		E500045D17B645C200E50D70 /* WTMCollectionOfBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040C17B645C200E50D70 /* WTMCollectionOfBand.m */; };
+		E500045E17B645C200E50D70 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040E17B645C200E50D70 /* WTMCollectionOfElement.m */; };
+		E500045F17B645C200E50D70 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E500040E17B645C200E50D70 /* WTMCollectionOfElement.m */; };
+		E500046217B645C200E50D70 /* WTMCollectionOfImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041217B645C200E50D70 /* WTMCollectionOfImage.m */; };
+		E500046317B645C200E50D70 /* WTMCollectionOfImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041217B645C200E50D70 /* WTMCollectionOfImage.m */; };
+		E500046417B645C300E50D70 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041417B645C200E50D70 /* WTMCollectionOfLibrary.m */; };
+		E500046517B645C300E50D70 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041417B645C200E50D70 /* WTMCollectionOfLibrary.m */; };
+		E500046617B645C300E50D70 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041617B645C200E50D70 /* WTMCollectionOfMember.m */; };
+		E500046717B645C300E50D70 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041617B645C200E50D70 /* WTMCollectionOfMember.m */; };
+		E500046817B645C300E50D70 /* WTMCollectionOfMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041817B645C200E50D70 /* WTMCollectionOfMenu.m */; };
+		E500046917B645C300E50D70 /* WTMCollectionOfMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041817B645C200E50D70 /* WTMCollectionOfMenu.m */; };
+		E500046A17B645C300E50D70 /* WTMCollectionOfMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041A17B645C200E50D70 /* WTMCollectionOfMenuSection.m */; };
+		E500046B17B645C300E50D70 /* WTMCollectionOfMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041A17B645C200E50D70 /* WTMCollectionOfMenuSection.m */; };
+		E500046C17B645C300E50D70 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041C17B645C200E50D70 /* WTMCollectionOfPackage.m */; };
+		E500046D17B645C300E50D70 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041C17B645C200E50D70 /* WTMCollectionOfPackage.m */; };
+		E500046E17B645C300E50D70 /* WTMCollectionOfScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041E17B645C200E50D70 /* WTMCollectionOfScene.m */; };
+		E500046F17B645C300E50D70 /* WTMCollectionOfScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E500041E17B645C200E50D70 /* WTMCollectionOfScene.m */; };
+		E500047217B645C300E50D70 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042217B645C200E50D70 /* WTMElement.m */; };
+		E500047317B645C300E50D70 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042217B645C200E50D70 /* WTMElement.m */; };
+		E500047617B645C300E50D70 /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042617B645C200E50D70 /* WTMHtml.m */; };
+		E500047717B645C300E50D70 /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042617B645C200E50D70 /* WTMHtml.m */; };
+		E500047817B645C300E50D70 /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042817B645C200E50D70 /* WTMHyperlink.m */; };
+		E500047917B645C300E50D70 /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042817B645C200E50D70 /* WTMHyperlink.m */; };
+		E500047A17B645C300E50D70 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042A17B645C200E50D70 /* WTMImage.m */; };
+		E500047B17B645C300E50D70 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042A17B645C200E50D70 /* WTMImage.m */; };
+		E500047C17B645C300E50D70 /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042C17B645C200E50D70 /* WTMLabel.m */; };
+		E500047D17B645C300E50D70 /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042C17B645C200E50D70 /* WTMLabel.m */; };
+		E500047E17B645C300E50D70 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042E17B645C200E50D70 /* WTMLangDictionary.m */; };
+		E500047F17B645C300E50D70 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E500042E17B645C200E50D70 /* WTMLangDictionary.m */; };
+		E500048017B645C300E50D70 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043017B645C200E50D70 /* WTMLibrary.m */; };
+		E500048117B645C300E50D70 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043017B645C200E50D70 /* WTMLibrary.m */; };
+		E500048217B645C300E50D70 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043217B645C200E50D70 /* WTMLinkedAsset.m */; };
+		E500048317B645C300E50D70 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043217B645C200E50D70 /* WTMLinkedAsset.m */; };
+		E500048417B645C300E50D70 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043417B645C200E50D70 /* WTMMember.m */; };
+		E500048517B645C300E50D70 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043417B645C200E50D70 /* WTMMember.m */; };
+		E500048617B645C300E50D70 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043617B645C200E50D70 /* WTMMenu.m */; };
+		E500048717B645C300E50D70 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043617B645C200E50D70 /* WTMMenu.m */; };
+		E500048817B645C300E50D70 /* WTMMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043817B645C200E50D70 /* WTMMenuSection.m */; };
+		E500048917B645C300E50D70 /* WTMMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043817B645C200E50D70 /* WTMMenuSection.m */; };
+		E500048C17B645C300E50D70 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043C17B645C200E50D70 /* WTMOperand.m */; };
+		E500048D17B645C300E50D70 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043C17B645C200E50D70 /* WTMOperand.m */; };
+		E500048E17B645C300E50D70 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043E17B645C200E50D70 /* WTMOperator.m */; };
+		E500048F17B645C300E50D70 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E500043E17B645C200E50D70 /* WTMOperator.m */; };
+		E500049017B645C300E50D70 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044017B645C200E50D70 /* WTMPackage.m */; };
+		E500049117B645C300E50D70 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044017B645C200E50D70 /* WTMPackage.m */; };
+		E500049217B645C300E50D70 /* WTMPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044217B645C200E50D70 /* WTMPdf.m */; };
+		E500049317B645C300E50D70 /* WTMPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044217B645C200E50D70 /* WTMPdf.m */; };
+		E500049417B645C300E50D70 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044417B645C200E50D70 /* WTMRule.m */; };
+		E500049517B645C300E50D70 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044417B645C200E50D70 /* WTMRule.m */; };
+		E500049617B645C300E50D70 /* WTMScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044617B645C200E50D70 /* WTMScene.m */; };
+		E500049717B645C300E50D70 /* WTMScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044617B645C200E50D70 /* WTMScene.m */; };
+		E500049817B645C300E50D70 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044817B645C200E50D70 /* WTMShelf.m */; };
+		E500049917B645C300E50D70 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044817B645C200E50D70 /* WTMShelf.m */; };
+		E500049A17B645C300E50D70 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044A17B645C200E50D70 /* WTMSound.m */; };
+		E500049B17B645C300E50D70 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044A17B645C200E50D70 /* WTMSound.m */; };
+		E500049E17B645C300E50D70 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044E17B645C200E50D70 /* WTMVideo.m */; };
+		E500049F17B645C300E50D70 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E500044E17B645C200E50D70 /* WTMVideo.m */; };
+		E50004E317B64A9B00E50D70 /* WattCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004D817B64A9B00E50D70 /* WattCollectionOfGroup.m */; };
+		E50004E417B64A9B00E50D70 /* WattCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004D817B64A9B00E50D70 /* WattCollectionOfGroup.m */; };
+		E50004E517B64A9B00E50D70 /* WattCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004DA17B64A9B00E50D70 /* WattCollectionOfModel.m */; };
+		E50004E617B64A9B00E50D70 /* WattCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004DA17B64A9B00E50D70 /* WattCollectionOfModel.m */; };
+		E50004E717B64A9B00E50D70 /* WattCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004DC17B64A9B00E50D70 /* WattCollectionOfUser.m */; };
+		E50004E817B64A9B00E50D70 /* WattCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004DC17B64A9B00E50D70 /* WattCollectionOfUser.m */; };
+		E50004E917B64A9B00E50D70 /* WattGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004DE17B64A9B00E50D70 /* WattGroup.m */; };
+		E50004EA17B64A9B00E50D70 /* WattGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004DE17B64A9B00E50D70 /* WattGroup.m */; };
+		E50004EB17B64A9B00E50D70 /* WattModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004E017B64A9B00E50D70 /* WattModel.m */; };
+		E50004EC17B64A9B00E50D70 /* WattModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004E017B64A9B00E50D70 /* WattModel.m */; };
+		E50004ED17B64A9B00E50D70 /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004E217B64A9B00E50D70 /* WattUser.m */; };
+		E50004EE17B64A9B00E50D70 /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004E217B64A9B00E50D70 /* WattUser.m */; };
+		E50004F117B6655300E50D70 /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
+		E50004F217B6655300E50D70 /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
+		E50004F617B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */; };
+		E50004F717B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */; };
+		E50004FB17B66B1300E50D70 /* WTMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004FA17B66B1300E50D70 /* WTMPackager.m */; };
+		E50004FC17B66B1300E50D70 /* WTMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004FA17B66B1300E50D70 /* WTMPackager.m */; };
 		E5A9EBF11799242F00976997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
 		E5A9EBF21799242F00976997 /* WTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462541732A4A000E654A1 /* WTMAppDelegate.m */; };
 		E5A9EBF31799242F00976997 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
@@ -34,10 +124,6 @@
 		E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
-		E5CAD2841799A1A400D22369 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2201799A1A400D22369 /* UIImage+wattAdaptive.m */; };
-		E5CAD2851799A1A400D22369 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2201799A1A400D22369 /* UIImage+wattAdaptive.m */; };
-		E5CAD2861799A1A400D22369 /* WattAcl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2231799A1A400D22369 /* WattAcl.m */; };
-		E5CAD2871799A1A400D22369 /* WattAcl.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2231799A1A400D22369 /* WattAcl.m */; };
 		E5CAD2881799A1A400D22369 /* WattApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2251799A1A400D22369 /* WattApi.m */; };
 		E5CAD2891799A1A400D22369 /* WattApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2251799A1A400D22369 /* WattApi.m */; };
 		E5CAD28A1799A1A400D22369 /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2271799A1A400D22369 /* WattCollectionOfObject.m */; };
@@ -46,88 +132,6 @@
 		E5CAD28D1799A1A400D22369 /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2291799A1A400D22369 /* WattObject.m */; };
 		E5CAD28E1799A1A400D22369 /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22B1799A1A400D22369 /* WattRegistry.m */; };
 		E5CAD28F1799A1A400D22369 /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22B1799A1A400D22369 /* WattRegistry.m */; };
-		E5CAD2901799A1A400D22369 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22F1799A1A400D22369 /* WTMAction.m */; };
-		E5CAD2911799A1A400D22369 /* WTMAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22F1799A1A400D22369 /* WTMAction.m */; };
-		E5CAD2921799A1A400D22369 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2311799A1A400D22369 /* WTMActivity.m */; };
-		E5CAD2931799A1A400D22369 /* WTMActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2311799A1A400D22369 /* WTMActivity.m */; };
-		E5CAD2941799A1A400D22369 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2331799A1A400D22369 /* WTMAsset.m */; };
-		E5CAD2951799A1A400D22369 /* WTMAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2331799A1A400D22369 /* WTMAsset.m */; };
-		E5CAD2961799A1A400D22369 /* WTMBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2351799A1A400D22369 /* WTMBand.m */; };
-		E5CAD2971799A1A400D22369 /* WTMBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2351799A1A400D22369 /* WTMBand.m */; };
-		E5CAD2981799A1A400D22369 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2371799A1A400D22369 /* WTMBehavior.m */; };
-		E5CAD2991799A1A400D22369 /* WTMBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2371799A1A400D22369 /* WTMBehavior.m */; };
-		E5CAD29A1799A1A400D22369 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2391799A1A400D22369 /* WTMCollectionOfActivity.m */; };
-		E5CAD29B1799A1A400D22369 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2391799A1A400D22369 /* WTMCollectionOfActivity.m */; };
-		E5CAD29C1799A1A400D22369 /* WTMCollectionOfBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD23B1799A1A400D22369 /* WTMCollectionOfBand.m */; };
-		E5CAD29D1799A1A400D22369 /* WTMCollectionOfBand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD23B1799A1A400D22369 /* WTMCollectionOfBand.m */; };
-		E5CAD29E1799A1A400D22369 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD23D1799A1A400D22369 /* WTMCollectionOfElement.m */; };
-		E5CAD29F1799A1A400D22369 /* WTMCollectionOfElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD23D1799A1A400D22369 /* WTMCollectionOfElement.m */; };
-		E5CAD2A01799A1A400D22369 /* WTMCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD23F1799A1A400D22369 /* WTMCollectionOfGroup.m */; };
-		E5CAD2A11799A1A400D22369 /* WTMCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD23F1799A1A400D22369 /* WTMCollectionOfGroup.m */; };
-		E5CAD2A21799A1A400D22369 /* WTMCollectionOfImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2411799A1A400D22369 /* WTMCollectionOfImage.m */; };
-		E5CAD2A31799A1A400D22369 /* WTMCollectionOfImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2411799A1A400D22369 /* WTMCollectionOfImage.m */; };
-		E5CAD2A41799A1A400D22369 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2431799A1A400D22369 /* WTMCollectionOfLibrary.m */; };
-		E5CAD2A51799A1A400D22369 /* WTMCollectionOfLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2431799A1A400D22369 /* WTMCollectionOfLibrary.m */; };
-		E5CAD2A61799A1A400D22369 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2451799A1A400D22369 /* WTMCollectionOfMember.m */; };
-		E5CAD2A71799A1A400D22369 /* WTMCollectionOfMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2451799A1A400D22369 /* WTMCollectionOfMember.m */; };
-		E5CAD2A81799A1A400D22369 /* WTMCollectionOfMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2471799A1A400D22369 /* WTMCollectionOfMenu.m */; };
-		E5CAD2A91799A1A400D22369 /* WTMCollectionOfMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2471799A1A400D22369 /* WTMCollectionOfMenu.m */; };
-		E5CAD2AA1799A1A400D22369 /* WTMCollectionOfMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2491799A1A400D22369 /* WTMCollectionOfMenuSection.m */; };
-		E5CAD2AB1799A1A400D22369 /* WTMCollectionOfMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2491799A1A400D22369 /* WTMCollectionOfMenuSection.m */; };
-		E5CAD2AC1799A1A400D22369 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD24B1799A1A400D22369 /* WTMCollectionOfPackage.m */; };
-		E5CAD2AD1799A1A400D22369 /* WTMCollectionOfPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD24B1799A1A400D22369 /* WTMCollectionOfPackage.m */; };
-		E5CAD2AE1799A1A400D22369 /* WTMCollectionOfScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD24D1799A1A400D22369 /* WTMCollectionOfScene.m */; };
-		E5CAD2AF1799A1A400D22369 /* WTMCollectionOfScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD24D1799A1A400D22369 /* WTMCollectionOfScene.m */; };
-		E5CAD2B01799A1A400D22369 /* WTMCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD24F1799A1A400D22369 /* WTMCollectionOfUser.m */; };
-		E5CAD2B11799A1A400D22369 /* WTMCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD24F1799A1A400D22369 /* WTMCollectionOfUser.m */; };
-		E5CAD2B21799A1A400D22369 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2511799A1A400D22369 /* WTMElement.m */; };
-		E5CAD2B31799A1A400D22369 /* WTMElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2511799A1A400D22369 /* WTMElement.m */; };
-		E5CAD2B41799A1A400D22369 /* WTMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2531799A1A400D22369 /* WTMGroup.m */; };
-		E5CAD2B51799A1A400D22369 /* WTMGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2531799A1A400D22369 /* WTMGroup.m */; };
-		E5CAD2B61799A1A400D22369 /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2551799A1A400D22369 /* WTMHtml.m */; };
-		E5CAD2B71799A1A400D22369 /* WTMHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2551799A1A400D22369 /* WTMHtml.m */; };
-		E5CAD2B81799A1A400D22369 /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2571799A1A400D22369 /* WTMHyperlink.m */; };
-		E5CAD2B91799A1A400D22369 /* WTMHyperlink.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2571799A1A400D22369 /* WTMHyperlink.m */; };
-		E5CAD2BA1799A1A400D22369 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2591799A1A400D22369 /* WTMImage.m */; };
-		E5CAD2BB1799A1A400D22369 /* WTMImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2591799A1A400D22369 /* WTMImage.m */; };
-		E5CAD2BC1799A1A400D22369 /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD25B1799A1A400D22369 /* WTMLabel.m */; };
-		E5CAD2BD1799A1A400D22369 /* WTMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD25B1799A1A400D22369 /* WTMLabel.m */; };
-		E5CAD2BE1799A1A400D22369 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD25D1799A1A400D22369 /* WTMLangDictionary.m */; };
-		E5CAD2BF1799A1A400D22369 /* WTMLangDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD25D1799A1A400D22369 /* WTMLangDictionary.m */; };
-		E5CAD2C01799A1A400D22369 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD25F1799A1A400D22369 /* WTMLibrary.m */; };
-		E5CAD2C11799A1A400D22369 /* WTMLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD25F1799A1A400D22369 /* WTMLibrary.m */; };
-		E5CAD2C21799A1A400D22369 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2611799A1A400D22369 /* WTMLinkedAsset.m */; };
-		E5CAD2C31799A1A400D22369 /* WTMLinkedAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2611799A1A400D22369 /* WTMLinkedAsset.m */; };
-		E5CAD2C41799A1A400D22369 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2631799A1A400D22369 /* WTMMember.m */; };
-		E5CAD2C51799A1A400D22369 /* WTMMember.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2631799A1A400D22369 /* WTMMember.m */; };
-		E5CAD2C61799A1A400D22369 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2651799A1A400D22369 /* WTMMenu.m */; };
-		E5CAD2C71799A1A400D22369 /* WTMMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2651799A1A400D22369 /* WTMMenu.m */; };
-		E5CAD2C81799A1A400D22369 /* WTMMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2671799A1A400D22369 /* WTMMenuSection.m */; };
-		E5CAD2C91799A1A400D22369 /* WTMMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2671799A1A400D22369 /* WTMMenuSection.m */; };
-		E5CAD2CA1799A1A400D22369 /* WTMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2691799A1A400D22369 /* WTMModel.m */; };
-		E5CAD2CB1799A1A400D22369 /* WTMModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2691799A1A400D22369 /* WTMModel.m */; };
-		E5CAD2CC1799A1A400D22369 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD26B1799A1A400D22369 /* WTMOperand.m */; };
-		E5CAD2CD1799A1A400D22369 /* WTMOperand.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD26B1799A1A400D22369 /* WTMOperand.m */; };
-		E5CAD2CE1799A1A400D22369 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD26D1799A1A400D22369 /* WTMOperator.m */; };
-		E5CAD2CF1799A1A400D22369 /* WTMOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD26D1799A1A400D22369 /* WTMOperator.m */; };
-		E5CAD2D01799A1A400D22369 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD26F1799A1A400D22369 /* WTMPackage.m */; };
-		E5CAD2D11799A1A400D22369 /* WTMPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD26F1799A1A400D22369 /* WTMPackage.m */; };
-		E5CAD2D21799A1A400D22369 /* WTMPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2711799A1A400D22369 /* WTMPdf.m */; };
-		E5CAD2D31799A1A400D22369 /* WTMPdf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2711799A1A400D22369 /* WTMPdf.m */; };
-		E5CAD2D41799A1A400D22369 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2731799A1A400D22369 /* WTMRule.m */; };
-		E5CAD2D51799A1A400D22369 /* WTMRule.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2731799A1A400D22369 /* WTMRule.m */; };
-		E5CAD2D61799A1A400D22369 /* WTMScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2751799A1A400D22369 /* WTMScene.m */; };
-		E5CAD2D71799A1A400D22369 /* WTMScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2751799A1A400D22369 /* WTMScene.m */; };
-		E5CAD2D81799A1A400D22369 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2771799A1A400D22369 /* WTMShelf.m */; };
-		E5CAD2D91799A1A400D22369 /* WTMShelf.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2771799A1A400D22369 /* WTMShelf.m */; };
-		E5CAD2DA1799A1A400D22369 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2791799A1A400D22369 /* WTMSound.m */; };
-		E5CAD2DB1799A1A400D22369 /* WTMSound.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2791799A1A400D22369 /* WTMSound.m */; };
-		E5CAD2DC1799A1A400D22369 /* WTMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD27B1799A1A400D22369 /* WTMUser.m */; };
-		E5CAD2DD1799A1A400D22369 /* WTMUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD27B1799A1A400D22369 /* WTMUser.m */; };
-		E5CAD2DE1799A1A400D22369 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD27D1799A1A400D22369 /* WTMVideo.m */; };
-		E5CAD2DF1799A1A400D22369 /* WTMVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD27D1799A1A400D22369 /* WTMVideo.m */; };
-		E5CAD2E01799A1A400D22369 /* WattMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2811799A1A400D22369 /* WattMPackager.m */; };
-		E5CAD2E11799A1A400D22369 /* WattMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2811799A1A400D22369 /* WattMPackager.m */; };
 		FF0AD5BD8FB1459CB3E91419 /* libPods-PlayerSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */; };
 /* End PBXBuildFile section */
 
@@ -136,8 +140,101 @@
 		B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSample.xcconfig"; path = "../Pods/Pods-PlayerSample.xcconfig"; sourceTree = SOURCE_ROOT; };
 		D8890FBD9D4042C081050B0D /* Pods-PlayerSampleFlexions.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSampleFlexions.xcconfig"; path = "../Pods/Pods-PlayerSampleFlexions.xcconfig"; sourceTree = SOURCE_ROOT; };
 		DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlayerSampleFlexions.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E53234DE17B4CFA8001C0C39 /* WTMObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMObject.h; sourceTree = "<group>"; };
-		E53234DF17B4CFA8001C0C39 /* WTMObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMObject.m; sourceTree = "<group>"; };
+		E50003F317B63EEC00E50D70 /* WattDeltaEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattDeltaEngine.h; sourceTree = "<group>"; };
+		E50003F417B63EEC00E50D70 /* WattDelta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattDelta.m; sourceTree = "<group>"; };
+		E50003F517B63EEC00E50D70 /* WattDelta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattDelta.h; sourceTree = "<group>"; };
+		E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattDeltaEngine.m; sourceTree = "<group>"; };
+		E50003FC17B642C300E50D70 /* WTM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTM.h; sourceTree = "<group>"; };
+		E50003FF17B645C200E50D70 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
+		E500040017B645C200E50D70 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
+		E500040117B645C200E50D70 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
+		E500040217B645C200E50D70 /* WTMActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivity.m; sourceTree = "<group>"; };
+		E500040317B645C200E50D70 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
+		E500040417B645C200E50D70 /* WTMAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAsset.m; sourceTree = "<group>"; };
+		E500040517B645C200E50D70 /* WTMBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMBand.h; sourceTree = "<group>"; };
+		E500040617B645C200E50D70 /* WTMBand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMBand.m; sourceTree = "<group>"; };
+		E500040717B645C200E50D70 /* WTMBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMBehavior.h; sourceTree = "<group>"; };
+		E500040817B645C200E50D70 /* WTMBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMBehavior.m; sourceTree = "<group>"; };
+		E500040917B645C200E50D70 /* WTMCollectionOfActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfActivity.h; sourceTree = "<group>"; };
+		E500040A17B645C200E50D70 /* WTMCollectionOfActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfActivity.m; sourceTree = "<group>"; };
+		E500040B17B645C200E50D70 /* WTMCollectionOfBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfBand.h; sourceTree = "<group>"; };
+		E500040C17B645C200E50D70 /* WTMCollectionOfBand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfBand.m; sourceTree = "<group>"; };
+		E500040D17B645C200E50D70 /* WTMCollectionOfElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfElement.h; sourceTree = "<group>"; };
+		E500040E17B645C200E50D70 /* WTMCollectionOfElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfElement.m; sourceTree = "<group>"; };
+		E500041117B645C200E50D70 /* WTMCollectionOfImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfImage.h; sourceTree = "<group>"; };
+		E500041217B645C200E50D70 /* WTMCollectionOfImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfImage.m; sourceTree = "<group>"; };
+		E500041317B645C200E50D70 /* WTMCollectionOfLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLibrary.h; sourceTree = "<group>"; };
+		E500041417B645C200E50D70 /* WTMCollectionOfLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLibrary.m; sourceTree = "<group>"; };
+		E500041517B645C200E50D70 /* WTMCollectionOfMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMember.h; sourceTree = "<group>"; };
+		E500041617B645C200E50D70 /* WTMCollectionOfMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMember.m; sourceTree = "<group>"; };
+		E500041717B645C200E50D70 /* WTMCollectionOfMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMenu.h; sourceTree = "<group>"; };
+		E500041817B645C200E50D70 /* WTMCollectionOfMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenu.m; sourceTree = "<group>"; };
+		E500041917B645C200E50D70 /* WTMCollectionOfMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMenuSection.h; sourceTree = "<group>"; };
+		E500041A17B645C200E50D70 /* WTMCollectionOfMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenuSection.m; sourceTree = "<group>"; };
+		E500041B17B645C200E50D70 /* WTMCollectionOfPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfPackage.h; sourceTree = "<group>"; };
+		E500041C17B645C200E50D70 /* WTMCollectionOfPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfPackage.m; sourceTree = "<group>"; };
+		E500041D17B645C200E50D70 /* WTMCollectionOfScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfScene.h; sourceTree = "<group>"; };
+		E500041E17B645C200E50D70 /* WTMCollectionOfScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfScene.m; sourceTree = "<group>"; };
+		E500042117B645C200E50D70 /* WTMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElement.h; sourceTree = "<group>"; };
+		E500042217B645C200E50D70 /* WTMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMElement.m; sourceTree = "<group>"; };
+		E500042517B645C200E50D70 /* WTMHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHtml.h; sourceTree = "<group>"; };
+		E500042617B645C200E50D70 /* WTMHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMHtml.m; sourceTree = "<group>"; };
+		E500042717B645C200E50D70 /* WTMHyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHyperlink.h; sourceTree = "<group>"; };
+		E500042817B645C200E50D70 /* WTMHyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMHyperlink.m; sourceTree = "<group>"; };
+		E500042917B645C200E50D70 /* WTMImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMImage.h; sourceTree = "<group>"; };
+		E500042A17B645C200E50D70 /* WTMImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMImage.m; sourceTree = "<group>"; };
+		E500042B17B645C200E50D70 /* WTMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLabel.h; sourceTree = "<group>"; };
+		E500042C17B645C200E50D70 /* WTMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLabel.m; sourceTree = "<group>"; };
+		E500042D17B645C200E50D70 /* WTMLangDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLangDictionary.h; sourceTree = "<group>"; };
+		E500042E17B645C200E50D70 /* WTMLangDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLangDictionary.m; sourceTree = "<group>"; };
+		E500042F17B645C200E50D70 /* WTMLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLibrary.h; sourceTree = "<group>"; };
+		E500043017B645C200E50D70 /* WTMLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLibrary.m; sourceTree = "<group>"; };
+		E500043117B645C200E50D70 /* WTMLinkedAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLinkedAsset.h; sourceTree = "<group>"; };
+		E500043217B645C200E50D70 /* WTMLinkedAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLinkedAsset.m; sourceTree = "<group>"; };
+		E500043317B645C200E50D70 /* WTMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMember.h; sourceTree = "<group>"; };
+		E500043417B645C200E50D70 /* WTMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMember.m; sourceTree = "<group>"; };
+		E500043517B645C200E50D70 /* WTMMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenu.h; sourceTree = "<group>"; };
+		E500043617B645C200E50D70 /* WTMMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenu.m; sourceTree = "<group>"; };
+		E500043717B645C200E50D70 /* WTMMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenuSection.h; sourceTree = "<group>"; };
+		E500043817B645C200E50D70 /* WTMMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenuSection.m; sourceTree = "<group>"; };
+		E500043B17B645C200E50D70 /* WTMOperand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperand.h; sourceTree = "<group>"; };
+		E500043C17B645C200E50D70 /* WTMOperand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperand.m; sourceTree = "<group>"; };
+		E500043D17B645C200E50D70 /* WTMOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperator.h; sourceTree = "<group>"; };
+		E500043E17B645C200E50D70 /* WTMOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperator.m; sourceTree = "<group>"; };
+		E500043F17B645C200E50D70 /* WTMPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPackage.h; sourceTree = "<group>"; };
+		E500044017B645C200E50D70 /* WTMPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPackage.m; sourceTree = "<group>"; };
+		E500044117B645C200E50D70 /* WTMPdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPdf.h; sourceTree = "<group>"; };
+		E500044217B645C200E50D70 /* WTMPdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPdf.m; sourceTree = "<group>"; };
+		E500044317B645C200E50D70 /* WTMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMRule.h; sourceTree = "<group>"; };
+		E500044417B645C200E50D70 /* WTMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMRule.m; sourceTree = "<group>"; };
+		E500044517B645C200E50D70 /* WTMScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMScene.h; sourceTree = "<group>"; };
+		E500044617B645C200E50D70 /* WTMScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMScene.m; sourceTree = "<group>"; };
+		E500044717B645C200E50D70 /* WTMShelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMShelf.h; sourceTree = "<group>"; };
+		E500044817B645C200E50D70 /* WTMShelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMShelf.m; sourceTree = "<group>"; };
+		E500044917B645C200E50D70 /* WTMSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMSound.h; sourceTree = "<group>"; };
+		E500044A17B645C200E50D70 /* WTMSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMSound.m; sourceTree = "<group>"; };
+		E500044D17B645C200E50D70 /* WTMVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMVideo.h; sourceTree = "<group>"; };
+		E500044E17B645C200E50D70 /* WTMVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMVideo.m; sourceTree = "<group>"; };
+		E500044F17B645C200E50D70 /* WTMModelsImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModelsImports.h; sourceTree = "<group>"; };
+		E50004B617B6490C00E50D70 /* WattImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattImports.h; sourceTree = "<group>"; };
+		E50004D717B64A9B00E50D70 /* WattCollectionOfGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfGroup.h; sourceTree = "<group>"; };
+		E50004D817B64A9B00E50D70 /* WattCollectionOfGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfGroup.m; sourceTree = "<group>"; };
+		E50004D917B64A9B00E50D70 /* WattCollectionOfModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfModel.h; sourceTree = "<group>"; };
+		E50004DA17B64A9B00E50D70 /* WattCollectionOfModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfModel.m; sourceTree = "<group>"; };
+		E50004DB17B64A9B00E50D70 /* WattCollectionOfUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfUser.h; sourceTree = "<group>"; };
+		E50004DC17B64A9B00E50D70 /* WattCollectionOfUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfUser.m; sourceTree = "<group>"; };
+		E50004DD17B64A9B00E50D70 /* WattGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattGroup.h; sourceTree = "<group>"; };
+		E50004DE17B64A9B00E50D70 /* WattGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattGroup.m; sourceTree = "<group>"; };
+		E50004DF17B64A9B00E50D70 /* WattModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattModel.h; sourceTree = "<group>"; };
+		E50004E017B64A9B00E50D70 /* WattModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattModel.m; sourceTree = "<group>"; };
+		E50004E117B64A9B00E50D70 /* WattUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattUser.h; sourceTree = "<group>"; };
+		E50004E217B64A9B00E50D70 /* WattUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattUser.m; sourceTree = "<group>"; };
+		E50004EF17B6655200E50D70 /* WTMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMApi.h; sourceTree = "<group>"; };
+		E50004F017B6655200E50D70 /* WTMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMApi.m; sourceTree = "<group>"; };
+		E50004F417B66A7B00E50D70 /* UIImage+wattAdaptive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+wattAdaptive.h"; sourceTree = "<group>"; };
+		E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+wattAdaptive.m"; sourceTree = "<group>"; };
+		E50004F917B66B1300E50D70 /* WTMPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPackager.h; sourceTree = "<group>"; };
+		E50004FA17B66B1300E50D70 /* WTMPackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPackager.m; sourceTree = "<group>"; };
 		E5A9EC331799242F00976997 /* PlayerSampleFlexions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSampleFlexions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462411732A4A000E654A1 /* PlayerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462441732A4A000E654A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -156,10 +253,6 @@
 		E5B462601732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E5C5D9451746719200A6A46F /* WTMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMViewController.h; sourceTree = "<group>"; };
 		E5C5D9461746719200A6A46F /* WTMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
-		E5CAD21F1799A1A400D22369 /* UIImage+wattAdaptive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+wattAdaptive.h"; sourceTree = "<group>"; };
-		E5CAD2201799A1A400D22369 /* UIImage+wattAdaptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+wattAdaptive.m"; sourceTree = "<group>"; };
-		E5CAD2221799A1A400D22369 /* WattAcl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattAcl.h; sourceTree = "<group>"; };
-		E5CAD2231799A1A400D22369 /* WattAcl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattAcl.m; sourceTree = "<group>"; };
 		E5CAD2241799A1A400D22369 /* WattApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattApi.h; sourceTree = "<group>"; };
 		E5CAD2251799A1A400D22369 /* WattApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattApi.m; sourceTree = "<group>"; };
 		E5CAD2261799A1A400D22369 /* WattCollectionOfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfObject.h; sourceTree = "<group>"; };
@@ -168,89 +261,6 @@
 		E5CAD2291799A1A400D22369 /* WattObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattObject.m; sourceTree = "<group>"; };
 		E5CAD22A1799A1A400D22369 /* WattRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattRegistry.h; sourceTree = "<group>"; };
 		E5CAD22B1799A1A400D22369 /* WattRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattRegistry.m; sourceTree = "<group>"; };
-		E5CAD22E1799A1A400D22369 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
-		E5CAD22F1799A1A400D22369 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
-		E5CAD2301799A1A400D22369 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
-		E5CAD2311799A1A400D22369 /* WTMActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMActivity.m; sourceTree = "<group>"; };
-		E5CAD2321799A1A400D22369 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
-		E5CAD2331799A1A400D22369 /* WTMAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAsset.m; sourceTree = "<group>"; };
-		E5CAD2341799A1A400D22369 /* WTMBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMBand.h; sourceTree = "<group>"; };
-		E5CAD2351799A1A400D22369 /* WTMBand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMBand.m; sourceTree = "<group>"; };
-		E5CAD2361799A1A400D22369 /* WTMBehavior.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMBehavior.h; sourceTree = "<group>"; };
-		E5CAD2371799A1A400D22369 /* WTMBehavior.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMBehavior.m; sourceTree = "<group>"; };
-		E5CAD2381799A1A400D22369 /* WTMCollectionOfActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfActivity.h; sourceTree = "<group>"; };
-		E5CAD2391799A1A400D22369 /* WTMCollectionOfActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfActivity.m; sourceTree = "<group>"; };
-		E5CAD23A1799A1A400D22369 /* WTMCollectionOfBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfBand.h; sourceTree = "<group>"; };
-		E5CAD23B1799A1A400D22369 /* WTMCollectionOfBand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfBand.m; sourceTree = "<group>"; };
-		E5CAD23C1799A1A400D22369 /* WTMCollectionOfElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfElement.h; sourceTree = "<group>"; };
-		E5CAD23D1799A1A400D22369 /* WTMCollectionOfElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfElement.m; sourceTree = "<group>"; };
-		E5CAD23E1799A1A400D22369 /* WTMCollectionOfGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfGroup.h; sourceTree = "<group>"; };
-		E5CAD23F1799A1A400D22369 /* WTMCollectionOfGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfGroup.m; sourceTree = "<group>"; };
-		E5CAD2401799A1A400D22369 /* WTMCollectionOfImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfImage.h; sourceTree = "<group>"; };
-		E5CAD2411799A1A400D22369 /* WTMCollectionOfImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfImage.m; sourceTree = "<group>"; };
-		E5CAD2421799A1A400D22369 /* WTMCollectionOfLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLibrary.h; sourceTree = "<group>"; };
-		E5CAD2431799A1A400D22369 /* WTMCollectionOfLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLibrary.m; sourceTree = "<group>"; };
-		E5CAD2441799A1A400D22369 /* WTMCollectionOfMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMember.h; sourceTree = "<group>"; };
-		E5CAD2451799A1A400D22369 /* WTMCollectionOfMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMember.m; sourceTree = "<group>"; };
-		E5CAD2461799A1A400D22369 /* WTMCollectionOfMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMenu.h; sourceTree = "<group>"; };
-		E5CAD2471799A1A400D22369 /* WTMCollectionOfMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenu.m; sourceTree = "<group>"; };
-		E5CAD2481799A1A400D22369 /* WTMCollectionOfMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfMenuSection.h; sourceTree = "<group>"; };
-		E5CAD2491799A1A400D22369 /* WTMCollectionOfMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfMenuSection.m; sourceTree = "<group>"; };
-		E5CAD24A1799A1A400D22369 /* WTMCollectionOfPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfPackage.h; sourceTree = "<group>"; };
-		E5CAD24B1799A1A400D22369 /* WTMCollectionOfPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfPackage.m; sourceTree = "<group>"; };
-		E5CAD24C1799A1A400D22369 /* WTMCollectionOfScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfScene.h; sourceTree = "<group>"; };
-		E5CAD24D1799A1A400D22369 /* WTMCollectionOfScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfScene.m; sourceTree = "<group>"; };
-		E5CAD24E1799A1A400D22369 /* WTMCollectionOfUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfUser.h; sourceTree = "<group>"; };
-		E5CAD24F1799A1A400D22369 /* WTMCollectionOfUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfUser.m; sourceTree = "<group>"; };
-		E5CAD2501799A1A400D22369 /* WTMElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMElement.h; sourceTree = "<group>"; };
-		E5CAD2511799A1A400D22369 /* WTMElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMElement.m; sourceTree = "<group>"; };
-		E5CAD2521799A1A400D22369 /* WTMGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGroup.h; sourceTree = "<group>"; };
-		E5CAD2531799A1A400D22369 /* WTMGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGroup.m; sourceTree = "<group>"; };
-		E5CAD2541799A1A400D22369 /* WTMHtml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHtml.h; sourceTree = "<group>"; };
-		E5CAD2551799A1A400D22369 /* WTMHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMHtml.m; sourceTree = "<group>"; };
-		E5CAD2561799A1A400D22369 /* WTMHyperlink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMHyperlink.h; sourceTree = "<group>"; };
-		E5CAD2571799A1A400D22369 /* WTMHyperlink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMHyperlink.m; sourceTree = "<group>"; };
-		E5CAD2581799A1A400D22369 /* WTMImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMImage.h; sourceTree = "<group>"; };
-		E5CAD2591799A1A400D22369 /* WTMImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMImage.m; sourceTree = "<group>"; };
-		E5CAD25A1799A1A400D22369 /* WTMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLabel.h; sourceTree = "<group>"; };
-		E5CAD25B1799A1A400D22369 /* WTMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLabel.m; sourceTree = "<group>"; };
-		E5CAD25C1799A1A400D22369 /* WTMLangDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLangDictionary.h; sourceTree = "<group>"; };
-		E5CAD25D1799A1A400D22369 /* WTMLangDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLangDictionary.m; sourceTree = "<group>"; };
-		E5CAD25E1799A1A400D22369 /* WTMLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLibrary.h; sourceTree = "<group>"; };
-		E5CAD25F1799A1A400D22369 /* WTMLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLibrary.m; sourceTree = "<group>"; };
-		E5CAD2601799A1A400D22369 /* WTMLinkedAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLinkedAsset.h; sourceTree = "<group>"; };
-		E5CAD2611799A1A400D22369 /* WTMLinkedAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLinkedAsset.m; sourceTree = "<group>"; };
-		E5CAD2621799A1A400D22369 /* WTMMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMember.h; sourceTree = "<group>"; };
-		E5CAD2631799A1A400D22369 /* WTMMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMember.m; sourceTree = "<group>"; };
-		E5CAD2641799A1A400D22369 /* WTMMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenu.h; sourceTree = "<group>"; };
-		E5CAD2651799A1A400D22369 /* WTMMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenu.m; sourceTree = "<group>"; };
-		E5CAD2661799A1A400D22369 /* WTMMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMMenuSection.h; sourceTree = "<group>"; };
-		E5CAD2671799A1A400D22369 /* WTMMenuSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMMenuSection.m; sourceTree = "<group>"; };
-		E5CAD2681799A1A400D22369 /* WTMModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModel.h; sourceTree = "<group>"; };
-		E5CAD2691799A1A400D22369 /* WTMModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMModel.m; sourceTree = "<group>"; };
-		E5CAD26A1799A1A400D22369 /* WTMOperand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperand.h; sourceTree = "<group>"; };
-		E5CAD26B1799A1A400D22369 /* WTMOperand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperand.m; sourceTree = "<group>"; };
-		E5CAD26C1799A1A400D22369 /* WTMOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMOperator.h; sourceTree = "<group>"; };
-		E5CAD26D1799A1A400D22369 /* WTMOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMOperator.m; sourceTree = "<group>"; };
-		E5CAD26E1799A1A400D22369 /* WTMPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPackage.h; sourceTree = "<group>"; };
-		E5CAD26F1799A1A400D22369 /* WTMPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPackage.m; sourceTree = "<group>"; };
-		E5CAD2701799A1A400D22369 /* WTMPdf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPdf.h; sourceTree = "<group>"; };
-		E5CAD2711799A1A400D22369 /* WTMPdf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPdf.m; sourceTree = "<group>"; };
-		E5CAD2721799A1A400D22369 /* WTMRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMRule.h; sourceTree = "<group>"; };
-		E5CAD2731799A1A400D22369 /* WTMRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMRule.m; sourceTree = "<group>"; };
-		E5CAD2741799A1A400D22369 /* WTMScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMScene.h; sourceTree = "<group>"; };
-		E5CAD2751799A1A400D22369 /* WTMScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMScene.m; sourceTree = "<group>"; };
-		E5CAD2761799A1A400D22369 /* WTMShelf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMShelf.h; sourceTree = "<group>"; };
-		E5CAD2771799A1A400D22369 /* WTMShelf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMShelf.m; sourceTree = "<group>"; };
-		E5CAD2781799A1A400D22369 /* WTMSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMSound.h; sourceTree = "<group>"; };
-		E5CAD2791799A1A400D22369 /* WTMSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMSound.m; sourceTree = "<group>"; };
-		E5CAD27A1799A1A400D22369 /* WTMUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMUser.h; sourceTree = "<group>"; };
-		E5CAD27B1799A1A400D22369 /* WTMUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMUser.m; sourceTree = "<group>"; };
-		E5CAD27C1799A1A400D22369 /* WTMVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMVideo.h; sourceTree = "<group>"; };
-		E5CAD27D1799A1A400D22369 /* WTMVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMVideo.m; sourceTree = "<group>"; };
-		E5CAD27E1799A1A400D22369 /* WTMModelsImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMModelsImports.h; sourceTree = "<group>"; };
-		E5CAD2801799A1A400D22369 /* WattMPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattMPackager.h; sourceTree = "<group>"; };
-		E5CAD2811799A1A400D22369 /* WattMPackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattMPackager.m; sourceTree = "<group>"; };
 		E5CAD2831799A1A400D22369 /* Watt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watt.h; sourceTree = "<group>"; };
 		E5CAD2E21799A1B800D22369 /* PlayerSampleFlexions-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlayerSampleFlexions-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlayerSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,10 +292,149 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E50003FB17B6428100E50D70 /* WTM */ = {
+			isa = PBXGroup;
+			children = (
+				E50004F817B66B1300E50D70 /* Packager */,
+				E50004F317B66A7A00E50D70 /* Categories */,
+				E50003FD17B645C200E50D70 /* Generated */,
+				E50003FC17B642C300E50D70 /* WTM.h */,
+				E50004EF17B6655200E50D70 /* WTMApi.h */,
+				E50004F017B6655200E50D70 /* WTMApi.m */,
+			);
+			name = WTM;
+			path = ../WTM;
+			sourceTree = "<group>";
+		};
+		E50003FD17B645C200E50D70 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				E50003FE17B645C200E50D70 /* Models */,
+				E500044F17B645C200E50D70 /* WTMModelsImports.h */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		E50003FE17B645C200E50D70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E50003FF17B645C200E50D70 /* WTMAction.h */,
+				E500040017B645C200E50D70 /* WTMAction.m */,
+				E500040117B645C200E50D70 /* WTMActivity.h */,
+				E500040217B645C200E50D70 /* WTMActivity.m */,
+				E500040317B645C200E50D70 /* WTMAsset.h */,
+				E500040417B645C200E50D70 /* WTMAsset.m */,
+				E500040517B645C200E50D70 /* WTMBand.h */,
+				E500040617B645C200E50D70 /* WTMBand.m */,
+				E500040717B645C200E50D70 /* WTMBehavior.h */,
+				E500040817B645C200E50D70 /* WTMBehavior.m */,
+				E500040917B645C200E50D70 /* WTMCollectionOfActivity.h */,
+				E500040A17B645C200E50D70 /* WTMCollectionOfActivity.m */,
+				E500040B17B645C200E50D70 /* WTMCollectionOfBand.h */,
+				E500040C17B645C200E50D70 /* WTMCollectionOfBand.m */,
+				E500040D17B645C200E50D70 /* WTMCollectionOfElement.h */,
+				E500040E17B645C200E50D70 /* WTMCollectionOfElement.m */,
+				E500041117B645C200E50D70 /* WTMCollectionOfImage.h */,
+				E500041217B645C200E50D70 /* WTMCollectionOfImage.m */,
+				E500041317B645C200E50D70 /* WTMCollectionOfLibrary.h */,
+				E500041417B645C200E50D70 /* WTMCollectionOfLibrary.m */,
+				E500041517B645C200E50D70 /* WTMCollectionOfMember.h */,
+				E500041617B645C200E50D70 /* WTMCollectionOfMember.m */,
+				E500041717B645C200E50D70 /* WTMCollectionOfMenu.h */,
+				E500041817B645C200E50D70 /* WTMCollectionOfMenu.m */,
+				E500041917B645C200E50D70 /* WTMCollectionOfMenuSection.h */,
+				E500041A17B645C200E50D70 /* WTMCollectionOfMenuSection.m */,
+				E500041B17B645C200E50D70 /* WTMCollectionOfPackage.h */,
+				E500041C17B645C200E50D70 /* WTMCollectionOfPackage.m */,
+				E500041D17B645C200E50D70 /* WTMCollectionOfScene.h */,
+				E500041E17B645C200E50D70 /* WTMCollectionOfScene.m */,
+				E500042117B645C200E50D70 /* WTMElement.h */,
+				E500042217B645C200E50D70 /* WTMElement.m */,
+				E500042517B645C200E50D70 /* WTMHtml.h */,
+				E500042617B645C200E50D70 /* WTMHtml.m */,
+				E500042717B645C200E50D70 /* WTMHyperlink.h */,
+				E500042817B645C200E50D70 /* WTMHyperlink.m */,
+				E500042917B645C200E50D70 /* WTMImage.h */,
+				E500042A17B645C200E50D70 /* WTMImage.m */,
+				E500042B17B645C200E50D70 /* WTMLabel.h */,
+				E500042C17B645C200E50D70 /* WTMLabel.m */,
+				E500042D17B645C200E50D70 /* WTMLangDictionary.h */,
+				E500042E17B645C200E50D70 /* WTMLangDictionary.m */,
+				E500042F17B645C200E50D70 /* WTMLibrary.h */,
+				E500043017B645C200E50D70 /* WTMLibrary.m */,
+				E500043117B645C200E50D70 /* WTMLinkedAsset.h */,
+				E500043217B645C200E50D70 /* WTMLinkedAsset.m */,
+				E500043317B645C200E50D70 /* WTMMember.h */,
+				E500043417B645C200E50D70 /* WTMMember.m */,
+				E500043517B645C200E50D70 /* WTMMenu.h */,
+				E500043617B645C200E50D70 /* WTMMenu.m */,
+				E500043717B645C200E50D70 /* WTMMenuSection.h */,
+				E500043817B645C200E50D70 /* WTMMenuSection.m */,
+				E500043B17B645C200E50D70 /* WTMOperand.h */,
+				E500043C17B645C200E50D70 /* WTMOperand.m */,
+				E500043D17B645C200E50D70 /* WTMOperator.h */,
+				E500043E17B645C200E50D70 /* WTMOperator.m */,
+				E500043F17B645C200E50D70 /* WTMPackage.h */,
+				E500044017B645C200E50D70 /* WTMPackage.m */,
+				E500044117B645C200E50D70 /* WTMPdf.h */,
+				E500044217B645C200E50D70 /* WTMPdf.m */,
+				E500044317B645C200E50D70 /* WTMRule.h */,
+				E500044417B645C200E50D70 /* WTMRule.m */,
+				E500044517B645C200E50D70 /* WTMScene.h */,
+				E500044617B645C200E50D70 /* WTMScene.m */,
+				E500044717B645C200E50D70 /* WTMShelf.h */,
+				E500044817B645C200E50D70 /* WTMShelf.m */,
+				E500044917B645C200E50D70 /* WTMSound.h */,
+				E500044A17B645C200E50D70 /* WTMSound.m */,
+				E500044D17B645C200E50D70 /* WTMVideo.h */,
+				E500044E17B645C200E50D70 /* WTMVideo.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E50004A017B6468700E50D70 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				E50004D717B64A9B00E50D70 /* WattCollectionOfGroup.h */,
+				E50004D817B64A9B00E50D70 /* WattCollectionOfGroup.m */,
+				E50004D917B64A9B00E50D70 /* WattCollectionOfModel.h */,
+				E50004DA17B64A9B00E50D70 /* WattCollectionOfModel.m */,
+				E50004DB17B64A9B00E50D70 /* WattCollectionOfUser.h */,
+				E50004DC17B64A9B00E50D70 /* WattCollectionOfUser.m */,
+				E50004DD17B64A9B00E50D70 /* WattGroup.h */,
+				E50004DE17B64A9B00E50D70 /* WattGroup.m */,
+				E50004DF17B64A9B00E50D70 /* WattModel.h */,
+				E50004E017B64A9B00E50D70 /* WattModel.m */,
+				E50004E117B64A9B00E50D70 /* WattUser.h */,
+				E50004E217B64A9B00E50D70 /* WattUser.m */,
+				E50004B617B6490C00E50D70 /* WattImports.h */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		E50004F317B66A7A00E50D70 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E50004F417B66A7B00E50D70 /* UIImage+wattAdaptive.h */,
+				E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		E50004F817B66B1300E50D70 /* Packager */ = {
+			isa = PBXGroup;
+			children = (
+				E50004F917B66B1300E50D70 /* WTMPackager.h */,
+				E50004FA17B66B1300E50D70 /* WTMPackager.m */,
+			);
+			path = Packager;
+			sourceTree = "<group>";
+		};
 		E5B462381732A4A000E654A1 = {
 			isa = PBXGroup;
 			children = (
 				E5CAD21B1799A1A400D22369 /* Watt */,
+				E50003FB17B6428100E50D70 /* WTM */,
 				E5B4624A1732A4A000E654A1 /* PlayerSample */,
 				E5B462431732A4A000E654A1 /* Frameworks */,
 				E5B462421732A4A000E654A1 /* Products */,
@@ -348,47 +497,17 @@
 		E5CAD21B1799A1A400D22369 /* Watt */ = {
 			isa = PBXGroup;
 			children = (
-				E5CAD21C1799A1A400D22369 /* Authoring */,
-				E5CAD21D1799A1A400D22369 /* BaseClasses */,
-				E5CAD21E1799A1A400D22369 /* Categories */,
+				E50004A017B6468700E50D70 /* Generated */,
 				E5CAD2211799A1A400D22369 /* Core */,
-				E5CAD22C1799A1A400D22369 /* Generated */,
-				E5CAD27F1799A1A400D22369 /* Packager */,
-				E5CAD2821799A1A400D22369 /* Utilities */,
 				E5CAD2831799A1A400D22369 /* Watt.h */,
 			);
 			name = Watt;
 			path = ../Watt;
 			sourceTree = "<group>";
 		};
-		E5CAD21C1799A1A400D22369 /* Authoring */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Authoring;
-			sourceTree = "<group>";
-		};
-		E5CAD21D1799A1A400D22369 /* BaseClasses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BaseClasses;
-			sourceTree = "<group>";
-		};
-		E5CAD21E1799A1A400D22369 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				E5CAD21F1799A1A400D22369 /* UIImage+wattAdaptive.h */,
-				E5CAD2201799A1A400D22369 /* UIImage+wattAdaptive.m */,
-			);
-			path = Categories;
-			sourceTree = "<group>";
-		};
 		E5CAD2211799A1A400D22369 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E5CAD2221799A1A400D22369 /* WattAcl.h */,
-				E5CAD2231799A1A400D22369 /* WattAcl.m */,
 				E5CAD2241799A1A400D22369 /* WattApi.h */,
 				E5CAD2251799A1A400D22369 /* WattApi.m */,
 				E5CAD2261799A1A400D22369 /* WattCollectionOfObject.h */,
@@ -397,122 +516,12 @@
 				E5CAD2291799A1A400D22369 /* WattObject.m */,
 				E5CAD22A1799A1A400D22369 /* WattRegistry.h */,
 				E5CAD22B1799A1A400D22369 /* WattRegistry.m */,
+				E50003F517B63EEC00E50D70 /* WattDelta.h */,
+				E50003F417B63EEC00E50D70 /* WattDelta.m */,
+				E50003F317B63EEC00E50D70 /* WattDeltaEngine.h */,
+				E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		E5CAD22C1799A1A400D22369 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				E5CAD22D1799A1A400D22369 /* Models */,
-				E5CAD27E1799A1A400D22369 /* WTMModelsImports.h */,
-			);
-			path = Generated;
-			sourceTree = "<group>";
-		};
-		E5CAD22D1799A1A400D22369 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E53234DE17B4CFA8001C0C39 /* WTMObject.h */,
-				E53234DF17B4CFA8001C0C39 /* WTMObject.m */,
-				E5CAD22E1799A1A400D22369 /* WTMAction.h */,
-				E5CAD22F1799A1A400D22369 /* WTMAction.m */,
-				E5CAD2301799A1A400D22369 /* WTMActivity.h */,
-				E5CAD2311799A1A400D22369 /* WTMActivity.m */,
-				E5CAD2321799A1A400D22369 /* WTMAsset.h */,
-				E5CAD2331799A1A400D22369 /* WTMAsset.m */,
-				E5CAD2341799A1A400D22369 /* WTMBand.h */,
-				E5CAD2351799A1A400D22369 /* WTMBand.m */,
-				E5CAD2361799A1A400D22369 /* WTMBehavior.h */,
-				E5CAD2371799A1A400D22369 /* WTMBehavior.m */,
-				E5CAD2381799A1A400D22369 /* WTMCollectionOfActivity.h */,
-				E5CAD2391799A1A400D22369 /* WTMCollectionOfActivity.m */,
-				E5CAD23A1799A1A400D22369 /* WTMCollectionOfBand.h */,
-				E5CAD23B1799A1A400D22369 /* WTMCollectionOfBand.m */,
-				E5CAD23C1799A1A400D22369 /* WTMCollectionOfElement.h */,
-				E5CAD23D1799A1A400D22369 /* WTMCollectionOfElement.m */,
-				E5CAD23E1799A1A400D22369 /* WTMCollectionOfGroup.h */,
-				E5CAD23F1799A1A400D22369 /* WTMCollectionOfGroup.m */,
-				E5CAD2401799A1A400D22369 /* WTMCollectionOfImage.h */,
-				E5CAD2411799A1A400D22369 /* WTMCollectionOfImage.m */,
-				E5CAD2421799A1A400D22369 /* WTMCollectionOfLibrary.h */,
-				E5CAD2431799A1A400D22369 /* WTMCollectionOfLibrary.m */,
-				E5CAD2441799A1A400D22369 /* WTMCollectionOfMember.h */,
-				E5CAD2451799A1A400D22369 /* WTMCollectionOfMember.m */,
-				E5CAD2461799A1A400D22369 /* WTMCollectionOfMenu.h */,
-				E5CAD2471799A1A400D22369 /* WTMCollectionOfMenu.m */,
-				E5CAD2481799A1A400D22369 /* WTMCollectionOfMenuSection.h */,
-				E5CAD2491799A1A400D22369 /* WTMCollectionOfMenuSection.m */,
-				E5CAD24A1799A1A400D22369 /* WTMCollectionOfPackage.h */,
-				E5CAD24B1799A1A400D22369 /* WTMCollectionOfPackage.m */,
-				E5CAD24C1799A1A400D22369 /* WTMCollectionOfScene.h */,
-				E5CAD24D1799A1A400D22369 /* WTMCollectionOfScene.m */,
-				E5CAD24E1799A1A400D22369 /* WTMCollectionOfUser.h */,
-				E5CAD24F1799A1A400D22369 /* WTMCollectionOfUser.m */,
-				E5CAD2501799A1A400D22369 /* WTMElement.h */,
-				E5CAD2511799A1A400D22369 /* WTMElement.m */,
-				E5CAD2521799A1A400D22369 /* WTMGroup.h */,
-				E5CAD2531799A1A400D22369 /* WTMGroup.m */,
-				E5CAD2541799A1A400D22369 /* WTMHtml.h */,
-				E5CAD2551799A1A400D22369 /* WTMHtml.m */,
-				E5CAD2561799A1A400D22369 /* WTMHyperlink.h */,
-				E5CAD2571799A1A400D22369 /* WTMHyperlink.m */,
-				E5CAD2581799A1A400D22369 /* WTMImage.h */,
-				E5CAD2591799A1A400D22369 /* WTMImage.m */,
-				E5CAD25A1799A1A400D22369 /* WTMLabel.h */,
-				E5CAD25B1799A1A400D22369 /* WTMLabel.m */,
-				E5CAD25C1799A1A400D22369 /* WTMLangDictionary.h */,
-				E5CAD25D1799A1A400D22369 /* WTMLangDictionary.m */,
-				E5CAD25E1799A1A400D22369 /* WTMLibrary.h */,
-				E5CAD25F1799A1A400D22369 /* WTMLibrary.m */,
-				E5CAD2601799A1A400D22369 /* WTMLinkedAsset.h */,
-				E5CAD2611799A1A400D22369 /* WTMLinkedAsset.m */,
-				E5CAD2621799A1A400D22369 /* WTMMember.h */,
-				E5CAD2631799A1A400D22369 /* WTMMember.m */,
-				E5CAD2641799A1A400D22369 /* WTMMenu.h */,
-				E5CAD2651799A1A400D22369 /* WTMMenu.m */,
-				E5CAD2661799A1A400D22369 /* WTMMenuSection.h */,
-				E5CAD2671799A1A400D22369 /* WTMMenuSection.m */,
-				E5CAD2681799A1A400D22369 /* WTMModel.h */,
-				E5CAD2691799A1A400D22369 /* WTMModel.m */,
-				E5CAD26A1799A1A400D22369 /* WTMOperand.h */,
-				E5CAD26B1799A1A400D22369 /* WTMOperand.m */,
-				E5CAD26C1799A1A400D22369 /* WTMOperator.h */,
-				E5CAD26D1799A1A400D22369 /* WTMOperator.m */,
-				E5CAD26E1799A1A400D22369 /* WTMPackage.h */,
-				E5CAD26F1799A1A400D22369 /* WTMPackage.m */,
-				E5CAD2701799A1A400D22369 /* WTMPdf.h */,
-				E5CAD2711799A1A400D22369 /* WTMPdf.m */,
-				E5CAD2721799A1A400D22369 /* WTMRule.h */,
-				E5CAD2731799A1A400D22369 /* WTMRule.m */,
-				E5CAD2741799A1A400D22369 /* WTMScene.h */,
-				E5CAD2751799A1A400D22369 /* WTMScene.m */,
-				E5CAD2761799A1A400D22369 /* WTMShelf.h */,
-				E5CAD2771799A1A400D22369 /* WTMShelf.m */,
-				E5CAD2781799A1A400D22369 /* WTMSound.h */,
-				E5CAD2791799A1A400D22369 /* WTMSound.m */,
-				E5CAD27A1799A1A400D22369 /* WTMUser.h */,
-				E5CAD27B1799A1A400D22369 /* WTMUser.m */,
-				E5CAD27C1799A1A400D22369 /* WTMVideo.h */,
-				E5CAD27D1799A1A400D22369 /* WTMVideo.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		E5CAD27F1799A1A400D22369 /* Packager */ = {
-			isa = PBXGroup;
-			children = (
-				E5CAD2801799A1A400D22369 /* WattMPackager.h */,
-				E5CAD2811799A1A400D22369 /* WattMPackager.m */,
-			);
-			path = Packager;
-			sourceTree = "<group>";
-		};
-		E5CAD2821799A1A400D22369 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -687,7 +696,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../Flexions/\n. flexions.sh";
+			shellScript = "cd ../FlexionsWatt/\n. flexions.sh\ncd ../FlexionsWTM/\n. flexions.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -699,54 +708,56 @@
 				E5A9EBF11799242F00976997 /* main.m in Sources */,
 				E5A9EBF21799242F00976997 /* WTMAppDelegate.m in Sources */,
 				E5A9EBF31799242F00976997 /* WTMViewController.m in Sources */,
-				E5CAD2851799A1A400D22369 /* UIImage+wattAdaptive.m in Sources */,
-				E5CAD2871799A1A400D22369 /* WattAcl.m in Sources */,
 				E5CAD2891799A1A400D22369 /* WattApi.m in Sources */,
 				E5CAD28B1799A1A400D22369 /* WattCollectionOfObject.m in Sources */,
 				E5CAD28D1799A1A400D22369 /* WattObject.m in Sources */,
 				E5CAD28F1799A1A400D22369 /* WattRegistry.m in Sources */,
-				E5CAD2911799A1A400D22369 /* WTMAction.m in Sources */,
-				E5CAD2931799A1A400D22369 /* WTMActivity.m in Sources */,
-				E5CAD2951799A1A400D22369 /* WTMAsset.m in Sources */,
-				E5CAD2971799A1A400D22369 /* WTMBand.m in Sources */,
-				E5CAD2991799A1A400D22369 /* WTMBehavior.m in Sources */,
-				E5CAD29B1799A1A400D22369 /* WTMCollectionOfActivity.m in Sources */,
-				E5CAD29D1799A1A400D22369 /* WTMCollectionOfBand.m in Sources */,
-				E5CAD29F1799A1A400D22369 /* WTMCollectionOfElement.m in Sources */,
-				E5CAD2A11799A1A400D22369 /* WTMCollectionOfGroup.m in Sources */,
-				E5CAD2A31799A1A400D22369 /* WTMCollectionOfImage.m in Sources */,
-				E5CAD2A51799A1A400D22369 /* WTMCollectionOfLibrary.m in Sources */,
-				E5CAD2A71799A1A400D22369 /* WTMCollectionOfMember.m in Sources */,
-				E5CAD2A91799A1A400D22369 /* WTMCollectionOfMenu.m in Sources */,
-				E5CAD2AB1799A1A400D22369 /* WTMCollectionOfMenuSection.m in Sources */,
-				E5CAD2AD1799A1A400D22369 /* WTMCollectionOfPackage.m in Sources */,
-				E5CAD2AF1799A1A400D22369 /* WTMCollectionOfScene.m in Sources */,
-				E5CAD2B11799A1A400D22369 /* WTMCollectionOfUser.m in Sources */,
-				E5CAD2B31799A1A400D22369 /* WTMElement.m in Sources */,
-				E5CAD2B51799A1A400D22369 /* WTMGroup.m in Sources */,
-				E5CAD2B71799A1A400D22369 /* WTMHtml.m in Sources */,
-				E5CAD2B91799A1A400D22369 /* WTMHyperlink.m in Sources */,
-				E5CAD2BB1799A1A400D22369 /* WTMImage.m in Sources */,
-				E5CAD2BD1799A1A400D22369 /* WTMLabel.m in Sources */,
-				E5CAD2BF1799A1A400D22369 /* WTMLangDictionary.m in Sources */,
-				E5CAD2C11799A1A400D22369 /* WTMLibrary.m in Sources */,
-				E5CAD2C31799A1A400D22369 /* WTMLinkedAsset.m in Sources */,
-				E5CAD2C51799A1A400D22369 /* WTMMember.m in Sources */,
-				E5CAD2C71799A1A400D22369 /* WTMMenu.m in Sources */,
-				E5CAD2C91799A1A400D22369 /* WTMMenuSection.m in Sources */,
-				E5CAD2CB1799A1A400D22369 /* WTMModel.m in Sources */,
-				E5CAD2CD1799A1A400D22369 /* WTMOperand.m in Sources */,
-				E5CAD2CF1799A1A400D22369 /* WTMOperator.m in Sources */,
-				E5CAD2D11799A1A400D22369 /* WTMPackage.m in Sources */,
-				E5CAD2D31799A1A400D22369 /* WTMPdf.m in Sources */,
-				E5CAD2D51799A1A400D22369 /* WTMRule.m in Sources */,
-				E5CAD2D71799A1A400D22369 /* WTMScene.m in Sources */,
-				E5CAD2D91799A1A400D22369 /* WTMShelf.m in Sources */,
-				E5CAD2DB1799A1A400D22369 /* WTMSound.m in Sources */,
-				E5CAD2DD1799A1A400D22369 /* WTMUser.m in Sources */,
-				E5CAD2DF1799A1A400D22369 /* WTMVideo.m in Sources */,
-				E5CAD2E11799A1A400D22369 /* WattMPackager.m in Sources */,
-				E53234E117B4CFA8001C0C39 /* WTMObject.m in Sources */,
+				E50003F817B63EEC00E50D70 /* WattDelta.m in Sources */,
+				E50003FA17B63EEC00E50D70 /* WattDeltaEngine.m in Sources */,
+				E500045117B645C200E50D70 /* WTMAction.m in Sources */,
+				E500045317B645C200E50D70 /* WTMActivity.m in Sources */,
+				E500045517B645C200E50D70 /* WTMAsset.m in Sources */,
+				E500045717B645C200E50D70 /* WTMBand.m in Sources */,
+				E500045917B645C200E50D70 /* WTMBehavior.m in Sources */,
+				E500045B17B645C200E50D70 /* WTMCollectionOfActivity.m in Sources */,
+				E500045D17B645C200E50D70 /* WTMCollectionOfBand.m in Sources */,
+				E500045F17B645C200E50D70 /* WTMCollectionOfElement.m in Sources */,
+				E500046317B645C200E50D70 /* WTMCollectionOfImage.m in Sources */,
+				E500046517B645C300E50D70 /* WTMCollectionOfLibrary.m in Sources */,
+				E500046717B645C300E50D70 /* WTMCollectionOfMember.m in Sources */,
+				E500046917B645C300E50D70 /* WTMCollectionOfMenu.m in Sources */,
+				E500046B17B645C300E50D70 /* WTMCollectionOfMenuSection.m in Sources */,
+				E500046D17B645C300E50D70 /* WTMCollectionOfPackage.m in Sources */,
+				E500046F17B645C300E50D70 /* WTMCollectionOfScene.m in Sources */,
+				E500047317B645C300E50D70 /* WTMElement.m in Sources */,
+				E500047717B645C300E50D70 /* WTMHtml.m in Sources */,
+				E500047917B645C300E50D70 /* WTMHyperlink.m in Sources */,
+				E500047B17B645C300E50D70 /* WTMImage.m in Sources */,
+				E500047D17B645C300E50D70 /* WTMLabel.m in Sources */,
+				E500047F17B645C300E50D70 /* WTMLangDictionary.m in Sources */,
+				E500048117B645C300E50D70 /* WTMLibrary.m in Sources */,
+				E500048317B645C300E50D70 /* WTMLinkedAsset.m in Sources */,
+				E500048517B645C300E50D70 /* WTMMember.m in Sources */,
+				E500048717B645C300E50D70 /* WTMMenu.m in Sources */,
+				E500048917B645C300E50D70 /* WTMMenuSection.m in Sources */,
+				E500048D17B645C300E50D70 /* WTMOperand.m in Sources */,
+				E500048F17B645C300E50D70 /* WTMOperator.m in Sources */,
+				E500049117B645C300E50D70 /* WTMPackage.m in Sources */,
+				E500049317B645C300E50D70 /* WTMPdf.m in Sources */,
+				E500049517B645C300E50D70 /* WTMRule.m in Sources */,
+				E500049717B645C300E50D70 /* WTMScene.m in Sources */,
+				E500049917B645C300E50D70 /* WTMShelf.m in Sources */,
+				E500049B17B645C300E50D70 /* WTMSound.m in Sources */,
+				E500049F17B645C300E50D70 /* WTMVideo.m in Sources */,
+				E50004E417B64A9B00E50D70 /* WattCollectionOfGroup.m in Sources */,
+				E50004E617B64A9B00E50D70 /* WattCollectionOfModel.m in Sources */,
+				E50004E817B64A9B00E50D70 /* WattCollectionOfUser.m in Sources */,
+				E50004EA17B64A9B00E50D70 /* WattGroup.m in Sources */,
+				E50004EC17B64A9B00E50D70 /* WattModel.m in Sources */,
+				E50004EE17B64A9B00E50D70 /* WattUser.m in Sources */,
+				E50004F217B6655300E50D70 /* WTMApi.m in Sources */,
+				E50004F717B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */,
+				E50004FC17B66B1300E50D70 /* WTMPackager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,54 +768,56 @@
 				E5B462511732A4A000E654A1 /* main.m in Sources */,
 				E5B462551732A4A000E654A1 /* WTMAppDelegate.m in Sources */,
 				E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */,
-				E5CAD2841799A1A400D22369 /* UIImage+wattAdaptive.m in Sources */,
-				E5CAD2861799A1A400D22369 /* WattAcl.m in Sources */,
 				E5CAD2881799A1A400D22369 /* WattApi.m in Sources */,
 				E5CAD28A1799A1A400D22369 /* WattCollectionOfObject.m in Sources */,
 				E5CAD28C1799A1A400D22369 /* WattObject.m in Sources */,
 				E5CAD28E1799A1A400D22369 /* WattRegistry.m in Sources */,
-				E5CAD2901799A1A400D22369 /* WTMAction.m in Sources */,
-				E5CAD2921799A1A400D22369 /* WTMActivity.m in Sources */,
-				E5CAD2941799A1A400D22369 /* WTMAsset.m in Sources */,
-				E5CAD2961799A1A400D22369 /* WTMBand.m in Sources */,
-				E5CAD2981799A1A400D22369 /* WTMBehavior.m in Sources */,
-				E5CAD29A1799A1A400D22369 /* WTMCollectionOfActivity.m in Sources */,
-				E5CAD29C1799A1A400D22369 /* WTMCollectionOfBand.m in Sources */,
-				E5CAD29E1799A1A400D22369 /* WTMCollectionOfElement.m in Sources */,
-				E5CAD2A01799A1A400D22369 /* WTMCollectionOfGroup.m in Sources */,
-				E5CAD2A21799A1A400D22369 /* WTMCollectionOfImage.m in Sources */,
-				E5CAD2A41799A1A400D22369 /* WTMCollectionOfLibrary.m in Sources */,
-				E5CAD2A61799A1A400D22369 /* WTMCollectionOfMember.m in Sources */,
-				E5CAD2A81799A1A400D22369 /* WTMCollectionOfMenu.m in Sources */,
-				E5CAD2AA1799A1A400D22369 /* WTMCollectionOfMenuSection.m in Sources */,
-				E5CAD2AC1799A1A400D22369 /* WTMCollectionOfPackage.m in Sources */,
-				E5CAD2AE1799A1A400D22369 /* WTMCollectionOfScene.m in Sources */,
-				E5CAD2B01799A1A400D22369 /* WTMCollectionOfUser.m in Sources */,
-				E5CAD2B21799A1A400D22369 /* WTMElement.m in Sources */,
-				E5CAD2B41799A1A400D22369 /* WTMGroup.m in Sources */,
-				E5CAD2B61799A1A400D22369 /* WTMHtml.m in Sources */,
-				E5CAD2B81799A1A400D22369 /* WTMHyperlink.m in Sources */,
-				E5CAD2BA1799A1A400D22369 /* WTMImage.m in Sources */,
-				E5CAD2BC1799A1A400D22369 /* WTMLabel.m in Sources */,
-				E5CAD2BE1799A1A400D22369 /* WTMLangDictionary.m in Sources */,
-				E5CAD2C01799A1A400D22369 /* WTMLibrary.m in Sources */,
-				E5CAD2C21799A1A400D22369 /* WTMLinkedAsset.m in Sources */,
-				E5CAD2C41799A1A400D22369 /* WTMMember.m in Sources */,
-				E5CAD2C61799A1A400D22369 /* WTMMenu.m in Sources */,
-				E5CAD2C81799A1A400D22369 /* WTMMenuSection.m in Sources */,
-				E5CAD2CA1799A1A400D22369 /* WTMModel.m in Sources */,
-				E5CAD2CC1799A1A400D22369 /* WTMOperand.m in Sources */,
-				E5CAD2CE1799A1A400D22369 /* WTMOperator.m in Sources */,
-				E5CAD2D01799A1A400D22369 /* WTMPackage.m in Sources */,
-				E5CAD2D21799A1A400D22369 /* WTMPdf.m in Sources */,
-				E5CAD2D41799A1A400D22369 /* WTMRule.m in Sources */,
-				E5CAD2D61799A1A400D22369 /* WTMScene.m in Sources */,
-				E5CAD2D81799A1A400D22369 /* WTMShelf.m in Sources */,
-				E5CAD2DA1799A1A400D22369 /* WTMSound.m in Sources */,
-				E5CAD2DC1799A1A400D22369 /* WTMUser.m in Sources */,
-				E5CAD2DE1799A1A400D22369 /* WTMVideo.m in Sources */,
-				E5CAD2E01799A1A400D22369 /* WattMPackager.m in Sources */,
-				E53234E017B4CFA8001C0C39 /* WTMObject.m in Sources */,
+				E50003F717B63EEC00E50D70 /* WattDelta.m in Sources */,
+				E50003F917B63EEC00E50D70 /* WattDeltaEngine.m in Sources */,
+				E500045017B645C200E50D70 /* WTMAction.m in Sources */,
+				E500045217B645C200E50D70 /* WTMActivity.m in Sources */,
+				E500045417B645C200E50D70 /* WTMAsset.m in Sources */,
+				E500045617B645C200E50D70 /* WTMBand.m in Sources */,
+				E500045817B645C200E50D70 /* WTMBehavior.m in Sources */,
+				E500045A17B645C200E50D70 /* WTMCollectionOfActivity.m in Sources */,
+				E500045C17B645C200E50D70 /* WTMCollectionOfBand.m in Sources */,
+				E500045E17B645C200E50D70 /* WTMCollectionOfElement.m in Sources */,
+				E500046217B645C200E50D70 /* WTMCollectionOfImage.m in Sources */,
+				E500046417B645C300E50D70 /* WTMCollectionOfLibrary.m in Sources */,
+				E500046617B645C300E50D70 /* WTMCollectionOfMember.m in Sources */,
+				E500046817B645C300E50D70 /* WTMCollectionOfMenu.m in Sources */,
+				E500046A17B645C300E50D70 /* WTMCollectionOfMenuSection.m in Sources */,
+				E500046C17B645C300E50D70 /* WTMCollectionOfPackage.m in Sources */,
+				E500046E17B645C300E50D70 /* WTMCollectionOfScene.m in Sources */,
+				E500047217B645C300E50D70 /* WTMElement.m in Sources */,
+				E500047617B645C300E50D70 /* WTMHtml.m in Sources */,
+				E500047817B645C300E50D70 /* WTMHyperlink.m in Sources */,
+				E500047A17B645C300E50D70 /* WTMImage.m in Sources */,
+				E500047C17B645C300E50D70 /* WTMLabel.m in Sources */,
+				E500047E17B645C300E50D70 /* WTMLangDictionary.m in Sources */,
+				E500048017B645C300E50D70 /* WTMLibrary.m in Sources */,
+				E500048217B645C300E50D70 /* WTMLinkedAsset.m in Sources */,
+				E500048417B645C300E50D70 /* WTMMember.m in Sources */,
+				E500048617B645C300E50D70 /* WTMMenu.m in Sources */,
+				E500048817B645C300E50D70 /* WTMMenuSection.m in Sources */,
+				E500048C17B645C300E50D70 /* WTMOperand.m in Sources */,
+				E500048E17B645C300E50D70 /* WTMOperator.m in Sources */,
+				E500049017B645C300E50D70 /* WTMPackage.m in Sources */,
+				E500049217B645C300E50D70 /* WTMPdf.m in Sources */,
+				E500049417B645C300E50D70 /* WTMRule.m in Sources */,
+				E500049617B645C300E50D70 /* WTMScene.m in Sources */,
+				E500049817B645C300E50D70 /* WTMShelf.m in Sources */,
+				E500049A17B645C300E50D70 /* WTMSound.m in Sources */,
+				E500049E17B645C300E50D70 /* WTMVideo.m in Sources */,
+				E50004E317B64A9B00E50D70 /* WattCollectionOfGroup.m in Sources */,
+				E50004E517B64A9B00E50D70 /* WattCollectionOfModel.m in Sources */,
+				E50004E717B64A9B00E50D70 /* WattCollectionOfUser.m in Sources */,
+				E50004E917B64A9B00E50D70 /* WattGroup.m in Sources */,
+				E50004EB17B64A9B00E50D70 /* WattModel.m in Sources */,
+				E50004ED17B64A9B00E50D70 /* WattUser.m in Sources */,
+				E50004F117B6655300E50D70 /* WTMApi.m in Sources */,
+				E50004F617B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */,
+				E50004FB17B66B1300E50D70 /* WTMPackager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

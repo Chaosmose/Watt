@@ -22,7 +22,6 @@
 
 #import "WattObject.h"
 #import "WattCollectionOfObject.h"
-#import "WattApi.h"
 #import <objc/runtime.h>
 
 @implementation WattObject{
@@ -55,7 +54,6 @@
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier{
     self=[super init];
     if(self){
-        _wapi=wattAPI;
         _uinstID=identifier;// no registration
         if(registry){
             _registry=registry;
@@ -178,7 +176,8 @@
                 if(![o hasBeenLocalized])
                     [o localize];
             }else{
-                [_wapi localize:self withKey:key andValue:o];
+#warning todo 
+                //[_wapi localize:self withKey:key andValue:o];
             }
         }
     }

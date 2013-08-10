@@ -31,6 +31,7 @@ end
 
 # For development purpose i link directly a shared watt folder
 #pod 'Watt', {:git => 'https://github.com/benoit-pereira-da-silva/Watt.git'}
+#pod 'WTM', {:git => 'https://github.com/benoit-pereira-da-silva/Watt.git'}
 
 #those dependencies are directly "linked in Watt" when using watt podspec
 #pod 'AFNetworking','~>1.3.1'

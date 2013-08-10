@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
-//  WTMApi.h
+//  WattApi.h
 //
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
@@ -29,7 +29,6 @@
 
 #import "Watt.h"
 #import "WattObject.h"
-#import "WattAcl.h"
 #import "WTMModelsImports.h"
 
 
@@ -42,6 +41,39 @@ typedef enum watt_F_TYPES{
 }Watt_F_TYPE;
 
 
+
+// WATT_ACL
+
+typedef enum watt_Actions{
+    WattREAD=0,     //view the file
+    WattWRITE=1,    //create, edit or delete
+    WattEXECUTE=2   //run a script or enter a directory ?
+}Watt_Action;
+
+// Watt acl was inspired by the unix permissions.
+// http://mason.gmu.edu/~montecin/UNIXpermiss.htm
+
+// But !
+// Most of the time WTMModels are not owned by anyone.
+// Owned object are used only if complex workflows can apply.
+// By default a user owns mosts of the objects.
+
+/*
+ 
+ A classic approach to protect an object is to use the "system" user
+ 
+ [<API> applyRights:[<API> rightsFromString:@"RWXR--R--"]
+ andOwner:<API>.system
+ on:objectReference];
+ */
+
+#ifndef WATT_ACL_CONST
+#define WATT_ACL_CONST
+#define WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME @"WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME"
+#endif
+
+
+
 #pragma mark - WattApi
 
 @protocol WTMlocalizationDelegateProtocol;
@@ -49,12 +81,11 @@ typedef enum watt_F_TYPES{
 @interface WattApi : NSObject
 
 @property (nonatomic,assign)    id<WTMlocalizationDelegateProtocol>localizationDelegate;
-@property (nonatomic,strong)    WTMUser *me;
+@property (nonatomic,strong)    WattUser *me;
 @property (nonatomic,strong)    WattRegistry *currentRegistry; // Used to register & create object ( you can change its reference at runtime)
-@property (nonatomic,readonly)  WTMUser *system;
-@property (nonatomic,readonly)  WTMGroup *systemGroup;
+@property (nonatomic,readonly)  WattUser *system;
+@property (nonatomic,readonly)  WattGroup *systemGroup;
 @property (nonatomic,strong)    NSFileManager *fileManager;
-@property (nonatomic,strong)    WattAcl *acl;
 
 // The files with those extensions can be mixed in the soup
 // You can add any binary format by adding its extension to mixableExtensions
@@ -68,10 +99,7 @@ typedef enum watt_F_TYPES{
 //That defines the format & soup behaviour
 -(void)use:(Watt_F_TYPE)ftype;
 
-
-// WattMApi singleton accessor
-+ (WattApi*)sharedInstance;
-
+- (void)configureOnce;
 
 #pragma mark - Registry 
 
@@ -81,125 +109,34 @@ typedef enum watt_F_TYPES{
        reIndexUinstID:(BOOL)index;
 
 
-#pragma mark - /// MULTIMEDIA API ///
+#pragma mark - ACL 
+
+#pragma mark - rights facilities
+
+- (void)applyRights:(NSUInteger)rights
+           andOwner:(WattUser*)owner
+                 on:(WattModel*)model;
+
+- (NSString*)rightsFromInteger:(NSUInteger)numericRights;
+
+- (NSUInteger)rightsFromString:(NSString*)stringRights;
 
 
-#pragma mark -Shelf
+#pragma  mark - access control
 
-// Creates a shelf, a user , the local group, a package with a shared lib ...
--(WTMShelf*)createShelfWithName:(NSString*)name;
+// The acl method
+- (BOOL)actionIsAllowed:(Watt_Action)action on:(WattModel*)model;
 
-// A facility to generate symboliclink for package and libraries
-- (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf;
-
-// No remove method actually (need to be analyzed)
-
-#pragma mark - User and groups
-
-- (WTMUser*)createUserInShelf:(WTMShelf*)shelf;
-- (WTMGroup*)createGroupInShelf:(WTMShelf*)shelf;
-- (void)addUser:(WTMUser*)user toGroup:(WTMGroup*)group;
-
-// No remove method actually (need to be analyzed) 
-
-#pragma mark - Menus & section 
-
-- (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf;
-- (void)removeSection:(WTMMenuSection*)section;
-- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section;
-- (void)removeMenu:(WTMMenu*)menu;
-
-#pragma mark - Package
-
-// Create a package and it default library
-- (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;
-
-- (void)removePackage:(WTMPackage*)package;
-
-// Immport process this method can move a package from a registry to another
-// Producing renamming of assets and performing re-identification
-- (void)addPackage:(WTMPackage*)package
-          toShelf:(WTMShelf*)shelf;
-
-- (NSArray*)dependenciesPathForPackage:(WTMPackage*)package;
+- (BOOL)actionIsAllowed:(Watt_Action)action
+             withRights:(NSUInteger)rights
+             imTheOwner:(BOOL)owned
+      imInTheOwnerGroup:(BOOL)inTheGroup;
 
 
-#pragma mark - Library
-
-- (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package;
-- (void)removeLibrary:(WTMLibrary*)library;
-
-- (NSArray*)dependenciesPathForLibrary:(WTMLibrary*)library;
-
-#pragma mark - Activity
-
-- (WTMActivity*)createActivityInPackage:(WTMPackage*)package;
-- (void)removeActivity:(WTMActivity*)activity;
+- (BOOL)mIOwnerOf:(WattModel*)model;
+- (BOOL)mIIntheGroup:(WattGroup*)group;
 
 
-#pragma mark - Scene
-
-- (WTMScene*)createSceneInActivity:(WTMActivity*)activity;
-- (void)removeScene:(WTMScene*)scene;
-
-#pragma mark - Element 
-
-// scene & asset must not be nil
-// behavior is optionnal
--(WTMElement*)createElementInScene:(WTMScene*)scene
-                         withAsset:(WTMAsset*)asset
-                       andBehavior:(WTMBehavior*)behavior;
-
--(void)removeElement:(WTMElement*)element;
-
-#pragma mark -  Bands 
-
-// Bands
-- (WTMBand*)createBandInLibrary:(WTMLibrary*)library
-             withMembers:(NSArray*)members;
-
-
-// Call purgeMemberIfNecessary on any member.
-
-- (void)purgeBandIfNecessary:(WTMBand*)band;
-
-// Removing band  will remove and force the purge.
-- (void)removeBand:(WTMBand*)band;
-
-
-#pragma mark -  Members
-
-// Use this section of the api to add member.
-// The underlining refererCounter is automaticly managed
-// Purging  a member or band from a library can automatically delete the linked files
-
-// Linked assets dependencies
-// Library 1<->n member
-
-// Band n<->n member
-// Library 1<->n member
-
-
-- (WTMBehavior*)createBehaviorMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMHtml*)createHtmlMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMVideo*)createVideoMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMImage*)createImageMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMSound*)createSoundMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMPdf*)createPdfMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMHyperlink*)createHyperlinkMemberInLibrary:(WTMLibrary*)library;
-
-- (WTMLabel*)createLabelMemberInLibrary:(WTMLibrary*)library;
-
-- (void)purgeMemberIfNecessary:(WTMMember*)member;
-
-// Removing member  will remove and force the purge.
-- (void)removeMember:(WTMMember*)member;
 
 
 #pragma mark localization

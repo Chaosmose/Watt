@@ -23,7 +23,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kRootUinstID 1
+#define kWattRegistryRootUinstID 1
 
 @class WattObject;
 @class WattCollectionOfObject;
@@ -33,7 +33,16 @@
 // The registry name is used for external purpose
 // eg : defining a file path to store serialized registry and associated bundle
 // Notice that the mane is never serialized.
-@property (nonatomic,copy)NSString* name; 
+@property (nonatomic,copy)NSString* name;
+
+
+// WattDelta
+
+@property (nonatomic,strong)NSDate *creationDate;
+@property (nonatomic,strong)NSDate *lastSerializationDate;
+@property (nonatomic,strong)NSString *uniqueIdentifier;
+@property (nonatomic,strong)NSMutableArray *deltas;
+
 
 
 #pragma mark - Serialization/Deserialization facilities

@@ -92,12 +92,8 @@ __LINE__ ,\
 
 #ifndef WT_MACROS
 #define WT_MACROS
-#define wattAPI [WattApi sharedInstance]
 #define wattPackager [WattMPackager sharedInstance]
-#define wattTodo(message) [wattAPI wattTodo:message]
 #endif
-
-
 
 #endif
 
@@ -116,13 +112,15 @@ __LINE__ ,\
 @interface WattObject : NSObject<WattCoding>{
     @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
-    WattApi *_wapi;
     NSInteger _uinstID;
     @protected
     NSString *_currentLocale;           // The locale that has been used for localization
     WattRegistry*_registry;
     BOOL _isAnAlias;
 }
+
+
+
 
 
 #pragma mark - registry
