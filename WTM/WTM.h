@@ -22,7 +22,7 @@
 // WTM is built on Watt
 #import "Watt.h"
 #import "WTMApi.h"
-#import "WTMPackager.h"
+
 
 #ifndef WTM_MACROS
 #define WTM_MACROS
