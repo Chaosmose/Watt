@@ -27,9 +27,7 @@
 #import "SVProgressHUD.h"
 #endif
 
-
 @interface WTMPackager : NSObject
-
 
 // WTMPackager singleton accessor
 + (WTMPackager*)sharedInstance;

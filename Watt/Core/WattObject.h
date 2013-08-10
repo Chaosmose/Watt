@@ -90,10 +90,6 @@ __LINE__ ,\
 #endif
 
 
-#ifndef WT_MACROS
-#define WT_MACROS
-#define wattPackager [WattMPackager sharedInstance]
-#endif
 
 #endif
 
