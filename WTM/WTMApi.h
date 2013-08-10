@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WattApi.h"
+#import "WTM.h"
+#import "WTMModelsImports.h"
 
 @interface WTMApi : WattApi
 
