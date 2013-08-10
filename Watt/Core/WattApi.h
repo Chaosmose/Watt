@@ -31,7 +31,40 @@
 #import "WattObject.h"
 #import "WTMModelsImports.h"
 
+////////////
+// WATT_ACL
+////////////
 
+
+// Watt acl was inspired by the unix permissions.
+// Most of the time WattModels are not owned by anyone!
+// Owned object are used only if complex workflows can apply.
+
+/*
+ 
+ A classic approach to protect an object is to use the "system" user
+ 
+ [<API> applyRights:[<API> rightsFromString:@"RWXR--R--"]
+            andOwner:<API>.system
+                 on:objectReference];
+ */
+
+typedef enum watt_Actions{
+    WattREAD=0,     //view the file
+    WattWRITE=1,    //create, edit or delete
+    WattEXECUTE=2   //run a script or enter a directory ?
+}Watt_Action;
+
+
+#ifndef WATT_ACL_CONST
+#define WATT_ACL_CONST
+#define WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME @"WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME"
+#endif
+
+
+////////////
+// WATT_SOUP
+////////////
 
 typedef enum watt_F_TYPES{
     WattJx=0,   // Json + soup      * Default
@@ -40,41 +73,6 @@ typedef enum watt_F_TYPES{
     WattP=3     // Plist + no soup
 }Watt_F_TYPE;
 
-
-
-// WATT_ACL
-
-typedef enum watt_Actions{
-    WattREAD=0,     //view the file
-    WattWRITE=1,    //create, edit or delete
-    WattEXECUTE=2   //run a script or enter a directory ?
-}Watt_Action;
-
-// Watt acl was inspired by the unix permissions.
-// http://mason.gmu.edu/~montecin/UNIXpermiss.htm
-
-// But !
-// Most of the time WTMModels are not owned by anyone.
-// Owned object are used only if complex workflows can apply.
-// By default a user owns mosts of the objects.
-
-/*
- 
- A classic approach to protect an object is to use the "system" user
- 
- [<API> applyRights:[<API> rightsFromString:@"RWXR--R--"]
- andOwner:<API>.system
- on:objectReference];
- */
-
-#ifndef WATT_ACL_CONST
-#define WATT_ACL_CONST
-#define WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME @"WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME"
-#endif
-
-
-
-#pragma mark - WattApi
 
 @protocol WTMlocalizationDelegateProtocol;
 
