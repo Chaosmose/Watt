@@ -12,7 +12,4 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files =  'Watt','WTM/**/*.{h,m}'
   s.public_header_files = 'WTM/**/*.h'
-  s.dependency 'SSZipArchive','~> 0.2.2'
-  s.dependency 'AFNetworking','~> 1.3.1'
-  s.ios.dependency 'SVProgressHUD'
 end
