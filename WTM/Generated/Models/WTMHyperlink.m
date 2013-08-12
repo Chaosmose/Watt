@@ -24,11 +24,14 @@
 @implementation WTMHyperlink 
 
 @synthesize allowExploration=_allowExploration;
+@synthesize updateUrlOnChange=_updateUrlOnChange;
 @synthesize urlString=_urlString;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"allowExploration"]){
 		[super setValue:value forKey:@"allowExploration"];
+	} else if ([key isEqualToString:@"updateUrlOnChange"]) {
+		[super setValue:value forKey:@"updateUrlOnChange"];
 	} else if ([key isEqualToString:@"urlString"]) {
 		[super setValue:value forKey:@"urlString"];
 	} else {
@@ -48,6 +51,7 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:[NSNumber numberWithBool:self.allowExploration] forKey:@"allowExploration"];
+	[dictionary setValue:[NSNumber numberWithBool:self.updateUrlOnChange] forKey:@"updateUrlOnChange"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
     return dictionary;
 }
@@ -59,6 +63,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMHyperlink ",self.uinstID];
 	[s appendFormat:@"allowExploration : %@\n",[NSNumber numberWithBool:self.allowExploration]];
+	[s appendFormat:@"updateUrlOnChange : %@\n",[NSNumber numberWithBool:self.updateUrlOnChange]];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	return s;
 }

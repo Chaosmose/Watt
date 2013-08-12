@@ -7,6 +7,7 @@
 //
 
 #import "WTM.h"
+//Import of flexion generated classes
 #import "WTMModelsImports.h"
 
 @interface WTMApi : WattApi

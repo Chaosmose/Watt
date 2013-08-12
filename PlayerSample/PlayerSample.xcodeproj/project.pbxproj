@@ -98,8 +98,8 @@
 		E50004F217B6655300E50D70 /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
 		E50004F617B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */; };
 		E50004F717B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */; };
-		E50004FB17B66B1300E50D70 /* WTMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004FA17B66B1300E50D70 /* WTMPackager.m */; };
-		E50004FC17B66B1300E50D70 /* WTMPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004FA17B66B1300E50D70 /* WTMPackager.m */; };
+		E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
+		E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E5A9EBF11799242F00976997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
 		E5A9EBF21799242F00976997 /* WTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462541732A4A000E654A1 /* WTMAppDelegate.m */; };
 		E5A9EBF31799242F00976997 /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
@@ -233,8 +233,8 @@
 		E50004F017B6655200E50D70 /* WTMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMApi.m; sourceTree = "<group>"; };
 		E50004F417B66A7B00E50D70 /* UIImage+wattAdaptive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+wattAdaptive.h"; sourceTree = "<group>"; };
 		E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+wattAdaptive.m"; sourceTree = "<group>"; };
-		E50004F917B66B1300E50D70 /* WTMPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMPackager.h; sourceTree = "<group>"; };
-		E50004FA17B66B1300E50D70 /* WTMPackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMPackager.m; sourceTree = "<group>"; };
+		E51AC40D17B9129900E9DC83 /* WattBundlePackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattBundlePackager.h; sourceTree = "<group>"; };
+		E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattBundlePackager.m; sourceTree = "<group>"; };
 		E5A9EC331799242F00976997 /* PlayerSampleFlexions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSampleFlexions.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462411732A4A000E654A1 /* PlayerSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5B462441732A4A000E654A1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -295,7 +295,6 @@
 		E50003FB17B6428100E50D70 /* WTM */ = {
 			isa = PBXGroup;
 			children = (
-				E50004F817B66B1300E50D70 /* Packager */,
 				E50004F317B66A7A00E50D70 /* Categories */,
 				E50003FD17B645C200E50D70 /* Generated */,
 				E50003FC17B642C300E50D70 /* WTM.h */,
@@ -421,11 +420,11 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		E50004F817B66B1300E50D70 /* Packager */ = {
+		E51AC40C17B9129900E9DC83 /* Packager */ = {
 			isa = PBXGroup;
 			children = (
-				E50004F917B66B1300E50D70 /* WTMPackager.h */,
-				E50004FA17B66B1300E50D70 /* WTMPackager.m */,
+				E51AC40D17B9129900E9DC83 /* WattBundlePackager.h */,
+				E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */,
 			);
 			path = Packager;
 			sourceTree = "<group>";
@@ -497,6 +496,7 @@
 		E5CAD21B1799A1A400D22369 /* Watt */ = {
 			isa = PBXGroup;
 			children = (
+				E51AC40C17B9129900E9DC83 /* Packager */,
 				E50004A017B6468700E50D70 /* Generated */,
 				E5CAD2211799A1A400D22369 /* Core */,
 				E5CAD2831799A1A400D22369 /* Watt.h */,
@@ -696,7 +696,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../FlexionsWatt/\n. flexions.sh\ncd ../FlexionsWTM/\n. flexions.sh";
+			shellScript = "cd ../FlexionsWatt/\n. flexions.sh\n\ncd ../FlexionsWTM/\n. flexions.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -757,7 +757,7 @@
 				E50004EE17B64A9B00E50D70 /* WattUser.m in Sources */,
 				E50004F217B6655300E50D70 /* WTMApi.m in Sources */,
 				E50004F717B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */,
-				E50004FC17B66B1300E50D70 /* WTMPackager.m in Sources */,
+				E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,7 +817,7 @@
 				E50004ED17B64A9B00E50D70 /* WattUser.m in Sources */,
 				E50004F117B6655300E50D70 /* WTMApi.m in Sources */,
 				E50004F617B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */,
-				E50004FB17B66B1300E50D70 /* WTMPackager.m in Sources */,
+				E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

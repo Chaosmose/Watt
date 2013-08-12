@@ -35,8 +35,6 @@
 #import "WTMRule.h"
 #import "WTMCollectionOfElement.h"
 #import "WTMScene.h"
-#import "WattCollectionOfGroup.h"
-#import "WattCollectionOfUser.h"
 #import "WTMCollectionOfPackage.h"
 #import "WTMCollectionOfImage.h"
 #import "WTMCollectionOfMenuSection.h"

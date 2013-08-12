@@ -29,5 +29,4 @@
 #define wtmAPI [WTMApi sharedInstance]
 #endif
 
-//Import of flexion generated classes
-#import "WTMModelsImports.h"
+
