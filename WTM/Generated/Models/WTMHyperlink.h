@@ -27,6 +27,7 @@
 }
 
 @property (nonatomic,assign) BOOL  allowExploration;
+@property (nonatomic,assign) BOOL  updateImageOnChange;
 @property (nonatomic,assign) BOOL  updateUrlOnChange;
 @property (nonatomic,copy) NSString * urlString;
 
