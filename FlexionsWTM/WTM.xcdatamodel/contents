@@ -50,6 +50,7 @@
     </entity>
     <entity name="Hyperlink" representedClassName="Hyperlink" parentEntity="Asset" syncable="YES">
         <attribute name="allowExploration" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="updateUrlOnChange" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Image" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
@@ -163,14 +164,14 @@
         <element name="Behavior" positionX="-7389" positionY="-3636" width="128" height="88"/>
         <element name="Element" positionX="-6417" positionY="-3748" width="128" height="118"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
-        <element name="Hyperlink" positionX="-6615" positionY="-3501" width="128" height="73"/>
+        <element name="Hyperlink" positionX="-6615" positionY="-3537" width="128" height="88"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
         <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
         <element name="LangDictionary" positionX="-7274" positionY="-4228" width="128" height="88"/>
         <element name="Library" positionX="-7119" positionY="-3951" width="126" height="103"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="58"/>
         <element name="Member" positionX="-7137" positionY="-3771" width="128" height="103"/>
-        <element name="Menu" positionX="-6975" positionY="-4464" width="128" height="178"/>
+        <element name="Menu" positionX="-7254" positionY="-4590" width="128" height="178"/>
         <element name="MenuSection" positionX="-7472" positionY="-4491" width="128" height="133"/>
         <element name="Operand" positionX="-7695" positionY="-3753" width="128" height="58"/>
         <element name="Operator" positionX="-7760" positionY="-3681" width="128" height="58"/>
