@@ -1,4 +1,4 @@
-// This file is part of "WTM"
+// This file is part of "Watt"
 //
 // "Watt" is free software: you can redistribute it and/or modify
 // it under the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by
@@ -13,24 +13,37 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
-//  WTM.h
+//  WattBundlePackager.h
 //
-//  Created by Benoit Pereira da Silva on 10/08/2013
+//  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
+//
 
+#import <Foundation/Foundation.h>
+#import "SSZipArchive.h"
 
-// WTM is built on Watt
-#import "Watt.h"
-#import "WTMApi.h"
-
-
-#ifndef WTM_MACROS
-#define WTM_MACROS
-#define wtmAPI [WTMApi sharedInstance]
+#if TARGET_OS_IPHONE
+#import "SVProgressHUD.h"
 #endif
 
-#ifndef WTM_CONST
-#define WTM_CONST
-#endif
+@class WattApi;
 
 
+@interface WattBundlePackager : NSObject
+
+// WTMPackager singleton accessor
++ (WattBundlePackager*)sharedInstance;
+
+// You must set the this property before to use the WattBundlePackager
+@property (nonatomic,weak) WattApi *api;
+
+#pragma mark - packaging
+
+-(void)packWattBundleWithName:(NSString*)name
+                    withBlock:(void (^)(BOOL success))block;
+
+-(void)unPackWattBundleWithName:(NSString*)name
+                  withBlock:(void (^)(BOOL success))block;
+
+
+@end

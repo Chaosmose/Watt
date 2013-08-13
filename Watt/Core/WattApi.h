@@ -149,7 +149,11 @@ typedef enum watt_F_TYPES{
 
 #pragma mark - relative path and path discovery
 
+
+// Returns existing paths only
 - (NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
+
+// Returns existing paths only
 - (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
 
 #pragma  mark - file paths 

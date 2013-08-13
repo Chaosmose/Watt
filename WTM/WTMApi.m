@@ -72,8 +72,8 @@
                 
                 if([self.fileManager fileExistsAtPath:s] && ![self.fileManager fileExistsAtPath:d]){
                     [self.fileManager createSymbolicLinkAtPath:d
-                                              withDestinationPath:s
-                                                            error:&error];
+                                           withDestinationPath:s
+                                                         error:&error];
                     if(error){
                         WTLog(@"Error :%@",[error localizedDescription]);
                     }
@@ -86,8 +86,8 @@
                     if([self.fileManager fileExistsAtPath:ls] && ![self.fileManager fileExistsAtPath:ld]){
                         
                         [self.fileManager createSymbolicLinkAtPath:ld
-                                                  withDestinationPath:ls
-                                                                error:&error];
+                                               withDestinationPath:ls
+                                                             error:&error];
                         if(error){
                             WTLog(@"Error :%@",[error localizedDescription]);
                         }
@@ -536,26 +536,27 @@
 
 // Removing member  will remove and force the purge.
 - (void)removeMember:(WTMMember*)member{
-    
+    NSString *relativePath=nil;
     // Deletion of dependent files
     if([member respondsToSelector:@selector(relativePath)]){
-        NSString *relativePath=[member performSelector:@selector(relativePath)];
-        if(relativePath){
-            NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
-                                                                   all:YES];
-            for (NSString *pathToDelete in absolutePaths) {
-                NSError *error=nil;
-                [self.fileManager removeItemAtPath:pathToDelete
-                                                error:&error];
-                if(error){
-                    WTLog(@"Impossible to delete %@",pathToDelete);
-                }
+        relativePath=[member performSelector:@selector(relativePath)];
+    }else if ([member respondsToSelector:@selector(urlString)]){
+        relativePath=[member performSelector:@selector(urlString)];
+    }
+    if(relativePath){
+        NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
+                                                               all:YES];
+        for (NSString *pathToDelete in absolutePaths) {
+            NSError *error=nil;
+            [self.fileManager removeItemAtPath:pathToDelete
+                                         error:&error];
+            if(error){
+                WTLog(@"Impossible to delete %@",pathToDelete);
             }
         }
     }
     [member.library.members removeObject:member];
     [member autoUnRegister];
-    
 }
 
 
