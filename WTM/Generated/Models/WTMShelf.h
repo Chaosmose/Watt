@@ -21,6 +21,8 @@
  
 
 #import "WattModel.h"
+@class WattCollectionOfGroup;
+@class WattCollectionOfUser;
 @class WTMCollectionOfPackage;
 @class WTMCollectionOfImage;
 @class WTMCollectionOfMenuSection;
