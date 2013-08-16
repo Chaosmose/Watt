@@ -102,8 +102,7 @@
     //[r2 unRegisterObject:members];
     
     
-    // ANY WattObject should be unRegisterObject to purge it from its register.
-    // OR you can "purge" the whole registry (Best practice)
+
 
 /*
     // Graph representations

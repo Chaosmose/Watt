@@ -131,6 +131,8 @@ __LINE__ ,\
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier; //Used for reinstanciation from a device to another
 - (instancetype)initAsAliasWithIdentifier:(NSInteger)identifier; // instanciate an alias
 
+// ANY WattObject should be unRegistered to be released from its registry
+// autoUnRegister is a facility
 -(void)autoUnRegister;
 
 // Do not call directly!
