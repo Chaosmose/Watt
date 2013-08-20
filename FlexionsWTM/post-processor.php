@@ -51,7 +51,7 @@ $f=new Flexed();
 // This include sets $f properties
 include  FLEXIONS_SOURCE_DIR."variables.php";
 $f->package="";
-$f->fileName="WTMModelsImports.h";
+$f->fileName=$prefix."ModelsImports.h";
 
 // We save the generated headers.
 $filePath= $destination .$f->package. $f->fileName;

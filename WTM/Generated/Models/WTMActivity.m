@@ -28,7 +28,6 @@
 
 @synthesize controllerClass=_controllerClass;
 @synthesize level=_level;
-@synthesize nature=_nature;
 @synthesize rating=_rating;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
@@ -41,8 +40,6 @@
 		[super setValue:value forKey:@"controllerClass"];
 	} else if ([key isEqualToString:@"level"]) {
 		[super setValue:value forKey:@"level"];
-	} else if ([key isEqualToString:@"nature"]) {
-		[super setValue:value forKey:@"nature"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
 	} else if ([key isEqualToString:@"shortName"]) {
@@ -142,7 +139,6 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
-	[dictionary setValue:self.nature forKey:@"nature"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
@@ -178,7 +174,6 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMActivity ",self.uinstID];
 	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
-	[s appendFormat:@"nature : %@\n",self.nature];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];

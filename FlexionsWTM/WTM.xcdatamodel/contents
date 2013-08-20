@@ -14,7 +14,6 @@
     <entity name="Activity" representedClassName="Activity" syncable="YES">
         <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="nature" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -159,7 +158,7 @@
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="75"/>
-        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="180"/>
+        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="163"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Band" positionX="-7346" positionY="-3946" width="128" height="88"/>
         <element name="Behavior" positionX="-7389" positionY="-3636" width="128" height="88"/>
