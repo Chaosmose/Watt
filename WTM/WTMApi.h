@@ -10,9 +10,16 @@
 //Import of flexion generated classes
 #import "WTMModelsImports.h"
 
+/**
+ * The WTM Api 
+ */
 @interface WTMApi : WattApi
 
-// WattMApi singleton accessor
+/**
+ *  Its singleton accessor
+ *
+ *  @return the unique instance of WTMApi
+ */
 + (WTMApi*)sharedInstance;
 
 #pragma mark - /// MULTIMEDIA API ///
@@ -76,15 +83,58 @@
 - (WTMScene*)createSceneInActivity:(WTMActivity*)activity;
 - (void)removeScene:(WTMScene*)scene;
 
-#pragma mark - Element
+#pragma mark - Element + cells
 
-// scene & asset must not be nil
-// behavior is optionnal
--(WTMElement*)createElementInScene:(WTMScene*)scene
-                         withAsset:(WTMAsset*)asset
-                       andBehavior:(WTMBehavior*)behavior;
+/**
+ *  Creates a new element
+ *
+ *  @param asset    a valid asset (not nil)
+ *  @param behavior optionnal reference to a behavior
+ *  @param scene    the parent scene
+ *
+ *  @return a new WTMELement
+ */
+- (WTMElement*)createElementWithAsset:(WTMAsset*)asset
+                          andBehavior:(WTMBehavior*)behavior
+                              inScene:(WTMScene*)scene;
 
--(void)removeElement:(WTMElement*)element;
+
+/**
+ *  Removes and unregisters the element and all it cells.
+ *
+ *  @param element the WTMELement to be removed from the scene.
+ */
+- (void)removeElement:(WTMElement*)element;
+    
+/**
+ *  Creates a new line in the column, and a cell referecing an element
+ *  If the element is not
+ *
+ *  @param element    an element is an "occurence" of a member
+ *  @param attributes a dictionary with key, value attributes
+ *  @param column     the destination column, if nil a new column is created
+ *  @param scene      the parent scene
+ *
+ *  @return a new WTMcell.
+ */
+- (WTMCell*)createCellInANewLineFor:(WTMElement*)element
+                     withAttributes:(NSDictionary*)attributes
+                           inColumn:(WTMColumn*)column
+                           forScene:(WTMScene*)scene;
+
+/**
+ *  Removes and unregisters the cell 
+ *  And deletes 
+ *  1- its line,
+ *  2- its column if there are no other element in the column
+ *  
+ *  But preserves the element.
+ *
+ *  @param cell the cell to be removed.
+ */
+-(void)removeCell:(WTMCell*)cell;
+
+
 
 #pragma mark -  Bands
 

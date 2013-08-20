@@ -26,7 +26,6 @@
 
 @implementation WTMActivity 
 
-@synthesize controllerClass=_controllerClass;
 @synthesize level=_level;
 @synthesize rating=_rating;
 @synthesize shortName=_shortName;
@@ -36,9 +35,7 @@
 @synthesize scenes=_scenes;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"controllerClass"]){
-		[super setValue:value forKey:@"controllerClass"];
-	} else if ([key isEqualToString:@"level"]) {
+	if ([key isEqualToString:@"level"]){
 		[super setValue:value forKey:@"level"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
@@ -137,7 +134,6 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
@@ -172,7 +168,6 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMActivity ",self.uinstID];
-	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
 	[s appendFormat:@"shortName : %@\n",self.shortName];

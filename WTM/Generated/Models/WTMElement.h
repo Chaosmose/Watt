@@ -23,19 +23,20 @@
 #import "WattModel.h"
 @class WTMAsset;
 @class WTMBehavior;
+@class WTMCollectionOfCell;
 @class WTMScene;
 
 @interface WTMElement:WattModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * controllerClass;
-@property (nonatomic,copy) NSString * rect;
 @property (nonatomic,strong) WTMAsset * asset;
 @property (nonatomic,strong) WTMBehavior * behavior;
+@property (nonatomic,strong) WTMCollectionOfCell * cells;
 @property (nonatomic,strong) WTMScene * scene;
 
 - (WTMAsset*)asset_auto;
 - (WTMBehavior*)behavior_auto;
+- (WTMCollectionOfCell*)cells_auto;
 - (WTMScene*)scene_auto;
 
 @end

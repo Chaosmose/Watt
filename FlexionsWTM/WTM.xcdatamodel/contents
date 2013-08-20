@@ -12,7 +12,6 @@
         </userInfo>
     </entity>
     <entity name="Activity" representedClassName="Activity" syncable="YES">
-        <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shortName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,12 +36,25 @@
         <relationship name="action" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Action" syncable="YES"/>
         <relationship name="trigger" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Rule" syncable="YES"/>
     </entity>
+    <entity name="Cell" syncable="YES">
+        <attribute name="attributes" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="type" value="dictionary"/>
+            </userInfo>
+        </attribute>
+        <relationship name="column" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Column" inverseName="cells" inverseEntity="Column" syncable="YES"/>
+        <relationship name="element" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Element" inverseName="cells" inverseEntity="Element" syncable="YES"/>
+        <relationship name="line" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Line" inverseName="cells" inverseEntity="Line" syncable="YES"/>
+    </entity>
+    <entity name="Column" syncable="YES">
+        <relationship name="cells" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cell" inverseName="column" inverseEntity="Cell" syncable="YES"/>
+        <relationship name="lines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Line" syncable="YES"/>
+    </entity>
     <entity name="Element" representedClassName="Element" syncable="YES">
-        <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="rect" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="asset" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Asset" syncable="YES"/>
         <relationship name="behavior" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Behavior" syncable="YES"/>
-        <relationship name="scene" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
+        <relationship name="cells" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cell" inverseName="element" inverseEntity="Cell" syncable="YES"/>
+        <relationship name="scene" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Html" representedClassName="Html" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
@@ -70,6 +82,9 @@
         <relationship name="bands" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Band" inverseName="library" inverseEntity="Band" syncable="YES"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Member" inverseName="library" inverseEntity="Member" syncable="YES"/>
         <relationship name="package" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Package" inverseName="libraries" inverseEntity="Package" syncable="YES"/>
+    </entity>
+    <entity name="Line" syncable="YES">
+        <relationship name="cells" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cell" inverseName="line" inverseEntity="Cell" syncable="YES"/>
     </entity>
     <entity name="LinkedAsset" representedClassName="LinkedAsset" parentEntity="Asset" syncable="YES">
         <attribute name="relativePath" optional="YES" attributeType="String" syncable="YES"/>
@@ -125,14 +140,13 @@
         <relationship name="operator" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Operator" syncable="YES"/>
     </entity>
     <entity name="Scene" representedClassName="Scene" syncable="YES">
-        <attribute name="controllerClass" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="rect" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Activity" inverseName="scenes" inverseEntity="Activity" syncable="YES"/>
         <relationship name="behavior" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Behavior" syncable="YES"/>
         <relationship name="elements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Element" inverseName="scene" inverseEntity="Element" syncable="YES"/>
         <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
+        <relationship name="table" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Table" syncable="YES"/>
     </entity>
     <entity name="Shelf" representedClassName="Shelf" syncable="YES">
         <attribute name="groups" optional="YES" attributeType="String" syncable="YES">
@@ -153,22 +167,28 @@
     <entity name="Sound" representedClassName="Sound" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="Table" syncable="YES">
+        <relationship name="columns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Column" syncable="YES"/>
+    </entity>
     <entity name="Video" representedClassName="Video" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="Action" positionX="-7542" positionY="-3753" width="128" height="75"/>
-        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="163"/>
+        <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="148"/>
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
-        <element name="Band" positionX="-7346" positionY="-3946" width="128" height="88"/>
+        <element name="Band" positionX="-7319" positionY="-3996" width="128" height="88"/>
         <element name="Behavior" positionX="-7389" positionY="-3636" width="128" height="88"/>
-        <element name="Element" positionX="-6417" positionY="-3748" width="128" height="118"/>
+        <element name="Cell" positionX="-6489" positionY="-3973" width="128" height="103"/>
+        <element name="Column" positionX="-6669" positionY="-3835" width="128" height="73"/>
+        <element name="Element" positionX="-6165" positionY="-3676" width="128" height="103"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3537" width="128" height="103"/>
         <element name="Image" positionX="-7011" positionY="-3330" width="128" height="58"/>
         <element name="Label" positionX="-6615" positionY="-3421" width="128" height="73"/>
         <element name="LangDictionary" positionX="-7274" positionY="-4228" width="128" height="88"/>
         <element name="Library" positionX="-7119" positionY="-3951" width="126" height="103"/>
+        <element name="Line" positionX="-6525" positionY="-3730" width="128" height="58"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="58"/>
         <element name="Member" positionX="-7137" positionY="-3771" width="128" height="103"/>
         <element name="Menu" positionX="-7254" positionY="-4590" width="128" height="178"/>
@@ -178,9 +198,10 @@
         <element name="Package" positionX="-7139" positionY="-4228" width="128" height="163"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
         <element name="Rule" positionX="-7544" positionY="-3519" width="128" height="103"/>
-        <element name="Scene" positionX="-6606" positionY="-4027" width="128" height="163"/>
+        <element name="Scene" positionX="-6644" positionY="-4120" width="128" height="148"/>
         <element name="Shelf" positionX="-7733" positionY="-4329" width="128" height="133"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
+        <element name="Table" positionX="-6831" positionY="-3897" width="128" height="58"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
     </elements>
 </model>

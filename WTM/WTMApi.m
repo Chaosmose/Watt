@@ -365,9 +365,19 @@
 
 #pragma mark - Element
 
-- (WTMElement*)createElementInScene:(WTMScene*)scene
-                          withAsset:(WTMAsset*)asset
-                        andBehavior:(WTMBehavior*)behavior{
+
+/**
+ *  Creates a new element
+ *
+ *  @param asset    a valid asset (not nil)
+ *  @param behavior optionnal reference to a behavior
+ *  @param scene    the parent scene
+ *
+ *  @return a new WTMELement
+ */
+- (WTMElement*)createElementWithAsset:(WTMAsset*)asset
+                          andBehavior:(WTMBehavior*)behavior
+                              inScene:(WTMScene*)scene{
     if(!scene)
         [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createElementInScene:withAsset:andBehavior:))];
     if(!asset)
@@ -376,28 +386,112 @@
     
     if([self actionIsAllowed:WattWRITE on:scene.activity]){
         WTMElement *element=[[WTMElement alloc] initInRegistry:self.currentRegistry];
-        element.scene=scene;
         element.asset=asset;
+        element.scene=scene;
         if(behavior){
             element.behavior=behavior;
             element.behavior.refererCounter++;
         }
         asset.refererCounter++;
-        [scene.elements addObject:element];
+        [scene.elements_auto addObject:element];
+        
+        return element;
     }
     return nil;
 }
 
 
+/**
+ *  Removes and unregisters the element and all it cells.
+ *
+ *  @param element the WTMELement to be removed from the scene.
+ */
 - (void)removeElement:(WTMElement*)element{
     if([self actionIsAllowed:WattWRITE on:element]){
+        
         [element.scene.elements removeObject:element];
         element.scene=nil;
+        
+        [element.cells enumerateObjectsUsingBlock:^(WTMCell *obj, NSUInteger idx, BOOL *stop) {
+            [self removeCell:obj];
+        }];
+        
         [self purgeMemberIfNecessary:element.asset];
         [self purgeMemberIfNecessary:element.behavior];
+        
         [element autoUnRegister];
     }
 }
+
+/**
+ *  Creates a new line in the column, and a cell referecing an element
+ *  If the element is not
+ *
+ *  @param element    an element is an "occurence" of a member
+ *  @param attributes a dictionary with key, value attributes
+ *  @param column     the destination column, if nil a new column is created
+ *  @param scene      the parent scene
+ *
+ *  @return a new WTMcell.
+ */
+- (WTMCell*)createCellInANewLineFor:(WTMElement*)element
+                     withAttributes:(NSDictionary*)attributes
+                           inColumn:(WTMColumn*)column
+                           forScene:(WTMScene*)scene{
+    if(!scene)
+        [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+    
+    if(!element)
+        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+
+    if(!column){
+        column=[[WTMColumn alloc] initInRegistry:self.currentRegistry];
+        [scene.table_auto.columns_auto addObject:column];
+    }
+
+    WTMLine *line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
+    [column.lines_auto addObject:line];
+    
+    WTMCell *cell=[[WTMCell alloc] initInRegistry:self.currentRegistry];
+    cell.column=column;
+    cell.line=line;
+    cell.element=element;
+    cell.attributes=attributes;
+    
+    return cell;
+}
+
+/**
+ *  Removes and unregisters the cell
+ *  And deletes
+ *  1- its line,
+ *  2- its column if there are no other element in the column
+ *
+ *  But preserves the element (it nullifies its reference)
+ *
+ *  @param cell the cell to be removed.
+ */
+-(void)removeCell:(WTMCell*)cell{
+
+    [cell.element.cells removeObject:cell];
+    cell.element=nil;
+    
+    if([cell.line.cells_auto count]==1){
+        [cell.column.lines removeObject:cell.line];
+        [cell.line autoUnRegister];
+    }
+    
+    if([cell.element.scene.table.columns count]==1){
+        [cell.element.scene.table.columns removeObject:cell.column];
+        [cell.column autoUnRegister];
+    }
+    
+    cell.line=nil;
+    cell.column=nil;
+    [cell autoUnRegister];
+}
+
+
 
 #pragma mark -  Bands
 

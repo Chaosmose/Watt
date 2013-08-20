@@ -132,6 +132,20 @@
 		E5CAD28D1799A1A400D22369 /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2291799A1A400D22369 /* WattObject.m */; };
 		E5CAD28E1799A1A400D22369 /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22B1799A1A400D22369 /* WattRegistry.m */; };
 		E5CAD28F1799A1A400D22369 /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22B1799A1A400D22369 /* WattRegistry.m */; };
+		E5D4E27017C37B3B000F3679 /* WTMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26317C37B3A000F3679 /* WTMCell.m */; };
+		E5D4E27117C37B3B000F3679 /* WTMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26317C37B3A000F3679 /* WTMCell.m */; };
+		E5D4E27217C37B3B000F3679 /* WTMCollectionOfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26517C37B3A000F3679 /* WTMCollectionOfCell.m */; };
+		E5D4E27317C37B3B000F3679 /* WTMCollectionOfCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26517C37B3A000F3679 /* WTMCollectionOfCell.m */; };
+		E5D4E27417C37B3B000F3679 /* WTMCollectionOfColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26717C37B3B000F3679 /* WTMCollectionOfColumn.m */; };
+		E5D4E27517C37B3B000F3679 /* WTMCollectionOfColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26717C37B3B000F3679 /* WTMCollectionOfColumn.m */; };
+		E5D4E27617C37B3B000F3679 /* WTMCollectionOfLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26917C37B3B000F3679 /* WTMCollectionOfLine.m */; };
+		E5D4E27717C37B3B000F3679 /* WTMCollectionOfLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26917C37B3B000F3679 /* WTMCollectionOfLine.m */; };
+		E5D4E27817C37B3B000F3679 /* WTMColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26B17C37B3B000F3679 /* WTMColumn.m */; };
+		E5D4E27917C37B3B000F3679 /* WTMColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26B17C37B3B000F3679 /* WTMColumn.m */; };
+		E5D4E27A17C37B3B000F3679 /* WTMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26D17C37B3B000F3679 /* WTMLine.m */; };
+		E5D4E27B17C37B3B000F3679 /* WTMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26D17C37B3B000F3679 /* WTMLine.m */; };
+		E5D4E27C17C37B3B000F3679 /* WTMTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26F17C37B3B000F3679 /* WTMTable.m */; };
+		E5D4E27D17C37B3B000F3679 /* WTMTable.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D4E26F17C37B3B000F3679 /* WTMTable.m */; };
 		FF0AD5BD8FB1459CB3E91419 /* libPods-PlayerSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */; };
 /* End PBXBuildFile section */
 
@@ -144,7 +158,7 @@
 		E50003F417B63EEC00E50D70 /* WattDelta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattDelta.m; sourceTree = "<group>"; };
 		E50003F517B63EEC00E50D70 /* WattDelta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattDelta.h; sourceTree = "<group>"; };
 		E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattDeltaEngine.m; sourceTree = "<group>"; };
-		E50003FC17B642C300E50D70 /* WTM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTM.h; sourceTree = "<group>"; };
+		E50003FC17B642C300E50D70 /* WTM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WTM.h; path = ../../WTM.h; sourceTree = "<group>"; };
 		E50003FF17B645C200E50D70 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E500040017B645C200E50D70 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E500040117B645C200E50D70 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -263,6 +277,20 @@
 		E5CAD22B1799A1A400D22369 /* WattRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattRegistry.m; sourceTree = "<group>"; };
 		E5CAD2831799A1A400D22369 /* Watt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watt.h; sourceTree = "<group>"; };
 		E5CAD2E21799A1B800D22369 /* PlayerSampleFlexions-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlayerSampleFlexions-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E5D4E26217C37B3A000F3679 /* WTMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCell.h; sourceTree = "<group>"; };
+		E5D4E26317C37B3A000F3679 /* WTMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCell.m; sourceTree = "<group>"; };
+		E5D4E26417C37B3A000F3679 /* WTMCollectionOfCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfCell.h; sourceTree = "<group>"; };
+		E5D4E26517C37B3A000F3679 /* WTMCollectionOfCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfCell.m; sourceTree = "<group>"; };
+		E5D4E26617C37B3B000F3679 /* WTMCollectionOfColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfColumn.h; sourceTree = "<group>"; };
+		E5D4E26717C37B3B000F3679 /* WTMCollectionOfColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfColumn.m; sourceTree = "<group>"; };
+		E5D4E26817C37B3B000F3679 /* WTMCollectionOfLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCollectionOfLine.h; sourceTree = "<group>"; };
+		E5D4E26917C37B3B000F3679 /* WTMCollectionOfLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMCollectionOfLine.m; sourceTree = "<group>"; };
+		E5D4E26A17C37B3B000F3679 /* WTMColumn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMColumn.h; sourceTree = "<group>"; };
+		E5D4E26B17C37B3B000F3679 /* WTMColumn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMColumn.m; sourceTree = "<group>"; };
+		E5D4E26C17C37B3B000F3679 /* WTMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMLine.h; sourceTree = "<group>"; };
+		E5D4E26D17C37B3B000F3679 /* WTMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMLine.m; sourceTree = "<group>"; };
+		E5D4E26E17C37B3B000F3679 /* WTMTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMTable.h; sourceTree = "<group>"; };
+		E5D4E26F17C37B3B000F3679 /* WTMTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMTable.m; sourceTree = "<group>"; };
 		F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlayerSample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -297,7 +325,6 @@
 			children = (
 				E50004F317B66A7A00E50D70 /* Categories */,
 				E50003FD17B645C200E50D70 /* Generated */,
-				E50003FC17B642C300E50D70 /* WTM.h */,
 				E50004EF17B6655200E50D70 /* WTMApi.h */,
 				E50004F017B6655200E50D70 /* WTMApi.m */,
 			);
@@ -317,6 +344,20 @@
 		E50003FE17B645C200E50D70 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E5D4E26217C37B3A000F3679 /* WTMCell.h */,
+				E5D4E26317C37B3A000F3679 /* WTMCell.m */,
+				E5D4E26417C37B3A000F3679 /* WTMCollectionOfCell.h */,
+				E5D4E26517C37B3A000F3679 /* WTMCollectionOfCell.m */,
+				E5D4E26617C37B3B000F3679 /* WTMCollectionOfColumn.h */,
+				E5D4E26717C37B3B000F3679 /* WTMCollectionOfColumn.m */,
+				E5D4E26817C37B3B000F3679 /* WTMCollectionOfLine.h */,
+				E5D4E26917C37B3B000F3679 /* WTMCollectionOfLine.m */,
+				E5D4E26A17C37B3B000F3679 /* WTMColumn.h */,
+				E5D4E26B17C37B3B000F3679 /* WTMColumn.m */,
+				E5D4E26C17C37B3B000F3679 /* WTMLine.h */,
+				E5D4E26D17C37B3B000F3679 /* WTMLine.m */,
+				E5D4E26E17C37B3B000F3679 /* WTMTable.h */,
+				E5D4E26F17C37B3B000F3679 /* WTMTable.m */,
 				E50003FF17B645C200E50D70 /* WTMAction.h */,
 				E500040017B645C200E50D70 /* WTMAction.m */,
 				E500040117B645C200E50D70 /* WTMActivity.h */,
@@ -387,6 +428,7 @@
 				E500044A17B645C200E50D70 /* WTMSound.m */,
 				E500044D17B645C200E50D70 /* WTMVideo.h */,
 				E500044E17B645C200E50D70 /* WTMVideo.m */,
+				E50003FC17B642C300E50D70 /* WTM.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -758,6 +800,13 @@
 				E50004F217B6655300E50D70 /* WTMApi.m in Sources */,
 				E50004F717B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */,
 				E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */,
+				E5D4E27117C37B3B000F3679 /* WTMCell.m in Sources */,
+				E5D4E27317C37B3B000F3679 /* WTMCollectionOfCell.m in Sources */,
+				E5D4E27517C37B3B000F3679 /* WTMCollectionOfColumn.m in Sources */,
+				E5D4E27717C37B3B000F3679 /* WTMCollectionOfLine.m in Sources */,
+				E5D4E27917C37B3B000F3679 /* WTMColumn.m in Sources */,
+				E5D4E27B17C37B3B000F3679 /* WTMLine.m in Sources */,
+				E5D4E27D17C37B3B000F3679 /* WTMTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,6 +867,13 @@
 				E50004F117B6655300E50D70 /* WTMApi.m in Sources */,
 				E50004F617B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */,
 				E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */,
+				E5D4E27017C37B3B000F3679 /* WTMCell.m in Sources */,
+				E5D4E27217C37B3B000F3679 /* WTMCollectionOfCell.m in Sources */,
+				E5D4E27417C37B3B000F3679 /* WTMCollectionOfColumn.m in Sources */,
+				E5D4E27617C37B3B000F3679 /* WTMCollectionOfLine.m in Sources */,
+				E5D4E27817C37B3B000F3679 /* WTMColumn.m in Sources */,
+				E5D4E27A17C37B3B000F3679 /* WTMLine.m in Sources */,
+				E5D4E27C17C37B3B000F3679 /* WTMTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

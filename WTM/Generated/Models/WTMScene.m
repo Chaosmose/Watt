@@ -24,25 +24,21 @@
 #import "WTMBehavior.h"
 #import "WTMCollectionOfElement.h"
 #import "WTMImage.h"
+#import "WTMTable.h"
 
 @implementation WTMScene 
 
-@synthesize controllerClass=_controllerClass;
-@synthesize number=_number;
-@synthesize rect=_rect;
+@synthesize index=_index;
 @synthesize title=_title;
 @synthesize activity=_activity;
 @synthesize behavior=_behavior;
 @synthesize elements=_elements;
 @synthesize picture=_picture;
+@synthesize table=_table;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"controllerClass"]){
-		[super setValue:value forKey:@"controllerClass"];
-	} else if ([key isEqualToString:@"number"]) {
-		[super setValue:value forKey:@"number"];
-	} else if ([key isEqualToString:@"rect"]) {
-		[super setValue:value forKey:@"rect"];
+	if ([key isEqualToString:@"index"]){
+		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"activity"]) {
@@ -53,6 +49,8 @@
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
 	} else if ([key isEqualToString:@"picture"]) {
 		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+	} else if ([key isEqualToString:@"table"]) {
+		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"table"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -150,6 +148,29 @@
 	_picture=picture;
 }
 
+- (WTMTable*)table{
+	if([_table isAnAlias]){
+		id o=[_registry objectWithUinstID:_table.uinstID];
+		if(o){
+			_table=o;
+		}
+	}
+	return _table;
+}
+
+
+- (WTMTable*)table_auto{
+	_table=[self table];
+	if(!_table){
+		_table=[[WTMTable alloc] initInRegistry:_registry];
+	}
+	return _table;
+}
+
+- (void)setTable:(WTMTable*)table{
+	_table=table;
+}
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -161,9 +182,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.controllerClass forKey:@"controllerClass"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.number] forKey:@"number"];
-	[dictionary setValue:self.rect forKey:@"rect"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.activity){
 		if(includeChildren){
@@ -193,6 +212,13 @@
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
+	if(self.table){
+		if(includeChildren){
+			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"table"];
+		}else{
+			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"table"];
+		}
+	}
     return dictionary;
 }
 
@@ -202,14 +228,13 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMScene ",self.uinstID];
-	[s appendFormat:@"controllerClass : %@\n",self.controllerClass];
-	[s appendFormat:@"number : %@\n",[NSNumber numberWithInteger:self.number]];
-	[s appendFormat:@"rect : %@\n",self.rect];
+	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
 	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
 	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
+	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];
 	return s;
 }
 

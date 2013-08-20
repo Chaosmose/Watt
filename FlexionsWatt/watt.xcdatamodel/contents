@@ -34,7 +34,7 @@
     </entity>
     <elements>
         <element name="Group" positionX="-8237" positionY="-4680" width="128" height="90"/>
-        <element name="Model" positionX="-8091" positionY="-4902" width="128" height="150"/>
+        <element name="Model" positionX="-8091" positionY="-4902" width="128" height="148"/>
         <element name="User" positionX="-7974" positionY="-4680" width="128" height="90"/>
     </elements>
 </model>

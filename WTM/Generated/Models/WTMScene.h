@@ -25,22 +25,23 @@
 @class WTMBehavior;
 @class WTMCollectionOfElement;
 @class WTMImage;
+@class WTMTable;
 
 @interface WTMScene:WattModel<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * controllerClass;
-@property (nonatomic,assign) NSInteger  number;
-@property (nonatomic,copy) NSString * rect;
+@property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;
 @property (nonatomic,strong) WTMBehavior * behavior;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
 @property (nonatomic,strong) WTMImage * picture;
+@property (nonatomic,strong) WTMTable * table;
 
 - (WTMActivity*)activity_auto;
 - (WTMBehavior*)behavior_auto;
 - (WTMCollectionOfElement*)elements_auto;
 - (WTMImage*)picture_auto;
+- (WTMTable*)table_auto;
 
 @end
