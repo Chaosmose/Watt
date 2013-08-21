@@ -430,23 +430,19 @@
  *  @param element    an element is an "occurence" of a member
  *  @param attributes a dictionary with key, value attributes
  *  @param column     the destination column, if nil a new column is created
- *  @param scene      the parent scene
  *
  *  @return a new WTMcell.
  */
 - (WTMCell*)createCellInANewLineFor:(WTMElement*)element
                      withAttributes:(NSDictionary*)attributes
-                           inColumn:(WTMColumn*)column
-                           forScene:(WTMScene*)scene{
-    if(!scene)
-        [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
-    
+                           inColumn:(WTMColumn*)column{
+
     if(!element)
         [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
 
     if(!column){
         column=[[WTMColumn alloc] initInRegistry:self.currentRegistry];
-        [scene.table_auto.columns_auto addObject:column];
+        [element.scene.table_auto.columns_auto addObject:column];
     }
 
     WTMLine *line=[[WTMLine alloc] initInRegistry:self.currentRegistry];

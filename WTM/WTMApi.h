@@ -113,14 +113,12 @@
  *  @param element    an element is an "occurence" of a member
  *  @param attributes a dictionary with key, value attributes
  *  @param column     the destination column, if nil a new column is created
- *  @param scene      the parent scene
  *
  *  @return a new WTMcell.
  */
 - (WTMCell*)createCellInANewLineFor:(WTMElement*)element
                      withAttributes:(NSDictionary*)attributes
-                           inColumn:(WTMColumn*)column
-                           forScene:(WTMScene*)scene;
+                           inColumn:(WTMColumn*)column;
 
 /**
  *  Removes and unregisters the cell 
