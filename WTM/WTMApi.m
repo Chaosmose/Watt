@@ -439,7 +439,7 @@
     if(!element)
         [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
     
-    if(element.scene)
+    if(!element.scene)
         [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
 
     
@@ -481,7 +481,7 @@
     if(!element)
         [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
     
-    if(element.scene)
+    if(!element.scene)
         [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
     
     
