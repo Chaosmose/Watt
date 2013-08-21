@@ -21,14 +21,18 @@
  
 #import "WTMTable.h" 
 #import "WTMCollectionOfColumn.h"
+#import "WTMCollectionOfLine.h"
 
 @implementation WTMTable 
 
 @synthesize columns=_columns;
+@synthesize lines=_lines;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"columns"]){
 		[super setValue:[WTMCollectionOfColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"columns"];
+	} else if ([key isEqualToString:@"lines"]) {
+		[super setValue:[WTMCollectionOfLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"lines"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -57,6 +61,29 @@
 	_columns=columns;
 }
 
+- (WTMCollectionOfLine*)lines{
+	if([_lines isAnAlias]){
+		id o=[_registry objectWithUinstID:_lines.uinstID];
+		if(o){
+			_lines=o;
+		}
+	}
+	return _lines;
+}
+
+
+- (WTMCollectionOfLine*)lines_auto{
+	_lines=[self lines];
+	if(!_lines){
+		_lines=[[WTMCollectionOfLine alloc] initInRegistry:_registry];
+	}
+	return _lines;
+}
+
+- (void)setLines:(WTMCollectionOfLine*)lines{
+	_lines=lines;
+}
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -75,6 +102,13 @@
 			[dictionary setValue:[self.columns aliasDictionaryRepresentation] forKey:@"columns"];
 		}
 	}
+	if(self.lines){
+		if(includeChildren){
+			[dictionary setValue:[self.lines dictionaryRepresentationWithChildren:includeChildren] forKey:@"lines"];
+		}else{
+			[dictionary setValue:[self.lines aliasDictionaryRepresentation] forKey:@"lines"];
+		}
+	}
     return dictionary;
 }
 
@@ -85,6 +119,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMTable ",self.uinstID];
 	[s appendFormat:@"columns : %@\n",NSStringFromClass([self.columns class])];
+	[s appendFormat:@"lines : %@\n",NSStringFromClass([self.lines class])];
 	return s;
 }
 

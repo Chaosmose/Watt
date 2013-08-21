@@ -21,14 +21,21 @@
  
 #import "WTMLine.h" 
 #import "WTMCollectionOfCell.h"
+#import "WTMTable.h"
 
 @implementation WTMLine 
 
+@synthesize width=_width;
 @synthesize cells=_cells;
+@synthesize table=_table;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"cells"]){
+	if ([key isEqualToString:@"width"]){
+		[super setValue:value forKey:@"width"];
+	} else if ([key isEqualToString:@"cells"]) {
 		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
+	} else if ([key isEqualToString:@"table"]) {
+		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"table"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -57,6 +64,29 @@
 	_cells=cells;
 }
 
+- (WTMTable*)table{
+	if([_table isAnAlias]){
+		id o=[_registry objectWithUinstID:_table.uinstID];
+		if(o){
+			_table=o;
+		}
+	}
+	return _table;
+}
+
+
+- (WTMTable*)table_auto{
+	_table=[self table];
+	if(!_table){
+		_table=[[WTMTable alloc] initInRegistry:_registry];
+	}
+	return _table;
+}
+
+- (void)setTable:(WTMTable*)table{
+	_table=table;
+}
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -68,11 +98,19 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
+	[dictionary setValue:[NSNumber numberWithInteger:self.width] forKey:@"width"];
 	if(self.cells){
 		if(includeChildren){
 			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
 		}else{
 			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"cells"];
+		}
+	}
+	if(self.table){
+		if(includeChildren){
+			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"table"];
+		}else{
+			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"table"];
 		}
 	}
     return dictionary;
@@ -84,7 +122,9 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMLine ",self.uinstID];
+	[s appendFormat:@"width : %@\n",[NSNumber numberWithInteger:self.width]];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];
+	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];
 	return s;
 }
 

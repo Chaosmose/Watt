@@ -21,18 +21,21 @@
  
 #import "WTMColumn.h" 
 #import "WTMCollectionOfCell.h"
-#import "WTMCollectionOfLine.h"
+#import "WTMTable.h"
 
 @implementation WTMColumn 
 
+@synthesize height=_height;
 @synthesize cells=_cells;
-@synthesize lines=_lines;
+@synthesize table=_table;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"cells"]){
+	if ([key isEqualToString:@"height"]){
+		[super setValue:value forKey:@"height"];
+	} else if ([key isEqualToString:@"cells"]) {
 		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
-	} else if ([key isEqualToString:@"lines"]) {
-		[super setValue:[WTMCollectionOfLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"lines"];
+	} else if ([key isEqualToString:@"table"]) {
+		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"table"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -61,27 +64,27 @@
 	_cells=cells;
 }
 
-- (WTMCollectionOfLine*)lines{
-	if([_lines isAnAlias]){
-		id o=[_registry objectWithUinstID:_lines.uinstID];
+- (WTMTable*)table{
+	if([_table isAnAlias]){
+		id o=[_registry objectWithUinstID:_table.uinstID];
 		if(o){
-			_lines=o;
+			_table=o;
 		}
 	}
-	return _lines;
+	return _table;
 }
 
 
-- (WTMCollectionOfLine*)lines_auto{
-	_lines=[self lines];
-	if(!_lines){
-		_lines=[[WTMCollectionOfLine alloc] initInRegistry:_registry];
+- (WTMTable*)table_auto{
+	_table=[self table];
+	if(!_table){
+		_table=[[WTMTable alloc] initInRegistry:_registry];
 	}
-	return _lines;
+	return _table;
 }
 
-- (void)setLines:(WTMCollectionOfLine*)lines{
-	_lines=lines;
+- (void)setTable:(WTMTable*)table{
+	_table=table;
 }
 
 
@@ -95,6 +98,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
+	[dictionary setValue:[NSNumber numberWithInteger:self.height] forKey:@"height"];
 	if(self.cells){
 		if(includeChildren){
 			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
@@ -102,11 +106,11 @@
 			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"cells"];
 		}
 	}
-	if(self.lines){
+	if(self.table){
 		if(includeChildren){
-			[dictionary setValue:[self.lines dictionaryRepresentationWithChildren:includeChildren] forKey:@"lines"];
+			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"table"];
 		}else{
-			[dictionary setValue:[self.lines aliasDictionaryRepresentation] forKey:@"lines"];
+			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"table"];
 		}
 	}
     return dictionary;
@@ -118,8 +122,9 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMColumn ",self.uinstID];
+	[s appendFormat:@"height : %@\n",[NSNumber numberWithInteger:self.height]];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];
-	[s appendFormat:@"lines : %@\n",NSStringFromClass([self.lines class])];
+	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];
 	return s;
 }
 

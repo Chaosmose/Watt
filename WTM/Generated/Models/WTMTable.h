@@ -22,12 +22,15 @@
 
 #import "WattModel.h"
 @class WTMCollectionOfColumn;
+@class WTMCollectionOfLine;
 
 @interface WTMTable:WattModel<WattCoding>{
 }
 
 @property (nonatomic,strong) WTMCollectionOfColumn * columns;
+@property (nonatomic,strong) WTMCollectionOfLine * lines;
 
 - (WTMCollectionOfColumn*)columns_auto;
+- (WTMCollectionOfLine*)lines_auto;
 
 @end

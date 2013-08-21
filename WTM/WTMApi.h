@@ -121,17 +121,42 @@
                            inColumn:(WTMColumn*)column;
 
 /**
- *  Removes and unregisters the cell 
- *  And deletes 
- *  1- its line,
- *  2- its column if there are no other element in the column
- *  
- *  But preserves the element.
+ *  Creates a new column in the line, and a cell referencing an element
+ *
+ *
+ *  @param element    an element is an "occurence" of a member
+ *  @param attributes a dictionary with key, value attributes
+ *  @param column     the destination column, if nil a new column is created
+ *
+ *  @return a new WTMcell.
+ */
+- (WTMCell*)createCellInANewColumnFor:(WTMElement*)element
+                       withAttributes:(NSDictionary*)attributes
+                               inLine:(WTMLine*)line;
+
+/**
+ *  Removes the colum and all its cells.
+ *
+ *  @param column to be removed
+ */
+- (void)removeColumn:(WTMColumn*)column;
+
+/**
+ *  Removes the line and all its cells.
+ *
+ *  @param line to be removed
+ */
+- (void)removeLine:(WTMLine*)line;
+
+
+/**
+ *  Removes and unregisters the cell
+ *  But preserves the element,in the scene
+ *  and preserves the column and the line
  *
  *  @param cell the cell to be removed.
  */
 -(void)removeCell:(WTMCell*)cell;
-
 
 
 #pragma mark -  Bands

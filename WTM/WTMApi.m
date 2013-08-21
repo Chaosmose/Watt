@@ -425,7 +425,6 @@
 
 /**
  *  Creates a new line in the column, and a cell referecing an element
- *  If the element is not
  *
  *  @param element    an element is an "occurence" of a member
  *  @param attributes a dictionary with key, value attributes
@@ -439,14 +438,21 @@
 
     if(!element)
         [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+    
+    if(element.scene)
+        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
 
+    
+    WTMTable *table=element.scene.table_auto;
     if(!column){
         column=[[WTMColumn alloc] initInRegistry:self.currentRegistry];
-        [element.scene.table_auto.columns_auto addObject:column];
+        [table.columns_auto addObject:column];
+        column.table=table;
     }
 
     WTMLine *line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
-    [column.lines_auto addObject:line];
+    [table.lines_auto addObject:line];
+    line.table=table;
     
     WTMCell *cell=[[WTMCell alloc] initInRegistry:self.currentRegistry];
     cell.column=column;
@@ -457,13 +463,81 @@
     return cell;
 }
 
+
+/**
+ *  Creates a new column in the line, and a cell referencing an element
+ *
+ *
+ *  @param element    an element is an "occurence" of a member
+ *  @param attributes a dictionary with key, value attributes
+ *  @param column     the destination column, if nil a new column is created
+ *
+ *  @return a new WTMcell.
+ */
+- (WTMCell*)createCellInANewColumnFor:(WTMElement*)element
+                     withAttributes:(NSDictionary*)attributes
+                           inLine:(WTMLine*)line{
+    
+    if(!element)
+        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+    
+    if(element.scene)
+        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+    
+    
+    WTMTable *table=element.scene.table_auto;
+    if(!line){
+        line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
+        [table.lines_auto addObject:line];
+        line.table=table;
+    }
+    
+    WTMColumn *column=[[WTMColumn alloc] initInRegistry:self.currentRegistry];
+    [table.columns_auto addObject:column];
+    column.table=table;
+    
+    WTMCell *cell=[[WTMCell alloc] initInRegistry:self.currentRegistry];
+    cell.column=column;
+    cell.line=line;
+    cell.element=element;
+    cell.attributes=attributes;
+    
+    return cell;
+}
+
+
+/**
+ *  Removes the colum and all its cells.
+ *
+ *  @param column to be removed
+ */
+- (void)removeColumn:(WTMColumn*)column{
+    [column.cells_auto enumerateObjectsUsingBlock:^(WTMCell *obj, NSUInteger idx, BOOL *stop) {
+        [self removeCell:obj];
+    }];
+    [column.table.columns removeObject:column];
+    [column autoUnRegister];
+}
+
+/**
+ *  Removes the line and all its cells.
+ *
+ *  @param line to be removed
+ */
+- (void)removeLine:(WTMLine*)line{
+    [line.cells_auto enumerateObjectsUsingBlock:^(WTMCell *obj, NSUInteger idx, BOOL *stop) {
+        [self removeCell:obj];
+    }];
+    [line.table.lines removeObject:line];
+    [line autoUnRegister];
+}
+
+
+
 /**
  *  Removes and unregisters the cell
- *  And deletes
- *  1- its line,
- *  2- its column if there are no other element in the column
- *
- *  But preserves the element (it nullifies its reference)
+ *  But preserves the element,in the scene
+ *  and preserves the column and the line 
  *
  *  @param cell the cell to be removed.
  */
@@ -472,15 +546,8 @@
     [cell.element.cells removeObject:cell];
     cell.element=nil;
     
-    if([cell.line.cells_auto count]==1){
-        [cell.column.lines removeObject:cell.line];
-        [cell.line autoUnRegister];
-    }
-    
-    if([cell.element.scene.table.columns count]==1){
-        [cell.element.scene.table.columns removeObject:cell.column];
-        [cell.column autoUnRegister];
-    }
+    [cell.line.cells removeObject:cell];
+    [cell.column.cells removeObject:cell];
     
     cell.line=nil;
     cell.column=nil;

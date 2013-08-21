@@ -22,12 +22,16 @@
 
 #import "WattModel.h"
 @class WTMCollectionOfCell;
+@class WTMTable;
 
 @interface WTMLine:WattModel<WattCoding>{
 }
 
+@property (nonatomic,assign) NSInteger  width;
 @property (nonatomic,strong) WTMCollectionOfCell * cells;
+@property (nonatomic,strong) WTMTable * table;
 
 - (WTMCollectionOfCell*)cells_auto;
+- (WTMTable*)table_auto;
 
 @end
