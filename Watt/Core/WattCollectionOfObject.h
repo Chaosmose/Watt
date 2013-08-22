@@ -51,6 +51,8 @@
 - (void)removeLastObject;
 - (void)removeObjectAtIndex:(NSUInteger)index;
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject;
+- (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to;
+
 
 - (NSUInteger)indexOfObjectWithID:(NSUInteger)uinstID;
 - (BOOL)containsAnObjectWithID:(NSUInteger)uinstID;

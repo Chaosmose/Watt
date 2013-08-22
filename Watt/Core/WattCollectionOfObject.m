@@ -218,6 +218,19 @@
     [_collection replaceObjectAtIndex:index withObject:anObject];
 }
 
+- (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to{
+    if (to != from) {
+        id obj = [_collection objectAtIndex:from];
+        [_collection removeObjectAtIndex:from];
+        if (to >= [self count]) {
+            [self addObject:obj];
+        } else {
+            [self insertObject:obj atIndex:to];
+        }
+    }
+}
+
+
 
 - (BOOL)containsAnObjectWithID:(NSUInteger)uinstID{
     for (WattObject*o in _collection) {
