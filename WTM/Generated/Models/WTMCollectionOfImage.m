@@ -44,10 +44,11 @@
 	return s;
 }
 
-- (void)enumerateObjectsUsingBlock:(void (^)(WTMImage *obj, NSUInteger idx, BOOL *stop))block{
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMImage *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
 	 NSUInteger idx = 0;
     BOOL stop = NO;
-    for( WTMImage* obj in _collection ){
+    NSEnumerator * enumerator=useReverseEnumeration?[_collection reverseObjectEnumerator]: [_collection objectEnumerator];
+    for( WTMImage* obj in enumerator ){
         block(obj, idx++, &stop);
         if( stop )
             break;

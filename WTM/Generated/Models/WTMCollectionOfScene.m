@@ -44,10 +44,11 @@
 	return s;
 }
 
-- (void)enumerateObjectsUsingBlock:(void (^)(WTMScene *obj, NSUInteger idx, BOOL *stop))block{
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMScene *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
 	 NSUInteger idx = 0;
     BOOL stop = NO;
-    for( WTMScene* obj in _collection ){
+    NSEnumerator * enumerator=useReverseEnumeration?[_collection reverseObjectEnumerator]: [_collection objectEnumerator];
+    for( WTMScene* obj in enumerator ){
         block(obj, idx++, &stop);
         if( stop )
             break;

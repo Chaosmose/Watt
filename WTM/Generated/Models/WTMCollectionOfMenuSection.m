@@ -44,10 +44,11 @@
 	return s;
 }
 
-- (void)enumerateObjectsUsingBlock:(void (^)(WTMMenuSection *obj, NSUInteger idx, BOOL *stop))block{
+- (void)enumerateObjectsUsingBlock:(void (^)(WTMMenuSection *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
 	 NSUInteger idx = 0;
     BOOL stop = NO;
-    for( WTMMenuSection* obj in _collection ){
+    NSEnumerator * enumerator=useReverseEnumeration?[_collection reverseObjectEnumerator]: [_collection objectEnumerator];
+    for( WTMMenuSection* obj in enumerator ){
         block(obj, idx++, &stop);
         if( stop )
             break;

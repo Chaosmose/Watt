@@ -93,10 +93,10 @@
                         }
                     }
                     
-                }];
+                }reverse:NO];
                 
             }
-        }];
+        } reverse:NO];
     }
 }
 
@@ -158,7 +158,7 @@
         [section.shelf.sections removeObject:section];
         [section.menus enumerateObjectsUsingBlock:^(WTMMenu *obj, NSUInteger idx, BOOL *stop) {
             [self removeMenu:obj];
-        }];
+        }reverse:YES];
         section.shelf=nil;
         [section autoUnRegister];
     }
@@ -219,11 +219,11 @@
         
         [package.activities enumerateObjectsUsingBlock:^(WTMActivity *obj, NSUInteger idx, BOOL *stop) {
             [self removeActivity:obj];
-        }];
+        }reverse:YES];
         
         [package.libraries enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
             [self removeLibrary:obj];
-        }];
+        }reverse:YES];
         
         [package.langDictionary autoUnRegister];
         
@@ -252,7 +252,7 @@
     NSMutableArray *array=[NSMutableArray array];
     [package.libraries_auto enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
         [array addObjectsFromArray:[self dependenciesPathForLibrary:obj]];
-    }];
+    }reverse:NO];
     return array;
 }
 
@@ -279,11 +279,11 @@
         
         [library.bands enumerateObjectsUsingBlock:^(WTMBand *obj, NSUInteger idx, BOOL *stop) {
             [self removeBand:obj];
-        }];
+        }reverse:YES];
         
         [library.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
             [self removeMember:obj];
-        }];
+        }reverse:YES];
         
         [library.package.libraries removeObject:library];
         [library autoUnRegister];
@@ -305,7 +305,7 @@
                 [array addObjectsFromArray:pths];
             }
         }
-    }];
+    }reverse:NO];
     return array;
 }
 
@@ -353,7 +353,7 @@
             [self purgeMemberIfNecessary:scene.picture];
         [scene.elements enumerateObjectsUsingBlock:^(WTMElement *obj, NSUInteger idx, BOOL *stop) {
             [self removeElement:obj];
-        }];
+        }reverse:YES];
         [scene.activity.scenes removeObject:scene];
         [scene autoUnRegister];
         if(scene.behavior){
@@ -414,7 +414,7 @@
         
         [element.cells enumerateObjectsUsingBlock:^(WTMCell *obj, NSUInteger idx, BOOL *stop) {
             [self removeCell:obj];
-        }];
+        }reverse:YES];
         
         [self purgeMemberIfNecessary:element.asset];
         [self purgeMemberIfNecessary:element.behavior];
@@ -514,7 +514,7 @@
 - (void)removeColumn:(WTMColumn*)column{
     [column.cells_auto enumerateObjectsUsingBlock:^(WTMCell *obj, NSUInteger idx, BOOL *stop) {
         [self removeCell:obj];
-    }];
+    }reverse:YES];
     [column.table.columns removeObject:column];
     [column autoUnRegister];
 }
@@ -527,7 +527,7 @@
 - (void)removeLine:(WTMLine*)line{
     [line.cells_auto enumerateObjectsUsingBlock:^(WTMCell *obj, NSUInteger idx, BOOL *stop) {
         [self removeCell:obj];
-    }];
+    }reverse:YES];
     [line.table.lines removeObject:line];
     [line autoUnRegister];
 }
@@ -582,7 +582,7 @@
     if([self actionIsAllowed:WattWRITE on:band]){
         [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
             [self purgeMemberIfNecessary:obj];
-        }];
+        }reverse:NO];
         [band.library.bands removeObject:band];
         band.members=nil;
         [band autoUnRegister];
@@ -594,7 +594,7 @@
 - (void)removeBand:(WTMBand*)band{
     [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
         [self removeMember:obj];
-    }];
+    }reverse:YES];
     [band.library.bands removeObject:band];
     band.members=nil;
     [band autoUnRegister];

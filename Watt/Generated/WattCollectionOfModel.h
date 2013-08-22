@@ -24,7 +24,7 @@
 
 @interface WattCollectionOfModel:WattCollectionOfObject <WattCoding>{
 }
-- (void)enumerateObjectsUsingBlock:(void (^)(WattModel *obj, NSUInteger idx, BOOL *stop))block;
+- (void)enumerateObjectsUsingBlock:(void (^)(WattModel *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - (WattCollectionOfModel*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 - (NSUInteger)count;
 - (WattModel *)objectAtIndex:(NSUInteger)index;
