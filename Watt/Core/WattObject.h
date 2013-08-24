@@ -86,7 +86,7 @@ __LINE__ ,\
 #define isIpad()(UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
 #define isWidePhone() ([UIScreen mainScreen].scale == 2.f && [UIScreen mainScreen].bounds.size.height == 568.0f)
 #define scale() [UIScreen mainScreen].scale
-#import "UIImage+wattAdaptive.h"
+
 #endif
 
 

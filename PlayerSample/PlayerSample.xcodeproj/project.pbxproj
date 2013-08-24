@@ -158,7 +158,7 @@
 		E50003F417B63EEC00E50D70 /* WattDelta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattDelta.m; sourceTree = "<group>"; };
 		E50003F517B63EEC00E50D70 /* WattDelta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattDelta.h; sourceTree = "<group>"; };
 		E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattDeltaEngine.m; sourceTree = "<group>"; };
-		E50003FC17B642C300E50D70 /* WTM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WTM.h; path = ../../WTM.h; sourceTree = "<group>"; };
+		E50003FC17B642C300E50D70 /* WTM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTM.h; sourceTree = "<group>"; };
 		E50003FF17B645C200E50D70 /* WTMAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAction.h; sourceTree = "<group>"; };
 		E500040017B645C200E50D70 /* WTMAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMAction.m; sourceTree = "<group>"; };
 		E500040117B645C200E50D70 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
@@ -325,6 +325,7 @@
 			children = (
 				E50004F317B66A7A00E50D70 /* Categories */,
 				E50003FD17B645C200E50D70 /* Generated */,
+				E50003FC17B642C300E50D70 /* WTM.h */,
 				E50004EF17B6655200E50D70 /* WTMApi.h */,
 				E50004F017B6655200E50D70 /* WTMApi.m */,
 			);
@@ -428,7 +429,6 @@
 				E500044A17B645C200E50D70 /* WTMSound.m */,
 				E500044D17B645C200E50D70 /* WTMVideo.h */,
 				E500044E17B645C200E50D70 /* WTMVideo.m */,
-				E50003FC17B642C300E50D70 /* WTM.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";

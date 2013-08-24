@@ -34,3 +34,7 @@
 #endif
 
 
+#if TARGET_OS_IPHONE
+#import "UIImage+wattAdaptive.h"
+#endif
+
