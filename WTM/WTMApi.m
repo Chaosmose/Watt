@@ -148,6 +148,7 @@
         section.index=[shelf.sections_auto count];//We compute the index
         [shelf.sections_auto addObject:section];
         section.shelf=shelf;
+        section.index=[shelf.sections count];
         return section;
     }
     return nil;
@@ -169,6 +170,7 @@
         WTMMenu *menu=[[WTMMenu alloc] initInRegistry:self.currentRegistry];
         [section.menus_auto addObject:menu];
         menu.menuSection=section;
+        menu.index=[section.menus count];
         return menu;
     }
     return nil;
