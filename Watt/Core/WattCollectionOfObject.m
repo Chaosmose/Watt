@@ -53,6 +53,8 @@
 
 
 
+// Filtering
+
 - (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
     if(array && [array count]>0){
@@ -65,6 +67,13 @@
     }
     return nil;
 }
+
+// Sorting
+
+- (void)sortUsingComparator:(NSComparator)cmptr{
+    [_collection sortUsingComparator:cmptr];
+}
+
 
 
 
@@ -270,5 +279,8 @@
     [s appendFormat:@"With of %i members\n",_collection?[_collection count]:0];
 	return s;
 }
+
+
+
 
 @end

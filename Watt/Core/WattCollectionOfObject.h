@@ -36,6 +36,10 @@
  */
 -(WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 
+// Sorting
+
+- (void)sortUsingComparator:(NSComparator)cmptr;
+
 // Accessors
 
 - (WattObject *)objectAtIndex:(NSUInteger)index;
@@ -60,5 +64,11 @@
 - (NSUInteger)count;
 - (NSUInteger)indexOfObject:(WattObject *)object;
 - (void)removeObject:(WattObject*)object;
+
+
+
+
+
+
 
 @end
