@@ -57,7 +57,7 @@
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
     if(array && [array count]>0){
         Class currentClass=[self class];
-        id instance=[[currentClass alloc]initInRegistry:nil];
+        id instance=[[currentClass alloc]initInRegistry:registry];
         for (id o in array) {
             [instance addObject:o];
         }
