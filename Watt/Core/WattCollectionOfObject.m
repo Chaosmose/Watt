@@ -45,7 +45,7 @@
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier{
     self=[super initInRegistry:registry withPresetIdentifier:identifier];
     if(self){
-         _collection=[NSMutableArray array];
+        _collection=[NSMutableArray array];
     }
     return self;
 }
@@ -57,15 +57,13 @@
 
 - (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
-    if(array && [array count]>0){
-        Class currentClass=[self class];
-        id instance=[[currentClass alloc]initInRegistry:registry];
-        for (id o in array) {
-            [instance addObject:o];
-        }
-        return instance;
+    Class currentClass=[self class];
+    id instance=[[currentClass alloc]initInRegistry:registry];
+    for (id o in array) {
+        [instance addObject:o];
     }
-    return nil;
+    return instance;
+    
 }
 
 // Sorting
@@ -123,11 +121,11 @@
 	}
     NSArray *a=[aDictionary objectForKey:__collection__];
     for (NSDictionary*objectDictionary in a) {
-            Class c=[objectDictionary objectForKey:__className__]?NSClassFromString([objectDictionary objectForKey:__className__]):[WattObject class];
-            id o=[c instanceFromDictionary:objectDictionary
+        Class c=[objectDictionary objectForKey:__className__]?NSClassFromString([objectDictionary objectForKey:__className__]):[WattObject class];
+        id o=[c instanceFromDictionary:objectDictionary
                             inRegistry:_registry
                        includeChildren:YES];
-            [_collection addObject:o];
+        [_collection addObject:o];
     }
 }
 
