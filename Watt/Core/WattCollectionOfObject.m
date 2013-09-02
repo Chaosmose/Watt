@@ -66,6 +66,16 @@
     
 }
 
+- (WattCollectionOfObject*)filteredCollectionUsingBlock:(BOOL (^)(WattObject *obj))block withRegistry:(WattRegistry *)registry{
+    WattCollectionOfObject *__block collection=[[WattCollectionOfObject alloc] initInRegistry:registry];
+    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        if(block(obj)){
+            [collection addObject:obj];
+        }
+    } reverse:NO];
+    return collection;
+}
+
 // Sorting
 
 - (void)sortUsingComparator:(NSComparator)cmptr{

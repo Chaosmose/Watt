@@ -30,17 +30,40 @@
     NSMutableArray* _collection;
 }
 
-/*
- Returns a collection filtered.
- Commonly you pass nil as registry to make the collection un persistent.
+#pragma mark - filtering
+
+/**
+ *  Returns collection of object filtered by the predicate
+ *
+ *  @param predicate the predicate to filter the collection
+ *  @param registry the registry that holds the collection Commonly you pass nil as registry to make the collection un persistent.
+ *
+ *  @return The filtered collection
  */
--(WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
+- (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry;
 
-// Sorting
+/**
+ * Returns collection of object filtered by the block
+ *
+ *  @param block the block that determine if a member of the source collection should be included into the filtered collection
+ *  @param registry the registry that holds the collection Commonly you pass nil as registry to make the collection un persistent.
+ *
+ *  @return The filtered collection
+ */
+- (WattCollectionOfObject*)filteredCollectionUsingBlock:(BOOL (^)(WattObject *obj))block withRegistry:(WattRegistry *)registry;
 
+
+#pragma mark - sorting
+
+/**
+ *  Sorts the collection using a comparator
+ *
+ *  @param cmptr the comparator  NSComparisonResult (^NSComparator)(id obj1, id obj2)
+ */
 - (void)sortUsingComparator:(NSComparator)cmptr;
 
-// Accessors
+
+#pragma mark -
 
 - (WattObject *)objectAtIndex:(NSUInteger)index;
 - (WattObject *)firstObject;
@@ -48,7 +71,11 @@
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array;
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID;
 
+#pragma mark - Enumeration 
+
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
+
+#pragma mark -
 
 - (void)addObject:(WattObject*)anObject;
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index;
@@ -64,11 +91,6 @@
 - (NSUInteger)count;
 - (NSUInteger)indexOfObject:(WattObject *)object;
 - (void)removeObject:(WattObject*)object;
-
-
-
-
-
 
 
 @end
