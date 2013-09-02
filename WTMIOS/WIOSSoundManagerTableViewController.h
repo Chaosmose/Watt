@@ -1,6 +1,6 @@
 //
 //  WIOSSoundManagerTableViewController.h
-//  PlayerSample
+//  WTM
 //
 //  Created by Benoit Pereira da Silva on 02/09/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
