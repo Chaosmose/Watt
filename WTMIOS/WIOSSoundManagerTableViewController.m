@@ -26,8 +26,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -37,8 +36,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -46,7 +44,13 @@
 
 -(void)setLibrary:(WTMLibrary *)library{
     _library=library;
-    //_sounds=[library.members filteredCollectionUsingPredicate:<#(NSPredicate *)#> withRegistry:nil];
+    _sounds=[library.members filteredCollectionUsingBlock:^BOOL(WTMMember *obj) {
+        if([obj isKindOfClass:[WTMSound class]]){
+            return YES;
+        }else{
+            return NO;
+        }
+    } withRegistry:nil];
 }
 
 
@@ -60,23 +64,19 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if(section==0);
+        return 1;
+    if(section==1)
+        return [_sounds count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
     return cell;
 }
 
