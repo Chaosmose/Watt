@@ -55,6 +55,16 @@
     }
 }
 
+- ( WTMCollectionOfPackage*)filteredCollectionUsingBlock:(BOOL (^)(WTMPackage  *obj))block withRegistry:(WattRegistry *)registry{
+	 WTMCollectionOfPackage *__block collection=[[WTMCollectionOfPackage alloc] initInRegistry:registry];
+	    [self enumerateObjectsUsingBlock:^(WTMPackage *obj, NSUInteger idx, BOOL *stop) {
+	        if(block(obj)){
+	            [collection addObject:obj];
+	        }
+	    } reverse:NO];
+	    return collection;
+	}
+
 - (WTMCollectionOfPackage*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
 	return (WTMCollectionOfPackage*)[super filteredCollectionUsingPredicate:predicate withRegistry:registry];
 }

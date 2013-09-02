@@ -55,6 +55,16 @@
     }
 }
 
+- ( WattCollectionOfModel*)filteredCollectionUsingBlock:(BOOL (^)(WattModel  *obj))block withRegistry:(WattRegistry *)registry{
+	 WattCollectionOfModel *__block collection=[[WattCollectionOfModel alloc] initInRegistry:registry];
+	    [self enumerateObjectsUsingBlock:^(WattModel *obj, NSUInteger idx, BOOL *stop) {
+	        if(block(obj)){
+	            [collection addObject:obj];
+	        }
+	    } reverse:NO];
+	    return collection;
+	}
+
 - (WattCollectionOfModel*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
 	return (WattCollectionOfModel*)[super filteredCollectionUsingPredicate:predicate withRegistry:registry];
 }
