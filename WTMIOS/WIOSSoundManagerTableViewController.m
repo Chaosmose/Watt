@@ -8,8 +8,11 @@
 
 #import "WIOSSoundManagerTableViewController.h"
 
-@interface WIOSSoundManagerTableViewController ()
+@interface WIOSSoundManagerTableViewController (){
+    UIBarButtonItem *_addButton;
+}
 
+@property (nonatomic,readonly)  WTMCollectionOfMember *sounds;
 @end
 
 @implementation WIOSSoundManagerTableViewController
@@ -31,9 +34,11 @@
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    _addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(_createSound:)];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItems = @[self.editButtonItem, _addButton];
 }
 
 - (void)didReceiveMemoryWarning{
@@ -58,25 +63,28 @@
     return _library;
 }
 
+
+- (void) _createSound:(id)sender{
+    WTMSound*sound=[wtmAPI createSoundMemberInLibrary:self.library];
+    sound.name=NSLocalizedString(@"New sound", @"");
+    [_sounds addObject:sound];
+}
+
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 2;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(section==0);
-        return 1;
-    if(section==1)
-        return [_sounds count];
+    return [_sounds count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"soundCell";
+    WIOSSoundListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+    cell.soundNameLabel.text=sound.name;
     return cell;
 }
 
@@ -119,16 +127,17 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    WIOSSoundRecorderViewController *vc=[segue destinationViewController];
+    WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:[self.tableView indexPathForSelectedRow].row];
+    vc.sound=sound;
+    self.selectedSound=sound;
 }
 
- */
+
 
 @end

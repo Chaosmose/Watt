@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIOSSoundRecorderViewController.h"
+#import "WIOSSoundListCell.h"
+
+@protocol WIOSSoundRecorderDelegate <NSObject>
+@required
+- (void) soundHasBeenCreated:(WTMSound*)sound;
+@end
 
 @interface WIOSSoundManagerTableViewController : UITableViewController
 
+@property (weak,nonatomic)      id<WIOSSoundRecorderDelegate>delegate;
 @property (nonatomic,strong)    WTMLibrary *library;
-@property (nonatomic,readonly)  WTMCollectionOfMember *sounds;
+@property (nonatomic,strong)    WTMSound *selectedSound; // You can select a sound within the list.
 
 @end
