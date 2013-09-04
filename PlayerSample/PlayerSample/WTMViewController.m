@@ -45,6 +45,9 @@
     // 1- We create a Graph of object within a WattRegistry (r1)
     
     WattRegistry*r1=[[WattRegistry alloc] init];
+    r1.apiReference=wtmAPI;
+    r1.autosave=NO;
+    
     WTMShelf *s=[self _createAShelfInRegistry:r1];
     s.comment=@"Comment #1 for test purposes";
     WTMPackage*p=[s.packages lastObject];
@@ -64,6 +67,7 @@
     WTMMember*m1=[l1.members lastObject];
     WTLog(@"p1:%@ l1:%@ m1:%@ ",p1,l1,m1);
     
+    r1.autosave=YES;
 
     //2- We serialize the registry R1 to a linear structure a1
     NSArray *a1=[r1 arrayRepresentation];
@@ -75,6 +79,7 @@
     
     //3- We generate a new Registry (r2) from a1 by deserializing
     WattRegistry*r2=[WattRegistry instanceFromArray:a1 resolveAliases:YES];
+    r2.apiReference=wtmAPI;
     WTLog(@"r2 : %@",r2);
     
     //4- We  grab the root object uinstID==1
