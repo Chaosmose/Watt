@@ -146,6 +146,7 @@
     if(self.autosave && self.serializationPath && [self.apiReference isKindOfClass:[WattApi class]]){
         [(WattApi*)self.apiReference writeRegistry:self
                                             toFile:self.serializationPath];
+        WTLog(@"Saved automatically");
     }
 }
 

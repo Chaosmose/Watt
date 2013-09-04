@@ -108,6 +108,8 @@
 		E56E248A17D77C54009C2C2C /* WIOSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248417D77C39009C2C2C /* WIOSButton.m */; };
 		E56E248D17D79C54009C2C2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248C17D79C54009C2C2C /* AVFoundation.framework */; };
 		E56E248F17D79C7C009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
+		E56E249317D7A14B009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
+		E56E249417D7A153009C2C2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248C17D79C54009C2C2C /* AVFoundation.framework */; };
 		E589F9D617D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E589F9D717D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E5A9EBF11799242F00976997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
@@ -333,6 +335,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E56E249417D7A153009C2C2C /* AVFoundation.framework in Frameworks */,
+				E56E249317D7A14B009C2C2C /* CoreAudio.framework in Frameworks */,
 				E5B462451732A4A000E654A1 /* UIKit.framework in Frameworks */,
 				E5B462471732A4A000E654A1 /* Foundation.framework in Frameworks */,
 				E5B462491732A4A000E654A1 /* CoreGraphics.framework in Frameworks */,
