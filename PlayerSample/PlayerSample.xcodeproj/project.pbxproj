@@ -491,13 +491,13 @@
 		E589F9D317D4BAB9002BF82C /* WTMIOS */ = {
 			isa = PBXGroup;
 			children = (
-				E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */,
-				E56E247F17D77C39009C2C2C /* WIOSSoundRecorderViewController.h */,
-				E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */,
-				E56E248117D77C39009C2C2C /* WIOSButton.h */,
 				E56E248217D77C39009C2C2C /* WTMIOS.h */,
 				E56E248317D77C39009C2C2C /* WIOSSoundListCell.h */,
+				E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */,
+				E56E248117D77C39009C2C2C /* WIOSButton.h */,
 				E56E248417D77C39009C2C2C /* WIOSButton.m */,
+				E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */,
+				E56E247F17D77C39009C2C2C /* WIOSSoundRecorderViewController.h */,
 				E589F9D417D4BF04002BF82C /* WIOSSoundManagerTableViewController.h */,
 				E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */,
 			);
