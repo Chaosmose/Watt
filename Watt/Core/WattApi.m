@@ -545,11 +545,16 @@
     if(((_ftype==WattPx)||(_ftype==WattP))){
         NSData *data=[self readDataFromPath:path];
         NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        return [WattRegistry instanceFromArray:array resolveAliases:YES];
+        WattRegistry *registry=[WattRegistry instanceFromArray:array resolveAliases:YES];
+        registry.apiReference=self;
+        return registry;
     }else{
         NSArray *array=[self _deserializeFromJsonWithPath:path];
-        if(array)
-            return [WattRegistry instanceFromArray:array resolveAliases:YES];
+        if(array){
+            WattRegistry *registry=[WattRegistry instanceFromArray:array resolveAliases:YES];
+            registry.apiReference=self;
+            return registry;
+        }
     }
     return nil;
 }

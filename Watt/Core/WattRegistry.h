@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 #define kWattRegistryRootUinstID 1
 
 @class WattObject;
@@ -42,6 +43,24 @@
 @property (nonatomic,strong)NSDate *lastSerializationDate;
 @property (nonatomic,strong)NSString *uniqueIdentifier;
 @property (nonatomic,strong)NSMutableArray *deltas;
+
+
+#pragma mark - auto saving 
+
+/**
+ *  The reference to the hosting api
+ */
+@property (nonatomic) id apiReference;
+
+/**
+ *  Autosave
+ */
+@property (nonatomic,assign)BOOL autosave;
+
+/**
+ *  You can reference the serializationPath
+ */
+@property (nonatomic,copy) NSString *serializationPath;
 
 /**
  * Automatically turns the hasChanged property of any holding wattObject if set to NO

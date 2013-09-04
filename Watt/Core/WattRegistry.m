@@ -37,12 +37,15 @@
 }
 
 @synthesize hasChanged = _hasChanged;
+@synthesize autosave = _autosave;
+@synthesize apiReference = _apiReference;
 
 - (id)init{
     self=[super init];
     if(self){
         _uinstIDCounter=0;
         _registry=[NSMutableDictionary dictionary];
+        _autosave=YES;// By default
     }
     return self;
 }
@@ -88,15 +91,26 @@
 }
 
 
+- (void)setApiReference:(id)apiReference{
+    _apiReference=apiReference;
+}
+
+- (id)apiReference{
+    return _apiReference;
+}
+
 - (void)setHasChanged:(BOOL)hasChanged{
     _hasChanged=hasChanged;
     if(hasChanged==NO){
         [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
             obj.hasChanged=NO;
         }];
+    }else{
+        [self _tryToSaveAutomatically];
     }
     
 }
+
 
 - (BOOL)hasChanged{
     // We check object changes if the registry is not already set to YES
@@ -107,8 +121,32 @@
                 *stop=YES;
             }
         }];
+        if(_hasChanged)
+             [self _tryToSaveAutomatically];
     }
     return _hasChanged;
+}
+
+
+- (void)setAutosave:(BOOL)autosave{
+    if(autosave==YES && _autosave==NO){
+        if([self hasChanged]){
+            [self _tryToSaveAutomatically];
+        }
+    }
+    _autosave=autosave;
+}
+
+- (BOOL)autosave{
+    return _autosave;
+}
+
+
+- (void)_tryToSaveAutomatically{
+    if(self.autosave && self.serializationPath && [self.apiReference isKindOfClass:[WattApi class]]){
+        [(WattApi*)self.apiReference writeRegistry:self
+                                            toFile:self.serializationPath];
+    }
 }
 
 
