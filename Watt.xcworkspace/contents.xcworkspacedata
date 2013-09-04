@@ -14,6 +14,9 @@
       location = "group:WTM.podspec">
    </FileRef>
    <FileRef
+      location = "group:WTMIOS.podspec">
+   </FileRef>
+   <FileRef
       location = "group:Podfile">
    </FileRef>
    <FileRef
