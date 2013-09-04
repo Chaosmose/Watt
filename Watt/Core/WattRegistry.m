@@ -83,7 +83,7 @@
             
         }];
     }
-    
+    r.hasChanged=NO;
     return r;
 }
 
@@ -235,6 +235,7 @@
         _uinstIDCounter=MAX(reference.uinstID, _uinstIDCounter);
         [self addObject:reference];
     }
+    self.hasChanged=YES;
 }
 
 - (void)addObject:(WattObject *)reference{
@@ -262,6 +263,7 @@
 - (void)unRegisterObject:(WattObject*)reference{
     [self _invalidateSortedKeys];
     [_registry removeObjectForKey:[self _keyFrom:reference.uinstID]];
+    self.hasChanged=YES;
 }
 
 
