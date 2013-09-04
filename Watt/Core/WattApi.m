@@ -519,6 +519,14 @@
 #pragma mark -  serialization
 
 
+-(BOOL)writeRegistryIfNecessary:(WattRegistry*)registry toFile:(NSString*)path{
+    if([registry hasChanged]){
+        [registry setHasChanged:NO];
+        return  [self writeRegistry:registry toFile:path];
+    }
+    return YES;
+}
+
 -(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path{
     NSArray *array=[registry arrayRepresentation];
     if(((_ftype==WattPx)||(_ftype==WattP))){

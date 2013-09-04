@@ -176,12 +176,44 @@ typedef enum watt_F_TYPES{
 
 #pragma mark - File serialization / deserialization
 
+/**
+ * Serializes the registry to a file only if registry.hasChanged==YES
+ *
+ *  @param registry the registry to be serialized
+ *  @param path     the path
+ *
+ *  @return the success of the operation
+ */
+-(BOOL)writeRegistryIfNecessary:(WattRegistry*)registry toFile:(NSString*)path;
+
+/**
+ *  Serializes the registry to a file 
+ *
+ *  @param registry the registry to be serialized
+ *  @param path     the path
+ *
+ *  @return the success of the operation
+ */
 -(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path;
+
+/**
+ *  Deserializes a registry from a file.
+ *
+ *  @param path the path
+ *
+ *  @return the registry
+ */
 -(WattRegistry*)readRegistryFromFile:(NSString*)path;
 
 
 
 #pragma mark - utilities 
+
+/**
+ *  Returns an unique identifier string 
+ *
+ *  @return the identifier
+ */
 - (NSString *)uuidString;
 
 - (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
