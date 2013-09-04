@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "WIOSSoundRecorderViewController.h"
 #import "WIOSSoundListCell.h"
+#import "WTMSound.h"
+#import "WTMLibrary.h"
 
 @protocol WIOSSoundRecorderDelegate <NSObject>
 @required

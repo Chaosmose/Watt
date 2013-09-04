@@ -8,6 +8,8 @@
 
 #import "WIOSSoundRecorderViewController.h"
 
+//#import <AVFoundation/AVAudioSettings.h>
+
 #define  AUDIOMONITOR_THRESHOLD
 
 @interface WIOSSoundRecorderViewController(){
