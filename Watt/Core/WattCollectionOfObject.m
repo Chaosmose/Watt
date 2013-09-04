@@ -211,28 +211,34 @@
 
 - (void)addObject:(WattObject*)anObject{
     [_collection addObject:anObject];
+    self.hasChanged=YES;
 }
 
 
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
 	[_collection insertObject:anObject atIndex:index];
+    self.hasChanged=YES;
 }
 
 - (void)removeLastObject{
 	[_collection removeLastObject];
+    self.hasChanged=YES;
 }
 
 - (void)removeObjectAtIndex:(NSUInteger)index{
     [_collection removeObjectAtIndex:index];
+    self.hasChanged=YES;
 }
 
 
 - (void)removeObject:(WattObject*)object{
     [_collection removeObject:object];
+    self.hasChanged=YES;
 }
 
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject{
     [_collection replaceObjectAtIndex:index withObject:anObject];
+    self.hasChanged=YES;
 }
 
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to{
@@ -244,6 +250,7 @@
         } else {
             [self insertObject:obj atIndex:to];
         }
+        self.hasChanged=YES;
     }
 }
 

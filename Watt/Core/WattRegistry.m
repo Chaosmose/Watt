@@ -36,6 +36,8 @@
     NSArray               *__sortedKeys;
 }
 
+@synthesize hasChanged = _hasChanged;
+
 - (id)init{
     self=[super init];
     if(self){
@@ -59,7 +61,7 @@
     // and allows circular referencing any object graph can be serialized.
     // First step   :  deserializes the registry with member's aliases
     // Second step  :  resolves the aliases (and the force the caches computation)
-    // The second step is optionnal as the generated getters 
+    // The second step is optionnal as the generated getters
     //  can proceed to dealiasing (runtime aliases resolution)
     
     //WTLog(@"Register");
@@ -78,11 +80,34 @@
         // Second step :
         [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
             [obj resolveAliases];
-          
+            
         }];
     }
     
     return r;
+}
+
+
+- (void)setHasChanged:(BOOL)hasChanged{
+    _hasChanged=hasChanged;
+    if(hasChanged==NO){
+        [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+            obj.hasChanged=NO;
+        }];
+    }
+    
+}
+
+- (BOOL)hasChanged{
+    // We recompute each time
+    _hasChanged=NO;
+    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        if(obj.hasChanged==YES){
+            _hasChanged=YES;
+            *stop=YES;
+        }
+    }];
+    return _hasChanged;
 }
 
 
@@ -220,7 +245,7 @@
                 // we do nothing ..
                 return;
             }else{
-                 [NSException raise:@"Registry" format:@"Reference missmatch"];
+                [NSException raise:@"Registry" format:@"Reference missmatch"];
             }
         }
     }

@@ -43,7 +43,11 @@
 @property (nonatomic,strong)NSString *uniqueIdentifier;
 @property (nonatomic,strong)NSMutableArray *deltas;
 
-
+/**
+ * Automatically turns the hasChanged property of any holding wattObject if set to NO
+ * Aggregates all the wattObject hasChanged property on getter.
+ */
+@property (nonatomic) BOOL hasChanged;
 
 #pragma mark - Serialization/Deserialization facilities
 

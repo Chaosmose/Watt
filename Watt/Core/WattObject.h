@@ -116,7 +116,12 @@ __LINE__ ,\
 }
 
 
-
+/**
+ * This special property is never serialized
+ * It serves to encapsulate if there changes on a WattObject
+ * It is automatically reset to NO when a registry
+ */
+@property (nonatomic) BOOL hasChanged;
 
 
 #pragma mark - registry
