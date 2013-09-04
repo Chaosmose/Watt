@@ -106,6 +106,8 @@
 		E56E248817D77C4A009C2C2C /* WIOSSoundRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */; };
 		E56E248917D77C4E009C2C2C /* WIOSSoundListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */; };
 		E56E248A17D77C54009C2C2C /* WIOSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248417D77C39009C2C2C /* WIOSButton.m */; };
+		E56E248D17D79C54009C2C2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248C17D79C54009C2C2C /* AVFoundation.framework */; };
+		E56E248F17D79C7C009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
 		E589F9D617D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E589F9D717D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E5A9EBF11799242F00976997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
@@ -261,9 +263,11 @@
 		E56E247F17D77C39009C2C2C /* WIOSSoundRecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundRecorderViewController.h; sourceTree = "<group>"; };
 		E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundListCell.m; sourceTree = "<group>"; };
 		E56E248117D77C39009C2C2C /* WIOSButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSButton.h; sourceTree = "<group>"; };
-		E56E248217D77C39009C2C2C /* WTMIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMIOS.h; sourceTree = "<group>"; };
+		E56E248217D77C39009C2C2C /* WIOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOS.h; sourceTree = "<group>"; };
 		E56E248317D77C39009C2C2C /* WIOSSoundListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundListCell.h; sourceTree = "<group>"; };
 		E56E248417D77C39009C2C2C /* WIOSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSButton.m; sourceTree = "<group>"; };
+		E56E248C17D79C54009C2C2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E56E248E17D79C7C009C2C2C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		E589F9D417D4BF04002BF82C /* WIOSSoundManagerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundManagerTableViewController.h; sourceTree = "<group>"; };
 		E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundManagerTableViewController.m; sourceTree = "<group>"; };
 		E5A9EC331799242F00976997 /* PlayerSampleFlexions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSampleFlexions.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,6 +323,8 @@
 				E5A9EC241799242F00976997 /* UIKit.framework in Frameworks */,
 				E5A9EC251799242F00976997 /* Foundation.framework in Frameworks */,
 				E5A9EC261799242F00976997 /* CoreGraphics.framework in Frameworks */,
+				E56E248D17D79C54009C2C2C /* AVFoundation.framework in Frameworks */,
+				E56E248F17D79C7C009C2C2C /* CoreAudio.framework in Frameworks */,
 				447087F9105E44D19142000C /* libPods-PlayerSampleFlexions.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,27 +494,27 @@
 			path = Packager;
 			sourceTree = "<group>";
 		};
-		E589F9D317D4BAB9002BF82C /* WTMIOS */ = {
+		E589F9D317D4BAB9002BF82C /* WTIOS */ = {
 			isa = PBXGroup;
 			children = (
-				E56E248217D77C39009C2C2C /* WTMIOS.h */,
+				E56E248217D77C39009C2C2C /* WIOS.h */,
 				E56E248317D77C39009C2C2C /* WIOSSoundListCell.h */,
 				E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */,
 				E56E248117D77C39009C2C2C /* WIOSButton.h */,
 				E56E248417D77C39009C2C2C /* WIOSButton.m */,
-				E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */,
 				E56E247F17D77C39009C2C2C /* WIOSSoundRecorderViewController.h */,
+				E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */,
 				E589F9D417D4BF04002BF82C /* WIOSSoundManagerTableViewController.h */,
 				E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */,
 			);
-			name = WTMIOS;
+			name = WTIOS;
 			path = ../WTMIOS;
 			sourceTree = "<group>";
 		};
 		E5B462381732A4A000E654A1 = {
 			isa = PBXGroup;
 			children = (
-				E589F9D317D4BAB9002BF82C /* WTMIOS */,
+				E589F9D317D4BAB9002BF82C /* WTIOS */,
 				E5CAD21B1799A1A400D22369 /* Watt */,
 				E50003FB17B6428100E50D70 /* WTM */,
 				E5B4624A1732A4A000E654A1 /* PlayerSample */,
@@ -531,6 +537,8 @@
 		E5B462431732A4A000E654A1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E56E248E17D79C7C009C2C2C /* CoreAudio.framework */,
+				E56E248C17D79C54009C2C2C /* AVFoundation.framework */,
 				E5B462441732A4A000E654A1 /* UIKit.framework */,
 				E5B462461732A4A000E654A1 /* Foundation.framework */,
 				E5B462481732A4A000E654A1 /* CoreGraphics.framework */,
