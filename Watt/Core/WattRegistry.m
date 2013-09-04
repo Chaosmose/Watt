@@ -99,14 +99,15 @@
 }
 
 - (BOOL)hasChanged{
-    // We recompute each time
-    _hasChanged=NO;
-    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        if(obj.hasChanged==YES){
-            _hasChanged=YES;
-            *stop=YES;
-        }
-    }];
+    // We check object changes if the registry is not already set to YES
+    if(! _hasChanged){
+        [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+            if(obj.hasChanged==YES){
+                _hasChanged=YES;
+                *stop=YES;
+            }
+        }];
+    }
     return _hasChanged;
 }
 
