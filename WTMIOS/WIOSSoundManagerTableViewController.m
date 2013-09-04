@@ -68,6 +68,8 @@
     WTMSound*sound=[wtmAPI createSoundMemberInLibrary:self.library];
     sound.name=NSLocalizedString(@"New sound", @"");
     [_sounds addObject:sound];
+    [self.delegate soundHasBeenCreated:sound];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -84,10 +86,26 @@
     static NSString *CellIdentifier = @"soundCell";
     WIOSSoundListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+    cell.useButton.indexPath=indexPath;
     cell.soundNameLabel.text=sound.name;
+    
+    if([(WTMSound*)[_sounds objectAtIndex:indexPath.row] isEqual:self.selectedSound]){
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }else{
+         [cell setAccessoryType:UITableViewCellAccessoryNone];
+    }
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 50.f;
+}
+
+
+- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+    self.selectedSound=sound;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,11 +151,14 @@
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     WIOSSoundRecorderViewController *vc=[segue destinationViewController];
-    WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:[self.tableView indexPathForSelectedRow].row];
-    vc.sound=sound;
-    self.selectedSound=sound;
+    vc.sound=self.selectedSound;
 }
 
 
 
+- (IBAction)editSound:(id)sender {
+    WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:[(WIOSButton*)sender indexPath].row];
+    self.selectedSound=sound;
+    [self performSegueWithIdentifier:@"editSound" sender:sender];
+}
 @end

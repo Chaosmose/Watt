@@ -12,7 +12,7 @@
 
 
 
-@interface WIOSSoundRecorderViewController : UIViewController<AVAudioRecorderDelegate>{
+@interface WIOSSoundRecorderViewController : UIViewController<AVAudioRecorderDelegate,AVAudioPlayerDelegate>{
 
 }
 

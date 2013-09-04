@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WIOSButton.h"
 
 @interface WIOSSoundListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *soundNameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *useButton;
+@property (weak, nonatomic) IBOutlet WIOSButton *useButton;
 
 @end

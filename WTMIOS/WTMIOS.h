@@ -8,5 +8,8 @@
 
 #ifndef WTMIOS_h
 #define WTMIOS_h
+#import "WIOSButton.h"
+#import "WIOSSoundListCell.h"
+#import "WIOSSoundRecorderViewController.h"
 #import "WIOSSoundManagerTableViewController.h"
 #endif

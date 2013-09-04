@@ -21,4 +21,6 @@
 @property (nonatomic,strong)    WTMLibrary *library;
 @property (nonatomic,strong)    WTMSound *selectedSound; // You can select a sound within the list.
 
+- (IBAction)editSound:(id)sender;
+
 @end
