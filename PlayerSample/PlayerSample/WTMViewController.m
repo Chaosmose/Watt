@@ -67,6 +67,7 @@
     WTMMember*m1=[l1.members lastObject];
     WTLog(@"p1:%@ l1:%@ m1:%@ ",p1,l1,m1);
     
+    r1.hasChanged=YES;
     r1.autosave=YES;
 
     //2- We serialize the registry R1 to a linear structure a1
