@@ -11,6 +11,5 @@
 
 @interface WIOSSoundListCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *soundNameLabel;
-@property (weak, nonatomic) IBOutlet WIOSButton *useButton;
-
+@property (weak, nonatomic) IBOutlet WIOSButton *editSoundButton;
 @end

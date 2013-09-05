@@ -21,7 +21,7 @@
  
 #import "WTMScene.h" 
 #import "WTMActivity.h"
-#import "WTMBehavior.h"
+#import "WTMCollectionOfBehavior.h"
 #import "WTMCollectionOfElement.h"
 #import "WTMImage.h"
 #import "WTMTable.h"
@@ -31,7 +31,7 @@
 @synthesize index=_index;
 @synthesize title=_title;
 @synthesize activity=_activity;
-@synthesize behavior=_behavior;
+@synthesize behaviors=_behaviors;
 @synthesize elements=_elements;
 @synthesize picture=_picture;
 @synthesize table=_table;
@@ -43,8 +43,8 @@
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"activity"]) {
 		[super setValue:[WTMActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activity"];
-	} else if ([key isEqualToString:@"behavior"]) {
-		[super setValue:[WTMBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behavior"];
+	} else if ([key isEqualToString:@"behaviors"]) {
+		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behaviors"];
 	} else if ([key isEqualToString:@"elements"]) {
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
 	} else if ([key isEqualToString:@"picture"]) {
@@ -79,27 +79,27 @@
 	_activity=activity;
 }
 
-- (WTMBehavior*)behavior{
-	if([_behavior isAnAlias]){
-		id o=[_registry objectWithUinstID:_behavior.uinstID];
+- (WTMCollectionOfBehavior*)behaviors{
+	if([_behaviors isAnAlias]){
+		id o=[_registry objectWithUinstID:_behaviors.uinstID];
 		if(o){
-			_behavior=o;
+			_behaviors=o;
 		}
 	}
-	return _behavior;
+	return _behaviors;
 }
 
 
-- (WTMBehavior*)behavior_auto{
-	_behavior=[self behavior];
-	if(!_behavior){
-		_behavior=[[WTMBehavior alloc] initInRegistry:_registry];
+- (WTMCollectionOfBehavior*)behaviors_auto{
+	_behaviors=[self behaviors];
+	if(!_behaviors){
+		_behaviors=[[WTMCollectionOfBehavior alloc] initInRegistry:_registry];
 	}
-	return _behavior;
+	return _behaviors;
 }
 
-- (void)setBehavior:(WTMBehavior*)behavior{
-	_behavior=behavior;
+- (void)setBehaviors:(WTMCollectionOfBehavior*)behaviors{
+	_behaviors=behaviors;
 }
 
 - (WTMCollectionOfElement*)elements{
@@ -191,11 +191,11 @@
 			[dictionary setValue:[self.activity aliasDictionaryRepresentation] forKey:@"activity"];
 		}
 	}
-	if(self.behavior){
+	if(self.behaviors){
 		if(includeChildren){
-			[dictionary setValue:[self.behavior dictionaryRepresentationWithChildren:includeChildren] forKey:@"behavior"];
+			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"behaviors"];
 		}else{
-			[dictionary setValue:[self.behavior aliasDictionaryRepresentation] forKey:@"behavior"];
+			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"behaviors"];
 		}
 	}
 	if(self.elements){
@@ -231,7 +231,7 @@
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
-	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
+	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];

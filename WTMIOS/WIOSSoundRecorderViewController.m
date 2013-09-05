@@ -220,7 +220,7 @@
         if(!self.sound.relativePath){
             self.sound.relativePath=[NSString stringWithFormat:@"%@/%@/%i.caf",_sound.library.package.objectName,_sound.library.objectName,_sound.uinstID];
         }
-        NSString *path=[[wtmAPI absolutePathForRegistryBundleWithName:wtmAPI.currentRegistry.name] stringByAppendingString:self.sound.relativePath];
+        NSString *path=[[wtmAPI absolutePathForRegistryBundleWithName:wtmRegistry.name] stringByAppendingString:self.sound.relativePath];
         [wtmAPI createRecursivelyRequiredFolderForPath:path];
         _fileURL = [NSURL fileURLWithPath:path ];
     }

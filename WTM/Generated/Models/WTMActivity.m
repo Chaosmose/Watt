@@ -28,6 +28,7 @@
 
 @synthesize level=_level;
 @synthesize rating=_rating;
+@synthesize score=_score;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
 @synthesize package=_package;
@@ -39,6 +40,8 @@
 		[super setValue:value forKey:@"level"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
+	} else if ([key isEqualToString:@"score"]) {
+		[super setValue:value forKey:@"score"];
 	} else if ([key isEqualToString:@"shortName"]) {
 		[super setValue:value forKey:@"shortName"];
 	} else if ([key isEqualToString:@"title"]) {
@@ -136,6 +139,7 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
+	[dictionary setValue:[NSNumber numberWithInteger:self.score] forKey:@"score"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.package){
@@ -170,6 +174,7 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMActivity ",self.uinstID];
 	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
 	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
+	[s appendFormat:@"score : %@\n",[NSNumber numberWithInteger:self.score]];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];

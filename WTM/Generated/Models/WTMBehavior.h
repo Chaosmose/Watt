@@ -22,17 +22,13 @@
 
 #import "WattModel.h"
 #import "WTMMember.h"
-@class WTMAction;
-@class WTMRule;
 
 @interface WTMBehavior:WTMMember<WattCoding>{
 }
 
-@property (nonatomic,copy) NSString * comment;
-@property (nonatomic,strong) WTMAction * action;
-@property (nonatomic,strong) WTMRule * trigger;
+@property (nonatomic,copy) NSString * actionName;
+@property (nonatomic,strong) NSDictionary * attributes;
+@property (nonatomic,copy) NSString * triggerName;
 
-- (WTMAction*)action_auto;
-- (WTMRule*)trigger_auto;
 
 @end

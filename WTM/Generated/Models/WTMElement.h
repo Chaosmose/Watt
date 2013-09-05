@@ -22,7 +22,7 @@
 
 #import "WattModel.h"
 @class WTMAsset;
-@class WTMBehavior;
+@class WTMCollectionOfBehavior;
 @class WTMCollectionOfCell;
 @class WTMScene;
 
@@ -30,12 +30,12 @@
 }
 
 @property (nonatomic,strong) WTMAsset * asset;
-@property (nonatomic,strong) WTMBehavior * behavior;
+@property (nonatomic,strong) WTMCollectionOfBehavior * behaviors;
 @property (nonatomic,strong) WTMCollectionOfCell * cells;
 @property (nonatomic,strong) WTMScene * scene;
 
 - (WTMAsset*)asset_auto;
-- (WTMBehavior*)behavior_auto;
+- (WTMCollectionOfBehavior*)behaviors_auto;
 - (WTMCollectionOfCell*)cells_auto;
 - (WTMScene*)scene_auto;
 

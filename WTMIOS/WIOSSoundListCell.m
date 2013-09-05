@@ -10,8 +10,7 @@
 
 @implementation WIOSSoundListCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -19,13 +18,25 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated{
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    if(selected){
+        [self setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }else{
+        [self setAccessoryType:UITableViewCellAccessoryNone];
+    }
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated{
+    [super setEditing:editing animated:animated];
+    if(editing){
+        [self.editSoundButton setAlpha:0.f];
+        [self.editSoundButton setEnabled:NO];
+    }else{
+        [self.editSoundButton setAlpha:1.f];
+        [self.editSoundButton setEnabled:YES];
+    }
+}
 
 
 

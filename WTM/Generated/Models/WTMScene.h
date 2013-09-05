@@ -22,7 +22,7 @@
 
 #import "WattModel.h"
 @class WTMActivity;
-@class WTMBehavior;
+@class WTMCollectionOfBehavior;
 @class WTMCollectionOfElement;
 @class WTMImage;
 @class WTMTable;
@@ -33,13 +33,13 @@
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;
-@property (nonatomic,strong) WTMBehavior * behavior;
+@property (nonatomic,strong) WTMCollectionOfBehavior * behaviors;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
 @property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMTable * table;
 
 - (WTMActivity*)activity_auto;
-- (WTMBehavior*)behavior_auto;
+- (WTMCollectionOfBehavior*)behaviors_auto;
 - (WTMCollectionOfElement*)elements_auto;
 - (WTMImage*)picture_auto;
 - (WTMTable*)table_auto;

@@ -31,6 +31,7 @@
 
 @property (nonatomic,assign) NSInteger  level;
 @property (nonatomic,assign) NSInteger  rating;
+@property (nonatomic,assign) NSInteger  score;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMPackage * package;

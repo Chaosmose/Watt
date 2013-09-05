@@ -19,10 +19,15 @@
 
 @interface WIOSSoundManagerTableViewController : UITableViewController
 
-@property (weak,nonatomic)      id<WIOSSoundRecorderDelegate>delegate;
-@property (nonatomic,strong)    WTMLibrary *library;
-@property (nonatomic,strong)    WTMSound *selectedSound; // You can select a sound within the list.
+
+- (void)setUpWithSound:(WTMSound*)sound
+           fromLibrary:(WTMLibrary*)library
+       useCategoryName:(NSString*)category
+            anDelegate:(id<WIOSSoundRecorderDelegate>)delegate;
 
 - (IBAction)editSound:(id)sender;
+
+
+
 
 @end

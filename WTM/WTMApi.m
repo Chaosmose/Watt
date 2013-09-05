@@ -358,8 +358,12 @@
         }reverse:YES];
         [scene.activity.scenes removeObject:scene];
         [scene autoUnRegister];
-        if(scene.behavior){
-            [self purgeMemberIfNecessary:scene.behavior];
+        if([scene.behaviors count]>0){
+            WTMApi *__weak weakSelf=self;
+            [scene.behaviors enumerateObjectsUsingBlock:^(WTMBehavior *obj, NSUInteger idx, BOOL *stop) {
+                [weakSelf purgeMemberIfNecessary:obj];
+            } reverse:YES];
+            
         }
         
     }
@@ -391,8 +395,8 @@
         element.asset=asset;
         element.scene=scene;
         if(behavior){
-            element.behavior=behavior;
-            element.behavior.refererCounter++;
+            [element.behaviors_auto addObject:behavior];
+            behavior.refererCounter++;
         }
         asset.refererCounter++;
         [scene.elements_auto addObject:element];
@@ -419,8 +423,10 @@
         }reverse:YES];
         
         [self purgeMemberIfNecessary:element.asset];
-        [self purgeMemberIfNecessary:element.behavior];
-        
+        WTMApi *__weak weakSelf=self;
+        [element.behaviors enumerateObjectsUsingBlock:^(WTMBehavior *obj, NSUInteger idx, BOOL *stop) {
+            [weakSelf purgeMemberIfNecessary:obj];
+        } reverse:YES];
         [element autoUnRegister];
     }
 }

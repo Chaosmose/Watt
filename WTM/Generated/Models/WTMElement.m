@@ -21,22 +21,22 @@
  
 #import "WTMElement.h" 
 #import "WTMAsset.h"
-#import "WTMBehavior.h"
+#import "WTMCollectionOfBehavior.h"
 #import "WTMCollectionOfCell.h"
 #import "WTMScene.h"
 
 @implementation WTMElement 
 
 @synthesize asset=_asset;
-@synthesize behavior=_behavior;
+@synthesize behaviors=_behaviors;
 @synthesize cells=_cells;
 @synthesize scene=_scene;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"asset"]){
 		[super setValue:[WTMAsset instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"asset"];
-	} else if ([key isEqualToString:@"behavior"]) {
-		[super setValue:[WTMBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behavior"];
+	} else if ([key isEqualToString:@"behaviors"]) {
+		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behaviors"];
 	} else if ([key isEqualToString:@"cells"]) {
 		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
 	} else if ([key isEqualToString:@"scene"]) {
@@ -69,27 +69,27 @@
 	_asset=asset;
 }
 
-- (WTMBehavior*)behavior{
-	if([_behavior isAnAlias]){
-		id o=[_registry objectWithUinstID:_behavior.uinstID];
+- (WTMCollectionOfBehavior*)behaviors{
+	if([_behaviors isAnAlias]){
+		id o=[_registry objectWithUinstID:_behaviors.uinstID];
 		if(o){
-			_behavior=o;
+			_behaviors=o;
 		}
 	}
-	return _behavior;
+	return _behaviors;
 }
 
 
-- (WTMBehavior*)behavior_auto{
-	_behavior=[self behavior];
-	if(!_behavior){
-		_behavior=[[WTMBehavior alloc] initInRegistry:_registry];
+- (WTMCollectionOfBehavior*)behaviors_auto{
+	_behaviors=[self behaviors];
+	if(!_behaviors){
+		_behaviors=[[WTMCollectionOfBehavior alloc] initInRegistry:_registry];
 	}
-	return _behavior;
+	return _behaviors;
 }
 
-- (void)setBehavior:(WTMBehavior*)behavior{
-	_behavior=behavior;
+- (void)setBehaviors:(WTMCollectionOfBehavior*)behaviors{
+	_behaviors=behaviors;
 }
 
 - (WTMCollectionOfCell*)cells{
@@ -156,11 +156,11 @@
 			[dictionary setValue:[self.asset aliasDictionaryRepresentation] forKey:@"asset"];
 		}
 	}
-	if(self.behavior){
+	if(self.behaviors){
 		if(includeChildren){
-			[dictionary setValue:[self.behavior dictionaryRepresentationWithChildren:includeChildren] forKey:@"behavior"];
+			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"behaviors"];
 		}else{
-			[dictionary setValue:[self.behavior aliasDictionaryRepresentation] forKey:@"behavior"];
+			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"behaviors"];
 		}
 	}
 	if(self.cells){
@@ -187,7 +187,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMElement ",self.uinstID];
 	[s appendFormat:@"asset : %@\n",NSStringFromClass([self.asset class])];
-	[s appendFormat:@"behavior : %@\n",NSStringFromClass([self.behavior class])];
+	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];
 	[s appendFormat:@"scene : %@\n",NSStringFromClass([self.scene class])];
 	return s;

@@ -10,9 +10,14 @@
 
 @interface WIOSSoundManagerTableViewController (){
     UIBarButtonItem *_addButton;
+    BOOL _hasPushed;
 }
-
+@property (assign,nonatomic)    id<WIOSSoundRecorderDelegate>delegate;
+@property (nonatomic,strong)    WTMLibrary *library;
+@property (nonatomic,strong)    WTMSound *selectedSound;
 @property (nonatomic,readonly)  WTMCollectionOfMember *sounds;
+@property (nonatomic,copy)      NSString *categoryName;
+
 @end
 
 @implementation WIOSSoundManagerTableViewController
@@ -20,14 +25,24 @@
 @synthesize library = _library;
 @synthesize sounds = _sounds;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style{
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
     }
     return self;
 }
+
+- (void)setUpWithSound:(WTMSound*)sound
+           fromLibrary:(WTMLibrary*)library
+       useCategoryName:(NSString*)category
+            anDelegate:(id<WIOSSoundRecorderDelegate>)delegate{
+    [self setLibrary:library];
+    [self setSelectedSound:sound];
+    [self setCategoryName:category];
+    self.delegate=delegate;
+}
+
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -38,8 +53,19 @@
     _addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(_createSound:)];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    self.navigationItem.rightBarButtonItems = @[self.editButtonItem, _addButton];
+    self.navigationItem.rightBarButtonItems = @[_addButton,self.editButtonItem];
 }
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if(_hasPushed){
+        [self.tableView reloadData];
+    }
+    _hasPushed=NO;
+}
+
+
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
@@ -49,8 +75,9 @@
 
 -(void)setLibrary:(WTMLibrary *)library{
     _library=library;
+    WIOSSoundManagerTableViewController *__weak weakSelf=self;
     _sounds=[library.members filteredCollectionUsingBlock:^BOOL(WTMMember *obj) {
-        if([obj isKindOfClass:[WTMSound class]]){
+        if([obj isKindOfClass:[WTMSound class]] && (!weakSelf.categoryName||[obj.category isEqualToString:weakSelf.categoryName])){
             return YES;
         }else{
             return NO;
@@ -66,6 +93,7 @@
 
 - (void) _createSound:(id)sender{
     WTMSound*sound=[wtmAPI createSoundMemberInLibrary:self.library];
+    sound.category=self.categoryName;
     sound.name=NSLocalizedString(@"New sound", @"");
     [_sounds addObject:sound];
     [self.delegate soundHasBeenCreated:sound];
@@ -86,13 +114,12 @@
     static NSString *CellIdentifier = @"soundCell";
     WIOSSoundListCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
-    cell.useButton.indexPath=indexPath;
+    cell.editSoundButton.indexPath=indexPath;
     cell.soundNameLabel.text=sound.name;
-    
     if([(WTMSound*)[_sounds objectAtIndex:indexPath.row] isEqual:self.selectedSound]){
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        [cell setSelected:YES animated:NO];
     }else{
-         [cell setAccessoryType:UITableViewCellAccessoryNone];
+         [cell setSelected:NO animated:NO];
     }
     return cell;
 }
@@ -115,19 +142,19 @@
 }
 */
 
-/*
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+        [wtmAPI removeMember:sound];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
+
 
 /*
 // Override to support rearranging the table view.
@@ -160,5 +187,6 @@
     WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:[(WIOSButton*)sender indexPath].row];
     self.selectedSound=sound;
     [self performSegueWithIdentifier:@"editSound" sender:sender];
+    _hasPushed=YES;
 }
 @end

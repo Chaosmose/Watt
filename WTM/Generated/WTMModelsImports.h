@@ -6,7 +6,6 @@
  
 
 
-#import "WTMAction.h"
 #import "WTMCollectionOfScene.h"
 #import "WTMActivity.h"
 #import "WTMAsset.h"
@@ -16,6 +15,7 @@
 #import "WTMCell.h"
 #import "WTMCollectionOfCell.h"
 #import "WTMColumn.h"
+#import "WTMCollectionOfBehavior.h"
 #import "WTMElement.h"
 #import "WTMHtml.h"
 #import "WTMHyperlink.h"
@@ -30,13 +30,10 @@
 #import "WTMCollectionOfMenu.h"
 #import "WTMMenu.h"
 #import "WTMMenuSection.h"
-#import "WTMOperand.h"
-#import "WTMOperator.h"
 #import "WTMCollectionOfActivity.h"
 #import "WTMCollectionOfLibrary.h"
 #import "WTMPackage.h"
 #import "WTMPdf.h"
-#import "WTMRule.h"
 #import "WTMCollectionOfElement.h"
 #import "WTMScene.h"
 #import "WTMCollectionOfPackage.h"
