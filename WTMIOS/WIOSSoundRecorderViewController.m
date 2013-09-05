@@ -26,6 +26,7 @@
 @synthesize isPlaying = _isPlaying;
 @synthesize isRecording = _isRecording;
 @synthesize isPaused = _isPaused;
+@synthesize sound = _sound;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -44,6 +45,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
     [self.nameTextField setText:self.sound.name];
     [self.progressSlider setContinuous:YES];
     [self.progressSlider setMinimumValue:0.f];
@@ -56,6 +58,16 @@
 
 }
 
+
+- (void)setSound:(WTMSound *)sound{
+    _sound=sound;
+    _sound.registry.autosave=NO;
+}
+
+- (WTMSound*)sound{
+    return _sound;
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self _stopRecording];
@@ -63,8 +75,9 @@
     
     if (![self.nameTextField.text isEqualToString:self.sound.name]) {
         self.sound.name=self.nameTextField.text;
-        self.sound.hasChanged=YES;
+        self.sound.registry.hasChanged=YES;
     }
+    _sound.registry.autosave=YES;
 }
 
 - (void)didReceiveMemoryWarning{
