@@ -27,6 +27,7 @@
 #ifndef WTM_MACROS
 #define WTM_MACROS
 #define wtmAPI [WTMApi sharedInstance]
+#define wtmRegistry [wtmAPI currentRegistry]
 #endif
 
 #ifndef WTM_CONST
