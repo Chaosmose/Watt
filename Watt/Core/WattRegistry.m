@@ -51,6 +51,19 @@
 }
 
 
+/**
+ *  Execute the block and autosaves
+ *
+ *  @param block of modification of object in the registry.
+ */
+- (void)executeAndAutoSaveBlock:(void (^)())block{
+    self.autosave=NO;
+    block();
+    self.hasChanged=YES;
+    self.autosave=YES;
+}
+
+
 #pragma mark - Serialization/Deserialization facilities
 
 
@@ -99,42 +112,14 @@
     return _apiReference;
 }
 
-- (void)setHasChanged:(BOOL)hasChanged{
-    _hasChanged=hasChanged;
-    if(hasChanged==NO){
-        [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-            obj.hasChanged=NO;
-        }];
-    }else{
-        [self _tryToSaveAutomatically];
-    }
-    
-}
-
-
-- (BOOL)hasChanged{
-    // We check object changes if the registry is not already set to YES
-    if(! _hasChanged){
-        [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-            if(obj.hasChanged==YES){
-                _hasChanged=YES;
-                *stop=YES;
-            }
-        }];
-        if(_hasChanged)
-             [self _tryToSaveAutomatically];
-    }
-    return _hasChanged;
-}
-
 
 - (void)setAutosave:(BOOL)autosave{
-    if(autosave==YES && _autosave==NO){
+    _autosave=autosave;
+    if(_autosave){
         if([self hasChanged]){
             [self _tryToSaveAutomatically];
         }
     }
-    _autosave=autosave;
 }
 
 - (BOOL)autosave{
@@ -143,10 +128,22 @@
 
 
 - (void)_tryToSaveAutomatically{
-    if(self.autosave && self.serializationPath && [self.apiReference isKindOfClass:[WattApi class]]){
-        [(WattApi*)self.apiReference writeRegistry:self
-                                            toFile:self.serializationPath];
-        WTLog(@"Saved automatically");
+    
+    if([self.name length]>=1 && [self.apiReference isKindOfClass:[WattApi class]]){
+        if(self.autosave){
+            if([(WattApi*)self.apiReference writeRegistry:self
+                                                   toFile:[(WattApi*)self.apiReference absolutePathForRegistryFileWithName:self.name]]){
+                _hasChanged=NO;
+                WTLog(@"Saved automatically");
+            }
+        }else{
+           NSMutableString *diagnostic=[NSMutableString string];
+           if(![self.name length]>=1)
+               [diagnostic appendFormat:@" invalid registry name : %@ ",self.name];
+            if(![self.apiReference isKindOfClass:[WattApi class]])
+                [diagnostic appendFormat:@" invalid apiReference : %@ ",self.apiReference];
+            [NSException raise:@"WattRegistry exception" format:@"%@",diagnostic];
+        }
     }
 }
 

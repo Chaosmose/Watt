@@ -53,20 +53,30 @@
 @property (nonatomic) id apiReference;
 
 /**
- *  Autosave
+ *  Autosave : 
+ * 
+ *  I# You can use @selector(executeAndAutoSaveBlock:) if you perform a suite of actions and want to save them immediatly
+ *
+ *  II# You can manually use the autosave to reduce the I/O 
+ *  
+ *  1- set registry.autosave=NO;
+ *  2- update the models , deletes, modify, create , ... 
+ *  3- set registry.hasChanged when you perform a discrete changes that need to saved (the api, the collection automatically set) 
+ *  4- set registry.autosave=YES (this will save only if on of the object has changed)
  */
 @property (nonatomic,assign)BOOL autosave;
 
 /**
- *  You can reference the serializationPath
- */
-@property (nonatomic,copy) NSString *serializationPath;
-
-/**
- * Automatically turns the hasChanged property of any holding wattObject if set to NO
- * Aggregates all the wattObject hasChanged property on getter.
+ * A flag used by the autosave process.
  */
 @property (nonatomic) BOOL hasChanged;
+
+/**
+ *  Execute the block and autosaves
+ *
+ *  @param block of modification of object in the registry.
+ */
+- (void)executeAndAutoSaveBlock:(void (^)())block;
 
 #pragma mark - Serialization/Deserialization facilities
 
