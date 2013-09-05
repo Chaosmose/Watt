@@ -50,7 +50,10 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    _addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(_createSound:)];
+    _addButton=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Add new sound", @"Add new sound")
+                                                style:UIBarButtonItemStyleBordered
+                                               target:self
+                                               action:@selector(_createSound:)];
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItems = @[_addButton,self.editButtonItem];
@@ -132,6 +135,7 @@
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
     self.selectedSound=sound;
+    [self.delegate selectedSoundIs:sound];
 }
 /*
 // Override to support conditional editing of the table view.

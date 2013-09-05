@@ -15,6 +15,7 @@
 @protocol WIOSSoundRecorderDelegate <NSObject>
 @required
 - (void) soundHasBeenCreated:(WTMSound*)sound;
+- (void) selectedSoundIs:(WTMSound*)sound;
 @end
 
 @interface WIOSSoundManagerTableViewController : UITableViewController
