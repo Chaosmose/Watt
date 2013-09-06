@@ -22,17 +22,21 @@
 #import "WTMTable.h" 
 #import "WTMCollectionOfColumn.h"
 #import "WTMCollectionOfLine.h"
+#import "WTMScene.h"
 
 @implementation WTMTable 
 
 @synthesize columns=_columns;
 @synthesize lines=_lines;
+@synthesize scene=_scene;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"columns"]){
 		[super setValue:[WTMCollectionOfColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"columns"];
 	} else if ([key isEqualToString:@"lines"]) {
 		[super setValue:[WTMCollectionOfLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"lines"];
+	} else if ([key isEqualToString:@"scene"]) {
+		[super setValue:[WTMScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scene"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -84,6 +88,29 @@
 	_lines=lines;
 }
 
+- (WTMScene*)scene{
+	if([_scene isAnAlias]){
+		id o=[_registry objectWithUinstID:_scene.uinstID];
+		if(o){
+			_scene=o;
+		}
+	}
+	return _scene;
+}
+
+
+- (WTMScene*)scene_auto{
+	_scene=[self scene];
+	if(!_scene){
+		_scene=[[WTMScene alloc] initInRegistry:_registry];
+	}
+	return _scene;
+}
+
+- (void)setScene:(WTMScene*)scene{
+	_scene=scene;
+}
+
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -109,6 +136,13 @@
 			[dictionary setValue:[self.lines aliasDictionaryRepresentation] forKey:@"lines"];
 		}
 	}
+	if(self.scene){
+		if(includeChildren){
+			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"scene"];
+		}else{
+			[dictionary setValue:[self.scene aliasDictionaryRepresentation] forKey:@"scene"];
+		}
+	}
     return dictionary;
 }
 
@@ -120,6 +154,7 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMTable ",self.uinstID];
 	[s appendFormat:@"columns : %@\n",NSStringFromClass([self.columns class])];
 	[s appendFormat:@"lines : %@\n",NSStringFromClass([self.lines class])];
+	[s appendFormat:@"scene : %@\n",NSStringFromClass([self.scene class])];
 	return s;
 }
 

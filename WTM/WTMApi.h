@@ -83,6 +83,10 @@
 - (WTMScene*)createSceneInActivity:(WTMActivity*)activity;
 - (void)removeScene:(WTMScene*)scene;
 
+#pragma mark - Table 
+
+- (void)removeTable:(WTMTable*)table;
+
 #pragma mark - Element + cells
 
 /**

@@ -23,14 +23,17 @@
 #import "WattModel.h"
 @class WTMCollectionOfColumn;
 @class WTMCollectionOfLine;
+@class WTMScene;
 
 @interface WTMTable:WattModel<WattCoding>{
 }
 
 @property (nonatomic,strong) WTMCollectionOfColumn * columns;
 @property (nonatomic,strong) WTMCollectionOfLine * lines;
+@property (nonatomic,strong) WTMScene * scene;
 
 - (WTMCollectionOfColumn*)columns_auto;
 - (WTMCollectionOfLine*)lines_auto;
+- (WTMScene*)scene_auto;
 
 @end

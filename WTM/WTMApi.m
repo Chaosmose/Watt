@@ -343,6 +343,7 @@
         WTMScene*scene=[[WTMScene alloc]initInRegistry:self.currentRegistry];
         [activity.scenes_auto addObject:scene];
         scene.activity=activity;
+        scene.table_auto.scene=scene;
         return scene;
         
     }
@@ -368,6 +369,18 @@
         
     }
 }
+
+
+#pragma mark - Table
+
+- (void)removeTable:(WTMTable*)table{
+    table.scene=nil;
+    WTMApi *__weak weakSelf=self;
+    [table.columns enumerateObjectsUsingBlock:^(WTMColumn *obj, NSUInteger idx, BOOL *stop) {
+        [weakSelf removeColumn:obj];
+    } reverse:YES];
+}
+
 
 #pragma mark - Element
 
