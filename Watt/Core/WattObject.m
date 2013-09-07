@@ -24,6 +24,11 @@
 #import "WattCollectionOfObject.h"
 #import <objc/runtime.h>
 
+@interface WattObject(){
+    BOOL _aliasesHasBeenResolved; //A flag to Prevent circular desaliasing.
+}
+@end
+
 @implementation WattObject{
 }
 
@@ -176,7 +181,7 @@
                 if(![o hasBeenLocalized])
                     [o localize];
             }else{
-#warning todo 
+#warning todo
                 //[_wapi localize:self withKey:key andValue:o];
             }
         }
@@ -221,18 +226,21 @@
 
 // Attempt to resolve the aliases
 - (void)resolveAliases{
-    NSArray *p=[self propertiesKeys];
-    for (NSString*key in p) {
-        id value=[self valueForKey:key];
-        if(value){
-            if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
-                id instance=[_registry objectWithUinstID:[value uinstID]];
-                if(instance){
-                    [self setValue:instance forKey:key];
+    if(!_aliasesHasBeenResolved){
+        _aliasesHasBeenResolved=YES;
+        NSArray *p=[self propertiesKeys];
+        for (NSString*key in p) {
+            id value=[self valueForKey:key];
+            if(value){
+                if([value respondsToSelector:@selector(isAnAlias)] && [value isAnAlias]){
+                    id instance=[_registry objectWithUinstID:[value uinstID]];
+                    if(instance){
+                        [self setValue:instance forKey:key];
+                    }
+                }else if([value respondsToSelector:@selector(resolveAliases)]){
+                    // Recursive alias resolution
+                    [value resolveAliases];
                 }
-            }else if([value respondsToSelector:@selector(resolveAliases)]){
-                // Recursive alias resolution
-                [value resolveAliases];
             }
         }
     }
