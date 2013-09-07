@@ -387,7 +387,7 @@
     } reverse:YES];
 }
 
-#pragma mark - Column and line 
+#pragma mark - Column and line
 
 - (WTMColumn*)createColumnInTableOfScene:(WTMScene*)scene{
     WTMTable *table=[self createTableInSceneIfNecessary:scene];
@@ -479,28 +479,32 @@
 - (WTMCell*)createCellInANewLineFor:(WTMElement*)element
                      withAttributes:(NSDictionary*)attributes
                            inColumn:(WTMColumn*)column{
-
+    
     if(!element)
         [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
     
     if(!element.scene)
         [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
-
     
-    WTMTable *table=element.scene.table_auto;
+    
+    WTMTable *table=[self createTableInSceneIfNecessary:element.scene];
     if(!column)
         column=[self createColumnInTableOfScene:element.scene];
     
-
+    
     WTMLine *line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
     [table.lines_auto addObject:line];
     line.table=table;
+    
     
     WTMCell *cell=[[WTMCell alloc] initInRegistry:self.currentRegistry];
     cell.column=column;
     cell.line=line;
     cell.element=element;
     cell.attributes=attributes;
+    
+    [line.cells_auto addObject:cell];
+    [column.cells_auto addObject:cell];
     
     return cell;
 }
@@ -517,8 +521,8 @@
  *  @return a new WTMcell.
  */
 - (WTMCell*)createCellInANewColumnFor:(WTMElement*)element
-                     withAttributes:(NSDictionary*)attributes
-                           inLine:(WTMLine*)line{
+                       withAttributes:(NSDictionary*)attributes
+                               inLine:(WTMLine*)line{
     
     if(!element)
         [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
@@ -527,7 +531,7 @@
         [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
     
     
-    WTMTable *table=element.scene.table_auto;
+    WTMTable *table=[self createTableInSceneIfNecessary:element.scene];
     if(!line){
         line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
         [table.lines_auto addObject:line];
@@ -543,6 +547,9 @@
     cell.line=line;
     cell.element=element;
     cell.attributes=attributes;
+    
+    [line.cells_auto addObject:cell];
+    [column.cells_auto addObject:cell];
     
     return cell;
 }
@@ -579,12 +586,12 @@
 /**
  *  Removes and unregisters the cell
  *  But preserves the element,in the scene
- *  and preserves the column and the line 
+ *  and preserves the column and the line
  *
  *  @param cell the cell to be removed.
  */
 -(void)removeCell:(WTMCell*)cell{
-
+    
     [cell.element.cells removeObject:cell];
     cell.element=nil;
     
@@ -757,7 +764,5 @@
     [member.library.members removeObject:member];
     [member autoUnRegister];
 }
-
-
 
 @end
