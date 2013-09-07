@@ -128,7 +128,6 @@
 
 
 - (void)_tryToSaveAutomatically{
-    
     if([self.name length]>=1 && [self.apiReference isKindOfClass:[WattApi class]]){
         if(self.autosave){
             if([(WattApi*)self.apiReference writeRegistry:self
@@ -136,16 +135,17 @@
                 _hasChanged=NO;
                 WTLog(@"Saved automatically");
             }
-        }else{
-           NSMutableString *diagnostic=[NSMutableString string];
-           if(![self.name length]>=1)
-               [diagnostic appendFormat:@" invalid registry name : %@ ",self.name];
-            if(![self.apiReference isKindOfClass:[WattApi class]])
-                [diagnostic appendFormat:@" invalid apiReference : %@ ",self.apiReference];
-            [NSException raise:@"WattRegistry exception" format:@"%@",diagnostic];
         }
+    }else{
+        NSMutableString *diagnostic=[NSMutableString string];
+        if(![self.name length]>=1)
+            [diagnostic appendFormat:@"invalid registry name : %@ ",self.name];
+        if(![self.apiReference isKindOfClass:[WattApi class]])
+            [diagnostic appendFormat:@"invalid apiReference : %@ ",self.apiReference];
+        [NSException raise:@"WattRegistry exception" format:@"%@",diagnostic];
     }
 }
+
 
 
 - (NSArray*)arrayRepresentation{
