@@ -373,6 +373,12 @@
 
 #pragma mark - Table
 
+- (WTMTable*)createTableInSceneIfNecessary:(WTMScene*)scene{
+    WTMTable*table=scene.table_auto;
+    table.scene=scene;
+    return table;
+}
+
 - (void)removeTable:(WTMTable*)table{
     table.scene=nil;
     WTMApi *__weak weakSelf=self;
@@ -381,6 +387,23 @@
     } reverse:YES];
 }
 
+#pragma mark - Column and line 
+
+- (WTMColumn*)createColumnInTableOfScene:(WTMScene*)scene{
+    WTMTable *table=[self createTableInSceneIfNecessary:scene];
+    WTMColumn*column=[[WTMColumn alloc] initInRegistry:self.currentRegistry];
+    [table.columns_auto addObject:column];
+    column.table=table;
+    return column;
+}
+
+- (WTMLine*)createLineInTableOfScene:(WTMScene*)scene{
+    WTMTable *table=[self createTableInSceneIfNecessary:scene];
+    WTMLine*line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
+    [table.lines_auto addObject:line];
+    line.table=table;
+    return line;
+}
 
 #pragma mark - Element
 
@@ -465,11 +488,9 @@
 
     
     WTMTable *table=element.scene.table_auto;
-    if(!column){
-        column=[[WTMColumn alloc] initInRegistry:self.currentRegistry];
-        [table.columns_auto addObject:column];
-        column.table=table;
-    }
+    if(!column)
+        column=[self createColumnInTableOfScene:element.scene];
+    
 
     WTMLine *line=[[WTMLine alloc] initInRegistry:self.currentRegistry];
     [table.lines_auto addObject:line];

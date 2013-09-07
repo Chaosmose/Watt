@@ -85,7 +85,13 @@
 
 #pragma mark - Table 
 
+- (WTMTable*)createTableInSceneIfNecessary:(WTMScene*)scene;
 - (void)removeTable:(WTMTable*)table;
+
+#pragma mark - Column
+
+- (WTMColumn*)createColumnInTableOfScene:(WTMScene*)scene;
+- (WTMLine*)createLineInTableOfScene:(WTMScene*)scene;
 
 #pragma mark - Element + cells
 
