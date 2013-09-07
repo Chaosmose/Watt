@@ -184,7 +184,7 @@
         <element name="Scene" positionX="-6644" positionY="-4120" width="128" height="148"/>
         <element name="Shelf" positionX="-7733" positionY="-4329" width="128" height="133"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
-        <element name="Table" positionX="-6858" positionY="-3922" width="128" height="88"/>
+        <element name="Table" positionX="-6851" positionY="-3958" width="128" height="88"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>
     </elements>
 </model>
