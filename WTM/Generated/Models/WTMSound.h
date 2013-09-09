@@ -26,7 +26,7 @@
 @interface WTMSound:WTMLinkedAsset<WattCoding>{
 }
 
-@property (nonatomic,assign) NSInteger  duration;
+@property (nonatomic,assign) float  duration;
 
 
 @end

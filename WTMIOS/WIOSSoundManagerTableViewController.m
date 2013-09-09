@@ -99,7 +99,6 @@
     sound.category=self.categoryName;
     sound.name=NSLocalizedString(@"New sound", @"");
     [_sounds addObject:sound];
-    [self.delegate soundHasBeenCreated:sound];
     [self.tableView reloadData];
 }
 
@@ -120,9 +119,9 @@
     cell.editSoundButton.indexPath=indexPath;
     cell.soundNameLabel.text=sound.name;
     if([(WTMSound*)[_sounds objectAtIndex:indexPath.row] isEqual:self.selectedSound]){
-        [cell setSelected:YES animated:NO];
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }else{
-         [cell setSelected:NO animated:NO];
+        [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
     return cell;
 }
@@ -150,6 +149,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+        [self.delegate willDeleteSound:sound];
         [wtmAPI removeMember:sound];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   

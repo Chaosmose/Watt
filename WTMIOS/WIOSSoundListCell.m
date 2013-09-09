@@ -18,15 +18,6 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated{
-    [super setSelected:selected animated:animated];
-    if(selected){
-        [self setAccessoryType:UITableViewCellAccessoryCheckmark];
-    }else{
-        [self setAccessoryType:UITableViewCellAccessoryNone];
-    }
-}
-
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     [super setEditing:editing animated:animated];
     if(editing){
@@ -37,7 +28,5 @@
         [self.editSoundButton setEnabled:YES];
     }
 }
-
-
 
 @end

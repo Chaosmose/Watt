@@ -150,7 +150,7 @@
         <relationship name="sections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="shelf" inverseEntity="MenuSection" syncable="YES"/>
     </entity>
     <entity name="Sound" representedClassName="Sound" parentEntity="LinkedAsset" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Table" syncable="YES">
         <relationship name="columns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Column" inverseName="table" inverseEntity="Column" syncable="YES"/>
