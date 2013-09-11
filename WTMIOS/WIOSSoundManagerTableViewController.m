@@ -17,7 +17,6 @@
 @property (nonatomic,strong)    WTMSound *selectedSound;
 @property (nonatomic,readonly)  WTMCollectionOfMember *sounds;
 @property (nonatomic,copy)      NSString *categoryName;
-
 @end
 
 @implementation WIOSSoundManagerTableViewController
@@ -62,9 +61,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    if(_hasPushed){
-        [self.tableView reloadData];
-    }
+    [self.tableView reloadData];
     _hasPushed=NO;
 }
 
