@@ -12,4 +12,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files =  'WTM/**/*.{h,m}'
   s.public_header_files = 'WTM/**/*.h'
+  s.dependency  'Watt', '~> 0.3' 
 end
