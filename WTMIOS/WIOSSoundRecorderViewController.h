@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
+#import "WTM.h"
 #import "WTMSound.h"
 
 @interface WIOSSoundRecorderViewController : UIViewController<AVAudioRecorderDelegate,AVAudioPlayerDelegate>{
