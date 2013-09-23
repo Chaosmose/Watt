@@ -22,10 +22,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
 @property (weak, nonatomic) IBOutlet UISlider *progressSlider;
-
 @property (weak, nonatomic) IBOutlet UILabel *originLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endLabel;
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *recordingProgressLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;

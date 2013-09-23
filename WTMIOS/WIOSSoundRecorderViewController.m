@@ -40,22 +40,32 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     [self _setUpAudioSession];
-    [self _setUpInitialState];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
     [self.nameTextField setText:self.sound.name];
     [self.progressSlider setContinuous:YES];
     [self.progressSlider setMinimumValue:0.f];
     [self.progressSlider setMaximumValue:1.f];
     
+    [self.progressSlider addTarget:self
+                            action:@selector(_sliderValueChanged:)
+                forControlEvents:UIControlEventValueChanged];
+
     [self.originLabel setText:@"0"];
     [self.progressSlider setAlpha:1.f];
+    [self.progressSlider setValue:0.f];
     [self.originLabel setAlpha:1.f];
     [self.endLabel setAlpha:1.f];
-
+    [self.endLabel setText:@"0"];
+    
+    [self.recordingProgressLabel setAlpha:1.f];
+    [self.recordingProgressLabel setText:@"0"];
+    
+    [self.activityIndicator setHidesWhenStopped:YES];
+    [self _setUpInitialState];
 }
 
 
@@ -91,9 +101,11 @@
 #pragma mark - states
 
 - (void) _setUpInitialState {
-    [self setIsPlaying:NO];
-    [self setIsRecording:NO];
-    [self setIsPaused:NO];
+    _isPlaying=NO;
+    _isRecording=NO;
+    _isPaused=NO;
+    [self _initializePlayer];
+    [self _updateState];
 }
 
 
@@ -136,48 +148,86 @@
  *  Update the views states
  */
 - (void) _updateState{
-    if(_isPlaying){
-        if(self.progressSlider.alpha==0.f){
-            [self.originLabel setText:@"0"];
-            [self.progressSlider setAlpha:1.f];
-            [self.originLabel setAlpha:1.f];
-            [self.endLabel setAlpha:1.f];
+
+    BOOL isReset=(!_isPaused && !_isPlaying && ! _isRecording);
+    if(isReset){
+        BOOL soundExists=[self _soundExists];
+        if(soundExists){
+            [self _playButtonEnabled:YES];
+            [self _recordButtonEnabled:YES];
+        }else{
+            [self _playButtonEnabled:NO];
+            [self _recordButtonEnabled:YES];
         }
+        [self _showActivityIndicator:!soundExists isAnimated:NO];
+        [self _showSlider:soundExists];
+        [self _stopButtonEnabled:NO];
     }else{
-        if(self.progressSlider.alpha==1.f && _isRecording){
-            [self.progressSlider setAlpha:0.f];
-            [self.originLabel setAlpha:0.f];
-            [self.endLabel setAlpha:0.f];
-        }
+        [self _showSlider:_isPlaying];
+        [self _showActivityIndicator:_isRecording isAnimated:!_isPaused];
+        [self _playButtonEnabled:_isPlaying];
+        [self _recordButtonEnabled:_isRecording];
     }
     
-    if(self.isRecording){
-        if(!self.stopButton.enabled){
-            [self.stopButton setEnabled:YES];
-            [self.activityIndicator startAnimating];
-            [self.activityIndicator setAlpha:1.f];
-        }
+    BOOL isActive=(_isPlaying || _isRecording);
+    [self _stopButtonEnabled:isActive];
+}
+
+- (void)_playButtonEnabled:(BOOL)enabled {
+    [self.playButton setEnabled:enabled];
+    [self.playButton setAlpha:enabled?1.f:0.3f];
+    if(_isPlaying && !_isPaused){
+        [self.playButton  setTitle:@"PAUSE" forState:UIControlStateNormal];
     }else{
-        if(self.stopButton.enabled && _isPlaying){
-            [self.stopButton setEnabled:NO];
-            [self.activityIndicator stopAnimating];
-            [self.activityIndicator setAlpha:0.f];
-        }
+        [self.playButton setTitle:@"PLAY" forState:UIControlStateNormal];
     }
-    
-    if(self.isRecording && !self.isPaused){
-        [self.recordButton setTitle:@"Pause" forState:UIControlStateNormal];
+}
+
+
+- (void)_recordButtonEnabled:(BOOL)enabled{
+    [self.recordButton setEnabled:enabled];
+    [self.recordButton setAlpha:enabled?1.f:0.3f];
+    if(_isRecording  && !_isPaused){
+        [self.recordButton  setTitle:@"PAUSE" forState:UIControlStateNormal];
     }else{
-        [self.recordButton setTitle:@"Rec" forState:UIControlStateNormal];
+        [self.recordButton setTitle:@"REC" forState:UIControlStateNormal];
     }
+}
+
+
+- (void)_stopButtonEnabled:(BOOL)enabled{
+    [self.stopButton setEnabled:enabled];
+    [self.stopButton setAlpha:enabled?1.f:0.3f];
     
-    if(self.isPlaying && !self.isPaused){
-        [self.playButton  setTitle:@"Pause" forState:UIControlStateNormal];
-    }else{
-        [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
-    }
-    
-    
+}
+
+- (void)_showSlider:(BOOL)show{
+    [self.progressSlider setEnabled:show];
+    [self.progressSlider setAlpha:show?1.f:0.f];
+    [self.originLabel setAlpha:show?1.f:0.f];
+    [self.endLabel setAlpha:show?1.f:0.f];
+}
+
+- (void)_showActivityIndicator:(BOOL)show isAnimated:(BOOL)animated{
+    [self.activityIndicator setAlpha:show?1.f:0.f];
+    if(animated && !self.activityIndicator.isAnimating)
+        [self.activityIndicator startAnimating];
+    if(!animated && self.activityIndicator.isAnimating)
+        [self.activityIndicator stopAnimating];
+    [self.recordingProgressLabel setAlpha:show?1.f:0.f];
+}
+
+- (BOOL)_soundExists{
+    return [[NSFileManager defaultManager]fileExistsAtPath:[self _soundPath]];
+}
+
+- (void)_displaySoundDuration{
+    [self.endLabel setText:[NSString stringWithFormat:@"%.01f s",_player.duration]];
+}
+
+- (void)_resetProgress{
+    [self.progressSlider setValue:0];
+    [self.originLabel setText:@"0"];
 }
 
 /**
@@ -217,15 +267,18 @@
 
 - (NSURL*)_soundFileUrl{
     if(!_fileURL){
-        if(!self.sound.relativePath){
-            self.sound.relativePath=[NSString stringWithFormat:@"%@/%@/%i.caf",_sound.library.package.objectName,_sound.library.objectName,_sound.uinstID];
-        }
-        NSString *path=[[wtmAPI absolutePathForRegistryBundleWithName:wtmRegistry.name] stringByAppendingString:self.sound.relativePath];
+        NSString *path=[self _soundPath];
         [wtmAPI createRecursivelyRequiredFolderForPath:path];
         _fileURL = [NSURL fileURLWithPath:path ];
     }
     return _fileURL;
 }
+
+
+- (NSString*)_soundPath{
+    return [[wtmAPI absolutePathForRegistryBundleWithName:wtmRegistry.name] stringByAppendingString:self.sound.relativePath];
+}
+
 
 - (NSMutableDictionary*)_soundSettingsDictionary{
     NSMutableDictionary* settings = [[NSMutableDictionary alloc] init];
@@ -234,8 +287,6 @@
     [settings setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
     return settings;
 }
-
-
 
 
 - (void) _setUpAudioSession {
@@ -249,47 +300,60 @@
     if(self.isRecording && self.isPaused){
         [_recorder record];
     }else{
-        NSError *error=nil;
-        _recorder = [[ AVAudioRecorder alloc] initWithURL:[self _soundFileUrl] settings:[self _soundSettingsDictionary] error:&error];
-        [_recorder setDelegate:self];
-        [_recorder prepareToRecord];
-        [_recorder record];
+        if([self _initializeRecorder]){
+            _timer=[NSTimer scheduledTimerWithTimeInterval:0.02
+                                                    target:self
+                                                  selector:@selector(_recordingTimer:)
+                                                  userInfo:nil
+                                                   repeats:YES];
+           
+        }
     }
     _isPaused=NO;
-    [self setIsRecording:YES];
+    [self setIsRecording:[_recorder isRecording]];
     
 }
 
 - (void) _play{
-    NSError *error=nil;
     if(!_isPlaying){
-        _player=[[AVAudioPlayer alloc] initWithContentsOfURL:[self _soundFileUrl] error:&error];
-        [_player setDelegate:self];
-        if([self _proceedError:error withTitle:NSLocalizedString(@"Audio player initialization error", @"")]){
+        if([self _initializePlayer]){
             if(self.sound.duration!=_player.duration){
                 self.sound.duration=_player.duration;
-
             }
             _timer=[NSTimer scheduledTimerWithTimeInterval:0.02
                                                     target:self
                                                   selector:@selector(_playingTimer:)
                                                   userInfo:nil
                                                    repeats:YES];
-            [self.endLabel setText:[NSString stringWithFormat:@"%f",_player.duration]];
+            
         }
     }
-    [self setIsPlaying:[_player play]];
     _isPaused=NO;
-    [self setIsPlaying:YES];
+    [self setIsPlaying:[_player play]];
 }
 
 
 -(void)_playingTimer:(NSTimer*)timer {
     float total=_player.duration;
     float f=_player.currentTime / total;
-    //NSString *str = [NSString stringWithFormat:@"%f", f];
     [self.progressSlider setValue:f];
+    [self.originLabel setText:[NSString stringWithFormat:@"%.01f",_player.currentTime]];
 }
+
+-(void)_recordingTimer:(NSTimer*)timer {
+    if([_recorder isRecording]){
+        [self.recordingProgressLabel setText:[NSString stringWithFormat:@"%.01f s",_recorder.currentTime]];
+    }
+}
+
+
+-(void)_sliderValueChanged:(UISlider *)sender{
+    NSLog(@"slider value = %f", sender.value);
+    if(_player){
+        [_player setCurrentTime:_player.duration*sender.value];
+    }
+}
+
 
 - (void)_purgeTimer{
     [_timer invalidate];
@@ -297,23 +361,14 @@
 }
 
 - (void)_stop {
-    [self _stopRecording];
-    [self _stopPlaying];
-}
-
-- (void) _stopRecording{
-    [_recorder stop];
-    [self _purgeTimer];
-}
-
-- (void) _pauseRecording{
-    [self setIsPaused:YES];
-    [_recorder pause];
-}
-
-- (void) _stopPlaying{
-    [_player stop];
-    [self _purgeTimer];
+    if(_isPlaying){
+        [_player stop];
+        [self _stopPlaying];
+    }
+    if(_isRecording){
+        [_recorder stop];
+        // _stopRecording will be automatically called.
+    }
 }
 
 - (void) _pausePlaying{
@@ -321,7 +376,32 @@
     [_player pause];
 }
 
-- (BOOL) _proceedError:(NSError*)error withTitle:(NSString*)title{
+
+- (void) _pauseRecording{
+    [self setIsPaused:YES];
+    [_recorder pause];
+}
+
+- (void) _stopPlaying{
+    _isPaused=NO;
+    [self _purgePlayer];
+    [self _purgeTimer];
+    [self _resetProgress];
+    [self setIsPlaying:NO];
+}
+
+
+- (void) _stopRecording{
+    _isPaused=NO;
+    [self _purgeRecorder];
+    [self _purgeTimer];
+    [self _resetProgress];
+    [self setIsRecording:NO];
+    [self _initializePlayer];// We reinitialize the player
+}
+
+
+- (BOOL)_proceedError:(NSError*)error withTitle:(NSString*)title{
     if(error){
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:title
                                                       message:[error localizedDescription]
@@ -334,13 +414,54 @@
     return YES;
 }
 
+
+- (BOOL)_initializePlayer{
+    if(_player || ![self _soundExists]){
+        
+        return YES;
+    }
+    NSError *error=nil;
+    _player=[[AVAudioPlayer alloc] initWithContentsOfURL:[self _soundFileUrl] error:&error];
+    [_player setDelegate:self];
+    [self _displaySoundDuration];
+    BOOL success=[self _proceedError:error withTitle:NSLocalizedString(@"Audio player initialization error", @"")];
+    if(!success){
+        [_player setDelegate:nil];
+        _player=nil;
+    }
+    return success;
+}
+
+- (BOOL)_initializeRecorder{
+    NSError *error=nil;
+    _recorder = [[ AVAudioRecorder alloc] initWithURL:[self _soundFileUrl] settings:[self _soundSettingsDictionary] error:&error];
+    [_recorder setDelegate:self];
+    [_recorder prepareToRecord];
+    [_recorder record];
+    BOOL success=[self _proceedError:error withTitle:NSLocalizedString(@"Audio recorder initialization error", @"")];
+    if(!success){
+        [_player setDelegate:nil];
+        _player=nil;
+    }
+    return success;
+}
+
+
+- (void)_purgePlayer{
+    _player.delegate=nil;
+    _player=nil;
+}
+
+- (void)_purgeRecorder{
+    _recorder.delegate=nil;
+    _recorder=nil;
+}
+
 #pragma mark - AVAudioPlayerDelegate
 
 /* audioPlayerDidFinishPlaying:successfully: is called when a sound has finished playing. This method is NOT called if the player is stopped due to an interruption. */
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    _isPaused=NO;
-    [self setIsPlaying:NO];
-    [self _purgeTimer];
+    [self _stopPlaying];
 }
 
 /* if an error occurs while decoding it will be reported to the delegate. */
@@ -364,9 +485,7 @@
 
 /* audioRecorderDidFinishRecording:successfully: is called when a recording has been finished or stopped. This method is NOT called if the recorder is stopped due to an interruption. */
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
-    _isPaused=NO;
-    [self setIsRecording:NO];
-    [self _purgeTimer];
+    [self _stopRecording];
 }
 
 /* if an error occurs while encoding it will be reported to the delegate. */
@@ -374,11 +493,9 @@
     
 }
 
-
 /* audioRecorderBeginInterruption: is called when the audio session has been interrupted while the recorder was recording. The recorded file will be closed. */
 - (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder{
     
 }
-
 
 @end

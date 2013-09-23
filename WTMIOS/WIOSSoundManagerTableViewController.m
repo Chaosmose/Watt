@@ -95,7 +95,9 @@
     WTMSound*sound=[wtmAPI createSoundMemberInLibrary:self.library];
     sound.category=self.categoryName;
     sound.name=NSLocalizedString(@"New sound", @"");
+    sound.relativePath=[NSString stringWithFormat:@"%@/%@/%i.caf",sound.library.package.objectName,sound.library.objectName,sound.uinstID];
     [_sounds addObject:sound];
+    wtmRegistry.hasChanged=YES;
     [self.tableView reloadData];
 }
 
