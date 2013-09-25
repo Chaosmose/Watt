@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9E448ADE-6B6B-4E7E-B54A-3FEBCD3AEDE7</string>
+	<string>410391ED-A3C8-45CF-8A35-B8ED7EDB7857</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Watt</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>1ED068B7-763D-4C3A-9221-D00CE76D8D17</key>
+		<key>5DDB4485-F921-4EAB-BF4F-B5336559937B</key>
 		<string>https://github.com/benoit-pereira-da-silva/Watt.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Watt.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>1ED068B7-763D-4C3A-9221-D00CE76D8D17</key>
+		<key>5DDB4485-F921-4EAB-BF4F-B5336559937B</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>1ED068B7-763D-4C3A-9221-D00CE76D8D17</string>
+	<string>5DDB4485-F921-4EAB-BF4F-B5336559937B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>1ED068B7-763D-4C3A-9221-D00CE76D8D17</string>
+			<string>5DDB4485-F921-4EAB-BF4F-B5336559937B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Watt</string>
 		</dict>

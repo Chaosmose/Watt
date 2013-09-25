@@ -32,12 +32,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIButton *stopButton;
 
-
-
 @property (assign,nonatomic) BOOL isPlaying;
 @property (assign,nonatomic) BOOL isRecording;
 @property (assign,nonatomic) BOOL isPaused;
 
+/**
+ *  You can use your own skin by changing the bundleName;
+ */
+- (void)setBundleName:(NSString *)bundleName;
 
 - (IBAction)action:(id)sender;
 

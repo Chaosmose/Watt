@@ -18,6 +18,7 @@
     return self;
 }
 
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated{
     [super setEditing:editing animated:animated];
     if(editing){
@@ -29,4 +30,11 @@
     }
 }
 
+- (IBAction)switched:(id)sender {
+    if (self.selectedSwitch.isOn) {
+        [self.delegate selectedIndexPathHasChanged:self.editSoundButton.indexPath];
+    }else{
+        [self.delegate selectedIndexPathHasChanged:nil];
+    }
+}
 @end

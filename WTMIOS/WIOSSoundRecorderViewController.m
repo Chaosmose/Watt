@@ -18,6 +18,7 @@
     NSURL          *_fileURL;
     
     NSTimer *_timer;
+    NSBundle *_wiosBundle;
 }
 @end
 
@@ -42,9 +43,25 @@
     [self _setUpAudioSession];
 }
 
+
+- (void)setBundleName:(NSString *)bundleName{
+    NSString*bundlePath=[[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
+    if(!bundlePath){
+        [NSException raise:@"Missing bundle" format:@"%@",bundleName];
+    }
+    _wiosBundle=[NSBundle bundleWithPath:bundlePath];
+}
+
+
+
+
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if(!_wiosBundle)
+        [self setBundleName:@"wiosSound"];
     
+    [self.stopButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"stop" ofType:@"png"]]forState:UIControlStateNormal];
     [self.nameTextField setText:self.sound.name];
     [self.progressSlider setContinuous:YES];
     [self.progressSlider setMinimumValue:0.f];
@@ -177,9 +194,9 @@
     [self.playButton setEnabled:enabled];
     [self.playButton setAlpha:enabled?1.f:0.3f];
     if(_isPlaying && !_isPaused){
-        [self.playButton  setTitle:@"PAUSE" forState:UIControlStateNormal];
+        [self.playButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"pause" ofType:@"png"]]forState:UIControlStateNormal];
     }else{
-        [self.playButton setTitle:@"PLAY" forState:UIControlStateNormal];
+        [self.playButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"play" ofType:@"png"]] forState:UIControlStateNormal];
     }
 }
 
@@ -188,9 +205,9 @@
     [self.recordButton setEnabled:enabled];
     [self.recordButton setAlpha:enabled?1.f:0.3f];
     if(_isRecording  && !_isPaused){
-        [self.recordButton  setTitle:@"PAUSE" forState:UIControlStateNormal];
+        [self.recordButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"pause" ofType:@"png"]]forState:UIControlStateNormal];
     }else{
-        [self.recordButton setTitle:@"REC" forState:UIControlStateNormal];
+        [self.recordButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"record" ofType:@"png"]]forState:UIControlStateNormal];
     }
 }
 
@@ -393,7 +410,6 @@
 
 - (void) _stopRecording{
     _isPaused=NO;
-    [self _purgeRecorder];
     [self _purgeTimer];
     [self _resetProgress];
     [self setIsRecording:NO];
@@ -406,7 +422,7 @@
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:title
                                                       message:[error localizedDescription]
                                                      delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK")
+                                            cancelButtonTitle:NSLocalizedString(@"OK", @"OK choice in alerts")
                                             otherButtonTitles: nil];
         [alert show];
         return NO;
@@ -424,7 +440,7 @@
     _player=[[AVAudioPlayer alloc] initWithContentsOfURL:[self _soundFileUrl] error:&error];
     [_player setDelegate:self];
     [self _displaySoundDuration];
-    BOOL success=[self _proceedError:error withTitle:NSLocalizedString(@"Audio player initialization error", @"")];
+    BOOL success=[self _proceedError:error withTitle:NSLocalizedString(@"Audio player initialization error", @"Audio player initialization error message")];
     if(!success){
         [_player setDelegate:nil];
         _player=nil;
@@ -438,7 +454,7 @@
     [_recorder setDelegate:self];
     [_recorder prepareToRecord];
     [_recorder record];
-    BOOL success=[self _proceedError:error withTitle:NSLocalizedString(@"Audio recorder initialization error", @"")];
+    BOOL success=[self _proceedError:error withTitle:NSLocalizedString(@"Audio recorder initialization error", @"Audio recorder initialization error message")];
     if(!success){
         [_player setDelegate:nil];
         _player=nil;

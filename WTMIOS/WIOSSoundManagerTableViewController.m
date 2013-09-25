@@ -8,9 +8,11 @@
 
 #import "WIOSSoundManagerTableViewController.h"
 
-@interface WIOSSoundManagerTableViewController (){
+@interface WIOSSoundManagerTableViewController () <WIOSSOundSelectionProtocol>{
     UIBarButtonItem *_addButton;
     BOOL _hasPushed;
+    NSBundle *_wiosBundle;
+    
 }
 @property (assign,nonatomic)    id<WIOSSoundRecorderDelegate>delegate;
 @property (nonatomic,strong)    WTMLibrary *library;
@@ -40,6 +42,7 @@
     [self setSelectedSound:sound];
     [self setCategoryName:category];
     self.delegate=delegate;
+    [self.tableView reloadData];
 }
 
 
@@ -49,13 +52,30 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    _addButton=[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Add new sound", @"Add new sound")
-                                                style:UIBarButtonItemStyleBordered
-                                               target:self
-                                               action:@selector(_createSound:)];
+    _addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                             target:self
+                                                             action:@selector(_createSound:)];
+
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItems = @[_addButton,self.editButtonItem];
+}
+
+
+- (void)setBundleName:(NSString *)bundleName{
+    NSString*bundlePath=[[NSBundle mainBundle] pathForResource:bundleName ofType:@"bundle"];
+    if(!bundlePath){
+        [NSException raise:@"Missing bundle" format:@"%@",bundleName];
+    }
+    _wiosBundle=[NSBundle bundleWithPath:bundlePath];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if(!_wiosBundle)
+        [self setBundleName:@"wiosSound"];
+
 }
 
 
@@ -92,12 +112,15 @@
 
 
 - (void) _createSound:(id)sender{
-    WTMSound*sound=[wtmAPI createSoundMemberInLibrary:self.library];
-    sound.category=self.categoryName;
-    sound.name=NSLocalizedString(@"New sound", @"");
-    sound.relativePath=[NSString stringWithFormat:@"%@/%@/%i.caf",sound.library.package.objectName,sound.library.objectName,sound.uinstID];
-    [_sounds addObject:sound];
-    wtmRegistry.hasChanged=YES;
+    WIOSSoundManagerTableViewController *__weak weakSelf=self;
+    [wtmRegistry executeAndAutoSaveBlock:^{
+        WTMLibrary*library=weakSelf.library;
+        WTMSound*sound=[wtmAPI createSoundMemberInLibrary:library];
+        sound.category=weakSelf.categoryName;;
+        sound.name=NSLocalizedString(@"New sound name", @"The default sound name to be used on sound creation");
+        sound.relativePath=[NSString stringWithFormat:@"%@/%@/%i.caf",sound.library.package.objectName,sound.library.objectName,sound.uinstID];
+        [_sounds addObject:sound];
+    }];
     [self.tableView reloadData];
 }
 
@@ -117,10 +140,12 @@
     WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
     cell.editSoundButton.indexPath=indexPath;
     cell.soundNameLabel.text=sound.name;
-    if([(WTMSound*)[_sounds objectAtIndex:indexPath.row] isEqual:self.selectedSound]){
-        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    [cell.editSoundButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"microphone" ofType:@"png"]]forState:UIControlStateNormal];
+    cell.delegate=self;
+    if(self.selectedSound && [_sounds objectAtIndex:indexPath.row].uinstID ==self.selectedSound.uinstID){
+        [[cell selectedSwitch] setOn:YES];
     }else{
-        [cell setAccessoryType:UITableViewCellAccessoryNone];
+        [[cell selectedSwitch] setOn:NO];
     }
     return cell;
 }
@@ -129,12 +154,6 @@
     return 50.f;
 }
 
-
-- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
-    self.selectedSound=sound;
-    [self.delegate selectedSoundIs:sound];
-}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -159,21 +178,6 @@
 
 
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark - Navigation
@@ -192,4 +196,24 @@
     [self performSegueWithIdentifier:@"editSound" sender:sender];
     _hasPushed=YES;
 }
+
+
+
+#pragma mark - WIOSSOundSelectionProtocol
+
+- (void)selectedIndexPathHasChanged:(NSIndexPath*)indexPath{
+    if(indexPath){
+        self.selectedSound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+    }else{
+        self.selectedSound=nil;
+    }
+    if(self.selectedSound){
+        [self.delegate selectedSoundIs:self.selectedSound];
+    }else{
+        [self.delegate noSound];
+    }
+    [self.tableView reloadData];
+}
+
+
 @end
