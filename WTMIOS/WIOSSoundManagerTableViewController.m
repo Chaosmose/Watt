@@ -17,6 +17,7 @@
 @property (assign,nonatomic)    id<WIOSSoundRecorderDelegate>delegate;
 @property (nonatomic,strong)    WTMLibrary *library;
 @property (nonatomic,strong)    WTMSound *selectedSound;
+@property (nonatomic,strong)    WTMSound *tappedSound;
 @property (nonatomic,readonly)  WTMCollectionOfMember *sounds;
 @property (nonatomic,copy)      NSString *categoryName;
 @end
@@ -38,9 +39,9 @@
            fromLibrary:(WTMLibrary*)library
        useCategoryName:(NSString*)category
             anDelegate:(id<WIOSSoundRecorderDelegate>)delegate{
-    [self setLibrary:library];
     [self setSelectedSound:sound];
     [self setCategoryName:category];
+    [self setLibrary:library];
     self.delegate=delegate;
     [self.tableView reloadData];
 }
@@ -116,6 +117,7 @@
     [wtmRegistry executeAndAutoSaveBlock:^{
         WTMLibrary*library=weakSelf.library;
         WTMSound*sound=[wtmAPI createSoundMemberInLibrary:library];
+        sound.refererCounter=NSIntegerMax; // We do consider that any sound must be persistent and explicitly deleted.
         sound.category=weakSelf.categoryName;;
         sound.name=NSLocalizedString(@"New sound name", @"The default sound name to be used on sound creation");
         sound.relativePath=[NSString stringWithFormat:@"%@/%@/%i.caf",sound.library.package.objectName,sound.library.objectName,sound.uinstID];
@@ -168,7 +170,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
         [self.delegate willDeleteSound:sound];
-        [wtmAPI removeMember:sound];
+        [wtmRegistry executeAndAutoSaveBlock:^{
+               [wtmAPI removeMember:sound];
+        }];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -185,14 +189,14 @@
 // In a story board-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     WIOSSoundRecorderViewController *vc=[segue destinationViewController];
-    vc.sound=self.selectedSound;
+    vc.sound=self.tappedSound;
 }
 
 
 
 - (IBAction)editSound:(id)sender {
     WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:[(WIOSButton*)sender indexPath].row];
-    self.selectedSound=sound;
+    self.tappedSound=sound;
     [self performSegueWithIdentifier:@"editSound" sender:sender];
     _hasPushed=YES;
 }

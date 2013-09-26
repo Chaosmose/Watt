@@ -13,9 +13,9 @@
 
 @protocol WIOSSoundRecorderDelegate <NSObject>
 @required
-- (void) selectedSoundIs:(WTMSound*)sound;
-- (void) willDeleteSound:(WTMSound*)sound;
-- (void) noSound;
+- (void)selectedSoundIs:(WTMSound*)sound;
+- (void)willDeleteSound:(WTMSound*)sound;
+- (void)noSound;
 @end
 
 @interface WIOSSoundManagerTableViewController : UITableViewController

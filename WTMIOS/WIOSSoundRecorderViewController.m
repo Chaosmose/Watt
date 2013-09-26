@@ -19,6 +19,7 @@
     
     NSTimer *_timer;
     NSBundle *_wiosBundle;
+    float _soundDuration;
 }
 @end
 
@@ -88,6 +89,7 @@
 
 - (void)setSound:(WTMSound *)sound{
     _sound=sound;
+    _soundDuration=sound.duration;
     _sound.registry.autosave=NO;
 }
 
@@ -97,14 +99,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self _stopRecording];
-    [self _stopPlaying];
-    
-    if (![self.nameTextField.text isEqualToString:self.sound.name]) {
+    [self _stop];
+    if (![self.nameTextField.text isEqualToString:self.sound.name] || _soundDuration!=_sound.duration) {
         self.sound.name=self.nameTextField.text;
-        self.sound.registry.hasChanged=YES;
+        wtmRegistry.hasChanged=YES;
     }
-    _sound.registry.autosave=YES;
 }
 
 - (void)didReceiveMemoryWarning{
@@ -379,12 +378,10 @@
 
 - (void)_stop {
     if(_isPlaying){
-        [_player stop];
         [self _stopPlaying];
     }
     if(_isRecording){
-        [_recorder stop];
-        // _stopRecording will be automatically called.
+        [self _stopRecording];
     }
 }
 
@@ -410,6 +407,7 @@
 
 - (void) _stopRecording{
     _isPaused=NO;
+    [self _purgeRecorder];
     [self _purgeTimer];
     [self _resetProgress];
     [self setIsRecording:NO];
@@ -433,7 +431,6 @@
 
 - (BOOL)_initializePlayer{
     if(_player || ![self _soundExists]){
-        
         return YES;
     }
     NSError *error=nil;
@@ -464,11 +461,14 @@
 
 
 - (void)_purgePlayer{
+    [_player stop];
     _player.delegate=nil;
     _player=nil;
 }
 
 - (void)_purgeRecorder{
+    _sound.duration=_recorder.currentTime;
+    [_recorder stop];
     _recorder.delegate=nil;
     _recorder=nil;
 }
@@ -501,7 +501,6 @@
 
 /* audioRecorderDidFinishRecording:successfully: is called when a recording has been finished or stopped. This method is NOT called if the recorder is stopped due to an interruption. */
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag{
-    [self _stopRecording];
 }
 
 /* if an error occurs while encoding it will be reported to the delegate. */

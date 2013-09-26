@@ -17,7 +17,7 @@
 }
 
 
-@property (strong,nonatomic) WTMSound *sound;
+@property (weak,nonatomic) WTMSound *sound;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
