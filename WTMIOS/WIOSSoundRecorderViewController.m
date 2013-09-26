@@ -1,9 +1,9 @@
 //
 //  WIOSSoundRecorderCell.m
-//  HopNBook
+//  Watt
 //
 //  Created by Benoit Pereira da Silva on 02/09/13.
-//  Copyright (c) 2013 HopToys. All rights reserved.
+//  Copyright (c) 2013 pereira-da-silva.com. All rights reserved.
 //
 
 #import "WIOSSoundRecorderViewController.h"
