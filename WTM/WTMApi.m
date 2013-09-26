@@ -459,10 +459,12 @@
         }reverse:YES];
         
         [self purgeMemberIfNecessary:element.asset];
+        
         WTMApi *__weak weakSelf=self;
         [element.behaviors enumerateObjectsUsingBlock:^(WTMBehavior *obj, NSUInteger idx, BOOL *stop) {
             [weakSelf purgeMemberIfNecessary:obj];
         } reverse:YES];
+        
         [element autoUnRegister];
     }
 }
