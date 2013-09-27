@@ -20,18 +20,22 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMColumn.h" 
+#import "WTMCollectionOfBehavior.h"
 #import "WTMCollectionOfCell.h"
 #import "WTMTable.h"
 
 @implementation WTMColumn 
 
 @synthesize height=_height;
+@synthesize behaviors=_behaviors;
 @synthesize cells=_cells;
 @synthesize table=_table;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"height"]){
 		[super setValue:value forKey:@"height"];
+	} else if ([key isEqualToString:@"behaviors"]) {
+		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behaviors"];
 	} else if ([key isEqualToString:@"cells"]) {
 		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
 	} else if ([key isEqualToString:@"table"]) {
@@ -39,6 +43,29 @@
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+- (WTMCollectionOfBehavior*)behaviors{
+	if([_behaviors isAnAlias]){
+		id o=[_registry objectWithUinstID:_behaviors.uinstID];
+		if(o){
+			_behaviors=o;
+		}
+	}
+	return _behaviors;
+}
+
+
+- (WTMCollectionOfBehavior*)behaviors_auto{
+	_behaviors=[self behaviors];
+	if(!_behaviors){
+		_behaviors=[[WTMCollectionOfBehavior alloc] initInRegistry:_registry];
+	}
+	return _behaviors;
+}
+
+- (void)setBehaviors:(WTMCollectionOfBehavior*)behaviors{
+	_behaviors=behaviors;
 }
 
 - (WTMCollectionOfCell*)cells{
@@ -99,6 +126,13 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:[NSNumber numberWithInteger:self.height] forKey:@"height"];
+	if(self.behaviors){
+		if(includeChildren){
+			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"behaviors"];
+		}else{
+			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"behaviors"];
+		}
+	}
 	if(self.cells){
 		if(includeChildren){
 			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
@@ -123,6 +157,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMColumn ",self.uinstID];
 	[s appendFormat:@"height : %@\n",[NSNumber numberWithInteger:self.height]];
+	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];
 	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];
 	return s;

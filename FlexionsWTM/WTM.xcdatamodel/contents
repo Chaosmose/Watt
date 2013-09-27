@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F37" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Activity" representedClassName="Activity" syncable="YES">
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -42,6 +42,7 @@
     </entity>
     <entity name="Column" syncable="YES">
         <attribute name="height" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="behaviors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Behavior" syncable="YES"/>
         <relationship name="cells" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Cell" inverseName="column" inverseEntity="Cell" syncable="YES"/>
         <relationship name="table" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Table" inverseName="columns" inverseEntity="Table" syncable="YES"/>
     </entity>
@@ -166,7 +167,7 @@
         <element name="Band" positionX="-7319" positionY="-3996" width="128" height="88"/>
         <element name="Behavior" positionX="-6869" positionY="-3742" width="128" height="88"/>
         <element name="Cell" positionX="-6489" positionY="-3910" width="128" height="103"/>
-        <element name="Column" positionX="-6660" positionY="-3942" width="128" height="88"/>
+        <element name="Column" positionX="-6660" positionY="-3964" width="128" height="103"/>
         <element name="Element" positionX="-6453" positionY="-3721" width="128" height="103"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>
         <element name="Hyperlink" positionX="-6615" positionY="-3537" width="128" height="103"/>

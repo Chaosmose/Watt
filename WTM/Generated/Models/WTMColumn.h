@@ -21,6 +21,7 @@
  
 
 #import "WattModel.h"
+@class WTMCollectionOfBehavior;
 @class WTMCollectionOfCell;
 @class WTMTable;
 
@@ -28,9 +29,11 @@
 }
 
 @property (nonatomic,assign) NSInteger  height;
+@property (nonatomic,strong) WTMCollectionOfBehavior * behaviors;
 @property (nonatomic,strong) WTMCollectionOfCell * cells;
 @property (nonatomic,strong) WTMTable * table;
 
+- (WTMCollectionOfBehavior*)behaviors_auto;
 - (WTMCollectionOfCell*)cells_auto;
 - (WTMTable*)table_auto;
 
