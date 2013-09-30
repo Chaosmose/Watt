@@ -15,6 +15,9 @@
     </entity>
     <entity name="Asset" representedClassName="Asset" parentEntity="Member" syncable="YES">
         <attribute name="comment" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
     </entity>
     <entity name="Band" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -53,13 +56,20 @@
         <relationship name="scene" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="elements" inverseEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Html" representedClassName="Html" parentEntity="LinkedAsset" syncable="YES">
-        <attribute name="string" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="string" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="generate" value="collection"/>
+            </userInfo>
+        </attribute>
     </entity>
     <entity name="Hyperlink" representedClassName="Hyperlink" parentEntity="Asset" syncable="YES">
         <attribute name="allowExploration" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="updateImageOnChange" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="updateUrlOnChange" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="colection"/>
+        </userInfo>
     </entity>
     <entity name="Image" representedClassName="Image" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
@@ -67,6 +77,9 @@
     <entity name="Label" representedClassName="Label" parentEntity="Asset" syncable="YES">
         <attribute name="font" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
     </entity>
     <entity name="LangDictionary" representedClassName="LangDictionary" syncable="YES">
         <attribute name="key" optional="YES" attributeType="String" syncable="YES"/>
@@ -124,6 +137,9 @@
     </entity>
     <entity name="Pdf" representedClassName="Pdf" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
     </entity>
     <entity name="Scene" representedClassName="Scene" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -152,6 +168,9 @@
     </entity>
     <entity name="Sound" representedClassName="Sound" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
     </entity>
     <entity name="Table" syncable="YES">
         <relationship name="columns" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Column" inverseName="table" inverseEntity="Column" syncable="YES"/>
@@ -160,6 +179,9 @@
     </entity>
     <entity name="Video" representedClassName="Video" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
     </entity>
     <elements>
         <element name="Activity" positionX="-6824" positionY="-4230" width="128" height="163"/>
