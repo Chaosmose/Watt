@@ -11,6 +11,7 @@
 
 @interface WIOSMatrixViewController(){
     NSMutableArray*_matrixCellViewControllers;
+    NSMutableArray*_positions;
 }
 @end
 
@@ -18,32 +19,75 @@
 
 - (void)displayCells{
     if([self _isConform]){
-    
+        [self _removeMatrixCellViewControllers];
         NSInteger n=[[self _casted] viewControllersCount];
         if(n>0){
-            [self _removeMatrixCellViewControllers];
+            
             CGSize containerSize=self.view.bounds.size;
             CGSize cellSize=[self _computeCellSize];
-            NSInteger numberOfCellPerLine=(containerSize.width-[[self _casted] cellMinimumHorizontalSpacing])/(cellSize.width+[[self _casted] cellMinimumHorizontalSpacing]);
+            
+            CGFloat minHSP=[[self _casted] cellMinimumHorizontalSpacing];
+            CGFloat minVSP=[[self _casted] cellMinimumVerticalSpacing];
+            
+            NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
+            
+            _positions=[NSMutableArray array];
+            
             
             NSUInteger nb=[[self _casted] viewControllersCount];
             NSInteger lineNumber=0;
             NSInteger columnNumber=0;
+            
+            CGFloat maxX=0.f;
+            CGFloat maxY=0.f;
+            
+           // WTLog( @"numberOfCellPerLine:%i for %i items",numberOfCellPerLine,nb);
+            
             for (int i=0; i<nb; i++) {
+                
                 WIOSMatrixCellViewController*cellViewController=[[self _casted] viewControllerForIndex:i];
                 
-                [self _addCellViewController:cellViewController
-                                atLineNumber:lineNumber
-                             andColumnNumber:columnNumber
-                                withCellSize:cellSize];
+                // We register the view controller
+                [self _registerViewController:cellViewController];
                 
-                if(columnNumber>numberOfCellPerLine){
+                CGRect destination=[self _destinationatLineNumber:lineNumber
+                                                  andColumnNumber:columnNumber
+                                                     withCellSize:cellSize];
+                
+                // We store the raw position
+                [_positions addObject:[NSValue valueWithCGRect:destination]];
+                
+                if(columnNumber>=numberOfCellPerLine-1){
+                    maxX=destination.origin.x+destination.size.width+minHSP;
                     columnNumber=0;
                     lineNumber++;
                 }else{
                     columnNumber++;
                 }
+                maxY=destination.origin.y+destination.size.height+minVSP;
             }
+
+    
+            CGFloat deltaX=containerSize.width-maxX;
+            CGFloat deltaY=containerSize.height-maxY;
+            
+            for (int i=0; i<nb; i++) {
+                
+                // We do proceed to adjustement Vertical an horizontal of the box.
+                CGRect destination=[[_positions objectAtIndex:i] CGRectValue];
+                
+                // Centering of the block
+                destination.origin.x+=deltaX/2.f;
+                destination.origin.y+=deltaY/2.f;
+                
+                WIOSMatrixCellViewController*cellViewController=[_matrixCellViewControllers objectAtIndex:i];
+                [self _addCellViewController:cellViewController
+                               atDestination:destination];
+            }
+            
+           
+            
+            
         }
     }
 }
@@ -55,38 +99,49 @@
         [cellViewController removeFromParentViewController];
     }
     [_matrixCellViewControllers removeAllObjects];
-    _matrixCellViewControllers=nil;
+    _matrixCellViewControllers=[NSMutableArray array];
 }
 
 
-- (void)_addCellViewController:(WIOSMatrixCellViewController*)cellViewController
-                  atLineNumber:(NSInteger)lineNumber
-               andColumnNumber:(NSInteger)columnNumber
-                  withCellSize:(CGSize)cellSize{
-    
-    if(!_matrixCellViewControllers)
-        
-        
-        // We reference the matrix controller
-        cellViewController.matrix=[self _casted];
+
+
+- (void)_registerViewController:(WIOSMatrixCellViewController*)cellViewController{
+    // We reference the matrix controller
+    cellViewController.matrix=[self _casted];
     [_matrixCellViewControllers addObject:cellViewController];
     // And its index
     cellViewController.matrixIndex=[_matrixCellViewControllers count]-1;
+}
+
+
+
+
+- (void)_addCellViewController:(WIOSMatrixCellViewController*)cellViewController
+                 atDestination:(CGRect)destination{
+    
+    // We add the view controller.
+    [self addChildViewController:cellViewController];
+    // We setup the frame
+    [cellViewController.view setFrame:destination];
+    // We add its subview
+    [self.view addSubview:cellViewController.view];
+    // We notify the move to parent.
+    [cellViewController didMoveToParentViewController:self];
+}
+
+
+- (CGRect)_destinationatLineNumber:(NSInteger)lineNumber
+                   andColumnNumber:(NSInteger)columnNumber
+                      withCellSize:(CGSize)cellSize{
     
     CGFloat hSpace=[[self _casted] cellMinimumHorizontalSpacing];
     CGFloat vSpace=[[self _casted] cellMinimumVerticalSpacing];
+    CGFloat x=columnNumber*(cellSize.width+hSpace)+hSpace;
+    CGFloat y=lineNumber*(cellSize.height+vSpace)+vSpace;
+    CGRect destination=CGRectMake(x,y, cellSize.width, cellSize.height);
     
-    CGRect destination=CGRectMake(columnNumber*cellSize.width+hSpace, lineNumber*cellSize.height+vSpace, cellSize.width, cellSize.height);
+    return destination;
     
-    
-    [self addChildViewController:cellViewController];
-    [cellViewController.view setFrame:destination];
-    [cellViewController.view setBackgroundColor:randomColor()];
-    [self.view addSubview:cellViewController.view];
-    [cellViewController didMoveToParentViewController:self];
-    
-    
-    //Do We need to configure the autolayout ?
 }
 
 

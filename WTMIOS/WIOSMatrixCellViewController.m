@@ -45,7 +45,6 @@
  *  @param model the reference to the model
  */
 - (void)configureViewControllerFor:(id)model{
-
 }
 
 

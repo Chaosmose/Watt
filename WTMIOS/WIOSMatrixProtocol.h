@@ -54,8 +54,9 @@
  *  Returns view controller for the given index
  *  This selector should  :
  *  1- Instantiate the <WIOSMatrixCellViewController Class>*cell=...;
- *  2- call id model=[self modelForIndex:index];
- *  3- configure the cell with : [cell configureViewControllerWith:model];
+ *  2- if(cell.view){ // to for the view to be loaded
+ *  3- call id model=[self modelForIndex:index];
+ *  4- configure the cell with : [cell configureViewControllerWith:model];
  *
  *
  *  @param index of the viewController
