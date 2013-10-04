@@ -12,5 +12,6 @@ Pod::Spec.new do |s|
   s.source_files =  'WTMIOS/**/*.{h,m}'
   s.public_header_files = 'WTMIOS/**/*.h'
   s.resources = 'wiosSound.bundle'
+  s.dependency  'Watt', '~> 0.3'
   s.dependency  'WTM', '~> 0.3'
 end
