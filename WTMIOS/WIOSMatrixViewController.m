@@ -157,7 +157,8 @@
         CGFloat containerSurface=(CGFloat)containerSize.width*containerSize.height;
         CGFloat surfacePerCell=(containerSurface/(CGFloat)n); // WE should remove padding surface for a more accurate approximation
         
-        CGSize desiredCellSize=isLandscapeOrientation()?  [[self _casted] cellDesiredSizeForLandscapeOrientation]:\
+        BOOL isLandscapeOrientation= UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
+        CGSize desiredCellSize=isLandscapeOrientation?  [[self _casted] cellDesiredSizeForLandscapeOrientation]:\
         [[self _casted] cellDesiredSizeForPortraitOrientation];
         
         CGFloat ratioHW=desiredCellSize.height/desiredCellSize.width;
@@ -213,20 +214,12 @@
     if([self conformsToProtocol:@protocol(WIOSMatrixCellDelegateProtocol)]){
         return YES;
     }else{
-        [NSException raise:@"WIOSMatrixViewController"
+        [NSException raise:NSStringFromClass([self class])
                     format:@"%@ must conforms to @protocol(WIOSMatrixCellDelegateProtocol)",NSStringFromClass([self class])];
     }
     return NO;
 }
 
-
-UIColor *randomColor() {
-    UIColor *theColor = [UIColor colorWithRed:((random() % 255) / 255.0f)
-                                        green:((random() % 255) / 255.0f)
-                                         blue:((random() % 255) / 255.0f)
-                                        alpha:1.0f];
-    return theColor;
-}
 
 
 
