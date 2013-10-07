@@ -52,12 +52,13 @@
 
 /**
  *  Returns view controller for the given index
+ *
  *  This selector should  :
- *  1- Instantiate the <WIOSMatrixCellViewController Class>*cell=...;
- *  2- if(cell.view){ // to for the view to be loaded
+ *  1- Instantiate the <WIOSMatrixCellViewController Class>*matrixCell=...;
+ *  2- Reference the matriox  matrixCell.matrix=self;
  *  3- call id model=[self modelForIndex:index];
  *  4- configure the cell with : [cell configureViewControllerWith:model];
- *
+ *  You configureViewControllerWith:model may need to call if (self.view) to force the view loading
  *
  *  @param index of the viewController
  *

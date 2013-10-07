@@ -10,98 +10,188 @@
 #import "WIOSMatrixCellViewController.h"
 
 @interface WIOSMatrixViewController(){
-    NSMutableArray*_matrixCellViewControllers;
-    NSMutableArray*_positions;
 }
+@property (strong,nonatomic)NSMutableArray* matrixCellViewControllers;
+@property (strong,nonatomic)NSMutableArray* positions;
 @end
 
 @implementation WIOSMatrixViewController
 
-- (void)displayCells{
-    if([self _isConform]){
-        [self _removeMatrixCellViewControllers];
-        NSInteger n=[[self _casted] viewControllersCount];
-        if(n>0){
-            
-            CGSize containerSize=self.view.bounds.size;
-            CGSize cellSize=[self _computeCellSize];
-            
-            CGFloat minHSP=[[self _casted] cellMinimumHorizontalSpacing];
-            CGFloat minVSP=[[self _casted] cellMinimumVerticalSpacing];
-            
-            NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
-            
-            _positions=[NSMutableArray array];
-            
-            
-            NSUInteger nb=[[self _casted] viewControllersCount];
-            NSInteger lineNumber=0;
-            NSInteger columnNumber=0;
-            
-            CGFloat maxX=0.f;
-            CGFloat maxY=0.f;
-            
-           // WTLog( @"numberOfCellPerLine:%i for %i items",numberOfCellPerLine,nb);
-            
-            for (int i=0; i<nb; i++) {
-                
-                WIOSMatrixCellViewController*cellViewController=[[self _casted] viewControllerForIndex:i];
-                
-                // We register the view controller
-                [self _registerViewController:cellViewController];
-                
-                CGRect destination=[self _destinationatLineNumber:lineNumber
-                                                  andColumnNumber:columnNumber
-                                                     withCellSize:cellSize];
-                
-                // We store the raw position
-                [_positions addObject:[NSValue valueWithCGRect:destination]];
-                
-                if(columnNumber>=numberOfCellPerLine-1){
-                    maxX=destination.origin.x+destination.size.width+minHSP;
-                    columnNumber=0;
-                    lineNumber++;
-                }else{
-                    columnNumber++;
-                }
-                maxY=destination.origin.y+destination.size.height+minVSP;
-            }
+@synthesize matrixCellViewControllers = _matrixCellViewControllers;
+@synthesize positions = _positions;
+@synthesize selectedIndex = _selectedIndex;
 
-    
-            CGFloat deltaX=containerSize.width-maxX;
-            CGFloat deltaY=containerSize.height-maxY;
-            
-            for (int i=0; i<nb; i++) {
-                
-                // We do proceed to adjustement Vertical an horizontal of the box.
-                CGRect destination=[[_positions objectAtIndex:i] CGRectValue];
-                
-                // Centering of the block
-                destination.origin.x+=deltaX/2.f;
-                destination.origin.y+=deltaY/2.f;
-                
-                WIOSMatrixCellViewController*cellViewController=[_matrixCellViewControllers objectAtIndex:i];
-                [self _addCellViewController:cellViewController
-                               atDestination:destination];
-            }
-            
-           
-            
-            
+
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex{
+    _selectedIndex=selectedIndex;
+    for (WIOSMatrixCellViewController  *cellViewController in self.matrixCellViewControllers) {
+        if(cellViewController.matrixIndex!=selectedIndex){
+            [cellViewController setSelected:NO animated:YES];
+        }
+        if(cellViewController.matrixIndex==selectedIndex){
+            [cellViewController setSelected:YES animated:YES];
         }
     }
 }
 
-- (void)_removeMatrixCellViewControllers{
-    for (WIOSMatrixCellViewController  *cellViewController in _matrixCellViewControllers) {
+
+- (NSUInteger)selectedIndex{
+    return _selectedIndex;
+}
+
+
+/**
+ *  Display the cells animated or not
+ *
+ *  @param animated should the cell transition be animated
+ */
+- (void)reloadCellsAnimated:(BOOL)animated{
+    [self reloadCellsAnimated:animated
+          withAnimationOptions:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp];
+}
+
+/**
+ *   Display the cells animated or not with animations options
+ *
+ *  @param animated should the cell transition be animated
+ *  @param options  check UIViewAnimationOptions
+ */
+- (void)reloadCellsAnimated:(BOOL)animated withAnimationOptions:(NSUInteger)options{
+    if([self _isConform]){
+        WIOSMatrixViewController *__weak weakSelf=self;
+        [self _loadMatrixCellViewControllersWith:^{
+            [weakSelf displayCellsAnimated:animated withAnimationOptions:options];
+        }animated:animated withAnimationOptions:options];
+    }
+}
+
+
+/**
+ *  Displays the celles according to the current geometry (without reloading)
+ *
+ *  @param animated  should the transition be animated
+ */
+- (void)displayCellsAnimated:(BOOL)animated{
+    [self displayCellsAnimated:animated
+          withAnimationOptions:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp];
+}
+
+/**
+ *  Displays the celles according to the current geometry (without reloading)
+ *
+ *  @param animated hould the cell transition be animated
+ *  @param options  check UIViewAnimationOptions
+ */
+- (void)displayCellsAnimated:(BOOL)animated withAnimationOptions:(NSUInteger)options{
+    WIOSMatrixViewController *__weak weakSelf=self;
+    NSInteger n=[[weakSelf _casted] viewControllersCount];
+    if(n>0){
+        
+        [UIView animateWithDuration:animated?0.2f:0.f
+                              delay:0.f
+                            options:options
+                         animations:^{
+                             CGSize containerSize=weakSelf.view.bounds.size;
+                             CGSize cellSize=[weakSelf _computeCellSize];
+                             
+                             CGFloat minHSP=[[weakSelf _casted] cellMinimumHorizontalSpacing];
+                             CGFloat minVSP=[[weakSelf _casted] cellMinimumVerticalSpacing];
+                             
+                             NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
+                             
+                             _positions=[NSMutableArray array];
+                             
+                             
+                             NSUInteger nb=[[weakSelf _casted] viewControllersCount];
+                             NSInteger lineNumber=0;
+                             NSInteger columnNumber=0;
+                             
+                             CGFloat maxX=0.f;
+                             CGFloat maxY=0.f;
+                             
+                             // WTLog( @"numberOfCellPerLine:%i for %i items",numberOfCellPerLine,nb);
+                             
+                             for (int i=0; i<nb; i++) {
+                                 
+                                 WIOSMatrixCellViewController*cellViewController=[[weakSelf _casted] viewControllerForIndex:i];
+                                 
+                                 // We register the view controller
+                                 [weakSelf _registerViewController:cellViewController];
+                                 
+                                 CGRect destination=[weakSelf _destinationatLineNumber:lineNumber
+                                                                       andColumnNumber:columnNumber
+                                                                          withCellSize:cellSize];
+                                 
+                                 // We store the raw position
+                                 [_positions addObject:[NSValue valueWithCGRect:destination]];
+                                 
+                                 if(columnNumber>=numberOfCellPerLine-1){
+                                     maxX=destination.origin.x+destination.size.width+minHSP;
+                                     columnNumber=0;
+                                     lineNumber++;
+                                 }else{
+                                     columnNumber++;
+                                 }
+                                 maxY=destination.origin.y+destination.size.height+minVSP;
+                             }
+                             
+                             
+                             CGFloat deltaX=containerSize.width-maxX;
+                             CGFloat deltaY=containerSize.height-maxY;
+                             
+                             for (int i=0; i<nb; i++) {
+                                 
+                                 // We do proceed to adjustement Vertical an horizontal of the box.
+                                 CGRect destination=[[_positions objectAtIndex:i] CGRectValue];
+                                 
+                                 // Centering of the block
+                                 destination.origin.x+= roundf(deltaX/2.f);
+                                 destination.origin.y+= roundf(deltaY/2.f);
+                                 
+                                 WIOSMatrixCellViewController*cellViewController=[_matrixCellViewControllers objectAtIndex:i];
+                                 [weakSelf _addCellViewController:cellViewController
+                                                    atDestination:destination];
+                             }
+                         }
+                         completion:^(BOOL finished) {
+                             
+                         }];
+        
+        
+    }
+}
+
+- (void)_loadMatrixCellViewControllersWith:(void (^)(void))displayBlock
+                                  animated:(BOOL)animated
+                      withAnimationOptions:(NSUInteger)options{
+    WIOSMatrixViewController *__weak weakSelf=self;
+    [UIView animateWithDuration:animated?0.2f:0.f
+                              delay:0.f
+                            options:options
+                         animations:^{
+                             [weakSelf _removeMatrixCells];
+                         }
+                         completion:^(BOOL finished) {
+                             [weakSelf _postCellRemoval];
+                             displayBlock();
+                         }];
+}
+
+
+- (void)_removeMatrixCells{
+    for (WIOSMatrixCellViewController  *cellViewController in self.matrixCellViewControllers) {
         [cellViewController willMoveToParentViewController:nil];
         [cellViewController.view removeFromSuperview];
         [cellViewController removeFromParentViewController];
     }
-    [_matrixCellViewControllers removeAllObjects];
-    _matrixCellViewControllers=[NSMutableArray array];
 }
 
+
+- (void)_postCellRemoval{
+    [self.matrixCellViewControllers removeAllObjects];
+    self.matrixCellViewControllers=[NSMutableArray array];
+}
 
 
 
@@ -177,6 +267,7 @@
             cellSize.height= cellSize.width*ratioHW;
         }
     }
+    cellSize=CGSizeMake(floorf(cellSize.width), floorf(cellSize.height));
     return cellSize;
 }
 
@@ -222,6 +313,14 @@
 
 
 
+#pragma - mark UIGestureRecognizerDelegatew
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
+}
 
 @end

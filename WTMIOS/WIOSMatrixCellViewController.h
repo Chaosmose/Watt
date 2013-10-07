@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WIOSMatrixViewController.h"
 
+#define WIOS_MATRIX_CELL_TAPPED_ACTION_IDENTIFIER 0
 
 /**
  *  You matrix cell must inheritate from WIOSMatrixCellViewController 
@@ -23,6 +24,8 @@
  *  This property is automatically set by the WIOSMatrixViewController
  */
 @property (weak,nonatomic) WIOSMatrixViewController<WIOSMatrixCellDelegateProtocol> *matrix;
+
+@property (readonly,nonatomic) BOOL selected;
 
 /**
  *  This property is automatically set by the WIOSMatrixViewController
@@ -43,6 +46,15 @@
  *  @param infos      optional informations
  */
 - (void)didPerformActionWithIdentifier:(NSInteger)identifier withInfos:(NSDictionary*)infos;
+
+
+/**
+ *  Called on selection
+ *
+ *  @param selected the selection status
+ *  @param animated should we animate
+ */
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 
 
 
