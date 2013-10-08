@@ -33,11 +33,13 @@
 
 -(void)unZip:(NSString*)zipSourcePath
           to:(NSString*)destinationFolder
-   withBlock:(void (^)(BOOL success))block;
+   withBlock:(void (^)(BOOL success))block
+useBackgroundMode:(BOOL)backgroundMode;;
 
 -(void)zip:(NSString*)sourcePath
         to:(NSString*)destinationZipFilePath
- withBlock:(void (^)(BOOL success))block;
+ withBlock:(void (^)(BOOL success))block
+useBackgroundMode:(BOOL)backgroundMode;
 
 @end
 @implementation WattBundlePackager
@@ -68,12 +70,13 @@
     _api=api;
 }
 
-#pragma mark - packaging 
+#pragma mark - packaging
 
 
 
 -(void)packWattBundleWithName:(NSString*)name
-                    withBlock:(void (^)(BOOL success))block{
+                    withBlock:(void (^)(BOOL success))block
+            useBackgroundMode:(BOOL)backgroundMode{
     NSString *sourceFolderPath=[self.api absolutePathForRegistryBundleWithName:name];
     sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
     NSString *destinationFilePath=[sourceFolderPath stringByAppendingString:@".zip"];;
@@ -83,16 +86,17 @@
         i++;
     }
     [self zip:sourceFolderPath
-                   to:destinationFilePath
-            withBlock:^(BOOL success) {
-                block(success);
-            }];
+           to:destinationFilePath
+    withBlock:^(BOOL success) {
+        block(success);
+    } useBackgroundMode:backgroundMode];
 }
 
 
 
 -(void)unPackWattBundleWithName:(NSString*)name
-                  withBlock:(void (^)(BOOL success))block{
+                      withBlock:(void (^)(BOOL success))block
+              useBackgroundMode:(BOOL)backgroundMode{
     
     NSString *p=[[[self.api absolutePathForRegistryBundleWithName:name] lastPathComponent] stringByReplacingOccurrencesOfString:@"/" withString:@""];
     NSString *zipSourcePath=[[NSBundle mainBundle] pathForResource:p ofType:@".zip"];
@@ -106,12 +110,11 @@
     }else{
         [self.api createRecursivelyRequiredFolderForPath:destinationFolder];
         [self unZip:zipSourcePath
-                         to:destinationFolder
-                  withBlock:^(BOOL success) {
-                      block(success);
-                  }];
+                 to:destinationFolder
+          withBlock:^(BOOL success) {
+              block(success);
+          }useBackgroundMode:backgroundMode];
     }
-    
 }
 
 
@@ -120,13 +123,29 @@
 
 -(void)unZip:(NSString*)zipSourcePath
           to:(NSString*)destinationFolder
-   withBlock:(void (^)(BOOL success))block{
-    
+   withBlock:(void (^)(BOOL success))block
+useBackgroundMode:(BOOL)backgroundMode{
     if([self.api.fileManager fileExistsAtPath:zipSourcePath]){
         if([self.api createRecursivelyRequiredFolderForPath:destinationFolder]){
+#if TARGET_OS_IPHONE
             [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-            
-            [self.queue addOperationWithBlock:^{
+#endif
+            if(backgroundMode){
+                [self.queue addOperationWithBlock:^{
+                    if([SSZipArchive unzipFileAtPath:zipSourcePath
+                                       toDestination:destinationFolder
+                                            delegate:self]){
+                        block(YES);
+                    }else{
+                        block(NO);
+                    }
+#if TARGET_OS_IPHONE
+                    [self.queue addOperationWithBlock:^{
+                        [SVProgressHUD dismiss];
+                    }];
+#endif
+                }];
+            }else{
                 if([SSZipArchive unzipFileAtPath:zipSourcePath
                                    toDestination:destinationFolder
                                         delegate:self]){
@@ -134,37 +153,34 @@
                 }else{
                     block(NO);
                 }
-#if TARGET_OS_IPHONE
-                [self.queue addOperationWithBlock:^{
-                    [SVProgressHUD dismiss];
-                }];
-#endif
-            }];
+            }
         }else{
             // Error
         }
     }
 }
 
+
 #pragma mark SSZipArchiveDelegate
 
 - (void)zipArchiveWillUnzipFileAtIndex:(NSInteger)fileIndex totalFiles:(NSInteger)totalFiles archivePath:(NSString *)archivePath fileInfo:(unz_file_info)fileInfo{
     /*
-    CGFloat progress=(CGFloat)fileIndex/(CGFloat)totalFiles;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-       
-        [SVProgressHUD showProgress:progress
-                             status:@"UNZIP"
-                           maskType:SVProgressHUDMaskTypeBlack];
-       
-    });
-    */
+     CGFloat progress=(CGFloat)fileIndex/(CGFloat)totalFiles;
+     dispatch_sync(dispatch_get_main_queue(), ^{
+     
+     [SVProgressHUD showProgress:progress
+     status:@"UNZIP"
+     maskType:SVProgressHUDMaskTypeBlack];
+     
+     });
+     */
 }
 
 
 -(void)zip:(NSString*)sourcePath
         to:(NSString*)destinationZipFilePath
- withBlock:(void (^)(BOOL success))block{
+ withBlock:(void (^)(BOOL success))block
+useBackgroundMode:(BOOL)backgroundMode{
     NSError*error=nil;
     if([self.api.fileManager fileExistsAtPath:sourcePath]){
         if([self.api.fileManager fileExistsAtPath:destinationZipFilePath]){
@@ -174,6 +190,7 @@
         [SVProgressHUD showWithStatus:@"Compression"
                              maskType:SVProgressHUDMaskTypeBlack];
 #endif
+         if(backgroundMode){
         [self.queue addOperationWithBlock:^{
             if([SSZipArchive createZipFileAtPath:destinationZipFilePath
                          withContentsOfDirectory:sourcePath]){
@@ -182,6 +199,14 @@
                 block(NO);
             }
         }];
+         }else{
+             if([SSZipArchive createZipFileAtPath:destinationZipFilePath
+                          withContentsOfDirectory:sourcePath]){
+                 block(YES);
+             }else{
+                 block(NO);
+             }
+         }
 #if TARGET_OS_IPHONE
         [self.queue addOperationWithBlock:^{
             [SVProgressHUD dismiss];
@@ -212,9 +237,6 @@
         }
 	}
 }
-
-
-
 
 
 #pragma mark ZipArchiveDelegate

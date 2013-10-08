@@ -40,10 +40,12 @@
 #pragma mark - packaging
 
 -(void)packWattBundleWithName:(NSString*)name
-                    withBlock:(void (^)(BOOL success))block;
+                    withBlock:(void (^)(BOOL success))block
+            useBackgroundMode:(BOOL)backgroundMode;
 
 -(void)unPackWattBundleWithName:(NSString*)name
-                  withBlock:(void (^)(BOOL success))block;
+                  withBlock:(void (^)(BOOL success))block
+              useBackgroundMode:(BOOL)backgroundMode;
 
 
 @end
