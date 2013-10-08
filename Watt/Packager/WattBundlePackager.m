@@ -187,30 +187,35 @@ useBackgroundMode:(BOOL)backgroundMode{
             [self.api.fileManager removeItemAtPath:destinationZipFilePath error:&error];
         }
 #if TARGET_OS_IPHONE
-        [SVProgressHUD showWithStatus:@"Compression"
-                             maskType:SVProgressHUDMaskTypeBlack];
+        if(backgroundMode){
+            
+            [SVProgressHUD showWithStatus:@"Compression"
+                                 maskType:SVProgressHUDMaskTypeBlack];
+        }
 #endif
-         if(backgroundMode){
-        [self.queue addOperationWithBlock:^{
+        if(backgroundMode){
+            [self.queue addOperationWithBlock:^{
+                if([SSZipArchive createZipFileAtPath:destinationZipFilePath
+                             withContentsOfDirectory:sourcePath]){
+                    block(YES);
+                }else{
+                    block(NO);
+                }
+            }];
+        }else{
             if([SSZipArchive createZipFileAtPath:destinationZipFilePath
                          withContentsOfDirectory:sourcePath]){
                 block(YES);
             }else{
                 block(NO);
             }
-        }];
-         }else{
-             if([SSZipArchive createZipFileAtPath:destinationZipFilePath
-                          withContentsOfDirectory:sourcePath]){
-                 block(YES);
-             }else{
-                 block(NO);
-             }
-         }
+        }
 #if TARGET_OS_IPHONE
-        [self.queue addOperationWithBlock:^{
-            [SVProgressHUD dismiss];
-        }];
+        if(backgroundMode){
+            [self.queue addOperationWithBlock:^{
+                [SVProgressHUD dismiss];
+            }];
+        }
 #endif
     }else{
         block(NO);
