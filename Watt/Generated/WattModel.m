@@ -25,8 +25,8 @@
 
 @synthesize category=_category;
 @synthesize comment=_comment;
-@synthesize extras=_extras;
 @synthesize groupID=_groupID;
+@synthesize metadata=_metadata;
 @synthesize objectName=_objectName;
 @synthesize ownerID=_ownerID;
 @synthesize rights=_rights;
@@ -36,10 +36,10 @@
 		[super setValue:value forKey:@"category"];
 	} else if ([key isEqualToString:@"comment"]) {
 		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"extras"]) {
-		[super setValue:value forKey:@"extras"];
 	} else if ([key isEqualToString:@"groupID"]) {
 		[super setValue:value forKey:@"groupID"];
+	} else if ([key isEqualToString:@"metadata"]) {
+		[super setValue:value forKey:@"metadata"];
 	} else if ([key isEqualToString:@"objectName"]) {
 		[super setValue:value forKey:@"objectName"];
 	} else if ([key isEqualToString:@"ownerID"]) {
@@ -64,8 +64,8 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:self.extras forKey:@"extras"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.groupID] forKey:@"groupID"];
+	[dictionary setValue:self.metadata forKey:@"metadata"];
 	[dictionary setValue:self.objectName forKey:@"objectName"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.ownerID] forKey:@"ownerID"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.rights] forKey:@"rights"];
@@ -80,8 +80,8 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WattModel ",self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"extras : %@\n",self.extras];
 	[s appendFormat:@"groupID : %@\n",[NSNumber numberWithInteger:self.groupID]];
+	[s appendFormat:@"metadata : %@\n",self.metadata];
 	[s appendFormat:@"objectName : %@\n",self.objectName];
 	[s appendFormat:@"ownerID : %@\n",[NSNumber numberWithInteger:self.ownerID]];
 	[s appendFormat:@"rights : %@\n",[NSNumber numberWithInteger:self.rights]];

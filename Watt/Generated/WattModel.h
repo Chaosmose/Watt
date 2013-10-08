@@ -27,8 +27,8 @@
 
 @property (nonatomic,copy) NSString * category;
 @property (nonatomic,copy) NSString * comment;
-@property (nonatomic,strong) NSDictionary * extras;
 @property (nonatomic,assign) NSInteger  groupID;
+@property (nonatomic,strong) NSDictionary * metadata;
 @property (nonatomic,copy) NSString * objectName;
 @property (nonatomic,assign) NSInteger  ownerID;
 @property (nonatomic,assign) NSInteger  rights;

@@ -128,7 +128,9 @@ useBackgroundMode:(BOOL)backgroundMode{
     if([self.api.fileManager fileExistsAtPath:zipSourcePath]){
         if([self.api createRecursivelyRequiredFolderForPath:destinationFolder]){
 #if TARGET_OS_IPHONE
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            if(backgroundMode){
+                [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
+            }
 #endif
             if(backgroundMode){
                 [self.queue addOperationWithBlock:^{
