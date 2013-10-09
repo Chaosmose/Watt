@@ -295,7 +295,30 @@
 	return s;
 }
 
+#pragma mark - index
 
+/**
+ *  This selector enumerates the member of the collection and allocate the index value
+ *  and allocate to the designated property
+ *
+ *  @param propertyName the name of the property
+ */
+- (void)computeCollectionIndexesAndStoreInPropertyWithName:(NSString*)propertyName{
+    SEL selectorForProperty=NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]]);
+    BOOL tested=NO;
+    BOOL ok=YES;
+    NSInteger i=0;
+    for (id member in _collection) {
+        if(!tested)
+            ok=[member respondsToSelector:selectorForProperty];
+        if(!ok){
+            break;
+        }else{
+            [member setValue:@(i) forKey:propertyName];
+        }
+        i++;
+    }
+}
 
 
 @end

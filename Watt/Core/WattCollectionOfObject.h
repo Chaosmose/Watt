@@ -93,4 +93,14 @@
 - (void)removeObject:(WattObject*)object;
 
 
+#pragma mark - index
+
+/**
+ *  This selector enumerates the member of the collection and allocate the index value 
+ *  and allocate to the designated property
+ *
+ *  @param propertyName the name of the property
+ */
+- (void)computeCollectionIndexesAndStoreInPropertyWithName:(NSString*)propertyName;
+
 @end
