@@ -75,7 +75,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if(!_wiosBundle)
-        [self setBundleName:@"wiosSound"];
+        [self setBundleName:@"WTMIOS"];
 
 }
 
