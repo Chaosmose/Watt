@@ -28,8 +28,6 @@
 		E50004F217B6655300E50D70 /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
 		E50004F617B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */; };
 		E50004F717B66A7B00E50D70 /* UIImage+wattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */; };
-		E50B610017FF30CD006E76C5 /* wiosSound.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E50B60FA17FF30CC006E76C5 /* wiosSound.bundle */; };
-		E50B610117FF30CD006E76C5 /* wiosSound.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E50B60FA17FF30CC006E76C5 /* wiosSound.bundle */; };
 		E50B610217FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */; };
 		E50B610317FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */; };
 		E50B610417FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
@@ -84,6 +82,26 @@
 		E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625C1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard */; };
 		E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5B4625F1732A4A000E654A1 /* MainStoryboard_iPad.storyboard */; };
 		E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5C5D9461746719200A6A46F /* WTMViewController.m */; };
+		E5C6FA6818054B6000ECDFF3 /* microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA5E18054B6000ECDFF3 /* microphone.png */; };
+		E5C6FA6918054B6000ECDFF3 /* microphone.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA5E18054B6000ECDFF3 /* microphone.png */; };
+		E5C6FA6A18054B6000ECDFF3 /* microphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA5F18054B6000ECDFF3 /* microphone@2x.png */; };
+		E5C6FA6B18054B6000ECDFF3 /* microphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA5F18054B6000ECDFF3 /* microphone@2x.png */; };
+		E5C6FA6C18054B6000ECDFF3 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6018054B6000ECDFF3 /* pause.png */; };
+		E5C6FA6D18054B6000ECDFF3 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6018054B6000ECDFF3 /* pause.png */; };
+		E5C6FA6E18054B6000ECDFF3 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6118054B6000ECDFF3 /* pause@2x.png */; };
+		E5C6FA6F18054B6000ECDFF3 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6118054B6000ECDFF3 /* pause@2x.png */; };
+		E5C6FA7018054B6000ECDFF3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6218054B6000ECDFF3 /* play.png */; };
+		E5C6FA7118054B6000ECDFF3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6218054B6000ECDFF3 /* play.png */; };
+		E5C6FA7218054B6000ECDFF3 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6318054B6000ECDFF3 /* play@2x.png */; };
+		E5C6FA7318054B6000ECDFF3 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6318054B6000ECDFF3 /* play@2x.png */; };
+		E5C6FA7418054B6000ECDFF3 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6418054B6000ECDFF3 /* record.png */; };
+		E5C6FA7518054B6000ECDFF3 /* record.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6418054B6000ECDFF3 /* record.png */; };
+		E5C6FA7618054B6000ECDFF3 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6518054B6000ECDFF3 /* record@2x.png */; };
+		E5C6FA7718054B6000ECDFF3 /* record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6518054B6000ECDFF3 /* record@2x.png */; };
+		E5C6FA7818054B6000ECDFF3 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6618054B6000ECDFF3 /* stop.png */; };
+		E5C6FA7918054B6000ECDFF3 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6618054B6000ECDFF3 /* stop.png */; };
+		E5C6FA7A18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
+		E5C6FA7B18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
 		E5CAD2881799A1A400D22369 /* WattApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2251799A1A400D22369 /* WattApi.m */; };
 		E5CAD2891799A1A400D22369 /* WattApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2251799A1A400D22369 /* WattApi.m */; };
 		E5CAD28A1799A1A400D22369 /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2271799A1A400D22369 /* WattCollectionOfObject.m */; };
@@ -209,7 +227,6 @@
 		E50004F017B6655200E50D70 /* WTMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMApi.m; sourceTree = "<group>"; };
 		E50004F417B66A7B00E50D70 /* UIImage+wattAdaptive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+wattAdaptive.h"; sourceTree = "<group>"; };
 		E50004F517B66A7B00E50D70 /* UIImage+wattAdaptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+wattAdaptive.m"; sourceTree = "<group>"; };
-		E50B60FA17FF30CC006E76C5 /* wiosSound.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = wiosSound.bundle; sourceTree = "<group>"; };
 		E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSMatrixViewController.m; sourceTree = "<group>"; };
 		E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSMatrixCellViewController.m; sourceTree = "<group>"; };
 		E50B60FD17FF30CC006E76C5 /* WIOSMatrixProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSMatrixProtocol.h; sourceTree = "<group>"; };
@@ -258,6 +275,16 @@
 		E5B462601732A4A000E654A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		E5C5D9451746719200A6A46F /* WTMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMViewController.h; sourceTree = "<group>"; };
 		E5C5D9461746719200A6A46F /* WTMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMViewController.m; sourceTree = "<group>"; };
+		E5C6FA5E18054B6000ECDFF3 /* microphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = microphone.png; sourceTree = "<group>"; };
+		E5C6FA5F18054B6000ECDFF3 /* microphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "microphone@2x.png"; sourceTree = "<group>"; };
+		E5C6FA6018054B6000ECDFF3 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		E5C6FA6118054B6000ECDFF3 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		E5C6FA6218054B6000ECDFF3 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
+		E5C6FA6318054B6000ECDFF3 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		E5C6FA6418054B6000ECDFF3 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
+		E5C6FA6518054B6000ECDFF3 /* record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "record@2x.png"; sourceTree = "<group>"; };
+		E5C6FA6618054B6000ECDFF3 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		E5C6FA6718054B6000ECDFF3 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop@2x.png"; sourceTree = "<group>"; };
 		E5CAD2241799A1A400D22369 /* WattApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattApi.h; sourceTree = "<group>"; };
 		E5CAD2251799A1A400D22369 /* WattApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattApi.m; sourceTree = "<group>"; };
 		E5CAD2261799A1A400D22369 /* WattCollectionOfObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfObject.h; sourceTree = "<group>"; };
@@ -555,7 +582,7 @@
 		E589F9D317D4BAB9002BF82C /* WTIOS */ = {
 			isa = PBXGroup;
 			children = (
-				E50B60FA17FF30CC006E76C5 /* wiosSound.bundle */,
+				E5C6FA5D18054B6000ECDFF3 /* Resources */,
 				E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */,
 				E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */,
 				E50B60FD17FF30CC006E76C5 /* WIOSMatrixProtocol.h */,
@@ -640,6 +667,23 @@
 				E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E5C6FA5D18054B6000ECDFF3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E5C6FA5E18054B6000ECDFF3 /* microphone.png */,
+				E5C6FA5F18054B6000ECDFF3 /* microphone@2x.png */,
+				E5C6FA6018054B6000ECDFF3 /* pause.png */,
+				E5C6FA6118054B6000ECDFF3 /* pause@2x.png */,
+				E5C6FA6218054B6000ECDFF3 /* play.png */,
+				E5C6FA6318054B6000ECDFF3 /* play@2x.png */,
+				E5C6FA6418054B6000ECDFF3 /* record.png */,
+				E5C6FA6518054B6000ECDFF3 /* record@2x.png */,
+				E5C6FA6618054B6000ECDFF3 /* stop.png */,
+				E5C6FA6718054B6000ECDFF3 /* stop@2x.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E5CAD21B1799A1A400D22369 /* Watt */ = {
@@ -748,13 +792,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E50B610117FF30CD006E76C5 /* wiosSound.bundle in Resources */,
 				E5A9EC291799242F00976997 /* InfoPlist.strings in Resources */,
 				E5A9EC2A1799242F00976997 /* Default.png in Resources */,
+				E5C6FA7518054B6000ECDFF3 /* record.png in Resources */,
+				E5C6FA7318054B6000ECDFF3 /* play@2x.png in Resources */,
+				E5C6FA6B18054B6000ECDFF3 /* microphone@2x.png in Resources */,
+				E5C6FA6918054B6000ECDFF3 /* microphone.png in Resources */,
 				E5A9EC2B1799242F00976997 /* Default@2x.png in Resources */,
+				E5C6FA6D18054B6000ECDFF3 /* pause.png in Resources */,
 				E5A9EC2C1799242F00976997 /* Default-568h@2x.png in Resources */,
+				E5C6FA7118054B6000ECDFF3 /* play.png in Resources */,
+				E5C6FA6F18054B6000ECDFF3 /* pause@2x.png in Resources */,
+				E5C6FA7918054B6000ECDFF3 /* stop.png in Resources */,
 				E5A9EC2D1799242F00976997 /* MainStoryboard_iPhone.storyboard in Resources */,
 				E5A9EC2E1799242F00976997 /* MainStoryboard_iPad.storyboard in Resources */,
+				E5C6FA7B18054B6000ECDFF3 /* stop@2x.png in Resources */,
+				E5C6FA7718054B6000ECDFF3 /* record@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,13 +815,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E50B610017FF30CD006E76C5 /* wiosSound.bundle in Resources */,
 				E5B4624F1732A4A000E654A1 /* InfoPlist.strings in Resources */,
 				E5B462571732A4A000E654A1 /* Default.png in Resources */,
+				E5C6FA7418054B6000ECDFF3 /* record.png in Resources */,
+				E5C6FA7218054B6000ECDFF3 /* play@2x.png in Resources */,
+				E5C6FA6A18054B6000ECDFF3 /* microphone@2x.png in Resources */,
+				E5C6FA6818054B6000ECDFF3 /* microphone.png in Resources */,
 				E5B462591732A4A000E654A1 /* Default@2x.png in Resources */,
+				E5C6FA6C18054B6000ECDFF3 /* pause.png in Resources */,
 				E5B4625B1732A4A000E654A1 /* Default-568h@2x.png in Resources */,
+				E5C6FA7018054B6000ECDFF3 /* play.png in Resources */,
+				E5C6FA6E18054B6000ECDFF3 /* pause@2x.png in Resources */,
+				E5C6FA7818054B6000ECDFF3 /* stop.png in Resources */,
 				E5B4625E1732A4A000E654A1 /* MainStoryboard_iPhone.storyboard in Resources */,
 				E5B462611732A4A000E654A1 /* MainStoryboard_iPad.storyboard in Resources */,
+				E5C6FA7A18054B6000ECDFF3 /* stop@2x.png in Resources */,
+				E5C6FA7618054B6000ECDFF3 /* record@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
