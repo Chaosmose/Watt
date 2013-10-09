@@ -28,6 +28,8 @@
 
 @implementation WTMScene 
 
+@synthesize footer=_footer;
+@synthesize header=_header;
 @synthesize index=_index;
 @synthesize title=_title;
 @synthesize activity=_activity;
@@ -37,7 +39,11 @@
 @synthesize table=_table;
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"index"]){
+	if ([key isEqualToString:@"footer"]){
+		[super setValue:value forKey:@"footer"];
+	} else if ([key isEqualToString:@"header"]) {
+		[super setValue:value forKey:@"header"];
+	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
@@ -182,6 +188,8 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
+	[dictionary setValue:self.footer forKey:@"footer"];
+	[dictionary setValue:self.header forKey:@"header"];
 	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.activity){
@@ -228,6 +236,8 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMScene ",self.uinstID];
+	[s appendFormat:@"footer : %@\n",self.footer];
+	[s appendFormat:@"header : %@\n",self.header];
 	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];

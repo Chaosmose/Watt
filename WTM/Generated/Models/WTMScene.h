@@ -30,6 +30,8 @@
 @interface WTMScene:WattModel<WattCoding>{
 }
 
+@property (nonatomic,copy) NSString * footer;
+@property (nonatomic,copy) NSString * header;
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;
