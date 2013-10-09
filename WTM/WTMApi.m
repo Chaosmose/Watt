@@ -421,9 +421,9 @@
                           andBehavior:(WTMBehavior*)behavior
                               inScene:(WTMScene*)scene{
     if(!scene)
-        [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createElementInScene:withAsset:andBehavior:))];
+        [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createElementWithAsset:andBehavior:inScene:))];
     if(!asset)
-        [self raiseExceptionWithFormat:@"asset is nil in %@",NSStringFromSelector(@selector(createElementInScene:withAsset:andBehavior:))];
+        [self raiseExceptionWithFormat:@"asset is nil in %@",NSStringFromSelector(@selector(createElementWithAsset:andBehavior:inScene:))];
     // Behavior is optionnal
     
     if([self actionIsAllowed:WattWRITE on:scene.activity]){
@@ -483,10 +483,10 @@
                            inColumn:(WTMColumn*)column{
     
     if(!element)
-        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:))];
     
     if(!element.scene)
-        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:))];
     
     
     WTMTable *table=[self createTableInSceneIfNecessary:element.scene];
@@ -527,10 +527,10 @@
                                inLine:(WTMLine*)line{
     
     if(!element)
-        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewColumnFor:withAttributes:inLine:))];
     
     if(!element.scene)
-        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:forScene:))];
+        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewColumnFor:withAttributes:inLine:))];
     
     
     WTMTable *table=[self createTableInSceneIfNecessary:element.scene];

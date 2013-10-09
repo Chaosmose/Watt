@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0460"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D02D6AF60E09489DB53C2732"
+               BlueprintIdentifier = "D09856F23D9342218734EF90"
                BuildableName = "libPods-WattAuthor-SSZipArchive.a"
                BlueprintName = "Pods-WattAuthor-SSZipArchive"
                ReferencedContainer = "container:Pods.xcodeproj">
