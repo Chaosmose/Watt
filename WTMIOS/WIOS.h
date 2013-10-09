@@ -9,7 +9,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define wtodo() [[[UIAlertView alloc] initWithTitle:@"!" message:@"Todo" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show]
+#define wtodo() [[[UIAlertView alloc] initWithTitle:@"!" message:@"Todo" delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"OK choice in alerts") otherButtonTitles:nil] show]
 
 
 #ifndef WIOS_h
