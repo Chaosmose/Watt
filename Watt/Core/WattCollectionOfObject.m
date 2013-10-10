@@ -297,6 +297,7 @@
 
 #pragma mark - index
 
+
 /**
  *  This selector enumerates the member of the collection and allocate the index value
  *  and allocate to the designated property
@@ -304,7 +305,7 @@
  *  @param propertyName the name of the property
  */
 - (void)computeCollectionIndexesAndStoreInPropertyWithName:(NSString*)propertyName{
-    SEL selectorForProperty=NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]]);
+    SEL selectorForProperty=selectorSetterFromPropertyName(propertyName);
     BOOL tested=NO;
     BOOL ok=YES;
     NSInteger i=0;
@@ -312,13 +313,13 @@
         if(!tested)
             ok=[member respondsToSelector:selectorForProperty];
         if(!ok){
-            break;
+            [NSException raise:@"computeCollectionIndexesAndStoreInPropertyWithName"
+                        format:@"Member does not respond to %@",NSStringFromSelector(selectorForProperty)];
         }else{
             [member setValue:@(i) forKey:propertyName];
         }
         i++;
     }
 }
-
 
 @end

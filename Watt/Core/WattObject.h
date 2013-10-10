@@ -50,6 +50,10 @@ __LINE__ ,\
 #ifndef WT_RUNTIME_CONFIGURATION
 #define WT_RUNTIME_CONFIGURATION
 
+#define selectorSetterFromPropertyName(propertyName) NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]])
+#define selectorGetterFromPropertyName(propertyName) NSSelectorFromString(propertyName)
+
+
 #ifndef WT_CODING_KEYS
 #define WT_CODING_KEYS
 #define __uinstID__         @"i"
@@ -59,7 +63,7 @@ __LINE__ ,\
 #define __isAliased__       @"a"
 #endif
 
- 
+
 
 #ifndef WT_CONST
 #define WT_CONST
@@ -86,7 +90,6 @@ __LINE__ ,\
 #define isIpad()(UI_USER_INTERFACE_IDIOM()==UIUserInterfaceIdiomPad)
 #define isWidePhone() ([UIScreen mainScreen].scale == 2.f && [UIScreen mainScreen].bounds.size.height == 568.0f)
 #define scale() [UIScreen mainScreen].scale
-
 #endif
 
 
@@ -106,10 +109,10 @@ __LINE__ ,\
 
 
 @interface WattObject : NSObject<WattCoding>{
-    @private
+@private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
     NSInteger _uinstID;
-    @protected
+@protected
     NSString *_currentLocale;           // The locale that has been used for localization
     WattRegistry*_registry;
     BOOL _isAnAlias;
@@ -124,7 +127,7 @@ __LINE__ ,\
 
 // You should normally use only initInRegistry directly
 
-- (instancetype)init; 
+- (instancetype)init;
 - (instancetype)initInRegistry:(WattRegistry*)registry;
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier; //Used for reinstanciation from a device to another
 - (instancetype)initAsAliasWithIdentifier:(NSInteger)identifier; // instanciate an alias
@@ -139,7 +142,7 @@ __LINE__ ,\
 - (void)identifyWithUinstId:(NSInteger)identifier;
 
 
-#pragma mark  Aliasing 
+#pragma mark  Aliasing
 
 - (BOOL)isAnAlias;
 - (void)resolveAliases;
@@ -161,7 +164,7 @@ __LINE__ ,\
 
 #pragma mark - localization
 
-- (instancetype)localized; 
+- (instancetype)localized;
 - (void)localize;
 - (BOOL)hasBeenLocalized;
 
