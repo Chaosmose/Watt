@@ -583,11 +583,11 @@
 			isa = PBXGroup;
 			children = (
 				E5C6FA5D18054B6000ECDFF3 /* Resources */,
-				E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */,
-				E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */,
 				E50B60FD17FF30CC006E76C5 /* WIOSMatrixProtocol.h */,
 				E50B60FE17FF30CC006E76C5 /* WIOSMatrixViewController.h */,
+				E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */,
 				E50B60FF17FF30CD006E76C5 /* WIOSMatrixCellViewController.h */,
+				E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */,
 				E56E248217D77C39009C2C2C /* WIOS.h */,
 				E56E248317D77C39009C2C2C /* WIOSSoundListCell.h */,
 				E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */,

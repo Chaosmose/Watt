@@ -112,6 +112,7 @@
 - (CGFloat)cellMinimumHorizontalSpacing;
 
 
+
 @optional
 
 /**
@@ -121,5 +122,34 @@
  *  @param infos      optional informations
  */
 - (void)matrixCell:(WIOSMatrixCellViewController*)cell didPerformActionWithIdentifier:(NSInteger)identifier withInfos:(NSDictionary*)infos;
+
+/**
+ *  The matrix header view controller
+ *
+ *  @return the header view controller;
+ */
+- (UIViewController*)headerViewController;
+
+/**
+ *  The matrix header view controller
+ *
+ *  @return the footer view controller;
+ */
+- (UIViewController*)footerViewController;
+
+
+/**
+ *  The height of the header
+ *
+ *  @return return the height
+ */
+- (CGFloat)headerHeight;
+
+/**
+ *  The height of the footer
+ *
+ *  @return return the height
+ */
+- (CGFloat)footerHeight;
 
 @end

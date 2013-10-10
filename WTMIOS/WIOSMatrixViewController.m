@@ -11,6 +11,8 @@
 
 @interface WIOSMatrixViewController(){
 }
+@property (strong,nonatomic)UIViewController *header;
+@property (strong,nonatomic)UIViewController *footer;
 @property (strong,nonatomic)NSMutableArray* matrixCellViewControllers;
 @property (strong,nonatomic)NSMutableArray* positions;
 @end
@@ -20,6 +22,8 @@
 @synthesize matrixCellViewControllers = _matrixCellViewControllers;
 @synthesize positions = _positions;
 @synthesize selectedIndex = _selectedIndex;
+@synthesize header = _header;
+@synthesize footer = _footer;
 
 
 
@@ -48,7 +52,7 @@
  */
 - (void)reloadCellsAnimated:(BOOL)animated{
     [self reloadCellsAnimated:animated
-          withAnimationOptions:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp];
+         withAnimationOptions:UIViewAnimationOptionCurveEaseInOut|UIViewAnimationOptionTransitionCurlUp];
 }
 
 /**
@@ -92,7 +96,8 @@
                               delay:0.f
                             options:options
                          animations:^{
-                             CGSize containerSize=weakSelf.view.bounds.size;
+                             
+                             CGSize containerSize=[weakSelf _containerSize];
                              CGSize cellSize=[weakSelf _computeCellSize];
                              
                              CGFloat minHSP=[[weakSelf _casted] cellMinimumHorizontalSpacing];
@@ -101,6 +106,17 @@
                              NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
                              
                              _positions=[NSMutableArray array];
+                             
+                             // HEADER
+                             
+                             if(!weakSelf.header){
+                                 weakSelf.header=[[weakSelf _casted] headerViewController];
+                             }
+                             if(weakSelf.header.view){
+                                 [weakSelf _addSupplementaryViewController:weakSelf.header
+                                                                       atY:0.f
+                                                                withHeight:[weakSelf headerHeight]];
+                             }
                              
                              
                              NSUInteger nb=[[weakSelf _casted] viewControllersCount];
@@ -119,7 +135,7 @@
                                  // We register the view controller
                                  [weakSelf _registerViewController:cellViewController];
                                  
-                                 CGRect destination=[weakSelf _destinationatLineNumber:lineNumber
+                                 CGRect destination=[weakSelf _destinationAtLineNumber:lineNumber
                                                                        andColumnNumber:columnNumber
                                                                           withCellSize:cellSize];
                                  
@@ -136,10 +152,11 @@
                                  maxY=destination.origin.y+destination.size.height+minVSP;
                              }
                              
-                             
-                             CGFloat deltaX=containerSize.width-maxX;
-                             CGFloat deltaY=containerSize.height-maxY;
-                             
+                             CGSize viewSize=weakSelf.view.bounds.size;
+                             CGFloat deltaX=viewSize.width-maxX;
+                             CGFloat deltaY=(viewSize.height-maxY);
+                             deltaY+=[weakSelf headerHeight];
+                             deltaY-=[weakSelf footerHeight];
                              for (int i=0; i<nb; i++) {
                                  
                                  // We do proceed to adjustement Vertical an horizontal of the box.
@@ -150,8 +167,19 @@
                                  destination.origin.y+= roundf(deltaY/2.f);
                                  
                                  WIOSMatrixCellViewController*cellViewController=[_matrixCellViewControllers objectAtIndex:i];
-                                 [weakSelf _addCellViewController:cellViewController
-                                                    atDestination:destination];
+                                 [weakSelf _addViewController:cellViewController
+                                                atDestination:destination];
+                                 
+                             }
+                             
+                             // FOOTER
+                             if(!weakSelf.footer){
+                                 weakSelf.footer=[[weakSelf _casted] footerViewController];
+                             }
+                             if(weakSelf.footer){
+                                 [weakSelf _addSupplementaryViewController:weakSelf.footer
+                                                                       atY:viewSize.height-[weakSelf footerHeight]
+                                                                withHeight:[weakSelf footerHeight]];
                              }
                          }
                          completion:^(BOOL finished) {
@@ -167,23 +195,30 @@
                       withAnimationOptions:(NSUInteger)options{
     WIOSMatrixViewController *__weak weakSelf=self;
     [UIView animateWithDuration:animated?0.2f:0.f
-                              delay:0.f
-                            options:options
-                         animations:^{
-                             [weakSelf _removeMatrixCells];
-                         }
-                         completion:^(BOOL finished) {
-                             [weakSelf _postCellRemoval];
-                             displayBlock();
-                         }];
+                          delay:0.f
+                        options:options
+                     animations:^{
+                         [weakSelf _removeMatrixCells];
+                     }
+                     completion:^(BOOL finished) {
+                         [weakSelf _postCellRemoval];
+                         displayBlock();
+                     }];
 }
 
 
 - (void)_removeMatrixCells{
-    for (WIOSMatrixCellViewController  *cellViewController in self.matrixCellViewControllers) {
-        [cellViewController willMoveToParentViewController:nil];
-        [cellViewController.view removeFromSuperview];
-        [cellViewController removeFromParentViewController];
+    NSMutableArray *toBeRemoved=[NSMutableArray arrayWithArray:self.matrixCellViewControllers];
+    if(self.header){
+        [toBeRemoved addObject:self.header];
+    }
+    if(self.footer){
+        [toBeRemoved addObject:self.footer];
+    }
+    for (UIViewController  *vc in toBeRemoved) {
+        [vc willMoveToParentViewController:nil];
+        [vc.view removeFromSuperview];
+        [vc removeFromParentViewController];
     }
 }
 
@@ -191,6 +226,8 @@
 - (void)_postCellRemoval{
     [self.matrixCellViewControllers removeAllObjects];
     self.matrixCellViewControllers=[NSMutableArray array];
+    self.header=nil;
+    self.footer=nil;
 }
 
 
@@ -206,8 +243,8 @@
 
 
 
-- (void)_addCellViewController:(WIOSMatrixCellViewController*)cellViewController
-                 atDestination:(CGRect)destination{
+- (void)_addViewController:(UIViewController*)cellViewController
+             atDestination:(CGRect)destination{
     
     // We add the view controller.
     [self addChildViewController:cellViewController];
@@ -215,12 +252,28 @@
     [cellViewController.view setFrame:destination];
     // We add its subview
     [self.view addSubview:cellViewController.view];
+    
+    //[cellViewController.view setAlpha:0.3f];
+    
     // We notify the move to parent.
     [cellViewController didMoveToParentViewController:self];
 }
 
 
-- (CGRect)_destinationatLineNumber:(NSInteger)lineNumber
+
+- (void)_addSupplementaryViewController:(UIViewController*)viewController
+                                    atY:(CGFloat)y
+                             withHeight:(CGFloat)height{
+    
+    CGRect destination=CGRectMake(0, roundf(y), [self _containerSize].width, roundf(height));
+    
+    [self _addViewController:viewController
+               atDestination:destination];
+}
+
+
+
+- (CGRect)_destinationAtLineNumber:(NSInteger)lineNumber
                    andColumnNumber:(NSInteger)columnNumber
                       withCellSize:(CGSize)cellSize{
     
@@ -243,7 +296,7 @@
     CGSize cellSize=CGSizeZero;
     if(n>0){
         // We try to find a solution to arrange the cells in the matrix
-        CGSize containerSize=self.view.bounds.size;
+        CGSize containerSize=[self _containerSize];
         CGFloat containerSurface=(CGFloat)containerSize.width*containerSize.height;
         CGFloat surfacePerCell=(containerSurface/(CGFloat)n); // WE should remove padding surface for a more accurate approximation
         
@@ -271,6 +324,14 @@
     return cellSize;
 }
 
+- (CGSize)_containerSize{
+    CGSize containerSize=self.view.bounds.size;
+    CGFloat footerHeight=[self footerHeight];
+    CGFloat headerHeight=[self headerHeight];
+    containerSize.height=containerSize.height-(headerHeight+footerHeight);
+    return containerSize;
+}
+
 
 - (BOOL)_anEnsembleOfCellNumber:(NSInteger)n
                    cellWithSize:(CGSize)cellSize
@@ -293,7 +354,7 @@
 }
 
 
-#pragma - mark facilities
+#pragma mark - facilities
 
 
 - (WIOSMatrixViewController<WIOSMatrixCellDelegateProtocol>*)_casted{
@@ -313,7 +374,7 @@
 
 
 
-#pragma - mark UIGestureRecognizerDelegatew
+#pragma  mark - UIGestureRecognizerDelegatew
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     return YES;
@@ -322,5 +383,49 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
 }
+
+#pragma  mark -
+
+
+
+// Default placeholder implementation
+
+/**
+ *  The matrix header view controller
+ *
+ *  @return the header view controller;
+ */
+- (UIViewController*)headerViewController{
+    return nil;
+}
+
+/**
+ *  The matrix header view controller
+ *
+ *  @return the footer view controller;
+ */
+- (UIViewController*)footerViewController{
+    return nil;
+}
+
+
+/**
+ *  The height of the header
+ *
+ *  @return return the height
+ */
+- (CGFloat)headerHeight{
+    return 0.f;
+}
+
+/**
+ *  The height of the footer
+ *
+ *  @return return the height
+ */
+- (CGFloat)footerHeight{
+    return 0.f;
+}
+
 
 @end
