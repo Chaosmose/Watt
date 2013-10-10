@@ -26,7 +26,6 @@
 @synthesize footer = _footer;
 
 
-
 - (void)setSelectedIndex:(NSUInteger)selectedIndex{
     _selectedIndex=selectedIndex;
     for (WIOSMatrixCellViewController  *cellViewController in self.matrixCellViewControllers) {
@@ -96,14 +95,17 @@
                               delay:0.f
                             options:options
                          animations:^{
+                             BOOL isLandscapeOrientation= UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
                              
-                             CGSize containerSize=[weakSelf _containerSize];
-                             CGSize cellSize=[weakSelf _computeCellSize];
+                             CGSize viewSize=weakSelf.view.bounds.size;
+                            
                              
                              CGFloat minHSP=[[weakSelf _casted] cellMinimumHorizontalSpacing];
                              CGFloat minVSP=[[weakSelf _casted] cellMinimumVerticalSpacing];
                              
-                             NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
+                             CGFloat headerHeight=isLandscapeOrientation?[weakSelf headerHeightForLandscapeOrientation]:[weakSelf headerHeightForPortraitOrientation];
+                             CGFloat footerHeight=isLandscapeOrientation?[weakSelf footerHeightForLandscapeOrientation]:[weakSelf footerHeightForPortraitOrientation];
+                             
                              
                              _positions=[NSMutableArray array];
                              
@@ -115,9 +117,25 @@
                              if(weakSelf.header.view){
                                  [weakSelf _addSupplementaryViewController:weakSelf.header
                                                                        atY:0.f
-                                                                withHeight:[weakSelf headerHeight]];
+                                                                withHeight:headerHeight];
                              }
                              
+                             // FOOTER
+                             if(!weakSelf.footer){
+                                 weakSelf.footer=[[weakSelf _casted] footerViewController];
+                             }
+                             if(weakSelf.footer){
+                                 [weakSelf _addSupplementaryViewController:weakSelf.footer
+                                                                       atY:viewSize.height-footerHeight
+                                                                withHeight:footerHeight];
+                             }
+                             
+                             // CELLS
+                             
+                             CGSize containerSize=[weakSelf _containerSize];
+                             CGSize cellSize=[weakSelf _computeCellSize];
+                             
+                             NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
                              
                              NSUInteger nb=[[weakSelf _casted] viewControllersCount];
                              NSInteger lineNumber=0;
@@ -152,11 +170,11 @@
                                  maxY=destination.origin.y+destination.size.height+minVSP;
                              }
                              
-                             CGSize viewSize=weakSelf.view.bounds.size;
+                            
                              CGFloat deltaX=viewSize.width-maxX;
                              CGFloat deltaY=(viewSize.height-maxY);
-                             deltaY+=[weakSelf headerHeight];
-                             deltaY-=[weakSelf footerHeight];
+                             deltaY+=headerHeight;
+                             deltaY-=footerHeight;
                              for (int i=0; i<nb; i++) {
                                  
                                  // We do proceed to adjustement Vertical an horizontal of the box.
@@ -172,15 +190,7 @@
                                  
                              }
                              
-                             // FOOTER
-                             if(!weakSelf.footer){
-                                 weakSelf.footer=[[weakSelf _casted] footerViewController];
-                             }
-                             if(weakSelf.footer){
-                                 [weakSelf _addSupplementaryViewController:weakSelf.footer
-                                                                       atY:viewSize.height-[weakSelf footerHeight]
-                                                                withHeight:[weakSelf footerHeight]];
-                             }
+                      
                          }
                          completion:^(BOOL finished) {
                              
@@ -326,8 +336,9 @@
 
 - (CGSize)_containerSize{
     CGSize containerSize=self.view.bounds.size;
-    CGFloat footerHeight=[self footerHeight];
-    CGFloat headerHeight=[self headerHeight];
+    BOOL isLandscapeOrientation= UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
+    CGFloat footerHeight=isLandscapeOrientation?[self footerHeightForLandscapeOrientation]:[self footerHeightForPortraitOrientation];
+    CGFloat headerHeight=isLandscapeOrientation?[self headerHeightForLandscapeOrientation]:[self headerHeightForPortraitOrientation];
     containerSize.height=containerSize.height-(headerHeight+footerHeight);
     return containerSize;
 }
@@ -390,6 +401,7 @@
 
 // Default placeholder implementation
 
+
 /**
  *  The matrix header view controller
  *
@@ -414,7 +426,7 @@
  *
  *  @return return the height
  */
-- (CGFloat)headerHeight{
+- (CGFloat)headerHeightForLandscapeOrientation{
     return 0.f;
 }
 
@@ -423,9 +435,45 @@
  *
  *  @return return the height
  */
-- (CGFloat)footerHeight{
+- (CGFloat)footerHeightForLandscapeOrientation{
     return 0.f;
 }
 
+/**
+ *  The height of the header
+ *
+ *  @return return the height
+ */
+- (CGFloat)headerHeightForPortraitOrientation{
+    return 0.f;
+}
+/**
+ *  The height of the footer
+ *
+ *  @return return the height
+ */
+- (CGFloat)footerHeightForPortraitOrientation{
+    return 0.f;
+}
+
+
+
+
+- (NSString*)description{
+    NSMutableString *s=[NSMutableString string];
+    [s appendString:[super description]];
+    [s appendString:@"\n"];
+     [s appendFormat:@"navigation controller : %@ \n",self.navigationController.navigationBar];
+    [s appendFormat:@"header : %@ %@\n",self.header,self.header.view];
+    [s appendFormat:@"footer : %@ %@\n",self.footer,self.footer.view];
+
+    int i=0;
+     for (WIOSMatrixCellViewController  *vc in self.matrixCellViewControllers) {
+         [s appendFormat:@"Cell %i : %@ %@ \n",i,vc,vc.view];
+         i++;
+     }
+        [s appendFormat:@"toolbar : %@ %@\n",self.navigationController.toolbar,self.navigationController.toolbar];
+    return s;
+}
 
 @end

@@ -143,13 +143,29 @@
  *
  *  @return return the height
  */
-- (CGFloat)headerHeight;
+- (CGFloat)headerHeightForLandscapeOrientation;
 
 /**
  *  The height of the footer
  *
  *  @return return the height
  */
-- (CGFloat)footerHeight;
+- (CGFloat)footerHeightForLandscapeOrientation;
+
+
+/**
+ *  The height of the header
+ *
+ *  @return return the height
+ */
+- (CGFloat)headerHeightForPortraitOrientation;
+
+/**
+ *  The height of the footer
+ *
+ *  @return return the height
+ */
+- (CGFloat)footerHeightForPortraitOrientation;
+
 
 @end

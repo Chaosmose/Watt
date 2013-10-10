@@ -51,6 +51,7 @@
         if(self.selected==NO)
             self.matrix.selectedIndex=self.matrixIndex;
         [self didPerformActionWithIdentifier:WIOS_MATRIX_CELL_TAPPED_ACTION_IDENTIFIER];
+        NSLog(@"%@",[self.matrix description]);
     }
 }
 
