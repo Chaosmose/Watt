@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		447087F9105E44D19142000C /* libPods-PlayerSampleFlexions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */; };
+		D6121FA7CE9341F09A0E1C9E /* libPods-PlayerSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */; };
 		E50003F717B63EEC00E50D70 /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F417B63EEC00E50D70 /* WattDelta.m */; };
 		E50003F817B63EEC00E50D70 /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F417B63EEC00E50D70 /* WattDelta.m */; };
 		E50003F917B63EEC00E50D70 /* WattDeltaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E50003F617B63EEC00E50D70 /* WattDeltaEngine.m */; };
@@ -34,6 +35,11 @@
 		E50B610517FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
 		E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
+		E54FBA201809AB51002B2BAB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54FBA1F1809AB51002B2BAB /* XCTest.framework */; };
+		E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
+		E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
+		E54FBA281809AB51002B2BAB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E54FBA261809AB51002B2BAB /* InfoPlist.strings */; };
+		E54FBA2A1809AB51002B2BAB /* PlayerSample_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E54FBA291809AB51002B2BAB /* PlayerSample_Tests.m */; };
 		E56E248517D77C39009C2C2C /* WIOSSoundRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */; };
 		E56E248617D77C39009C2C2C /* WIOSSoundListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */; };
 		E56E248717D77C39009C2C2C /* WIOSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248417D77C39009C2C2C /* WIOSButton.m */; };
@@ -199,6 +205,16 @@
 		FF0AD5BD8FB1459CB3E91419 /* libPods-PlayerSample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E54FBA311809B076002B2BAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5B462391732A4A000E654A1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5B462401732A4A000E654A1;
+			remoteInfo = PlayerSample;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4D765C0724FF40EB85ED90BC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSample.xcconfig"; path = "../Pods/Pods-PlayerSample.xcconfig"; sourceTree = SOURCE_ROOT; };
@@ -234,6 +250,12 @@
 		E50B60FF17FF30CD006E76C5 /* WIOSMatrixCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSMatrixCellViewController.h; sourceTree = "<group>"; };
 		E51AC40D17B9129900E9DC83 /* WattBundlePackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattBundlePackager.h; sourceTree = "<group>"; };
 		E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattBundlePackager.m; sourceTree = "<group>"; };
+		E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PlayerSample Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E54FBA1F1809AB51002B2BAB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayerSample Tests-Info.plist"; sourceTree = "<group>"; };
+		E54FBA271809AB51002B2BAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E54FBA291809AB51002B2BAB /* PlayerSample_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerSample_Tests.m; sourceTree = "<group>"; };
+		E54FBA2B1809AB51002B2BAB /* PlayerSample Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlayerSample Tests-Prefix.pch"; sourceTree = "<group>"; };
 		E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundRecorderViewController.m; sourceTree = "<group>"; };
 		E56E247F17D77C39009C2C2C /* WIOSSoundRecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundRecorderViewController.h; sourceTree = "<group>"; };
 		E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundListCell.m; sourceTree = "<group>"; };
@@ -385,6 +407,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E54FBA1B1809AB51002B2BAB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E54FBA201809AB51002B2BAB /* XCTest.framework in Frameworks */,
+				E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */,
+				E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */,
+				D6121FA7CE9341F09A0E1C9E /* libPods-PlayerSample.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5A9EC231799242F00976997 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -579,6 +612,25 @@
 			path = Packager;
 			sourceTree = "<group>";
 		};
+		E54FBA231809AB51002B2BAB /* PlayerSample Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E54FBA291809AB51002B2BAB /* PlayerSample_Tests.m */,
+				E54FBA241809AB51002B2BAB /* Supporting Files */,
+			);
+			path = "PlayerSample Tests";
+			sourceTree = "<group>";
+		};
+		E54FBA241809AB51002B2BAB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */,
+				E54FBA261809AB51002B2BAB /* InfoPlist.strings */,
+				E54FBA2B1809AB51002B2BAB /* PlayerSample Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		E589F9D317D4BAB9002BF82C /* WTIOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +661,7 @@
 				E5CAD21B1799A1A400D22369 /* Watt */,
 				E50003FB17B6428100E50D70 /* WTM */,
 				E5B4624A1732A4A000E654A1 /* PlayerSample */,
+				E54FBA231809AB51002B2BAB /* PlayerSample Tests */,
 				E5B462431732A4A000E654A1 /* Frameworks */,
 				E5B462421732A4A000E654A1 /* Products */,
 				B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */,
@@ -621,6 +674,7 @@
 			children = (
 				E5B462411732A4A000E654A1 /* PlayerSample.app */,
 				E5A9EC331799242F00976997 /* PlayerSampleFlexions.app */,
+				E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -636,6 +690,7 @@
 				4D765C0724FF40EB85ED90BC /* libPods.a */,
 				F24E9693AB304D3F9DE0C313 /* libPods-PlayerSample.a */,
 				DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */,
+				E54FBA1F1809AB51002B2BAB /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -720,6 +775,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E54FBA1D1809AB51002B2BAB /* PlayerSample Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E54FBA301809AB51002B2BAB /* Build configuration list for PBXNativeTarget "PlayerSample Tests" */;
+			buildPhases = (
+				C73D35B74FE140E79C15EB01 /* Check Pods Manifest.lock */,
+				E54FBA1A1809AB51002B2BAB /* Sources */,
+				E54FBA1B1809AB51002B2BAB /* Frameworks */,
+				E54FBA1C1809AB51002B2BAB /* Resources */,
+				CD4B6B936C914D04BD2D2A33 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E54FBA321809B076002B2BAB /* PBXTargetDependency */,
+			);
+			name = "PlayerSample Tests";
+			productName = "PlayerSample Tests";
+			productReference = E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E5A9EBED1799242F00976997 /* PlayerSampleFlexions */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5A9EC301799242F00976997 /* Build configuration list for PBXNativeTarget "PlayerSampleFlexions" */;
@@ -768,6 +843,11 @@
 				CLASSPREFIX = WTM;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Pereira da Silva";
+				TargetAttributes = {
+					E54FBA1D1809AB51002B2BAB = {
+						TestTargetID = E5B462401732A4A000E654A1;
+					};
+				};
 			};
 			buildConfigurationList = E5B4623C1732A4A000E654A1 /* Build configuration list for PBXProject "PlayerSample" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -783,11 +863,20 @@
 			targets = (
 				E5B462401732A4A000E654A1 /* PlayerSample */,
 				E5A9EBED1799242F00976997 /* PlayerSampleFlexions */,
+				E54FBA1D1809AB51002B2BAB /* PlayerSample Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E54FBA1C1809AB51002B2BAB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E54FBA281809AB51002B2BAB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5A9EC281799242F00976997 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -882,6 +971,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		C73D35B74FE140E79C15EB01 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CD4B6B936C914D04BD2D2A33 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-PlayerSample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CE428BA37C3D4665A42F9C63 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -914,6 +1033,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E54FBA1A1809AB51002B2BAB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E54FBA2A1809AB51002B2BAB /* PlayerSample_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5A9EBF01799242F00976997 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1076,7 +1203,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E54FBA321809B076002B2BAB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5B462401732A4A000E654A1 /* PlayerSample */;
+			targetProxy = E54FBA311809B076002B2BAB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		E54FBA261809AB51002B2BAB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E54FBA271809AB51002B2BAB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		E5B4624D1732A4A000E654A1 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1104,6 +1247,69 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E54FBA2E1809AB51002B2BAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlayerSample.app/PlayerSample";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PlayerSample Tests/PlayerSample Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "PlayerSample Tests/PlayerSample Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		E54FBA2F1809AB51002B2BAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlayerSample.app/PlayerSample";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PlayerSample Tests/PlayerSample Tests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "PlayerSample Tests/PlayerSample Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		E5A9EC311799242F00976997 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D8890FBD9D4042C081050B0D /* Pods-PlayerSampleFlexions.xcconfig */;
@@ -1217,6 +1423,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E54FBA301809AB51002B2BAB /* Build configuration list for PBXNativeTarget "PlayerSample Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E54FBA2E1809AB51002B2BAB /* Debug */,
+				E54FBA2F1809AB51002B2BAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5A9EC301799242F00976997 /* Build configuration list for PBXNativeTarget "PlayerSampleFlexions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

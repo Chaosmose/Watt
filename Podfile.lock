@@ -1,5 +1,5 @@
 PODS:
-  - AFNetworking (1.3.2)
+  - AFNetworking (1.3.3)
   - SSZipArchive (0.2.5)
   - SVProgressHUD (0.9)
 
@@ -9,8 +9,8 @@ DEPENDENCIES:
   - SVProgressHUD
 
 SPEC CHECKSUMS:
-  AFNetworking: 7f9bcd7c287a75476cd5c61e82fd3380e93e4c54
+  AFNetworking: 0700ec7a58c36ad217173e167f6e4df7270df66b
   SSZipArchive: a83d709af4df0b30667a08dc458d8cfc4d3a2cb8
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
 
-COCOAPODS: 0.23.0
+COCOAPODS: 0.26.2

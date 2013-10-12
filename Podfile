@@ -8,6 +8,7 @@ target :PlayerSample do
 	pod 'SVProgressHUD'
 	pod 'SSZipArchive','~> 0.2.2'
     xcodeproj 'PlayerSample/PlayerSample.xcodeproj'
+    link_with ['PlayerSample','PlayerSample Tests']
 end
 
 target :PlayerSampleFlexions do
@@ -24,6 +25,8 @@ target :WattAuthor do
 	pod 'SSZipArchive','~> 0.2.2'
     xcodeproj 'WattAuthor/WattAuthor.xcodeproj'
 end
+
+
 
 
 #######
