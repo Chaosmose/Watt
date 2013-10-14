@@ -15,6 +15,7 @@
 @property (strong,nonatomic)UIViewController *footer;
 @property (strong,nonatomic)NSMutableArray* matrixCellViewControllers;
 @property (strong,nonatomic)NSMutableArray* positions;
+@property (strong,nonatomic)UIImageView*backgroundImageView;
 @end
 
 @implementation WIOSMatrixViewController
@@ -24,6 +25,10 @@
 @synthesize selectedIndex = _selectedIndex;
 @synthesize header = _header;
 @synthesize footer = _footer;
+
+@synthesize backgroundImage = _backgroundImage;
+@synthesize backgroundImageView = _backgroundImageView;
+
 
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex{
@@ -87,7 +92,7 @@
  *  @param options  check UIViewAnimationOptions
  */
 - (void)displayCellsAnimated:(BOOL)animated withAnimationOptions:(NSUInteger)options{
-    WIOSMatrixViewController *__weak weakSelf=self;
+    WIOSMatrixViewController *__block weakSelf=self;
     NSInteger n=[[weakSelf _casted] viewControllersCount];
     if(n>0){
         
@@ -99,6 +104,14 @@
                              
                              CGSize viewSize=weakSelf.view.bounds.size;
                             
+                             if(weakSelf->_backgroundImage){
+                                 if(!weakSelf->_backgroundImageView){
+                                     weakSelf->_backgroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, viewSize.width, viewSize.height)];
+                                 }
+                                 [weakSelf->_backgroundImageView setImage:weakSelf->_backgroundImage];
+                                 [weakSelf.view addSubview:_backgroundImageView];
+                             }
+                             
                              
                              CGFloat minHSP=[[weakSelf _casted] cellMinimumHorizontalSpacing];
                              CGFloat minVSP=[[weakSelf _casted] cellMinimumVerticalSpacing];
@@ -230,10 +243,15 @@
         [vc.view removeFromSuperview];
         [vc removeFromParentViewController];
     }
+    
+
 }
 
 
 - (void)_postCellRemoval{
+    [self.backgroundImageView removeFromSuperview];
+    self.backgroundImage=nil;
+    
     [self.matrixCellViewControllers removeAllObjects];
     self.matrixCellViewControllers=[NSMutableArray array];
     self.header=nil;

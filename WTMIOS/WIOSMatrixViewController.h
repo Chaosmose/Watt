@@ -18,6 +18,8 @@
 
 @property (nonatomic) NSUInteger selectedIndex;
 
+@property (nonatomic) UIImage* backgroundImage;
+
 /**
  *  Reloads and displays the cells animated or not
  *
