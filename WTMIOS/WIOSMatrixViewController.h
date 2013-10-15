@@ -18,7 +18,7 @@
 
 @property (nonatomic) NSUInteger selectedIndex;
 
-@property (nonatomic) UIImage* backgroundImage;
+@property (strong,nonatomic) UIImage* matrixBackgroundImage;
 
 /**
  *  Reloads and displays the cells animated or not
@@ -50,9 +50,5 @@
  *  @param options  check UIViewAnimationOptions
  */
 - (void)displayCellsAnimated:(BOOL)animated withAnimationOptions:(NSUInteger)options;
-
-
-
-
 
 @end

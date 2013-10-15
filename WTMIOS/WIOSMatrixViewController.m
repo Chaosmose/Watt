@@ -15,7 +15,7 @@
 @property (strong,nonatomic)UIViewController *footer;
 @property (strong,nonatomic)NSMutableArray* matrixCellViewControllers;
 @property (strong,nonatomic)NSMutableArray* positions;
-@property (strong,nonatomic)UIImageView*backgroundImageView;
+@property (strong,nonatomic)UIImageView*matrixBackgroundImageView;
 @end
 
 @implementation WIOSMatrixViewController
@@ -26,8 +26,8 @@
 @synthesize header = _header;
 @synthesize footer = _footer;
 
-@synthesize backgroundImage = _backgroundImage;
-@synthesize backgroundImageView = _backgroundImageView;
+@synthesize matrixBackgroundImage = _matrixBackgroundImage;
+@synthesize matrixBackgroundImageView = _matrixBackgroundImageView;
 
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex{
@@ -91,68 +91,72 @@
  *  @param options  check UIViewAnimationOptions
  */
 - (void)displayCellsAnimated:(BOOL)animated withAnimationOptions:(NSUInteger)options{
-    WIOSMatrixViewController *__block weakSelf=self;
-    NSInteger n=[[weakSelf _casted] viewControllersCount];
+    WIOSMatrixViewController *__block blockSelf=self;
+    NSInteger n=[[blockSelf _casted] viewControllersCount];
     if(n>0){
-        
         [UIView animateWithDuration:animated?0.2f:0.f
                               delay:0.f
                             options:options
                          animations:^{
                              BOOL isLandscapeOrientation= UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
                              
-                             CGSize viewSize=weakSelf.view.bounds.size;
+                             CGSize viewSize=blockSelf.view.bounds.size;
                              
-                             if(weakSelf->_backgroundImage){
-                                 if(!weakSelf->_backgroundImageView){
-                                     weakSelf->_backgroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, viewSize.width, viewSize.height)];
-                                     [weakSelf->_backgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-                                     [weakSelf->_backgroundImageView setImage:weakSelf->_backgroundImage];
-                                     [weakSelf.view addSubview:_backgroundImageView];
+                             if(blockSelf.matrixBackgroundImage){
+                                 if(!blockSelf.matrixBackgroundImageView){
+                                     blockSelf.matrixBackgroundImageView=[[UIImageView alloc] initWithFrame:blockSelf.view.bounds];
+                                     [blockSelf.matrixBackgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+                                     [_matrixBackgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+                                     [_matrixBackgroundImageView setImage:_matrixBackgroundImage];
                                  }else{
-                                     [weakSelf->_backgroundImageView setImage:weakSelf->_backgroundImage];
+                                     [_matrixBackgroundImageView setImage:_matrixBackgroundImage];
                                  }
+                                 if(!_matrixBackgroundImageView.superview){
+                                     [blockSelf.view addSubview:_matrixBackgroundImageView];
+                                 }
+                             }else{
+                                 [blockSelf.matrixBackgroundImageView removeFromSuperview];
                              }
                              
                              
-                             CGFloat minHSP=[[weakSelf _casted] cellMinimumHorizontalSpacing];
-                             CGFloat minVSP=[[weakSelf _casted] cellMinimumVerticalSpacing];
+                             CGFloat minHSP=[[blockSelf _casted] cellMinimumHorizontalSpacing];
+                             CGFloat minVSP=[[blockSelf _casted] cellMinimumVerticalSpacing];
                              
-                             CGFloat headerHeight=isLandscapeOrientation?[weakSelf headerHeightForLandscapeOrientation]:[weakSelf headerHeightForPortraitOrientation];
-                             CGFloat footerHeight=isLandscapeOrientation?[weakSelf footerHeightForLandscapeOrientation]:[weakSelf footerHeightForPortraitOrientation];
+                             CGFloat headerHeight=isLandscapeOrientation?[blockSelf headerHeightForLandscapeOrientation]:[blockSelf headerHeightForPortraitOrientation];
+                             CGFloat footerHeight=isLandscapeOrientation?[blockSelf footerHeightForLandscapeOrientation]:[blockSelf footerHeightForPortraitOrientation];
                              
                              
                              _positions=[NSMutableArray array];
                              
                              // HEADER
                              
-                             if(!weakSelf.header){
-                                 weakSelf.header=[[weakSelf _casted] headerViewController];
+                             if(!blockSelf.header){
+                                 blockSelf.header=[[blockSelf _casted] headerViewController];
                              }
-                             if(weakSelf.header.view){
-                                 [weakSelf _addSupplementaryViewController:weakSelf.header
+                             if(blockSelf.header.view){
+                                 [blockSelf _addSupplementaryViewController:blockSelf.header
                                                                        atY:0.f
                                                                 withHeight:headerHeight];
                              }
                              
                              // FOOTER
-                             if(!weakSelf.footer){
-                                 weakSelf.footer=[[weakSelf _casted] footerViewController];
+                             if(!blockSelf.footer){
+                                 blockSelf.footer=[[blockSelf _casted] footerViewController];
                              }
-                             if(weakSelf.footer){
-                                 [weakSelf _addSupplementaryViewController:weakSelf.footer
+                             if(blockSelf.footer){
+                                 [blockSelf _addSupplementaryViewController:blockSelf.footer
                                                                        atY:viewSize.height-footerHeight
                                                                 withHeight:footerHeight];
                              }
                              
                              // CELLS
                              
-                             CGSize containerSize=[weakSelf _containerSize];
-                             CGSize cellSize=[weakSelf _computeCellSize];
+                             CGSize containerSize=[blockSelf _containerSize];
+                             CGSize cellSize=[blockSelf _computeCellSize];
                              
                              NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
                              
-                             NSUInteger nb=[[weakSelf _casted] viewControllersCount];
+                             NSUInteger nb=[[blockSelf _casted] viewControllersCount];
                              NSInteger lineNumber=0;
                              NSInteger columnNumber=0;
                              
@@ -163,12 +167,12 @@
                              
                              for (int i=0; i<nb; i++) {
                                  
-                                 WIOSMatrixCellViewController*cellViewController=[[weakSelf _casted] viewControllerForIndex:i];
+                                 WIOSMatrixCellViewController*cellViewController=[[blockSelf _casted] viewControllerForIndex:i];
                                  
                                  // We register the view controller
-                                 [weakSelf _registerViewController:cellViewController];
+                                 [blockSelf _registerViewController:cellViewController];
                                  
-                                 CGRect destination=[weakSelf _destinationAtLineNumber:lineNumber
+                                 CGRect destination=[blockSelf _destinationAtLineNumber:lineNumber
                                                                        andColumnNumber:columnNumber
                                                                           withCellSize:cellSize];
                                  
@@ -200,7 +204,7 @@
                                  destination.origin.y+= roundf(deltaY/2.f);
                                  
                                  WIOSMatrixCellViewController*cellViewController=[_matrixCellViewControllers objectAtIndex:i];
-                                 [weakSelf _addViewController:cellViewController
+                                 [blockSelf _addViewController:cellViewController
                                                 atDestination:destination];
                                  
                              }
@@ -251,9 +255,6 @@
 
 
 - (void)_postCellRemoval{
-    [self.backgroundImageView removeFromSuperview];
-    self.backgroundImage=nil;
-    
     [self.matrixCellViewControllers removeAllObjects];
     self.matrixCellViewControllers=[NSMutableArray array];
     self.header=nil;
