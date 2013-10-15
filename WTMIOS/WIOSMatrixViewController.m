@@ -30,7 +30,6 @@
 @synthesize backgroundImageView = _backgroundImageView;
 
 
-
 - (void)setSelectedIndex:(NSUInteger)selectedIndex{
     _selectedIndex=selectedIndex;
     for (WIOSMatrixCellViewController  *cellViewController in self.matrixCellViewControllers) {
@@ -103,13 +102,16 @@
                              BOOL isLandscapeOrientation= UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
                              
                              CGSize viewSize=weakSelf.view.bounds.size;
-                            
+                             
                              if(weakSelf->_backgroundImage){
                                  if(!weakSelf->_backgroundImageView){
                                      weakSelf->_backgroundImageView=[[UIImageView alloc] initWithFrame:CGRectMake(0.f, 0.f, viewSize.width, viewSize.height)];
+                                     [weakSelf->_backgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+                                     [weakSelf->_backgroundImageView setImage:weakSelf->_backgroundImage];
+                                     [weakSelf.view addSubview:_backgroundImageView];
+                                 }else{
+                                     [weakSelf->_backgroundImageView setImage:weakSelf->_backgroundImage];
                                  }
-                                 [weakSelf->_backgroundImageView setImage:weakSelf->_backgroundImage];
-                                 [weakSelf.view addSubview:_backgroundImageView];
                              }
                              
                              
@@ -183,7 +185,7 @@
                                  maxY=destination.origin.y+destination.size.height+minVSP;
                              }
                              
-                            
+                             
                              CGFloat deltaX=viewSize.width-maxX;
                              CGFloat deltaY=(viewSize.height-maxY);
                              deltaY+=headerHeight;
@@ -203,7 +205,7 @@
                                  
                              }
                              
-                      
+                             
                          }
                          completion:^(BOOL finished) {
                              
@@ -244,7 +246,7 @@
         [vc removeFromParentViewController];
     }
     
-
+    
 }
 
 
@@ -481,16 +483,16 @@
     NSMutableString *s=[NSMutableString string];
     [s appendString:[super description]];
     [s appendString:@"\n"];
-     [s appendFormat:@"navigation controller : %@ \n",self.navigationController.navigationBar];
+    [s appendFormat:@"navigation controller : %@ \n",self.navigationController.navigationBar];
     [s appendFormat:@"header : %@ %@\n",self.header,self.header.view];
     [s appendFormat:@"footer : %@ %@\n",self.footer,self.footer.view];
-
+    
     int i=0;
-     for (WIOSMatrixCellViewController  *vc in self.matrixCellViewControllers) {
-         [s appendFormat:@"Cell %i : %@ %@ \n",i,vc,vc.view];
-         i++;
-     }
-        [s appendFormat:@"toolbar : %@ %@\n",self.navigationController.toolbar,self.navigationController.toolbar];
+    for (WIOSMatrixCellViewController  *vc in self.matrixCellViewControllers) {
+        [s appendFormat:@"Cell %i : %@ %@ \n",i,vc,vc.view];
+        i++;
+    }
+    [s appendFormat:@"toolbar : %@ %@\n",self.navigationController.toolbar,self.navigationController.toolbar];
     return s;
 }
 
