@@ -41,7 +41,8 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
+}
+/*
     // 1- We create a Graph of object within a WattRegistry (r1)
     
     WattRegistry*r1=[[WattRegistry alloc] init];
@@ -125,12 +126,13 @@
     WTLog(@"%@",r2);    // Registry
 #warning dictionaryRepresentationWithChildren:YES can loop infinitely
    // WTLog(@"%@",[s3 dictionaryRepresentationWithChildren:YES]);
-*/
+
     [s2 localize];
     
 }
 
-
+ */
+/*
 - (WTMShelf*)_createAShelfInRegistry:(WattRegistry*)registry{
     // We create a Shelf
     WTMShelf *shelf=[[WTMShelf alloc]initInRegistry:registry];
@@ -149,7 +151,7 @@
     castLib.package=p;// Reciprocity
     return shelf;
 }
-
+*/
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];

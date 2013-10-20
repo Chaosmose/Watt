@@ -91,8 +91,8 @@
  *  @param options  check UIViewAnimationOptions
  */
 - (void)displayCellsAnimated:(BOOL)animated withAnimationOptions:(NSUInteger)options{
-    WIOSMatrixViewController *__block blockSelf=self;
-    NSInteger n=[[blockSelf _casted] viewControllersCount];
+    WIOSMatrixViewController *__weak weakSelf=self;
+    NSInteger n=[[weakSelf _casted] viewControllersCount];
     if(n>0){
         [UIView animateWithDuration:animated?0.2f:0.f
                               delay:0.f
@@ -100,63 +100,63 @@
                          animations:^{
                              BOOL isLandscapeOrientation= UIDeviceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]);
                              
-                             CGSize viewSize=blockSelf.view.bounds.size;
+                             CGSize viewSize=weakSelf.view.bounds.size;
                              
-                             if(blockSelf.matrixBackgroundImage){
-                                 if(!blockSelf.matrixBackgroundImageView){
-                                     blockSelf.matrixBackgroundImageView=[[UIImageView alloc] initWithFrame:blockSelf.view.bounds];
-                                     [blockSelf.matrixBackgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
+                             if(weakSelf.matrixBackgroundImage){
+                                 if(!weakSelf.matrixBackgroundImageView){
+                                     weakSelf.matrixBackgroundImageView=[[UIImageView alloc] initWithFrame:weakSelf.view.bounds];
+                                     [weakSelf.matrixBackgroundImageView setContentMode:UIViewContentModeScaleAspectFill];
                                      [_matrixBackgroundImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
                                      [_matrixBackgroundImageView setImage:_matrixBackgroundImage];
                                  }else{
                                      [_matrixBackgroundImageView setImage:_matrixBackgroundImage];
                                  }
                                  if(!_matrixBackgroundImageView.superview){
-                                     [blockSelf.view addSubview:_matrixBackgroundImageView];
+                                     [weakSelf.view addSubview:_matrixBackgroundImageView];
                                  }
                              }else{
-                                 [blockSelf.matrixBackgroundImageView removeFromSuperview];
+                                 [weakSelf.matrixBackgroundImageView removeFromSuperview];
                              }
                              
                              
-                             CGFloat minHSP=[[blockSelf _casted] cellMinimumHorizontalSpacing];
-                             CGFloat minVSP=[[blockSelf _casted] cellMinimumVerticalSpacing];
+                             CGFloat minHSP=[[weakSelf _casted] cellMinimumHorizontalSpacing];
+                             CGFloat minVSP=[[weakSelf _casted] cellMinimumVerticalSpacing];
                              
-                             CGFloat headerHeight=isLandscapeOrientation?[blockSelf headerHeightForLandscapeOrientation]:[blockSelf headerHeightForPortraitOrientation];
-                             CGFloat footerHeight=isLandscapeOrientation?[blockSelf footerHeightForLandscapeOrientation]:[blockSelf footerHeightForPortraitOrientation];
+                             CGFloat headerHeight=isLandscapeOrientation?[weakSelf headerHeightForLandscapeOrientation]:[weakSelf headerHeightForPortraitOrientation];
+                             CGFloat footerHeight=isLandscapeOrientation?[weakSelf footerHeightForLandscapeOrientation]:[weakSelf footerHeightForPortraitOrientation];
                              
                              
                              _positions=[NSMutableArray array];
                              
                              // HEADER
                              
-                             if(!blockSelf.header){
-                                 blockSelf.header=[[blockSelf _casted] headerViewController];
+                             if(!weakSelf.header){
+                                 weakSelf.header=[[weakSelf _casted] headerViewController];
                              }
-                             if(blockSelf.header.view){
-                                 [blockSelf _addSupplementaryViewController:blockSelf.header
+                             if(weakSelf.header.view){
+                                 [weakSelf _addSupplementaryViewController:weakSelf.header
                                                                        atY:0.f
                                                                 withHeight:headerHeight];
                              }
                              
                              // FOOTER
-                             if(!blockSelf.footer){
-                                 blockSelf.footer=[[blockSelf _casted] footerViewController];
+                             if(!weakSelf.footer){
+                                 weakSelf.footer=[[weakSelf _casted] footerViewController];
                              }
-                             if(blockSelf.footer){
-                                 [blockSelf _addSupplementaryViewController:blockSelf.footer
+                             if(weakSelf.footer){
+                                 [weakSelf _addSupplementaryViewController:weakSelf.footer
                                                                        atY:viewSize.height-footerHeight
                                                                 withHeight:footerHeight];
                              }
                              
                              // CELLS
                              
-                             CGSize containerSize=[blockSelf _containerSize];
-                             CGSize cellSize=[blockSelf _computeCellSize];
+                             CGSize containerSize=[weakSelf _containerSize];
+                             CGSize cellSize=[weakSelf _computeCellSize];
                              
                              NSInteger numberOfCellPerLine=(containerSize.width-(minHSP*2))/cellSize.width;
                              
-                             NSUInteger nb=[[blockSelf _casted] viewControllersCount];
+                             NSUInteger nb=[[weakSelf _casted] viewControllersCount];
                              NSInteger lineNumber=0;
                              NSInteger columnNumber=0;
                              
@@ -167,12 +167,12 @@
                              
                              for (int i=0; i<nb; i++) {
                                  
-                                 WIOSMatrixCellViewController*cellViewController=[[blockSelf _casted] viewControllerForIndex:i];
+                                 WIOSMatrixCellViewController*cellViewController=[[weakSelf _casted] viewControllerForIndex:i];
                                  
                                  // We register the view controller
-                                 [blockSelf _registerViewController:cellViewController];
+                                 [weakSelf _registerViewController:cellViewController];
                                  
-                                 CGRect destination=[blockSelf _destinationAtLineNumber:lineNumber
+                                 CGRect destination=[weakSelf _destinationAtLineNumber:lineNumber
                                                                        andColumnNumber:columnNumber
                                                                           withCellSize:cellSize];
                                  
@@ -204,7 +204,7 @@
                                  destination.origin.y+= roundf(deltaY/2.f);
                                  
                                  WIOSMatrixCellViewController*cellViewController=[_matrixCellViewControllers objectAtIndex:i];
-                                 [blockSelf _addViewController:cellViewController
+                                 [weakSelf _addViewController:cellViewController
                                                 atDestination:destination];
                                  
                              }
@@ -249,8 +249,6 @@
         [vc.view removeFromSuperview];
         [vc removeFromParentViewController];
     }
-    
-    
 }
 
 

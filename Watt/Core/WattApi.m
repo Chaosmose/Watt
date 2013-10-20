@@ -44,7 +44,6 @@
         self.fileManager=[[NSFileManager alloc] init];
         self.mixableExtensions=[NSMutableArray array];
         self.forcedSoupPaths=[NSMutableArray array];
-        
     });
 }
 
@@ -224,7 +223,7 @@
         if(!authorized){
             [[NSNotificationCenter defaultCenter] postNotificationName:WATT_ACTION_IS_NOT_AUTHORIZED_NOTIFICATION_NAME
                                                                 object:self
-                                                              userInfo:@{@"reference":model,@"action":[NSNumber numberWithInteger:action]}];
+                                                              userInfo:@{@"reference":model,@"action":@(action)}];
         }
         
         

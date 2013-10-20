@@ -39,7 +39,7 @@
 		E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
 		E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
 		E54FBA281809AB51002B2BAB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E54FBA261809AB51002B2BAB /* InfoPlist.strings */; };
-		E54FBA2A1809AB51002B2BAB /* PlayerSample_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E54FBA291809AB51002B2BAB /* PlayerSample_Tests.m */; };
+		E54FBA2A1809AB51002B2BAB /* Watt_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E54FBA291809AB51002B2BAB /* Watt_Tests.m */; };
 		E56E248517D77C39009C2C2C /* WIOSSoundRecorderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */; };
 		E56E248617D77C39009C2C2C /* WIOSSoundListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */; };
 		E56E248717D77C39009C2C2C /* WIOSButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E56E248417D77C39009C2C2C /* WIOSButton.m */; };
@@ -50,6 +50,8 @@
 		E56E248F17D79C7C009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
 		E56E249317D7A14B009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
 		E56E249417D7A153009C2C2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248C17D79C54009C2C2C /* AVFoundation.framework */; };
+		E586EAB51813D80000C77705 /* WTM_Shelf_tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E586EAB41813D80000C77705 /* WTM_Shelf_tests.m */; };
+		E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */; };
 		E589F9D617D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E589F9D717D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E5A9EBF11799242F00976997 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B462501732A4A000E654A1 /* main.m */; };
@@ -254,7 +256,7 @@
 		E54FBA1F1809AB51002B2BAB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayerSample Tests-Info.plist"; sourceTree = "<group>"; };
 		E54FBA271809AB51002B2BAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E54FBA291809AB51002B2BAB /* PlayerSample_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerSample_Tests.m; sourceTree = "<group>"; };
+		E54FBA291809AB51002B2BAB /* Watt_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Watt_Tests.m; sourceTree = "<group>"; };
 		E54FBA2B1809AB51002B2BAB /* PlayerSample Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlayerSample Tests-Prefix.pch"; sourceTree = "<group>"; };
 		E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundRecorderViewController.m; sourceTree = "<group>"; };
 		E56E247F17D77C39009C2C2C /* WIOSSoundRecorderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundRecorderViewController.h; sourceTree = "<group>"; };
@@ -265,6 +267,8 @@
 		E56E248417D77C39009C2C2C /* WIOSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSButton.m; sourceTree = "<group>"; };
 		E56E248C17D79C54009C2C2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E56E248E17D79C7C009C2C2C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		E586EAB41813D80000C77705 /* WTM_Shelf_tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTM_Shelf_tests.m; sourceTree = "<group>"; };
+		E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Watt_ACL_tests.m; sourceTree = "<group>"; };
 		E589F9D417D4BF04002BF82C /* WIOSSoundManagerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundManagerTableViewController.h; sourceTree = "<group>"; };
 		E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundManagerTableViewController.m; sourceTree = "<group>"; };
 		E5A9EC331799242F00976997 /* PlayerSampleFlexions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlayerSampleFlexions.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -615,7 +619,9 @@
 		E54FBA231809AB51002B2BAB /* PlayerSample Tests */ = {
 			isa = PBXGroup;
 			children = (
-				E54FBA291809AB51002B2BAB /* PlayerSample_Tests.m */,
+				E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */,
+				E54FBA291809AB51002B2BAB /* Watt_Tests.m */,
+				E586EAB41813D80000C77705 /* WTM_Shelf_tests.m */,
 				E54FBA241809AB51002B2BAB /* Supporting Files */,
 			);
 			path = "PlayerSample Tests";
@@ -634,13 +640,12 @@
 		E589F9D317D4BAB9002BF82C /* WTIOS */ = {
 			isa = PBXGroup;
 			children = (
-				E5C6FA5D18054B6000ECDFF3 /* Resources */,
+				E56E248217D77C39009C2C2C /* WIOS.h */,
 				E50B60FD17FF30CC006E76C5 /* WIOSMatrixProtocol.h */,
 				E50B60FE17FF30CC006E76C5 /* WIOSMatrixViewController.h */,
 				E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */,
 				E50B60FF17FF30CD006E76C5 /* WIOSMatrixCellViewController.h */,
 				E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */,
-				E56E248217D77C39009C2C2C /* WIOS.h */,
 				E56E248317D77C39009C2C2C /* WIOSSoundListCell.h */,
 				E56E248017D77C39009C2C2C /* WIOSSoundListCell.m */,
 				E56E248117D77C39009C2C2C /* WIOSButton.h */,
@@ -649,6 +654,7 @@
 				E56E247E17D77C39009C2C2C /* WIOSSoundRecorderViewController.m */,
 				E589F9D417D4BF04002BF82C /* WIOSSoundManagerTableViewController.h */,
 				E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */,
+				E5C6FA5D18054B6000ECDFF3 /* Resources */,
 			);
 			name = WTIOS;
 			path = ../WTMIOS;
@@ -1037,7 +1043,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E54FBA2A1809AB51002B2BAB /* PlayerSample_Tests.m in Sources */,
+				E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */,
+				E54FBA2A1809AB51002B2BAB /* Watt_Tests.m in Sources */,
+				E586EAB51813D80000C77705 /* WTM_Shelf_tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

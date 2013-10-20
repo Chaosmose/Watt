@@ -7,13 +7,13 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "WTM.h"
+#import "Watt.h"
 
-@interface PlayerSample_Tests : XCTestCase
+@interface Watt_Tests : XCTestCase
 
 @end
 
-@implementation PlayerSample_Tests
+@implementation Watt_Tests
 
 - (void)setUp
 {
@@ -28,16 +28,5 @@
 }
 
 
-- (void)testOne{
-    XCTAssertFalse(2==1, @"2 should not be equal to 1");
-}
-
-/*
-
-- (void)testShelfName
-{
-   WTMShelf *s=[[WTMApi sharedInstance] createShelfWithName:@"a"];
-    XCTAssertEqual(s.name, @"a", @"Shelf name should be 'a' and is %@ ",s.name);
-}*/
 
 @end
