@@ -102,6 +102,10 @@
                              
                              CGSize viewSize=weakSelf.view.bounds.size;
                              
+                             if(weakSelf.matrixBackgroundColor && ![weakSelf.view.backgroundColor isEqual:weakSelf.matrixBackgroundColor]){
+                                 [weakSelf.view setBackgroundColor:weakSelf.matrixBackgroundColor];
+                             }// Else we keep the previous value
+                             
                              if(weakSelf.matrixBackgroundImage){
                                  if(!weakSelf.matrixBackgroundImageView){
                                      weakSelf.matrixBackgroundImageView=[[UIImageView alloc] initWithFrame:weakSelf.view.bounds];
@@ -474,7 +478,6 @@
 - (CGFloat)footerHeightForPortraitOrientation{
     return 0.f;
 }
-
 
 
 

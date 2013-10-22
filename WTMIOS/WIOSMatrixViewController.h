@@ -18,6 +18,7 @@
 
 @property (nonatomic) NSUInteger selectedIndex;
 
+@property (strong,nonatomic) UIColor* matrixBackgroundColor;
 @property (strong,nonatomic) UIImage* matrixBackgroundImage;
 
 /**
