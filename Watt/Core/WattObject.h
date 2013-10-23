@@ -99,10 +99,9 @@ __LINE__ ,\
 @class WattObject;
 @class WattApi;
 
-@protocol WattCopying <NSCopying>
+@protocol WattCopying
+// Equivalent to NSCopying but with a reference to an explicite registry :
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry;
-// and Implements NSCopying's :
-// - (id)copyWithZone:(NSZone *)zone
 @end
 
 @protocol WattCoding <NSObject>
@@ -116,8 +115,9 @@ __LINE__ ,\
 @interface WattObject : NSObject<WattCoding,WattCopying>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
-    NSInteger _uinstID;
+
 @protected
+    NSInteger _uinstID;
     NSString *_currentLocale;           // The locale that has been used for localization
     WattRegistry*_registry;
     BOOL _isAnAlias;

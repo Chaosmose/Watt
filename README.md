@@ -2,7 +2,7 @@ Watt & WTM
 ==========
 
 Watt has been created by Benoit Pereira da Silva and is licensed under LGPL.
-Watt & WTM are currently in early experimental phases.
+Watt & WTM are currently in early intensive experimental phases.
 
 Watt is a model driven framework based extensively on code generation (Flexions)
 

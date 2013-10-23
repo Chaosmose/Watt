@@ -35,11 +35,10 @@
     //2- We serialize the registry R1 to a linear structure a1
     NSArray *a1=[r1 arrayRepresentation];
     
-    XCTAssertTrue([a1 count]>=4,@"The serialized registry should contains a least 4 items, current count is : %i",[a1 count]);
-    
     //3- We generate a new Registry (r2) from a1 by deserializing
     WattRegistry*r2=[WattRegistry instanceFromArray:a1
                                 resolveAliases:YES];
+    
     r2.apiReference=wtmAPI;
     r2.name=@"r2";
     
@@ -50,11 +49,16 @@
     [r1 enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
         NSUInteger identifier=obj.uinstID;
         id ro=[r2Ref objectWithUinstID:identifier];
+        
+        // We verify the class mapping
         XCTAssertTrue([obj isMemberOfClass:[ro class]], @"The obj : %@ should be a member %@",obj,NSStringFromClass([ro class]));
+        
+        // We verify that the instance are not references.
+        XCTAssertFalse([obj isEqual:ro], @"The instances should not be equal");
         [s appendFormat:@"Analysed : %@\n",NSStringFromClass([obj class])];
     }];
-    
-    WTLog(@"\n%@",s);
+    // We verify we have enough members.
+    XCTAssertTrue([a1 count]>=4,@"The serialized registry should contains a least 4 items, current count is : %i",[a1 count]);
     /*
     
     
@@ -85,12 +89,28 @@
 }
 
 
+- (void)testShelfs_CopyFromARegistryToAnother{
+    // 1- We create a Graph of object within a WattRegistry (r1)
+    WattRegistry*r1=[self _createAPopulatedRegistry];
+    WTMShelf *s=(WTMShelf*)[r1 objectWithUinstID:1];
+    
+    // We copy the shel to another registry
+    WattRegistry*r2=[[WattRegistry alloc]init];
+    [s wattCopyInRegistry:r2];
+    
+    WTLog(@"%@",r2);
+    
+}
+
+
+
 - (WattRegistry*)_createAPopulatedRegistry{
     
     WattRegistry*registry=[[WattRegistry alloc] init];
     registry.name=@"r1";
     registry.apiReference=[WTMApi sharedInstance];
     registry.autosave=NO;
+    wtmAPI.currentRegistry=registry; // Very important
     
     WTMShelf *s=[self _createAShelfInRegistry:registry];
     s.comment=@"Comment #1 for test purposes";

@@ -53,28 +53,25 @@
 
 #pragma  mark WattCopying
 
+
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WattCollectionOfObject *instance=[super copy];
-    [registry addObject:instance];
+    WattCollectionOfObject *instance=[super wattCopyInRegistry:registry];
+    //We add the instance to the registry
+    if(![registry objectWithUinstID:[instance uinstID]]){
+        [registry addObject:instance];
+    }
+    // We add the members of the collection to the registry
     WattRegistry *__block registryReference=registry;
     [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        [registryReference addObject:obj];
+        WattObject *copyedObject=[obj wattCopyInRegistry:registryReference];
+        if(![registryReference objectWithUinstID:[copyedObject uinstID]]){
+            [registryReference addObject:copyedObject];
+        }
     } reverse:NO];
+    
     return instance;
 }
 
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WattCollectionOfObject*instance=[super copyWithZone:zone];
-    instance->_registry=nil; // We want to furnish a registry free copy
-    //_uinstID=0;// we do not provide an _uinstID
-    WattCollectionOfObject *__block ref=instance;
-    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        [ref addObject:[obj copy]];
-    } reverse:NO];
-    return instance;
-}
 
 #pragma mark
 

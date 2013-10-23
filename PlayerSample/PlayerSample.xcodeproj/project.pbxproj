@@ -620,8 +620,8 @@
 			isa = PBXGroup;
 			children = (
 				E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */,
-				E54FBA291809AB51002B2BAB /* Watt_Tests.m */,
 				E586EAB41813D80000C77705 /* WTM_Shelf_tests.m */,
+				E54FBA291809AB51002B2BAB /* Watt_Tests.m */,
 				E54FBA241809AB51002B2BAB /* Supporting Files */,
 			);
 			path = "PlayerSample Tests";

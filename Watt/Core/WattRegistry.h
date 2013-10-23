@@ -49,6 +49,7 @@
 
 /**
  *  The reference to the hosting api
+ *  Used to access to the current reference (for autosave support, or higher level support, like WTM creation api)
  */
 @property (nonatomic) id apiReference;
 

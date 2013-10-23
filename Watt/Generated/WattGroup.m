@@ -32,22 +32,17 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WattGroup *instance=[self copy];
-    [registry addObject:instance];
+	WattGroup *instance=[super wattCopyInRegistry:registry];
+    if(![registry objectWithUinstID:instance.uinstID]){
+        [registry addObject:instance];
+		instance->_registry=registry;
+		instance->_name=[_name copy];
+		instance->_objectName=[_objectName copy];
+		instance->_users=[_users wattCopyInRegistry:registry];
+	}
     return instance;
 }
 
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WattGroup *instance=[super copyWithZone:zone];
-    	instance->_registry=nil; // We want to furnish a registry free copy
-		// we do not provide an _uinstID
-   			instance->_name=[_name copyWithZone:zone];
-		instance->_objectName=[_objectName copyWithZone:zone];
-		instance->_users=[_users copyWithZone:zone];
-    return instance;
-}
 
 #pragma mark -
 

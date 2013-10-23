@@ -77,19 +77,15 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WattObject *instance=[self copy];
-    [registry addObject:instance];
+    WattObject*instance=[[[self class] alloc] init];
+    instance->_registry=registry;
+    instance->_uinstID=[self uinstID];
+    if(![registry objectWithUinstID:[self uinstID]]){
+        [registry addObject:instance];
+    }
     return instance;
 }
 
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WattObject*instance=[[[self class] allocWithZone:zone] init];
-    instance->_registry=nil; // We want to furnish a registry free copy
-    // we do not provide an _uinstID
-    return instance;
-}
 
 #pragma mark -
 
@@ -97,7 +93,6 @@
 -(void)autoUnRegister{
     [_registry unRegisterObject:self];
 }
-
 
 
 - (BOOL)isAnAlias{

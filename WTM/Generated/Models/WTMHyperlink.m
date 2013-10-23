@@ -32,23 +32,18 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WTMHyperlink *instance=[self copy];
-    [registry addObject:instance];
-    return instance;
-}
-
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WTMHyperlink *instance=[super copyWithZone:zone];
-    	instance->_registry=nil; // We want to furnish a registry free copy
-		// we do not provide an _uinstID
-   			instance->_allowExploration=_allowExploration;
+	WTMHyperlink *instance=[super wattCopyInRegistry:registry];
+    if(![registry objectWithUinstID:instance.uinstID]){
+        [registry addObject:instance];
+		instance->_registry=registry;
+		instance->_allowExploration=_allowExploration;
 		instance->_updateImageOnChange=_updateImageOnChange;
 		instance->_updateUrlOnChange=_updateUrlOnChange;
-		instance->_urlString=[_urlString copyWithZone:zone];
+		instance->_urlString=[_urlString copy];
+	}
     return instance;
 }
+
 
 #pragma mark -
 

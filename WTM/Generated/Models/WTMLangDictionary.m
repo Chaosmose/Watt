@@ -31,22 +31,17 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WTMLangDictionary *instance=[self copy];
-    [registry addObject:instance];
+	WTMLangDictionary *instance=[super wattCopyInRegistry:registry];
+    if(![registry objectWithUinstID:instance.uinstID]){
+        [registry addObject:instance];
+		instance->_registry=registry;
+		instance->_key=[_key copy];
+		instance->_locale=[_locale copy];
+		instance->_value=[_value copy];
+	}
     return instance;
 }
 
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WTMLangDictionary *instance=[super copyWithZone:zone];
-    	instance->_registry=nil; // We want to furnish a registry free copy
-		// we do not provide an _uinstID
-   			instance->_key=[_key copyWithZone:zone];
-		instance->_locale=[_locale copyWithZone:zone];
-		instance->_value=[_value copyWithZone:zone];
-    return instance;
-}
 
 #pragma mark -
 

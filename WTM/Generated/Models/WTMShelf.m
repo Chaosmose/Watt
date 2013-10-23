@@ -39,25 +39,20 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WTMShelf *instance=[self copy];
-    [registry addObject:instance];
+	WTMShelf *instance=[super wattCopyInRegistry:registry];
+    if(![registry objectWithUinstID:instance.uinstID]){
+        [registry addObject:instance];
+		instance->_registry=registry;
+		instance->_groups=[_groups wattCopyInRegistry:registry];
+		instance->_name=[_name copy];
+		instance->_users=[_users wattCopyInRegistry:registry];
+		instance->_packages=[_packages wattCopyInRegistry:registry];
+		instance->_picture=[_picture wattCopyInRegistry:registry];
+		instance->_sections=[_sections wattCopyInRegistry:registry];
+	}
     return instance;
 }
 
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WTMShelf *instance=[super copyWithZone:zone];
-    	instance->_registry=nil; // We want to furnish a registry free copy
-		// we do not provide an _uinstID
-   			instance->_groups=[_groups copyWithZone:zone];
-		instance->_name=[_name copyWithZone:zone];
-		instance->_users=[_users copyWithZone:zone];
-		instance->_packages=[_packages copyWithZone:zone];
-		instance->_picture=[_picture copyWithZone:zone];
-		instance->_sections=[_sections copyWithZone:zone];
-    return instance;
-}
 
 #pragma mark -
 

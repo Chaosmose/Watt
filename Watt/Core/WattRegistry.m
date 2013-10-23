@@ -115,6 +115,10 @@
 
 - (void)setAutosave:(BOOL)autosave{
     _autosave=autosave;
+    if(!self.apiReference){
+        [NSException raise:@"WattRegistry autosaving exception"
+                    format:@"A registry requires an api reference to handle auto saving you should register a compliant instance of a Wattapi"];
+    }
     if(_autosave){
         if([self hasChanged]){
             [self _tryToSaveAutomatically];

@@ -133,7 +133,11 @@
         <relationship name="langDictionary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LangDictionary" syncable="YES"/>
         <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" inverseName="package" inverseEntity="Library" syncable="YES"/>
         <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
-        <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="packages" inverseEntity="Shelf" syncable="YES"/>
+        <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="packages" inverseEntity="Shelf" syncable="YES">
+            <userInfo>
+                <entry key="weak" value="true"/>
+            </userInfo>
+        </relationship>
     </entity>
     <entity name="Pdf" representedClassName="Pdf" parentEntity="LinkedAsset" syncable="YES">
         <attribute name="size" optional="YES" attributeType="String" syncable="YES"/>

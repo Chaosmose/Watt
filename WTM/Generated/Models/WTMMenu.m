@@ -41,28 +41,23 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WTMMenu *instance=[self copy];
-    [registry addObject:instance];
-    return instance;
-}
-
-
-// NSCopying
-- (id)copyWithZone:(NSZone *)zone{
-    WTMMenu *instance=[super copyWithZone:zone];
-    	instance->_registry=nil; // We want to furnish a registry free copy
-		// we do not provide an _uinstID
-   			instance->_details=[_details copyWithZone:zone];
+	WTMMenu *instance=[super wattCopyInRegistry:registry];
+    if(![registry objectWithUinstID:instance.uinstID]){
+        [registry addObject:instance];
+		instance->_registry=registry;
+		instance->_details=[_details copy];
 		instance->_index=_index;
-		instance->_label=[_label copyWithZone:zone];
+		instance->_label=[_label copy];
 		instance->_referenceUinstID=_referenceUinstID;
-		instance->_urlString=[_urlString copyWithZone:zone];
-		instance->_childrens=[_childrens copyWithZone:zone];
-		instance->_menuSection=[_menuSection copyWithZone:zone];
-		instance->_parent=[_parent copyWithZone:zone];
-		instance->_picture=[_picture copyWithZone:zone];
+		instance->_urlString=[_urlString copy];
+		instance->_childrens=[_childrens wattCopyInRegistry:registry];
+		instance->_menuSection=[_menuSection wattCopyInRegistry:registry];
+		instance->_parent=[_parent wattCopyInRegistry:registry];
+		instance->_picture=[_picture wattCopyInRegistry:registry];
+	}
     return instance;
 }
+
 
 #pragma mark -
 
