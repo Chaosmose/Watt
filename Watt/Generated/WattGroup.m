@@ -28,6 +28,30 @@
 @synthesize objectName=_objectName;
 @synthesize users=_users;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WattGroup *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WattGroup *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_name=[_name copyWithZone:zone];
+		instance->_objectName=[_objectName copyWithZone:zone];
+		instance->_users=[_users copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];

@@ -22,7 +22,7 @@
 #import "WTMColumn.h" 
 #import "WattCollectionOfModel.h" 
 
-@interface WTMCollectionOfColumn:WattCollectionOfModel <WattCoding>{
+@interface WTMCollectionOfColumn:WattCollectionOfModel <WattCoding,WattCopying>{
 }
 - (void)enumerateObjectsUsingBlock:(void (^)(WTMColumn *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - ( WTMCollectionOfColumn*)filteredCollectionUsingBlock:(BOOL (^)(WTMColumn  *obj))block withRegistry:(WattRegistry *)registry;

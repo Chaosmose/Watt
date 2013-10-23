@@ -14,7 +14,7 @@ if (isset ( $f )) {
 }
 $parentClass = "WattModel";
 $collectionParentClass="WattCollectionOfModel";
-$protocols="WattCoding";
+$protocols="WattCoding,WattCopying";
 $imports = "\n#import \"$parentClass.h\"\n";
 $markAsDynamic = false;
 $allowScalars = true;

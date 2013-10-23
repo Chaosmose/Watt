@@ -28,6 +28,31 @@
 @synthesize updateUrlOnChange=_updateUrlOnChange;
 @synthesize urlString=_urlString;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMHyperlink *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMHyperlink *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_allowExploration=_allowExploration;
+		instance->_updateImageOnChange=_updateImageOnChange;
+		instance->_updateUrlOnChange=_updateUrlOnChange;
+		instance->_urlString=[_urlString copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"allowExploration"]){
 		[super setValue:value forKey:@"allowExploration"];

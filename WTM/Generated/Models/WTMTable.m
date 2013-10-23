@@ -30,6 +30,30 @@
 @synthesize lines=_lines;
 @synthesize scene=_scene;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMTable *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMTable *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_columns=[_columns copyWithZone:zone];
+		instance->_lines=[_lines copyWithZone:zone];
+		instance->_scene=[_scene copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"columns"]){
 		[super setValue:[WTMCollectionOfColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"columns"];

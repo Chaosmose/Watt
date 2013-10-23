@@ -23,7 +23,7 @@
 #import "WattModel.h"
 #import "WTMAsset.h"
 
-@interface WTMLinkedAsset:WTMAsset<WattCoding>{
+@interface WTMLinkedAsset:WTMAsset<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * relativePath;

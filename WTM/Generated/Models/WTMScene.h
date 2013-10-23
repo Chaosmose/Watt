@@ -27,7 +27,7 @@
 @class WTMImage;
 @class WTMTable;
 
-@interface WTMScene:WattModel<WattCoding>{
+@interface WTMScene:WattModel<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * footer;

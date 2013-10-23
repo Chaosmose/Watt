@@ -23,7 +23,7 @@
 #import "WattModel.h"
 #import "WTMAsset.h"
 
-@interface WTMLabel:WTMAsset<WattCoding>{
+@interface WTMLabel:WTMAsset<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * font;

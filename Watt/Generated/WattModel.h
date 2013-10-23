@@ -22,7 +22,7 @@
 
 #import "WattObject.h"
 
-@interface WattModel:WattObject<WattCoding>{
+@interface WattModel:WattObject<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * category;

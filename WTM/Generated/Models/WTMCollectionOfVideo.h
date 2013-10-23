@@ -22,7 +22,7 @@
 #import "WTMVideo.h" 
 #import "WattCollectionOfModel.h" 
 
-@interface WTMCollectionOfVideo:WattCollectionOfModel <WattCoding>{
+@interface WTMCollectionOfVideo:WattCollectionOfModel <WattCoding,WattCopying>{
 }
 - (void)enumerateObjectsUsingBlock:(void (^)(WTMVideo *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - ( WTMCollectionOfVideo*)filteredCollectionUsingBlock:(BOOL (^)(WTMVideo  *obj))block withRegistry:(WattRegistry *)registry;

@@ -31,6 +31,31 @@
 @synthesize cells=_cells;
 @synthesize table=_table;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMColumn *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMColumn *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_height=_height;
+		instance->_behaviors=[_behaviors copyWithZone:zone];
+		instance->_cells=[_cells copyWithZone:zone];
+		instance->_table=[_table copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"height"]){
 		[super setValue:value forKey:@"height"];

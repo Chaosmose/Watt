@@ -22,7 +22,7 @@
 
 #import "WattModel.h"
 
-@interface WTMLangDictionary:WattModel<WattCoding>{
+@interface WTMLangDictionary:WattModel<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * key;

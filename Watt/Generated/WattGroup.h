@@ -23,7 +23,7 @@
 #import "WattObject.h"
 @class WattCollectionOfUser;
 
-@interface WattGroup:WattObject<WattCoding>{
+@interface WattGroup:WattObject<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * name;

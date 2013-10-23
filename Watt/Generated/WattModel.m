@@ -31,6 +31,34 @@
 @synthesize ownerID=_ownerID;
 @synthesize rights=_rights;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WattModel *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WattModel *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_category=[_category copyWithZone:zone];
+		instance->_comment=[_comment copyWithZone:zone];
+		instance->_groupID=_groupID;
+		instance->_metadata=[_metadata copyWithZone:zone];
+		instance->_objectName=[_objectName copyWithZone:zone];
+		instance->_ownerID=_ownerID;
+		instance->_rights=_rights;
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"category"]){
 		[super setValue:value forKey:@"category"];

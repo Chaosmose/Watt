@@ -37,6 +37,36 @@
 @synthesize parent=_parent;
 @synthesize picture=_picture;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMMenu *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMMenu *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_details=[_details copyWithZone:zone];
+		instance->_index=_index;
+		instance->_label=[_label copyWithZone:zone];
+		instance->_referenceUinstID=_referenceUinstID;
+		instance->_urlString=[_urlString copyWithZone:zone];
+		instance->_childrens=[_childrens copyWithZone:zone];
+		instance->_menuSection=[_menuSection copyWithZone:zone];
+		instance->_parent=[_parent copyWithZone:zone];
+		instance->_picture=[_picture copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
 		[super setValue:value forKey:@"details"];

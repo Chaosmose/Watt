@@ -31,6 +31,31 @@
 @synthesize element=_element;
 @synthesize line=_line;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMCell *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMCell *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_attributes=[_attributes copyWithZone:zone];
+		instance->_column=[_column copyWithZone:zone];
+		instance->_element=[_element copyWithZone:zone];
+		instance->_line=[_line copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"attributes"]){
 		[super setValue:value forKey:@"attributes"];

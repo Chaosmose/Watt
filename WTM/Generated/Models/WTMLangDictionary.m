@@ -27,6 +27,30 @@
 @synthesize locale=_locale;
 @synthesize value=_value;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMLangDictionary *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMLangDictionary *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_key=[_key copyWithZone:zone];
+		instance->_locale=[_locale copyWithZone:zone];
+		instance->_value=[_value copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"key"]){
 		[super setValue:value forKey:@"key"];

@@ -38,6 +38,36 @@
 @synthesize picture=_picture;
 @synthesize table=_table;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMScene *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMScene *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_footer=[_footer copyWithZone:zone];
+		instance->_header=[_header copyWithZone:zone];
+		instance->_index=_index;
+		instance->_title=[_title copyWithZone:zone];
+		instance->_activity=[_activity copyWithZone:zone];
+		instance->_behaviors=[_behaviors copyWithZone:zone];
+		instance->_elements=[_elements copyWithZone:zone];
+		instance->_picture=[_picture copyWithZone:zone];
+		instance->_table=[_table copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"footer"]){
 		[super setValue:value forKey:@"footer"];

@@ -25,7 +25,7 @@
 @class WTMElement;
 @class WTMLine;
 
-@interface WTMCell:WattModel<WattCoding>{
+@interface WTMCell:WattModel<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,strong) NSDictionary * attributes;

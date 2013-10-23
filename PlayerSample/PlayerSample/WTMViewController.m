@@ -94,7 +94,6 @@
     WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
     WTLog(@"objectWithUinstID:7 %@",[r2 objectWithUinstID:7]);
 
-    /*
     // OTHER ATTEMPT : 
 
     // Request a collection of members.

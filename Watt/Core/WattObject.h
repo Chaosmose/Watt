@@ -99,13 +99,18 @@ __LINE__ ,\
 @class WattObject;
 @class WattApi;
 
-
+@protocol WattCopying <NSCopying>
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry;
+// and Implements NSCopying's :
+// - (id)copyWithZone:(NSZone *)zone
+@end
 
 @protocol WattCoding <NSObject>
 @required
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren;
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren;
 @end
+
 
 
 @interface WattObject : NSObject<WattCoding>{

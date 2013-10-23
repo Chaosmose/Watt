@@ -23,7 +23,7 @@
 #import "WattModel.h"
 #import "WTMLinkedAsset.h"
 
-@interface WTMVideo:WTMLinkedAsset<WattCoding>{
+@interface WTMVideo:WTMLinkedAsset<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,assign) float  duration;

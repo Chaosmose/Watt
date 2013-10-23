@@ -22,7 +22,7 @@
 #import "WTMSound.h" 
 #import "WattCollectionOfModel.h" 
 
-@interface WTMCollectionOfSound:WattCollectionOfModel <WattCoding>{
+@interface WTMCollectionOfSound:WattCollectionOfModel <WattCoding,WattCopying>{
 }
 - (void)enumerateObjectsUsingBlock:(void (^)(WTMSound *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - ( WTMCollectionOfSound*)filteredCollectionUsingBlock:(BOOL (^)(WTMSound  *obj))block withRegistry:(WattRegistry *)registry;

@@ -26,7 +26,7 @@
 @class WTMMenu;
 @class WTMImage;
 
-@interface WTMMenu:WattModel<WattCoding>{
+@interface WTMMenu:WattModel<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * details;

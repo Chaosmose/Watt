@@ -26,7 +26,7 @@
 @class WTMCollectionOfCell;
 @class WTMScene;
 
-@interface WTMElement:WattModel<WattCoding>{
+@interface WTMElement:WattModel<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,strong) WTMAsset * asset;

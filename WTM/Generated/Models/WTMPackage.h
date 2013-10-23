@@ -27,7 +27,7 @@
 @class WTMImage;
 @class WTMShelf;
 
-@interface WTMPackage:WattModel<WattCoding>{
+@interface WTMPackage:WattModel<WattCoding,WattCopying>{
 }
 
 @property (nonatomic,copy) NSString * license;

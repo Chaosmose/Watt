@@ -35,6 +35,35 @@
 @synthesize picture=_picture;
 @synthesize scenes=_scenes;
 
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WTMActivity *instance=[self copy];
+    [registry addObject:instance];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WTMActivity *instance=[[[super class] allocWithZone:zone] init];
+    	instance->_registry=nil; // We want to furnish a registry free copy
+		// we do not provide an _uinstID
+   			instance->_level=_level;
+		instance->_rating=_rating;
+		instance->_score=_score;
+		instance->_shortName=[_shortName copyWithZone:zone];
+		instance->_title=[_title copyWithZone:zone];
+		instance->_package=[_package copyWithZone:zone];
+		instance->_picture=[_picture copyWithZone:zone];
+		instance->_scenes=[_scenes copyWithZone:zone];
+    return instance;
+}
+
+#pragma mark -
+
+
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"level"]){
 		[super setValue:value forKey:@"level"];

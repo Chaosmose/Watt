@@ -32,6 +32,36 @@
     }
     return self;
 }
+  
+
+#pragma  mark WattCopying
+
+- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+    WattCollectionOfGroup *instance=[super copy];
+    [registry addObject:instance];
+     WattRegistry *__block registryReference=registry;
+    [self enumerateObjectsUsingBlock:^(WattGroup *obj, NSUInteger idx, BOOL *stop) {
+        [registryReference addObject:obj]; 
+    } reverse:NO];
+    return instance;
+}
+
+
+// NSCopying
+- (id)copyWithZone:(NSZone *)zone{
+    WattCollectionOfGroup*instance=[[[self class] allocWithZone:zone] init];
+    instance->_registry=nil; // We want to furnish a registry free copy
+    //_uinstID=0;// we do not provide an _uinstID
+   WattCollectionOfGroup*__block ref=instance;
+    [self enumerateObjectsUsingBlock:^(WattGroup *obj, NSUInteger idx, BOOL *stop) {
+        [ref addObject:[obj copy]];
+    } reverse:NO];
+    return instance;
+}
+
+
+#pragma mark -
+
 
 
 - (NSString*)description{
