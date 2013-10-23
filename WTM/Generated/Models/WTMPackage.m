@@ -49,7 +49,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMPackage *instance=[[[super class] allocWithZone:zone] init];
+    WTMPackage *instance=[super copyWithZone:zone];
     	instance->_registry=nil; // We want to furnish a registry free copy
 		// we do not provide an _uinstID
    			instance->_license=[_license copyWithZone:zone];

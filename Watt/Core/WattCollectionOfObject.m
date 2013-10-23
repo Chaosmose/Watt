@@ -66,7 +66,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WattCollectionOfObject*instance=[[[self class] allocWithZone:zone] init];
+    WattCollectionOfObject*instance=[super copyWithZone:zone];
     instance->_registry=nil; // We want to furnish a registry free copy
     //_uinstID=0;// we do not provide an _uinstID
     WattCollectionOfObject *__block ref=instance;

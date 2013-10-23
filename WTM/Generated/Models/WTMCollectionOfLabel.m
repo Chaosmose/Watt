@@ -37,7 +37,7 @@
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WTMCollectionOfLabel *instance=[super copy];
+    WTMCollectionOfLabel *instance=[self copy];
     [registry addObject:instance];
      WattRegistry *__block registryReference=registry;
     [self enumerateObjectsUsingBlock:^(WTMLabel *obj, NSUInteger idx, BOOL *stop) {
@@ -49,7 +49,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMCollectionOfLabel*instance=[[[self class] allocWithZone:zone] init];
+    WTMCollectionOfLabel*instance=[super copyWithZone:zone];
     instance->_registry=nil; // We want to furnish a registry free copy
     //_uinstID=0;// we do not provide an _uinstID
    WTMCollectionOfLabel*__block ref=instance;

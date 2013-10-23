@@ -113,7 +113,7 @@ __LINE__ ,\
 
 
 
-@interface WattObject : NSObject<WattCoding>{
+@interface WattObject : NSObject<WattCoding,WattCopying>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
     NSInteger _uinstID;

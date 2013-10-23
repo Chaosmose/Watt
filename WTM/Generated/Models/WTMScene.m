@@ -50,7 +50,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMScene *instance=[[[super class] allocWithZone:zone] init];
+    WTMScene *instance=[super copyWithZone:zone];
     	instance->_registry=nil; // We want to furnish a registry free copy
 		// we do not provide an _uinstID
    			instance->_footer=[_footer copyWithZone:zone];

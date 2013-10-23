@@ -39,7 +39,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMBehavior *instance=[[[super class] allocWithZone:zone] init];
+    WTMBehavior *instance=[super copyWithZone:zone];
     	instance->_registry=nil; // We want to furnish a registry free copy
 		// we do not provide an _uinstID
    			instance->_actionName=[_actionName copyWithZone:zone];

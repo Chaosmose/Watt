@@ -37,7 +37,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMVideo *instance=[[[super class] allocWithZone:zone] init];
+    WTMVideo *instance=[super copyWithZone:zone];
     	instance->_registry=nil; // We want to furnish a registry free copy
 		// we do not provide an _uinstID
    			instance->_duration=_duration;

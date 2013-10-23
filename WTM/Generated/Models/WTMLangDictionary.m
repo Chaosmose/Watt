@@ -39,7 +39,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMLangDictionary *instance=[[[super class] allocWithZone:zone] init];
+    WTMLangDictionary *instance=[super copyWithZone:zone];
     	instance->_registry=nil; // We want to furnish a registry free copy
 		// we do not provide an _uinstID
    			instance->_key=[_key copyWithZone:zone];

@@ -44,7 +44,7 @@
 
 // NSCopying
 - (id)copyWithZone:(NSZone *)zone{
-    WTMElement *instance=[[[super class] allocWithZone:zone] init];
+    WTMElement *instance=[super copyWithZone:zone];
     	instance->_registry=nil; // We want to furnish a registry free copy
 		// we do not provide an _uinstID
    			instance->_asset=[_asset copyWithZone:zone];
