@@ -41,6 +41,20 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMHyperlink *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_allowExploration=_allowExploration;
+	instance->_updateImageOnChange=_updateImageOnChange;
+	instance->_updateUrlOnChange=_updateUrlOnChange;
+	instance->_urlString=[_urlString copy];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

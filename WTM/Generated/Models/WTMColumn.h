@@ -25,7 +25,7 @@
 @class WTMCollectionOfCell;
 @class WTMTable;
 
-@interface WTMColumn:WattModel<WattCoding,WattCopying>{
+@interface WTMColumn:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,assign) NSInteger  height;

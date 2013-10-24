@@ -69,6 +69,29 @@
 
 
 
+#pragma mark - WattExtraction
+
+/**
+ *  Watt Collection members are always extractibles
+ *  @param destinationRegistry the registry
+ *
+ *  @return the copy of the instance in the destinationRegistry
+ */
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+    WattCollectionOfObject *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+    // We add the members of the collection to the registry"
+    WattRegistry *__block registryReference=destinationRegistry;
+    WattCollectionOfObject *__weak weakSelf=self;
+    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        WattObject *objectToAdd=[weakSelf instanceOf:obj byCopyTo:registryReference];
+        [instance addObject:objectToAdd];
+    } reverse:NO];
+    
+    return instance;
+    
+}
+
+
 #pragma mark
 
 // Filtering

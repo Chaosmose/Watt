@@ -27,7 +27,7 @@
 @class WTMImage;
 @class WTMShelf;
 
-@interface WTMPackage:WattModel<WattCoding,WattCopying>{
+@interface WTMPackage:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,copy) NSString * license;
@@ -37,7 +37,7 @@
 @property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMImage * picture;
-@property (nonatomic,strong) WTMShelf * shelf;
+@property (nonatomic,strong) WTMShelf * shelf;// non extractible
 
 - (WTMCollectionOfActivity*)activities_auto;
 - (WTMLangDictionary*)langDictionary_auto;

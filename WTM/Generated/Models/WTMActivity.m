@@ -52,6 +52,24 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMActivity *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_level=_level;
+	instance->_rating=_rating;
+	instance->_score=_score;
+	instance->_shortName=[_shortName copy];
+	instance->_title=[_title copy];
+	instance->_package=nil;// Non extractible
+	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_scenes=[_scenes wattExtractAndCopyToRegistry:destinationRegistry];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

@@ -56,6 +56,25 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMScene *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_footer=[_footer copy];
+	instance->_header=[_header copy];
+	instance->_index=_index;
+	instance->_title=[_title copy];
+	instance->_activity=[_activity wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_behaviors=[_behaviors wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_elements=[_elements wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_table=[_table wattExtractAndCopyToRegistry:destinationRegistry];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

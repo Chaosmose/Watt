@@ -39,6 +39,19 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMBehavior *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_actionName=[_actionName copy];
+	instance->_attributes=[_attributes copy];
+	instance->_triggerName=[_triggerName copy];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

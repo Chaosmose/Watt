@@ -26,7 +26,7 @@
 @class WTMImage;
 @class WTMCollectionOfScene;
 
-@interface WTMActivity:WattModel<WattCoding,WattCopying>{
+@interface WTMActivity:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,assign) NSInteger  level;
@@ -34,7 +34,7 @@
 @property (nonatomic,assign) NSInteger  score;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
-@property (nonatomic,strong) WTMPackage * package;
+@property (nonatomic,strong) WTMPackage * package;// non extractible
 @property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
 

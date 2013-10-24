@@ -23,7 +23,7 @@
 #import "WattModel.h"
 #import "WTMLinkedAsset.h"
 
-@interface WTMHtml:WTMLinkedAsset<WattCoding,WattCopying>{
+@interface WTMHtml:WTMLinkedAsset<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,copy) NSString * string;

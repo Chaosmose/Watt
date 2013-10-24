@@ -44,6 +44,20 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMLibrary *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_name=[_name copy];
+	instance->_bands=[_bands wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_members=[_members wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_package=nil;// Non extractible
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

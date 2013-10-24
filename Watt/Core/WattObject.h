@@ -62,7 +62,6 @@ __LINE__ ,\
 #endif
 
 
-
 #ifndef WT_CONST
 #define WT_CONST
 #define kWattAPIExecptionName       @"WattAPIException"
@@ -133,6 +132,24 @@ __LINE__ ,\
 @end
 
 
+#pragma mark - WattExtraction
+
+@protocol WattExtraction <NSObject>
+/**
+ *  Equivalent to WattCopying but without integration of non extractible properties
+ *  You should implement this method the same way WattCopying but :
+ *  instance->_aExtractible=< the copy logic >
+ *  instance->_aNonExtractible=nil;
+ *  return instance;
+ *  }
+ *
+ *  @param destinationRegistry the registry
+ *
+ *  @return the copy of the instance in the destinationRegistry
+ */
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry;
+@end
+
 
 #pragma mark - WattCoding
 
@@ -144,7 +161,7 @@ __LINE__ ,\
 
 #pragma mark - WattObject
 
-@interface WattObject : NSObject<WattCoding,WattCopying>{
+@interface WattObject : NSObject<WattCoding,WattCopying,WattExtraction>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
 @protected

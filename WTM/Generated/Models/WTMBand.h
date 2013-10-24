@@ -24,7 +24,7 @@
 @class WTMLibrary;
 @class WTMCollectionOfMember;
 
-@interface WTMBand:WattModel<WattCoding,WattCopying>{
+@interface WTMBand:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,copy) NSString * name;

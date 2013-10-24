@@ -54,6 +54,24 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMPackage *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_license=[_license copy];
+	instance->_minEngineVersion=_minEngineVersion;
+	instance->_name=[_name copy];
+	instance->_activities=[_activities wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_langDictionary=[_langDictionary wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_libraries=[_libraries wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_shelf=nil;// Non extractible
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

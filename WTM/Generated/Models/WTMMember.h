@@ -23,13 +23,13 @@
 #import "WattModel.h"
 @class WTMLibrary;
 
-@interface WTMMember:WattModel<WattCoding,WattCopying>{
+@interface WTMMember:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,assign) NSInteger  refererCounter;
 @property (nonatomic,copy) NSString * thumbnailRelativePath;
-@property (nonatomic,strong) WTMLibrary * library;
+@property (nonatomic,strong) WTMLibrary * library;// non extractible
 
 - (WTMLibrary*)library_auto;
 

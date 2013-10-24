@@ -37,6 +37,18 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMLabel *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_font=[_font copy];
+	instance->_text=[_text copy];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

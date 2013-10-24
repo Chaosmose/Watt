@@ -25,13 +25,13 @@
 @class WTMCollectionOfMember;
 @class WTMPackage;
 
-@interface WTMLibrary:WattModel<WattCoding,WattCopying>{
+@interface WTMLibrary:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMCollectionOfBand * bands;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
-@property (nonatomic,strong) WTMPackage * package;
+@property (nonatomic,strong) WTMPackage * package;// non extractible
 
 - (WTMCollectionOfBand*)bands_auto;
 - (WTMCollectionOfMember*)members_auto;

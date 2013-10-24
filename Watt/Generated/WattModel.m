@@ -47,6 +47,23 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WattModel *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_category=[_category copy];
+	instance->_comment=[_comment copy];
+	instance->_groupID=_groupID;
+	instance->_metadata=[_metadata copy];
+	instance->_objectName=[_objectName copy];
+	instance->_ownerID=_ownerID;
+	instance->_rights=_rights;
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

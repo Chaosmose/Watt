@@ -24,7 +24,7 @@
 @class WTMCollectionOfCell;
 @class WTMTable;
 
-@interface WTMLine:WattModel<WattCoding,WattCopying>{
+@interface WTMLine:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,assign) NSInteger  width;

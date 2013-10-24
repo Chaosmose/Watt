@@ -48,6 +48,22 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMMenuSection *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_details=[_details copy];
+	instance->_index=_index;
+	instance->_label=[_label copy];
+	instance->_menus=[_menus wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_shelf=[_shelf wattExtractAndCopyToRegistry:destinationRegistry];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

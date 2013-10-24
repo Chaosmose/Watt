@@ -23,7 +23,7 @@
 #import "WattModel.h"
 #import "WTMAsset.h"
 
-@interface WTMHyperlink:WTMAsset<WattCoding,WattCopying>{
+@interface WTMHyperlink:WTMAsset<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,assign) BOOL  allowExploration;

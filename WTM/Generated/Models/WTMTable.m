@@ -42,6 +42,19 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMTable *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_columns=[_columns wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_lines=[_lines wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_scene=[_scene wattExtractAndCopyToRegistry:destinationRegistry];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

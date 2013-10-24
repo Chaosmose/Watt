@@ -75,7 +75,23 @@
 
 
 #pragma  mark -  WattCopying
-
+/**
+ *  Equivalent to NSCopying but with a reference to an explicit registry
+ *  You should implement this method (sample) :
+ *
+ * - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+ *  <YourClass> *instance=[super wattCopyInRegistry:destinationRegistry];
+ *  instance->_registry=destinationRegistry;
+ *  instance->_aString=[_aString copy];
+ *  instance->_aScalar=_aScalar;
+ *  instance->_aWattCopyableObject=[_aWattCopyableObject wattCopyInRegistry:destinationRegistry];
+ *  return instance;
+ *  }
+ *
+ *  @param destinationRegistry the registry
+ *
+ *  @return the copy of the instance in the destinationRegistry
+ */
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattObject*instance=[[[self class] alloc] init];
     instance->_registry=destinationRegistry;
@@ -107,6 +123,35 @@
     }
     return instance;
 }
+
+
+
+#pragma mark - WattExtraction
+
+/**
+ *  Equivalent to WattCopying but without integration of non extractible properties
+ *  You should implement this method the same way WattCopying but :
+ *  instance->_aExtractible=< the copy logic >
+ *  instance->_aNonExtractible=nil;
+ *  return instance;
+ *  }
+ *
+ *  @param destinationRegistry the registry
+ *
+ *  @return the copy of the instance in the destinationRegistry
+ */
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+    WattObject*instance=[[[self class] alloc] init];
+    instance->_registry=destinationRegistry;
+    instance->_uinstID=[self uinstID];
+    if(![destinationRegistry objectWithUinstID:[self uinstID]]){
+        [destinationRegistry addObject:instance];
+    }
+    destinationRegistry.hasChanged=YES;
+    return instance;
+
+}
+
 
 
 

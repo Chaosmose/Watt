@@ -39,6 +39,19 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMLangDictionary *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_key=[_key copy];
+	instance->_locale=[_locale copy];
+	instance->_value=[_value copy];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 

@@ -35,6 +35,17 @@
     return instance;
 }
 
+#pragma  mark WattExtraction
+
+- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
+	WTMLinkedAsset *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_relativePath=[_relativePath copy];
+    return instance;
+}
+
+
+
 
 #pragma mark -
 
