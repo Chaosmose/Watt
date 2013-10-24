@@ -40,12 +40,10 @@
 }
 
 
-/*
+
 - (void)testACL_StandardValue{
-    
-   // [self rightsFromString:@"RWXR--R--"]
+    XCTAssertTrue([self.api rightsFromString:@"RWXRWXRWX"]==777,@"RWXRWXRWX should equals 777");
     
 }
- 
- */
+
 @end

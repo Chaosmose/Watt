@@ -28,13 +28,10 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMAsset *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_comment=[_comment copy];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMAsset *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_comment=[_comment copy];
     return instance;
 }
 

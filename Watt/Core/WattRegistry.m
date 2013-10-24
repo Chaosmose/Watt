@@ -337,6 +337,18 @@
 
 
 
+#pragma mark -
+
+/**
+ *  Returns the number of live referenced objects.
+ *
+ *  @return the count
+ */
+- (NSUInteger)count{
+    return [[self _sortedKeys] count];
+}
+
+
 
 
 @end

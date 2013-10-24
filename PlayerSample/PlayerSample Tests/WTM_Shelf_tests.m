@@ -59,47 +59,40 @@
     }];
     // We verify we have enough members.
     XCTAssertTrue([a1 count]>=4,@"The serialized registry should contains a least 4 items, current count is : %i",[a1 count]);
-    /*
-    
-    
-    //4- We  grab the root object uinstID==1
-    WTMShelf *s2=(WTMShelf*)[r2 objectWithUinstID:1];
-    WTMPackage*p2=[s2.packages lastObject];
-    WTMLibrary*l2=[p2.libraries lastObject];
-    WTMMember*m2=[l2.members lastObject];
-    WTLog(@"p2:%@ l2:%@ m2:%@ ",p2,l2,m2);
-    WTLog(@"objectWithUinstID:7 %@",[r2 objectWithUinstID:7]);
-    */
-    /*
-     // OTHER ATTEMPT :
-     
-     // Request a collection of members.
-     WTMCollectionOfMember *members=[r2 objectsWithClass:[WTMMember class]
-     andPrefix:@"WTM"
-     returningRegistry:nil];// You can use r2 as returningRegistry to save the result
-     // Use the collection
-     // ...
-     WTLog(@"%@",members);
-     WTLog(@"%@",[members lastObject]);
-     */
-    
-    // And unRegisterObject the collection if from the register if necessary
-    //[r2 unRegisterObject:members];
-    
 }
 
 
 - (void)testShelfs_CopyFromARegistryToAnother{
+    
     // 1- We create a Graph of object within a WattRegistry (r1)
     WattRegistry*r1=[self _createAPopulatedRegistry];
-    WTMShelf *s=(WTMShelf*)[r1 objectWithUinstID:1];
+    WTMShelf *shelf=(WTMShelf*)[r1 objectWithUinstID:1];
     
-    // We copy the shel to another registry
+    // 2- We copy the shel to another registry
     WattRegistry*r2=[[WattRegistry alloc]init];
-    [s wattCopyInRegistry:r2];
+    [shelf wattCopyInRegistry:r2];
     
-    WTLog(@"%@",r2);
+    // TESTS
+    // Let's compare r1 & r2 members.
     
+    WattRegistry *__block r2Ref=r2;
+    NSMutableString *__block s=[NSMutableString string];
+    [r1 enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        NSUInteger identifier=obj.uinstID;
+        id ro=[r2Ref objectWithUinstID:identifier];
+        
+        // We verify the class mapping
+        XCTAssertTrue([obj isMemberOfClass:[ro class]], @"The obj : %@ should be a member %@",obj,NSStringFromClass([ro class]));
+        
+        // We verify that the instance are not references.
+        XCTAssertFalse([obj isEqual:ro], @"The instances should not be equal");
+        [s appendFormat:@"Analysed : %@\n",NSStringFromClass([obj class])];
+    }];
+
+    
+    // Let s count
+    XCTAssertTrue([r1 count]==[r2 count], @"The registries do not have the same count %i %i",[r1 count], [r2 count]);
+
 }
 
 

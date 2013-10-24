@@ -38,20 +38,17 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMActivity *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_level=_level;
-		instance->_rating=_rating;
-		instance->_score=_score;
-		instance->_shortName=[_shortName copy];
-		instance->_title=[_title copy];
-		instance->_package=[_package wattCopyInRegistry:registry];
-		instance->_picture=[_picture wattCopyInRegistry:registry];
-		instance->_scenes=[_scenes wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMActivity *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_level=_level;
+	instance->_rating=_rating;
+	instance->_score=_score;
+	instance->_shortName=[_shortName copy];
+	instance->_title=[_title copy];
+	instance->_package=[_package wattCopyInRegistry:destinationRegistry];
+	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
+	instance->_scenes=[_scenes wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

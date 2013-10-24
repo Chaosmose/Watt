@@ -40,20 +40,17 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMPackage *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_license=[_license copy];
-		instance->_minEngineVersion=_minEngineVersion;
-		instance->_name=[_name copy];
-		instance->_activities=[_activities wattCopyInRegistry:registry];
-		instance->_langDictionary=[_langDictionary wattCopyInRegistry:registry];
-		instance->_libraries=[_libraries wattCopyInRegistry:registry];
-		instance->_picture=[_picture wattCopyInRegistry:registry];
-		instance->_shelf=[_shelf wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMPackage *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_license=[_license copy];
+	instance->_minEngineVersion=_minEngineVersion;
+	instance->_name=[_name copy];
+	instance->_activities=[_activities wattCopyInRegistry:destinationRegistry];
+	instance->_langDictionary=[_langDictionary wattCopyInRegistry:destinationRegistry];
+	instance->_libraries=[_libraries wattCopyInRegistry:destinationRegistry];
+	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
+	instance->_shelf=[_shelf wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

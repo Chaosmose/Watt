@@ -36,18 +36,15 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMMenuSection *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_details=[_details copy];
-		instance->_index=_index;
-		instance->_label=[_label copy];
-		instance->_menus=[_menus wattCopyInRegistry:registry];
-		instance->_picture=[_picture wattCopyInRegistry:registry];
-		instance->_shelf=[_shelf wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMMenuSection *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_details=[_details copy];
+	instance->_index=_index;
+	instance->_label=[_label copy];
+	instance->_menus=[_menus wattCopyInRegistry:destinationRegistry];
+	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
+	instance->_shelf=[_shelf wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

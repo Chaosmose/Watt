@@ -31,16 +31,13 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMHyperlink *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_allowExploration=_allowExploration;
-		instance->_updateImageOnChange=_updateImageOnChange;
-		instance->_updateUrlOnChange=_updateUrlOnChange;
-		instance->_urlString=[_urlString copy];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMHyperlink *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_allowExploration=_allowExploration;
+	instance->_updateImageOnChange=_updateImageOnChange;
+	instance->_updateUrlOnChange=_updateUrlOnChange;
+	instance->_urlString=[_urlString copy];
     return instance;
 }
 

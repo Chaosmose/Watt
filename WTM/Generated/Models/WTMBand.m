@@ -32,15 +32,12 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMBand *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_name=[_name copy];
-		instance->_library=[_library wattCopyInRegistry:registry];
-		instance->_members=[_members wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMBand *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_name=[_name copy];
+	instance->_library=[_library wattCopyInRegistry:destinationRegistry];
+	instance->_members=[_members wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

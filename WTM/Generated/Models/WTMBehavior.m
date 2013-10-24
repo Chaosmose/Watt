@@ -30,15 +30,12 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMBehavior *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_actionName=[_actionName copy];
-		instance->_attributes=[_attributes copy];
-		instance->_triggerName=[_triggerName copy];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMBehavior *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_actionName=[_actionName copy];
+	instance->_attributes=[_attributes copy];
+	instance->_triggerName=[_triggerName copy];
     return instance;
 }
 

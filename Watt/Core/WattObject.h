@@ -18,6 +18,7 @@
 //  Created by Benoit Pereira da Silva on 09/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
+#pragma mark Declarations
 
 #ifndef WT_LOG
 #define WT_LOG 1 // You can set up WT_LOG to 1 or 0
@@ -43,9 +44,6 @@ __LINE__ ,\
 #endif
 #endif
 
-#pragma mark - WattCoding
-
-#pragma mark - Runtime
 
 #ifndef WT_RUNTIME_CONFIGURATION
 #define WT_RUNTIME_CONFIGURATION
@@ -91,18 +89,52 @@ __LINE__ ,\
 #define isWidePhone() ([UIScreen mainScreen].scale == 2.f && [UIScreen mainScreen].bounds.size.height == 568.0f)
 #define scale() [UIScreen mainScreen].scale
 #endif
-
-
-
 #endif
 
 @class WattObject;
 @class WattApi;
 
+#pragma mark - WattCopying
+
 @protocol WattCopying
-// Equivalent to NSCopying but with a reference to an explicite registry :
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry;
+@required
+/**
+ *  Equivalent to NSCopying but with a reference to an explicit registry 
+ *  You should implement this method (sample) :
+ *
+ * - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+ *  <YourClass> *instance=[super wattCopyInRegistry:destinationRegistry];
+ *  instance->_registry=destinationRegistry;
+ *  instance->_aString=[_aString copy];
+ *  instance->_aScalar=_aScalar;
+ *  instance->_aWattCopyableObject=[_aWattCopyableObject wattCopyInRegistry:destinationRegistry];
+ *  return instance;
+ *  }
+ *
+ *  @param destinationRegistry the registry
+ *
+ *  @return the copy of the instance in the destinationRegistry
+ */
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry;
+@optional
+
+/**
+ *  Implemented in WattObject (no need normaly to implement)
+ *  If the copy allready exists in the destination registry
+ *  This method returns the existing reference
+ *
+ *  @param sourceObject        the object to be copied
+ *  @param destinationRegistry the registry
+ *
+ *  @return return the copy
+ */
+- (WattObject*)instanceOf:(WattObject*)sourceObject
+                 byCopyTo:(WattRegistry*)destinationRegistry;
 @end
+
+
+
+#pragma mark - WattCoding
 
 @protocol WattCoding <NSObject>
 @required
@@ -110,12 +142,11 @@ __LINE__ ,\
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren;
 @end
 
-
+#pragma mark - WattObject
 
 @interface WattObject : NSObject<WattCoding,WattCopying>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
-
 @protected
     NSInteger _uinstID;
     NSString *_currentLocale;           // The locale that has been used for localization
@@ -123,9 +154,6 @@ __LINE__ ,\
     BOOL _isAnAlias;
 }
 
-
-
-#pragma mark - registry
 
 @property (readonly)NSInteger uinstID;
 @property (readonly)WattRegistry*registry;
@@ -147,7 +175,7 @@ __LINE__ ,\
 - (void)identifyWithUinstId:(NSInteger)identifier;
 
 
-#pragma mark  Aliasing
+#pragma mark - Aliasing
 
 - (BOOL)isAnAlias;
 - (void)resolveAliases;

@@ -40,21 +40,18 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMMenu *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_details=[_details copy];
-		instance->_index=_index;
-		instance->_label=[_label copy];
-		instance->_referenceUinstID=_referenceUinstID;
-		instance->_urlString=[_urlString copy];
-		instance->_childrens=[_childrens wattCopyInRegistry:registry];
-		instance->_menuSection=[_menuSection wattCopyInRegistry:registry];
-		instance->_parent=[_parent wattCopyInRegistry:registry];
-		instance->_picture=[_picture wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMMenu *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_details=[_details copy];
+	instance->_index=_index;
+	instance->_label=[_label copy];
+	instance->_referenceUinstID=_referenceUinstID;
+	instance->_urlString=[_urlString copy];
+	instance->_childrens=[_childrens wattCopyInRegistry:destinationRegistry];
+	instance->_menuSection=[_menuSection wattCopyInRegistry:destinationRegistry];
+	instance->_parent=[_parent wattCopyInRegistry:destinationRegistry];
+	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

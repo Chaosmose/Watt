@@ -30,15 +30,12 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMLangDictionary *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_key=[_key copy];
-		instance->_locale=[_locale copy];
-		instance->_value=[_value copy];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMLangDictionary *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_key=[_key copy];
+	instance->_locale=[_locale copy];
+	instance->_value=[_value copy];
     return instance;
 }
 

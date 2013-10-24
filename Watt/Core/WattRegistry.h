@@ -108,4 +108,15 @@
 
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block;
 
+
+#pragma mark -
+
+/**
+ *  Returns the number of live referenced objects.
+ *
+ *  @return the count
+ */
+- (NSUInteger)count;
+
+
 @end

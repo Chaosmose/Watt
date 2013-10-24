@@ -34,16 +34,13 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMCell *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_attributes=[_attributes copy];
-		instance->_column=[_column wattCopyInRegistry:registry];
-		instance->_element=[_element wattCopyInRegistry:registry];
-		instance->_line=[_line wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMCell *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_attributes=[_attributes copy];
+	instance->_column=[_column wattCopyInRegistry:destinationRegistry];
+	instance->_element=[_element wattCopyInRegistry:destinationRegistry];
+	instance->_line=[_line wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

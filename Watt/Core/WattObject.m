@@ -74,17 +74,40 @@
 }
 
 
-#pragma  mark WattCopying
+#pragma  mark -  WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattObject*instance=[[[self class] alloc] init];
-    instance->_registry=registry;
+    instance->_registry=destinationRegistry;
     instance->_uinstID=[self uinstID];
-    if(![registry objectWithUinstID:[self uinstID]]){
-        [registry addObject:instance];
+    if(![destinationRegistry objectWithUinstID:[self uinstID]]){
+        [destinationRegistry addObject:instance];
+    }
+    destinationRegistry.hasChanged=YES;
+    return instance;
+}
+
+/**
+ *  If the copy allready exists in the destination registry
+ *  This method returns the existing reference
+ *
+ *  @param sourceObject        the object to be copied
+ *  @param destinationRegistry the registry
+ *
+ *  @return return the copy
+ */
+- (WattObject*)instanceOf:(WattObject*)sourceObject
+                 byCopyTo:(WattRegistry*)destinationRegistry{
+    WattObject *instance=[destinationRegistry objectWithUinstID:[sourceObject uinstID]];
+    if(!instance){
+        instance=[sourceObject wattCopyInRegistry:destinationRegistry];
+    }
+    if(![destinationRegistry objectWithUinstID:[instance uinstID]]){
+        [destinationRegistry addObject:instance];
     }
     return instance;
 }
+
 
 
 #pragma mark -

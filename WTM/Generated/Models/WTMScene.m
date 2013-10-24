@@ -41,21 +41,18 @@
 
 #pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-	WTMScene *instance=[super wattCopyInRegistry:registry];
-    if(![registry objectWithUinstID:instance.uinstID]){
-        [registry addObject:instance];
-		instance->_registry=registry;
-		instance->_footer=[_footer copy];
-		instance->_header=[_header copy];
-		instance->_index=_index;
-		instance->_title=[_title copy];
-		instance->_activity=[_activity wattCopyInRegistry:registry];
-		instance->_behaviors=[_behaviors wattCopyInRegistry:registry];
-		instance->_elements=[_elements wattCopyInRegistry:registry];
-		instance->_picture=[_picture wattCopyInRegistry:registry];
-		instance->_table=[_table wattCopyInRegistry:registry];
-	}
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+	WTMScene *instance=[super wattCopyInRegistry:destinationRegistry];
+	instance->_registry=destinationRegistry;
+	instance->_footer=[_footer copy];
+	instance->_header=[_header copy];
+	instance->_index=_index;
+	instance->_title=[_title copy];
+	instance->_activity=[_activity wattCopyInRegistry:destinationRegistry];
+	instance->_behaviors=[_behaviors wattCopyInRegistry:destinationRegistry];
+	instance->_elements=[_elements wattCopyInRegistry:destinationRegistry];
+	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
+	instance->_table=[_table wattCopyInRegistry:destinationRegistry];
     return instance;
 }
 

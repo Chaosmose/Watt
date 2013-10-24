@@ -54,23 +54,19 @@
 #pragma  mark WattCopying
 
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)registry{
-    WattCollectionOfObject *instance=[super wattCopyInRegistry:registry];
-    //We add the instance to the registry
-    if(![registry objectWithUinstID:[instance uinstID]]){
-        [registry addObject:instance];
-    }
-    // We add the members of the collection to the registry
-    WattRegistry *__block registryReference=registry;
+- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
+    WattCollectionOfObject *instance=[super wattCopyInRegistry:destinationRegistry];
+    // We add the members of the collection to the registry"
+    WattRegistry *__block registryReference=destinationRegistry;
+    WattCollectionOfObject *__weak weakSelf=self;
     [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        WattObject *copyedObject=[obj wattCopyInRegistry:registryReference];
-        if(![registryReference objectWithUinstID:[copyedObject uinstID]]){
-            [registryReference addObject:copyedObject];
-        }
+        WattObject *objectToAdd=[weakSelf instanceOf:obj byCopyTo:registryReference];
+        [instance addObject:objectToAdd];
     } reverse:NO];
     
     return instance;
 }
+
 
 
 #pragma mark
