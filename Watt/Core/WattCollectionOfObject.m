@@ -77,7 +77,7 @@
  *  @return the copy of the instance in the destinationRegistry
  */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-    return [self wattCopyInRegistry:destinationRegistry];
+    return [self instancebyCopyTo:destinationRegistry];
     
 }
 
