@@ -38,9 +38,9 @@
 	WTMCell *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_attributes=[_attributes copy];
-	instance->_column=[_column wattCopyInRegistry:destinationRegistry];
-	instance->_element=[_element wattCopyInRegistry:destinationRegistry];
-	instance->_line=[_line wattCopyInRegistry:destinationRegistry];
+	instance->_column=[_column instancebyCopyTo:destinationRegistry];
+	instance->_element=[_element instancebyCopyTo:destinationRegistry];
+	instance->_line=[_line instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

@@ -75,6 +75,7 @@
 
 
 #pragma  mark -  WattCopying
+
 /**
  *  Equivalent to NSCopying but with a reference to an explicit registry
  *  You should implement this method (sample) :
@@ -96,27 +97,24 @@
     WattObject*instance=[[[self class] alloc] init];
     instance->_registry=destinationRegistry;
     instance->_uinstID=[self uinstID];
-    if(![destinationRegistry objectWithUinstID:[self uinstID]]){
-        [destinationRegistry addObject:instance];
-    }
+    [destinationRegistry addObject:instance];
     destinationRegistry.hasChanged=YES;
     return instance;
 }
 
 /**
+ *  Implemented in WattObject (no need normaly to implement)
  *  If the copy allready exists in the destination registry
  *  This method returns the existing reference
  *
- *  @param sourceObject        the object to be copied
  *  @param destinationRegistry the registry
  *
  *  @return return the copy
  */
-- (WattObject*)instanceOf:(WattObject*)sourceObject
-                 byCopyTo:(WattRegistry*)destinationRegistry{
-    WattObject *instance=[destinationRegistry objectWithUinstID:[sourceObject uinstID]];
+- (instancetype)instancebyCopyTo:(WattRegistry*)destinationRegistry{
+    WattObject *instance=[destinationRegistry objectWithUinstID:[self uinstID]];
     if(!instance){
-        instance=[sourceObject wattCopyInRegistry:destinationRegistry];
+        instance=[self wattCopyInRegistry:destinationRegistry];
     }
     if(![destinationRegistry objectWithUinstID:[instance uinstID]]){
         [destinationRegistry addObject:instance];
@@ -141,15 +139,7 @@
  *  @return the copy of the instance in the destinationRegistry
  */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-    WattObject*instance=[[[self class] alloc] init];
-    instance->_registry=destinationRegistry;
-    instance->_uinstID=[self uinstID];
-    if(![destinationRegistry objectWithUinstID:[self uinstID]]){
-        [destinationRegistry addObject:instance];
-    }
-    destinationRegistry.hasChanged=YES;
-    return instance;
-
+    return [self instancebyCopyTo:destinationRegistry];
 }
 
 

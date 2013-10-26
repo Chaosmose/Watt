@@ -48,10 +48,10 @@
 	instance->_label=[_label copy];
 	instance->_referenceUinstID=_referenceUinstID;
 	instance->_urlString=[_urlString copy];
-	instance->_childrens=[_childrens wattCopyInRegistry:destinationRegistry];
-	instance->_menuSection=[_menuSection wattCopyInRegistry:destinationRegistry];
-	instance->_parent=[_parent wattCopyInRegistry:destinationRegistry];
-	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
+	instance->_childrens=[_childrens instancebyCopyTo:destinationRegistry];
+	instance->_menuSection=[_menuSection instancebyCopyTo:destinationRegistry];
+	instance->_parent=[_parent instancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

@@ -48,11 +48,11 @@
 	instance->_header=[_header copy];
 	instance->_index=_index;
 	instance->_title=[_title copy];
-	instance->_activity=[_activity wattCopyInRegistry:destinationRegistry];
-	instance->_behaviors=[_behaviors wattCopyInRegistry:destinationRegistry];
-	instance->_elements=[_elements wattCopyInRegistry:destinationRegistry];
-	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
-	instance->_table=[_table wattCopyInRegistry:destinationRegistry];
+	instance->_activity=[_activity instancebyCopyTo:destinationRegistry];
+	instance->_behaviors=[_behaviors instancebyCopyTo:destinationRegistry];
+	instance->_elements=[_elements instancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
+	instance->_table=[_table instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

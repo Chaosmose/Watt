@@ -38,9 +38,9 @@
 	WTMLibrary *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_name=[_name copy];
-	instance->_bands=[_bands wattCopyInRegistry:destinationRegistry];
-	instance->_members=[_members wattCopyInRegistry:destinationRegistry];
-	instance->_package=[_package wattCopyInRegistry:destinationRegistry];
+	instance->_bands=[_bands instancebyCopyTo:destinationRegistry];
+	instance->_members=[_members instancebyCopyTo:destinationRegistry];
+	instance->_package=[_package instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

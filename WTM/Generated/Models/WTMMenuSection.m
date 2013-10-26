@@ -42,9 +42,9 @@
 	instance->_details=[_details copy];
 	instance->_index=_index;
 	instance->_label=[_label copy];
-	instance->_menus=[_menus wattCopyInRegistry:destinationRegistry];
-	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
-	instance->_shelf=[_shelf wattCopyInRegistry:destinationRegistry];
+	instance->_menus=[_menus instancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
+	instance->_shelf=[_shelf instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

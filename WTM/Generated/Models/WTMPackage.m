@@ -46,11 +46,11 @@
 	instance->_license=[_license copy];
 	instance->_minEngineVersion=_minEngineVersion;
 	instance->_name=[_name copy];
-	instance->_activities=[_activities wattCopyInRegistry:destinationRegistry];
-	instance->_langDictionary=[_langDictionary wattCopyInRegistry:destinationRegistry];
-	instance->_libraries=[_libraries wattCopyInRegistry:destinationRegistry];
-	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
-	instance->_shelf=[_shelf wattCopyInRegistry:destinationRegistry];
+	instance->_activities=[_activities instancebyCopyTo:destinationRegistry];
+	instance->_langDictionary=[_langDictionary instancebyCopyTo:destinationRegistry];
+	instance->_libraries=[_libraries instancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
+	instance->_shelf=[_shelf instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

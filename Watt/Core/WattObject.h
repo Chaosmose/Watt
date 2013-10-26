@@ -122,19 +122,25 @@ __LINE__ ,\
  *  If the copy allready exists in the destination registry
  *  This method returns the existing reference
  *
- *  @param sourceObject        the object to be copied
  *  @param destinationRegistry the registry
  *
  *  @return return the copy
  */
-- (WattObject*)instanceOf:(WattObject*)sourceObject
-                 byCopyTo:(WattRegistry*)destinationRegistry;
+- (instancetype)instancebyCopyTo:(WattRegistry*)destinationRegistry;
 @end
 
 
 #pragma mark - WattExtraction
 
+#warning INTERESTING 
+
+// WOOZOO's SUGGESTIONS !
+// NOTE WE COULD IMPLEMENT AN EXTRACTION WITH ExclusionPath : "ClassName.propertyName.propertyName"
+// or Inclusion Path
+// or Predicate filters
+
 @protocol WattExtraction <NSObject>
+@required
 /**
  *  Equivalent to WattCopying but without integration of non extractible properties
  *  You should implement this method the same way WattCopying but :
@@ -148,6 +154,7 @@ __LINE__ ,\
  *  @return the copy of the instance in the destinationRegistry
  */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry;
+
 @end
 
 

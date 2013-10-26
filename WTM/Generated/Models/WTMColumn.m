@@ -38,9 +38,9 @@
 	WTMColumn *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_height=_height;
-	instance->_behaviors=[_behaviors wattCopyInRegistry:destinationRegistry];
-	instance->_cells=[_cells wattCopyInRegistry:destinationRegistry];
-	instance->_table=[_table wattCopyInRegistry:destinationRegistry];
+	instance->_behaviors=[_behaviors instancebyCopyTo:destinationRegistry];
+	instance->_cells=[_cells instancebyCopyTo:destinationRegistry];
+	instance->_table=[_table instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

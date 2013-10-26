@@ -46,9 +46,9 @@
 	instance->_score=_score;
 	instance->_shortName=[_shortName copy];
 	instance->_title=[_title copy];
-	instance->_package=[_package wattCopyInRegistry:destinationRegistry];
-	instance->_picture=[_picture wattCopyInRegistry:destinationRegistry];
-	instance->_scenes=[_scenes wattCopyInRegistry:destinationRegistry];
+	instance->_package=[_package instancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
+	instance->_scenes=[_scenes instancebyCopyTo:destinationRegistry];
     return instance;
 }
 

@@ -207,7 +207,7 @@
         <element name="Asset" positionX="-6941" positionY="-3591" width="128" height="58"/>
         <element name="Band" positionX="-7355" positionY="-3870" width="128" height="88"/>
         <element name="Behavior" positionX="-6869" positionY="-3742" width="128" height="88"/>
-        <element name="Cell" positionX="-6480" positionY="-3910" width="128" height="103"/>
+        <element name="Cell" positionX="-6462" positionY="-3924" width="128" height="103"/>
         <element name="Column" positionX="-6660" positionY="-3964" width="128" height="103"/>
         <element name="Element" positionX="-6453" positionY="-3721" width="128" height="103"/>
         <element name="Html" positionX="-7256" positionY="-3429" width="128" height="58"/>

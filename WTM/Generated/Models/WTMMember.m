@@ -38,7 +38,7 @@
 	instance->_name=[_name copy];
 	instance->_refererCounter=_refererCounter;
 	instance->_thumbnailRelativePath=[_thumbnailRelativePath copy];
-	instance->_library=[_library wattCopyInRegistry:destinationRegistry];
+	instance->_library=[_library instancebyCopyTo:destinationRegistry];
     return instance;
 }
 
