@@ -13,6 +13,5 @@ Pod::Spec.new do |s|
   s.source_files =  'Watt','Watt/**/*.{h,m}'
   s.public_header_files = 'Watt/**/*.h'
   s.dependency 'SSZipArchive','~> 0.2.2'
-  s.dependency 'AFNetworking','~> 1.3.1'
   s.ios.dependency 'SVProgressHUD'
 end
