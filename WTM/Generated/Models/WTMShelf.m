@@ -55,12 +55,12 @@
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
 	WTMShelf *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
-	instance->_groups=[_groups wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_groups=[_groups extractInstancebyCopyTo:destinationRegistry];
 	instance->_name=[_name copy];
-	instance->_users=[_users wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_packages=[_packages wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_sections=[_sections wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_users=[_users extractInstancebyCopyTo:destinationRegistry];
+	instance->_packages=[_packages extractInstancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
+	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

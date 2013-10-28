@@ -77,7 +77,16 @@
  *  @return the copy of the instance in the destinationRegistry
  */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-    return [self instancebyCopyTo:destinationRegistry];
+    WattCollectionOfObject *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
+    // We add the members of the collection to the registry"
+    WattRegistry *__block registryReference=destinationRegistry;
+    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        WattObject *objectToAdd=[obj extractInstancebyCopyTo:registryReference];
+        [instance addObject:objectToAdd];
+    } reverse:NO];
+    
+    return instance;
+
     
 }
 

@@ -155,6 +155,11 @@ __LINE__ ,\
  */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry;
 
+- (instancetype)extractInstancebyCopyTo:(WattRegistry*)destinationRegistry;
+
+//@optional
+//- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry withExclusionPathList:(NSArray*)exclusionPathList;
+
 @end
 
 

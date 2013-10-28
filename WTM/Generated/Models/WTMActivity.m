@@ -63,8 +63,8 @@
 	instance->_shortName=[_shortName copy];
 	instance->_title=[_title copy];
 	instance->_package=nil;// Non extractible
-	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_scenes=[_scenes wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
+	instance->_scenes=[_scenes extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

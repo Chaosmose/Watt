@@ -22,6 +22,7 @@
 - (void)setUp{
     [super setUp];
     self.api=[[WattApi alloc] init];
+    [self.api use:WattJx];
 }
 
 - (void)tearDown{
@@ -35,7 +36,6 @@
     
     
     NSString *p=[[NSBundle mainBundle] pathForResource:@"dataset1" ofType:@"json"];
-    WTLog(@"%@",[p stringByReplacingOccurrencesOfString:@" " withString:@"\\ "]);
     XCTAssertTrue(p, "The dataset path should not be nil");
     
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:p isDirectory:NO], @"dataset file should exist at path : %@",p);
@@ -70,15 +70,32 @@
             NSString *baseName=[obj shortName];
             
             NSString *filteredBaseName=[baseName stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-            NSMutableString *folderPath=[NSMutableString stringWithString:[weakApi applicationDocumentsDirectory]];
+            NSMutableString *__weak folderPath=[NSMutableString stringWithString:[weakApi applicationDocumentsDirectory]];
             [folderPath appendFormat:@"export/%@/",[filteredBaseName length]>1?filteredBaseName:[NSNumber numberWithInt:obj.uinstID]];
             [weakApi createRecursivelyRequiredFolderForPath:folderPath];
             
-            NSString*path=[NSString stringWithFormat:@"%@%@",folderPath,@"activity.j"];
-            WTLog(@"%@",path);
-            [weakApi writeRegistry:r toFile:path];
+            NSString*path=[NSString stringWithFormat:@"%@%@",folderPath,@"activity.jx"];
+            WTLog(@"%@",[path stringByReplacingOccurrencesOfString:@" " withString:@"\\ "]);
             
+            [weakApi writeRegistry:r toFile:path];
             XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:NO],@"File at path %@ should exist",path);
+            
+            // We do create void file to simulate the export
+            [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+                if ([[obj class]isSubclassOfClass:[WTMLinkedAsset class]]) {
+                    WTMLinkedAsset *l=(WTMLinkedAsset*)obj;
+                    NSString*destination=[folderPath stringByAppendingString:l.relativePath];
+                    [weakApi createRecursivelyRequiredFolderForPath:destination];
+                    [weakApi.fileManager createFileAtPath:destination contents:nil attributes:nil];
+                }
+            }];
+            
+            
+            [WattBundlePackager sharedInstance].api=weakApi;
+            [[WattBundlePackager sharedInstance]packFolderFromPath:folderPath
+                                                         withBlock:^(BOOL success) {}
+                                                 useBackgroundMode:NO
+                                                     withExtension:@"watt"];
             
         } reverse:NO];
     }

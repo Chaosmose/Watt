@@ -65,10 +65,10 @@
 	instance->_label=[_label copy];
 	instance->_referenceUinstID=_referenceUinstID;
 	instance->_urlString=[_urlString copy];
-	instance->_childrens=[_childrens wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_menuSection=[_menuSection wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_parent=[_parent wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
+	instance->_menuSection=[_menuSection extractInstancebyCopyTo:destinationRegistry];
+	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

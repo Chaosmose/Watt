@@ -47,8 +47,8 @@
 	WTMLine *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_width=_width;
-	instance->_cells=[_cells wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_table=[_table wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_cells=[_cells extractInstancebyCopyTo:destinationRegistry];
+	instance->_table=[_table extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

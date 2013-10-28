@@ -70,6 +70,57 @@ useBackgroundMode:(BOOL)backgroundMode;
     _api=api;
 }
 
+
+
+#pragma mark -
+
+
+-(void)packFolderFromPath:(NSString*)path
+                withBlock:(void (^)(BOOL success))block
+        useBackgroundMode:(BOOL)backgroundMode
+            withExtension:(NSString*)extension{
+
+
+    NSString *sourceFolderPath=path;
+    sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
+    NSString *destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@",extension?extension:@"zip"];
+    NSInteger i=0;
+    while ([self.api.fileManager fileExistsAtPath:destinationFilePath]) {
+        destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.%@",i,extension?extension:@"zip"];
+        i++;
+    }
+    [self zip:sourceFolderPath
+           to:destinationFilePath
+    withBlock:^(BOOL success) {
+        block(success);
+    } useBackgroundMode:backgroundMode];
+    
+}
+
+
+
+-(void)unPackFromPath:(NSString*)path
+            withBlock:(void (^)(BOOL success))block
+    useBackgroundMode:(BOOL)backgroundMode{
+    NSString *zipSourcePath=path;
+    NSString *destinationFolder=[zipSourcePath stringByDeletingLastPathComponent];
+    if(![self.api.fileManager fileExistsAtPath:zipSourcePath]){
+        WTLog(@"%@ do not exist",zipSourcePath);
+    }else{
+        [self.api createRecursivelyRequiredFolderForPath:destinationFolder];
+        [self unZip:zipSourcePath
+                 to:destinationFolder
+          withBlock:^(BOOL success) {
+              block(success);
+          }useBackgroundMode:backgroundMode];
+    }
+}
+
+
+
+
+
+
 #pragma mark - packaging
 
 
@@ -165,7 +216,10 @@ useBackgroundMode:(BOOL)backgroundMode{
 
 #pragma mark SSZipArchiveDelegate
 
-- (void)zipArchiveWillUnzipFileAtIndex:(NSInteger)fileIndex totalFiles:(NSInteger)totalFiles archivePath:(NSString *)archivePath fileInfo:(unz_file_info)fileInfo{
+- (void)zipArchiveWillUnzipFileAtIndex:(NSInteger)fileIndex
+                            totalFiles:(NSInteger)totalFiles
+                           archivePath:(NSString *)archivePath
+                              fileInfo:(unz_file_info)fileInfo{
     /*
      CGFloat progress=(CGFloat)fileIndex/(CGFloat)totalFiles;
      dispatch_sync(dispatch_get_main_queue(), ^{

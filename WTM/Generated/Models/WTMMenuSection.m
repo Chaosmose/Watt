@@ -56,9 +56,9 @@
 	instance->_details=[_details copy];
 	instance->_index=_index;
 	instance->_label=[_label copy];
-	instance->_menus=[_menus wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_shelf=[_shelf wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_menus=[_menus extractInstancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
+	instance->_shelf=[_shelf extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

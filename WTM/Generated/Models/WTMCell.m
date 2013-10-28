@@ -50,9 +50,9 @@
 	WTMCell *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_attributes=[_attributes copy];
-	instance->_column=[_column wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_element=[_element wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_line=[_line wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_column=[_column extractInstancebyCopyTo:destinationRegistry];
+	instance->_element=[_element extractInstancebyCopyTo:destinationRegistry];
+	instance->_line=[_line extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

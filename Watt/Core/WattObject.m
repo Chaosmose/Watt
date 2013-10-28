@@ -139,10 +139,25 @@
  *  @return the copy of the instance in the destinationRegistry
  */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-    return [self instancebyCopyTo:destinationRegistry];
+    WattObject*instance=[[[self class] alloc] init];
+    instance->_registry=destinationRegistry;
+    instance->_uinstID=[self uinstID];
+    [destinationRegistry addObject:instance];
+    destinationRegistry.hasChanged=YES;
+    return instance;
+
 }
 
-
+- (instancetype)extractInstancebyCopyTo:(WattRegistry*)destinationRegistry{
+    WattObject *instance=[destinationRegistry objectWithUinstID:[self uinstID]];
+    if(!instance){
+        instance=[self wattExtractAndCopyToRegistry:destinationRegistry];
+    }
+    if(![destinationRegistry objectWithUinstID:[instance uinstID]]){
+        [destinationRegistry addObject:instance];
+    }
+    return instance;
+}
 
 
 #pragma mark -

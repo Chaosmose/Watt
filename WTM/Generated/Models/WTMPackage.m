@@ -62,10 +62,10 @@
 	instance->_license=[_license copy];
 	instance->_minEngineVersion=_minEngineVersion;
 	instance->_name=[_name copy];
-	instance->_activities=[_activities wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_langDictionary=[_langDictionary wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_libraries=[_libraries wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_picture=[_picture wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_activities=[_activities extractInstancebyCopyTo:destinationRegistry];
+	instance->_langDictionary=[_langDictionary extractInstancebyCopyTo:destinationRegistry];
+	instance->_libraries=[_libraries extractInstancebyCopyTo:destinationRegistry];
+	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
 	instance->_shelf=nil;// Non extractible
     return instance;
 }

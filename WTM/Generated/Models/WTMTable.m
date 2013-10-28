@@ -47,9 +47,9 @@
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
 	WTMTable *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
-	instance->_columns=[_columns wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_lines=[_lines wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_scene=[_scene wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_columns=[_columns extractInstancebyCopyTo:destinationRegistry];
+	instance->_lines=[_lines extractInstancebyCopyTo:destinationRegistry];
+	instance->_scene=[_scene extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

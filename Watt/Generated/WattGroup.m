@@ -47,7 +47,7 @@
 	instance->_registry=destinationRegistry;
 	instance->_name=[_name copy];
 	instance->_objectName=[_objectName copy];
-	instance->_users=[_users wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_users=[_users extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 

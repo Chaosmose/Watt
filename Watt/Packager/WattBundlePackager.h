@@ -37,6 +37,26 @@
 // You must set the this property before to use the WattBundlePackager
 @property (nonatomic,weak) WattApi *api;
 
+
+
+#pragma mark -
+
+
+-(void)packFolderFromPath:(NSString*)path
+                    withBlock:(void (^)(BOOL success))block
+            useBackgroundMode:(BOOL)backgroundMode
+        withExtension:(NSString*)extension;
+
+-(void)unPackFromPath:(NSString*)path
+            withBlock:(void (^)(BOOL success))block
+    useBackgroundMode:(BOOL)backgroundMode;
+
+
+
+
+// LEGACY APPROACH
+
+
 #pragma mark - packaging
 
 -(void)packWattBundleWithName:(NSString*)name
@@ -44,8 +64,7 @@
             useBackgroundMode:(BOOL)backgroundMode;
 
 -(void)unPackWattBundleWithName:(NSString*)name
-                  withBlock:(void (^)(BOOL success))block
+                      withBlock:(void (^)(BOOL success))block
               useBackgroundMode:(BOOL)backgroundMode;
-
 
 @end

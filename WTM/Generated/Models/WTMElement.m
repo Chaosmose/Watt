@@ -50,10 +50,10 @@
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
 	WTMElement *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
-	instance->_asset=[_asset wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_behaviors=[_behaviors wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_cells=[_cells wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_scene=[_scene wattExtractAndCopyToRegistry:destinationRegistry];
+	instance->_asset=[_asset extractInstancebyCopyTo:destinationRegistry];
+	instance->_behaviors=[_behaviors extractInstancebyCopyTo:destinationRegistry];
+	instance->_cells=[_cells extractInstancebyCopyTo:destinationRegistry];
+	instance->_scene=[_scene extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 
