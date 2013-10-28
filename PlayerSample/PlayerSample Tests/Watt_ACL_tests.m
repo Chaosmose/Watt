@@ -18,7 +18,6 @@
 - (void)setUp{
     [super setUp];
     self.api=[[WattApi alloc] init];
-    [self.api configureOnce];
 }
 
 - (void)tearDown{

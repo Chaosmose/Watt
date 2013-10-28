@@ -85,7 +85,7 @@ typedef enum watt_F_TYPES{
 @property (nonatomic,strong)    WattRegistry *currentRegistry; // Used to register & create object ( you can change its reference at runtime)
 @property (nonatomic,readonly)  WattUser *system;
 @property (nonatomic,readonly)  WattGroup *systemGroup;
-@property (nonatomic,strong)    NSFileManager *fileManager;
+@property (atomic,strong)       NSFileManager *fileManager;
 
 // The files with those extensions can be mixed in the soup (mixing is a sort of encryption)
 // You can add any binary format by adding its extension to mixableExtensions
@@ -103,11 +103,6 @@ typedef enum watt_F_TYPES{
  */
 -(void)use:(Watt_F_TYPE)ftype;
 
-/**
- *  this method used to perform a one time configuration
- *  check WTMApi's implementation for an example.
- */
-- (void)configureOnce;
 
 #pragma mark - Registry
 

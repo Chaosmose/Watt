@@ -13,9 +13,9 @@
             buildForTesting = "YES"
             buildForRunning = "YES">
             <BuildableReference
-               BlueprintIdentifier = "B9876D618DA240AC8A078B48"
-               BlueprintName = "Pods-WattAuthor-AFNetworking"
-               BuildableName = "libPods-WattAuthor-AFNetworking.a"
+               BlueprintIdentifier = "47F36154266A49619D11FF37"
+               BlueprintName = "Pods-PlayerSample-TRVSMonitor"
+               BuildableName = "libPods-PlayerSample-TRVSMonitor.a"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableIdentifier = "primary">
             </BuildableReference>

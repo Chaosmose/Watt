@@ -41,6 +41,14 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    /*
+    NSString *p=[[NSBundle mainBundle] pathForResource:@"dataset1" ofType:@"json"];
+    BOOL exists=[[NSFileManager defaultManager] fileExistsAtPath:p isDirectory:NO];
+    WattRegistry *r=[wtmAPI readRegistryFromFile:p];
+    if(exists && r){
+        NSLog(@"BINGO");
+    }
+     */
 }
 /*
     // 1- We create a Graph of object within a WattRegistry (r1)

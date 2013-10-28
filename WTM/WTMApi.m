@@ -16,18 +16,11 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
-        [sharedInstance configureOnce];
+        [WattBundlePackager sharedInstance].api=sharedInstance;
     });
     return sharedInstance;
 }
 
-- (void)configureOnce{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [super configureOnce];
-        [WattBundlePackager sharedInstance].api=self;
-    });
-}
 
 
 #pragma mark - MULTIMEDIA API

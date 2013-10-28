@@ -25,5 +25,6 @@
 #import "Watt.h"
 
 @interface WTMViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

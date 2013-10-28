@@ -32,20 +32,21 @@
     NSString    *_applicationDocumentsDirectory;
 }
 
+- (instancetype)init{
+    self=[super init];
+    if(self){
+        self.fileManager=[[NSFileManager alloc] init];
+        self.mixableExtensions=[NSMutableArray array];
+        self.forcedSoupPaths=[NSMutableArray array];
+    }
+    return self;
+}
+
+
 -(void)use:(Watt_F_TYPE)ftype{
     _ftype=ftype;
 }
 
-
-
-- (void)configureOnce{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        self.fileManager=[[NSFileManager alloc] init];
-        self.mixableExtensions=[NSMutableArray array];
-        self.forcedSoupPaths=[NSMutableArray array];
-    });
-}
 
 
 // system and systemGroup are not in any registry
@@ -541,7 +542,8 @@
 }
 
 -(WattRegistry*)readRegistryFromFile:(NSString*)path{
-    if(![self.fileManager fileExistsAtPath:path]){
+    
+    if(self.fileManager && ![self.fileManager fileExistsAtPath:path isDirectory:NO]){
         [self raiseExceptionWithFormat:@"Unexisting registry path %@",path];
     }
     if(((_ftype==WattPx)||(_ftype==WattP))){

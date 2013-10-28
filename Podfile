@@ -7,6 +7,7 @@ target :PlayerSample do
 	pod 'AFNetworking','~>1.3.1'
 	pod 'SVProgressHUD'
 	pod 'SSZipArchive','~> 0.2.2'
+    pod 'TRVSMonitor',  { :git => 'https://github.com/benoit-pereira-da-silva/TRVSMonitor' }
     xcodeproj 'PlayerSample/PlayerSample.xcodeproj'
     link_with ['PlayerSample','PlayerSample Tests']
 end
@@ -25,8 +26,6 @@ target :WattAuthor do
 	pod 'SSZipArchive','~> 0.2.2'
     xcodeproj 'WattAuthor/WattAuthor.xcodeproj'
 end
-
-
 
 
 #######
