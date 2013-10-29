@@ -66,24 +66,7 @@
 
 
 
-#pragma mark - Downloading
 
-/**
- *  Download then unpack the downloaded pack
- *
- *  @param sourceURL         the url
- *  @param destinationFolder the destination
- *  @param block             the completion block with the success flag an the final path
- */
--(void)unPackFromUrl:(NSURL*)sourceURL
-                   to:(NSString*)destinationFolder
-           withBlock:(void (^)(BOOL success,NSString*path))block;
-
-
-#pragma mark - Uploading
-
-// SHOULD BE IMPLEMENTED PER PROJECT
-// POST to a given URL
 
 
 @end
