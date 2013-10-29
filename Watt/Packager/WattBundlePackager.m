@@ -64,19 +64,29 @@
  *  @param path           the source path
  *  @param block          the completion block with the success flag an the final path
  *  @param backgroundMode should the operation be performed in background
+ *  @param overWrite      if there is an existing destination and set to yes it is overwritten
  */
 -(void)packFolderFromPath:(NSString*)path
                 withBlock:(void (^)(BOOL success, NSString*packPath))block
-        useBackgroundMode:(BOOL)backgroundMode{
+        useBackgroundMode:(BOOL)backgroundMode
+                overWrite:(BOOL)overWrite{
 
     NSString *sourceFolderPath=path;
     sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
     NSString *__weak destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@",self.defaultPackExtension];
     NSInteger i=0;
-    while ([self.fileManager fileExistsAtPath:destinationFilePath]) {
-        destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.%@",i,self.defaultPackExtension];
-        i++;
+    if(overWrite){
+        if([self.fileManager fileExistsAtPath:destinationFilePath]){
+            NSError*error=nil;
+            [self.fileManager removeItemAtPath:destinationFilePath error:&error];
+        }
+    }else{
+        while ([self.fileManager fileExistsAtPath:destinationFilePath]) {
+            destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.%@",i,self.defaultPackExtension];
+            i++;
+        }
     }
+   
     [self zip:sourceFolderPath
            to:destinationFilePath
     withBlock:^(BOOL success) {
@@ -93,15 +103,21 @@
  *  @param destinationFolder the destination
  *  @param block             the completion block with the success flag an the final path
  *  @param backgroundMode    should the operation be performed in background
+ *  @param overWrite        if there is an existing destination and set to yes it is overwritten
  */
 -(void)unPackFromPath:(NSString*)sourcePath
                    to:(NSString*)destinationFolder
             withBlock:(void (^)(BOOL success,NSString*path))block
-    useBackgroundMode:(BOOL)backgroundMode{
+    useBackgroundMode:(BOOL)backgroundMode
+overWrite:(BOOL)overWrite{
     
     if(![self.fileManager fileExistsAtPath:sourcePath]){
         block(NO,nil);
     }else{
+        if([self.fileManager fileExistsAtPath:destinationFolder]){
+            NSError*error=nil;
+            [self.fileManager removeItemAtPath:destinationFolder error:&error];
+        }
         [self _createRecursivelyRequiredFolderForPath:destinationFolder];
         NSString *__weak destination=destinationFolder;
         [self unZip:sourcePath

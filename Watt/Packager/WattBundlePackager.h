@@ -41,10 +41,12 @@
  *  @param path           the source path
  *  @param block          the completion block with the success flag an the final path
  *  @param backgroundMode should the operation be performed in background
+ *  @param overWrite      if there is an existing destination and set to yes it is overwritten
  */
 -(void)packFolderFromPath:(NSString*)path
                     withBlock:(void (^)(BOOL success, NSString*packPath))block
-            useBackgroundMode:(BOOL)backgroundMode;
+            useBackgroundMode:(BOOL)backgroundMode
+                overWrite:(BOOL)overWrite;
 
 
 /**
@@ -54,11 +56,13 @@
  *  @param destinationFolder the destination
  *  @param block             the completion block with the success flag an the final path
  *  @param backgroundMode    should the operation be performed in background
+ *  @param overWrite      if there is an existing destination and set to yes it is overwritten
  */
 -(void)unPackFromPath:(NSString*)sourcePath
                    to:(NSString*)destinationFolder
             withBlock:(void (^)(BOOL success,NSString*path))block
-    useBackgroundMode:(BOOL)backgroundMode;
+    useBackgroundMode:(BOOL)backgroundMode
+   overWrite:(BOOL)overWrite;
 
 
 

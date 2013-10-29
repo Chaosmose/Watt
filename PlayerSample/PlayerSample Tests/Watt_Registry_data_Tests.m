@@ -92,7 +92,8 @@
             [[WattBundlePackager sharedInstance]packFolderFromPath:folderPath
                                                          withBlock:^(BOOL success, NSString *packPath) {
                                                              XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:packPath isDirectory:NO],@"File at path %@ should exist",packPath);
-                                                         } useBackgroundMode:NO];
+                                                         } useBackgroundMode:NO
+                                                         overWrite:YES];
         } reverse:NO];
     }
 }
