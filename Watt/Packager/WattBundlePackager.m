@@ -22,9 +22,7 @@
 
 #import "WattBundlePackager.h"
 #import "SSZipArchive.h"
-#if TARGET_OS_IPHONE
-#import "SVProgressHUD.h"
-#endif
+
 
 @interface WattBundlePackager()<SSZipArchiveDelegate>{
 }
@@ -70,7 +68,7 @@
                 withBlock:(void (^)(BOOL success, NSString*packPath))block
         useBackgroundMode:(BOOL)backgroundMode
                 overWrite:(BOOL)overWrite{
-
+    
     NSString *sourceFolderPath=path;
     sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
     NSString *__weak destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@",self.defaultPackExtension];
@@ -86,7 +84,7 @@
             i++;
         }
     }
-   
+    
     [self zip:sourceFolderPath
            to:destinationFilePath
     withBlock:^(BOOL success) {
@@ -109,20 +107,32 @@
                    to:(NSString*)destinationFolder
             withBlock:(void (^)(BOOL success,NSString*path))block
     useBackgroundMode:(BOOL)backgroundMode
-overWrite:(BOOL)overWrite{
+            overWrite:(BOOL)overWrite{
     
     if(![self.fileManager fileExistsAtPath:sourcePath]){
         block(NO,nil);
     }else{
-        if([self.fileManager fileExistsAtPath:destinationFolder]){
+        NSString *__weak destination=destinationFolder;
+        if([self.fileManager fileExistsAtPath:destinationFolder] && overWrite){
             NSError*error=nil;
             [self.fileManager removeItemAtPath:destinationFolder error:&error];
+        }else{
+            int i=1;
+            while ([self.fileManager fileExistsAtPath:destination]) {
+                i++;
+                destination=[destinationFolder stringByAppendingFormat:@"_%i",i];
+            }
         }
-        [self _createRecursivelyRequiredFolderForPath:destinationFolder];
-        NSString *__weak destination=destinationFolder;
+        [self _createRecursivelyRequiredFolderForPath:destination];
+        
+        WattBundlePackager *__weak weakSelf=self;
+        NSString *__weak weakSourcePath=sourcePath;
         [self unZip:sourcePath
-                 to:destinationFolder
+                 to:destination
           withBlock:^(BOOL success) {
+              NSError *error=nil;
+              [weakSelf.fileManager removeItemAtPath:weakSourcePath
+                                               error:&error];
               block(success,destination);
           }useBackgroundMode:backgroundMode];
     }
@@ -157,11 +167,6 @@ overWrite:(BOOL)overWrite{
 useBackgroundMode:(BOOL)backgroundMode{
     if([self.fileManager fileExistsAtPath:zipSourcePath]){
         if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
-#if TARGET_OS_IPHONE
-            if(backgroundMode){
-                [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
-            }
-#endif
             if(backgroundMode){
                 [self.queue addOperationWithBlock:^{
                     if([SSZipArchive unzipFileAtPath:zipSourcePath
@@ -171,11 +176,6 @@ useBackgroundMode:(BOOL)backgroundMode{
                     }else{
                         block(NO);
                     }
-#if TARGET_OS_IPHONE
-                    [self.queue addOperationWithBlock:^{
-                        [SVProgressHUD dismiss];
-                    }];
-#endif
                 }];
             }else{
                 if([SSZipArchive unzipFileAtPath:zipSourcePath
@@ -221,13 +221,6 @@ useBackgroundMode:(BOOL)backgroundMode{
         if([self.fileManager fileExistsAtPath:destinationZipFilePath]){
             [self.fileManager removeItemAtPath:destinationZipFilePath error:&error];
         }
-#if TARGET_OS_IPHONE
-        if(backgroundMode){
-            
-            [SVProgressHUD showWithStatus:@"Compression"
-                                 maskType:SVProgressHUDMaskTypeBlack];
-        }
-#endif
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
                 if([SSZipArchive createZipFileAtPath:destinationZipFilePath
@@ -245,13 +238,6 @@ useBackgroundMode:(BOOL)backgroundMode{
                 block(NO);
             }
         }
-#if TARGET_OS_IPHONE
-        if(backgroundMode){
-            [self.queue addOperationWithBlock:^{
-                [SVProgressHUD dismiss];
-            }];
-        }
-#endif
     }else{
         block(NO);
     }
