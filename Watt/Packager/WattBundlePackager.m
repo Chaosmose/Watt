@@ -100,7 +100,7 @@
     useBackgroundMode:(BOOL)backgroundMode{
     
     if(![self.fileManager fileExistsAtPath:sourcePath]){
-        WTLog(@"%@ do not exist",sourcePath);
+        block(NO,nil);
     }else{
         [self _createRecursivelyRequiredFolderForPath:destinationFolder];
         NSString *__weak destination=destinationFolder;
