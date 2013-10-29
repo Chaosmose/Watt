@@ -21,30 +21,19 @@
 
 
 #import "WattBundlePackager.h"
-#import "WattApi.h"
+#import "SSZipArchive.h"
+#if TARGET_OS_IPHONE
+#import "SVProgressHUD.h"
+#endif
 
 @interface WattBundlePackager()<SSZipArchiveDelegate>{
-    
 }
-@property (nonatomic,strong) NSMutableArray *objectPool; // This object pool is used to retain ZipArchives during background NSOperation.
-@property (nonatomic,strong) NSOperationQueue *queue;
-
-#pragma mark - ZIP / UNZIP
-
--(void)unZip:(NSString*)zipSourcePath
-          to:(NSString*)destinationFolder
-   withBlock:(void (^)(BOOL success))block
-useBackgroundMode:(BOOL)backgroundMode;;
-
--(void)zip:(NSString*)sourcePath
-        to:(NSString*)destinationZipFilePath
- withBlock:(void (^)(BOOL success))block
-useBackgroundMode:(BOOL)backgroundMode;
-
+@property (nonatomic,strong)    NSOperationQueue *queue;
+@property (atomic,strong)       NSFileManager *fileManager;
 @end
+
 @implementation WattBundlePackager
 
-@synthesize api = _api;
 
 + (WattBundlePackager*)sharedInstance {
     static WattBundlePackager *sharedInstance = nil;
@@ -53,120 +42,119 @@ useBackgroundMode:(BOOL)backgroundMode;
         sharedInstance = [[self alloc] init];
         sharedInstance.queue=[[NSOperationQueue alloc] init];
         [sharedInstance.queue setMaxConcurrentOperationCount:1];
-        sharedInstance.objectPool=[NSMutableArray array];
+        sharedInstance.fileManager=[[NSFileManager alloc]init];
     });
     return sharedInstance;
 }
 
 
--(WattApi*)api{
-    if(!_api){
-        [NSException raise:@"WattBundlePackager" format:@"api must be set when using WattBundlePackager"];
+- (NSString*)defaultPackExtension{
+    if(!_defaultPackExtension){
+        self.defaultPackExtension=@".watt";
     }
-    return _api;
+    return _defaultPackExtension;
 }
-
--(void)setApi:(WattApi *)api{
-    _api=api;
-}
-
-
 
 #pragma mark -
 
 
+/**
+ *  Pack the folder
+ *
+ *  @param path           the source path
+ *  @param block          the completion block with the success flag an the final path
+ *  @param backgroundMode should the operation be performed in background
+ */
 -(void)packFolderFromPath:(NSString*)path
-                withBlock:(void (^)(BOOL success))block
-        useBackgroundMode:(BOOL)backgroundMode
-            withExtension:(NSString*)extension{
-
+                withBlock:(void (^)(BOOL success, NSString*packPath))block
+        useBackgroundMode:(BOOL)backgroundMode{
 
     NSString *sourceFolderPath=path;
     sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
-    NSString *destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@",extension?extension:@"zip"];
+    NSString *__weak destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@",self.defaultPackExtension];
     NSInteger i=0;
-    while ([self.api.fileManager fileExistsAtPath:destinationFilePath]) {
-        destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.%@",i,extension?extension:@"zip"];
+    while ([self.fileManager fileExistsAtPath:destinationFilePath]) {
+        destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.%@",i,self.defaultPackExtension];
         i++;
     }
     [self zip:sourceFolderPath
            to:destinationFilePath
     withBlock:^(BOOL success) {
-        block(success);
+        block(success,destinationFilePath);
     } useBackgroundMode:backgroundMode];
     
 }
 
 
-
--(void)unPackFromPath:(NSString*)path
-            withBlock:(void (^)(BOOL success))block
+/**
+ *  Unpack
+ *
+ *  @param sourcePath        the source path
+ *  @param destinationFolder the destination
+ *  @param block             the completion block with the success flag an the final path
+ *  @param backgroundMode    should the operation be performed in background
+ */
+-(void)unPackFromPath:(NSString*)sourcePath
+                   to:(NSString*)destinationFolder
+            withBlock:(void (^)(BOOL success,NSString*path))block
     useBackgroundMode:(BOOL)backgroundMode{
-    NSString *zipSourcePath=path;
-    NSString *destinationFolder=[zipSourcePath stringByDeletingLastPathComponent];
-    if(![self.api.fileManager fileExistsAtPath:zipSourcePath]){
-        WTLog(@"%@ do not exist",zipSourcePath);
-    }else{
-        [self.api createRecursivelyRequiredFolderForPath:destinationFolder];
-        [self unZip:zipSourcePath
-                 to:destinationFolder
-          withBlock:^(BOOL success) {
-              block(success);
-          }useBackgroundMode:backgroundMode];
-    }
-}
-
-
-
-
-
-
-#pragma mark - packaging
-
-
-
--(void)packWattBundleWithName:(NSString*)name
-                    withBlock:(void (^)(BOOL success))block
-            useBackgroundMode:(BOOL)backgroundMode{
-    NSString *sourceFolderPath=[self.api absolutePathForRegistryBundleWithName:name];
-    sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
-    NSString *destinationFilePath=[sourceFolderPath stringByAppendingString:@".zip"];;
-    NSInteger i=0;
-    while ([self.api.fileManager fileExistsAtPath:destinationFilePath]) {
-        destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.zip",i];
-        i++;
-    }
-    [self zip:sourceFolderPath
-           to:destinationFilePath
-    withBlock:^(BOOL success) {
-        block(success);
-    } useBackgroundMode:backgroundMode];
-}
-
-
-
--(void)unPackWattBundleWithName:(NSString*)name
-                      withBlock:(void (^)(BOOL success))block
-              useBackgroundMode:(BOOL)backgroundMode{
     
-    NSString *p=[[[self.api absolutePathForRegistryBundleWithName:name] lastPathComponent] stringByReplacingOccurrencesOfString:@"/" withString:@""];
-    NSString *zipSourcePath=[[NSBundle mainBundle] pathForResource:p ofType:@".zip"];
-    NSString *folderName=[[zipSourcePath lastPathComponent] stringByReplacingOccurrencesOfString:@".zip" withString:@""];
-    NSString *destinationFolder=[[self.api applicationDocumentsDirectory] stringByAppendingString:folderName];
-    if(![self.api.fileManager fileExistsAtPath:zipSourcePath]){
-        zipSourcePath=[[self.api applicationDocumentsDirectory] stringByAppendingString:[zipSourcePath lastPathComponent]];
-    }
-    if(![self.api.fileManager fileExistsAtPath:zipSourcePath]){
-        WTLog(@"%@ do not exist",zipSourcePath);
+    if(![self.fileManager fileExistsAtPath:sourcePath]){
+        WTLog(@"%@ do not exist",sourcePath);
     }else{
-        [self.api createRecursivelyRequiredFolderForPath:destinationFolder];
-        [self unZip:zipSourcePath
+        [self _createRecursivelyRequiredFolderForPath:destinationFolder];
+        NSString *__weak destination=destinationFolder;
+        [self unZip:sourcePath
                  to:destinationFolder
           withBlock:^(BOOL success) {
-              block(success);
+              block(success,destination);
           }useBackgroundMode:backgroundMode];
     }
 }
+
+
+
+-(BOOL)_createRecursivelyRequiredFolderForPath:(NSString*)path{
+    if(![[path substringFromIndex:path.length-1] isEqualToString:@"/"])
+        path=[path stringByDeletingLastPathComponent];
+    
+    if(![self.fileManager fileExistsAtPath:path]){
+        NSError *error=nil;
+        [self.fileManager createDirectoryAtPath:path
+                    withIntermediateDirectories:YES
+                                     attributes:nil
+                                          error:&error];
+        if(error){
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
+#pragma mark - Downloading
+
+/**
+ *  Download then unpack the downloaded pack
+ *
+ *  @param sourceURL         the url
+ *  @param destinationFolder the destination
+ *  @param block             the completion block with the success flag an the final path
+ */
+-(void)unPackFromUrl:(NSURL*)sourceURL
+                  to:(NSString*)destinationFolder
+           withBlock:(void (^)(BOOL success,NSString*path))block{
+    
+}
+
+
+#pragma mark - Uploading
+
+// SHOULD BE IMPLEMENTED PER PROJECT
+// POST to a given URL
+
+
+
 
 
 
@@ -176,8 +164,8 @@ useBackgroundMode:(BOOL)backgroundMode;
           to:(NSString*)destinationFolder
    withBlock:(void (^)(BOOL success))block
 useBackgroundMode:(BOOL)backgroundMode{
-    if([self.api.fileManager fileExistsAtPath:zipSourcePath]){
-        if([self.api createRecursivelyRequiredFolderForPath:destinationFolder]){
+    if([self.fileManager fileExistsAtPath:zipSourcePath]){
+        if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
 #if TARGET_OS_IPHONE
             if(backgroundMode){
                 [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeGradient];
@@ -238,9 +226,9 @@ useBackgroundMode:(BOOL)backgroundMode{
  withBlock:(void (^)(BOOL success))block
 useBackgroundMode:(BOOL)backgroundMode{
     NSError*error=nil;
-    if([self.api.fileManager fileExistsAtPath:sourcePath]){
-        if([self.api.fileManager fileExistsAtPath:destinationZipFilePath]){
-            [self.api.fileManager removeItemAtPath:destinationZipFilePath error:&error];
+    if([self.fileManager fileExistsAtPath:sourcePath]){
+        if([self.fileManager fileExistsAtPath:destinationZipFilePath]){
+            [self.fileManager removeItemAtPath:destinationZipFilePath error:&error];
         }
 #if TARGET_OS_IPHONE
         if(backgroundMode){
@@ -282,7 +270,7 @@ useBackgroundMode:(BOOL)backgroundMode{
 
 
 -(void)_addFolder:(NSString*)path pathPrefix:(NSString*)prefix toMapping:(NSMutableDictionary**)dictionary{
-    NSFileManager *fm=self.api.fileManager;
+    NSFileManager *fm=self.fileManager;
 	NSArray		*dirArray = [fm contentsOfDirectoryAtPath:path
                                                  error:nil];
     int nb=[dirArray count];
@@ -299,17 +287,6 @@ useBackgroundMode:(BOOL)backgroundMode{
 	}
 }
 
-
-#pragma mark ZipArchiveDelegate
-
-
--(void)ErrorMessage:(NSString *)msg{
-    WTLog(@"ZipArchiveDelegate ERROR : %@",msg);
-}
-
--(BOOL)OverWriteOperation:(NSString *)file{
-    return YES;
-}
 
 
 @end

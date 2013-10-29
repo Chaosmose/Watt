@@ -20,51 +20,66 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SSZipArchive.h"
-
-#if TARGET_OS_IPHONE
-#import "SVProgressHUD.h"
-#endif
-
-@class WattApi;
-
 
 @interface WattBundlePackager : NSObject
 
 // WTMPackager singleton accessor
 + (WattBundlePackager*)sharedInstance;
 
-// You must set the this property before to use the WattBundlePackager
-@property (nonatomic,weak) WattApi *api;
+
+/**
+ *  By default ".watt" you can use your own packExtension
+ */
+@property (nonatomic,copy) NSString *defaultPackExtension;
+
+#pragma mark - Packaging
 
 
-
-#pragma mark -
-
-
+/**
+ *  Pack the folder
+ *
+ *  @param path           the source path
+ *  @param block          the completion block with the success flag an the final path
+ *  @param backgroundMode should the operation be performed in background
+ */
 -(void)packFolderFromPath:(NSString*)path
-                    withBlock:(void (^)(BOOL success))block
-            useBackgroundMode:(BOOL)backgroundMode
-        withExtension:(NSString*)extension;
+                    withBlock:(void (^)(BOOL success, NSString*packPath))block
+            useBackgroundMode:(BOOL)backgroundMode;
 
--(void)unPackFromPath:(NSString*)path
-            withBlock:(void (^)(BOOL success))block
+
+/**
+ *  Unpack
+ *
+ *  @param sourcePath        the source path
+ *  @param destinationFolder the destination
+ *  @param block             the completion block with the success flag an the final path
+ *  @param backgroundMode    should the operation be performed in background
+ */
+-(void)unPackFromPath:(NSString*)sourcePath
+                   to:(NSString*)destinationFolder
+            withBlock:(void (^)(BOOL success,NSString*path))block
     useBackgroundMode:(BOOL)backgroundMode;
 
 
 
+#pragma mark - Downloading
 
-// LEGACY APPROACH
+/**
+ *  Download then unpack the downloaded pack
+ *
+ *  @param sourceURL         the url
+ *  @param destinationFolder the destination
+ *  @param block             the completion block with the success flag an the final path
+ */
+-(void)unPackFromUrl:(NSURL*)sourceURL
+                   to:(NSString*)destinationFolder
+           withBlock:(void (^)(BOOL success,NSString*path))block;
 
 
-#pragma mark - packaging
+#pragma mark - Uploading
 
--(void)packWattBundleWithName:(NSString*)name
-                    withBlock:(void (^)(BOOL success))block
-            useBackgroundMode:(BOOL)backgroundMode;
+// SHOULD BE IMPLEMENTED PER PROJECT
+// POST to a given URL
 
--(void)unPackWattBundleWithName:(NSString*)name
-                      withBlock:(void (^)(BOOL success))block
-              useBackgroundMode:(BOOL)backgroundMode;
 
 @end

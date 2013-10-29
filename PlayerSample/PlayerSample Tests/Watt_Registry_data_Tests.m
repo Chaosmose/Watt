@@ -32,8 +32,7 @@
 }
 
 
-- (void)testActivityExport{
-    
+- (void)testExtractionAndPackaging{
     
     NSString *p=[[NSBundle mainBundle] pathForResource:@"dataset1" ofType:@"json"];
     XCTAssertTrue(p, "The dataset path should not be nil");
@@ -90,13 +89,10 @@
                 }
             }];
             
-            
-            [WattBundlePackager sharedInstance].api=weakApi;
             [[WattBundlePackager sharedInstance]packFolderFromPath:folderPath
-                                                         withBlock:^(BOOL success) {}
-                                                 useBackgroundMode:NO
-                                                     withExtension:@"watt"];
-            
+                                                         withBlock:^(BOOL success, NSString *packPath) {
+                                                             XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:packPath isDirectory:NO],@"File at path %@ should exist",packPath);
+                                                         } useBackgroundMode:NO];
         } reverse:NO];
     }
 }
