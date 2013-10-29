@@ -50,7 +50,7 @@
 
 - (NSString*)defaultPackExtension{
     if(!_defaultPackExtension){
-        self.defaultPackExtension=@".watt";
+        self.defaultPackExtension=@"watt";
     }
     return _defaultPackExtension;
 }
