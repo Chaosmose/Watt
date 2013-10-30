@@ -72,12 +72,14 @@
  */
 @property (nonatomic) BOOL hasChanged;
 
+
 /**
  *  Execute the block and autosaves
  *
  *  @param block of modification of object in the registry.
  */
 - (void)executeAndAutoSaveBlock:(void (^)())block;
+
 
 #pragma mark - Serialization/Deserialization facilities
 
@@ -109,7 +111,7 @@
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block;
 
 
-#pragma mark -
+#pragma mark - counters
 
 /**
  *  Returns the number of live referenced objects.
@@ -118,5 +120,33 @@
  */
 - (NSUInteger)count;
 
+/**
+ *  Gives the next uisntID (used for merging for example)
+ *
+ *  @return return an uinstID > the last uinstID
+ */
+- (NSUInteger)nextUinstID;
+
+
+#pragma mark - Merging 
+
+/**
+ *  Merge the registryToAdd into the current registry
+ *  During the merging the registry to be added will be destroyed.
+ *
+ *  @param registryToAdd the registry to add
+ *
+ *  @return a success flag
+ */
+- (BOOL)mergeWithRegistry:(WattRegistry*)registryToAdd;
+
+
+#pragma mark - Destroy
+
+
+/**
+ *  Destroys the registry ( used in merging process for example)
+ */
+- (void)destroyRegistry;
 
 @end

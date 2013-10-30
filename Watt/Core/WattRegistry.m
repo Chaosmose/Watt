@@ -24,6 +24,27 @@
 #import "WattRegistry.h"
 #import "Watt.h"
 
+#pragma  mark - WattObject reidentification
+
+@interface WattObject (Invisible){
+}
+    /**
+     *  Do not call directly
+     *  This selector is used during initialization or merging
+     *
+     *  @param identifier the uinsID;
+     */
+    - (void)identifyWithUinstId:(NSInteger)identifier;
+@end
+
+@implementation WattObject(Invisible)
+- (void)identifyWithUinstId:(NSInteger)identifier{
+    self->_uinstID=identifier;
+}
+@end
+
+#pragma  mark - WattRegistry
+
 @interface WattRegistry (){
 }
 
@@ -275,7 +296,6 @@
         _uinstIDCounter=MAX(reference.uinstID, _uinstIDCounter);
         [self addObject:reference];
     }
-    self.hasChanged=YES;
 }
 
 - (void)addObject:(WattObject *)reference{
@@ -297,6 +317,8 @@
     }else{
         [NSException raise:@"Registry" format:@"Unsuccessfull attempt to add a reference"];
     }
+    _uinstIDCounter=MAX(reference.uinstID, _uinstIDCounter);
+    self.hasChanged=YES;
 }
 
 
@@ -337,7 +359,7 @@
 
 
 
-#pragma mark -
+#pragma mark - Counters
 
 /**
  *  Returns the number of live referenced objects.
@@ -346,6 +368,57 @@
  */
 - (NSUInteger)count{
     return [[self _sortedKeys] count];
+}
+
+
+
+/**
+ *  Gives the next uisntID (used for merging for example)
+ *
+ *  @return return an uinstID > the last uinstID
+ */
+- (NSUInteger)nextUinstID{
+    return _uinstIDCounter+1;
+}
+
+
+
+#pragma mark - Merging
+
+/**
+ *  Merge the registryToAdd into the current registry
+ *
+ *  @param registryToAdd the registry to add
+ *
+ *  @return a success flag
+ */
+- (BOOL)mergeWithRegistry:(WattRegistry*)registryToAdd{
+    BOOL __block success=YES;
+    [registryToAdd enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        [obj identifyWithUinstId:obj.uinstID+[self nextUinstID]];
+        [self addObject:obj];
+    }];
+    [registryToAdd destroyRegistry];
+    return success;
+}
+
+
+
+#pragma mark - Destroy
+
+
+/**
+ *  Destroys the registry ( used in merging process for example)
+ */
+- (void)destroyRegistry{
+    _uinstIDCounter=0;
+    _registry=nil;
+    _history=nil;
+    __sortedKeys=nil;
+    _name=nil;
+    _hasChanged=NO;
+    _autosave=NO;
+    _apiReference=nil;
 }
 
 

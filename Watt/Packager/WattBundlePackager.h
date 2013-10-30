@@ -20,6 +20,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SSZipArchive.h"
 
 @interface WattBundlePackager : NSObject
 
@@ -33,7 +34,6 @@
 @property (nonatomic,copy) NSString *defaultPackExtension;
 
 #pragma mark - Packaging
-
 
 /**
  *  Pack the folder

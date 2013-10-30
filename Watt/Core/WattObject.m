@@ -246,15 +246,7 @@
     return _uinstID;
 }
 
-- (void)identifyWithUinstId:(NSInteger)identifier{
-    if(_uinstID==0){
-        _uinstID=identifier;
-    }else if(identifier==_uinstID){
-        [NSException raise:@"Registry" format:@"Attempt to re-identify an instance"];
-    }else{
-        [NSException raise:@"Registry" format:@"Attempt to change the identity of an instance"];
-    }
-}
+
 
 - (void)localize{
     if(![self hasBeenLocalized]){

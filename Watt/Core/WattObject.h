@@ -198,12 +198,6 @@ __LINE__ ,\
 // autoUnRegister is a facility
 -(void)autoUnRegister;
 
-// Do not call directly!
-// This selector is used during initialization.
-// If used twice will raise an exception "Attempt to re-identify an instance"
-- (void)identifyWithUinstId:(NSInteger)identifier;
-
-
 #pragma mark - Aliasing
 
 - (BOOL)isAnAlias;
