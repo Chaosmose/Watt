@@ -66,7 +66,7 @@
 	instance->_referenceUinstID=_referenceUinstID;
 	instance->_urlString=[_urlString copy];
 	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
-	instance->_menuSection=[_menuSection extractInstancebyCopyTo:destinationRegistry];
+	instance->_menuSection=nil;// Non extractible
 	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
 	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
     return instance;

@@ -808,8 +808,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5A9EC301799242F00976997 /* Build configuration list for PBXNativeTarget "PlayerSampleFlexions" */;
 			buildPhases = (
-				538282EF462C439C904D16E0 /* Check Pods Manifest.lock */,
 				E5A9EBEE1799242F00976997 /* Invoke Flexions */,
+				538282EF462C439C904D16E0 /* Check Pods Manifest.lock */,
 				E5A9EBF01799242F00976997 /* Sources */,
 				E5A9EC231799242F00976997 /* Frameworks */,
 				E5A9EC281799242F00976997 /* Resources */,

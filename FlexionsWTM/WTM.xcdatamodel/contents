@@ -125,7 +125,11 @@
         <attribute name="referenceUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
-        <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES"/>
+        <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES">
+            <userInfo>
+                <entry key="extractible" value="no"/>
+            </userInfo>
+        </relationship>
         <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
         <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
     </entity>
@@ -135,7 +139,11 @@
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="menus" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" inverseName="menuSection" inverseEntity="Menu" syncable="YES"/>
         <relationship name="picture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Image" syncable="YES"/>
-        <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="sections" inverseEntity="Shelf" syncable="YES"/>
+        <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="sections" inverseEntity="Shelf" syncable="YES">
+            <userInfo>
+                <entry key="extractible" value="no"/>
+            </userInfo>
+        </relationship>
     </entity>
     <entity name="Package" representedClassName="Package" syncable="YES">
         <attribute name="license" optional="YES" attributeType="String" syncable="YES"/>

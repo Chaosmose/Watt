@@ -35,7 +35,7 @@
 @property (nonatomic,assign) NSInteger  referenceUinstID;
 @property (nonatomic,copy) NSString * urlString;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
-@property (nonatomic,strong) WTMMenuSection * menuSection;
+@property (nonatomic,strong) WTMMenuSection * menuSection;// non extractible
 @property (nonatomic,strong) WTMMenu * parent;
 @property (nonatomic,strong) WTMImage * picture;
 

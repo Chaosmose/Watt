@@ -58,7 +58,7 @@
 	instance->_label=[_label copy];
 	instance->_menus=[_menus extractInstancebyCopyTo:destinationRegistry];
 	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
-	instance->_shelf=[_shelf extractInstancebyCopyTo:destinationRegistry];
+	instance->_shelf=nil;// Non extractible
     return instance;
 }
 

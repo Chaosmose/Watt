@@ -33,7 +33,7 @@
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,strong) WTMCollectionOfMenu * menus;
 @property (nonatomic,strong) WTMImage * picture;
-@property (nonatomic,strong) WTMShelf * shelf;
+@property (nonatomic,strong) WTMShelf * shelf;// non extractible
 
 - (WTMCollectionOfMenu*)menus_auto;
 - (WTMImage*)picture_auto;
