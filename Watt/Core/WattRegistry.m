@@ -24,22 +24,34 @@
 #import "WattRegistry.h"
 #import "Watt.h"
 
-#pragma  mark - WattObject reidentification
+#pragma  mark - WattObject reIdentification invisible category
 
 @interface WattObject (Invisible){
 }
-    /**
-     *  Do not call directly
-     *  This selector is used during initialization or merging
-     *
-     *  @param identifier the uinsID;
-     */
-    - (void)identifyWithUinstId:(NSInteger)identifier;
+/**
+ *  Do not call directly
+ *  This selector is used during initialization or merging
+ *
+ *  @param identifier the uinsID;
+ */
+- (void)identifyWithUinstId:(NSInteger)identifier;
+
+/**
+ *  Do not call directly
+ *  This selector is used during merging
+ *
+ *  @param registry the destination registry
+ */
+- (void)moveToRegistry:(WattRegistry*)registry;
+
 @end
 
 @implementation WattObject(Invisible)
 - (void)identifyWithUinstId:(NSInteger)identifier{
     self->_uinstID=identifier;
+}
+- (void)moveToRegistry:(WattRegistry*)registry{
+    self->_registry=registry;
 }
 @end
 
@@ -396,6 +408,7 @@
     BOOL __block success=YES;
     [registryToAdd enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
         [obj identifyWithUinstId:obj.uinstID+[self nextUinstID]];
+        [obj moveToRegistry:self];
         [self addObject:obj];
     }];
     [registryToAdd destroyRegistry];
@@ -405,7 +418,6 @@
 
 
 #pragma mark - Destroy
-
 
 /**
  *  Destroys the registry ( used in merging process for example)
