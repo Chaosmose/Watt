@@ -370,6 +370,20 @@
 }
 
 
+- (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
+    NSUInteger idx = 0;
+    BOOL stop = NO;
+    NSEnumerator * enumerator=useReverseEnumeration?[[self _sortedKeys] reverseObjectEnumerator]: [[self _sortedKeys] objectEnumerator];
+    for(NSString*key  in enumerator){
+        WattObject*obj =[_registry objectForKey:key];
+        block(obj, idx++, &stop);
+        if( stop )
+            break;
+    }
+
+}
+
+
 
 #pragma mark - Counters
 

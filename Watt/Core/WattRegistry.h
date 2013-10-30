@@ -108,7 +108,22 @@
 
 - (id)objectsWithClass:(Class)theClass andPrefix:(NSString*)prefix returningRegistry:(WattRegistry*)registry;
 
+#pragma  mark - Enumeration
+
+/**
+ *  Enumerates the objects to perform block based action on the objects
+ *
+ *  @param block the block can be stopped by setting stop=YES;
+ */
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block;
+
+/**
+ *  Enumerates the objects to perform block based action on the objects
+ *
+ *  @param block                 the block can be stopped by setting stop=YES;
+ *  @param useReverseEnumeration if YES the enumeration order is reversed ( usefull for deletion ) 
+ */
+- (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 
 
 #pragma mark - counters
