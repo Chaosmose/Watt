@@ -22,7 +22,6 @@
 
 #import "WattModel.h"
 @class WTMCollectionOfActivity;
-@class WTMLangDictionary;
 @class WTMCollectionOfLibrary;
 @class WTMImage;
 @class WTMShelf;
@@ -34,13 +33,11 @@
 @property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
-@property (nonatomic,strong) WTMLangDictionary * langDictionary;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMShelf * shelf;// non extractible
 
 - (WTMCollectionOfActivity*)activities_auto;
-- (WTMLangDictionary*)langDictionary_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
 - (WTMImage*)picture_auto;
 - (WTMShelf*)shelf_auto;

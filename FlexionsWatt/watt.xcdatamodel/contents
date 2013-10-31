@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13A603" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
@@ -34,7 +34,7 @@
     </entity>
     <elements>
         <element name="Group" positionX="-8237" positionY="-4680" width="128" height="90"/>
-        <element name="Model" positionX="-8091" positionY="-4929" width="128" height="148"/>
+        <element name="Model" positionX="-8127" positionY="-4932" width="128" height="148"/>
         <element name="User" positionX="-7974" positionY="-4680" width="128" height="90"/>
     </elements>
 </model>

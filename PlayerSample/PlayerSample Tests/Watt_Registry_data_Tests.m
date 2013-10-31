@@ -34,7 +34,7 @@
 
 - (void)testExtractionAndPackaging{
     
-    NSString *p=[[NSBundle mainBundle] pathForResource:@"dataset1" ofType:@"json"];
+    NSString *p=[[NSBundle bundleForClass:[self class]] pathForResource:@"dataset1" ofType:@"json"];
     XCTAssertTrue(p, "The dataset path should not be nil");
     
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:p isDirectory:NO], @"dataset file should exist at path : %@",p);

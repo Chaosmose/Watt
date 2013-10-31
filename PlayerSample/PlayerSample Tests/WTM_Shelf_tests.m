@@ -126,8 +126,6 @@
     WTMShelf *shelf=[[WTMShelf alloc]initInRegistry:registry];
     // With one package
     WTMPackage *p=[wtmAPI createPackageInShelf:shelf];
-    // With one lang dictionary
-    [p langDictionary_auto];
     // Containing one library
     [wtmAPI createLibraryInPackage:p];
     

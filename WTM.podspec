@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = 'WTM'
-  s.version     = '0.4'
+  s.version     = '0.5'
   s.authors     = { 'Benoit Pereira da Silva' => 'benoit@pereira-da-silva.com' }
   s.homepage    = 'https://https://github.com/benoit-pereira-da-silva/Watt'
   s.summary     = 'A multimedia - hypermedia engine'

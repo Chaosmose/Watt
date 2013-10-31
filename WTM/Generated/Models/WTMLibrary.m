@@ -20,14 +20,12 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMLibrary.h" 
-#import "WTMCollectionOfBand.h"
 #import "WTMCollectionOfMember.h"
 #import "WTMPackage.h"
 
 @implementation WTMLibrary 
 
 @synthesize name=_name;
-@synthesize bands=_bands;
 @synthesize members=_members;
 @synthesize package=_package;
 
@@ -38,7 +36,6 @@
 	WTMLibrary *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_name=[_name copy];
-	instance->_bands=[_bands instancebyCopyTo:destinationRegistry];
 	instance->_members=[_members instancebyCopyTo:destinationRegistry];
 	instance->_package=[_package instancebyCopyTo:destinationRegistry];
     return instance;
@@ -50,7 +47,6 @@
 	WTMLibrary *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_name=[_name copy];
-	instance->_bands=[_bands extractInstancebyCopyTo:destinationRegistry];
 	instance->_members=[_members extractInstancebyCopyTo:destinationRegistry];
 	instance->_package=nil;// Non extractible
     return instance;
@@ -65,8 +61,6 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"bands"]) {
-		[super setValue:[WTMCollectionOfBand instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"bands"];
 	} else if ([key isEqualToString:@"members"]) {
 		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"members"];
 	} else if ([key isEqualToString:@"package"]) {
@@ -74,29 +68,6 @@
 	} else {
 		[super setValue:value forKey:key];
 	}
-}
-
-- (WTMCollectionOfBand*)bands{
-	if([_bands isAnAlias]){
-		id o=[_registry objectWithUinstID:_bands.uinstID];
-		if(o){
-			_bands=o;
-		}
-	}
-	return _bands;
-}
-
-
-- (WTMCollectionOfBand*)bands_auto{
-	_bands=[self bands];
-	if(!_bands){
-		_bands=[[WTMCollectionOfBand alloc] initInRegistry:_registry];
-	}
-	return _bands;
-}
-
-- (void)setBands:(WTMCollectionOfBand*)bands{
-	_bands=bands;
 }
 
 - (WTMCollectionOfMember*)members{
@@ -157,13 +128,6 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.name forKey:@"name"];
-	if(self.bands){
-		if(includeChildren){
-			[dictionary setValue:[self.bands dictionaryRepresentationWithChildren:includeChildren] forKey:@"bands"];
-		}else{
-			[dictionary setValue:[self.bands aliasDictionaryRepresentation] forKey:@"bands"];
-		}
-	}
 	if(self.members){
 		if(includeChildren){
 			[dictionary setValue:[self.members dictionaryRepresentationWithChildren:includeChildren] forKey:@"members"];
@@ -188,7 +152,6 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMLibrary ",self.uinstID];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"bands : %@\n",NSStringFromClass([self.bands class])];
 	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
 	return s;

@@ -192,7 +192,6 @@
         WTMPackage *package=[[WTMPackage alloc] initInRegistry:self.currentRegistry];
         package.objectName=[self uuidString];// We create a uuid for each package and library to deal with linked assets
         [shelf.packages_auto addObject:package];
-        [package langDictionary_auto];
         package.shelf=shelf;
         
         // We create a default library
@@ -218,8 +217,6 @@
         [package.libraries enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
             [self removeLibrary:obj];
         }reverse:YES];
-        
-        [package.langDictionary autoUnRegister];
         
         [package.shelf.packages removeObject:package];
         package.shelf=nil;
@@ -270,10 +267,6 @@
 
 - (void)removeLibrary:(WTMLibrary*)library{
     if([self actionIsAllowed:WattWRITE on:library.package]){
-        
-        [library.bands enumerateObjectsUsingBlock:^(WTMBand *obj, NSUInteger idx, BOOL *stop) {
-            [self removeBand:obj];
-        }reverse:YES];
         
         [library.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
             [self removeMember:obj];
@@ -598,50 +591,6 @@
 }
 
 
-
-#pragma mark -  Bands
-
-// Bands
-- (WTMBand*)createBandInLibrary:(WTMLibrary*)library
-                    withMembers:(NSArray*)members{
-    if([self actionIsAllowed:WattWRITE on:library]){
-        WTMBand *band=[[WTMBand alloc] initInRegistry:self.currentRegistry];
-        band.library=library;
-        [library.bands_auto addObject:band];
-        for (WTMMember *member in members) {
-            // We do verify the casting
-            if([member isKindOfClass:[WTMMember class]]){
-                [band.members_auto addObject:member];
-            }else{
-                [self raiseExceptionWithFormat:@"Attempt to add %@ in a non WTM Member %@",member,NSStringFromSelector(@selector(createBandInLibrary:withMembers:))];
-            }
-        }
-        return band;
-    }
-    return nil;
-}
-
-- (void)purgeBandIfNecessary:(WTMBand*)band{
-    if([self actionIsAllowed:WattWRITE on:band]){
-        [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
-            [self purgeMemberIfNecessary:obj];
-        }reverse:NO];
-        [band.library.bands removeObject:band];
-        band.members=nil;
-        [band autoUnRegister];
-    }
-}
-
-
-// Removing band  will remove and force the purge.
-- (void)removeBand:(WTMBand*)band{
-    [band.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
-        [self removeMember:obj];
-    }reverse:YES];
-    [band.library.bands removeObject:band];
-    band.members=nil;
-    [band autoUnRegister];
-}
 
 
 

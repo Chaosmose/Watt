@@ -390,7 +390,6 @@
                         return result;
                 }
             }
-            
         }
     }
     return result;
@@ -600,17 +599,6 @@
     @finally {
     }
     return nil;
-}
-
-
-#pragma mark - localization
-
-- (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value{
-    if(_localizationDelegate){
-        [_localizationDelegate localize:reference withKey:key andValue:value];
-    }else{
-        // Default localization policy
-    }
 }
 
 #pragma mark -utilities

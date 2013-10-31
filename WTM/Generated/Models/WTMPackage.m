@@ -21,7 +21,6 @@
  
 #import "WTMPackage.h" 
 #import "WTMCollectionOfActivity.h"
-#import "WTMLangDictionary.h"
 #import "WTMCollectionOfLibrary.h"
 #import "WTMImage.h"
 #import "WTMShelf.h"
@@ -32,7 +31,6 @@
 @synthesize minEngineVersion=_minEngineVersion;
 @synthesize name=_name;
 @synthesize activities=_activities;
-@synthesize langDictionary=_langDictionary;
 @synthesize libraries=_libraries;
 @synthesize picture=_picture;
 @synthesize shelf=_shelf;
@@ -47,7 +45,6 @@
 	instance->_minEngineVersion=_minEngineVersion;
 	instance->_name=[_name copy];
 	instance->_activities=[_activities instancebyCopyTo:destinationRegistry];
-	instance->_langDictionary=[_langDictionary instancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries instancebyCopyTo:destinationRegistry];
 	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
 	instance->_shelf=[_shelf instancebyCopyTo:destinationRegistry];
@@ -63,7 +60,6 @@
 	instance->_minEngineVersion=_minEngineVersion;
 	instance->_name=[_name copy];
 	instance->_activities=[_activities extractInstancebyCopyTo:destinationRegistry];
-	instance->_langDictionary=[_langDictionary extractInstancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries extractInstancebyCopyTo:destinationRegistry];
 	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
 	instance->_shelf=nil;// Non extractible
@@ -85,8 +81,6 @@
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
-	} else if ([key isEqualToString:@"langDictionary"]) {
-		[super setValue:[WTMLangDictionary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"langDictionary"];
 	} else if ([key isEqualToString:@"libraries"]) {
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
 	} else if ([key isEqualToString:@"picture"]) {
@@ -119,29 +113,6 @@
 
 - (void)setActivities:(WTMCollectionOfActivity*)activities{
 	_activities=activities;
-}
-
-- (WTMLangDictionary*)langDictionary{
-	if([_langDictionary isAnAlias]){
-		id o=[_registry objectWithUinstID:_langDictionary.uinstID];
-		if(o){
-			_langDictionary=o;
-		}
-	}
-	return _langDictionary;
-}
-
-
-- (WTMLangDictionary*)langDictionary_auto{
-	_langDictionary=[self langDictionary];
-	if(!_langDictionary){
-		_langDictionary=[[WTMLangDictionary alloc] initInRegistry:_registry];
-	}
-	return _langDictionary;
-}
-
-- (void)setLangDictionary:(WTMLangDictionary*)langDictionary{
-	_langDictionary=langDictionary;
 }
 
 - (WTMCollectionOfLibrary*)libraries{
@@ -234,13 +205,6 @@
 			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"activities"];
 		}
 	}
-	if(self.langDictionary){
-		if(includeChildren){
-			[dictionary setValue:[self.langDictionary dictionaryRepresentationWithChildren:includeChildren] forKey:@"langDictionary"];
-		}else{
-			[dictionary setValue:[self.langDictionary aliasDictionaryRepresentation] forKey:@"langDictionary"];
-		}
-	}
 	if(self.libraries){
 		if(includeChildren){
 			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"libraries"];
@@ -275,7 +239,6 @@
 	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
-	[s appendFormat:@"langDictionary : %@\n",NSStringFromClass([self.langDictionary class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];

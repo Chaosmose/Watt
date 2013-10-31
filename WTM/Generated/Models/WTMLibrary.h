@@ -21,7 +21,6 @@
  
 
 #import "WattModel.h"
-@class WTMCollectionOfBand;
 @class WTMCollectionOfMember;
 @class WTMPackage;
 
@@ -29,11 +28,9 @@
 }
 
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,strong) WTMCollectionOfBand * bands;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
 @property (nonatomic,strong) WTMPackage * package;// non extractible
 
-- (WTMCollectionOfBand*)bands_auto;
 - (WTMCollectionOfMember*)members_auto;
 - (WTMPackage*)package_auto;
 

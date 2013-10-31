@@ -24,7 +24,6 @@
 @class WattCollectionOfGroup;
 @class WattCollectionOfUser;
 @class WTMCollectionOfPackage;
-@class WTMCollectionOfImage;
 @class WTMCollectionOfMenuSection;
 
 @interface WTMShelf:WattModel<WattCoding,WattCopying,WattExtraction>{
@@ -34,13 +33,11 @@
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WattCollectionOfUser * users;
 @property (nonatomic,strong) WTMCollectionOfPackage * packages;
-@property (nonatomic,strong) WTMCollectionOfImage * picture;
 @property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 
 - (WattCollectionOfGroup*)groups_auto;
 - (WattCollectionOfUser*)users_auto;
 - (WTMCollectionOfPackage*)packages_auto;
-- (WTMCollectionOfImage*)picture_auto;
 - (WTMCollectionOfMenuSection*)sections_auto;
 
 @end

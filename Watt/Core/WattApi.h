@@ -140,13 +140,6 @@ typedef enum watt_F_TYPES{
 
 - (BOOL)mIIntheGroup:(WattGroup*)group;
 
-#pragma mark localization
-
-//You should normaly not call directly that method
-//This method is called from WTMObject from the @selector(localize) implementation.
-//Calls the localizationDelegate if it is set or invokes the default implementation
-- (void)localize:(WattObject*)reference withKey:(NSString*)key andValue:(id)value;
-
 
 #pragma mark - relative path and path discovery
 
@@ -235,13 +228,5 @@ typedef enum watt_F_TYPES{
 
 
 
-
-#pragma mark localization delegate prototocol
-
-// You can implement this protocol if you want to customize the internationalization process.
-@protocol WTMlocalizationDelegateProtocol <NSObject>
-@required
-- (void)localize:(id)reference withKey:(NSString*)key andValue:(id)value;
-@end
 
 #

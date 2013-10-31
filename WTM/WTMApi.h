@@ -167,22 +167,6 @@
  */
 -(void)removeCell:(WTMCell*)cell;
 
-
-#pragma mark -  Bands
-
-// Bands
-- (WTMBand*)createBandInLibrary:(WTMLibrary*)library
-                    withMembers:(NSArray*)members;
-
-
-// Call purgeMemberIfNecessary on any member.
-
-- (void)purgeBandIfNecessary:(WTMBand*)band;
-
-// Removing band  will remove and force the purge.
-- (void)removeBand:(WTMBand*)band;
-
-
 #pragma mark -  Members
 
 // Use this section of the api to add member.

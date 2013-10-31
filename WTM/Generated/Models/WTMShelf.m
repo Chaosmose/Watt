@@ -23,7 +23,6 @@
 #import "WattCollectionOfGroup.h"
 #import "WattCollectionOfUser.h"
 #import "WTMCollectionOfPackage.h"
-#import "WTMCollectionOfImage.h"
 #import "WTMCollectionOfMenuSection.h"
 
 @implementation WTMShelf 
@@ -32,7 +31,6 @@
 @synthesize name=_name;
 @synthesize users=_users;
 @synthesize packages=_packages;
-@synthesize picture=_picture;
 @synthesize sections=_sections;
 
 
@@ -45,7 +43,6 @@
 	instance->_name=[_name copy];
 	instance->_users=[_users instancebyCopyTo:destinationRegistry];
 	instance->_packages=[_packages instancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -59,7 +56,6 @@
 	instance->_name=[_name copy];
 	instance->_users=[_users extractInstancebyCopyTo:destinationRegistry];
 	instance->_packages=[_packages extractInstancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -79,8 +75,6 @@
 		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
 	} else if ([key isEqualToString:@"packages"]) {
 		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMCollectionOfImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"sections"]) {
 		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"sections"];
 	} else {
@@ -157,29 +151,6 @@
 	_packages=packages;
 }
 
-- (WTMCollectionOfImage*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
-		if(o){
-			_picture=o;
-		}
-	}
-	return _picture;
-}
-
-
-- (WTMCollectionOfImage*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMCollectionOfImage alloc] initInRegistry:_registry];
-	}
-	return _picture;
-}
-
-- (void)setPicture:(WTMCollectionOfImage*)picture{
-	_picture=picture;
-}
-
 - (WTMCollectionOfMenuSection*)sections{
 	if([_sections isAnAlias]){
 		id o=[_registry objectWithUinstID:_sections.uinstID];
@@ -236,13 +207,6 @@
 			[dictionary setValue:[self.packages aliasDictionaryRepresentation] forKey:@"packages"];
 		}
 	}
-	if(self.picture){
-		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
-		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
-		}
-	}
 	if(self.sections){
 		if(includeChildren){
 			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"sections"];
@@ -263,7 +227,6 @@
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"sections : %@\n",NSStringFromClass([self.sections class])];
 	return s;
 }
