@@ -51,6 +51,7 @@ __LINE__ ,\
 #define selectorSetterFromPropertyName(propertyName) NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]])
 #define selectorGetterFromPropertyName(propertyName) NSSelectorFromString(propertyName)
 
+#define WT_KVC_KEY_FAULT_TOLERENCE
 
 #ifndef WT_CODING_KEYS
 #define WT_CODING_KEYS

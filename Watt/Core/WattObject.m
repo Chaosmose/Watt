@@ -76,9 +76,7 @@
 
 #pragma  mark - KVC 
 
-#warning to be evaluated
-//  fault tolerence.
-
+#ifdef WT_KVC_KEY_FAULT_TOLERENCE
 
 - (id)valueForUndefinedKey:(NSString *)key{
     WTLog(@"Get Undefined key %@ in %@",key, NSStringFromClass([self class]));
@@ -88,6 +86,8 @@
 - (void) setValue:(id)value forUndefinedKey:(NSString *)key{
     WTLog(@"Set Undefined key %@ in %@",key, NSStringFromClass([self class]));
 }
+
+#endif
 
 #pragma  mark -  WattCopying
 
