@@ -84,9 +84,9 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:[NSNumber numberWithBool:self.allowExploration] forKey:@"allowExploration"];
-	[dictionary setValue:[NSNumber numberWithBool:self.updateImageOnChange] forKey:@"updateImageOnChange"];
-	[dictionary setValue:[NSNumber numberWithBool:self.updateUrlOnChange] forKey:@"updateUrlOnChange"];
+	[dictionary setValue:@(self.allowExploration) forKey:@"allowExploration"];
+	[dictionary setValue:@(self.updateImageOnChange) forKey:@"updateImageOnChange"];
+	[dictionary setValue:@(self.updateUrlOnChange) forKey:@"updateUrlOnChange"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
     return dictionary;
 }
@@ -97,9 +97,9 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMHyperlink ",self.uinstID];
-	[s appendFormat:@"allowExploration : %@\n",[NSNumber numberWithBool:self.allowExploration]];
-	[s appendFormat:@"updateImageOnChange : %@\n",[NSNumber numberWithBool:self.updateImageOnChange]];
-	[s appendFormat:@"updateUrlOnChange : %@\n",[NSNumber numberWithBool:self.updateUrlOnChange]];
+	[s appendFormat:@"allowExploration : %@\n",@(self.allowExploration)];
+	[s appendFormat:@"updateImageOnChange : %@\n",@(self.updateImageOnChange)];
+	[s appendFormat:@"updateUrlOnChange : %@\n",@(self.updateUrlOnChange)];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	return s;
 }

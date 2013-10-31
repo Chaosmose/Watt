@@ -127,7 +127,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:[NSNumber numberWithInteger:self.width] forKey:@"width"];
+	[dictionary setValue:@(self.width) forKey:@"width"];
 	if(self.cells){
 		if(includeChildren){
 			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
@@ -151,7 +151,7 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMLine ",self.uinstID];
-	[s appendFormat:@"width : %@\n",[NSNumber numberWithInteger:self.width]];
+	[s appendFormat:@"width : %@\n",@(self.width)];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];
 	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];
 	return s;

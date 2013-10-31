@@ -109,7 +109,7 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.refererCounter] forKey:@"refererCounter"];
+	[dictionary setValue:@(self.refererCounter) forKey:@"refererCounter"];
 	[dictionary setValue:self.thumbnailRelativePath forKey:@"thumbnailRelativePath"];
 	if(self.library){
 		if(includeChildren){
@@ -128,7 +128,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMember ",self.uinstID];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"refererCounter : %@\n",[NSNumber numberWithInteger:self.refererCounter]];
+	[s appendFormat:@"refererCounter : %@\n",@(self.refererCounter)];
 	[s appendFormat:@"thumbnailRelativePath : %@\n",self.thumbnailRelativePath];
 	[s appendFormat:@"library : %@\n",NSStringFromClass([self.library class])];
 	return s;

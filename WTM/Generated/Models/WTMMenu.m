@@ -206,9 +206,9 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.details forKey:@"details"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
+	[dictionary setValue:@(self.index) forKey:@"index"];
 	[dictionary setValue:self.label forKey:@"label"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.referenceUinstID] forKey:@"referenceUinstID"];
+	[dictionary setValue:@(self.referenceUinstID) forKey:@"referenceUinstID"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
 	if(self.childrens){
 		if(includeChildren){
@@ -248,9 +248,9 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMenu ",self.uinstID];
 	[s appendFormat:@"details : %@\n",self.details];
-	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
+	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"label : %@\n",self.label];
-	[s appendFormat:@"referenceUinstID : %@\n",[NSNumber numberWithInteger:self.referenceUinstID]];
+	[s appendFormat:@"referenceUinstID : %@\n",@(self.referenceUinstID)];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];

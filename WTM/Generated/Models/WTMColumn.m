@@ -156,7 +156,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:[NSNumber numberWithInteger:self.height] forKey:@"height"];
+	[dictionary setValue:@(self.height) forKey:@"height"];
 	if(self.behaviors){
 		if(includeChildren){
 			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"behaviors"];
@@ -187,7 +187,7 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMColumn ",self.uinstID];
-	[s appendFormat:@"height : %@\n",[NSNumber numberWithInteger:self.height]];
+	[s appendFormat:@"height : %@\n",@(self.height)];
 	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];
 	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];

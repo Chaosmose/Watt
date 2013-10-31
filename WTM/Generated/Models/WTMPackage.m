@@ -28,7 +28,6 @@
 @implementation WTMPackage 
 
 @synthesize license=_license;
-@synthesize minEngineVersion=_minEngineVersion;
 @synthesize name=_name;
 @synthesize activities=_activities;
 @synthesize libraries=_libraries;
@@ -42,7 +41,6 @@
 	WTMPackage *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_license=[_license copy];
-	instance->_minEngineVersion=_minEngineVersion;
 	instance->_name=[_name copy];
 	instance->_activities=[_activities instancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries instancebyCopyTo:destinationRegistry];
@@ -57,7 +55,6 @@
 	WTMPackage *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_license=[_license copy];
-	instance->_minEngineVersion=_minEngineVersion;
 	instance->_name=[_name copy];
 	instance->_activities=[_activities extractInstancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries extractInstancebyCopyTo:destinationRegistry];
@@ -75,8 +72,6 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"license"]){
 		[super setValue:value forKey:@"license"];
-	} else if ([key isEqualToString:@"minEngineVersion"]) {
-		[super setValue:value forKey:@"minEngineVersion"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
 	} else if ([key isEqualToString:@"activities"]) {
@@ -196,7 +191,6 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.license forKey:@"license"];
-	[dictionary setValue:[NSNumber numberWithFloat:self.minEngineVersion] forKey:@"minEngineVersion"];
 	[dictionary setValue:self.name forKey:@"name"];
 	if(self.activities){
 		if(includeChildren){
@@ -236,7 +230,6 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMPackage ",self.uinstID];
 	[s appendFormat:@"license : %@\n",self.license];
-	[s appendFormat:@"minEngineVersion : %@\n",[NSNumber numberWithFloat:self.minEngineVersion]];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];

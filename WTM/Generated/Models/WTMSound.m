@@ -69,7 +69,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:[NSNumber numberWithFloat:self.duration] forKey:@"duration"];
+	[dictionary setValue:@(self.duration) forKey:@"duration"];
     return dictionary;
 }
 
@@ -79,7 +79,7 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMSound ",self.uinstID];
-	[s appendFormat:@"duration : %@\n",[NSNumber numberWithFloat:self.duration]];
+	[s appendFormat:@"duration : %@\n",@(self.duration)];
 	return s;
 }
 

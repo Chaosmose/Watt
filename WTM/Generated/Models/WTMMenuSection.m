@@ -167,7 +167,7 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.details forKey:@"details"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
+	[dictionary setValue:@(self.index) forKey:@"index"];
 	[dictionary setValue:self.label forKey:@"label"];
 	if(self.menus){
 		if(includeChildren){
@@ -200,7 +200,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMenuSection ",self.uinstID];
 	[s appendFormat:@"details : %@\n",self.details];
-	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
+	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"menus : %@\n",NSStringFromClass([self.menus class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];

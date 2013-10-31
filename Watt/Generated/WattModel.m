@@ -101,11 +101,11 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.category forKey:@"category"];
 	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.groupID] forKey:@"groupID"];
+	[dictionary setValue:@(self.groupID) forKey:@"groupID"];
 	[dictionary setValue:self.metadata forKey:@"metadata"];
 	[dictionary setValue:self.objectName forKey:@"objectName"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.ownerID] forKey:@"ownerID"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.rights] forKey:@"rights"];
+	[dictionary setValue:@(self.ownerID) forKey:@"ownerID"];
+	[dictionary setValue:@(self.rights) forKey:@"rights"];
     return dictionary;
 }
 
@@ -117,11 +117,11 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WattModel ",self.uinstID];
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
-	[s appendFormat:@"groupID : %@\n",[NSNumber numberWithInteger:self.groupID]];
+	[s appendFormat:@"groupID : %@\n",@(self.groupID)];
 	[s appendFormat:@"metadata : %@\n",self.metadata];
 	[s appendFormat:@"objectName : %@\n",self.objectName];
-	[s appendFormat:@"ownerID : %@\n",[NSNumber numberWithInteger:self.ownerID]];
-	[s appendFormat:@"rights : %@\n",[NSNumber numberWithInteger:self.rights]];
+	[s appendFormat:@"ownerID : %@\n",@(self.ownerID)];
+	[s appendFormat:@"rights : %@\n",@(self.rights)];
 	return s;
 }
 

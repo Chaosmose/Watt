@@ -176,9 +176,9 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:[NSNumber numberWithInteger:self.level] forKey:@"level"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.rating] forKey:@"rating"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.score] forKey:@"score"];
+	[dictionary setValue:@(self.level) forKey:@"level"];
+	[dictionary setValue:@(self.rating) forKey:@"rating"];
+	[dictionary setValue:@(self.score) forKey:@"score"];
 	[dictionary setValue:self.shortName forKey:@"shortName"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.package){
@@ -211,9 +211,9 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMActivity ",self.uinstID];
-	[s appendFormat:@"level : %@\n",[NSNumber numberWithInteger:self.level]];
-	[s appendFormat:@"rating : %@\n",[NSNumber numberWithInteger:self.rating]];
-	[s appendFormat:@"score : %@\n",[NSNumber numberWithInteger:self.score]];
+	[s appendFormat:@"level : %@\n",@(self.level)];
+	[s appendFormat:@"rating : %@\n",@(self.rating)];
+	[s appendFormat:@"score : %@\n",@(self.score)];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];

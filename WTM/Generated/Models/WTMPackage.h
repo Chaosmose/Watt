@@ -30,7 +30,6 @@
 }
 
 @property (nonatomic,copy) NSString * license;
-@property (nonatomic,assign) float  minEngineVersion;
 @property (nonatomic,copy) NSString * name;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;

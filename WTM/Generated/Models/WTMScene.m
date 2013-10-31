@@ -231,7 +231,7 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:self.footer forKey:@"footer"];
 	[dictionary setValue:self.header forKey:@"header"];
-	[dictionary setValue:[NSNumber numberWithInteger:self.index] forKey:@"index"];
+	[dictionary setValue:@(self.index) forKey:@"index"];
 	[dictionary setValue:self.title forKey:@"title"];
 	if(self.activity){
 		if(includeChildren){
@@ -279,7 +279,7 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMScene ",self.uinstID];
 	[s appendFormat:@"footer : %@\n",self.footer];
 	[s appendFormat:@"header : %@\n",self.header];
-	[s appendFormat:@"index : %@\n",[NSNumber numberWithInteger:self.index]];
+	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
 	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
