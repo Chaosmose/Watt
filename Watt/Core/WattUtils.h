@@ -6,8 +6,7 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-
-#import "Watt.h"
+#import <Foundation/Foundation.h>
 
 @class WattRegistry;
 

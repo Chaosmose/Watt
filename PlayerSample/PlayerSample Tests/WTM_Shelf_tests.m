@@ -103,11 +103,13 @@
     registry.name=@"r1";
     registry.apiReference=[WTMApi sharedInstance];
     registry.autosave=NO;
-    wtmAPI.currentRegistry=registry; // Very important
     
     WTMShelf *s=[self _createAShelfInRegistry:registry];
     s.comment=@"Comment #1 for test purposes";
-    WTMPackage*p=[s.packages lastObject];
+   
+    NSString *pObjectName=[s.packagesList lastObject];
+    WTMPackage*p=[s packageWithObjectName:pObjectName using:WattJ];
+    
     p.name=@"Package A";
     
     WTMLibrary*lib=[p.libraries_auto firstObject];
@@ -124,7 +126,8 @@
     
     // We create a Shelf
     WTMShelf *shelf=[[WTMShelf alloc]initInRegistry:registry];
-    // With one package
+    
+    // And one package (with its own registry)
     WTMPackage *p=[wtmAPI createPackageInShelf:shelf];
     // Containing one library
     [wtmAPI createLibraryInPackage:p];

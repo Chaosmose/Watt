@@ -32,9 +32,9 @@
  Standard <ImageName><orientation_modifier><device_modifier>.<filename_extension>
  Retina <ImageName><orientation_modifier>@2x<device_modifier>.<filename_extension>
  */
-+ (UIImage*)adaptiveWithRelativePath:(NSString *)relativePath;
-- (BOOL)writePNGToAbsolutePath:(NSString*)path;
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path;
++(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath inRegistry:(WattRegistry*)registry;
+- (BOOL)writePNGToAbsolutePath:(NSString*)path using:(Watt_F_TYPE)serializationMode;
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path using:(Watt_F_TYPE)serializationMode;
 
 @end
 #endif

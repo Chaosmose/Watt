@@ -23,18 +23,20 @@
 
 
 #import "UIImage+WattAdaptive.h"
-#import "WTMApi.h"
+#import "WattUtils.h"
 
 @implementation UIImage(WattAdaptive)
 
 
 
-+(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath{
-    NSString *p=[wtmAPI absolutePathFromRelativePath:relativePath];
++(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath inRegistry:(WattRegistry*)registry{
+    WattUtils *utils=[[WattUtils alloc] init];
+    NSString *p=[utils absolutePathFromRelativePath:relativePath
+                                            inBundleWithName:registry.name];
     if(p){
-        if ([p rangeOfString:[wtmAPI applicationDocumentsDirectory]].location!=NSNotFound) {
+        if ([p rangeOfString:[utils applicationDocumentsDirectory]].location!=NSNotFound) {
             //Unsoup if necessary
-            NSData *data=[wtmAPI readDataFromPath:p];
+            NSData *data=[utils readDataFromPath:p];
             return [UIImage imageWithData:data];
         }else{
             //It is bundled asset.
@@ -45,14 +47,18 @@
     return nil;
 }
 
-- (BOOL)writePNGToAbsolutePath:(NSString*)path{
+- (BOOL)writePNGToAbsolutePath:(NSString*)path using:(Watt_F_TYPE)serializationMode{
+    WattUtils *utils=[[WattUtils alloc] init];
+    [utils use:serializationMode];
     NSData *data=UIImagePNGRepresentation(self);
-    return [wtmAPI writeData:data toPath:path];
+    return [utils writeData:data toPath:path];
 }
 
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path{
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path using:(Watt_F_TYPE)serializationMode{
+    WattUtils *utils=[[WattUtils alloc] init];
+    [utils use:serializationMode];
     NSData *data=UIImageJPEGRepresentation(self, 0.5f);
-    return [wtmAPI writeData:data toPath:path];
+    return [utils writeData:data toPath:path];
 }
 
 

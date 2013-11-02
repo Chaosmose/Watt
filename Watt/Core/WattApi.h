@@ -27,7 +27,7 @@
 // Watt is a model driven framework relying on files.
 
 
-#import "Watt.h"
+#import "WattUtils.h"
 
 @class WattUser, WattGroup, WattModel;
 
@@ -65,19 +65,8 @@ typedef enum watt_Actions{
 @interface WattApi : WattUtils
 
 @property (nonatomic,strong)    WattUser *me;
-@property (nonatomic,strong)    WattRegistry *currentRegistry; // Used to register & create object ( you can change its reference at runtime)
 @property (nonatomic,readonly)  WattUser *system;
 @property (nonatomic,readonly)  WattGroup *systemGroup;
-
-
-#warning DEPRECATED USE WattUtils methods 
-
-// Returns existing paths only
-- (NSString*)absolutePathFromRelativePath:(NSString *)relativePath;
- 
-// Returns existing paths only
-- (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll;
-
 
 
 #pragma mark - Registry

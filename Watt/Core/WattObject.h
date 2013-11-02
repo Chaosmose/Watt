@@ -66,13 +66,6 @@ __LINE__ ,\
 #ifndef WT_CONST
 #define WT_CONST
 #define kCategoryNameShared         @"shared"
-#define kDefaultName                @"default"
-#define kRegistryFileName           @"registry"
-#define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
-#define kWattBundle                 @".watt"
-
-#define kWattClassPrefix            @"WTM"
-
 #define kWattMe                     @"user-me"
 #define kWattMyGroup                @"my-group"
 #define kWattMyGroupName            @"users"
@@ -132,10 +125,10 @@ __LINE__ ,\
 
 #pragma mark - WattExtraction
 
-#warning INTERESTING 
+#warning INTERESTING We should deprecate WattExtraction and exclude props according to ExclusionPaths based on _propertiesKeys
 
 // WOOZOO's SUGGESTIONS !
-// NOTE WE COULD IMPLEMENT AN EXTRACTION WITH ExclusionPath : "ClassName.propertyName.propertyName"
+// NOTE WE COULD IMPLEMENT AN EXTRACTION WITH ExclusionPaths : "ClassName.propertyName.propertyName"
 // or Inclusion Path
 // or Predicate filters
 
@@ -178,7 +171,6 @@ __LINE__ ,\
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
 @protected
     NSInteger _uinstID;
-    NSString *_currentLocale;           // The locale that has been used for localization
     WattRegistry*_registry;
     BOOL _isAnAlias;
 }
@@ -218,10 +210,5 @@ __LINE__ ,\
 - (NSArray*)propertiesKeys;
 
 
-#pragma mark - localization
-
-- (instancetype)localized;
-- (void)localize;
-- (BOOL)hasBeenLocalized;
 
 @end

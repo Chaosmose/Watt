@@ -125,17 +125,6 @@
 
 
 
-- (void)localize{
-    if(![self hasBeenLocalized]){
-        _currentLocale=[[NSLocale currentLocale] localeIdentifier];
-        for (WattObject*object in _collection) {
-            if([object respondsToSelector:@selector(localize)]&& [object respondsToSelector:@selector(hasBeenLocalized)]){
-                if(![object hasBeenLocalized])
-                    [object localize];
-            }
-        }
-    }
-}
 
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
     NSUInteger idx = 0;

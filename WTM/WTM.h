@@ -28,8 +28,6 @@
 #ifndef WTM_MACROS
 #define WTM_MACROS
 #define wtmAPI [WTMApi sharedInstance]
-#define wtmRegistry [wtmAPI currentRegistry]
-#define wtmSaveRegistry() [wtmRegistry executeAndAutoSaveBlock:^{}]
 #endif
 
 #ifndef WTM_CONST

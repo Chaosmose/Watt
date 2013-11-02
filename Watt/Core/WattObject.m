@@ -252,39 +252,11 @@
 }
 
 
-- (instancetype)localized{
-    [self localize];
-    return self;
-}
-
 - (NSInteger)uinstID{
     return _uinstID;
 }
 
 
-
-- (void)localize{
-    if(![self hasBeenLocalized]){
-        _currentLocale=[[NSLocale currentLocale] localeIdentifier];
-        NSArray *keys=[self propertiesKeys];
-        for (NSString*key in keys) {
-            id o=[self valueForKey:key];
-            if([o respondsToSelector:@selector(localize)]&&[o respondsToSelector:@selector(hasBeenLocalized)]){
-                if(![o hasBeenLocalized])
-                    [o localize];
-            }else{
-#warning todo
-                //[_wapi localize:self withKey:key andValue:o];
-            }
-        }
-    }
-    
-}
-
-
-- (BOOL)hasBeenLocalized{
-    return ([[[NSLocale currentLocale] localeIdentifier] isEqualToString:_currentLocale]);
-}
 
 
 // _keys dictionary caches the responses for future uses.

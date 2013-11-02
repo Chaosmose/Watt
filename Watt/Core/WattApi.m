@@ -52,16 +52,6 @@
     return _systemGroup;
 }
 
-// Returns existing paths only
-- (NSString*)absolutePathFromRelativePath:(NSString *)relativePath{
-    return [super absolutePathFromRelativePath:relativePath inBundleWithName:self.currentRegistry.name];
-}
-
-// Returns existing paths only
-- (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath all:(BOOL)returnAll{
-    return [super absolutePathsFromRelativePath:relativePath inBundleWithName:self.currentRegistry.name all:returnAll];
-}
-
 
 
 /*

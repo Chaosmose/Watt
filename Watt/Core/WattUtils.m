@@ -8,6 +8,13 @@
 
 #import "WattUtils.h"
 
+#define kDefaultName                @"default"
+#define kRegistryFileName           @"registry"
+#define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
+#define kWattBundle                 @".watt"
+
+
+
 @implementation WattUtils{
     Watt_F_TYPE  _ftype;
     NSString    *_applicationDocumentsDirectory;

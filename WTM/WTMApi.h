@@ -23,12 +23,11 @@
  */
 + (WTMApi*)sharedInstance;
 
-#pragma mark - /// MULTIMEDIA API ///
-
-#pragma mark -Shelf
+#pragma mark - /// SHELF ///
+#pragma mark -
 
 // Creates a shelf, a user , the local group, a package with a shared lib ...
--(WTMShelf*)createShelfWithName:(NSString*)name;
+-(WTMShelf*)createShelfWithName:(NSString*)name inRegistry:(WattRegistry*)registry;
 
 // No remove method actually (need to be analyzed)
 
@@ -47,7 +46,9 @@
 - (WTMMenu*)createMenuInSection:(WTMMenuSection*)section;
 - (void)removeMenu:(WTMMenu*)menu;
 
-#pragma mark - Package
+
+#pragma mark - /// PACKAGE ///
+#pragma mark -
 
 // Create a package and it default library
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;

@@ -51,6 +51,9 @@
         
         // We search the activity package
         WTMPackage *__block activitiesPackage=nil;
+        
+    
+        
         [s.packages enumerateObjectsUsingBlock:^(WTMPackage *obj, NSUInteger idx, BOOL *stop) {
             if([obj.category isEqualToString:@"activity"]){
                 activitiesPackage=obj;
