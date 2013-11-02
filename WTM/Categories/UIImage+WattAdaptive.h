@@ -24,7 +24,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIImage(wattAdaptive)
+@interface UIImage(WattAdaptive)
 
 /*
  Support of multiple modifiers

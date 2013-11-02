@@ -22,15 +22,14 @@
 #import "WTMShelf.h" 
 #import "WattCollectionOfGroup.h"
 #import "WattCollectionOfUser.h"
-#import "WTMCollectionOfPackage.h"
 #import "WTMCollectionOfMenuSection.h"
 
 @implementation WTMShelf 
 
 @synthesize groups=_groups;
 @synthesize name=_name;
+@synthesize packagesList=_packagesList;
 @synthesize users=_users;
-@synthesize packages=_packages;
 @synthesize sections=_sections;
 
 
@@ -41,8 +40,8 @@
 	instance->_registry=destinationRegistry;
 	instance->_groups=[_groups instancebyCopyTo:destinationRegistry];
 	instance->_name=[_name copy];
+	instance->_packagesList=[_packagesList copy];
 	instance->_users=[_users instancebyCopyTo:destinationRegistry];
-	instance->_packages=[_packages instancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -54,8 +53,8 @@
 	instance->_registry=destinationRegistry;
 	instance->_groups=[_groups extractInstancebyCopyTo:destinationRegistry];
 	instance->_name=[_name copy];
+	instance->_packagesList=[_packagesList copy];
 	instance->_users=[_users extractInstancebyCopyTo:destinationRegistry];
-	instance->_packages=[_packages extractInstancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -71,10 +70,10 @@
 		[super setValue:[WattCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"packagesList"]) {
+		[super setValue:value forKey:@"packagesList"];
 	} else if ([key isEqualToString:@"users"]) {
 		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
-	} else if ([key isEqualToString:@"packages"]) {
-		[super setValue:[WTMCollectionOfPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"packages"];
 	} else if ([key isEqualToString:@"sections"]) {
 		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"sections"];
 	} else {
@@ -128,29 +127,6 @@
 	_users=users;
 }
 
-- (WTMCollectionOfPackage*)packages{
-	if([_packages isAnAlias]){
-		id o=[_registry objectWithUinstID:_packages.uinstID];
-		if(o){
-			_packages=o;
-		}
-	}
-	return _packages;
-}
-
-
-- (WTMCollectionOfPackage*)packages_auto{
-	_packages=[self packages];
-	if(!_packages){
-		_packages=[[WTMCollectionOfPackage alloc] initInRegistry:_registry];
-	}
-	return _packages;
-}
-
-- (void)setPackages:(WTMCollectionOfPackage*)packages{
-	_packages=packages;
-}
-
 - (WTMCollectionOfMenuSection*)sections{
 	if([_sections isAnAlias]){
 		id o=[_registry objectWithUinstID:_sections.uinstID];
@@ -193,18 +169,12 @@
 		}
 	}
 	[dictionary setValue:self.name forKey:@"name"];
+	[dictionary setValue:self.packagesList forKey:@"packagesList"];
 	if(self.users){
 		if(includeChildren){
 			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
 		}else{
 			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"users"];
-		}
-	}
-	if(self.packages){
-		if(includeChildren){
-			[dictionary setValue:[self.packages dictionaryRepresentationWithChildren:includeChildren] forKey:@"packages"];
-		}else{
-			[dictionary setValue:[self.packages aliasDictionaryRepresentation] forKey:@"packages"];
 		}
 	}
 	if(self.sections){
@@ -225,8 +195,8 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMShelf ",self.uinstID];
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"packagesList : %@\n",self.packagesList];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
-	[s appendFormat:@"packages : %@\n",NSStringFromClass([self.packages class])];
 	[s appendFormat:@"sections : %@\n",NSStringFromClass([self.sections class])];
 	return s;
 }

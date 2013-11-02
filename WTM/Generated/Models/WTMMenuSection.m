@@ -21,7 +21,6 @@
  
 #import "WTMMenuSection.h" 
 #import "WTMCollectionOfMenu.h"
-#import "WTMImage.h"
 #import "WTMShelf.h"
 
 @implementation WTMMenuSection 
@@ -30,7 +29,6 @@
 @synthesize index=_index;
 @synthesize label=_label;
 @synthesize menus=_menus;
-@synthesize picture=_picture;
 @synthesize shelf=_shelf;
 
 
@@ -43,7 +41,6 @@
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_menus=[_menus instancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
 	instance->_shelf=[_shelf instancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -57,7 +54,6 @@
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_menus=[_menus extractInstancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
 	instance->_shelf=nil;// Non extractible
     return instance;
 }
@@ -77,8 +73,6 @@
 		[super setValue:value forKey:@"label"];
 	} else if ([key isEqualToString:@"menus"]) {
 		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menus"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"shelf"]) {
 		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
@@ -107,29 +101,6 @@
 
 - (void)setMenus:(WTMCollectionOfMenu*)menus{
 	_menus=menus;
-}
-
-- (WTMImage*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
-		if(o){
-			_picture=o;
-		}
-	}
-	return _picture;
-}
-
-
-- (WTMImage*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _picture;
-}
-
-- (void)setPicture:(WTMImage*)picture{
-	_picture=picture;
 }
 
 - (WTMShelf*)shelf{
@@ -176,13 +147,6 @@
 			[dictionary setValue:[self.menus aliasDictionaryRepresentation] forKey:@"menus"];
 		}
 	}
-	if(self.picture){
-		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
-		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
-		}
-	}
 	if(self.shelf){
 		if(includeChildren){
 			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"shelf"];
@@ -203,7 +167,6 @@
 	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"menus : %@\n",NSStringFromClass([self.menus class])];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }

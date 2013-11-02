@@ -22,10 +22,12 @@
 
 
 
-#import "UIImage+wattAdaptive.h"
+#import "UIImage+WattAdaptive.h"
 #import "WTMApi.h"
 
-@implementation UIImage(wattAdaptive)
+@implementation UIImage(WattAdaptive)
+
+
 
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath{
     NSString *p=[wtmAPI absolutePathFromRelativePath:relativePath];

@@ -65,7 +65,6 @@ __LINE__ ,\
 
 #ifndef WT_CONST
 #define WT_CONST
-#define kWattAPIExecptionName       @"WattAPIException"
 #define kCategoryNameShared         @"shared"
 #define kDefaultName                @"default"
 #define kRegistryFileName           @"registry"

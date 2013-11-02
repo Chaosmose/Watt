@@ -37,7 +37,7 @@
 @property (assign,nonatomic) BOOL isPaused;
 
 /**
- *  You can use your own skin by changing the bundleName;
+ *  You can use your own skin by changing the bundleName; (NSBundle)
  */
 - (void)setBundleName:(NSString *)bundleName;
 

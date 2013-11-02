@@ -23,7 +23,6 @@
 #import "WTMCollectionOfActivity.h"
 #import "WTMCollectionOfLibrary.h"
 #import "WTMImage.h"
-#import "WTMShelf.h"
 
 @implementation WTMPackage 
 
@@ -32,7 +31,6 @@
 @synthesize activities=_activities;
 @synthesize libraries=_libraries;
 @synthesize picture=_picture;
-@synthesize shelf=_shelf;
 
 
 #pragma  mark WattCopying
@@ -45,7 +43,6 @@
 	instance->_activities=[_activities instancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries instancebyCopyTo:destinationRegistry];
 	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
-	instance->_shelf=[_shelf instancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -59,7 +56,6 @@
 	instance->_activities=[_activities extractInstancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries extractInstancebyCopyTo:destinationRegistry];
 	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
-	instance->_shelf=nil;// Non extractible
     return instance;
 }
 
@@ -80,8 +76,6 @@
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
 	} else if ([key isEqualToString:@"picture"]) {
 		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
-	} else if ([key isEqualToString:@"shelf"]) {
-		[super setValue:[WTMShelf instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"shelf"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -156,29 +150,6 @@
 	_picture=picture;
 }
 
-- (WTMShelf*)shelf{
-	if([_shelf isAnAlias]){
-		id o=[_registry objectWithUinstID:_shelf.uinstID];
-		if(o){
-			_shelf=o;
-		}
-	}
-	return _shelf;
-}
-
-
-- (WTMShelf*)shelf_auto{
-	_shelf=[self shelf];
-	if(!_shelf){
-		_shelf=[[WTMShelf alloc] initInRegistry:_registry];
-	}
-	return _shelf;
-}
-
-- (void)setShelf:(WTMShelf*)shelf{
-	_shelf=shelf;
-}
-
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -213,13 +184,6 @@
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
-	if(self.shelf){
-		if(includeChildren){
-			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"shelf"];
-		}else{
-			[dictionary setValue:[self.shelf aliasDictionaryRepresentation] forKey:@"shelf"];
-		}
-	}
     return dictionary;
 }
 
@@ -234,7 +198,6 @@
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
 	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
-	[s appendFormat:@"shelf : %@\n",NSStringFromClass([self.shelf class])];
 	return s;
 }
 

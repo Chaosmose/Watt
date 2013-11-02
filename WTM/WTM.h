@@ -23,6 +23,7 @@
 #import "Watt.h"
 #import "WTMApi.h"
 
+#import "WTMShelf+WTMShelf_Packages.h"
 
 #ifndef WTM_MACROS
 #define WTM_MACROS
@@ -36,7 +37,8 @@
 #endif
 
 
+
 #if TARGET_OS_IPHONE
-#import "UIImage+wattAdaptive.h"
+#import "UIImage+WattAdaptive.h"
 #endif
 

@@ -24,7 +24,6 @@
 @class WTMCollectionOfMenu;
 @class WTMMenuSection;
 @class WTMMenu;
-@class WTMImage;
 
 @interface WTMMenu:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
@@ -32,16 +31,15 @@
 @property (nonatomic,copy) NSString * details;
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
+@property (nonatomic,copy) NSString * pictureRelativePath;
 @property (nonatomic,assign) NSInteger  referenceUinstID;
 @property (nonatomic,copy) NSString * urlString;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
 @property (nonatomic,strong) WTMMenuSection * menuSection;// non extractible
 @property (nonatomic,strong) WTMMenu * parent;
-@property (nonatomic,strong) WTMImage * picture;
 
 - (WTMCollectionOfMenu*)childrens_auto;
 - (WTMMenuSection*)menuSection_auto;
 - (WTMMenu*)parent_auto;
-- (WTMImage*)picture_auto;
 
 @end

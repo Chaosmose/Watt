@@ -23,19 +23,18 @@
 #import "WTMCollectionOfMenu.h"
 #import "WTMMenuSection.h"
 #import "WTMMenu.h"
-#import "WTMImage.h"
 
 @implementation WTMMenu 
 
 @synthesize details=_details;
 @synthesize index=_index;
 @synthesize label=_label;
+@synthesize pictureRelativePath=_pictureRelativePath;
 @synthesize referenceUinstID=_referenceUinstID;
 @synthesize urlString=_urlString;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
 @synthesize parent=_parent;
-@synthesize picture=_picture;
 
 
 #pragma  mark WattCopying
@@ -46,12 +45,12 @@
 	instance->_details=[_details copy];
 	instance->_index=_index;
 	instance->_label=[_label copy];
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_referenceUinstID=_referenceUinstID;
 	instance->_urlString=[_urlString copy];
 	instance->_childrens=[_childrens instancebyCopyTo:destinationRegistry];
 	instance->_menuSection=[_menuSection instancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent instancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -63,12 +62,12 @@
 	instance->_details=[_details copy];
 	instance->_index=_index;
 	instance->_label=[_label copy];
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_referenceUinstID=_referenceUinstID;
 	instance->_urlString=[_urlString copy];
 	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
 	instance->_menuSection=nil;// Non extractible
 	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -85,6 +84,8 @@
 		[super setValue:value forKey:@"index"];
 	} else if ([key isEqualToString:@"label"]) {
 		[super setValue:value forKey:@"label"];
+	} else if ([key isEqualToString:@"pictureRelativePath"]) {
+		[super setValue:value forKey:@"pictureRelativePath"];
 	} else if ([key isEqualToString:@"referenceUinstID"]) {
 		[super setValue:value forKey:@"referenceUinstID"];
 	} else if ([key isEqualToString:@"urlString"]) {
@@ -95,8 +96,6 @@
 		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menuSection"];
 	} else if ([key isEqualToString:@"parent"]) {
 		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"parent"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -171,29 +170,6 @@
 	_parent=parent;
 }
 
-- (WTMImage*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
-		if(o){
-			_picture=o;
-		}
-	}
-	return _picture;
-}
-
-
-- (WTMImage*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _picture;
-}
-
-- (void)setPicture:(WTMImage*)picture{
-	_picture=picture;
-}
-
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -208,6 +184,7 @@
 	[dictionary setValue:self.details forKey:@"details"];
 	[dictionary setValue:@(self.index) forKey:@"index"];
 	[dictionary setValue:self.label forKey:@"label"];
+	[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
 	[dictionary setValue:@(self.referenceUinstID) forKey:@"referenceUinstID"];
 	[dictionary setValue:self.urlString forKey:@"urlString"];
 	if(self.childrens){
@@ -231,13 +208,6 @@
 			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"parent"];
 		}
 	}
-	if(self.picture){
-		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
-		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
-		}
-	}
     return dictionary;
 }
 
@@ -250,12 +220,12 @@
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"label : %@\n",self.label];
+	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"referenceUinstID : %@\n",@(self.referenceUinstID)];
 	[s appendFormat:@"urlString : %@\n",self.urlString];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
 	[s appendFormat:@"parent : %@\n",NSStringFromClass([self.parent class])];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	return s;
 }
 

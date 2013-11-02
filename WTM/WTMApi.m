@@ -51,46 +51,9 @@
     return shelf;
 }
 
-// A facility to generate symboliclink for package and libraries
-- (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf{
-    if(shelf){
-        [shelf.packages enumerateObjectsUsingBlock:^(WTMPackage *obj, NSUInteger idx, BOOL *stop) {
-            if(obj.name && obj.objectName){
-                NSError *error=nil;
-                NSString *pb=[self absolutePathForRegistryBundleWithName:self.currentRegistry.name];
-                
-                NSString *s=[pb stringByAppendingString:obj.objectName ];
-                NSString *d=[pb stringByAppendingString:[obj.name stringByReplacingOccurrencesOfString:@" " withString:@"-"] ];
-                
-                if([self.fileManager fileExistsAtPath:s] && ![self.fileManager fileExistsAtPath:d]){
-                    [self.fileManager createSymbolicLinkAtPath:d
-                                           withDestinationPath:s
-                                                         error:&error];
-                    if(error){
-                        WTLog(@"Error :%@",[error localizedDescription]);
-                    }
-                }
-                // Libraries
-                [obj.libraries enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
-                    NSError *error=nil;
-                    NSString *ls=[s stringByAppendingFormat:@"/%@",obj.objectName];
-                    NSString *ld=[d stringByAppendingFormat:@"/%@",[obj.name stringByReplacingOccurrencesOfString:@" " withString:@"-"]];
-                    if([self.fileManager fileExistsAtPath:ls] && ![self.fileManager fileExistsAtPath:ld]){
-                        
-                        [self.fileManager createSymbolicLinkAtPath:ld
-                                               withDestinationPath:ls
-                                                             error:&error];
-                        if(error){
-                            WTLog(@"Error :%@",[error localizedDescription]);
-                        }
-                    }
-                    
-                }reverse:NO];
-                
-            }
-        } reverse:NO];
-    }
-}
+
+
+
 
 
 
@@ -171,9 +134,7 @@
 
 - (void)removeMenu:(WTMMenu*)menu{
     if([self actionIsAllowed:WattWRITE on:menu]){
-        if(menu.picture){
-            [self purgeMemberIfNecessary:menu.picture];
-        }
+        [self _removeFilesWithRelativesPath:menu.pictureRelativePath];
         [menu.menuSection.menus removeObject:menu];
         [menu autoUnRegister];
     }
@@ -189,10 +150,15 @@
     if([self actionIsAllowed:WattWRITE on:shelf]){
         if(!shelf)
             [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
-        WTMPackage *package=[[WTMPackage alloc] initInRegistry:self.currentRegistry];
+        
+        // IMPORTANT WE CREATE A NEW REGISTRY
+        
+        WattRegistry *registry=[[WattRegistry alloc] init];
+        registry.name=[self uuidString];
+        
+        WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
         package.objectName=[self uuidString];// We create a uuid for each package and library to deal with linked assets
-        [shelf.packages_auto addObject:package];
-        package.shelf=shelf;
+        [shelf addPackage:package];
         
         // We create a default library
         WTMLibrary*library=[self createLibraryInPackage:package];
@@ -204,7 +170,7 @@
 }
 
 
-- (void)removePackage:(WTMPackage*)package{
+- (void)removePackage:(WTMPackage*)package fromShelf:(WTMShelf*)shelf{
     if([self actionIsAllowed:WattWRITE on:package]){
         
         if(package.picture)
@@ -218,35 +184,27 @@
             [self removeLibrary:obj];
         }reverse:YES];
         
-        [package.shelf.packages removeObject:package];
-        package.shelf=nil;
+        [shelf removePackage:package deleteFiles:YES];
+        
+        WattRegistry *registry=package.registry;
         [package autoUnRegister];
+        
+        [self removeItemAtPath:[self absolutePathForRegistryBundleFolderWithName:registry.name]];
+        [registry destroyRegistry];
+        
     }
 }
 
-// Immport process this method can move a package from a registry to another
-// Producing renamming of assets and performing re-identification including ACL
 - (void)addPackage:(WTMPackage*)package
            toShelf:(WTMShelf*)shelf{
-#warning todo
     if(!package)
         [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
     if(!shelf)
         [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
     if([self actionIsAllowed:WattWRITE on:shelf]){
-        
-        
+        [shelf addPackage:package];
     }
 }
-
-- (NSArray*)dependenciesPathForPackage:(WTMPackage*)package{
-    NSMutableArray *array=[NSMutableArray array];
-    [package.libraries_auto enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
-        [array addObjectsFromArray:[self dependenciesPathForLibrary:obj]];
-    }reverse:NO];
-    return array;
-}
-
 
 
 #pragma mark - Library
@@ -277,24 +235,6 @@
     }
 }
 
-- (NSArray*)dependenciesPathForLibrary:(WTMLibrary*)library{
-    if(!library)
-        [self raiseExceptionWithFormat:@"library is nil in %@",NSStringFromSelector(@selector(dependenciesPathForLibrary:))];
-    NSMutableArray *array=[NSMutableArray array];
-    [library.members_auto enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
-        NSArray *pths=[self absolutePathsFromRelativePath:obj.thumbnailRelativePath all:YES];
-        if(pths){
-            [array addObjectsFromArray:pths];
-        }
-        if([[obj propertiesKeys] indexOfObject:@"relativePath"]!=NSNotFound){
-            pths=[self absolutePathsFromRelativePath:[obj valueForKey:@"relativePath"] all:YES];
-            if(pths){
-                [array addObjectsFromArray:pths];
-            }
-        }
-    }reverse:NO];
-    return array;
-}
 
 
 #pragma mark - Activity
@@ -693,19 +633,25 @@
         relativePath=[member performSelector:@selector(urlString)];
     }
     if(relativePath){
-        NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
-                                                               all:YES];
-        for (NSString *pathToDelete in absolutePaths) {
-            NSError *error=nil;
-            [self.fileManager removeItemAtPath:pathToDelete
-                                         error:&error];
-            if(error){
-                WTLog(@"Impossible to delete %@",pathToDelete);
-            }
-        }
+        [self _removeFilesWithRelativesPath:relativePath];
     }
     [member.library.members removeObject:member];
     [member autoUnRegister];
 }
+
+
+
+#pragma  mark - file removal 
+
+
+- (void)_removeFilesWithRelativesPath:(NSString*)relativePath{
+    NSArray *absolutePaths=[self absolutePathsFromRelativePath:relativePath
+                                                           all:YES];
+    for (NSString *pathToDelete in absolutePaths) {
+        [self removeItemAtPath:pathToDelete];
+    }
+
+}
+
 
 @end

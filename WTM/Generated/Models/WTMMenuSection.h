@@ -22,7 +22,6 @@
 
 #import "WattModel.h"
 @class WTMCollectionOfMenu;
-@class WTMImage;
 @class WTMShelf;
 
 @interface WTMMenuSection:WattModel<WattCoding,WattCopying,WattExtraction>{
@@ -32,11 +31,9 @@
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,strong) WTMCollectionOfMenu * menus;
-@property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMShelf * shelf;// non extractible
 
 - (WTMCollectionOfMenu*)menus_auto;
-- (WTMImage*)picture_auto;
 - (WTMShelf*)shelf_auto;
 
 @end

@@ -20,6 +20,7 @@
     NSTimer *_timer;
     NSBundle *_wiosBundle;
     float _soundDuration;
+    WattUtils *__utils;
 }
 @end
 
@@ -31,12 +32,20 @@
 @synthesize sound = _sound;
 
 
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }
     return self;
+}
+
+- (WattUtils*)_wattUtils{
+    if(!__utils){
+        __utils=[[WattUtils alloc] init];
+    }
+    return __utils;
 }
 
 - (void)viewDidLoad{
@@ -102,7 +111,7 @@
     [self _stop];
     if (![self.nameTextField.text isEqualToString:self.sound.name] || _soundDuration!=_sound.duration) {
         self.sound.name=self.nameTextField.text;
-        wtmRegistry.hasChanged=YES;
+        self.sound.registry.hasChanged=YES;
     }
 }
 
@@ -253,7 +262,7 @@
  */
 - (IBAction)action:(id)sender {
     if(!_sound){
-        [wtmAPI raiseExceptionWithFormat:@"WIOSSoundRecorderViewController sound reference is not set"];
+        [[self _wattUtils] raiseExceptionWithFormat:@"WIOSSoundRecorderViewController sound reference is not set"];
     }else{
         if ([sender  isEqual:self.recordButton]) {
             if(_isPlaying){
@@ -284,7 +293,7 @@
 - (NSURL*)_soundFileUrl{
     if(!_fileURL){
         NSString *path=[self _soundPath];
-        [wtmAPI createRecursivelyRequiredFolderForPath:path];
+        [[self _wattUtils] createRecursivelyRequiredFolderForPath:path];
         _fileURL = [NSURL fileURLWithPath:path ];
     }
     return _fileURL;
@@ -292,7 +301,7 @@
 
 
 - (NSString*)_soundPath{
-    return [[wtmAPI absolutePathForRegistryBundleWithName:wtmRegistry.name] stringByAppendingString:self.sound.relativePath];
+    return  [[self _wattUtils] absolutePathFromRelativePath:self.sound.relativePath inBundleWithName:self.sound.registry.name];
 }
 
 

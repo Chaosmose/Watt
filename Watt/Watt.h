@@ -21,6 +21,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WattUtils.h"
 #import "WattApi.h"
 #import "WattObject.h"
 #import "WattCollectionOfObject.h"

@@ -23,7 +23,6 @@
 #import "WattModel.h"
 @class WattCollectionOfGroup;
 @class WattCollectionOfUser;
-@class WTMCollectionOfPackage;
 @class WTMCollectionOfMenuSection;
 
 @interface WTMShelf:WattModel<WattCoding,WattCopying,WattExtraction>{
@@ -31,13 +30,12 @@
 
 @property (nonatomic,strong) WattCollectionOfGroup * groups;
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,strong) NSMutableArray * packagesList;
 @property (nonatomic,strong) WattCollectionOfUser * users;
-@property (nonatomic,strong) WTMCollectionOfPackage * packages;
 @property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 
 - (WattCollectionOfGroup*)groups_auto;
 - (WattCollectionOfUser*)users_auto;
-- (WTMCollectionOfPackage*)packages_auto;
 - (WTMCollectionOfMenuSection*)sections_auto;
 
 @end

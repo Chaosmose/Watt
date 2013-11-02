@@ -24,7 +24,6 @@
 @class WTMCollectionOfActivity;
 @class WTMCollectionOfLibrary;
 @class WTMImage;
-@class WTMShelf;
 
 @interface WTMPackage:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
@@ -34,11 +33,9 @@
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
 @property (nonatomic,strong) WTMImage * picture;
-@property (nonatomic,strong) WTMShelf * shelf;// non extractible
 
 - (WTMCollectionOfActivity*)activities_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
 - (WTMImage*)picture_auto;
-- (WTMShelf*)shelf_auto;
 
 @end

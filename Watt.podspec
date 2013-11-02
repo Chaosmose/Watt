@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = 'Watt'
-  s.version     = '0.9'
+  s.version     = '0.10'
   s.authors     = { 'Benoit Pereira da Silva' => 'benoit@pereira-da-silva.com' }
   s.homepage    = 'https://https://github.com/benoit-pereira-da-silva/Watt'
   s.summary     = 'Watt'

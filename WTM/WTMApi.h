@@ -9,6 +9,7 @@
 #import "WTM.h"
 //Import of flexion generated classes
 #import "WTMModelsImports.h"
+#import "WTMShelf+WTMShelf_Packages.h"
 
 /**
  * The WTM Api 
@@ -28,9 +29,6 @@
 
 // Creates a shelf, a user , the local group, a package with a shared lib ...
 -(WTMShelf*)createShelfWithName:(NSString*)name;
-
-// A facility to generate symboliclink for package and libraries
-- (void)generateSymbolicLinkForShelf:(WTMShelf*)shelf;
 
 // No remove method actually (need to be analyzed)
 
@@ -53,23 +51,16 @@
 
 // Create a package and it default library
 - (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;
-
-- (void)removePackage:(WTMPackage*)package;
-
+- (void)removePackage:(WTMPackage*)package fromShelf:(WTMShelf*)shelf;
 // Immport process this method can move a package from a registry to another
-// Producing renamming of assets and performing re-identification
 - (void)addPackage:(WTMPackage*)package
            toShelf:(WTMShelf*)shelf;
-
-- (NSArray*)dependenciesPathForPackage:(WTMPackage*)package;
-
 
 #pragma mark - Library
 
 - (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package;
 - (void)removeLibrary:(WTMLibrary*)library;
 
-- (NSArray*)dependenciesPathForLibrary:(WTMLibrary*)library;
 
 #pragma mark - Activity
 
