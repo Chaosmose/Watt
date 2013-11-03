@@ -20,10 +20,8 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
+#import "WattObjectProtocols.h"
 #import "WattObject.h"
-
-@class WattRegistry;
-@class WattObjectAlias;
 
 @interface WattCollectionOfObject : WattObject {
 @protected

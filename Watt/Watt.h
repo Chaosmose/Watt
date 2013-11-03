@@ -84,7 +84,7 @@ __LINE__ ,\
 #import "WattObject.h"
 #import "WattRegistry.h"
 #import "WattCollectionOfObject.h"
-#import "WattRegistry.h"
+
 #import "WattDelta.h"
 #import "WattDeltaEngine.h"
 #import "WattUtils.h"

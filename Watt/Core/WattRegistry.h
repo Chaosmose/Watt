@@ -22,7 +22,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Watt.h"
 
 #define kWattRegistryRootUinstID 1
 

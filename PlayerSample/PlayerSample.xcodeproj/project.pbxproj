@@ -322,6 +322,7 @@
 		E5CAD22B1799A1A400D22369 /* WattRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattRegistry.m; sourceTree = "<group>"; };
 		E5CAD2831799A1A400D22369 /* Watt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watt.h; sourceTree = "<group>"; };
 		E5CAD2E21799A1B800D22369 /* PlayerSampleFlexions-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlayerSampleFlexions-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E5CFF95D1826628A003658CE /* WattObjectProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattObjectProtocols.h; sourceTree = "<group>"; };
 		E5D9A30B1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WTMShelf+WTMShelf_Packages.h"; sourceTree = "<group>"; };
 		E5D9A30C1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WTMShelf+WTMShelf_Packages.m"; sourceTree = "<group>"; };
 		E5D9A30F182554BA00824D47 /* WattUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattUtils.h; sourceTree = "<group>"; };
@@ -753,16 +754,17 @@
 		E5CAD2211799A1A400D22369 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E5D9A30F182554BA00824D47 /* WattUtils.h */,
-				E5D9A310182554BA00824D47 /* WattUtils.m */,
-				E5CAD2241799A1A400D22369 /* WattApi.h */,
-				E5CAD2251799A1A400D22369 /* WattApi.m */,
-				E5CAD22A1799A1A400D22369 /* WattRegistry.h */,
-				E5CAD22B1799A1A400D22369 /* WattRegistry.m */,
-				E5CAD2261799A1A400D22369 /* WattCollectionOfObject.h */,
-				E5CAD2271799A1A400D22369 /* WattCollectionOfObject.m */,
+				E5CFF95D1826628A003658CE /* WattObjectProtocols.h */,
 				E5CAD2281799A1A400D22369 /* WattObject.h */,
 				E5CAD2291799A1A400D22369 /* WattObject.m */,
+				E5CAD2261799A1A400D22369 /* WattCollectionOfObject.h */,
+				E5CAD2271799A1A400D22369 /* WattCollectionOfObject.m */,
+				E5D9A30F182554BA00824D47 /* WattUtils.h */,
+				E5D9A310182554BA00824D47 /* WattUtils.m */,
+				E5CAD22A1799A1A400D22369 /* WattRegistry.h */,
+				E5CAD22B1799A1A400D22369 /* WattRegistry.m */,
+				E5CAD2241799A1A400D22369 /* WattApi.h */,
+				E5CAD2251799A1A400D22369 /* WattApi.m */,
 				E50003F517B63EEC00E50D70 /* WattDelta.h */,
 				E50003F417B63EEC00E50D70 /* WattDelta.m */,
 				E50003F317B63EEC00E50D70 /* WattDeltaEngine.h */,
