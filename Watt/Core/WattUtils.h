@@ -7,22 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "WattDefinitions.h"
 
 
-#pragma mark - SOUP
-
-#ifndef WT_SERIALIZATION_MODE
-#define WT_SERIALIZATION_MODE
-
-typedef enum WattSerializationModes{
-    WattJx=0,   // Json + soup      * Default
-    WattJ=1,    // Json  + no soup
-    WattPx=2,   // Plist + soup
-    WattP=3     // Plist + no soup
-    // We plan to add Message Pack + soup
-}WattSerializationMode;
-
-#endif
 
 @class WattRegistry;
 

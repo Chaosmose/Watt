@@ -20,13 +20,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SSZipArchive.h"
 
 @interface WattBundlePackager : NSObject
 
 // WTMPackager singleton accessor
 + (WattBundlePackager*)sharedInstance;
-
 
 /**
  *  By default ".watt" you can use your own packExtension

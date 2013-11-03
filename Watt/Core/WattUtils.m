@@ -15,7 +15,6 @@
 #define kWattBundle                 @".watt"
 
 
-
 @implementation WattUtils{
     WattSerializationMode  _ftype;
     NSString    *_applicationDocumentsDirectory;

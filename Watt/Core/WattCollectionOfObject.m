@@ -21,7 +21,7 @@
 //
 
 #import "WattCollectionOfObject.h"
-#import "WattApi.h"
+#import "WattACL.h"
 
 @implementation WattCollectionOfObject
 

@@ -18,6 +18,8 @@
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
+#import "WattDefinitions.h"
+
 #ifndef WT_LOG
 #define WT_LOG 1 // You can set up WT_LOG to 1 or 0
 typedef enum logNatures{
@@ -48,25 +50,7 @@ __LINE__ ,\
 #define selectorSetterFromPropertyName(propertyName) NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]])
 #define selectorGetterFromPropertyName(propertyName) NSSelectorFromString(propertyName)
 
-#define WT_KVC_KEY_FAULT_TOLERENCE
-
-#ifndef WT_CODING_KEYS
-#define WT_CODING_KEYS
-#define __uinstID__         @"i"
-#define __className__       @"c"
-#define __properties__      @"p"
-#define __collection__      @"cl"
-#define __isAliased__       @"a"
-#endif
-
-#ifndef WT_CONST
-#define WT_CONST
-#define kCategoryNameShared         @"shared"
-#define kWattMe                     @"user-me"
-#define kWattMyGroup                @"my-group"
-#define kWattMyGroupName            @"users"
-
-#endif
+#define WT_KVC_KEY_FAULT_TOLERENCE // Remove to be KVC strict
 
 #if TARGET_OS_IPHONE
 #define currentOrientation() [[UIApplication sharedApplication] statusBarOrientation]
@@ -77,14 +61,14 @@ __LINE__ ,\
 #endif
 #endif
 
-
 #pragma mark - Imports
 
-#import "WattApi.h"
+#import "WattObjectProtocols.h"
 #import "WattObject.h"
 #import "WattRegistry.h"
 #import "WattCollectionOfObject.h"
 
+#import "WattACL.h"
 #import "WattDelta.h"
 #import "WattDeltaEngine.h"
 #import "WattUtils.h"
@@ -93,6 +77,3 @@ __LINE__ ,\
 #pragma mark - generated imports
 
 #import "WattImports.h"
-
-
-

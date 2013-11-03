@@ -13,23 +13,16 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
-//  WattApi.h
+//  WattACL.h
 //
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-// This is a cross platform authoring and runtime api
-// to developp multimedia project
-// That intent to be fully supported by mac os x and IOS
-
-// Port to Java targetting Android & non android system is possible.
-// Watt is a model driven framework relying on files.
-
 
 #import "WattUtils.h"
 
-@class WattUser, WattGroup, WattModel,WattRegistry;
+@class WattUser, WattGroup, WattModel;
 
 ////////////
 // WATT_ACL
@@ -62,7 +55,7 @@ typedef enum watt_Actions{
 #endif
 
 
-@interface WattApi : NSObject
+@interface WattACL : NSObject
 
 @property (nonatomic,strong)    WattUser *me;
 @property (nonatomic,readonly)  WattUser *system;

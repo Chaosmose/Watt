@@ -10,14 +10,14 @@
 #import "Watt.h"
 
 @interface Watt_ACL_tests : XCTestCase
-@property (strong,nonatomic)WattApi *api;
+@property (strong,nonatomic)WattACL *api;
 @end
 
 @implementation Watt_ACL_tests
 
 - (void)setUp{
     [super setUp];
-    self.api=[[WattApi alloc] init];
+    self.api=[[WattACL alloc] init];
 }
 
 - (void)tearDown{

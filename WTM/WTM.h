@@ -20,21 +20,15 @@
 
 
 // WTM is built on Watt
+
 #import "Watt.h"
 #import "WTMApi.h"
-
 #import "WTMShelf+WTMShelf_Packages.h"
 
-#ifndef WTM_MACROS
-#define WTM_MACROS
+#ifndef _WTM
+#define _WTM
 #define wtmAPI [WTMApi sharedInstance]
 #endif
-
-#ifndef WTM_CONST
-#define WTM_CONST
-#endif
-
-
 
 #if TARGET_OS_IPHONE
 #import "UIImage+WattAdaptive.h"

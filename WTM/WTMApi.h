@@ -11,10 +11,18 @@
 #import "WTMModelsImports.h"
 #import "WTMShelf+WTMShelf_Packages.h"
 
+// This is a cross platform authoring and runtime api
+// to developp multimedia project
+// That intent to be fully supported by mac os x and IOS
+
+// Port to Java targetting Android & non android system is possible.
+// Watt is a model driven framework relying on files.
+
+
 /**
  * The WTM Api 
  */
-@interface WTMApi : WattApi
+@interface WTMApi : WattACL
 
 
 @property (nonatomic,strong)WattUtils *utils;

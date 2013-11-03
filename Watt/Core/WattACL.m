@@ -21,13 +21,13 @@
 
 
 
-#import "WattApi.h"
+#import "WattACL.h"
 #import "Watt.h"
 
-@interface WattApi()
+@interface WattACL()
 @end
 
-@implementation WattApi{
+@implementation WattACL{
     WattUser     *  _system;
     WattGroup    * _systemGroup;
 }
