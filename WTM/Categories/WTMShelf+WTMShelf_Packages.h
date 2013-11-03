@@ -21,10 +21,10 @@
  *  Its reference will be stored in a memory cache
  *
  *  @param name                 the name of the package to load.
- *  @param serializationMode    the Watt_F_TYPE
+ *  @param serializationMode    the WattSerializationMode
  *  @return                     The package in a separate registry.
  */
-- (WTMPackage*)packageWithObjectName:(NSString*)name using:(Watt_F_TYPE)serializationMode;
+- (WTMPackage*)packageWithObjectName:(NSString*)name using:(WattSerializationMode)serializationMode;
 
 /**
  *  Add a package to the shelf.

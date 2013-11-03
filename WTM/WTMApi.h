@@ -16,6 +16,10 @@
  */
 @interface WTMApi : WattApi
 
+
+@property (nonatomic,strong)WattUtils *utils;
+
+
 /**
  *  Its singleton accessor
  *

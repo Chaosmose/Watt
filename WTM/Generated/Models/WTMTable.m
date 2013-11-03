@@ -60,12 +60,12 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"columns"]){
-		[super setValue:[WTMCollectionOfColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"columns"];
-	} else if ([key isEqualToString:@"lines"]) {
-		[super setValue:[WTMCollectionOfLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"lines"];
-	} else if ([key isEqualToString:@"scene"]) {
-		[super setValue:[WTMScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scene"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:[WTMCollectionOfColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:[WTMCollectionOfLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:[WTMScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -153,23 +153,23 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(self.columns){
 		if(includeChildren){
-			[dictionary setValue:[self.columns dictionaryRepresentationWithChildren:includeChildren] forKey:@"columns"];
+			[dictionary setValue:[self.columns dictionaryRepresentationWithChildren:includeChildren] forKey:@"a"];
 		}else{
-			[dictionary setValue:[self.columns aliasDictionaryRepresentation] forKey:@"columns"];
+			[dictionary setValue:[self.columns aliasDictionaryRepresentation] forKey:@"a"];
 		}
 	}
 	if(self.lines){
 		if(includeChildren){
-			[dictionary setValue:[self.lines dictionaryRepresentationWithChildren:includeChildren] forKey:@"lines"];
+			[dictionary setValue:[self.lines dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
 		}else{
-			[dictionary setValue:[self.lines aliasDictionaryRepresentation] forKey:@"lines"];
+			[dictionary setValue:[self.lines aliasDictionaryRepresentation] forKey:@"b"];
 		}
 	}
 	if(self.scene){
 		if(includeChildren){
-			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"scene"];
+			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{
-			[dictionary setValue:[self.scene aliasDictionaryRepresentation] forKey:@"scene"];
+			[dictionary setValue:[self.scene aliasDictionaryRepresentation] forKey:@"c"];
 		}
 	}
     return dictionary;

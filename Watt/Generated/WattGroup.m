@@ -58,12 +58,12 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"name"]){
-		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"objectName"]) {
-		[super setValue:value forKey:@"objectName"];
-	} else if ([key isEqualToString:@"users"]) {
-		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -103,13 +103,13 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.name forKey:@"name"];
-	[dictionary setValue:self.objectName forKey:@"objectName"];
+	[dictionary setValue:self.name forKey:@"a"];
+	[dictionary setValue:self.objectName forKey:@"b"];
 	if(self.users){
 		if(includeChildren){
-			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
+			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{
-			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"users"];
+			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"c"];
 		}
 	}
     return dictionary;

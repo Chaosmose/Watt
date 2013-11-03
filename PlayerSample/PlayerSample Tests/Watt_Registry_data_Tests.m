@@ -22,7 +22,6 @@
 - (void)setUp{
     [super setUp];
     self.api=[[WattApi alloc] init];
-    [self.api use:WattJx];
 }
 
 - (void)tearDown{
@@ -33,6 +32,9 @@
 
 
 - (void)testExtractionAndPackaging{
+    /*
+    
+    // We need a pool of JSON.
     
     NSString *p=[[NSBundle bundleForClass:[self class]] pathForResource:@"dataset1" ofType:@"json"];
     XCTAssertTrue(p, "The dataset path should not be nil");
@@ -50,15 +52,15 @@
         XCTAssertTrue(s,@"Shelf is nil");
         
         // We search the activity package
-        WTMPackage *__block activitiesPackage=nil;
-        
-    
-        
-        [s.packages enumerateObjectsUsingBlock:^(WTMPackage *obj, NSUInteger idx, BOOL *stop) {
-            if([obj.category isEqualToString:@"activity"]){
-                activitiesPackage=obj;
+        WTMPackage *activitiesPackage=nil;
+        for (NSString*packageObjectName in s.packagesList) {
+            WTMPackage*p=[s packageWithObjectName:packageObjectName using:WattJ];
+            if([p.category isEqualToString:@"activity"]){
+                activitiesPackage=p;
+                break;
             }
-        }reverse:NO];
+        }
+        
         XCTAssertTrue(activitiesPackage,@"We haven't found a package in 'activity' category");
         
         // We iterate on each activity
@@ -99,6 +101,7 @@
                                                          overWrite:YES];
         } reverse:NO];
     }
+     */
 }
 
 

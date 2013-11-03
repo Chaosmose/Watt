@@ -114,7 +114,7 @@
 
 - (void) _createSound:(id)sender{
     WIOSSoundManagerTableViewController *__weak weakSelf=self;
-    [self.library.registry executeAndAutoSaveBlock:^{
+    [self.library.registry executeBlockAndSaveIfNecessary:^{
         WTMLibrary*library=weakSelf.library;
         WTMSound*sound=[wtmAPI createSoundMemberInLibrary:library];
         sound.refererCounter=NSIntegerMax; // We do consider that any sound must be persistent and explicitly deleted.
@@ -170,7 +170,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
         [self.delegate willDeleteSound:sound];
-        [self.library.registry executeAndAutoSaveBlock:^{
+        [self.library.registry executeBlockAndSaveIfNecessary:^{
                [wtmAPI removeMember:sound];
         }];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];

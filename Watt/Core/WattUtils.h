@@ -8,20 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-@class WattRegistry;
 
-////////////
-// WATT_SOUP
-////////////
+#pragma mark - SOUP
 
-typedef enum watt_F_TYPES{
+#ifndef WT_SERIALIZATION_MODE
+#define WT_SERIALIZATION_MODE
+
+typedef enum WattSerializationModes{
     WattJx=0,   // Json + soup      * Default
     WattJ=1,    // Json  + no soup
     WattPx=2,   // Plist + soup
     WattP=3     // Plist + no soup
     // We plan to add Message Pack + soup
-}Watt_F_TYPE;
+}WattSerializationMode;
 
+#endif
+
+@class WattRegistry;
 
 @interface WattUtils : NSObject
 
@@ -37,9 +40,9 @@ typedef enum watt_F_TYPES{
 /**
  * Advanced runtime configuration
  * When using for example WattJx : the format is JSON and the data is mixed in a binary file soup
- *  @param ftype the format & soup behaviour
+ *  @param mode the format & soup behaviour
  */
--(void)use:(Watt_F_TYPE)ftype;
+-(void)use:(WattSerializationMode)mode;
 
 
 #pragma mark - relative path and path discovery
@@ -161,15 +164,6 @@ typedef enum watt_F_TYPES{
  */
 - (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
-
-#pragma  mark - dev temp methods
-
-/**
- *  Display a todo message
- *
- *  @param message The message
- */
-- (void)wattTodo:(NSString*)message; // A way to mark the job to be done;
 
 @end
 

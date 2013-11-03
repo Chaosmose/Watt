@@ -7,6 +7,7 @@
 //
 
 #import "WattUtils.h"
+#import "watt.h"
 
 #define kDefaultName                @"default"
 #define kRegistryFileName           @"registry"
@@ -16,7 +17,7 @@
 
 
 @implementation WattUtils{
-    Watt_F_TYPE  _ftype;
+    WattSerializationMode  _ftype;
     NSString    *_applicationDocumentsDirectory;
 }
 
@@ -64,7 +65,7 @@
 
 #pragma mark -
 
--(void)use:(Watt_F_TYPE)ftype{
+-(void)use:(WattSerializationMode)ftype{
     _ftype=ftype;
 }
 
@@ -183,10 +184,8 @@
 }
 
 - (NSString *)_wattRegistryFileRelativePathWithName:(NSString*)name{
-    if(!name)
-        name=kDefaultName;
     NSString *bPath=[self _wattBundleRelativePathWithName:name];
-    return [bPath stringByAppendingFormat:@"%@.%@",name,[self _suffix]];
+    return [bPath stringByAppendingFormat:@"%@.%@",kRegistryFileName,[self _suffix]];
 }
 
 - (NSString*)_suffix{
@@ -311,7 +310,6 @@
 }
 
 -(WattRegistry*)readRegistryFromFile:(NSString*)path{
-    
     if(self.fileManager && ![self.fileManager fileExistsAtPath:path isDirectory:NO]){
         [self raiseExceptionWithFormat:@"Unexisting registry path %@",path];
     }
@@ -319,13 +317,11 @@
         NSData *data=[self readDataFromPath:path];
         NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         WattRegistry *registry=[WattRegistry instanceFromArray:array resolveAliases:YES];
-        registry.apiReference=self;
         return registry;
     }else{
         NSArray *array=[self _deserializeFromJsonWithPath:path];
         if(array){
             WattRegistry *registry=[WattRegistry instanceFromArray:array resolveAliases:YES];
-            registry.apiReference=self;
             return registry;
         }
     }
@@ -340,7 +336,8 @@
     NSData *data=nil;
     @try {
         data=[NSJSONSerialization dataWithJSONObject:reference
-                                             options:NSJSONWritingPrettyPrinted error:&errorJson];
+                                             options:0
+                                               error:&errorJson];
     }
     @catch (NSException *exception) {
         return NO;
@@ -394,10 +391,5 @@
     return uuidStr;
 }
 
--(void)wattTodo:(NSString*)message{
-    if(!message)
-        message=@"todo";
-    [self raiseExceptionWithFormat:@"%@",message];
-}
 
 @end

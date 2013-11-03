@@ -36,6 +36,8 @@
 // Notice that the mane is never serialized.
 @property (nonatomic,copy)NSString* name;
 
+@property (nonatomic,assign) WattSerializationMode serializationMode;
+
 
 // WattDelta
 
@@ -44,14 +46,7 @@
 @property (nonatomic,strong)NSString *uniqueIdentifier;
 @property (nonatomic,strong)NSMutableArray *deltas;
 
-
-#pragma mark - auto saving 
-
-/**
- *  The reference to the hosting api
- *  Used to access to the current reference (for autosave support, or higher level support, like WTM creation api)
- */
-@property (nonatomic) id apiReference;
+#pragma mark - Save
 
 /**
  *  Autosave : 
@@ -74,27 +69,40 @@
 
 
 /**
- *  Execute the block and autosaves
+ *  Execute a bunch of modification in the block and save if necessary
  *
  *  @param block of modification of object in the registry.
  */
-- (void)executeAndAutoSaveBlock:(void (^)())block;
+- (void)executeBlockAndSaveIfNecessary:(void (^)())block;
+
+/**
+ *  Saves if hasChanged==YES;
+ */
+- (void)saveIfNecessary;
+
+/**
+ *  Saves
+ */
+- (void)save;
+
 
 
 #pragma mark - Serialization/Deserialization facilities
+
+/**
+ *  The serialization path
+ *
+ *  @return the path
+ */
+- (NSString*)serializationPath;
 
 // If you want serialize / deserialize a registry
 // Including fully decoupled object.
 + (WattRegistry*)instanceFromArray:(NSArray*)array resolveAliases:(BOOL)resolveAliases;
 - (NSArray*)arrayRepresentation;
 
-// If you want just sub graphs
-// resetHistory is done once per "session" to invalidate the serialization history
-// the serialization history prevents from circular referencing;
-- (NSDictionary*)dictionaryWithAliasesFrom:(WattObject*)object
-                             resetHistory:(BOOL)resetHistory;
-
 - (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary;
+
 
 #pragma mark - runtime object graph register
 
@@ -163,5 +171,8 @@
  *  Destroys the registry ( used in merging process for example)
  */
 - (void)destroyRegistry;
+
+
+
 
 @end

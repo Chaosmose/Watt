@@ -36,7 +36,6 @@
 		E50B610517FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
 		E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
-		E54AE905181E9B3F00D1C5D2 /* dataset1.json in Resources */ = {isa = PBXBuildFile; fileRef = E54AE904181E9B3F00D1C5D2 /* dataset1.json */; };
 		E54FBA201809AB51002B2BAB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54FBA1F1809AB51002B2BAB /* XCTest.framework */; };
 		E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
 		E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
@@ -253,7 +252,6 @@
 		E50B60FF17FF30CD006E76C5 /* WIOSMatrixCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIOSMatrixCellViewController.h; path = ../WTMIOS/WIOSMatrixCellViewController.h; sourceTree = "<group>"; };
 		E51AC40D17B9129900E9DC83 /* WattBundlePackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattBundlePackager.h; sourceTree = "<group>"; };
 		E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattBundlePackager.m; sourceTree = "<group>"; };
-		E54AE904181E9B3F00D1C5D2 /* dataset1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dataset1.json; sourceTree = "<group>"; };
 		E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PlayerSample Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E54FBA1F1809AB51002B2BAB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayerSample Tests-Info.plist"; sourceTree = "<group>"; };
@@ -627,7 +625,6 @@
 		E54FBA241809AB51002B2BAB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E54AE904181E9B3F00D1C5D2 /* dataset1.json */,
 				E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */,
 				E54FBA261809AB51002B2BAB /* InfoPlist.strings */,
 				E54FBA2B1809AB51002B2BAB /* PlayerSample Tests-Prefix.pch */,
@@ -896,7 +893,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E54AE905181E9B3F00D1C5D2 /* dataset1.json in Resources */,
 				E54FBA281809AB51002B2BAB /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

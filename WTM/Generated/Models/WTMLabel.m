@@ -54,10 +54,10 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"font"]){
-		[super setValue:value forKey:@"font"];
-	} else if ([key isEqualToString:@"text"]) {
-		[super setValue:value forKey:@"text"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -74,8 +74,8 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.font forKey:@"font"];
-	[dictionary setValue:self.text forKey:@"text"];
+	[dictionary setValue:self.font forKey:@"a"];
+	[dictionary setValue:self.text forKey:@"b"];
     return dictionary;
 }
 

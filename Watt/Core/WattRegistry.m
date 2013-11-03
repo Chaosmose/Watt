@@ -59,7 +59,7 @@
 
 @interface WattRegistry (){
 }
-
+@property (nonatomic,strong)WattUtils*utils;
 @end
 
 @implementation WattRegistry{
@@ -71,7 +71,8 @@
 
 @synthesize hasChanged = _hasChanged;
 @synthesize autosave = _autosave;
-@synthesize apiReference = _apiReference;
+@synthesize utils = _utils;
+@synthesize serializationMode = _serializationMode;
 
 - (id)init{
     self=[super init];
@@ -79,8 +80,28 @@
         _uinstIDCounter=0;
         _registry=[NSMutableDictionary dictionary];
         _autosave=YES;// By default
+        _utils=[[WattUtils alloc] init];
     }
     return self;
+}
+
+- (void)setSerializationMode:(WattSerializationMode)serializationMode{
+    _serializationMode=serializationMode;
+    [self.utils use:_serializationMode];
+}
+
+
+- (void)setAutosave:(BOOL)autosave{
+    _autosave=autosave;
+    if(_autosave){
+        if([self hasChanged]){
+            [self saveIfNecessary];
+        }
+    }
+}
+
+- (BOOL)autosave{
+    return _autosave;
 }
 
 
@@ -89,15 +110,46 @@
  *
  *  @param block of modification of object in the registry.
  */
-- (void)executeAndAutoSaveBlock:(void (^)())block{
+- (void)executeBlockAndSaveIfNecessary:(void (^)())block{
+    BOOL autoSaveInitialValue=self.autosave;
     self.autosave=NO;
     block();
-    self.hasChanged=YES;
-    self.autosave=YES;
+    [self saveIfNecessary];
+    self.autosave=autoSaveInitialValue;
 }
 
 
+/**
+ *  Saves if hasChanged==YES;
+ */
+- (void)saveIfNecessary{
+    if([self.name length]>=1){
+        if([self hasChanged]){
+            [self save];
+        }
+    }else{
+        [_utils raiseExceptionWithFormat:@"invalid registry name : %@ ",self.name];
+    }
+}
+
+/**
+ *  Saves
+ */
+- (void)save{
+    if([_utils writeRegistry:self
+                      toFile:[_utils absolutePathForRegistryFileWithName:self.name]]){
+        _hasChanged=NO;
+        WTLog(@"Saved automatically");
+    }
+
+}
+
 #pragma mark - Serialization/Deserialization facilities
+
+
+- (NSString*)serializationPath{
+    return [_utils absolutePathForRegistryFileWithName:self.name];
+}
 
 
 // If you want serialize / deserialize the whole registry
@@ -134,53 +186,6 @@
     }
     r.hasChanged=NO;
     return r;
-}
-
-
-- (void)setApiReference:(id)apiReference{
-    _apiReference=apiReference;
-}
-
-- (id)apiReference{
-    return _apiReference;
-}
-
-
-- (void)setAutosave:(BOOL)autosave{
-    _autosave=autosave;
-    if(!self.apiReference){
-        [NSException raise:@"WattRegistry autosaving exception"
-                    format:@"A registry requires an api reference to handle auto saving you should register a compliant instance of a Wattapi"];
-    }
-    if(_autosave){
-        if([self hasChanged]){
-            [self _tryToSaveAutomatically];
-        }
-    }
-}
-
-- (BOOL)autosave{
-    return _autosave;
-}
-
-
-- (void)_tryToSaveAutomatically{
-    if([self.name length]>=1 && [self.apiReference isKindOfClass:[WattApi class]]){
-        if(self.autosave){
-            if([(WattApi*)self.apiReference writeRegistry:self
-                                                   toFile:[(WattApi*)self.apiReference absolutePathForRegistryFileWithName:self.name]]){
-                _hasChanged=NO;
-                WTLog(@"Saved automatically");
-            }
-        }
-    }else{
-        NSMutableString *diagnostic=[NSMutableString string];
-        if(![self.name length]>=1)
-            [diagnostic appendFormat:@"invalid registry name : %@ ",self.name];
-        if(![self.apiReference isKindOfClass:[WattApi class]])
-            [diagnostic appendFormat:@"invalid apiReference : %@ ",self.apiReference];
-        [NSException raise:@"WattRegistry exception" format:@"%@",diagnostic];
-    }
 }
 
 
@@ -223,29 +228,6 @@
 
 - (void)_invalidateSortedKeys{
     __sortedKeys=nil;
-}
-
-// If you want serialize / deserialize an arbitrary object graph from a given object
-
-
-- (NSDictionary*)dictionaryWithAliasesFrom:(WattObject*)object
-                              resetHistory:(BOOL)resetHistory{
-    if(resetHistory){
-        _history=[NSMutableArray array];
-    }
-    BOOL inHistory=NO;
-    for (NSNumber*uid in _history) {
-        if([uid integerValue]==object.uinstID){
-            inHistory=YES;
-            break;
-        }
-    }
-    if(inHistory){
-        return [object aliasDictionaryRepresentation];
-    }else{
-        [_history addObject:@(object.uinstID)];
-        return [object dictionaryRepresentationWithChildren:YES];
-    }
 }
 
 - (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary{
@@ -380,7 +362,7 @@
         if( stop )
             break;
     }
-
+    
 }
 
 
@@ -444,7 +426,7 @@
     _name=nil;
     _hasChanged=NO;
     _autosave=NO;
-    _apiReference=nil;
+    _utils=nil;
 }
 
 

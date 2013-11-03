@@ -29,7 +29,7 @@
 
 #import "WattUtils.h"
 
-@class WattUser, WattGroup, WattModel;
+@class WattUser, WattGroup, WattModel,WattRegistry;
 
 ////////////
 // WATT_ACL
@@ -62,7 +62,7 @@ typedef enum watt_Actions{
 #endif
 
 
-@interface WattApi : WattUtils
+@interface WattApi : NSObject
 
 @property (nonatomic,strong)    WattUser *me;
 @property (nonatomic,readonly)  WattUser *system;

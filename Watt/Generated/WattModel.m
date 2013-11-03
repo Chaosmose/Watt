@@ -69,20 +69,20 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"category"]){
-		[super setValue:value forKey:@"category"];
-	} else if ([key isEqualToString:@"comment"]) {
-		[super setValue:value forKey:@"comment"];
-	} else if ([key isEqualToString:@"groupID"]) {
-		[super setValue:value forKey:@"groupID"];
-	} else if ([key isEqualToString:@"metadata"]) {
-		[super setValue:value forKey:@"metadata"];
-	} else if ([key isEqualToString:@"objectName"]) {
-		[super setValue:value forKey:@"objectName"];
-	} else if ([key isEqualToString:@"ownerID"]) {
-		[super setValue:value forKey:@"ownerID"];
-	} else if ([key isEqualToString:@"rights"]) {
-		[super setValue:value forKey:@"rights"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:value forKey:@"c"];
+	} else if ([key isEqualToString:@"d"]) {
+		[super setValue:value forKey:@"d"];
+	} else if ([key isEqualToString:@"e"]) {
+		[super setValue:value forKey:@"e"];
+	} else if ([key isEqualToString:@"f"]) {
+		[super setValue:value forKey:@"f"];
+	} else if ([key isEqualToString:@"g"]) {
+		[super setValue:value forKey:@"g"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -99,13 +99,13 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"category"];
-	[dictionary setValue:self.comment forKey:@"comment"];
-	[dictionary setValue:@(self.groupID) forKey:@"groupID"];
-	[dictionary setValue:self.metadata forKey:@"metadata"];
-	[dictionary setValue:self.objectName forKey:@"objectName"];
-	[dictionary setValue:@(self.ownerID) forKey:@"ownerID"];
-	[dictionary setValue:@(self.rights) forKey:@"rights"];
+	[dictionary setValue:self.category forKey:@"a"];
+	[dictionary setValue:self.comment forKey:@"b"];
+	[dictionary setValue:@(self.groupID) forKey:@"c"];
+	[dictionary setValue:self.metadata forKey:@"d"];
+	[dictionary setValue:self.objectName forKey:@"e"];
+	[dictionary setValue:@(self.ownerID) forKey:@"f"];
+	[dictionary setValue:@(self.rights) forKey:@"g"];
     return dictionary;
 }
 

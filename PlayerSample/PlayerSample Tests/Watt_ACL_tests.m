@@ -34,14 +34,13 @@
         [m  appendFormat:@"Tested : %@:%@\n",rs,n];
         XCTAssertTrue(ri==[n integerValue], @"%@ failed",n);
     }
-    
     WTLog(@"%@",m);
 }
 
 
-
 - (void)testACL_StandardValue{
     XCTAssertTrue([self.api rightsFromString:@"RWXRWXRWX"]==777,@"RWXRWXRWX should equals 777");
+    XCTAssertTrue([self.api rightsFromString:@"RWX------"]==700,@"RWX------ should equals 700");
     
 }
 

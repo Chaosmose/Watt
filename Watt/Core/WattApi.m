@@ -20,7 +20,7 @@
 //
 
 #import "WattApi.h"
-
+#import "Watt.h"
 
 @interface WattApi()
 @end
@@ -94,7 +94,6 @@
         }];
         //_idIndex;
     }
-    
     sourceRegistry=nil;
     
 }
@@ -108,7 +107,7 @@
            andOwner:(WattUser*)owner
                  on:(WattModel*)model{
     if(!model)
-        [self raiseExceptionWithFormat:@"WattAcl attempt to setup rights on void model"];
+        [ NSException raise:@"WattACL" format:@"Attempt to setup rights on void model"];
     model.rights=rights;
     if(owner){
         model.ownerID=owner.uinstID;

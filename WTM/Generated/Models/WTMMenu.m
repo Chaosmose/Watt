@@ -78,24 +78,24 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"details"]){
-		[super setValue:value forKey:@"details"];
-	} else if ([key isEqualToString:@"index"]) {
-		[super setValue:value forKey:@"index"];
-	} else if ([key isEqualToString:@"label"]) {
-		[super setValue:value forKey:@"label"];
-	} else if ([key isEqualToString:@"pictureRelativePath"]) {
-		[super setValue:value forKey:@"pictureRelativePath"];
-	} else if ([key isEqualToString:@"referenceUinstID"]) {
-		[super setValue:value forKey:@"referenceUinstID"];
-	} else if ([key isEqualToString:@"urlString"]) {
-		[super setValue:value forKey:@"urlString"];
-	} else if ([key isEqualToString:@"childrens"]) {
-		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"childrens"];
-	} else if ([key isEqualToString:@"menuSection"]) {
-		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menuSection"];
-	} else if ([key isEqualToString:@"parent"]) {
-		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"parent"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:value forKey:@"c"];
+	} else if ([key isEqualToString:@"d"]) {
+		[super setValue:value forKey:@"d"];
+	} else if ([key isEqualToString:@"e"]) {
+		[super setValue:value forKey:@"e"];
+	} else if ([key isEqualToString:@"f"]) {
+		[super setValue:value forKey:@"f"];
+	} else if ([key isEqualToString:@"g"]) {
+		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"g"];
+	} else if ([key isEqualToString:@"h"]) {
+		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
+	} else if ([key isEqualToString:@"i"]) {
+		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"i"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -181,31 +181,31 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.details forKey:@"details"];
-	[dictionary setValue:@(self.index) forKey:@"index"];
-	[dictionary setValue:self.label forKey:@"label"];
-	[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
-	[dictionary setValue:@(self.referenceUinstID) forKey:@"referenceUinstID"];
-	[dictionary setValue:self.urlString forKey:@"urlString"];
+	[dictionary setValue:self.details forKey:@"a"];
+	[dictionary setValue:@(self.index) forKey:@"b"];
+	[dictionary setValue:self.label forKey:@"c"];
+	[dictionary setValue:self.pictureRelativePath forKey:@"d"];
+	[dictionary setValue:@(self.referenceUinstID) forKey:@"e"];
+	[dictionary setValue:self.urlString forKey:@"f"];
 	if(self.childrens){
 		if(includeChildren){
-			[dictionary setValue:[self.childrens dictionaryRepresentationWithChildren:includeChildren] forKey:@"childrens"];
+			[dictionary setValue:[self.childrens dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];
 		}else{
-			[dictionary setValue:[self.childrens aliasDictionaryRepresentation] forKey:@"childrens"];
+			[dictionary setValue:[self.childrens aliasDictionaryRepresentation] forKey:@"g"];
 		}
 	}
 	if(self.menuSection){
 		if(includeChildren){
-			[dictionary setValue:[self.menuSection dictionaryRepresentationWithChildren:includeChildren] forKey:@"menuSection"];
+			[dictionary setValue:[self.menuSection dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
 		}else{
-			[dictionary setValue:[self.menuSection aliasDictionaryRepresentation] forKey:@"menuSection"];
+			[dictionary setValue:[self.menuSection aliasDictionaryRepresentation] forKey:@"h"];
 		}
 	}
 	if(self.parent){
 		if(includeChildren){
-			[dictionary setValue:[self.parent dictionaryRepresentationWithChildren:includeChildren] forKey:@"parent"];
+			[dictionary setValue:[self.parent dictionaryRepresentationWithChildren:includeChildren] forKey:@"i"];
 		}else{
-			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"parent"];
+			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"i"];
 		}
 	}
     return dictionary;

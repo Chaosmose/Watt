@@ -60,14 +60,14 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"allowExploration"]){
-		[super setValue:value forKey:@"allowExploration"];
-	} else if ([key isEqualToString:@"updateImageOnChange"]) {
-		[super setValue:value forKey:@"updateImageOnChange"];
-	} else if ([key isEqualToString:@"updateUrlOnChange"]) {
-		[super setValue:value forKey:@"updateUrlOnChange"];
-	} else if ([key isEqualToString:@"urlString"]) {
-		[super setValue:value forKey:@"urlString"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:value forKey:@"c"];
+	} else if ([key isEqualToString:@"d"]) {
+		[super setValue:value forKey:@"d"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -84,10 +84,10 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:@(self.allowExploration) forKey:@"allowExploration"];
-	[dictionary setValue:@(self.updateImageOnChange) forKey:@"updateImageOnChange"];
-	[dictionary setValue:@(self.updateUrlOnChange) forKey:@"updateUrlOnChange"];
-	[dictionary setValue:self.urlString forKey:@"urlString"];
+	[dictionary setValue:@(self.allowExploration) forKey:@"a"];
+	[dictionary setValue:@(self.updateImageOnChange) forKey:@"b"];
+	[dictionary setValue:@(self.updateUrlOnChange) forKey:@"c"];
+	[dictionary setValue:self.urlString forKey:@"d"];
     return dictionary;
 }
 

@@ -66,16 +66,16 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"license"]){
-		[super setValue:value forKey:@"license"];
-	} else if ([key isEqualToString:@"name"]) {
-		[super setValue:value forKey:@"name"];
-	} else if ([key isEqualToString:@"activities"]) {
-		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
-	} else if ([key isEqualToString:@"libraries"]) {
-		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
+	} else if ([key isEqualToString:@"d"]) {
+		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
+	} else if ([key isEqualToString:@"e"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"e"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -161,27 +161,27 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.license forKey:@"license"];
-	[dictionary setValue:self.name forKey:@"name"];
+	[dictionary setValue:self.license forKey:@"a"];
+	[dictionary setValue:self.name forKey:@"b"];
 	if(self.activities){
 		if(includeChildren){
-			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
+			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{
-			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"activities"];
+			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"c"];
 		}
 	}
 	if(self.libraries){
 		if(includeChildren){
-			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"libraries"];
+			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
 		}else{
-			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"libraries"];
+			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"d"];
 		}
 	}
 	if(self.picture){
 		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];
 		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"e"];
 		}
 	}
     return dictionary;

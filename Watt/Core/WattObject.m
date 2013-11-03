@@ -270,7 +270,6 @@
     }
     Class currentClass=[self class];
     NSUInteger  count;
-    // (!) IMPORTANT
     // Each class has its own set of property in the inheritance chain.
     // So we do perform while "currentClass" has a superClass
     while (currentClass) {

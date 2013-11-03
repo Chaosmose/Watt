@@ -28,7 +28,7 @@
 }
 
 
-- (void)testCompareShelfs_SerializationDeserialization{
+- (void)testShelfAndPackagesSerializationDeserialization{
     
     // 1- We create a Graph of object within a WattRegistry (r1)
     WattRegistry*r1=[self _createAPopulatedRegistry];
@@ -39,7 +39,6 @@
     WattRegistry*r2=[WattRegistry instanceFromArray:a1
                                 resolveAliases:YES];
     
-    r2.apiReference=wtmAPI;
     r2.name=@"r2";
     
     // Let's compare r1 & r2 members.
@@ -57,12 +56,10 @@
         XCTAssertFalse([obj isEqual:ro], @"The instances should not be equal");
         [s appendFormat:@"Analysed : %@\n",NSStringFromClass([obj class])];
     }];
-    // We verify we have enough members.
-    XCTAssertTrue([a1 count]>=4,@"The serialized registry should contains a least 4 items, current count is : %i",[a1 count]);
 }
 
 
-- (void)testShelfs_CopyFromARegistryToAnother{
+- (void)testShelfsCopyFromARegistryToAnother{
     
     // 1- We create a Graph of object within a WattRegistry (r1)
     WattRegistry*r1=[self _createAPopulatedRegistry];
@@ -89,7 +86,6 @@
         [s appendFormat:@"Analysed : %@\n",NSStringFromClass([obj class])];
     }];
 
-    
     // Let s count
     XCTAssertTrue([r1 count]==[r2 count], @"The registries do not have the same count %i %i",[r1 count], [r2 count]);
 
@@ -100,23 +96,30 @@
 - (WattRegistry*)_createAPopulatedRegistry{
     
     WattRegistry*registry=[[WattRegistry alloc] init];
+    [registry setSerializationMode:WattJ];
     registry.name=@"r1";
-    registry.apiReference=[WTMApi sharedInstance];
     registry.autosave=NO;
     
     WTMShelf *s=[self _createAShelfInRegistry:registry];
     s.comment=@"Comment #1 for test purposes";
    
-    NSString *pObjectName=[s.packagesList lastObject];
+
+    NSString *pObjectName=[s.packagesList firstObject];
     WTMPackage*p=[s packageWithObjectName:pObjectName using:WattJ];
-    
     p.name=@"Package A";
+    
+    XCTAssertNotNil(p,@"The package should no be nil");
+    
     
     WTMLibrary*lib=[p.libraries_auto firstObject];
     lib.name=@"First Library";
     
     WTMHyperlink*h=[wtmAPI createHyperlinkMemberInLibrary:lib];
     h.urlString=@"http://www.pereira-da-silva.com";
+    
+    [p.registry save];
+    
+    WTLog(@"p.registry serializationPath : %@",[p.registry serializationPath]);
     
     return registry;
 }
@@ -129,8 +132,10 @@
     
     // And one package (with its own registry)
     WTMPackage *p=[wtmAPI createPackageInShelf:shelf];
-    // Containing one library
-    [wtmAPI createLibraryInPackage:p];
+    
+    //
+    WTMActivity*a=[wtmAPI createActivityInPackage:p];
+    [a setShortName:@"activity1"];
     
     return shelf;
 }

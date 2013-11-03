@@ -47,14 +47,14 @@
     return nil;
 }
 
-- (BOOL)writePNGToAbsolutePath:(NSString*)path using:(Watt_F_TYPE)serializationMode{
+- (BOOL)writePNGToAbsolutePath:(NSString*)path using:(WattSerializationMode)serializationMode{
     WattUtils *utils=[[WattUtils alloc] init];
     [utils use:serializationMode];
     NSData *data=UIImagePNGRepresentation(self);
     return [utils writeData:data toPath:path];
 }
 
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path using:(Watt_F_TYPE)serializationMode{
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path using:(WattSerializationMode)serializationMode{
     WattUtils *utils=[[WattUtils alloc] init];
     [utils use:serializationMode];
     NSData *data=UIImageJPEGRepresentation(self, 0.5f);

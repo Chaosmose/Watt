@@ -57,12 +57,12 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"actionName"]){
-		[super setValue:value forKey:@"actionName"];
-	} else if ([key isEqualToString:@"attributes"]) {
-		[super setValue:value forKey:@"attributes"];
-	} else if ([key isEqualToString:@"triggerName"]) {
-		[super setValue:value forKey:@"triggerName"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:value forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:value forKey:@"c"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -79,9 +79,9 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.actionName forKey:@"actionName"];
-	[dictionary setValue:self.attributes forKey:@"attributes"];
-	[dictionary setValue:self.triggerName forKey:@"triggerName"];
+	[dictionary setValue:self.actionName forKey:@"a"];
+	[dictionary setValue:self.attributes forKey:@"b"];
+	[dictionary setValue:self.triggerName forKey:@"c"];
     return dictionary;
 }
 

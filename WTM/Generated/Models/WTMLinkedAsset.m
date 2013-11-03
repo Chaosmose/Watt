@@ -51,8 +51,8 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"relativePath"]){
-		[super setValue:value forKey:@"relativePath"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -69,7 +69,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.relativePath forKey:@"relativePath"];
+	[dictionary setValue:self.relativePath forKey:@"a"];
     return dictionary;
 }
 

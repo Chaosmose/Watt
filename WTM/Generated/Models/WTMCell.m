@@ -63,14 +63,14 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"attributes"]){
-		[super setValue:value forKey:@"attributes"];
-	} else if ([key isEqualToString:@"column"]) {
-		[super setValue:[WTMColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"column"];
-	} else if ([key isEqualToString:@"element"]) {
-		[super setValue:[WTMElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"element"];
-	} else if ([key isEqualToString:@"line"]) {
-		[super setValue:[WTMLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"line"];
+	if ([key isEqualToString:@"a"]){
+		[super setValue:value forKey:@"a"];
+	} else if ([key isEqualToString:@"b"]) {
+		[super setValue:[WTMColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"b"];
+	} else if ([key isEqualToString:@"c"]) {
+		[super setValue:[WTMElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
+	} else if ([key isEqualToString:@"d"]) {
+		[super setValue:[WTMLine instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -156,26 +156,26 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.attributes forKey:@"attributes"];
+	[dictionary setValue:self.attributes forKey:@"a"];
 	if(self.column){
 		if(includeChildren){
-			[dictionary setValue:[self.column dictionaryRepresentationWithChildren:includeChildren] forKey:@"column"];
+			[dictionary setValue:[self.column dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
 		}else{
-			[dictionary setValue:[self.column aliasDictionaryRepresentation] forKey:@"column"];
+			[dictionary setValue:[self.column aliasDictionaryRepresentation] forKey:@"b"];
 		}
 	}
 	if(self.element){
 		if(includeChildren){
-			[dictionary setValue:[self.element dictionaryRepresentationWithChildren:includeChildren] forKey:@"element"];
+			[dictionary setValue:[self.element dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{
-			[dictionary setValue:[self.element aliasDictionaryRepresentation] forKey:@"element"];
+			[dictionary setValue:[self.element aliasDictionaryRepresentation] forKey:@"c"];
 		}
 	}
 	if(self.line){
 		if(includeChildren){
-			[dictionary setValue:[self.line dictionaryRepresentationWithChildren:includeChildren] forKey:@"line"];
+			[dictionary setValue:[self.line dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
 		}else{
-			[dictionary setValue:[self.line aliasDictionaryRepresentation] forKey:@"line"];
+			[dictionary setValue:[self.line aliasDictionaryRepresentation] forKey:@"d"];
 		}
 	}
     return dictionary;
