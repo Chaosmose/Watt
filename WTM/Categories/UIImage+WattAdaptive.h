@@ -22,6 +22,7 @@
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#import "Watt.h"
 
 
 @interface UIImage(WattAdaptive)

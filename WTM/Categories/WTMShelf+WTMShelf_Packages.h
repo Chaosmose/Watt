@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
+#import "Watt.h"
 #import "WTMShelf.h"
 #import "WTMPackage.h"
 #import "WTMCollectionOfPackage.h"
