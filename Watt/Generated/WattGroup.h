@@ -21,7 +21,6 @@
  
 
 #import "WattObject.h"
-
 @class WattCollectionOfUser;
 
 @interface WattGroup:WattObject<WattCoding,WattCopying,WattExtraction>{

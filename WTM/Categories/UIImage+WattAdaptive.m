@@ -31,6 +31,7 @@
 
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath inRegistry:(WattRegistry*)registry{
     WattUtils *utils=[[WattUtils alloc] init];
+    [utils use:registry.serializationMode];
     NSString *p=[utils absolutePathFromRelativePath:relativePath
                                             inBundleWithName:registry.name];
     if(p){

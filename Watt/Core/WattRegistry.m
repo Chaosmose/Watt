@@ -74,16 +74,46 @@
 @synthesize utils = _utils;
 @synthesize serializationMode = _serializationMode;
 
+
+/**
+ *  Invalid initializer
+ *  You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry
+ *  @return nil
+ */
 - (id)init{
+    [NSException raise:@"WattRegistry initialization exception"
+                    format:@"You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry"];
+    return nil;
+}
+
+
+/**
+ * The constructor
+ *
+ *  @param serializationMode The format (json,plist, ...) +  soup or not
+ *  @param name              The name of the registry
+ *  @param containerName     The name of the container eg : "superApp"
+ will permit group the files in <app documents>/superApp/registryName/... (registry.jx, folders & cie);
+ *
+ *  @return The new created instance
+ */
+-(instancetype)initWithSerializationMode:(WattSerializationMode)serializationMode
+                                    name:(NSString*)name
+                        andContainerName:(NSString*)containerName{
     self=[super init];
     if(self){
         _uinstIDCounter=0;
         _registry=[NSMutableDictionary dictionary];
         _autosave=YES;// By default
+        _name=name;
+        // utils
         _utils=[[WattUtils alloc] init];
+        [_utils use:serializationMode];
+        _utils.containerName=containerName;
     }
     return self;
 }
+
 
 - (void)setSerializationMode:(WattSerializationMode)serializationMode{
     _serializationMode=serializationMode;
@@ -152,11 +182,23 @@
 }
 
 
-// If you want serialize / deserialize the whole registry
-
-
-+ (WattRegistry*)instanceFromArray:(NSArray*)array resolveAliases:(BOOL)resolveAliases{
-    WattRegistry *r=[[WattRegistry alloc] init];
+/**
+ *  A facility constructor for a registry fron an array instance
+ *
+ *  @param array             the array flat representation
+ *  @param serializationMode the mode
+ *  @param name              the registry name
+ *  @param containerName     the optionnal container name
+ *  @param resolveAliases    resolveAliases directly (can be defered to runtine for lazy resolution)
+ *
+ *  @return the registry
+ */
++ (WattRegistry*)instanceFromArray:(NSArray*)array
+             withSerializationMode:(WattSerializationMode)serializationMode
+                              name:(NSString*)name
+                  andContainerName:(NSString*)containerName
+                    resolveAliases:(BOOL)resolveAliases{
+    WattRegistry *r=[[WattRegistry alloc] initWithSerializationMode:serializationMode name:name andContainerName:containerName];
     
     // Double step deserialization
     // and allows circular referencing any object graph can be serialized.

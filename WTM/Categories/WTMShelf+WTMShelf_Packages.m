@@ -99,8 +99,12 @@ static char const * const PackagesKey = "PackagesKey";
 
 - (WTMCollectionOfPackage*)_packages_auto{
 	if(![self _packages]){
-        WattRegistry *r=[[WattRegistry alloc] init];
-        WTMCollectionOfPackage*p=[[WTMCollectionOfPackage alloc] initInRegistry:r];
+        
+        // This registry is temp
+        WattRegistry *registry=[[WattRegistry alloc] initWithSerializationMode:self.registry.serializationMode
+                                                                          name:[WattUtils uuidString]
+                                                              andContainerName:self.registry.name];
+        WTMCollectionOfPackage*p=[[WTMCollectionOfPackage alloc] initInRegistry:registry];
         [self _setPackages:p];
     }
     return [self _packages];

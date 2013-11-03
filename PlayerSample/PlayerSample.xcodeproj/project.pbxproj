@@ -18,8 +18,6 @@
 		E50B610317FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */; };
 		E50B610417FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
 		E50B610517FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
-		E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
-		E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E54FBA201809AB51002B2BAB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54FBA1F1809AB51002B2BAB /* XCTest.framework */; };
 		E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
 		E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
@@ -97,49 +95,34 @@
 		E5C6FA7B18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
 		E5CF13291826669E003658CE /* WattACL.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9621826668D003658CE /* WattACL.m */; };
 		E5CF132A1826669E003658CE /* WattACL.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9621826668D003658CE /* WattACL.m */; };
-		E5CF132B1826669E003658CE /* WattACL.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9621826668D003658CE /* WattACL.m */; };
 		E5CF132C1826669E003658CE /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9641826668D003658CE /* WattCollectionOfObject.m */; };
 		E5CF132D1826669E003658CE /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9641826668D003658CE /* WattCollectionOfObject.m */; };
-		E5CF132E1826669E003658CE /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9641826668D003658CE /* WattCollectionOfObject.m */; };
 		E5CF132F1826669E003658CE /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9661826668D003658CE /* WattObject.m */; };
 		E5CF13301826669E003658CE /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9661826668D003658CE /* WattObject.m */; };
-		E5CF13311826669E003658CE /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9661826668D003658CE /* WattObject.m */; };
 		E5CF13321826669E003658CE /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9691826668D003658CE /* WattRegistry.m */; };
 		E5CF13331826669E003658CE /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9691826668D003658CE /* WattRegistry.m */; };
-		E5CF13341826669E003658CE /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9691826668D003658CE /* WattRegistry.m */; };
 		E5CF13351826669E003658CE /* WattUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF96B1826668D003658CE /* WattUtils.m */; };
 		E5CF13361826669E003658CE /* WattUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF96B1826668D003658CE /* WattUtils.m */; };
-		E5CF13371826669E003658CE /* WattUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF96B1826668D003658CE /* WattUtils.m */; };
 		E5CF13381826669E003658CE /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF96E1826668D003658CE /* WattDelta.m */; };
 		E5CF13391826669E003658CE /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF96E1826668D003658CE /* WattDelta.m */; };
-		E5CF133A1826669E003658CE /* WattDelta.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF96E1826668D003658CE /* WattDelta.m */; };
 		E5CF133B1826669E003658CE /* WattDeltaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9701826668D003658CE /* WattDeltaEngine.m */; };
 		E5CF133C1826669E003658CE /* WattDeltaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9701826668D003658CE /* WattDeltaEngine.m */; };
-		E5CF133D1826669E003658CE /* WattDeltaEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9701826668D003658CE /* WattDeltaEngine.m */; };
 		E5CF133E1826669E003658CE /* WattCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9731826668D003658CE /* WattCollectionOfGroup.m */; };
 		E5CF133F1826669E003658CE /* WattCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9731826668D003658CE /* WattCollectionOfGroup.m */; };
-		E5CF13401826669E003658CE /* WattCollectionOfGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9731826668D003658CE /* WattCollectionOfGroup.m */; };
 		E5CF13411826669E003658CE /* WattCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9751826668D003658CE /* WattCollectionOfModel.m */; };
 		E5CF13421826669E003658CE /* WattCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9751826668D003658CE /* WattCollectionOfModel.m */; };
-		E5CF13431826669E003658CE /* WattCollectionOfModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9751826668D003658CE /* WattCollectionOfModel.m */; };
 		E5CF13441826669E003658CE /* WattCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9771826668D003658CE /* WattCollectionOfUser.m */; };
 		E5CF13451826669E003658CE /* WattCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9771826668D003658CE /* WattCollectionOfUser.m */; };
-		E5CF13461826669E003658CE /* WattCollectionOfUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9771826668D003658CE /* WattCollectionOfUser.m */; };
 		E5CF13471826669E003658CE /* WattGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9791826668D003658CE /* WattGroup.m */; };
 		E5CF13481826669E003658CE /* WattGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9791826668D003658CE /* WattGroup.m */; };
-		E5CF13491826669E003658CE /* WattGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9791826668D003658CE /* WattGroup.m */; };
 		E5CF134A1826669E003658CE /* WattModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97C1826668D003658CE /* WattModel.m */; };
 		E5CF134B1826669E003658CE /* WattModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97C1826668D003658CE /* WattModel.m */; };
-		E5CF134C1826669E003658CE /* WattModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97C1826668D003658CE /* WattModel.m */; };
 		E5CF134D1826669E003658CE /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97E1826668D003658CE /* WattUser.m */; };
 		E5CF134E1826669E003658CE /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97E1826668D003658CE /* WattUser.m */; };
-		E5CF134F1826669E003658CE /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97E1826668D003658CE /* WattUser.m */; };
-		E5CF13501826669E003658CE /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9811826668D003658CE /* WattBundlePackager.m */; };
-		E5CF13511826669E003658CE /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9811826668D003658CE /* WattBundlePackager.m */; };
-		E5CF13521826669E003658CE /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9811826668D003658CE /* WattBundlePackager.m */; };
-		E5CFF95C18265DB1003658CE /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
 		E5D9A30D1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D9A30C1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m */; };
 		E5D9A30E1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D9A30C1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m */; };
+		E5ECCD521826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
+		E5ECCD531826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E5F4333F17D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432EF17D8B52600CD20B7 /* WTMCollectionOfActivity.m */; };
 		E5F4334017D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432EF17D8B52600CD20B7 /* WTMCollectionOfActivity.m */; };
 		E5F4334117D8B52600CD20B7 /* WTMCollectionOfBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432F217D8B52600CD20B7 /* WTMCollectionOfBehavior.m */; };
@@ -341,8 +324,6 @@
 		E5CFF97C1826668D003658CE /* WattModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattModel.m; sourceTree = "<group>"; };
 		E5CFF97D1826668D003658CE /* WattUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattUser.h; sourceTree = "<group>"; };
 		E5CFF97E1826668D003658CE /* WattUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattUser.m; sourceTree = "<group>"; };
-		E5CFF9801826668D003658CE /* WattBundlePackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattBundlePackager.h; sourceTree = "<group>"; };
-		E5CFF9811826668D003658CE /* WattBundlePackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattBundlePackager.m; sourceTree = "<group>"; };
 		E5D9A30B1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WTMShelf+WTMShelf_Packages.h"; sourceTree = "<group>"; };
 		E5D9A30C1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WTMShelf+WTMShelf_Packages.m"; sourceTree = "<group>"; };
 		E5F432E917D8B52600CD20B7 /* WTMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCell.h; sourceTree = "<group>"; };
@@ -744,7 +725,6 @@
 				E5CFF9601826668D003658CE /* Core */,
 				E5CFF96C1826668D003658CE /* Delta */,
 				E5CFF9711826668D003658CE /* Generated */,
-				E5CFF97F1826668D003658CE /* Packager */,
 				E5CF13271826669D003658CE /* Watt.h */,
 				E5CF13281826669D003658CE /* WattDefinitions.h */,
 			);
@@ -799,15 +779,6 @@
 				E5CFF97E1826668D003658CE /* WattUser.m */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		E5CFF97F1826668D003658CE /* Packager */ = {
-			isa = PBXGroup;
-			children = (
-				E5CFF9801826668D003658CE /* WattBundlePackager.h */,
-				E5CFF9811826668D003658CE /* WattBundlePackager.m */,
-			);
-			path = Packager;
 			sourceTree = "<group>";
 		};
 		E5D9A3091824FC8500824D47 /* To_be_extracted_in_separate_projects */ = {
@@ -1098,22 +1069,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */,
-				E5CF13521826669E003658CE /* WattBundlePackager.m in Sources */,
 				E54FBA2A1809AB51002B2BAB /* Watt_Registry_data_Tests.m in Sources */,
-				E5CF13341826669E003658CE /* WattRegistry.m in Sources */,
-				E5CF13311826669E003658CE /* WattObject.m in Sources */,
-				E5CF13401826669E003658CE /* WattCollectionOfGroup.m in Sources */,
-				E5CFF95C18265DB1003658CE /* WTMApi.m in Sources */,
-				E5CF132E1826669E003658CE /* WattCollectionOfObject.m in Sources */,
-				E5CF134C1826669E003658CE /* WattModel.m in Sources */,
-				E5CF133D1826669E003658CE /* WattDeltaEngine.m in Sources */,
-				E5CF13431826669E003658CE /* WattCollectionOfModel.m in Sources */,
-				E5CF13491826669E003658CE /* WattGroup.m in Sources */,
-				E5CF13461826669E003658CE /* WattCollectionOfUser.m in Sources */,
-				E5CF134F1826669E003658CE /* WattUser.m in Sources */,
-				E5CF13371826669E003658CE /* WattUtils.m in Sources */,
-				E5CF132B1826669E003658CE /* WattACL.m in Sources */,
-				E5CF133A1826669E003658CE /* WattDelta.m in Sources */,
 				E586EAB51813D80000C77705 /* WTM_Shelf_tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1134,7 +1090,6 @@
 				E5CF13391826669E003658CE /* WattDelta.m in Sources */,
 				E5CF134B1826669E003658CE /* WattModel.m in Sources */,
 				E5ADA55F17F988790068BCDE /* WTMCollectionOfPdf.m in Sources */,
-				E51AC41017B924EF00E9DC83 /* WattBundlePackager.m in Sources */,
 				E56E248817D77C4A009C2C2C /* WIOSSoundRecorderViewController.m in Sources */,
 				E56E248917D77C4E009C2C2C /* WIOSSoundListCell.m in Sources */,
 				E56E248A17D77C54009C2C2C /* WIOSButton.m in Sources */,
@@ -1148,7 +1103,6 @@
 				E5F4334617D8B52600CD20B7 /* WTMCollectionOfElement.m in Sources */,
 				E5ADA56117F9887E0068BCDE /* WTMCollectionOfVideo.m in Sources */,
 				E5F4334817D8B52600CD20B7 /* WTMCollectionOfImage.m in Sources */,
-				E5CF13511826669E003658CE /* WattBundlePackager.m in Sources */,
 				E5CF13361826669E003658CE /* WattUtils.m in Sources */,
 				E5F4334A17D8B52600CD20B7 /* WTMCollectionOfLibrary.m in Sources */,
 				E5F4334C17D8B52600CD20B7 /* WTMCollectionOfLine.m in Sources */,
@@ -1179,6 +1133,7 @@
 				E5F4337017D8B52600CD20B7 /* WTMPdf.m in Sources */,
 				E5F4337217D8B52600CD20B7 /* WTMBehavior.m in Sources */,
 				E5F4337417D8B52600CD20B7 /* WTMLine.m in Sources */,
+				E5ECCD521826B72100242150 /* WattBundlePackager.m in Sources */,
 				E5F4337617D8B52600CD20B7 /* WTMSound.m in Sources */,
 				E5F4337817D8B52600CD20B7 /* WTMTable.m in Sources */,
 				E5F4337A17D8B52600CD20B7 /* WTMOperator.m in Sources */,
@@ -1214,7 +1169,6 @@
 				E5CF13381826669E003658CE /* WattDelta.m in Sources */,
 				E5CF134A1826669E003658CE /* WattModel.m in Sources */,
 				E5ADA55917F9885B0068BCDE /* WTMCollectionOfPdf.m in Sources */,
-				E51AC40F17B9129900E9DC83 /* WattBundlePackager.m in Sources */,
 				E56E248517D77C39009C2C2C /* WIOSSoundRecorderViewController.m in Sources */,
 				E56E248617D77C39009C2C2C /* WIOSSoundListCell.m in Sources */,
 				E56E248717D77C39009C2C2C /* WIOSButton.m in Sources */,
@@ -1228,7 +1182,6 @@
 				E5F4334517D8B52600CD20B7 /* WTMCollectionOfElement.m in Sources */,
 				E5ADA55B17F9885B0068BCDE /* WTMCollectionOfVideo.m in Sources */,
 				E5F4334717D8B52600CD20B7 /* WTMCollectionOfImage.m in Sources */,
-				E5CF13501826669E003658CE /* WattBundlePackager.m in Sources */,
 				E5CF13351826669E003658CE /* WattUtils.m in Sources */,
 				E5F4334917D8B52600CD20B7 /* WTMCollectionOfLibrary.m in Sources */,
 				E5F4334B17D8B52600CD20B7 /* WTMCollectionOfLine.m in Sources */,
@@ -1259,6 +1212,7 @@
 				E5F4336F17D8B52600CD20B7 /* WTMPdf.m in Sources */,
 				E5F4337117D8B52600CD20B7 /* WTMBehavior.m in Sources */,
 				E5F4337317D8B52600CD20B7 /* WTMLine.m in Sources */,
+				E5ECCD531826B72100242150 /* WattBundlePackager.m in Sources */,
 				E5F4337517D8B52600CD20B7 /* WTMSound.m in Sources */,
 				E5F4337717D8B52600CD20B7 /* WTMTable.m in Sources */,
 				E5F4337917D8B52600CD20B7 /* WTMOperator.m in Sources */,

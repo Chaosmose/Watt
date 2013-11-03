@@ -163,10 +163,9 @@
             [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
         
         // IMPORTANT WE CREATE A NEW REGISTRY
-        
-        WattRegistry *registry=[[WattRegistry alloc] init];
-        [registry setSerializationMode:shelf.registry.serializationMode];
-        registry.name=[self.utils uuidString];
+        WattRegistry *registry=[[WattRegistry alloc] initWithSerializationMode:shelf.registry.serializationMode
+                                                                          name:[WattUtils uuidString]
+                                                              andContainerName:shelf.registry.name];
         
         WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
         package.objectName=[self.utils uuidString];// We create a uuid for each package and library to deal with linked assets

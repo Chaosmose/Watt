@@ -15,6 +15,9 @@
 
 @interface WattUtils : NSObject
 
+/**
+ *  An atomic instance of a NSFileManager
+ */
 @property (atomic,strong) NSFileManager *fileManager;
 
 // The files with those extensions can be mixed in the soup (mixing is a sort of encryption)
@@ -25,11 +28,29 @@
 @property (nonatomic,strong)    NSMutableArray *forcedSoupPaths;
 
 /**
+ * The name of the container eg : "superApp"
+ * permit group the files in <app documents>/superApp/registryName/... (registry.jx, folders & cie);
+ */
+@property (nonatomic,copy)NSString*containerName;
+
+
+/**
  * Advanced runtime configuration
  * When using for example WattJx : the format is JSON and the data is mixed in a binary file soup
  *  @param mode the format & soup behaviour
  */
 -(void)use:(WattSerializationMode)mode;
+
+
+/**
+ *  Returns the wattSerializationMode by parsing the path suffix
+ *
+ *  @param path the path
+ *
+ *  @return the serialization mode
+ */
+- (WattSerializationMode)serializationModeFormPath:(NSString*)path;
+
 
 
 #pragma mark - relative path and path discovery
@@ -140,6 +161,15 @@
  *  @return the identifier
  */
 - (NSString *)uuidString;
+
+/**
+ *  Returns an unique identifier string
+ *
+ *  @return the identifier
+ */
++ (NSString *)uuidString;
+
+
 
 
 #pragma  mark - exceptions

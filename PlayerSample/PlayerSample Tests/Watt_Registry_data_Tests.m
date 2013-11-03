@@ -12,7 +12,6 @@
 #import "TRVSMonitor.h"
 
 @interface Watt_Registry_data_Tests : XCTestCase
-@property (atomic,strong)WattApi *api;
 @property (atomic,strong)WattRegistry*dataRegistry;
 @end
 
@@ -21,19 +20,17 @@
 
 - (void)setUp{
     [super setUp];
-    self.api=[[WattApi alloc] init];
 }
 
 - (void)tearDown{
     [super tearDown];
     self.dataRegistry=nil;
-    self.api=nil;
 }
 
 
 - (void)testExtractionAndPackaging{
-    /*
     
+    /*
     // We need a pool of JSON.
     
     NSString *p=[[NSBundle bundleForClass:[self class]] pathForResource:@"dataset1" ofType:@"json"];
@@ -67,7 +64,7 @@
         [activitiesPackage.activities_auto enumerateObjectsUsingBlock:^(WTMActivity *obj, NSUInteger idx, BOOL *stop) {
             
             // We create a new registry
-            WattRegistry*r=[[WattRegistry alloc] init];
+            WattRegistry*r=[[WattRegistry alloc] initWithSerializationMode:WattJ name:(NSString *) andContainerName:(NSString *)];
             // Copy the activity in the new registry
             [obj wattExtractAndCopyToRegistry:r];
             
@@ -101,6 +98,7 @@
                                                          overWrite:YES];
         } reverse:NO];
     }
+     
      */
 }
 

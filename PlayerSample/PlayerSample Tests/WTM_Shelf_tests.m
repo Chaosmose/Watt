@@ -36,8 +36,10 @@
     NSArray *a1=[r1 arrayRepresentation];
     
     //3- We generate a new Registry (r2) from a1 by deserializing
-    WattRegistry*r2=[WattRegistry instanceFromArray:a1
-                                resolveAliases:YES];
+    WattRegistry*r2=[WattRegistry instanceFromArray:a1 withSerializationMode:WattJ
+                                               name:@"r2"
+                                   andContainerName:@"test"
+                                     resolveAliases:YES];
     
     r2.name=@"r2";
     
@@ -66,7 +68,7 @@
     WTMShelf *shelf=(WTMShelf*)[r1 objectWithUinstID:1];
     
     // 2- We copy the shel to another registry
-    WattRegistry*r2=[[WattRegistry alloc]init];
+    WattRegistry*r2=[[WattRegistry alloc]initWithSerializationMode:WattJ name:[WattUtils uuidString] andContainerName:shelf.name];
     [shelf wattCopyInRegistry:r2];
     
     // TESTS
@@ -95,9 +97,7 @@
 
 - (WattRegistry*)_createAPopulatedRegistry{
     
-    WattRegistry*registry=[[WattRegistry alloc] init];
-    [registry setSerializationMode:WattJ];
-    registry.name=@"r1";
+    WattRegistry*registry=[[WattRegistry alloc] initWithSerializationMode:WattJ name:@"r1" andContainerName:nil];
     registry.autosave=NO;
     
     WTMShelf *s=[self _createAShelfInRegistry:registry];

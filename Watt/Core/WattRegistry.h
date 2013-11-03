@@ -28,15 +28,27 @@
 
 @class WattObject;
 @class WattCollectionOfObject;
+@class WattUtils;
 
 @interface WattRegistry : NSObject
 
-// The registry name is used for external purpose
-// eg : defining a file path to store serialized registry and associated bundle
-// Notice that the mane is never serialized.
+
+/**
+ * The registry name is used for external purpose
+ * eg : defining a file path to store serialized registry and associated bundle
+ * Notice that the mane is not serialized.
+ */
 @property (nonatomic,copy)NSString* name;
 
+/**
+ *  The registry serializationMode
+ */
 @property (nonatomic,assign) WattSerializationMode serializationMode;
+
+/**
+ *  A reference to an WattUtils instance
+ */
+@property (nonatomic,readonly)WattUtils *utils;
 
 
 // WattDelta
@@ -45,6 +57,7 @@
 @property (nonatomic,strong)NSDate *lastSerializationDate;
 @property (nonatomic,strong)NSString *uniqueIdentifier;
 @property (nonatomic,strong)NSMutableArray *deltas;
+
 
 #pragma mark - Save
 
@@ -66,6 +79,22 @@
  * A flag used by the autosave process.
  */
 @property (nonatomic) BOOL hasChanged;
+
+
+/**
+ * The constructor (you should not use the simple init)
+ *
+ *  @param serializationMode The format (json,plist, ...) +  soup or not
+ *  @param name              The name of the registry
+ *  @param containerName     The name of the container eg : "superApp"
+ *                           permit group the files in <app documents>/superApp/registryName/... (registry.jx, folders & cie);
+ *
+ *  @return The new created instance
+ */
+-(instancetype)initWithSerializationMode:(WattSerializationMode)serializationMode
+                                 name:(NSString*)name
+                        andContainerName:(NSString*)containerName;
+
 
 
 /**
@@ -96,9 +125,24 @@
  */
 - (NSString*)serializationPath;
 
-// If you want serialize / deserialize a registry
-// Including fully decoupled object.
-+ (WattRegistry*)instanceFromArray:(NSArray*)array resolveAliases:(BOOL)resolveAliases;
+
+/**
+ *  A facility constructor for a registry fron an array instance
+ *
+ *  @param array             the array flat representation
+ *  @param serializationMode the mode
+ *  @param name              the registry name
+ *  @param containerName     the optionnal container name
+ *  @param resolveAliases    resolveAliases directly (can be defered to runtine for lazy resolution)
+ *
+ *  @return the registry
+ */
++ (WattRegistry*)instanceFromArray:(NSArray*)array
+             withSerializationMode:(WattSerializationMode)serializationMode
+                              name:(NSString*)name
+                  andContainerName:(NSString*)containerName
+                    resolveAliases:(BOOL)resolveAliases;
+
 - (NSArray*)arrayRepresentation;
 
 - (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary;

@@ -16,7 +16,7 @@
 
 
 @implementation WattUtils{
-    WattSerializationMode  _ftype;
+    WattSerializationMode  _serializationMode;
     NSString    *_applicationDocumentsDirectory;
 }
 
@@ -25,7 +25,7 @@
 @synthesize fileManager = _fileManager;
 @synthesize mixableExtensions = _mixableExtensions;
 @synthesize forcedSoupPaths = _forcedSoupPaths;
-
+@synthesize containerName = _containerName;
 
 #pragma mark - SETTER and GETTERS
 
@@ -64,10 +64,35 @@
 
 #pragma mark -
 
--(void)use:(WattSerializationMode)ftype{
-    _ftype=ftype;
+-(void)use:(WattSerializationMode)mode{
+    _serializationMode=mode;
 }
 
+
+/**
+ *  Returns the wattSerializationMode by parsing the path suffix
+ *
+ *  @param path the path
+ *
+ *  @return the serialization mode
+ */
+- (WattSerializationMode)serializationModeFormPath:(NSString*)path{
+    NSArray *suffixes=[self _suffixes];
+    if([path.pathExtension isEqualToString:[suffixes objectAtIndex:3]]){
+        return WattP;
+    }
+    if([path.pathExtension isEqualToString:[suffixes objectAtIndex:2]]){
+        return WattPx;
+    }
+    if([path.pathExtension isEqualToString:[suffixes objectAtIndex:1]]){
+        return WattJ;
+    }
+    return WattJx;
+}
+
+- (NSArray*)_suffixes{
+    return @[@"jx",@"j",@"px",@"p"];
+}
 
 
 - (NSString*)absolutePathFromRelativePath:(NSString *)relativePath
@@ -168,13 +193,14 @@
 }
 
 - (NSString*)absolutePathForRegistryFileWithName:(NSString*)name{
-    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self _wattRegistryFileRelativePathWithName:name]] ;
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@%@",_containerName?[_containerName stringByAppendingString:@"/"]:@"",[self _wattRegistryFileRelativePathWithName:name]] ;
 }
 
 
 - (NSString *)absolutePathForRegistryBundleFolderWithName:(NSString*)name{
-    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@",[self _wattBundleRelativePathWithName:name]] ;
+    return [[self applicationDocumentsDirectory]stringByAppendingFormat:@"%@%@",_containerName?[_containerName stringByAppendingString:@"/"]:@"",[self _wattBundleRelativePathWithName:name]] ;
 }
+
 
 - (NSString*)_wattBundleRelativePathWithName:(NSString *)name{
     if(!name)
@@ -182,16 +208,15 @@
     return [NSString stringWithFormat:@"%@-%@%@/",name,[self _suffix],kWattBundle];
 }
 
+
 - (NSString *)_wattRegistryFileRelativePathWithName:(NSString*)name{
     NSString *bPath=[self _wattBundleRelativePathWithName:name];
     return [bPath stringByAppendingFormat:@"%@.%@",kRegistryFileName,[self _suffix]];
 }
 
 - (NSString*)_suffix{
-    NSArray *suffixes=@[@"jx",@"j",@"px",@"p"];
-    return [suffixes objectAtIndex:_ftype];
+    return [[self _suffixes] objectAtIndex:_serializationMode];
 }
-
 
 
 
@@ -219,7 +244,7 @@
     if([_forcedSoupPaths indexOfObject:path]!=NSNotFound){
         return YES;
     }
-    BOOL modeAllowsToMix=((_ftype==WattJx)||(_ftype==WattPx));
+    BOOL modeAllowsToMix=((_serializationMode==WattJx)||(_serializationMode==WattPx));
     if(modeAllowsToMix){
         if([_mixableExtensions indexOfObject:[path pathExtension]]!=NSNotFound ||
            [[path pathExtension] isEqualToString:@"jx"]||
@@ -249,8 +274,6 @@
         return data;
     }
 }
-
-
 
 
 -(BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path{
@@ -299,7 +322,7 @@
 
 -(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path{
     NSArray *array=[registry arrayRepresentation];
-    if(((_ftype==WattPx)||(_ftype==WattP))){
+    if(((_serializationMode==WattPx)||(_serializationMode==WattP))){
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array];
         return [self writeData:data toPath:path];
     }else{
@@ -312,16 +335,22 @@
     if(self.fileManager && ![self.fileManager fileExistsAtPath:path isDirectory:NO]){
         [self raiseExceptionWithFormat:@"Unexisting registry path %@",path];
     }
-    if(((_ftype==WattPx)||(_ftype==WattP))){
+    if(((_serializationMode==WattPx)||(_serializationMode==WattP))){
         NSData *data=[self readDataFromPath:path];
         NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        WattRegistry *registry=[WattRegistry instanceFromArray:array resolveAliases:YES];
-        return registry;
+        return [WattRegistry instanceFromArray:array
+                                         withSerializationMode:_serializationMode
+                                                          name:nil
+                                              andContainerName:nil
+                                                resolveAliases:YES];
     }else{
         NSArray *array=[self _deserializeFromJsonWithPath:path];
         if(array){
-            WattRegistry *registry=[WattRegistry instanceFromArray:array resolveAliases:YES];
-            return registry;
+            return [WattRegistry instanceFromArray:array
+                             withSerializationMode:_serializationMode
+                                              name:nil
+                                  andContainerName:nil
+                                    resolveAliases:YES];
         }
     }
     return nil;
@@ -383,12 +412,19 @@
 
 
 - (NSString*)uuidString {
+    return [WattUtils uuidString];
+}
+
+
++ (NSString*)uuidString {
     // Returns a UUID
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
     CFRelease(uuid);
     return uuidStr;
 }
+
+
 
 
 @end
