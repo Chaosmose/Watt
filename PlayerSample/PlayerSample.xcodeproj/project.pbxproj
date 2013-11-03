@@ -119,6 +119,7 @@
 		E5CAD28D1799A1A400D22369 /* WattObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD2291799A1A400D22369 /* WattObject.m */; };
 		E5CAD28E1799A1A400D22369 /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22B1799A1A400D22369 /* WattRegistry.m */; };
 		E5CAD28F1799A1A400D22369 /* WattRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CAD22B1799A1A400D22369 /* WattRegistry.m */; };
+		E5CFF95C18265DB1003658CE /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
 		E5D9A30D1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D9A30C1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m */; };
 		E5D9A30E1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D9A30C1824FECF00824D47 /* WTMShelf+WTMShelf_Packages.m */; };
 		E5D9A311182554BA00824D47 /* WattUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D9A310182554BA00824D47 /* WattUtils.m */; };
@@ -756,12 +757,12 @@
 				E5D9A310182554BA00824D47 /* WattUtils.m */,
 				E5CAD2241799A1A400D22369 /* WattApi.h */,
 				E5CAD2251799A1A400D22369 /* WattApi.m */,
+				E5CAD22A1799A1A400D22369 /* WattRegistry.h */,
+				E5CAD22B1799A1A400D22369 /* WattRegistry.m */,
 				E5CAD2261799A1A400D22369 /* WattCollectionOfObject.h */,
 				E5CAD2271799A1A400D22369 /* WattCollectionOfObject.m */,
 				E5CAD2281799A1A400D22369 /* WattObject.h */,
 				E5CAD2291799A1A400D22369 /* WattObject.m */,
-				E5CAD22A1799A1A400D22369 /* WattRegistry.h */,
-				E5CAD22B1799A1A400D22369 /* WattRegistry.m */,
 				E50003F517B63EEC00E50D70 /* WattDelta.h */,
 				E50003F417B63EEC00E50D70 /* WattDelta.m */,
 				E50003F317B63EEC00E50D70 /* WattDeltaEngine.h */,
@@ -1060,6 +1061,7 @@
 				E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */,
 				E54FBA2A1809AB51002B2BAB /* Watt_Registry_data_Tests.m in Sources */,
 				E5D9A313182554BA00824D47 /* WattUtils.m in Sources */,
+				E5CFF95C18265DB1003658CE /* WTMApi.m in Sources */,
 				E586EAB51813D80000C77705 /* WTM_Shelf_tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

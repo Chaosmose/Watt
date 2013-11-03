@@ -68,15 +68,6 @@ typedef enum watt_Actions{
 @property (nonatomic,readonly)  WattUser *system;
 @property (nonatomic,readonly)  WattGroup *systemGroup;
 
-
-#pragma mark - Registry
-
-
-- (void)mergeRegistry:(WattRegistry*)sourceRegistry
-                 into:(WattRegistry*)destinationRegistry
-       reIndexUinstID:(BOOL)index;
-
-
 #pragma mark - ACL
 
 #pragma mark - rights facilities

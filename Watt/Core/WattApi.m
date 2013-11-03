@@ -19,6 +19,8 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
+
+
 #import "WattApi.h"
 #import "Watt.h"
 
@@ -54,49 +56,6 @@
 
 
 
-/*
- 
- Best Pratices ?
- 
- The Model are generated using Flexions so the code quality is constant and fix can be done by re-generating
- The api should be absolutely waterproof i ve listed a few rules to respect.
- 
- 1- Any required argument that is not set should raise :
- if(!arg)
- [self raiseExceptionWithFormat:@"arg is nil in %@",NSStringFromSelector(@selector(selectorName:))];
- 
- 2- Most of the calls should begin with an ACL Control
- if([self user:_me canPerform:WattWRITE onObject:object]){
- }
- return nil;
- 
- */
-
-
-#pragma mark - Registry
-
-
-- (void)mergeRegistry:(WattRegistry*)sourceRegistry
-                 into:(WattRegistry*)destinationRegistry
-       reIndexUinstID:(BOOL)index{
-    NSMutableDictionary *idsIndex=[NSMutableDictionary dictionary];
-    [sourceRegistry enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        NSInteger olderUinstID=obj.uinstID;
-        [destinationRegistry registerObject:obj];
-        NSInteger newUinstID=obj.uinstID;
-        // we save the older
-        [idsIndex setValue:[NSNumber numberWithInteger:newUinstID]
-                    forKey:[NSString stringWithFormat:@"%i",olderUinstID]];
-    }];
-    if(index){
-        [sourceRegistry enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-            
-        }];
-        //_idIndex;
-    }
-    sourceRegistry=nil;
-    
-}
 
 
 #pragma mark - ACL

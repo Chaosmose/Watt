@@ -87,7 +87,6 @@
 
 - (instancetype)extractInstancebyCopyTo:(WattRegistry*)destinationRegistry;
 
-//@optional
 //- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry withExclusionPathList:(NSArray*)exclusionPathList;
 
 @end
