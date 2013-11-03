@@ -28,16 +28,16 @@
 @implementation UIImage(WattAdaptive)
 
 
-
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath inRegistry:(WattRegistry*)registry{
-    WattUtils *utils=[[WattUtils alloc] init];
-    [utils use:registry.serializationMode];
-    NSString *p=[utils absolutePathFromRelativePath:relativePath
+    if(!registry){
+        [NSException raise:@"Invalid registry exception" format:@"registry is nil"];
+    }
+    NSString *p=[registry.utils absolutePathFromRelativePath:relativePath
                                             inBundleWithName:registry.name];
     if(p){
-        if ([p rangeOfString:[utils applicationDocumentsDirectory]].location!=NSNotFound) {
+        if ([p rangeOfString:[registry.utils applicationDocumentsDirectory]].location!=NSNotFound) {
             //Unsoup if necessary
-            NSData *data=[utils readDataFromPath:p];
+            NSData *data=[registry.utils readDataFromPath:p];
             return [UIImage imageWithData:data];
         }else{
             //It is bundled asset.
@@ -61,7 +61,6 @@
     NSData *data=UIImageJPEGRepresentation(self, 0.5f);
     return [utils writeData:data toPath:path];
 }
-
 
 
 @end

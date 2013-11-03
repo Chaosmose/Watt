@@ -32,6 +32,7 @@
 @implementation WattObject{
 }
 
+@synthesize hasChanged = _hasChanged;
 
 - (instancetype)init{
     self=[self initInRegistry:nil];
@@ -71,6 +72,16 @@
         }
     }
     return self;
+}
+
+
+- (void)setHasChanged:(BOOL)hasChanged{
+    _hasChanged=hasChanged;
+    self.registry.hasChanged=(self.registry.hasChanged&&_hasChanged);
+}
+
+- (BOOL)hasChanged{
+    return _hasChanged;
 }
 
 

@@ -37,6 +37,11 @@
 @property (readonly)NSInteger uinstID;
 @property (readonly)WattRegistry*registry;
 
+/**
+ *  Relays the change status to its registry
+ */
+@property (nonatomic)BOOL hasChanged;
+
 // You should normally use only initInRegistry directly
 
 - (instancetype)init;
