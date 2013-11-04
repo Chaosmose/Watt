@@ -20,6 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WattModel.h" 
+#import "WattCollectionOfReference.h"
 
 @implementation WattModel 
 
@@ -30,6 +31,7 @@
 @synthesize objectName=_objectName;
 @synthesize ownerID=_ownerID;
 @synthesize rights=_rights;
+@synthesize references=_references;
 
 
 #pragma  mark WattCopying
@@ -44,6 +46,7 @@
 	instance->_objectName=[_objectName copy];
 	instance->_ownerID=_ownerID;
 	instance->_rights=_rights;
+	instance->_references=[_references instancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -59,6 +62,7 @@
 	instance->_objectName=[_objectName copy];
 	instance->_ownerID=_ownerID;
 	instance->_rights=_rights;
+	instance->_references=[_references extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -83,9 +87,34 @@
 		[super setValue:value forKey:@"f"];
 	} else if ([key isEqualToString:@"g"]) {
 		[super setValue:value forKey:@"g"];
+	} else if ([key isEqualToString:@"h"]) {
+		[super setValue:[WattCollectionOfReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+- (WattCollectionOfReference*)references{
+	if([_references isAnAlias]){
+		id o=[_registry objectWithUinstID:_references.uinstID];
+		if(o){
+			_references=o;
+		}
+	}
+	return _references;
+}
+
+
+- (WattCollectionOfReference*)references_auto{
+	_references=[self references];
+	if(!_references){
+		_references=[[WattCollectionOfReference alloc] initInRegistry:_registry];
+	}
+	return _references;
+}
+
+- (void)setReferences:(WattCollectionOfReference*)references{
+	_references=references;
 }
 
 
@@ -99,13 +128,28 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.category forKey:@"a"];
-	[dictionary setValue:self.comment forKey:@"b"];
+	if(_category){
+		[dictionary setValue:self.category forKey:@"a"];
+	}
+	if(_comment){
+		[dictionary setValue:self.comment forKey:@"b"];
+	}
 	[dictionary setValue:@(self.groupID) forKey:@"c"];
-	[dictionary setValue:self.metadata forKey:@"d"];
-	[dictionary setValue:self.objectName forKey:@"e"];
+	if(_metadata){
+		[dictionary setValue:self.metadata forKey:@"d"];
+	}
+	if(_objectName){
+		[dictionary setValue:self.objectName forKey:@"e"];
+	}
 	[dictionary setValue:@(self.ownerID) forKey:@"f"];
 	[dictionary setValue:@(self.rights) forKey:@"g"];
+	if(_references){
+		if(includeChildren){
+			[dictionary setValue:[self.references dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
+		}else{
+			[dictionary setValue:[self.references aliasDictionaryRepresentation] forKey:@"h"];
+		}
+	}
     return dictionary;
 }
 
@@ -122,6 +166,7 @@
 	[s appendFormat:@"objectName : %@\n",self.objectName];
 	[s appendFormat:@"ownerID : %@\n",@(self.ownerID)];
 	[s appendFormat:@"rights : %@\n",@(self.rights)];
+	[s appendFormat:@"references : %@\n",NSStringFromClass([self.references class])];
 	return s;
 }
 

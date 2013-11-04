@@ -9,11 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "WattDefinitions.h"
 
-
-
 @class WattRegistry;
 
-@interface WattUtils : NSObject
+@interface WattRegistryFilesUtils : NSObject
 
 /**
  *  An atomic instance of a NSFileManager
@@ -27,20 +25,17 @@
 // You can add paths that you want to be mixed (for DRM purposes)
 @property (nonatomic,strong)    NSMutableArray *forcedSoupPaths;
 
-/**
- * The name of the container eg : "superApp"
- * permit group the files in <app documents>/superApp/registryName/... (registry.jx, folders & cie);
- */
-@property (nonatomic,copy)NSString*containerName;
-
+@property (nonatomic,copy) NSString*relativeFolderPath;
 
 /**
- * Advanced runtime configuration
- * When using for example WattJx : the format is JSON and the data is mixed in a binary file soup
- *  @param mode the format & soup behaviour
+ *  Initialize the utils with a secret soup key
+ *
+ *  @param secretKey the secret key
+ *  @param relativeFolderPath the relative pool folder path
+ *  @return the utils instance
  */
--(void)use:(WattSerializationMode)mode;
-
+- (instancetype)initWithSecretKey:(NSString*)secretKey
+            andRelativeFolderPath:(NSString*)relativeFolderPath;
 
 /**
  *  Returns the wattSerializationMode by parsing the path suffix
@@ -49,7 +44,7 @@
  *
  *  @return the serialization mode
  */
-- (WattSerializationMode)serializationModeFormPath:(NSString*)path;
+- (WattSerializationMode)serializationModeFromPath:(NSString*)path;
 
 
 
@@ -115,9 +110,67 @@
 
 #pragma mark - files I/O
 
+
+/**
+ *  Write the data mixing if necessary
+ *
+ *  @param data The nsdata to write to the path
+ *  @param path the destination path
+ *
+ *  @return the success of the file operation
+ */
 - (BOOL)writeData:(NSData*)data toPath:(NSString*)path;
+
+/**
+ *  Reads the data and mix if necessary (mixing is reversible)
+ *
+ *  @param path the path
+ *
+ *  @return the Data
+ */
 - (NSData*)readDataFromPath:(NSString*)path;
+
+
+/**
+ *  Write the data mixing if necessary
+ *
+ *  @param data The nsdata to write to the path
+ *  @param path the destination path
+ *
+ *  @return the success of the file operation
+ */
+- (BOOL)writeData:(NSData*)data toPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode;
+
+/**
+ *  Reads the data and mix if necessary
+ *
+ *  @param path the path
+ *  @param mode 
+ *
+ *  @return the Data
+ */
+- (NSData*)readDataFromPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode;
+
+
+
+
+/**
+ *  Creates all the intermediary folders for a given a path
+ *
+ *  @param path the path
+ *
+ *  @return the success of the operation
+ */
 - (BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path;
+
+
+/**
+ *  Removes the item (folder or file) with recursive deletion
+ *
+ *  @param path the path to delete
+ *
+ *  @return the success of the operation
+ */
 - (BOOL)removeItemAtPath:(NSString*)path;
 
 #pragma mark - File serialization / deserialization
@@ -152,7 +205,6 @@
 -(WattRegistry*)readRegistryFromFile:(NSString*)path;
 
 
-
 #pragma mark - Unique identification
 
 /**
@@ -170,8 +222,6 @@
 + (NSString *)uuidString;
 
 
-
-
 #pragma  mark - exceptions
 
 /**
@@ -181,6 +231,4 @@
  */
 - (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
 
-
 @end
-

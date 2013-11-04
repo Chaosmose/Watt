@@ -112,14 +112,13 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pictureRelativePath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="referenceUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="urlString" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
-        <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES">
+        <attribute name="reference" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="extractible" value="no"/>
+                <entry key="relationship" value="WattReference"/>
             </userInfo>
-        </relationship>
+        </attribute>
+        <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
+        <relationship name="menuSection" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES"/>
         <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
     </entity>
     <entity name="MenuSection" syncable="YES">
@@ -127,11 +126,7 @@
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="menus" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" inverseName="menuSection" inverseEntity="Menu" syncable="YES"/>
-        <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="sections" inverseEntity="Shelf" syncable="YES">
-            <userInfo>
-                <entry key="extractible" value="no"/>
-            </userInfo>
-        </relationship>
+        <relationship name="shelf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Shelf" inverseName="sections" inverseEntity="Shelf" syncable="YES"/>
     </entity>
     <entity name="Package" representedClassName="Package" syncable="YES">
         <attribute name="license" optional="YES" attributeType="String" syncable="YES"/>
@@ -167,11 +162,6 @@
             </userInfo>
         </attribute>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="packagesList" optional="YES" attributeType="Transformable" syncable="YES">
-            <userInfo>
-                <entry key="type" value="mutable_array"/>
-            </userInfo>
-        </attribute>
         <attribute name="users" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="relationship" value="WattCollectionOfUser"/>
@@ -211,12 +201,12 @@
         <element name="Line" positionX="-6824" positionY="-3877" width="128" height="88"/>
         <element name="LinkedAsset" positionX="-7040" positionY="-3510" width="128" height="58"/>
         <element name="Member" positionX="-7137" positionY="-3771" width="128" height="103"/>
-        <element name="Menu" positionX="-7227" positionY="-4680" width="128" height="178"/>
-        <element name="MenuSection" positionX="-7425" positionY="-4590" width="128" height="118"/>
+        <element name="Menu" positionX="-7391" positionY="-4050" width="128" height="163"/>
+        <element name="MenuSection" positionX="-7389" positionY="-4203" width="128" height="118"/>
         <element name="Package" positionX="-7200" positionY="-4309" width="128" height="118"/>
         <element name="Pdf" positionX="-6842" positionY="-3438" width="128" height="58"/>
         <element name="Scene" positionX="-6480" positionY="-4273" width="128" height="178"/>
-        <element name="Shelf" positionX="-7427" positionY="-4428" width="128" height="118"/>
+        <element name="Shelf" positionX="-7382" positionY="-4356" width="128" height="103"/>
         <element name="Sound" positionX="-6858" positionY="-3343" width="128" height="58"/>
         <element name="Table" positionX="-6696" positionY="-4104" width="128" height="88"/>
         <element name="Video" positionX="-7155" positionY="-3330" width="128" height="58"/>

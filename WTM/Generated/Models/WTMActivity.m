@@ -179,27 +179,27 @@
 	[dictionary setValue:@(self.level) forKey:@"a"];
 	[dictionary setValue:@(self.rating) forKey:@"b"];
 	[dictionary setValue:@(self.score) forKey:@"c"];
-	if(self.shortName){
+	if(_shortName){
 		[dictionary setValue:self.shortName forKey:@"d"];
 	}
-	if(self.title){
+	if(_title){
 		[dictionary setValue:self.title forKey:@"e"];
 	}
-	if(self.package){
+	if(_package){
 		if(includeChildren){
 			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"f"];
 		}else{
 			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"f"];
 		}
 	}
-	if(self.picture){
+	if(_picture){
 		if(includeChildren){
 			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];
 		}else{
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"g"];
 		}
 	}
-	if(self.scenes){
+	if(_scenes){
 		if(includeChildren){
 			[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
 		}else{

@@ -75,7 +75,9 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:@(self.objectUinstID) forKey:@"a"];
-	[dictionary setValue:self.registryUidString forKey:@"b"];
+	if(_registryUidString){
+		[dictionary setValue:self.registryUidString forKey:@"b"];
+	}
     return dictionary;
 }
 

@@ -161,27 +161,27 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.license){
+	if(_license){
 		[dictionary setValue:self.license forKey:@"a"];
 	}
-	if(self.name){
+	if(_name){
 		[dictionary setValue:self.name forKey:@"b"];
 	}
-	if(self.activities){
+	if(_activities){
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{
 			[dictionary setValue:[self.activities aliasDictionaryRepresentation] forKey:@"c"];
 		}
 	}
-	if(self.libraries){
+	if(_libraries){
 		if(includeChildren){
 			[dictionary setValue:[self.libraries dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
 		}else{
 			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"d"];
 		}
 	}
-	if(self.picture){
+	if(_picture){
 		if(includeChildren){
 			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];
 		}else{

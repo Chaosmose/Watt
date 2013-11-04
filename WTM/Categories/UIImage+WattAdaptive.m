@@ -23,7 +23,7 @@
 
 
 #import "UIImage+WattAdaptive.h"
-#import "WattUtils.h"
+#import "WattRegistryFilesUtils.h"
 
 @implementation UIImage(WattAdaptive)
 
@@ -32,12 +32,12 @@
     if(!registry){
         [NSException raise:@"Invalid registry exception" format:@"registry is nil"];
     }
-    NSString *p=[registry.utils absolutePathFromRelativePath:relativePath
-                                            inBundleWithName:registry.name];
+    NSString *p=[registry.pool.utils absolutePathFromRelativePath:relativePath
+                                            inBundleWithName:registry.uidString];
     if(p){
-        if ([p rangeOfString:[registry.utils applicationDocumentsDirectory]].location!=NSNotFound) {
+        if ([p rangeOfString:[registry.pool.utils applicationDocumentsDirectory]].location!=NSNotFound) {
             //Unsoup if necessary
-            NSData *data=[registry.utils readDataFromPath:p];
+            NSData *data=[registry.pool.utils readDataFromPath:p];
             return [UIImage imageWithData:data];
         }else{
             //It is bundled asset.
@@ -48,18 +48,14 @@
     return nil;
 }
 
-- (BOOL)writePNGToAbsolutePath:(NSString*)path using:(WattSerializationMode)serializationMode{
-    WattUtils *utils=[[WattUtils alloc] init];
-    [utils use:serializationMode];
+- (BOOL)writePNGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry{
     NSData *data=UIImagePNGRepresentation(self);
-    return [utils writeData:data toPath:path];
+    return [registry.pool.utils writeData:data toPath:path];
 }
 
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path using:(WattSerializationMode)serializationMode{
-    WattUtils *utils=[[WattUtils alloc] init];
-    [utils use:serializationMode];
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry{
     NSData *data=UIImageJPEGRepresentation(self, 0.5f);
-    return [utils writeData:data toPath:path];
+    return [registry.pool.utils writeData:data toPath:path];
 }
 
 

@@ -20,7 +20,7 @@
     NSTimer *_timer;
     NSBundle *_wiosBundle;
     float _soundDuration;
-    WattUtils *__utils;
+    WattRegistryFilesUtils *__utils;
 }
 @end
 
@@ -41,9 +41,9 @@
     return self;
 }
 
-- (WattUtils*)_wattUtils{
+- (WattRegistryFilesUtils*)_wattUtils{
     if(!__utils){
-        __utils=[[WattUtils alloc] init];
+        __utils=[[WattRegistryFilesUtils alloc] init];
     }
     return __utils;
 }
@@ -301,7 +301,7 @@
 
 
 - (NSString*)_soundPath{
-    return  [[self _wattUtils] absolutePathFromRelativePath:self.sound.relativePath inBundleWithName:self.sound.registry.name];
+    return  [[self _wattUtils] absolutePathFromRelativePath:self.sound.relativePath inBundleWithName:self.sound.registry.uidString];
 }
 
 

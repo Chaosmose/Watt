@@ -23,40 +23,34 @@
 
 #import <Foundation/Foundation.h>
 #import "WattDefinitions.h"
+#import "WattRegistryPool.h"
 
 #define kWattRegistryRootUinstID 1
 
 @class WattObject;
 @class WattCollectionOfObject;
-@class WattUtils;
+@class WattRegistryFilesUtils;
+@class WattRegistryPool;
 
 @interface WattRegistry : NSObject
 
+/**
+ *  The holding pool
+ *  Excepted the WattRegistryPool's registry all the registries refers to a pool!
+ */
+@property (nonatomic,weak)WattRegistryPool*pool;
 
 /**
- * The registry name is used for external purpose
+ * The registry uidString is used for external purpose
  * eg : defining a file path to store serialized registry and associated bundle
- * Notice that the mane is not serialized.
+ * Notice that the mane is not serialized within the registry but by its RegistryPool
  */
-@property (nonatomic,copy)NSString* name;
+@property (nonatomic,copy)NSString* uidString;
 
 /**
  *  The registry serializationMode
  */
 @property (nonatomic,assign) WattSerializationMode serializationMode;
-
-/**
- *  A reference to an WattUtils instance
- */
-@property (nonatomic,readonly)WattUtils *utils;
-
-
-// WattDelta
-
-@property (nonatomic,strong)NSDate *creationDate;
-@property (nonatomic,strong)NSDate *lastSerializationDate;
-@property (nonatomic,strong)NSString *uniqueIdentifier;
-@property (nonatomic,strong)NSMutableArray *deltas;
 
 
 #pragma mark - Save
@@ -80,22 +74,35 @@
  */
 @property (nonatomic) BOOL hasChanged;
 
+#pragma mark - constructors
+
+/**
+ * The factory constructor
+ *
+ *  @param serializationMode The format (json,plist, ...) +  soup or not
+ *  @param name               The name of the registry
+ *  @param pool              The pool container
+ *
+ *  @return The new created instance
+ */
++(instancetype)registryWithSerializationMode:(WattSerializationMode)serializationMode
+                                            uniqueStringIdentifier:(NSString*)identifier
+                               inPool:(WattRegistryPool*)pool;
+
 
 /**
  * The constructor (you should not use the simple init)
  *
  *  @param serializationMode The format (json,plist, ...) +  soup or not
  *  @param name              The name of the registry
- *  @param containerName     The name of the container eg : "superApp"
- *                           permit group the files in <app documents>/superApp/registryName/... (registry.jx, folders & cie);
- *
+ *  @param pool              The pool container
  *  @return The new created instance
  */
--(instancetype)initWithSerializationMode:(WattSerializationMode)serializationMode
-                                 name:(NSString*)name
-                        andContainerName:(NSString*)containerName;
+-(instancetype)initRegistryWithSerializationMode:(WattSerializationMode)serializationMode
+                                    uniqueStringIdentifier:(NSString*)identifier
+                                  inPool:(WattRegistryPool*)pool;
 
-
+#pragma mark - save
 
 /**
  *  Execute a bunch of modification in the block and save if necessary
@@ -127,20 +134,20 @@
 
 
 /**
- *  A facility constructor for a registry fron an array instance
+ * A facility constructor for a registry fron an array instance
  *
  *  @param array             the array flat representation
  *  @param serializationMode the mode
- *  @param name              the registry name
- *  @param containerName     the optionnal container name
+ *  @param identifier        the registry unique string identifier
+ *  @param pool              the pool
  *  @param resolveAliases    resolveAliases directly (can be defered to runtine for lazy resolution)
  *
  *  @return the registry
  */
 + (WattRegistry*)instanceFromArray:(NSArray*)array
              withSerializationMode:(WattSerializationMode)serializationMode
-                              name:(NSString*)name
-                  andContainerName:(NSString*)containerName
+            uniqueStringIdentifier:(NSString*)identifier
+                            inPool:(WattRegistryPool*)pool
                     resolveAliases:(BOOL)resolveAliases;
 
 - (NSArray*)arrayRepresentation;

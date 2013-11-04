@@ -20,7 +20,7 @@
 //
 
 
-#import "WattUtils.h"
+#import "WattRegistryFilesUtils.h"
 
 @class WattUser, WattGroup, WattModel;
 

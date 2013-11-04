@@ -23,6 +23,7 @@
 
 #import "WattRegistry.h"
 #import "Watt.h"
+#import "WattRegistryPool.h"
 
 #pragma  mark - WattObject reIdentification invisible category
 
@@ -59,7 +60,7 @@
 
 @interface WattRegistry (){
 }
-@property (nonatomic,strong)WattUtils*utils;
+@property (nonatomic,strong)WattRegistryFilesUtils*utils;
 @end
 
 @implementation WattRegistry{
@@ -75,6 +76,8 @@
 @synthesize serializationMode = _serializationMode;
 
 
+#pragma mark - constructors
+
 /**
  *  Invalid initializer
  *  You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry
@@ -82,34 +85,48 @@
  */
 - (id)init{
     [NSException raise:@"WattRegistry initialization exception"
-                    format:@"You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry"];
+                format:@"You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry"];
     return nil;
+}
+
+/**
+ * The factory constructor
+ *
+ *  @param serializationMode The format (json,plist, ...) +  soup or not
+ *  @param name               The name of the registry
+ *  @param pool              The pool container
+ *
+ *  @return The new created instance
+ */
++(instancetype)registryWithSerializationMode:(WattSerializationMode)serializationMode
+                                        uniqueStringIdentifier:(NSString*)identifier
+                                      inPool:(WattRegistryPool*)pool{
+    return [[WattRegistry alloc] initRegistryWithSerializationMode:serializationMode
+                                                              uniqueStringIdentifier:identifier
+                                                            inPool:pool];
 }
 
 
 /**
- * The constructor
+ * The constructor (you should not use the simple init)
  *
  *  @param serializationMode The format (json,plist, ...) +  soup or not
  *  @param name              The name of the registry
- *  @param containerName     The name of the container eg : "superApp"
- will permit group the files in <app documents>/superApp/registryName/... (registry.jx, folders & cie);
- *
+ *  @param pool              The pool container
  *  @return The new created instance
  */
--(instancetype)initWithSerializationMode:(WattSerializationMode)serializationMode
-                                    name:(NSString*)name
-                        andContainerName:(NSString*)containerName{
+-(instancetype)initRegistryWithSerializationMode:(WattSerializationMode)serializationMode
+                                            uniqueStringIdentifier:(NSString*)identifier
+                                          inPool:(WattRegistryPool*)pool{
     self=[super init];
     if(self){
         _uinstIDCounter=0;
         _registry=[NSMutableDictionary dictionary];
         _autosave=YES;// By default
-        _name=name;
-        // utils
-        _utils=[[WattUtils alloc] init];
-        [_utils use:serializationMode];
-        _utils.containerName=containerName;
+        _uidString=identifier;
+        _pool=pool;
+        // We add this registry to the pool
+        [_pool addRegistry:self];
     }
     return self;
 }
@@ -117,8 +134,9 @@
 
 - (void)setSerializationMode:(WattSerializationMode)serializationMode{
     _serializationMode=serializationMode;
-    [self.utils use:_serializationMode];
 }
+
+#pragma mark - save
 
 
 - (void)setAutosave:(BOOL)autosave{
@@ -153,12 +171,12 @@
  *  Saves if hasChanged==YES;
  */
 - (void)saveIfNecessary{
-    if([self.name length]>=1){
+    if([self.uidString length]>=1){
         if([self hasChanged]){
             [self save];
         }
     }else{
-        [_utils raiseExceptionWithFormat:@"invalid registry name : %@ ",self.name];
+        [_utils raiseExceptionWithFormat:@"invalid registry name : %@ ",self.uidString];
     }
 }
 
@@ -167,7 +185,7 @@
  */
 - (void)save{
     if([_utils writeRegistry:self
-                      toFile:[_utils absolutePathForRegistryFileWithName:self.name]]){
+                      toFile:[_utils absolutePathForRegistryFileWithName:self.uidString]]){
         _hasChanged=NO;
         WTLog(@"Saved automatically");
     }
@@ -178,36 +196,39 @@
 
 
 - (NSString*)serializationPath{
-    return [_utils absolutePathForRegistryFileWithName:self.name];
+    return [_pool.utils absolutePathForRegistryFileWithName:self.uidString];
 }
 
 
 /**
- *  A facility constructor for a registry fron an array instance
+ * A facility constructor for a registry fron an array instance
  *
  *  @param array             the array flat representation
  *  @param serializationMode the mode
- *  @param name              the registry name
- *  @param containerName     the optionnal container name
+ *  @param identifier        the registry unique string identifier
+ *  @param pool              the pool
  *  @param resolveAliases    resolveAliases directly (can be defered to runtine for lazy resolution)
  *
  *  @return the registry
  */
 + (WattRegistry*)instanceFromArray:(NSArray*)array
              withSerializationMode:(WattSerializationMode)serializationMode
-                              name:(NSString*)name
-                  andContainerName:(NSString*)containerName
+            uniqueStringIdentifier:(NSString*)identifier
+                            inPool:(WattRegistryPool*)pool
                     resolveAliases:(BOOL)resolveAliases{
-    WattRegistry *r=[[WattRegistry alloc] initWithSerializationMode:serializationMode name:name andContainerName:containerName];
+    
+    WattRegistry *r=[WattRegistry registryWithSerializationMode:serializationMode
+                                         uniqueStringIdentifier:identifier
+                                                         inPool:pool];
     
     // Double step deserialization
     // and allows circular referencing any object graph can be serialized.
     // First step   :  deserializes the registry with member's aliases
     // Second step  :  resolves the aliases (and the force the caches computation)
     // The second step is optionnal as the generated getters
-    //  can proceed to dealiasing (runtime aliases resolution)
-    
-    //WTLog(@"Register");
+    // can proceed to dealiasing (runtime aliases resolution)
+
+
     // First step :
     NSUInteger i=1;
     for (NSDictionary *d in array) {
@@ -408,7 +429,6 @@
 }
 
 
-
 #pragma mark - Counters
 
 /**
@@ -465,7 +485,7 @@
     _registry=nil;
     _history=nil;
     __sortedKeys=nil;
-    _name=nil;
+    _uidString=nil;
     _hasChanged=NO;
     _autosave=NO;
     _utils=nil;

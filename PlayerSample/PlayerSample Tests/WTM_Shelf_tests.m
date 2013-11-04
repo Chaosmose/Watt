@@ -37,11 +37,11 @@
     
     //3- We generate a new Registry (r2) from a1 by deserializing
     WattRegistry*r2=[WattRegistry instanceFromArray:a1 withSerializationMode:WattJ
-                                               name:@"r2"
+                                               uniqueStringIdentifier:@"r2"
                                    andContainerName:@"test"
                                      resolveAliases:YES];
     
-    r2.name=@"r2";
+    r2.uidString=@"r2";
     
     // Let's compare r1 & r2 members.
     
@@ -68,7 +68,7 @@
     WTMShelf *shelf=(WTMShelf*)[r1 objectWithUinstID:1];
     
     // 2- We copy the shel to another registry
-    WattRegistry*r2=[[WattRegistry alloc]initWithSerializationMode:WattJ name:[WattUtils uuidString] andContainerName:shelf.name];
+    WattRegistry*r2=[[WattRegistry alloc]initRegistryWithSerializationMode:WattJ name:[WattRegistryFilesUtils uuidString] andContainerName:shelf.name];
     [shelf wattCopyInRegistry:r2];
     
     // TESTS
@@ -97,7 +97,7 @@
 
 - (WattRegistry*)_createAPopulatedRegistry{
     
-    WattRegistry*registry=[[WattRegistry alloc] initWithSerializationMode:WattJ name:@"r1" andContainerName:nil];
+    WattRegistry*registry=[[WattRegistry alloc] initRegistryWithSerializationMode:WattJ name:@"r1" andContainerName:nil];
     registry.autosave=NO;
     
     WTMShelf *s=[self _createAShelfInRegistry:registry];

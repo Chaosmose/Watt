@@ -20,6 +20,7 @@
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="references" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reference" syncable="YES"/>
         <userInfo>
             <entry key="generate" value="collection"/>
         </userInfo>
@@ -27,22 +28,25 @@
     <entity name="Reference" syncable="YES">
         <attribute name="objectUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
-        <userInfo>
-            <entry key="generate" value="collection"/>
-        </userInfo>
+    </entity>
+    <entity name="RegistryFile" syncable="YES">
+        <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relativePath" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="RegistryFileMap" syncable="YES">
+        <relationship name="registries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RegistryFile" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="users" inverseEntity="Group" syncable="YES"/>
-        <userInfo>
-            <entry key="generate" value="collection"/>
-        </userInfo>
     </entity>
     <elements>
-        <element name="Group" positionX="-8237" positionY="-4680" width="128" height="88"/>
-        <element name="Model" positionX="-8237" positionY="-4882" width="128" height="148"/>
-        <element name="User" positionX="-8039" positionY="-4563" width="128" height="90"/>
-        <element name="Reference" positionX="-8235" positionY="-5014" width="128" height="73"/>
+        <element name="Group" positionX="-8210" positionY="-4714" width="128" height="88"/>
+        <element name="Model" positionX="-8210" positionY="-4960" width="128" height="163"/>
+        <element name="Reference" positionX="-8037" positionY="-4771" width="128" height="73"/>
+        <element name="User" positionX="-8046" positionY="-4579" width="128" height="88"/>
+        <element name="RegistryFileMap" positionX="-8201" positionY="-5175" width="128" height="58"/>
+        <element name="RegistryFile" positionX="-8048" positionY="-5068" width="128" height="73"/>
     </elements>
 </model>

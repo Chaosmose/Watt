@@ -21,6 +21,7 @@
  
 
 #import "WattModel.h"
+@class WattReference;
 @class WTMCollectionOfMenu;
 @class WTMMenuSection;
 @class WTMMenu;
@@ -32,12 +33,12 @@
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,copy) NSString * pictureRelativePath;
-@property (nonatomic,assign) NSInteger  referenceUinstID;
-@property (nonatomic,copy) NSString * urlString;
+@property (nonatomic,strong) WattReference * reference;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
-@property (nonatomic,strong) WTMMenuSection * menuSection;// non extractible
+@property (nonatomic,strong) WTMMenuSection * menuSection;
 @property (nonatomic,strong) WTMMenu * parent;
 
+- (WattReference*)reference_auto;
 - (WTMCollectionOfMenu*)childrens_auto;
 - (WTMMenuSection*)menuSection_auto;
 - (WTMMenu*)parent_auto;

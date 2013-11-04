@@ -28,7 +28,6 @@
 
 @synthesize groups=_groups;
 @synthesize name=_name;
-@synthesize packagesList=_packagesList;
 @synthesize users=_users;
 @synthesize sections=_sections;
 
@@ -40,7 +39,6 @@
 	instance->_registry=destinationRegistry;
 	instance->_groups=[_groups instancebyCopyTo:destinationRegistry];
 	instance->_name=[_name copy];
-	instance->_packagesList=[_packagesList copy];
 	instance->_users=[_users instancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
     return instance;
@@ -53,7 +51,6 @@
 	instance->_registry=destinationRegistry;
 	instance->_groups=[_groups extractInstancebyCopyTo:destinationRegistry];
 	instance->_name=[_name copy];
-	instance->_packagesList=[_packagesList copy];
 	instance->_users=[_users extractInstancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
     return instance;
@@ -71,11 +68,9 @@
 	} else if ([key isEqualToString:@"b"]) {
 		[super setValue:value forKey:@"b"];
 	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:value forKey:@"c"];
+		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
 	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
-	} else if ([key isEqualToString:@"e"]) {
-		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"e"];
+		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -161,31 +156,28 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.groups){
+	if(_groups){
 		if(includeChildren){
 			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"a"];
 		}else{
 			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"a"];
 		}
 	}
-	if(self.name){
+	if(_name){
 		[dictionary setValue:self.name forKey:@"b"];
 	}
-	if(self.packagesList){
-		[dictionary setValue:self.packagesList forKey:@"c"];
-	}
-	if(self.users){
+	if(_users){
 		if(includeChildren){
-			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
+			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{
-			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"d"];
+			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"c"];
 		}
 	}
-	if(self.sections){
+	if(_sections){
 		if(includeChildren){
-			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];
+			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
 		}else{
-			[dictionary setValue:[self.sections aliasDictionaryRepresentation] forKey:@"e"];
+			[dictionary setValue:[self.sections aliasDictionaryRepresentation] forKey:@"d"];
 		}
 	}
     return dictionary;
@@ -199,7 +191,6 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMShelf ",self.uinstID];
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	[s appendFormat:@"name : %@\n",self.name];
-	[s appendFormat:@"packagesList : %@\n",self.packagesList];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];
 	[s appendFormat:@"sections : %@\n",NSStringFromClass([self.sections class])];
 	return s;

@@ -60,9 +60,6 @@
         [self addUser:self.me toGroup:group];
     }
     
-    WTMPackage*package=[self createPackageInShelf:shelf];
-    package.category=kCategoryNameShared;
-
     return shelf;
 }
 
@@ -155,65 +152,25 @@
 #pragma mark - /// PACKAGE ///
 #pragma mark -
 
-- (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf{
-    if(!shelf)
-        [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
-    if([self actionIsAllowed:WattWRITE on:shelf]){
-        if(!shelf)
-            [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createPackageInShelf:))];
+- (WTMPackage*)createPackageInPool:(WattRegistryPool*)pool{
+    
+    // IMPORTANT WE CREATE A NEW REGISTRY
+    WattRegistry *registry=[pool registryWithUidString:nil];
+    WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
+    package.objectName=[self.utils uuidString];// We create a uuid for each package and library to deal with linked assets
         
-        // IMPORTANT WE CREATE A NEW REGISTRY
-        WattRegistry *registry=[[WattRegistry alloc] initWithSerializationMode:shelf.registry.serializationMode
-                                                                          name:[WattUtils uuidString]
-                                                              andContainerName:shelf.registry.name];
-        
-        WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
-        package.objectName=[self.utils uuidString];// We create a uuid for each package and library to deal with linked assets
-        [shelf addPackage:package];
-        
-        // We create a default library
-        WTMLibrary*library=[self createLibraryInPackage:package];
-        library.category=kCategoryNameShared;
-        
-        return package;
-    }
-    return nil;
+    // We create a default library
+    WTMLibrary*library=[self createLibraryInPackage:package];
+    library.category=kCategoryNameShared;
+
+    return package;
 }
 
 
-- (void)removePackage:(WTMPackage*)package fromShelf:(WTMShelf*)shelf{
+- (void)removePackage:(WTMPackage*)package{
     if([self actionIsAllowed:WattWRITE on:package]){
-        
-        if(package.picture)
-            [self purgeMemberIfNecessary:package.picture];
-        
-        [package.activities enumerateObjectsUsingBlock:^(WTMActivity *obj, NSUInteger idx, BOOL *stop) {
-            [self removeActivity:obj];
-        }reverse:YES];
-        
-        [package.libraries enumerateObjectsUsingBlock:^(WTMLibrary *obj, NSUInteger idx, BOOL *stop) {
-            [self removeLibrary:obj];
-        }reverse:YES];
-        
-        [shelf removePackage:package deleteFiles:YES];
-        
-        WattRegistry *registry=package.registry;
-        [package autoUnRegister];
-        
-        [self.utils removeItemAtPath:[self.utils absolutePathForRegistryBundleFolderWithName:registry.name]];
-        [registry destroyRegistry];
-        
-    }
-}
-
-- (void)addPackage:(WTMPackage*)package
-           toShelf:(WTMShelf*)shelf{
-    if(!package)
-        [self.utils raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
-    if(!shelf)
-        [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(addPackage:toShelf:))];
-    if([self actionIsAllowed:WattWRITE on:shelf]){
-        [shelf addPackage:package];
+        [package.registry.pool removeRegistry:package.registry];
+        //[package.registry.pool emptyTheTrash];// We currently do not empty the trash
     }
 }
 
@@ -656,7 +613,7 @@
 
 
 - (void)_removeFilesWithRelativesPath:(NSString*)relativePath inRegistry:(WattRegistry*)registry{
-    NSArray *absolutePaths=[self.utils absolutePathsFromRelativePath:relativePath inBundleWithName:registry.name all:YES];
+    NSArray *absolutePaths=[self.utils absolutePathsFromRelativePath:relativePath inBundleWithName:registry.uidString all:YES];
     for (NSString *pathToDelete in absolutePaths) {
         [self.utils removeItemAtPath:pathToDelete];
     }

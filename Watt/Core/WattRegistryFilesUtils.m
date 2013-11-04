@@ -6,18 +6,27 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 //
 
-#import "WattUtils.h"
+#import "WattRegistryFilesUtils.h"
 #import "watt.h"
 
 #define kDefaultName                @"default"
 #define kRegistryFileName           @"registry"
-#define kWattSalt                   @"98717405-4A30-4DDC-9AA8-14E840D4D1F8"
 #define kWattBundle                 @".watt"
 
+static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsSmVuZW1lc2VudGlzcGx1c2d1aWTpcGFybGVzaGFsZXVyczpEZXNQZWF1eC1Sb3VnZXNjcmlhcmRzbGVzYXZhaWVudHByaXNwb3VyY2libGVzLExlc2F5YW50Y2xvdelzbnVzYXV4cG90ZWF1eGRlY291bGV1cnMuSjpdGFpc2luc291Y2lldXhkZXRvdXNsZXPpcXVpcGFnZXMsUG9ydGV1cmRlYmzpc2ZsYW1hbmRzb3VkZWNvdG9uc2FuZ2xhaXMuUXVhbmRhdmVjbWVzaGFsZXVyc29udGZpbmljZXN0YXBhZ2VzLExlc0ZsZXV2ZXNtP29udGxhaXNz6WRlc2NlbmRyZW5amV2b3VsYWlzLkRhbnNsZXNjbGFwb3RlbWVudHNmdXJpZXV4ZGVzbWFy6WVzLE1vaSxsP2F1dHJlaGl2ZXIscGx1c3NvdXJkcXVlbGVzY2VydmVhdXhkP2VuZmFudHMsSmVjb3VydXMhRXRsZXNQ6W5pbnN1bGVzZOltYXJy6WVzTj9vbnRwYXNzdWJpdG9odS1ib2h1c3BsdXN0cmlvbXBoYW50cy5MYXRlbXDqdGVhYuluaW1lcl2ZWlsc21hcml0aW1lcy5QbHVzbOlnZXJxdT91bmJvdWNob25qP2FpZGFuclzdXJsZXNmbG90c1F1P29uYXBwZWxsZXJvdWxldXJz6XRlcm5lbHNkZXZpY3RpbWVzLERpeG51aXRzLHNhbnNyZWdyZXR0ZXJsPz9pbG5pYWlzZGVzZmFsb3RzIVBsdXNkb3VjZXF1P2F1eGVuZmFudHNsYWNoYWlyZGVzcG9tbWVzc3VyZXMsTD9lYXV2ZXJ0ZXDpbul0";
 
-@implementation WattUtils{
+
+@implementation WattRegistryFilesUtils{
+    // We store temporary serilalization mode
     WattSerializationMode  _serializationMode;
-    NSString    *_applicationDocumentsDirectory;
+    NSString *_applicationDocumentsDirectory;
+    
+    // DATA SOUP
+    // Should be optimized in c.
+    NSMutableArray   *_secretBooleanList; // [@(YES),@(NO), ....];
+    NSUInteger       _secretLoopIndex;    // The looping index
+    NSUInteger       _secretLength;       //
+    
 }
 
 #pragma mark - relative path and path discovery
@@ -25,7 +34,21 @@
 @synthesize fileManager = _fileManager;
 @synthesize mixableExtensions = _mixableExtensions;
 @synthesize forcedSoupPaths = _forcedSoupPaths;
-@synthesize containerName = _containerName;
+@synthesize relativeFolderPath = _relativeFolderPath;
+
+
+-(instancetype)initWithSecretKey:(NSString *)secretKey{
+    self=[self init];
+    if(self){
+        if(!secretKey)
+            secretKey=rimbaud;
+        [self _generateTheSymetricKeyFrom:secretKey];
+    }
+    return self;
+}
+
+
+
 
 #pragma mark - SETTER and GETTERS
 
@@ -76,7 +99,7 @@
  *
  *  @return the serialization mode
  */
-- (WattSerializationMode)serializationModeFormPath:(NSString*)path{
+- (WattSerializationMode)serializationModeFromPath:(NSString*)path{
     NSArray *suffixes=[self _suffixes];
     if([path.pathExtension isEqualToString:[suffixes objectAtIndex:3]]){
         return WattP;
@@ -193,12 +216,12 @@
 }
 
 - (NSString*)absolutePathForRegistryFileWithName:(NSString*)name{
-    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@%@",_containerName?[_containerName stringByAppendingString:@"/"]:@"",[self _wattRegistryFileRelativePathWithName:name]] ;
+    return [[self applicationDocumentsDirectory] stringByAppendingFormat:@"%@%@",_relativeFolderPath?[_relativeFolderPath stringByAppendingString:@"/"]:@"",[self _wattRegistryFileRelativePathWithName:name]] ;
 }
 
 
 - (NSString *)absolutePathForRegistryBundleFolderWithName:(NSString*)name{
-    return [[self applicationDocumentsDirectory]stringByAppendingFormat:@"%@%@",_containerName?[_containerName stringByAppendingString:@"/"]:@"",[self _wattBundleRelativePathWithName:name]] ;
+    return [[self applicationDocumentsDirectory]stringByAppendingFormat:@"%@%@",_relativeFolderPath?[_relativeFolderPath stringByAppendingString:@"/"]:@"",[self _wattBundleRelativePathWithName:name]] ;
 }
 
 
@@ -225,8 +248,16 @@
 }
 
 
-#pragma mark - files management
+#pragma mark - files I/O
 
+/**
+ *  Write the data mixing if necessary
+ *
+ *  @param data The nsdata to write to the path
+ *  @param path the destination path
+ *
+ *  @return the success of the file operation
+ */
 
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
     [self createRecursivelyRequiredFolderForPath:path];
@@ -234,11 +265,46 @@
     return [data writeToFile:path atomically:YES];
 }
 
+/**
+ *  Reads the data and mix if necessary (mixing is reversible)
+ *
+ *  @param path the path
+ *
+ *  @return the Data
+ */
 -(NSData*)readDataFromPath:(NSString*)path{
     NSData *data=[NSData dataWithContentsOfFile:path];
-    data=[self _dataSoup:data mix:[self _shouldMixPath:path]];
-    return data;
+    return [self _dataSoup:data mix:[self _shouldMixPath:path]];;
 }
+
+
+/**
+ *  Write the data mixing if necessary
+ *
+ *  @param data The nsdata to write to the path
+ *  @param path the destination path
+ *
+ *  @return the success of the file operation
+ */
+- (BOOL)writeData:(NSData*)data toPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode{
+    [self createRecursivelyRequiredFolderForPath:path];
+    data=[self _dataSoup:data mix:(mode==WattJx||mode==WattPx)];
+    return [data writeToFile:path atomically:YES];
+}
+
+/**
+ *  Reads the data and mix if necessary
+ *
+ *  @param path the path
+ *  @param mode
+ *
+ *  @return the Data
+ */
+- (NSData*)readDataFromPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode{
+    NSData *data=[NSData dataWithContentsOfFile:path];
+    return [self _dataSoup:data mix:(mode==WattJx||mode==WattPx)];
+}
+
 
 -(BOOL)_shouldMixPath:(NSString*)path{
     if([_forcedSoupPaths indexOfObject:path]!=NSNotFound){
@@ -255,25 +321,9 @@
     return NO;
 }
 
-//The data soup method is a simple and fast encoding / decoding method.
-//That reverses the bytes array and reverse each byte value.
-//It is a simple symetric encoding to prevent from manual editing.
-//It is not a securized crypto method !
--(NSData*)_dataSoup:(NSData*)data  mix:(BOOL)mix{
-    if(mix){
-        const char *bytes = [data bytes];
-        char *reverseBytes = malloc(sizeof(char) * [data length]);
-        int index = [data length] - 1;
-        for (int i = 0; i < [data length]; i++){
-            reverseBytes[index--] = (~ bytes[i]); // double reverse
-        }
-        NSData *reversedData = [NSData dataWithBytes:reverseBytes length:[data length]];
-        free(reverseBytes);
-        return reversedData;
-    }else{
-        return data;
-    }
-}
+
+
+
 
 
 -(BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path{
@@ -306,7 +356,7 @@
         return NO;
     }
     return YES;
-
+    
 }
 
 #pragma mark -  serialization
@@ -335,24 +385,23 @@
     if(self.fileManager && ![self.fileManager fileExistsAtPath:path isDirectory:NO]){
         [self raiseExceptionWithFormat:@"Unexisting registry path %@",path];
     }
+    
+     _serializationMode=[self serializationModeFromPath:path];
+    NSArray *array=nil;
     if(((_serializationMode==WattPx)||(_serializationMode==WattP))){
         NSData *data=[self readDataFromPath:path];
-        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-        return [WattRegistry instanceFromArray:array
-                                         withSerializationMode:_serializationMode
-                                                          name:nil
-                                              andContainerName:nil
-                                                resolveAliases:YES];
+        array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }else{
-        NSArray *array=[self _deserializeFromJsonWithPath:path];
-        if(array){
-            return [WattRegistry instanceFromArray:array
-                             withSerializationMode:_serializationMode
-                                              name:nil
-                                  andContainerName:nil
-                                    resolveAliases:YES];
-        }
+       array=[self _deserializeFromJsonWithPath:path];
     }
+    if(array){
+        return [WattRegistry instanceFromArray:array
+                     withSerializationMode:_serializationMode
+                    uniqueStringIdentifier:nil
+                                    inPool:nil
+                            resolveAliases:YES];
+    }
+    
     return nil;
 }
 
@@ -396,7 +445,8 @@
     return nil;
 }
 
-#pragma mark -utilities
+
+#pragma mark - Execptions 
 
 - (void)raiseExceptionWithFormat:(NSString *)format, ...{
     va_list args;
@@ -409,10 +459,10 @@
         [NSException raise:@"WattAPIException" format:@"Internal error"];
     
 }
-
+#pragma mark - Unique strings
 
 - (NSString*)uuidString {
-    return [WattUtils uuidString];
+    return [WattRegistryFilesUtils uuidString];
 }
 
 
@@ -424,7 +474,82 @@
     return uuidStr;
 }
 
+#pragma mark - Data SOUP
 
+/**
+ * Mixes the data if necessary
+ * The data soup method is a simple and fast encoding / decoding method.
+ * That reverses the bytes array and reverse each byte value according to the _secretBooleanList
+ * It is a simple symetric encoding to prevent from manual editing. 
+ * It is not a super securized crypto method.
+ *
+ *  @param data the original data
+ *  @param mix  should we mix ?
+ *
+ *  @return the mixed NSData
+ */
+-(NSData*)_dataSoup:(NSData*)data  mix:(BOOL)mix{
+    if(mix && _secretBooleanList && [_secretBooleanList count]>1){
+        const char *bytes = [data bytes];
+        char *reverseBytes = malloc(sizeof(char) * [data length]);
+        int index = [data length] - 1;
+        for (int i = 0; i < [data length]; i++){
+            #warning QUICK dirty and not memory efficient
+            //Should be optimized in c.
+            // Objective C is not efficient here (refactory needed)
+            if([[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue]){
+                reverseBytes[index--] = (~ bytes[i]); // double reverse
+            }else{
+                reverseBytes[index--] = (bytes[i]); // no reverse
+            }
+            _secretLoopIndex++;
+            if(_secretLoopIndex>_secretLength){
+                _secretLoopIndex=0;
+            }
+        }
+        NSData *mixed = [NSData dataWithBytes:reverseBytes length:[data length]];
+        free(reverseBytes);
+        return mixed;
+    }else{
+        return data;
+    }
+}
 
+/**
+ *  Generate a _secretBooleanList from a secretKey
+ *
+ *  @param secretKey the string secret key
+ */
+- (void)_generateTheSymetricKeyFrom:(NSString*)secretKey{
+    if(secretKey){
+        // We gonna double the key to make it symetric.
+        NSMutableString *symetricKey = [NSMutableString string];
+        NSInteger charIndex = [secretKey length];
+        while (charIndex > 0) {
+            charIndex--;
+            NSRange subStrRange = NSMakeRange(charIndex, 1);
+            [symetricKey appendString:[secretKey substringWithRange:subStrRange]];
+        }
+        // we concat the keys "ABCD" becomes a symetric string "DCBAABCD"
+        [symetricKey appendString:secretKey];
+        // Then we transform "DCBAABCD" to a boolean list based on the binary representation of each char
+        _secretBooleanList=[NSMutableArray array];
+        NSString *previousChar=[symetricKey substringWithRange:NSMakeRange(0,1)];
+        NSUInteger nbOfChar=[symetricKey length];
+        for (int i=1; i<nbOfChar ; i++) {
+            NSString *currentChar=[symetricKey substringWithRange:NSMakeRange(i, 1)];
+            // We compare the previous and the current char.
+            // If previousChar is > currentChar then we add YES to the _secretBooleanList
+            // THE _secretBooleanList will be an array of : YES, NO, NO, YES ....
+            if([previousChar compare:currentChar]==NSOrderedAscending){
+                [_secretBooleanList addObject:@(YES)];
+            }else{
+                [_secretBooleanList addObject:@(NO)];
+            }
+        }
+        _secretLoopIndex=-1;
+        _secretLength=[_secretBooleanList count];
+    }
+}
 
 @end

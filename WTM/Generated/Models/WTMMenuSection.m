@@ -54,7 +54,7 @@
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_menus=[_menus extractInstancebyCopyTo:destinationRegistry];
-	instance->_shelf=nil;// Non extractible
+	instance->_shelf=[_shelf extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -137,21 +137,21 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.details){
+	if(_details){
 		[dictionary setValue:self.details forKey:@"a"];
 	}
 	[dictionary setValue:@(self.index) forKey:@"b"];
-	if(self.label){
+	if(_label){
 		[dictionary setValue:self.label forKey:@"c"];
 	}
-	if(self.menus){
+	if(_menus){
 		if(includeChildren){
 			[dictionary setValue:[self.menus dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
 		}else{
 			[dictionary setValue:[self.menus aliasDictionaryRepresentation] forKey:@"d"];
 		}
 	}
-	if(self.shelf){
+	if(_shelf){
 		if(includeChildren){
 			[dictionary setValue:[self.shelf dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];
 		}else{

@@ -69,7 +69,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.comment){
+	if(_comment){
 		[dictionary setValue:self.comment forKey:@"a"];
 	}
     return dictionary;

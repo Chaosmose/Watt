@@ -103,9 +103,13 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.identity forKey:@"a"];
-	[dictionary setValue:self.objectName forKey:@"b"];
-	if(self.group){
+	if(_identity){
+		[dictionary setValue:self.identity forKey:@"a"];
+	}
+	if(_objectName){
+		[dictionary setValue:self.objectName forKey:@"b"];
+	}
+	if(_group){
 		if(includeChildren){
 			[dictionary setValue:[self.group dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{

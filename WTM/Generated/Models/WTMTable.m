@@ -151,21 +151,21 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.columns){
+	if(_columns){
 		if(includeChildren){
 			[dictionary setValue:[self.columns dictionaryRepresentationWithChildren:includeChildren] forKey:@"a"];
 		}else{
 			[dictionary setValue:[self.columns aliasDictionaryRepresentation] forKey:@"a"];
 		}
 	}
-	if(self.lines){
+	if(_lines){
 		if(includeChildren){
 			[dictionary setValue:[self.lines dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
 		}else{
 			[dictionary setValue:[self.lines aliasDictionaryRepresentation] forKey:@"b"];
 		}
 	}
-	if(self.scene){
+	if(_scene){
 		if(includeChildren){
 			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
 		}else{

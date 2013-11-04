@@ -229,45 +229,45 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.footer){
+	if(_footer){
 		[dictionary setValue:self.footer forKey:@"a"];
 	}
-	if(self.header){
+	if(_header){
 		[dictionary setValue:self.header forKey:@"b"];
 	}
 	[dictionary setValue:@(self.index) forKey:@"c"];
-	if(self.title){
+	if(_title){
 		[dictionary setValue:self.title forKey:@"d"];
 	}
-	if(self.activity){
+	if(_activity){
 		if(includeChildren){
 			[dictionary setValue:[self.activity dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];
 		}else{
 			[dictionary setValue:[self.activity aliasDictionaryRepresentation] forKey:@"e"];
 		}
 	}
-	if(self.behaviors){
+	if(_behaviors){
 		if(includeChildren){
 			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"f"];
 		}else{
 			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"f"];
 		}
 	}
-	if(self.elements){
+	if(_elements){
 		if(includeChildren){
 			[dictionary setValue:[self.elements dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];
 		}else{
 			[dictionary setValue:[self.elements aliasDictionaryRepresentation] forKey:@"g"];
 		}
 	}
-	if(self.picture){
+	if(_picture){
 		if(includeChildren){
 			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
 		}else{
 			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"h"];
 		}
 	}
-	if(self.table){
+	if(_table){
 		if(includeChildren){
 			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"i"];
 		}else{

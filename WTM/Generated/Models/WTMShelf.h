@@ -30,7 +30,6 @@
 
 @property (nonatomic,strong) WattCollectionOfGroup * groups;
 @property (nonatomic,copy) NSString * name;
-@property (nonatomic,strong) NSMutableArray * packagesList;
 @property (nonatomic,strong) WattCollectionOfUser * users;
 @property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 

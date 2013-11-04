@@ -108,14 +108,14 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.name){
+	if(_name){
 		[dictionary setValue:self.name forKey:@"a"];
 	}
 	[dictionary setValue:@(self.refererCounter) forKey:@"b"];
-	if(self.thumbnailRelativePath){
+	if(_thumbnailRelativePath){
 		[dictionary setValue:self.thumbnailRelativePath forKey:@"c"];
 	}
-	if(self.library){
+	if(_library){
 		if(includeChildren){
 			[dictionary setValue:[self.library dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
 		}else{

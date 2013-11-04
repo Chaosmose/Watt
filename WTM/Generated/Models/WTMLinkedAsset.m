@@ -69,7 +69,7 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.relativePath){
+	if(_relativePath){
 		[dictionary setValue:self.relativePath forKey:@"a"];
 	}
     return dictionary;

@@ -20,6 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WTMMenu.h" 
+#import "WattReference.h"
 #import "WTMCollectionOfMenu.h"
 #import "WTMMenuSection.h"
 #import "WTMMenu.h"
@@ -30,8 +31,7 @@
 @synthesize index=_index;
 @synthesize label=_label;
 @synthesize pictureRelativePath=_pictureRelativePath;
-@synthesize referenceUinstID=_referenceUinstID;
-@synthesize urlString=_urlString;
+@synthesize reference=_reference;
 @synthesize childrens=_childrens;
 @synthesize menuSection=_menuSection;
 @synthesize parent=_parent;
@@ -46,8 +46,7 @@
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_referenceUinstID=_referenceUinstID;
-	instance->_urlString=[_urlString copy];
+	instance->_reference=[_reference instancebyCopyTo:destinationRegistry];
 	instance->_childrens=[_childrens instancebyCopyTo:destinationRegistry];
 	instance->_menuSection=[_menuSection instancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent instancebyCopyTo:destinationRegistry];
@@ -63,10 +62,9 @@
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_referenceUinstID=_referenceUinstID;
-	instance->_urlString=[_urlString copy];
+	instance->_reference=[_reference extractInstancebyCopyTo:destinationRegistry];
 	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
-	instance->_menuSection=nil;// Non extractible
+	instance->_menuSection=[_menuSection extractInstancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -87,18 +85,39 @@
 	} else if ([key isEqualToString:@"d"]) {
 		[super setValue:value forKey:@"d"];
 	} else if ([key isEqualToString:@"e"]) {
-		[super setValue:value forKey:@"e"];
+		[super setValue:[WattReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"e"];
 	} else if ([key isEqualToString:@"f"]) {
-		[super setValue:value forKey:@"f"];
+		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"f"];
 	} else if ([key isEqualToString:@"g"]) {
-		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"g"];
+		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"g"];
 	} else if ([key isEqualToString:@"h"]) {
-		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
-	} else if ([key isEqualToString:@"i"]) {
-		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"i"];
+		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
 	} else {
 		[super setValue:value forKey:key];
 	}
+}
+
+- (WattReference*)reference{
+	if([_reference isAnAlias]){
+		id o=[_registry objectWithUinstID:_reference.uinstID];
+		if(o){
+			_reference=o;
+		}
+	}
+	return _reference;
+}
+
+
+- (WattReference*)reference_auto{
+	_reference=[self reference];
+	if(!_reference){
+		_reference=[[WattReference alloc] initInRegistry:_registry];
+	}
+	return _reference;
+}
+
+- (void)setReference:(WattReference*)reference{
+	_reference=reference;
 }
 
 - (WTMCollectionOfMenu*)childrens{
@@ -181,39 +200,42 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	if(self.details){
+	if(_details){
 		[dictionary setValue:self.details forKey:@"a"];
 	}
 	[dictionary setValue:@(self.index) forKey:@"b"];
-	if(self.label){
+	if(_label){
 		[dictionary setValue:self.label forKey:@"c"];
 	}
-	if(self.pictureRelativePath){
+	if(_pictureRelativePath){
 		[dictionary setValue:self.pictureRelativePath forKey:@"d"];
 	}
-	[dictionary setValue:@(self.referenceUinstID) forKey:@"e"];
-	if(self.urlString){
-		[dictionary setValue:self.urlString forKey:@"f"];
-	}
-	if(self.childrens){
+	if(_reference){
 		if(includeChildren){
-			[dictionary setValue:[self.childrens dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];
+			[dictionary setValue:[self.reference dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];
 		}else{
-			[dictionary setValue:[self.childrens aliasDictionaryRepresentation] forKey:@"g"];
+			[dictionary setValue:[self.reference aliasDictionaryRepresentation] forKey:@"e"];
 		}
 	}
-	if(self.menuSection){
+	if(_childrens){
 		if(includeChildren){
-			[dictionary setValue:[self.menuSection dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
+			[dictionary setValue:[self.childrens dictionaryRepresentationWithChildren:includeChildren] forKey:@"f"];
 		}else{
-			[dictionary setValue:[self.menuSection aliasDictionaryRepresentation] forKey:@"h"];
+			[dictionary setValue:[self.childrens aliasDictionaryRepresentation] forKey:@"f"];
 		}
 	}
-	if(self.parent){
+	if(_menuSection){
 		if(includeChildren){
-			[dictionary setValue:[self.parent dictionaryRepresentationWithChildren:includeChildren] forKey:@"i"];
+			[dictionary setValue:[self.menuSection dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];
 		}else{
-			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"i"];
+			[dictionary setValue:[self.menuSection aliasDictionaryRepresentation] forKey:@"g"];
+		}
+	}
+	if(_parent){
+		if(includeChildren){
+			[dictionary setValue:[self.parent dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
+		}else{
+			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"h"];
 		}
 	}
     return dictionary;
@@ -229,8 +251,7 @@
 	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
-	[s appendFormat:@"referenceUinstID : %@\n",@(self.referenceUinstID)];
-	[s appendFormat:@"urlString : %@\n",self.urlString];
+	[s appendFormat:@"reference : %@\n",NSStringFromClass([self.reference class])];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
 	[s appendFormat:@"parent : %@\n",NSStringFromClass([self.parent class])];

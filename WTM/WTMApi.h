@@ -9,7 +9,6 @@
 #import "WTM.h"
 //Import of flexion generated classes
 #import "WTMModelsImports.h"
-#import "WTMShelf+WTMShelf_Packages.h"
 
 // This is a cross platform authoring and runtime api
 // to developp multimedia project
@@ -24,8 +23,7 @@
  */
 @interface WTMApi : WattACL
 
-
-@property (nonatomic,strong)WattUtils *utils;
+@property (nonatomic,strong)WattRegistryFilesUtils *utils;
 
 
 /**
@@ -38,10 +36,16 @@
 #pragma mark - /// SHELF ///
 #pragma mark -
 
-// Creates a shelf, a user , the local group, a package with a shared lib ...
--(WTMShelf*)createShelfWithName:(NSString*)name inRegistry:(WattRegistry*)registry;
+/**
+ *  Description
+ *
+ *  @param nameInPool nameInPool description
+ *  @param pool       pool description
+ *
+ *  @return The shelf
+ */
+-(WTMShelf*)createShelfWithName:(NSString*)name inPool:(WattRegistryPool*)pool;
 
-// No remove method actually (need to be analyzed)
 
 #pragma mark - User and groups
 
@@ -62,12 +66,23 @@
 #pragma mark - /// PACKAGE ///
 #pragma mark -
 
-// Create a package and it default library
-- (WTMPackage*)createPackageInShelf:(WTMShelf*)shelf;
-- (void)removePackage:(WTMPackage*)package fromShelf:(WTMShelf*)shelf;
-// Immport process this method can move a package from a registry to another
-- (void)addPackage:(WTMPackage*)package
-           toShelf:(WTMShelf*)shelf;
+//
+/**
+ *  Creates a package and its default library
+ *
+ *  @param pool the pool
+ *
+ *  @return the package
+ */
+- (WTMPackage*)createPackageInPool:(WattRegistryPool*)pool;
+
+/**
+ *  Moves the package and all its dependencies to the trash
+ *
+ *  @param package the package
+ */
+- (void)removePackage:(WTMPackage*)package;
+
 
 #pragma mark - Library
 

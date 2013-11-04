@@ -31,7 +31,7 @@
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,strong) WTMCollectionOfMenu * menus;
-@property (nonatomic,strong) WTMShelf * shelf;// non extractible
+@property (nonatomic,strong) WTMShelf * shelf;
 
 - (WTMCollectionOfMenu*)menus_auto;
 - (WTMShelf*)shelf_auto;

@@ -21,6 +21,7 @@
  
 
 #import "WattObject.h"
+@class WattCollectionOfReference;
 
 @interface WattModel:WattObject<WattCoding,WattCopying,WattExtraction>{
 }
@@ -32,6 +33,8 @@
 @property (nonatomic,copy) NSString * objectName;
 @property (nonatomic,assign) NSInteger  ownerID;
 @property (nonatomic,assign) NSInteger  rights;
+@property (nonatomic,strong) WattCollectionOfReference * references;
 
+- (WattCollectionOfReference*)references_auto;
 
 @end
