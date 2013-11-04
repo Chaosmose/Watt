@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="13A603" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
@@ -24,6 +24,13 @@
             <entry key="generate" value="collection"/>
         </userInfo>
     </entity>
+    <entity name="Reference" syncable="YES">
+        <attribute name="objectUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
+        <userInfo>
+            <entry key="generate" value="collection"/>
+        </userInfo>
+    </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,8 +40,9 @@
         </userInfo>
     </entity>
     <elements>
-        <element name="Group" positionX="-8237" positionY="-4680" width="128" height="90"/>
-        <element name="Model" positionX="-8127" positionY="-4932" width="128" height="148"/>
-        <element name="User" positionX="-7974" positionY="-4680" width="128" height="90"/>
+        <element name="Group" positionX="-8237" positionY="-4680" width="128" height="88"/>
+        <element name="Model" positionX="-8237" positionY="-4882" width="128" height="148"/>
+        <element name="User" positionX="-8039" positionY="-4563" width="128" height="90"/>
+        <element name="Reference" positionX="-8235" positionY="-5014" width="128" height="73"/>
     </elements>
 </model>

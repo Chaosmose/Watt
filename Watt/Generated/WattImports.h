@@ -11,4 +11,6 @@
 #import "WattGroup.h"
 #import "WattCollectionOfModel.h"
 #import "WattModel.h"
+#import "WattCollectionOfReference.h"
+#import "WattReference.h"
 #import "WattUser.h"

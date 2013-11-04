@@ -33,7 +33,6 @@
     BOOL _isAnAlias;
 }
 
-
 @property (readonly)NSInteger uinstID;
 @property (readonly)WattRegistry*registry;
 

@@ -93,6 +93,10 @@
 		E5C6FA7918054B6000ECDFF3 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6618054B6000ECDFF3 /* stop.png */; };
 		E5C6FA7A18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
 		E5C6FA7B18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
+		E5CDFE32182797AE002FC634 /* WattCollectionOfReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */; };
+		E5CDFE33182797AE002FC634 /* WattReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE31182797AE002FC634 /* WattReference.m */; };
+		E5CDFE34182797B3002FC634 /* WattCollectionOfReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */; };
+		E5CDFE35182797B8002FC634 /* WattReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE31182797AE002FC634 /* WattReference.m */; };
 		E5CF13291826669E003658CE /* WattACL.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9621826668D003658CE /* WattACL.m */; };
 		E5CF132A1826669E003658CE /* WattACL.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9621826668D003658CE /* WattACL.m */; };
 		E5CF132C1826669E003658CE /* WattCollectionOfObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF9641826668D003658CE /* WattCollectionOfObject.m */; };
@@ -294,6 +298,10 @@
 		E5C6FA6618054B6000ECDFF3 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		E5C6FA6718054B6000ECDFF3 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop@2x.png"; sourceTree = "<group>"; };
 		E5CAD2E21799A1B800D22369 /* PlayerSampleFlexions-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlayerSampleFlexions-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E5CDFE2E182797AE002FC634 /* WattCollectionOfReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfReference.h; sourceTree = "<group>"; };
+		E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfReference.m; sourceTree = "<group>"; };
+		E5CDFE30182797AE002FC634 /* WattReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattReference.h; sourceTree = "<group>"; };
+		E5CDFE31182797AE002FC634 /* WattReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattReference.m; sourceTree = "<group>"; };
 		E5CF13271826669D003658CE /* Watt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Watt.h; sourceTree = "<group>"; };
 		E5CF13281826669D003658CE /* WattDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattDefinitions.h; sourceTree = "<group>"; };
 		E5CFF9611826668D003658CE /* WattACL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattACL.h; sourceTree = "<group>"; };
@@ -764,6 +772,10 @@
 		E5CFF9711826668D003658CE /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				E5CDFE2E182797AE002FC634 /* WattCollectionOfReference.h */,
+				E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */,
+				E5CDFE30182797AE002FC634 /* WattReference.h */,
+				E5CDFE31182797AE002FC634 /* WattReference.m */,
 				E5CFF9721826668D003658CE /* WattCollectionOfGroup.h */,
 				E5CFF9731826668D003658CE /* WattCollectionOfGroup.m */,
 				E5CFF9741826668D003658CE /* WattCollectionOfModel.h */,
@@ -1118,6 +1130,7 @@
 				E5F4335C17D8B52600CD20B7 /* WTMActivity.m in Sources */,
 				E5F4335E17D8B52600CD20B7 /* WTMMenuSection.m in Sources */,
 				E5F4336017D8B52600CD20B7 /* WTMCell.m in Sources */,
+				E5CDFE34182797B3002FC634 /* WattCollectionOfReference.m in Sources */,
 				E5CF13451826669E003658CE /* WattCollectionOfUser.m in Sources */,
 				E5F4336217D8B52600CD20B7 /* WTMRule.m in Sources */,
 				E5F4336417D8B52600CD20B7 /* WTMShelf.m in Sources */,
@@ -1150,6 +1163,7 @@
 				E5F4338E17D8B52600CD20B7 /* WTMAction.m in Sources */,
 				E5F4339017D8B52600CD20B7 /* WTMHtml.m in Sources */,
 				E5F4339417D8B52600CD20B7 /* WTMCollectionOfColumn.m in Sources */,
+				E5CDFE35182797B8002FC634 /* WattReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1197,6 +1211,7 @@
 				E5F4335B17D8B52600CD20B7 /* WTMActivity.m in Sources */,
 				E5F4335D17D8B52600CD20B7 /* WTMMenuSection.m in Sources */,
 				E5F4335F17D8B52600CD20B7 /* WTMCell.m in Sources */,
+				E5CDFE32182797AE002FC634 /* WattCollectionOfReference.m in Sources */,
 				E5CF13441826669E003658CE /* WattCollectionOfUser.m in Sources */,
 				E5F4336117D8B52600CD20B7 /* WTMRule.m in Sources */,
 				E5F4336317D8B52600CD20B7 /* WTMShelf.m in Sources */,
@@ -1229,6 +1244,7 @@
 				E5F4338D17D8B52600CD20B7 /* WTMAction.m in Sources */,
 				E5F4338F17D8B52600CD20B7 /* WTMHtml.m in Sources */,
 				E5F4339317D8B52600CD20B7 /* WTMCollectionOfColumn.m in Sources */,
+				E5CDFE33182797AE002FC634 /* WattReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
