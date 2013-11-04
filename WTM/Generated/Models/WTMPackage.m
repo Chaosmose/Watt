@@ -161,8 +161,12 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.license forKey:@"a"];
-	[dictionary setValue:self.name forKey:@"b"];
+	if(self.license){
+		[dictionary setValue:self.license forKey:@"a"];
+	}
+	if(self.name){
+		[dictionary setValue:self.name forKey:@"b"];
+	}
 	if(self.activities){
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];

@@ -79,9 +79,15 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.actionName forKey:@"a"];
-	[dictionary setValue:self.attributes forKey:@"b"];
-	[dictionary setValue:self.triggerName forKey:@"c"];
+	if(self.actionName){
+		[dictionary setValue:self.actionName forKey:@"a"];
+	}
+	if(self.attributes){
+		[dictionary setValue:self.attributes forKey:@"b"];
+	}
+	if(self.triggerName){
+		[dictionary setValue:self.triggerName forKey:@"c"];
+	}
     return dictionary;
 }
 

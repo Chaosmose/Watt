@@ -156,7 +156,9 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.attributes forKey:@"a"];
+	if(self.attributes){
+		[dictionary setValue:self.attributes forKey:@"a"];
+	}
 	if(self.column){
 		if(includeChildren){
 			[dictionary setValue:[self.column dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];

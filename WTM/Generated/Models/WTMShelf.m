@@ -168,8 +168,12 @@
 			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"a"];
 		}
 	}
-	[dictionary setValue:self.name forKey:@"b"];
-	[dictionary setValue:self.packagesList forKey:@"c"];
+	if(self.name){
+		[dictionary setValue:self.name forKey:@"b"];
+	}
+	if(self.packagesList){
+		[dictionary setValue:self.packagesList forKey:@"c"];
+	}
 	if(self.users){
 		if(includeChildren){
 			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];

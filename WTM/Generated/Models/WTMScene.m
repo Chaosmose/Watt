@@ -229,10 +229,16 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.footer forKey:@"a"];
-	[dictionary setValue:self.header forKey:@"b"];
+	if(self.footer){
+		[dictionary setValue:self.footer forKey:@"a"];
+	}
+	if(self.header){
+		[dictionary setValue:self.header forKey:@"b"];
+	}
 	[dictionary setValue:@(self.index) forKey:@"c"];
-	[dictionary setValue:self.title forKey:@"d"];
+	if(self.title){
+		[dictionary setValue:self.title forKey:@"d"];
+	}
 	if(self.activity){
 		if(includeChildren){
 			[dictionary setValue:[self.activity dictionaryRepresentationWithChildren:includeChildren] forKey:@"e"];

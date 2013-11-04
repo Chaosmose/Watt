@@ -87,7 +87,9 @@
 	[dictionary setValue:@(self.allowExploration) forKey:@"a"];
 	[dictionary setValue:@(self.updateImageOnChange) forKey:@"b"];
 	[dictionary setValue:@(self.updateUrlOnChange) forKey:@"c"];
-	[dictionary setValue:self.urlString forKey:@"d"];
+	if(self.urlString){
+		[dictionary setValue:self.urlString forKey:@"d"];
+	}
     return dictionary;
 }
 

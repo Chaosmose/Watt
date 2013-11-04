@@ -74,8 +74,12 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.font forKey:@"a"];
-	[dictionary setValue:self.text forKey:@"b"];
+	if(self.font){
+		[dictionary setValue:self.font forKey:@"a"];
+	}
+	if(self.text){
+		[dictionary setValue:self.text forKey:@"b"];
+	}
     return dictionary;
 }
 

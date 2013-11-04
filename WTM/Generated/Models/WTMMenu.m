@@ -181,12 +181,20 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.details forKey:@"a"];
+	if(self.details){
+		[dictionary setValue:self.details forKey:@"a"];
+	}
 	[dictionary setValue:@(self.index) forKey:@"b"];
-	[dictionary setValue:self.label forKey:@"c"];
-	[dictionary setValue:self.pictureRelativePath forKey:@"d"];
+	if(self.label){
+		[dictionary setValue:self.label forKey:@"c"];
+	}
+	if(self.pictureRelativePath){
+		[dictionary setValue:self.pictureRelativePath forKey:@"d"];
+	}
 	[dictionary setValue:@(self.referenceUinstID) forKey:@"e"];
-	[dictionary setValue:self.urlString forKey:@"f"];
+	if(self.urlString){
+		[dictionary setValue:self.urlString forKey:@"f"];
+	}
 	if(self.childrens){
 		if(includeChildren){
 			[dictionary setValue:[self.childrens dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];

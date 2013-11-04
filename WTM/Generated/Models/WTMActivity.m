@@ -179,8 +179,12 @@
 	[dictionary setValue:@(self.level) forKey:@"a"];
 	[dictionary setValue:@(self.rating) forKey:@"b"];
 	[dictionary setValue:@(self.score) forKey:@"c"];
-	[dictionary setValue:self.shortName forKey:@"d"];
-	[dictionary setValue:self.title forKey:@"e"];
+	if(self.shortName){
+		[dictionary setValue:self.shortName forKey:@"d"];
+	}
+	if(self.title){
+		[dictionary setValue:self.title forKey:@"e"];
+	}
 	if(self.package){
 		if(includeChildren){
 			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"f"];

@@ -137,9 +137,13 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:self.details forKey:@"a"];
+	if(self.details){
+		[dictionary setValue:self.details forKey:@"a"];
+	}
 	[dictionary setValue:@(self.index) forKey:@"b"];
-	[dictionary setValue:self.label forKey:@"c"];
+	if(self.label){
+		[dictionary setValue:self.label forKey:@"c"];
+	}
 	if(self.menus){
 		if(includeChildren){
 			[dictionary setValue:[self.menus dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
