@@ -44,6 +44,4 @@
 - (void)removePackage:(WTMPackage*)package deleteFiles:(BOOL)deleteFiles;
 
 
-
-
 @end

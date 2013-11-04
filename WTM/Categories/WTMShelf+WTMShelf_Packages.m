@@ -25,22 +25,12 @@ static char const * const PackagesKey = "PackagesKey";
  *
  *  @param name                 the name of the package to load.
  *  @param serializationMode    the WattSerializationMode
- *  @return                     The package in a separate registry.
- */
+ *  @return                     The package in a separate registry.s */
 - (WTMPackage*)packageWithObjectName:(NSString*)name using:(WattSerializationMode)serializationMode{
     if(!self.packagesList){
         return nil;
     }
-    NSString *__weak search=name;
-    WTMPackage *__block packageReference=nil;
-    [[self _packages_auto] enumerateObjectsUsingBlock:^(WTMPackage *obj, NSUInteger idx, BOOL *stop) {
-        if([obj.objectName isEqualToString:search]){
-            packageReference=obj;
-            *stop=YES;
-        }
-
-    } reverse:NO];
-    
+    WTMPackage * packageReference=[[self _packages_auto] objectForKey:name];
     if(!packageReference){
         // We should try to deserialize.
         WattUtils *utils=[[WattUtils alloc] init];
@@ -49,6 +39,7 @@ static char const * const PackagesKey = "PackagesKey";
         WattRegistry*r=[utils readRegistryFromFile:path];
         if(r){
             packageReference=[r objectWithUinstID:kWattRegistryRootUinstID];
+            [[self _packages_auto] setObject:packageReference forKey:packageReference.name];
         }
     }
     return packageReference;
@@ -76,7 +67,7 @@ static char const * const PackagesKey = "PackagesKey";
     [self.registry setHasChanged:YES];
     
     // We reference the package.
-    [[self _packages_auto] addObject:package];
+    [[self _packages_auto] setObject:package forKey:package.name];
 }
 
 
@@ -97,15 +88,9 @@ static char const * const PackagesKey = "PackagesKey";
 
 #pragma  mark - Private
 
-- (WTMCollectionOfPackage*)_packages_auto{
+- (NSMutableDictionary*)_packages_auto{
 	if(![self _packages]){
-        
-        // This registry is temp
-        WattRegistry *registry=[[WattRegistry alloc] initWithSerializationMode:self.registry.serializationMode
-                                                                          name:[WattUtils uuidString]
-                                                              andContainerName:self.registry.name];
-        WTMCollectionOfPackage*p=[[WTMCollectionOfPackage alloc] initInRegistry:registry];
-        [self _setPackages:p];
+        [self _setPackages:[NSMutableDictionary dictionary]];
     }
     return [self _packages];
 }
@@ -119,11 +104,11 @@ static char const * const PackagesKey = "PackagesKey";
 #pragma  mark - Associative references
 
 
-- (WTMCollectionOfPackage*)_packages {
-    return (WTMCollectionOfPackage*)objc_getAssociatedObject(self, PackagesKey);
+- (NSMutableDictionary*)_packages {
+    return (NSMutableDictionary*)objc_getAssociatedObject(self, PackagesKey);
 }
 
-- (void)_setPackages:(WTMCollectionOfPackage*)newPackages{
+- (void)_setPackages:(NSMutableDictionary*)newPackages{
     objc_setAssociatedObject(self, PackagesKey, newPackages, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
