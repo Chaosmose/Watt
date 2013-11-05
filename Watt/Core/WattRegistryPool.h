@@ -11,16 +11,16 @@
 
 static NSString*mapFileDefaultName=@"map";
 
-@class WattRegistry,WattObject,WattReference,WattRegistryFileMap,WattRegistryFilesUtils;
+@class WattRegistry,WattModel,WattExternalReference,WattRegistryFileMap,WattRegistryFilesUtils;
 
 /*
 
  Definitions : 
  --------------
  
- -A pool            : groups an ensemble of registries and associated files
- -A registry        : manages a graph of watt objects and collections (it is an object graph DB)
- -A WattReference   : identifies an object by its registry identity and unique instance identifier (UinstID)
+ -A pool                    : groups an ensemble of registries and associated files
+ -A registry                : manages a graph of watt objects and collections (it is an object graph DB)
+ -A WattExternalReference   : identifies a WattModel by its registry identity and unique instance identifier (UinstID)
  
  File tree : 
  -----------
@@ -53,7 +53,7 @@ static NSString*mapFileDefaultName=@"map";
  -------------
  
  The easyest method to create a new registry in the pool :
- WattRegistry*registry=[self registryWithUidString:nil];
+ WattRegistry*registry=[<pool> registryWithUidString:nil];
 
  
  
@@ -133,13 +133,13 @@ static NSString*mapFileDefaultName=@"map";
 #pragma mark - Object grabber.
 
 /**
- *  Returns the object by its wattReference
+ *  Returns the object by its WattExternalReference
  *
- *  @param wattReference the object external reference of a watt object into another registry
+ *  @param WattExternalReference the object external reference of a watt object into another registry
  *
  *  @return the object or nil
  */
-- (WattObject*)objectByWattReference:(WattReference*)wattReference;
+- (WattModel*)objectByWattReference:(WattExternalReference*)externalReference;
 
 
 /**
@@ -149,7 +149,7 @@ static NSString*mapFileDefaultName=@"map";
  *
  *  @return the object or nil
  */
-- (WattObject*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
+- (WattModel*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
 
 
 #pragma mark - files 

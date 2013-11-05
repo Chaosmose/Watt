@@ -6,13 +6,13 @@
  
 
 
+#import "WattExternalReference.h"
 #import "WattCollectionOfGroup.h"
 #import "WattCollectionOfUser.h"
 #import "WattGroup.h"
 #import "WattCollectionOfModel.h"
-#import "WattCollectionOfReference.h"
+#import "WattCollectionOfExternalReference.h"
 #import "WattModel.h"
-#import "WattReference.h"
 #import "WattRegistryFile.h"
 #import "WattCollectionOfRegistryFile.h"
 #import "WattRegistryFileMap.h"

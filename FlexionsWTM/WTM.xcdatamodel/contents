@@ -114,7 +114,7 @@
         <attribute name="pictureRelativePath" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="reference" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
-                <entry key="relationship" value="WattReference"/>
+                <entry key="relationship" value="WattExternalReference"/>
             </userInfo>
         </attribute>
         <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>

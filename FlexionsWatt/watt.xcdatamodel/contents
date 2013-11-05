@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ExternalReference" syncable="YES">
+        <attribute name="objectUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Group" representedClassName="Group" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,14 +24,10 @@
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ownerID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="rights" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="references" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reference" syncable="YES"/>
+        <relationship name="references" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExternalReference" syncable="YES"/>
         <userInfo>
             <entry key="generate" value="collection"/>
         </userInfo>
-    </entity>
-    <entity name="Reference" syncable="YES">
-        <attribute name="objectUinstID" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="RegistryFile" syncable="YES">
         <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
@@ -44,9 +44,9 @@
     <elements>
         <element name="Group" positionX="-8210" positionY="-4714" width="128" height="88"/>
         <element name="Model" positionX="-8210" positionY="-4960" width="128" height="163"/>
-        <element name="Reference" positionX="-8037" positionY="-4771" width="128" height="73"/>
-        <element name="User" positionX="-8046" positionY="-4579" width="128" height="88"/>
-        <element name="RegistryFileMap" positionX="-8201" positionY="-5175" width="128" height="58"/>
+        <element name="ExternalReference" positionX="-8037" positionY="-4771" width="128" height="73"/>
         <element name="RegistryFile" positionX="-8048" positionY="-5068" width="128" height="73"/>
+        <element name="RegistryFileMap" positionX="-8201" positionY="-5175" width="128" height="58"/>
+        <element name="User" positionX="-8046" positionY="-4579" width="128" height="88"/>
     </elements>
 </model>

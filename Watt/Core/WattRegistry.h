@@ -56,15 +56,15 @@
 #pragma mark - Save
 
 /**
- *  Autosave : 
- * 
+ *  Autosave :
+ *
  *  I# You can use @selector(executeAndAutoSaveBlock:) if you perform a suite of actions and want to save them immediatly
  *
- *  II# You can manually use the autosave to reduce the I/O 
- *  
+ *  II# You can manually use the autosave to reduce the I/O
+ *
  *  1- set registry.autosave=NO;
- *  2- update the models , deletes, modify, create , ... 
- *  3- set registry.hasChanged when you perform a discrete changes that need to saved (the api, the collection automatically set) 
+ *  2- update the models , deletes, modify, create , ...
+ *  3- set registry.hasChanged when you perform a discrete changes that need to saved (the api, the collection automatically set)
  *  4- set registry.autosave=YES (this will save only if on of the object has changed)
  */
 @property (nonatomic,assign)BOOL autosave;
@@ -86,8 +86,8 @@
  *  @return The new created instance
  */
 +(instancetype)registryWithSerializationMode:(WattSerializationMode)serializationMode
-                                            uniqueStringIdentifier:(NSString*)identifier
-                               inPool:(WattRegistryPool*)pool;
+                      uniqueStringIdentifier:(NSString*)identifier
+                                      inPool:(WattRegistryPool*)pool;
 
 
 /**
@@ -99,8 +99,8 @@
  *  @return The new created instance
  */
 -(instancetype)initRegistryWithSerializationMode:(WattSerializationMode)serializationMode
-                                    uniqueStringIdentifier:(NSString*)identifier
-                                  inPool:(WattRegistryPool*)pool;
+                          uniqueStringIdentifier:(NSString*)identifier
+                                          inPool:(WattRegistryPool*)pool;
 
 #pragma mark - save
 
@@ -180,7 +180,7 @@
  *  Enumerates the objects to perform block based action on the objects
  *
  *  @param block                 the block can be stopped by setting stop=YES;
- *  @param useReverseEnumeration if YES the enumeration order is reversed ( usefull for deletion ) 
+ *  @param useReverseEnumeration if YES the enumeration order is reversed ( usefull for deletion )
  */
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 
@@ -202,7 +202,7 @@
 - (NSUInteger)nextUinstID;
 
 
-#pragma mark - Merging 
+#pragma mark - Merging
 
 /**
  *  Merge the registryToAdd into the current registry

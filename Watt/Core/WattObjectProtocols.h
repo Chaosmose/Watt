@@ -47,7 +47,7 @@
 
 #pragma mark - WattExtraction
 
-#warning INTERESTING We should deprecate WattExtraction and exclude props according to ExclusionPaths based on _propertiesKeys
+#warning We should deprecate WattExtraction and exclude props according to ExclusionPaths based on _propertiesKeys
 
 // WOOZOO's SUGGESTIONS !
 // NOTE WE COULD IMPLEMENT AN EXTRACTION WITH ExclusionPaths : "ClassName.propertyName.propertyName"

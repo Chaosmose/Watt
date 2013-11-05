@@ -167,15 +167,15 @@ static NSString*trashFolderName=@"trash";
 #pragma mark - Object grabber.
 
 /**
- *  Returns the object by its wattReference
+ *  Returns the object by its WattExternalReference
  *
- *  @param wattReference the object external reference of a watt object into another registry
+ *  @param WattExternalReference the object external reference of a watt object into another registry
  *
  *  @return the object or nil
  */
-- (WattObject*)objectByWattReference:(WattReference*)wattReference{
-    WattRegistry*registry=[self registryWithUidString:wattReference.registryUidString];
-    return [registry objectWithUinstID:wattReference.uinstID];
+- (WattModel*)objectByWattReference:(WattExternalReference*)externalReference{
+    WattRegistry*registry=[self registryWithUidString:externalReference.registryUidString];
+    return [registry objectWithUinstID:externalReference.uinstID];
 }
 
 
@@ -186,7 +186,7 @@ static NSString*trashFolderName=@"trash";
  *
  *  @return the object or nil
  */
-- (WattObject*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID{
+- (WattModel*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID{
     WattRegistry*registry=[self registryWithUidString:registryUidString];
     return [registry objectWithUinstID:objectUinstID];
 }

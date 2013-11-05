@@ -93,10 +93,6 @@
 		E5C6FA7918054B6000ECDFF3 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6618054B6000ECDFF3 /* stop.png */; };
 		E5C6FA7A18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
 		E5C6FA7B18054B6000ECDFF3 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C6FA6718054B6000ECDFF3 /* stop@2x.png */; };
-		E5CDFE32182797AE002FC634 /* WattCollectionOfReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */; };
-		E5CDFE33182797AE002FC634 /* WattReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE31182797AE002FC634 /* WattReference.m */; };
-		E5CDFE34182797B3002FC634 /* WattCollectionOfReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */; };
-		E5CDFE35182797B8002FC634 /* WattReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE31182797AE002FC634 /* WattReference.m */; };
 		E5CDFE3F1827A9CC002FC634 /* WattRegistryPool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE3E1827A9CC002FC634 /* WattRegistryPool.m */; };
 		E5CDFE401827A9CC002FC634 /* WattRegistryPool.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE3E1827A9CC002FC634 /* WattRegistryPool.m */; };
 		E5CDFE471827AF7C002FC634 /* WattCollectionOfRegistryFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CDFE421827AF7C002FC634 /* WattCollectionOfRegistryFile.m */; };
@@ -131,6 +127,10 @@
 		E5CF134B1826669E003658CE /* WattModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97C1826668D003658CE /* WattModel.m */; };
 		E5CF134D1826669E003658CE /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97E1826668D003658CE /* WattUser.m */; };
 		E5CF134E1826669E003658CE /* WattUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E5CFF97E1826668D003658CE /* WattUser.m */; };
+		E5D48F7F1828E35B00CC30F0 /* WattCollectionOfExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7C1828E35B00CC30F0 /* WattCollectionOfExternalReference.m */; };
+		E5D48F801828E35B00CC30F0 /* WattCollectionOfExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7C1828E35B00CC30F0 /* WattCollectionOfExternalReference.m */; };
+		E5D48F811828E35B00CC30F0 /* WattExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */; };
+		E5D48F821828E35B00CC30F0 /* WattExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */; };
 		E5ECCD521826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E5ECCD531826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E5F4333F17D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432EF17D8B52600CD20B7 /* WTMCollectionOfActivity.m */; };
@@ -304,10 +304,6 @@
 		E5C6FA6618054B6000ECDFF3 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		E5C6FA6718054B6000ECDFF3 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop@2x.png"; sourceTree = "<group>"; };
 		E5CAD2E21799A1B800D22369 /* PlayerSampleFlexions-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PlayerSampleFlexions-Info.plist"; sourceTree = SOURCE_ROOT; };
-		E5CDFE2E182797AE002FC634 /* WattCollectionOfReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfReference.h; sourceTree = "<group>"; };
-		E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfReference.m; sourceTree = "<group>"; };
-		E5CDFE30182797AE002FC634 /* WattReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattReference.h; sourceTree = "<group>"; };
-		E5CDFE31182797AE002FC634 /* WattReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattReference.m; sourceTree = "<group>"; };
 		E5CDFE3D1827A9CC002FC634 /* WattRegistryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattRegistryPool.h; sourceTree = "<group>"; };
 		E5CDFE3E1827A9CC002FC634 /* WattRegistryPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattRegistryPool.m; sourceTree = "<group>"; };
 		E5CDFE411827AF7C002FC634 /* WattCollectionOfRegistryFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfRegistryFile.h; sourceTree = "<group>"; };
@@ -346,6 +342,10 @@
 		E5CFF97C1826668D003658CE /* WattModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattModel.m; sourceTree = "<group>"; };
 		E5CFF97D1826668D003658CE /* WattUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattUser.h; sourceTree = "<group>"; };
 		E5CFF97E1826668D003658CE /* WattUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattUser.m; sourceTree = "<group>"; };
+		E5D48F7B1828E35B00CC30F0 /* WattCollectionOfExternalReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattCollectionOfExternalReference.h; sourceTree = "<group>"; };
+		E5D48F7C1828E35B00CC30F0 /* WattCollectionOfExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfExternalReference.m; sourceTree = "<group>"; };
+		E5D48F7D1828E35B00CC30F0 /* WattExternalReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattExternalReference.h; sourceTree = "<group>"; };
+		E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattExternalReference.m; sourceTree = "<group>"; };
 		E5F432E917D8B52600CD20B7 /* WTMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCell.h; sourceTree = "<group>"; };
 		E5F432EA17D8B52600CD20B7 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
 		E5F432EB17D8B52600CD20B7 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
@@ -784,16 +784,16 @@
 		E5CFF9711826668D003658CE /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				E5D48F7B1828E35B00CC30F0 /* WattCollectionOfExternalReference.h */,
+				E5D48F7C1828E35B00CC30F0 /* WattCollectionOfExternalReference.m */,
+				E5D48F7D1828E35B00CC30F0 /* WattExternalReference.h */,
+				E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */,
 				E5CDFE411827AF7C002FC634 /* WattCollectionOfRegistryFile.h */,
 				E5CDFE421827AF7C002FC634 /* WattCollectionOfRegistryFile.m */,
 				E5CDFE431827AF7C002FC634 /* WattRegistryFile.h */,
 				E5CDFE441827AF7C002FC634 /* WattRegistryFile.m */,
 				E5CDFE451827AF7C002FC634 /* WattRegistryFileMap.h */,
 				E5CDFE461827AF7C002FC634 /* WattRegistryFileMap.m */,
-				E5CDFE2E182797AE002FC634 /* WattCollectionOfReference.h */,
-				E5CDFE2F182797AE002FC634 /* WattCollectionOfReference.m */,
-				E5CDFE30182797AE002FC634 /* WattReference.h */,
-				E5CDFE31182797AE002FC634 /* WattReference.m */,
 				E5CFF9721826668D003658CE /* WattCollectionOfGroup.h */,
 				E5CFF9731826668D003658CE /* WattCollectionOfGroup.m */,
 				E5CFF9741826668D003658CE /* WattCollectionOfModel.h */,
@@ -1147,9 +1147,9 @@
 				E5F4335817D8B52600CD20B7 /* WTMPackage.m in Sources */,
 				E5F4335A17D8B52600CD20B7 /* WTMLinkedAsset.m in Sources */,
 				E5F4335C17D8B52600CD20B7 /* WTMActivity.m in Sources */,
+				E5D48F801828E35B00CC30F0 /* WattCollectionOfExternalReference.m in Sources */,
 				E5F4335E17D8B52600CD20B7 /* WTMMenuSection.m in Sources */,
 				E5F4336017D8B52600CD20B7 /* WTMCell.m in Sources */,
-				E5CDFE34182797B3002FC634 /* WattCollectionOfReference.m in Sources */,
 				E5CF13451826669E003658CE /* WattCollectionOfUser.m in Sources */,
 				E5F4336217D8B52600CD20B7 /* WTMRule.m in Sources */,
 				E5F4336417D8B52600CD20B7 /* WTMShelf.m in Sources */,
@@ -1184,7 +1184,7 @@
 				E5F4338E17D8B52600CD20B7 /* WTMAction.m in Sources */,
 				E5F4339017D8B52600CD20B7 /* WTMHtml.m in Sources */,
 				E5F4339417D8B52600CD20B7 /* WTMCollectionOfColumn.m in Sources */,
-				E5CDFE35182797B8002FC634 /* WattReference.m in Sources */,
+				E5D48F821828E35B00CC30F0 /* WattExternalReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,9 +1231,9 @@
 				E5F4335717D8B52600CD20B7 /* WTMPackage.m in Sources */,
 				E5F4335917D8B52600CD20B7 /* WTMLinkedAsset.m in Sources */,
 				E5F4335B17D8B52600CD20B7 /* WTMActivity.m in Sources */,
+				E5D48F7F1828E35B00CC30F0 /* WattCollectionOfExternalReference.m in Sources */,
 				E5F4335D17D8B52600CD20B7 /* WTMMenuSection.m in Sources */,
 				E5F4335F17D8B52600CD20B7 /* WTMCell.m in Sources */,
-				E5CDFE32182797AE002FC634 /* WattCollectionOfReference.m in Sources */,
 				E5CF13441826669E003658CE /* WattCollectionOfUser.m in Sources */,
 				E5F4336117D8B52600CD20B7 /* WTMRule.m in Sources */,
 				E5F4336317D8B52600CD20B7 /* WTMShelf.m in Sources */,
@@ -1268,7 +1268,7 @@
 				E5F4338D17D8B52600CD20B7 /* WTMAction.m in Sources */,
 				E5F4338F17D8B52600CD20B7 /* WTMHtml.m in Sources */,
 				E5F4339317D8B52600CD20B7 /* WTMCollectionOfColumn.m in Sources */,
-				E5CDFE33182797AE002FC634 /* WattReference.m in Sources */,
+				E5D48F811828E35B00CC30F0 /* WattExternalReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@
 //  Copyright (c) 2013 Benoit Pereira da Silva All rights reserved.
  
 #import "WattModel.h" 
-#import "WattCollectionOfReference.h"
+#import "WattCollectionOfExternalReference.h"
 
 @implementation WattModel 
 
@@ -88,13 +88,13 @@
 	} else if ([key isEqualToString:@"g"]) {
 		[super setValue:value forKey:@"g"];
 	} else if ([key isEqualToString:@"h"]) {
-		[super setValue:[WattCollectionOfReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
+		[super setValue:[WattCollectionOfExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
 	} else {
 		[super setValue:value forKey:key];
 	}
 }
 
-- (WattCollectionOfReference*)references{
+- (WattCollectionOfExternalReference*)references{
 	if([_references isAnAlias]){
 		id o=[_registry objectWithUinstID:_references.uinstID];
 		if(o){
@@ -105,15 +105,15 @@
 }
 
 
-- (WattCollectionOfReference*)references_auto{
+- (WattCollectionOfExternalReference*)references_auto{
 	_references=[self references];
 	if(!_references){
-		_references=[[WattCollectionOfReference alloc] initInRegistry:_registry];
+		_references=[[WattCollectionOfExternalReference alloc] initInRegistry:_registry];
 	}
 	return _references;
 }
 
-- (void)setReferences:(WattCollectionOfReference*)references{
+- (void)setReferences:(WattCollectionOfExternalReference*)references{
 	_references=references;
 }
 
