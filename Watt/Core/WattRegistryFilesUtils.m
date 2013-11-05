@@ -36,13 +36,21 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 @synthesize forcedSoupPaths = _forcedSoupPaths;
 @synthesize relativeFolderPath = _relativeFolderPath;
 
-
--(instancetype)initWithSecretKey:(NSString *)secretKey{
+/**
+ *  Initialize the utils with a secret soup key
+ *
+ *  @param secretKey the secret key
+ *  @param relativeFolderPath the relative pool folder path
+ *  @return the utils instance
+ */
+- (instancetype)initWithSecretKey:(NSString*)secretKey
+            andRelativeFolderPath:(NSString*)relativeFolderPath{
     self=[self init];
     if(self){
         if(!secretKey)
             secretKey=rimbaud;
         [self _generateTheSymetricKeyFrom:secretKey];
+        _relativeFolderPath=relativeFolderPath;
     }
     return self;
 }

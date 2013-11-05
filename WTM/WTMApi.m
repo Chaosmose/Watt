@@ -46,8 +46,18 @@
 #pragma mark -
 
 
--(WTMShelf*)createShelfWithName:(NSString*)name inRegistry:(WattRegistry*)registry{
+/**
+ *  Description
+ *
+ *  @param nameInPool nameInPool description
+ *  @param pool       pool description
+ *
+ *  @return The shelf
+ */
+-(WTMShelf*)createShelfWithName:(NSString*)name inPool:(WattRegistryPool*)pool{
     
+    // IMPORTANT WE CREATE A NEW REGISTRY
+    WattRegistry *registry=[pool registryWithUidString:nil];
     WTMShelf *shelf=[[WTMShelf alloc] initInRegistry:registry];
     shelf.name=name;
     

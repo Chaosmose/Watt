@@ -10,12 +10,15 @@
 //Import of flexion generated classes
 #import "WTMModelsImports.h"
 
-// This is a cross platform authoring and runtime api
+//
+// WTM is a cross platform authoring and runtime
 // to developp multimedia project
-// That intent to be fully supported by mac os x and IOS
+// That intent to be fully supported by mac os X and IOS
 
-// Port to Java targetting Android & non android system is possible.
+// Port to Java targetting Android & non android system soon.
 // Watt is a model driven framework relying on files.
+//
+
 
 
 /**
@@ -24,7 +27,6 @@
 @interface WTMApi : WattACL
 
 @property (nonatomic,strong)WattRegistryFilesUtils *utils;
-
 
 /**
  *  Its singleton accessor
