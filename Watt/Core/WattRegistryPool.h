@@ -14,47 +14,47 @@ static NSString*mapFileDefaultName=@"map";
 @class WattRegistry,WattModel,WattExternalReference,WattRegistryFileMap,WattRegistryFilesUtils;
 
 /*
-
- Definitions : 
+ 
+ Definitions :
  --------------
  
  -A pool                    : groups an ensemble of registries and associated files
  -A registry                : manages a graph of watt objects and collections (it is an object graph DB)
  -A WattExternalReference   : identifies a WattModel by its registry identity and unique instance identifier (UinstID)
  
- File tree : 
+ File tree :
  -----------
-
-    ->PoolFolder/                               <- the root pool folder (its path is defined by initializationpath)
-        <mapfileName>.<ext>                     <- the serialized registry file map (in a registry without pool)
-        -> <registryUidString>/                 <- the watt bundle folder for a given registry and dependencies
-                <base>/                         <- base localization folder
-                    registry.<ext>              <- the serialized registry (object DB)
-                    <bundled folders and file>  <- the bundled files and folders
-                <_locale_>/
  
-                <delta-DB> <- future extension for delta synchronisation
-        
-        <trash/>    <- trash area for registry-bundle
+ ->PoolFolder/                               <- the root pool folder (its path is defined by initializationpath)
+ <mapfileName>.<ext>                     <- the serialized registry file map (in a registry without pool)
+ -> <registryUidString>/                 <- the watt bundle folder for a given registry and dependencies
+ <base>/                         <- base localization folder
+ registry.<ext>              <- the serialized registry (object DB)
+ <bundled folders and file>  <- the bundled files and folders
+ <_locale_>/
  
-    ->Import/       <- conventionnaly we copy the files to import (dowloads in progress..., etc)
-    ->Export/       <- conventionnaly we copy the exported files
-   
-    Note : <ext> depends on serialization + soup mode
+ <delta-DB> <- future extension for delta synchronisation
+ 
+ <trash/>    <- trash area for registry-bundle
+ 
+ ->Import/       <- conventionnaly we copy the files to import (dowloads in progress..., etc)
+ ->Export/       <- conventionnaly we copy the exported files
+ 
+ Note : <ext> depends on serialization + soup mode
  
  
-  Discussion :  
+ Discussion :
  -------------
  
-  An app generally use one WattRegistryPool (but can use more if necessary)
-  For better performance you should use multiple registries
+ An app generally use one WattRegistryPool (but can use more if necessary)
+ For better performance you should use multiple registries
  
- Samples : 
+ Samples :
  -------------
  
  The easyest method to create a new registry in the pool :
  WattRegistry*registry=[<pool> registryWithUidString:nil];
-
+ 
  
  
  */
@@ -68,16 +68,19 @@ static NSString*mapFileDefaultName=@"map";
 
 #pragma mark - Initializer
 
-/**
- *  If the path does not exists it is created.
- *
- *  @param path the path of the file to store the RegistriesFileMap
- *
- *  @return a pool of registry
- */
--(instancetype)initFromRegistryFileMapRelativePath:(NSString*)path
-                                      andSecretKey:(NSString*)secret;
 
+/**
+ *  If the pool does not exists it is created.
+ *
+ *  @param path   the pool relative path
+ *  @param mode   the serialization mode
+ *  @param secret the secret key used when mixing the soup
+ *
+ *  @return the pool of registries
+ */
+-(instancetype)initWithRelativePath:(NSString*)path
+                   serializationMod:(WattSerializationMode)mode
+                       andSecretKey:(NSString*)secret;
 
 
 #pragma mark - Registries management
@@ -152,7 +155,7 @@ static NSString*mapFileDefaultName=@"map";
 - (WattModel*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
 
 
-#pragma mark - files 
+#pragma mark - files
 
 /**
  *  The pool relative path
@@ -177,6 +180,14 @@ static NSString*mapFileDefaultName=@"map";
  */
 - (void)emptyTheTrash;
 
+
+#pragma mark - global destruction
+
+/**
+ *  Use with caution
+ *  Deletes all the data and files
+ */
+- (void)deletePoolFiles;
 
 
 #pragma mark - Memory optimization

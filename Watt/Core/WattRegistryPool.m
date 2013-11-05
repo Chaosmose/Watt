@@ -9,7 +9,8 @@
 #import "WattRegistryPool.h"
 #import "watt.h"
 
-static NSString*trashFolderName=@"trash";
+static NSString*poolFileName        =   @"pool ";
+static NSString*trashFolderName     =   @"trash";
 
 
 @interface WattRegistryPool(){
@@ -40,21 +41,24 @@ static NSString*trashFolderName=@"trash";
 
 #pragma mark - Initializer
 
+
 /**
- *  If the path does not exists it is created.
+ *  If the pool does not exists it is created.
  *
- *  @param path the path of the file to store the RegistriesFileMap
+ *  @param path   the pool relative path
+ *  @param mode   the serialization mode
+ *  @param secret the secret key used when mixing the soup
  *
- *  @return a pool of registry
+ *  @return the pool of registries
  */
--(instancetype)initFromRegistryFileMapRelativePath:(NSString*)path
-                                      andSecretKey:(NSString*)secret{
+-(instancetype)initWithRelativePath:(NSString*)path
+                   serializationMod:(WattSerializationMode)mode
+                       andSecretKey:(NSString*)secret{
     self=[super init];
     if(self){
         _utils=[[WattRegistryFilesUtils alloc] init];
-        
-        _fileMapRegistryFilePath=[[_utils applicationDocumentsDirectory] stringByAppendingString:path];
-        _poolFolderRelativePath=[path stringByDeletingLastPathComponent];
+        _fileMapRegistryFilePath=[[_utils applicationDocumentsDirectory] stringByAppendingFormat:@"%@%@.%@",path,poolFileName,[_utils suffixFor:mode]];
+        _poolFolderRelativePath=[path copy];
         _poolFolderAbsolutePath=[[_utils applicationDocumentsDirectory]stringByAppendingString:_poolFolderRelativePath];
         _registries=[NSMutableDictionary dictionary];
         if([_utils.fileManager fileExistsAtPath:_poolFolderAbsolutePath isDirectory:NO]){
@@ -71,6 +75,7 @@ static NSString*trashFolderName=@"trash";
 - (void)_saveFileMap{
     [_utils writeRegistry:_fileMapRegistry toFile:_fileMapRegistryFilePath];
 }
+
 
 
 #pragma mark - Registries management
@@ -223,6 +228,20 @@ static NSString*trashFolderName=@"trash";
 - (NSString*)_trashFolderPath{
     return[_poolFolderAbsolutePath stringByAppendingFormat:@"%@",trashFolderName];
 }
+
+
+#pragma mark - global destruction 
+
+/**
+ *  Use with caution
+ *  Deletes all the data and files
+ */
+- (void)deletePoolFiles{
+    [_utils removeItemAtPath:_poolFolderAbsolutePath];
+}
+
+
+
 
 
 #pragma mark - Memory optimization

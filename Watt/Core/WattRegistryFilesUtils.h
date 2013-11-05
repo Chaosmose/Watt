@@ -47,6 +47,14 @@
 - (WattSerializationMode)serializationModeFromPath:(NSString*)path;
 
 
+/**
+ *  Returns the suffix according to the serialization mode
+ *
+ *  @param mode the serialization mode
+ *
+ *  @return the suffix
+ */
+- (NSString*)suffixFor:(WattSerializationMode)mode;
 
 #pragma mark - relative path and path discovery
 
@@ -150,8 +158,6 @@
  *  @return the Data
  */
 - (NSData*)readDataFromPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode;
-
-
 
 
 /**

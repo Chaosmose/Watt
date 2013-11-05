@@ -36,6 +36,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 @synthesize forcedSoupPaths = _forcedSoupPaths;
 @synthesize relativeFolderPath = _relativeFolderPath;
 
+
 /**
  *  Initialize the utils with a secret soup key
  *
@@ -120,6 +121,19 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     }
     return WattJx;
 }
+
+
+/**
+ *  Returns the suffix according to the serialization mode
+ *
+ *  @param mode the serialization mode
+ *
+ *  @return the suffix
+ */
+- (NSString*)suffixFor:(WattSerializationMode)mode{
+    return [[[self _suffixes] objectAtIndex:mode] copy];
+}
+
 
 - (NSArray*)_suffixes{
     return @[@"jx",@"j",@"px",@"p"];
