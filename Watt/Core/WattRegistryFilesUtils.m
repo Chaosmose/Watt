@@ -454,33 +454,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 }
 
 
-#pragma mark - Execptions 
 
-- (void)raiseExceptionWithFormat:(NSString *)format, ...{
-    va_list args;
-    va_start(args, format);
-    NSString *s = [[NSString alloc] initWithFormat:format arguments:args];
-    va_end(args);
-    if(s)
-        [NSException raise:@"WattAPIException" format:@"%@",s];
-    else
-        [NSException raise:@"WattAPIException" format:@"Internal error"];
-    
-}
-#pragma mark - Unique strings
-
-- (NSString*)uuidString {
-    return [WattRegistryFilesUtils uuidString];
-}
-
-
-+ (NSString*)uuidString {
-    // Returns a UUID
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
-    CFRelease(uuid);
-    return uuidStr;
-}
 
 #pragma mark - Data SOUP
 

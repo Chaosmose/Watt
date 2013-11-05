@@ -131,6 +131,8 @@
 		E5D48F801828E35B00CC30F0 /* WattCollectionOfExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7C1828E35B00CC30F0 /* WattCollectionOfExternalReference.m */; };
 		E5D48F811828E35B00CC30F0 /* WattExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */; };
 		E5D48F821828E35B00CC30F0 /* WattExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */; };
+		E5D48F861828E61900CC30F0 /* NSObject+WattBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */; };
+		E5D48F871828E61900CC30F0 /* NSObject+WattBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */; };
 		E5ECCD521826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E5ECCD531826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
 		E5F4333F17D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432EF17D8B52600CD20B7 /* WTMCollectionOfActivity.m */; };
@@ -346,6 +348,8 @@
 		E5D48F7C1828E35B00CC30F0 /* WattCollectionOfExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattCollectionOfExternalReference.m; sourceTree = "<group>"; };
 		E5D48F7D1828E35B00CC30F0 /* WattExternalReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattExternalReference.h; sourceTree = "<group>"; };
 		E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattExternalReference.m; sourceTree = "<group>"; };
+		E5D48F841828E61900CC30F0 /* NSObject+WattBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+WattBase.h"; sourceTree = "<group>"; };
+		E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+WattBase.m"; sourceTree = "<group>"; };
 		E5F432E917D8B52600CD20B7 /* WTMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCell.h; sourceTree = "<group>"; };
 		E5F432EA17D8B52600CD20B7 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
 		E5F432EB17D8B52600CD20B7 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
@@ -740,6 +744,7 @@
 		E5CFF95F1826668D003658CE /* Watt */ = {
 			isa = PBXGroup;
 			children = (
+				E5D48F831828E5E500CC30F0 /* Categories */,
 				E5CFF9601826668D003658CE /* Core */,
 				E5CFF96C1826668D003658CE /* Delta */,
 				E5CFF9711826668D003658CE /* Generated */,
@@ -809,6 +814,15 @@
 				E5CFF97E1826668D003658CE /* WattUser.m */,
 			);
 			path = Generated;
+			sourceTree = "<group>";
+		};
+		E5D48F831828E5E500CC30F0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				E5D48F841828E61900CC30F0 /* NSObject+WattBase.h */,
+				E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		E5D9A3091824FC8500824D47 /* To_be_extracted_in_separate_projects */ = {
@@ -1110,6 +1124,7 @@
 			files = (
 				E5A9EBF11799242F00976997 /* main.m in Sources */,
 				E5A9EBF21799242F00976997 /* WTMAppDelegate.m in Sources */,
+				E5D48F871828E61900CC30F0 /* NSObject+WattBase.m in Sources */,
 				E5A9EBF31799242F00976997 /* WTMViewController.m in Sources */,
 				E5CF13331826669E003658CE /* WattRegistry.m in Sources */,
 				E589F9D717D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */,
@@ -1194,6 +1209,7 @@
 			files = (
 				E5B462511732A4A000E654A1 /* main.m in Sources */,
 				E5B462551732A4A000E654A1 /* WTMAppDelegate.m in Sources */,
+				E5D48F861828E61900CC30F0 /* NSObject+WattBase.m in Sources */,
 				E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */,
 				E5CF13321826669E003658CE /* WattRegistry.m in Sources */,
 				E589F9D617D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */,
