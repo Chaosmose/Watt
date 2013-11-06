@@ -29,24 +29,15 @@
             <entry key="generate" value="collection"/>
         </userInfo>
     </entity>
-    <entity name="RegistryFile" syncable="YES">
-        <attribute name="registryUidString" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="relativePath" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
-    <entity name="RegistryFileMap" syncable="YES">
-        <relationship name="registries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RegistryFile" syncable="YES"/>
-    </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="users" inverseEntity="Group" syncable="YES"/>
     </entity>
     <elements>
+        <element name="ExternalReference" positionX="-8037" positionY="-4771" width="128" height="73"/>
         <element name="Group" positionX="-8210" positionY="-4714" width="128" height="88"/>
         <element name="Model" positionX="-8210" positionY="-4960" width="128" height="163"/>
-        <element name="ExternalReference" positionX="-8037" positionY="-4771" width="128" height="73"/>
-        <element name="RegistryFile" positionX="-8048" positionY="-5068" width="128" height="73"/>
-        <element name="RegistryFileMap" positionX="-8201" positionY="-5175" width="128" height="58"/>
         <element name="User" positionX="-8046" positionY="-4579" width="128" height="88"/>
     </elements>
 </model>

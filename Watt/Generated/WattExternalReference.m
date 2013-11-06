@@ -54,10 +54,10 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:value forKey:@"b"];
+	if ([key isEqualToString:@"objectUinstID"]){
+		[super setValue:value forKey:@"objectUinstID"];
+	} else if ([key isEqualToString:@"registryUidString"]) {
+		[super setValue:value forKey:@"registryUidString"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -74,9 +74,9 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:@(self.objectUinstID) forKey:@"a"];
+	[dictionary setValue:@(self.objectUinstID) forKey:@"objectUinstID"];
 	if(_registryUidString){
-		[dictionary setValue:self.registryUidString forKey:@"b"];
+		[dictionary setValue:self.registryUidString forKey:@"registryUidString"];
 	}
     return dictionary;
 }

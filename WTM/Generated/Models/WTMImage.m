@@ -51,8 +51,8 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
+	if ([key isEqualToString:@"size"]){
+		[super setValue:value forKey:@"size"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -70,7 +70,7 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(_size){
-		[dictionary setValue:self.size forKey:@"a"];
+		[dictionary setValue:self.size forKey:@"size"];
 	}
     return dictionary;
 }

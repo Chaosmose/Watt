@@ -60,7 +60,6 @@
 
 @interface WattRegistry (){
 }
-@property (nonatomic,strong)WattRegistryFilesUtils*utils;
 @end
 
 @implementation WattRegistry{
@@ -72,8 +71,6 @@
 
 @synthesize hasChanged = _hasChanged;
 @synthesize autosave = _autosave;
-@synthesize utils = _utils;
-@synthesize serializationMode = _serializationMode;
 
 
 #pragma mark - constructors
@@ -89,20 +86,19 @@
     return nil;
 }
 
+
 /**
  * The factory constructor
  *
  *  @param serializationMode The format (json,plist, ...) +  soup or not
- *  @param name               The name of the registry
+ *  @param identifier        The unique string to indentifiy of the registry
  *  @param pool              The pool container
  *
  *  @return The new created instance
  */
-+(instancetype)registryWithSerializationMode:(WattSerializationMode)serializationMode
-                                        uniqueStringIdentifier:(NSString*)identifier
-                                      inPool:(WattRegistryPool*)pool{
-    return [[WattRegistry alloc] initRegistryWithSerializationMode:serializationMode
-                                                              uniqueStringIdentifier:identifier
++(instancetype)registryWithUniqueStringIdentifier:(NSString*)identifier
+                                           inPool:(WattRegistryPool*)pool{
+    return [[WattRegistry alloc] initRegistryWithUniqueStringIdentifier:identifier
                                                             inPool:pool];
 }
 
@@ -111,14 +107,15 @@
  * The constructor (you should not use the simple init)
  *
  *  @param serializationMode The format (json,plist, ...) +  soup or not
- *  @param name              The name of the registry
+ *  @param identifier        The unique string to indentifiy of the registry
  *  @param pool              The pool container
  *  @return The new created instance
  */
--(instancetype)initRegistryWithSerializationMode:(WattSerializationMode)serializationMode
-                                            uniqueStringIdentifier:(NSString*)identifier
-                                          inPool:(WattRegistryPool*)pool{
+-(instancetype)initRegistryWithUniqueStringIdentifier:(NSString*)identifier
+                                               inPool:(WattRegistryPool*)pool{
     self=[super init];
+    if(!pool)
+        [self raiseExceptionWithFormat:@"WattRegistryPool must be set to create a registry"];
     if(self){
         _uinstIDCounter=0;
         _registry=[NSMutableDictionary dictionary];
@@ -129,11 +126,6 @@
         [_pool addRegistry:self];
     }
     return self;
-}
-
-
-- (void)setSerializationMode:(WattSerializationMode)serializationMode{
-    _serializationMode=serializationMode;
 }
 
 #pragma mark - save
@@ -176,7 +168,7 @@
             [self save];
         }
     }else{
-        [_utils raiseExceptionWithFormat:@"invalid registry name : %@ ",self.uidString];
+        [_pool raiseExceptionWithFormat:@"invalid registry name : %@ ",self.uidString];
     }
 }
 
@@ -184,19 +176,14 @@
  *  Saves
  */
 - (void)save{
-    if([_utils writeRegistry:self
-                      toFile:[_utils absolutePathForRegistryFileWithName:self.uidString]]){
-        _hasChanged=NO;
-        WTLog(@"Saved automatically");
-    }
-
+    [_pool saveRegistry:self];
 }
 
 #pragma mark - Serialization/Deserialization facilities
 
 
 - (NSString*)serializationPath{
-    return [_pool.utils absolutePathForRegistryFileWithName:self.uidString];
+    return [_pool  absolutePathForRegistryFileWithName:self.uidString];
 }
 
 
@@ -217,9 +204,8 @@
                             inPool:(WattRegistryPool*)pool
                     resolveAliases:(BOOL)resolveAliases{
     
-    WattRegistry *r=[WattRegistry registryWithSerializationMode:serializationMode
-                                         uniqueStringIdentifier:identifier
-                                                         inPool:pool];
+    WattRegistry *r=[WattRegistry registryWithUniqueStringIdentifier:identifier
+                                                              inPool:pool];
     
     // Double step deserialization
     // and allows circular referencing any object graph can be serialized.
@@ -488,7 +474,6 @@
     _uidString=nil;
     _hasChanged=NO;
     _autosave=NO;
-    _utils=nil;
 }
 
 

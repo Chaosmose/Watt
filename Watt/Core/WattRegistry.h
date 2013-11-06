@@ -29,7 +29,6 @@
 
 @class WattObject;
 @class WattCollectionOfObject;
-@class WattRegistryFilesUtils;
 @class WattRegistryPool;
 
 @interface WattRegistry : NSObject
@@ -45,12 +44,7 @@
  * eg : defining a file path to store serialized registry and associated bundle
  * Notice that the mane is not serialized within the registry but by its RegistryPool
  */
-@property (nonatomic,copy)NSString* uidString;
-
-/**
- *  The registry serializationMode
- */
-@property (nonatomic,assign) WattSerializationMode serializationMode;
+@property (nonatomic,readonly)NSString* uidString;
 
 
 #pragma mark - Save
@@ -80,13 +74,12 @@
  * The factory constructor
  *
  *  @param serializationMode The format (json,plist, ...) +  soup or not
- *  @param name               The name of the registry
+ *  @param identifier        The unique string to indentifiy of the registry
  *  @param pool              The pool container
  *
  *  @return The new created instance
  */
-+(instancetype)registryWithSerializationMode:(WattSerializationMode)serializationMode
-                      uniqueStringIdentifier:(NSString*)identifier
++(instancetype)registryWithUniqueStringIdentifier:(NSString*)identifier
                                       inPool:(WattRegistryPool*)pool;
 
 
@@ -94,12 +87,11 @@
  * The constructor (you should not use the simple init)
  *
  *  @param serializationMode The format (json,plist, ...) +  soup or not
- *  @param name              The name of the registry
+ *  @param identifier        The unique string to indentifiy of the registry
  *  @param pool              The pool container
  *  @return The new created instance
  */
--(instancetype)initRegistryWithSerializationMode:(WattSerializationMode)serializationMode
-                          uniqueStringIdentifier:(NSString*)identifier
+-(instancetype)initRegistryWithUniqueStringIdentifier:(NSString*)identifier
                                           inPool:(WattRegistryPool*)pool;
 
 #pragma mark - save
@@ -222,8 +214,6 @@
  *  Destroys the registry ( used in merging process for example)
  */
 - (void)destroyRegistry;
-
-
 
 
 @end

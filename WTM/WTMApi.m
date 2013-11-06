@@ -17,7 +17,7 @@
  
  1- Any required argument that is not set should raise :
  if(!arg)
- [self.utils raiseExceptionWithFormat:@"arg is nil in %@",NSStringFromSelector(@selector(selectorName:))];
+ [self raiseExceptionWithFormat:@"arg is nil in %@",NSStringFromSelector(@selector(selectorName:))];
  
  2- Most of the calls should begin with an ACL Control
  if([self user:_me canPerform:WattWRITE onObject:object]){
@@ -47,20 +47,17 @@
 
 
 /**
- *  Description
+ *  Create a shelf and a new registry
  *
- *  @param nameInPool nameInPool description
  *  @param pool       pool description
  *
  *  @return The shelf
  */
--(WTMShelf*)createShelfWithName:(NSString*)name inPool:(WattRegistryPool*)pool{
+-(WTMShelf*)createShelfInPool:(WattRegistryPool*)pool{
     
     // IMPORTANT WE CREATE A NEW REGISTRY
     WattRegistry *registry=[pool registryWithUidString:nil];
     WTMShelf *shelf=[[WTMShelf alloc] initInRegistry:registry];
-    shelf.name=name;
-    
     if(!self.me){
         self.me=[self createUserInShelf:shelf];
         self.me.objectName=kWattMe;
@@ -69,7 +66,6 @@
         group.objectName=kWattMyGroup;
         [self addUser:self.me toGroup:group];
     }
-    
     return shelf;
 }
 
@@ -79,18 +75,18 @@
 
 - (WattUser*)createUserInShelf:(WTMShelf*)shelf{
     if(!shelf)
-        [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createUserInShelf:))];
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createUserInShelf:))];
     
     WattUser *user=[[WattUser alloc]initInRegistry:shelf.registry];
     [shelf.users_auto addObject:user];
-    user.identity=[self.utils uuidString];
+    user.identity=[shelf.registry.pool uuidString];
     
     return user;
 }
 
 - (WattGroup*)createGroupInShelf:(WTMShelf*)shelf{
     if(!shelf)
-        [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createGroupInShelf:))];
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createGroupInShelf:))];
     
     WattGroup *group=[[WattGroup alloc]initInRegistry:shelf.registry];
     [shelf.groups_auto addObject:group];
@@ -100,9 +96,9 @@
 
 - (void)addUser:(WattUser*)user toGroup:(WattGroup*)group{
     if(!user)
-        [self.utils raiseExceptionWithFormat:@"user is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
+        [self raiseExceptionWithFormat:@"user is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
     if(!group)
-        [self.utils raiseExceptionWithFormat:@"group is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
+        [self raiseExceptionWithFormat:@"group is nil in %@",NSStringFromSelector(@selector(addUser:toGroup:))];
     
     [group.users_auto addObject:user];
     [user setGroup:group];
@@ -114,7 +110,7 @@
 
 - (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf{
     if(!shelf)
-        [self.utils raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createSectionInShelf:))];
+        [self raiseExceptionWithFormat:@"shelf is nil in %@",NSStringFromSelector(@selector(createSectionInShelf:))];
     
     if([self actionIsAllowed:WattWRITE on:shelf]){
         WTMMenuSection *section=[[WTMMenuSection alloc]initInRegistry:shelf.registry];
@@ -167,7 +163,7 @@
     // IMPORTANT WE CREATE A NEW REGISTRY
     WattRegistry *registry=[pool registryWithUidString:nil];
     WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
-    package.objectName=[self.utils uuidString];// We create a uuid for each package and library to deal with linked assets
+    package.objectName=[pool uuidString];// We create a uuid for each package and library to deal with linked assets
         
     // We create a default library
     WTMLibrary*library=[self createLibraryInPackage:package];
@@ -189,10 +185,10 @@
 
 - (WTMLibrary*)createLibraryInPackage:(WTMPackage*)package{
     if(!package)
-        [self.utils raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createLibraryInPackage:))];
+        [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createLibraryInPackage:))];
     if([self actionIsAllowed:WattWRITE on:package]){
         WTMLibrary *library=[[WTMLibrary alloc] initInRegistry:package.registry];
-        library.objectName=[self.utils uuidString];// We create a uuid for each package and library to deal with linked assets
+        library.objectName=[package.registry.pool uuidString];// We create a uuid for each package and library to deal with linked assets
         [package.libraries_auto addObject:library];
         [library setPackage:package];
         return library;
@@ -219,7 +215,7 @@
 
 - (WTMActivity*)createActivityInPackage:(WTMPackage*)package{
     if(!package)
-        [self.utils raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createActivityInPackage:))];
+        [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createActivityInPackage:))];
     if([self actionIsAllowed:WattWRITE on:package]){
         WTMActivity *activity=[[WTMActivity alloc] initInRegistry:package.registry];
         [package.activities_auto addObject:activity];
@@ -241,7 +237,7 @@
 
 - (WTMScene*)createSceneInActivity:(WTMActivity*)activity{
     if(!activity)
-        [self.utils raiseExceptionWithFormat:@"activity is nil in %@",NSStringFromSelector(@selector(createSceneInActivity:))];
+        [self raiseExceptionWithFormat:@"activity is nil in %@",NSStringFromSelector(@selector(createSceneInActivity:))];
     if([self actionIsAllowed:WattWRITE on:activity]){
         WTMScene*scene=[[WTMScene alloc]initInRegistry:activity.registry];
         [activity.scenes_auto addObject:scene];
@@ -324,9 +320,9 @@
                           andBehavior:(WTMBehavior*)behavior
                               inScene:(WTMScene*)scene{
     if(!scene)
-        [self.utils raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createElementWithAsset:andBehavior:inScene:))];
+        [self raiseExceptionWithFormat:@"scene is nil in %@",NSStringFromSelector(@selector(createElementWithAsset:andBehavior:inScene:))];
     if(!asset)
-        [self.utils raiseExceptionWithFormat:@"asset is nil in %@",NSStringFromSelector(@selector(createElementWithAsset:andBehavior:inScene:))];
+        [self raiseExceptionWithFormat:@"asset is nil in %@",NSStringFromSelector(@selector(createElementWithAsset:andBehavior:inScene:))];
     // Behavior is optionnal
     
     if([self actionIsAllowed:WattWRITE on:scene.activity]){
@@ -386,10 +382,10 @@
                            inColumn:(WTMColumn*)column{
     
     if(!element)
-        [self.utils raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:))];
+        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:))];
     
     if(!element.scene)
-        [self.utils raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:))];
+        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewLineFor:withAttributes:inColumn:))];
     
     
     WTMTable *table=[self createTableInSceneIfNecessary:element.scene];
@@ -430,10 +426,10 @@
                                inLine:(WTMLine*)line{
     
     if(!element)
-        [self.utils raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewColumnFor:withAttributes:inLine:))];
+        [self raiseExceptionWithFormat:@"element is nil in %@",NSStringFromSelector(@selector(createCellInANewColumnFor:withAttributes:inLine:))];
     
     if(!element.scene)
-        [self.utils raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewColumnFor:withAttributes:inLine:))];
+        [self raiseExceptionWithFormat:@"element.scene is nil in %@",NSStringFromSelector(@selector(createCellInANewColumnFor:withAttributes:inLine:))];
     
     
     WTMTable *table=[self createTableInSceneIfNecessary:element.scene];
@@ -578,9 +574,9 @@
          toLibrary:(WTMLibrary*)library {
     if([self actionIsAllowed:WattWRITE on:library]){
         if(!member)
-            [self.utils raiseExceptionWithFormat:@"member  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
+            [self raiseExceptionWithFormat:@"member  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
         if(!library)
-            [self.utils raiseExceptionWithFormat:@"library  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
+            [self raiseExceptionWithFormat:@"library  is nil in %@",NSStringFromSelector(@selector(_addMember:toLibrary:))];
         
         [library.members_auto addObject:member];
         member.library=library;
@@ -623,9 +619,9 @@
 
 
 - (void)_removeFilesWithRelativesPath:(NSString*)relativePath inRegistry:(WattRegistry*)registry{
-    NSArray *absolutePaths=[self.utils absolutePathsFromRelativePath:relativePath inBundleWithName:registry.uidString all:YES];
+    NSArray *absolutePaths=[registry.pool absolutePathsFromRelativePath:relativePath inBundleWithName:registry.uidString all:YES];
     for (NSString *pathToDelete in absolutePaths) {
-        [self.utils removeItemAtPath:pathToDelete];
+        [registry.pool removeItemAtPath:pathToDelete];
     }
 
 }

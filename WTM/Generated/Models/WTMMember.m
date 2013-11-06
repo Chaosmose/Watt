@@ -61,14 +61,14 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:value forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:value forKey:@"c"];
-	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:[WTMLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
+	if ([key isEqualToString:@"name"]){
+		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"refererCounter"]) {
+		[super setValue:value forKey:@"refererCounter"];
+	} else if ([key isEqualToString:@"thumbnailRelativePath"]) {
+		[super setValue:value forKey:@"thumbnailRelativePath"];
+	} else if ([key isEqualToString:@"library"]) {
+		[super setValue:[WTMLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"library"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -109,17 +109,17 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(_name){
-		[dictionary setValue:self.name forKey:@"a"];
+		[dictionary setValue:self.name forKey:@"name"];
 	}
-	[dictionary setValue:@(self.refererCounter) forKey:@"b"];
+	[dictionary setValue:@(self.refererCounter) forKey:@"refererCounter"];
 	if(_thumbnailRelativePath){
-		[dictionary setValue:self.thumbnailRelativePath forKey:@"c"];
+		[dictionary setValue:self.thumbnailRelativePath forKey:@"thumbnailRelativePath"];
 	}
 	if(_library){
 		if(includeChildren){
-			[dictionary setValue:[self.library dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
+			[dictionary setValue:[self.library dictionaryRepresentationWithChildren:includeChildren] forKey:@"library"];
 		}else{
-			[dictionary setValue:[self.library aliasDictionaryRepresentation] forKey:@"d"];
+			[dictionary setValue:[self.library aliasDictionaryRepresentation] forKey:@"library"];
 		}
 	}
     return dictionary;

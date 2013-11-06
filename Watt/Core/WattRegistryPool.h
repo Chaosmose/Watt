@@ -18,27 +18,23 @@ static NSString*mapFileDefaultName=@"map";
  Definitions :
  --------------
  
- -A pool                    : groups an ensemble of registries and associated files
+ -A pool                    : coordinate and insure the persistency of an ensemble of registries and associated files
  -A registry                : manages a graph of watt objects and collections (it is an object graph DB)
  -A WattExternalReference   : identifies a WattModel by its registry identity and unique instance identifier (UinstID)
+ 
  
  File tree :
  -----------
  
- ->PoolFolder/                               <- the root pool folder (its path is defined by initializationpath)
- <mapfileName>.<ext>                     <- the serialized registry file map (in a registry without pool)
- -> <registryUidString>/                 <- the watt bundle folder for a given registry and dependencies
- <base>/                         <- base localization folder
- registry.<ext>              <- the serialized registry (object DB)
- <bundled folders and file>  <- the bundled files and folders
- <_locale_>/
+ ->PoolFolder/                          <- the root pool folder (its path is defined by initializationpath)
+    -> <registryUidString>/             <- the watt bundle folder for a given registry and dependencies
+        registry.<ext>                  <- the serialized registry (object DB)
+        <bundled folders and file>      <- the bundled files and folders
+        <delta-DB>  <- future extension for delta synchronisation
+    <trash/>    <- trash area for registry-bundle
  
- <delta-DB> <- future extension for delta synchronisation
- 
- <trash/>    <- trash area for registry-bundle
- 
- ->Import/       <- conventionnaly we copy the files to import (dowloads in progress..., etc)
- ->Export/       <- conventionnaly we copy the exported files
+ ->Import/      <- conventionnaly we copy the files to import (dowloads in progress..., etc)
+ ->Export/      <- conventionnaly we copy the exported files
  
  Note : <ext> depends on serialization + soup mode
  
@@ -56,15 +52,27 @@ static NSString*mapFileDefaultName=@"map";
  WattRegistry*registry=[<pool> registryWithUidString:nil];
  
  
- 
  */
-
 @interface WattRegistryPool : NSObject
 
+
 /**
- * The utils to be used by the registries
+ *  An atomic instance of a NSFileManager
  */
-@property (nonatomic,readonly)  WattRegistryFilesUtils *utils;
+@property (atomic,readonly) NSFileManager *fileManager;
+
+// The files with those extensions can be mixed in the soup (mixing is a sort of encryption)
+// You can add any binary format by adding its extension to mixableExtensions
+@property (nonatomic,strong)    NSMutableArray *mixableExtensions;
+
+// You can add paths that you want to be mixed (for DRM purposes)
+@property (nonatomic,strong)    NSMutableArray *forcedSoupPaths;
+
+/**
+ * the serialization mode 
+ */
+@property (nonatomic,readonly)WattSerializationMode serializationMode;
+
 
 #pragma mark - Initializer
 
@@ -79,8 +87,15 @@ static NSString*mapFileDefaultName=@"map";
  *  @return the pool of registries
  */
 -(instancetype)initWithRelativePath:(NSString*)path
-                   serializationMod:(WattSerializationMode)mode
+                   serializationMode:(WattSerializationMode)mode
                        andSecretKey:(NSString*)secret;
+
+
+#pragma mark - converter 
+
+
+#warning todo
+//- (void)convertToSerializationMode:(WattSerializationMode)mode;
 
 
 #pragma mark - Registries management
@@ -121,6 +136,13 @@ static NSString*mapFileDefaultName=@"map";
 - (BOOL)removeRegistry:(WattRegistry*)registry;
 
 
+/**
+ *  Saves the registry
+ *
+ *  @param registry the registry to be saved
+ */
+- (void)saveRegistry:(WattRegistry*)registry;
+
 
 /**
  *  Saves all the registries
@@ -131,6 +153,15 @@ static NSString*mapFileDefaultName=@"map";
  *  Saves all the registries with hasChanged flag set to YES
  */
 - (void)saveRegistriesIfNecessary;
+
+
+/**
+ *  Returns the list of the registry's identifiers
+ *
+ *  @return the list of string
+ */
+- (NSArray*)registriesUidStringList;
+
 
 
 #pragma mark - Object grabber.
@@ -155,17 +186,54 @@ static NSString*mapFileDefaultName=@"map";
 - (WattModel*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
 
 
-#pragma mark - files
+#pragma mark - file paths
 
 /**
- *  The pool relative path
+ *  The current applicationDocumentDirectory
  *
- *  @return the path
+ *  @return The path of the directory
  */
-- (NSString*)poolFolderRelativePath;
+- (NSString*)applicationDocumentsDirectory;
+
+/**
+ *  Returns the absolute path of the registry serialization file
+ *
+ *  @param name the registry name
+ *
+ *  @return the absolute path of the registry serialization file
+ */
+- (NSString*)absolutePathForRegistryFileWithName:(NSString*)name;
+
+
+/**
+ *  Returns an existing absolute paths from a relative path
+ *
+ *  @param relativePath    the relative path
+ *  @param wattBundleName  the watt bundle name
+ *
+ *  @return the absolute path of existing file path and nil if the file does not exists.
+ */
+- (NSString*)absolutePathFromRelativePath:(NSString *)relativePath
+                         inBundleWithName:(NSString*)wattBundleName;
+
+
+/**
+ *  Returns an array of existing absolute paths from the relative path
+ *
+ *  @param relativePath   the relative path
+ *  @param wattBundleName the watt bundle name
+ *  @param returnAll      if YES returns all else only the first.
+ *
+ *  @return an Array of absolute existing file paths (excludes unexisting path)
+ */
+- (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath
+                         inBundleWithName:(NSString*)wattBundleName
+                                      all:(BOOL)returnAll;
 
 
 #pragma mark - Trash
+
+
 /**
  *  Moves the items to the trash
  *
@@ -181,7 +249,7 @@ static NSString*mapFileDefaultName=@"map";
 - (void)emptyTheTrash;
 
 
-#pragma mark - global destruction
+#pragma mark - file destruction
 
 /**
  *  Use with caution
@@ -190,11 +258,77 @@ static NSString*mapFileDefaultName=@"map";
 - (void)deletePoolFiles;
 
 
+
+#pragma mark - file I/O
+
+
+/**
+ *  Write the data mixing if necessary
+ *
+ *  @param data The nsdata to write to the path
+ *  @param path the destination path
+ *
+ *  @return the success of the file operation
+ */
+- (BOOL)writeData:(NSData*)data toPath:(NSString*)path;
+
+/**
+ *  Reads the data and mix if necessary (mixing is reversible)
+ *
+ *  @param path the path
+ *
+ *  @return the Data
+ */
+- (NSData*)readDataFromPath:(NSString*)path;
+
+/**
+ *  Write the data mixing if necessary
+ *
+ *  @param data The nsdata to write to the path
+ *  @param path the destination path
+ *
+ *  @return the success of the file operation
+ */
+- (BOOL)writeData:(NSData*)data toPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode;
+
+/**
+ *  Reads the data and mix if necessary
+ *
+ *  @param path the path
+ *  @param mode
+ *
+ *  @return the Data
+ */
+- (NSData*)readDataFromPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode;
+
+
+
+/**
+ *  Creates all the intermediary folders for a given a path
+ *
+ *  @param path the path
+ *
+ *  @return the success of the operation
+ */
+- (BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path;
+
+
+/**
+ *  Removes the item (folder or file) with recursive deletion
+ *
+ *  @param path the path to delete
+ *
+ *  @return the success of the operation
+ */
+- (BOOL)removeItemAtPath:(NSString*)path;
+
+
 #pragma mark - Memory optimization
 
 
 //- (BOOL)unloadRegistryWithRegistryID:(NSString*)registryUidString;
 
 //- (BOOl)unloadRegistries;
+
 
 @end

@@ -59,12 +59,12 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
+	if ([key isEqualToString:@"name"]){
+		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"members"]) {
+		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"members"];
+	} else if ([key isEqualToString:@"package"]) {
+		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -128,20 +128,20 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(_name){
-		[dictionary setValue:self.name forKey:@"a"];
+		[dictionary setValue:self.name forKey:@"name"];
 	}
 	if(_members){
 		if(includeChildren){
-			[dictionary setValue:[self.members dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
+			[dictionary setValue:[self.members dictionaryRepresentationWithChildren:includeChildren] forKey:@"members"];
 		}else{
-			[dictionary setValue:[self.members aliasDictionaryRepresentation] forKey:@"b"];
+			[dictionary setValue:[self.members aliasDictionaryRepresentation] forKey:@"members"];
 		}
 	}
 	if(_package){
 		if(includeChildren){
-			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
+			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"package"];
 		}else{
-			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"c"];
+			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"package"];
 		}
 	}
     return dictionary;

@@ -64,14 +64,14 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:[WTMAsset instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
-	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:[WTMScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
+	if ([key isEqualToString:@"asset"]){
+		[super setValue:[WTMAsset instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"asset"];
+	} else if ([key isEqualToString:@"behaviors"]) {
+		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behaviors"];
+	} else if ([key isEqualToString:@"cells"]) {
+		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
+	} else if ([key isEqualToString:@"scene"]) {
+		[super setValue:[WTMScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scene"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -182,30 +182,30 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(_asset){
 		if(includeChildren){
-			[dictionary setValue:[self.asset dictionaryRepresentationWithChildren:includeChildren] forKey:@"a"];
+			[dictionary setValue:[self.asset dictionaryRepresentationWithChildren:includeChildren] forKey:@"asset"];
 		}else{
-			[dictionary setValue:[self.asset aliasDictionaryRepresentation] forKey:@"a"];
+			[dictionary setValue:[self.asset aliasDictionaryRepresentation] forKey:@"asset"];
 		}
 	}
 	if(_behaviors){
 		if(includeChildren){
-			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
+			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"behaviors"];
 		}else{
-			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"b"];
+			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"behaviors"];
 		}
 	}
 	if(_cells){
 		if(includeChildren){
-			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
+			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
 		}else{
-			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"c"];
+			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"cells"];
 		}
 	}
 	if(_scene){
 		if(includeChildren){
-			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
+			[dictionary setValue:[self.scene dictionaryRepresentationWithChildren:includeChildren] forKey:@"scene"];
 		}else{
-			[dictionary setValue:[self.scene aliasDictionaryRepresentation] forKey:@"d"];
+			[dictionary setValue:[self.scene aliasDictionaryRepresentation] forKey:@"scene"];
 		}
 	}
     return dictionary;

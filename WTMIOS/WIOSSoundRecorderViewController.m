@@ -41,12 +41,6 @@
     return self;
 }
 
-- (WattRegistryFilesUtils*)_wattUtils{
-    if(!__utils){
-        __utils=[[WattRegistryFilesUtils alloc] init];
-    }
-    return __utils;
-}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -262,7 +256,7 @@
  */
 - (IBAction)action:(id)sender {
     if(!_sound){
-        [[self _wattUtils] raiseExceptionWithFormat:@"WIOSSoundRecorderViewController sound reference is not set"];
+        [self  raiseExceptionWithFormat:@"WIOSSoundRecorderViewController sound reference is not set"];
     }else{
         if ([sender  isEqual:self.recordButton]) {
             if(_isPlaying){
@@ -293,7 +287,7 @@
 - (NSURL*)_soundFileUrl{
     if(!_fileURL){
         NSString *path=[self _soundPath];
-        [[self _wattUtils] createRecursivelyRequiredFolderForPath:path];
+        [_sound.registry.pool createRecursivelyRequiredFolderForPath:path];
         _fileURL = [NSURL fileURLWithPath:path ];
     }
     return _fileURL;
@@ -301,7 +295,7 @@
 
 
 - (NSString*)_soundPath{
-    return  [[self _wattUtils] absolutePathFromRelativePath:self.sound.relativePath inBundleWithName:self.sound.registry.uidString];
+    return  [_sound.registry.pool absolutePathFromRelativePath:self.sound.relativePath inBundleWithName:self.sound.registry.uidString];
 }
 
 

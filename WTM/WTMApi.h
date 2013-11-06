@@ -19,6 +19,15 @@
 // Watt is a model driven framework relying on files.
 //
 
+/*
+ 
+    WTMShelf defines menus and hierarchy of multimedia packages.
+    A WTMPackage contains assets and data for bunches of activities.
+    
+    A shelf organizes the packages, members (Hyperlink,etc), activities.
+    A shelf is in a specific registry (loosely coupled with packages by external references)
+ 
+ */
 
 
 /**
@@ -38,16 +47,15 @@
 #pragma mark - /// SHELF ///
 #pragma mark -
 
+
 /**
- *  Description
+ *  Create a shelf in a new registry
  *
- *  @param nameInPool nameInPool description
  *  @param pool       pool description
  *
  *  @return The shelf
  */
--(WTMShelf*)createShelfWithName:(NSString*)name inPool:(WattRegistryPool*)pool;
-
+-(WTMShelf*)createShelfInPool:(WattRegistryPool*)pool;
 
 #pragma mark - User and groups
 
@@ -70,7 +78,7 @@
 
 //
 /**
- *  Creates a package and its default library
+ *  Creates a package and its default library in a new registry
  *
  *  @param pool the pool
  *

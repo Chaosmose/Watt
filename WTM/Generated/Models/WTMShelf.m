@@ -63,14 +63,14 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:[WattCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:value forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
-	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
+	if ([key isEqualToString:@"groups"]){
+		[super setValue:[WattCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];
+	} else if ([key isEqualToString:@"name"]) {
+		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"users"]) {
+		[super setValue:[WattCollectionOfUser instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"users"];
+	} else if ([key isEqualToString:@"sections"]) {
+		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"sections"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -158,26 +158,26 @@
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(_groups){
 		if(includeChildren){
-			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"a"];
+			[dictionary setValue:[self.groups dictionaryRepresentationWithChildren:includeChildren] forKey:@"groups"];
 		}else{
-			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"a"];
+			[dictionary setValue:[self.groups aliasDictionaryRepresentation] forKey:@"groups"];
 		}
 	}
 	if(_name){
-		[dictionary setValue:self.name forKey:@"b"];
+		[dictionary setValue:self.name forKey:@"name"];
 	}
 	if(_users){
 		if(includeChildren){
-			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
+			[dictionary setValue:[self.users dictionaryRepresentationWithChildren:includeChildren] forKey:@"users"];
 		}else{
-			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"c"];
+			[dictionary setValue:[self.users aliasDictionaryRepresentation] forKey:@"users"];
 		}
 	}
 	if(_sections){
 		if(includeChildren){
-			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
+			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"sections"];
 		}else{
-			[dictionary setValue:[self.sections aliasDictionaryRepresentation] forKey:@"d"];
+			[dictionary setValue:[self.sections aliasDictionaryRepresentation] forKey:@"sections"];
 		}
 	}
     return dictionary;

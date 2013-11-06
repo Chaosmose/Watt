@@ -59,12 +59,12 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
+	if ([key isEqualToString:@"width"]){
+		[super setValue:value forKey:@"width"];
+	} else if ([key isEqualToString:@"cells"]) {
+		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
+	} else if ([key isEqualToString:@"table"]) {
+		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"table"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -127,19 +127,19 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:@(self.width) forKey:@"a"];
+	[dictionary setValue:@(self.width) forKey:@"width"];
 	if(_cells){
 		if(includeChildren){
-			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
+			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
 		}else{
-			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"b"];
+			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"cells"];
 		}
 	}
 	if(_table){
 		if(includeChildren){
-			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
+			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"table"];
 		}else{
-			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"c"];
+			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"table"];
 		}
 	}
     return dictionary;

@@ -13,7 +13,4 @@
 #import "WattCollectionOfModel.h"
 #import "WattCollectionOfExternalReference.h"
 #import "WattModel.h"
-#import "WattRegistryFile.h"
-#import "WattCollectionOfRegistryFile.h"
-#import "WattRegistryFileMap.h"
 #import "WattUser.h"

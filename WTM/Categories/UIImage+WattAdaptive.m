@@ -23,7 +23,6 @@
 
 
 #import "UIImage+WattAdaptive.h"
-#import "WattRegistryFilesUtils.h"
 
 @implementation UIImage(WattAdaptive)
 
@@ -32,12 +31,12 @@
     if(!registry){
         [NSException raise:@"Invalid registry exception" format:@"registry is nil"];
     }
-    NSString *p=[registry.pool.utils absolutePathFromRelativePath:relativePath
+    NSString *p=[registry.pool absolutePathFromRelativePath:relativePath
                                             inBundleWithName:registry.uidString];
     if(p){
-        if ([p rangeOfString:[registry.pool.utils applicationDocumentsDirectory]].location!=NSNotFound) {
+        if ([p rangeOfString:[registry.pool applicationDocumentsDirectory]].location!=NSNotFound) {
             //Unsoup if necessary
-            NSData *data=[registry.pool.utils readDataFromPath:p];
+            NSData *data=[registry.pool readDataFromPath:p];
             return [UIImage imageWithData:data];
         }else{
             //It is bundled asset.
@@ -50,12 +49,12 @@
 
 - (BOOL)writePNGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry{
     NSData *data=UIImagePNGRepresentation(self);
-    return [registry.pool.utils writeData:data toPath:path];
+    return [registry.pool writeData:data toPath:path];
 }
 
 - (BOOL)writeJPGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry{
     NSData *data=UIImageJPEGRepresentation(self, 0.5f);
-    return [registry.pool.utils writeData:data toPath:path];
+    return [registry.pool writeData:data toPath:path];
 }
 
 

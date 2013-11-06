@@ -75,22 +75,22 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:value forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:value forKey:@"c"];
-	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:value forKey:@"d"];
-	} else if ([key isEqualToString:@"e"]) {
-		[super setValue:value forKey:@"e"];
-	} else if ([key isEqualToString:@"f"]) {
-		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"f"];
-	} else if ([key isEqualToString:@"g"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"g"];
-	} else if ([key isEqualToString:@"h"]) {
-		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
+	if ([key isEqualToString:@"level"]){
+		[super setValue:value forKey:@"level"];
+	} else if ([key isEqualToString:@"rating"]) {
+		[super setValue:value forKey:@"rating"];
+	} else if ([key isEqualToString:@"score"]) {
+		[super setValue:value forKey:@"score"];
+	} else if ([key isEqualToString:@"shortName"]) {
+		[super setValue:value forKey:@"shortName"];
+	} else if ([key isEqualToString:@"title"]) {
+		[super setValue:value forKey:@"title"];
+	} else if ([key isEqualToString:@"package"]) {
+		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
+	} else if ([key isEqualToString:@"picture"]) {
+		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
+	} else if ([key isEqualToString:@"scenes"]) {
+		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scenes"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -176,34 +176,34 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:@(self.level) forKey:@"a"];
-	[dictionary setValue:@(self.rating) forKey:@"b"];
-	[dictionary setValue:@(self.score) forKey:@"c"];
+	[dictionary setValue:@(self.level) forKey:@"level"];
+	[dictionary setValue:@(self.rating) forKey:@"rating"];
+	[dictionary setValue:@(self.score) forKey:@"score"];
 	if(_shortName){
-		[dictionary setValue:self.shortName forKey:@"d"];
+		[dictionary setValue:self.shortName forKey:@"shortName"];
 	}
 	if(_title){
-		[dictionary setValue:self.title forKey:@"e"];
+		[dictionary setValue:self.title forKey:@"title"];
 	}
 	if(_package){
 		if(includeChildren){
-			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"f"];
+			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"package"];
 		}else{
-			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"f"];
+			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"package"];
 		}
 	}
 	if(_picture){
 		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"g"];
+			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
 		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"g"];
+			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
 	if(_scenes){
 		if(includeChildren){
-			[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
+			[dictionary setValue:[self.scenes dictionaryRepresentationWithChildren:includeChildren] forKey:@"scenes"];
 		}else{
-			[dictionary setValue:[self.scenes aliasDictionaryRepresentation] forKey:@"h"];
+			[dictionary setValue:[self.scenes aliasDictionaryRepresentation] forKey:@"scenes"];
 		}
 	}
     return dictionary;

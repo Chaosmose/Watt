@@ -73,22 +73,22 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:value forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:value forKey:@"c"];
-	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:value forKey:@"d"];
-	} else if ([key isEqualToString:@"e"]) {
-		[super setValue:value forKey:@"e"];
-	} else if ([key isEqualToString:@"f"]) {
-		[super setValue:value forKey:@"f"];
-	} else if ([key isEqualToString:@"g"]) {
-		[super setValue:value forKey:@"g"];
-	} else if ([key isEqualToString:@"h"]) {
-		[super setValue:[WattCollectionOfExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"h"];
+	if ([key isEqualToString:@"category"]){
+		[super setValue:value forKey:@"category"];
+	} else if ([key isEqualToString:@"comment"]) {
+		[super setValue:value forKey:@"comment"];
+	} else if ([key isEqualToString:@"groupID"]) {
+		[super setValue:value forKey:@"groupID"];
+	} else if ([key isEqualToString:@"metadata"]) {
+		[super setValue:value forKey:@"metadata"];
+	} else if ([key isEqualToString:@"objectName"]) {
+		[super setValue:value forKey:@"objectName"];
+	} else if ([key isEqualToString:@"ownerID"]) {
+		[super setValue:value forKey:@"ownerID"];
+	} else if ([key isEqualToString:@"rights"]) {
+		[super setValue:value forKey:@"rights"];
+	} else if ([key isEqualToString:@"references"]) {
+		[super setValue:[WattCollectionOfExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"references"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -129,25 +129,25 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	if(_category){
-		[dictionary setValue:self.category forKey:@"a"];
+		[dictionary setValue:self.category forKey:@"category"];
 	}
 	if(_comment){
-		[dictionary setValue:self.comment forKey:@"b"];
+		[dictionary setValue:self.comment forKey:@"comment"];
 	}
-	[dictionary setValue:@(self.groupID) forKey:@"c"];
+	[dictionary setValue:@(self.groupID) forKey:@"groupID"];
 	if(_metadata){
-		[dictionary setValue:self.metadata forKey:@"d"];
+		[dictionary setValue:self.metadata forKey:@"metadata"];
 	}
 	if(_objectName){
-		[dictionary setValue:self.objectName forKey:@"e"];
+		[dictionary setValue:self.objectName forKey:@"objectName"];
 	}
-	[dictionary setValue:@(self.ownerID) forKey:@"f"];
-	[dictionary setValue:@(self.rights) forKey:@"g"];
+	[dictionary setValue:@(self.ownerID) forKey:@"ownerID"];
+	[dictionary setValue:@(self.rights) forKey:@"rights"];
 	if(_references){
 		if(includeChildren){
-			[dictionary setValue:[self.references dictionaryRepresentationWithChildren:includeChildren] forKey:@"h"];
+			[dictionary setValue:[self.references dictionaryRepresentationWithChildren:includeChildren] forKey:@"references"];
 		}else{
-			[dictionary setValue:[self.references aliasDictionaryRepresentation] forKey:@"h"];
+			[dictionary setValue:[self.references aliasDictionaryRepresentation] forKey:@"references"];
 		}
 	}
     return dictionary;

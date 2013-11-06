@@ -63,14 +63,14 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"a"]){
-		[super setValue:value forKey:@"a"];
-	} else if ([key isEqualToString:@"b"]) {
-		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"b"];
-	} else if ([key isEqualToString:@"c"]) {
-		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"c"];
-	} else if ([key isEqualToString:@"d"]) {
-		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"d"];
+	if ([key isEqualToString:@"height"]){
+		[super setValue:value forKey:@"height"];
+	} else if ([key isEqualToString:@"behaviors"]) {
+		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behaviors"];
+	} else if ([key isEqualToString:@"cells"]) {
+		[super setValue:[WTMCollectionOfCell instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"cells"];
+	} else if ([key isEqualToString:@"table"]) {
+		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"table"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -156,26 +156,26 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
-	[dictionary setValue:@(self.height) forKey:@"a"];
+	[dictionary setValue:@(self.height) forKey:@"height"];
 	if(_behaviors){
 		if(includeChildren){
-			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"b"];
+			[dictionary setValue:[self.behaviors dictionaryRepresentationWithChildren:includeChildren] forKey:@"behaviors"];
 		}else{
-			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"b"];
+			[dictionary setValue:[self.behaviors aliasDictionaryRepresentation] forKey:@"behaviors"];
 		}
 	}
 	if(_cells){
 		if(includeChildren){
-			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"c"];
+			[dictionary setValue:[self.cells dictionaryRepresentationWithChildren:includeChildren] forKey:@"cells"];
 		}else{
-			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"c"];
+			[dictionary setValue:[self.cells aliasDictionaryRepresentation] forKey:@"cells"];
 		}
 	}
 	if(_table){
 		if(includeChildren){
-			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"d"];
+			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"table"];
 		}else{
-			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"d"];
+			[dictionary setValue:[self.table aliasDictionaryRepresentation] forKey:@"table"];
 		}
 	}
     return dictionary;
