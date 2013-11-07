@@ -22,6 +22,7 @@
 //
 
 #import "WTMViewController.h"
+#import "WTM.h"
 
 @interface WTMViewController ()
 
@@ -35,6 +36,12 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 }
+
+
+
+
+
+
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
 }

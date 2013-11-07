@@ -30,7 +30,7 @@
 
 - (void)setUp{
     [super setUp];
-    [self _createAPopulatedPool];
+    [self _createAPopulatedPoolWithMode:WattJ];
 }
 
 - (void)tearDown{
@@ -59,30 +59,47 @@
     [self _compare:r1 with:r2];
 }
 
+#pragma mark - unload reload in any mode
 
-- (void)testUnloadReloadARegistryInAPool{
-    
-    WattRegistry*r1=_package.registry;
-    NSUInteger r1Count=[r1 count];
-    NSString *uidString=_package.registry.uidString;
-    
-    // We save the registry
-    [_pool saveRegistry:_package.registry];
-    
-    // We Unload
-    [_pool unloadRegistryWithRegistryID:uidString];
-    
-    //We reload from the serizalized registry identified by its uidString
-    WattRegistry*r2=[_pool registryWithUidString:uidString];
-    NSUInteger r2Count=[r2 count];
-    
-    //Test the semantic integrity.
-    [self _checkIntegrityOfPackageRegistry:r2];
-    
-    //Then count
-    XCTAssertTrue(r1Count==r2Count, @"The counts should remain constant %i<>%i",r1Count,r2Count);
+- (void)testUnloadReloadARegistryInAPool_J{
+    XCTAssertNoThrow([self __unloadReloadARegistryWithMode:WattJ], @"_unloadReloadARegistryWithMode:WattJ should not throw an exception");
+}
+- (void)testUnloadReloadARegistryInAPool_P{
+      XCTAssertNoThrow([self __unloadReloadARegistryWithMode:WattP], @"_unloadReloadARegistryWithMode:WattP should not throw an exception");
+}
+- (void)testUnloadReloadARegistryInAPool_Jx{
+      XCTAssertNoThrow([self __unloadReloadARegistryWithMode:WattJx], @"_unloadReloadARegistryWithMode:WattJx should not throw an exception");
+}
+- (void)testUnloadReloadARegistryInAPool_Px{
+      XCTAssertNoThrow([self __unloadReloadARegistryWithMode:WattPx], @"_unloadReloadARegistryWithMode:WattPx should not throw an exception");
 }
 
+
+- (void)testUnloadReloadARegistriesByName{
+    NSUInteger initialPoolCount=[_pool registryCount];
+    NSArray*rl=[_pool registriesUidStringList];
+    XCTAssertTrue([_pool registryCount]==[rl count], @"all the registries are loaded the registryCount should be equal to  registriesUidStringList count");
+    
+    for (NSString *s in rl) {
+        WattRegistry*r=[_pool registryWithUidString:s];
+        [r save];
+    }
+    [_pool unloadRegistries];
+    XCTAssertTrue([_pool registryCount]==0, @"the pool in memory should be void after unloadRegistries");
+    
+    for (NSString *s in rl) {
+        WattRegistry*reloaded=[_pool registryWithUidString:s];
+        if ([reloaded count]>0) {
+            [_pool registryWithUidString:s];
+        }
+    }
+    
+    XCTAssertTrue([_pool registryCount]==initialPoolCount, @"after reloading the pool count should be equal to the initialPoolCount");
+    
+}
+
+ 
+#pragma mark - Merger
 
 - (void)testMergeRegistries{
     
@@ -95,12 +112,13 @@
     
     [r1 mergeWithRegistry:_shelf.registry];
     
+    [self _checkIntegrityOfPackageRegistry:r1];
+    [self _checkIntegrityOfShelfRegistry:r1];
     XCTAssertTrue(r1Count+s1Count==[r1 count], @"The sum of counts should remain constant");
     XCTAssertTrue([_shelf.registry isEqual:r1], @"The shelf should have moved to the R1 registry");
     XCTAssertTrue([_package.registry isEqual:r1], @"The package should be in the R1 registry");
     
-    [self _checkIntegrityOfPackageRegistry:r1];
-    [self _checkIntegrityOfShelfRegistry:r1];
+
     
 }
 
@@ -227,9 +245,36 @@
 }
 
 
+- (void)__unloadReloadARegistryWithMode:(WattSerializationMode)mode{
+    [self _deletePopulatedPool];
+    [self _createAPopulatedPoolWithMode:mode];
+    
+    WattRegistry*r1=_package.registry;
+    NSUInteger r1Count=[r1 count];
+    NSString *uidString=_package.registry.uidString;
+    
+    // We save the registry
+    [_pool saveRegistry:_package.registry];
+    
+    // We Unload
+    [_pool unloadRegistryWithRegistryID:uidString];
+    
+    //We reload from the serizalized registry identified by its uidString
+    WattRegistry*r2=[_pool registryWithUidString:uidString];
+    NSUInteger r2Count=[r2 count];
+    
+    //Test the semantic integrity.
+    [self _checkIntegrityOfPackageRegistry:r2];
+    
+    //Then count
+    XCTAssertTrue(r1Count==r2Count, @"The counts should remain constant %i<>%i",r1Count,r2Count);
+}
+
+
+
 #pragma  mark - Value generation
 
-- (WattRegistryPool*)_createAPopulatedPool{
+- (WattRegistryPool*)_createAPopulatedPoolWithMode:(WattSerializationMode)mode{
     
     // We remove the folder before to start (in case there was an exception)
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -239,7 +284,7 @@
     [[NSFileManager defaultManager]removeItemAtPath:basePath error:&error];
     
     _pool=[[WattRegistryPool alloc] initWithRelativePath:@"test/"
-                                       serializationMode:WattJ
+                                       serializationMode:mode
                                             andSecretKey:nil];
     
     // We create a Shelf (with its own registry)
@@ -262,6 +307,8 @@
     
     return _pool;
 }
+
+
 
 - (void)_deletePopulatedPool{
     [_pool deletePoolFiles];

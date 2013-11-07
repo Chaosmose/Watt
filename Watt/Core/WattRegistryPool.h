@@ -352,4 +352,11 @@ static NSString*mapFileDefaultName=@"map";
 - (BOOL)removeItemAtPath:(NSString*)path;
 
 
+/**
+ *  Returns the number of registries in the pool
+ *
+ *  @return the count
+ */
+- (NSUInteger)registryCount;
+
 @end

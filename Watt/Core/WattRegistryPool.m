@@ -210,6 +210,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     if(registry){
         [self detachRegistry:registry];
         [registry purgeRegistry];
+        [_registries removeObjectForKey:registryUidString];
         return  YES;
     }else{
         return NO;
@@ -224,9 +225,10 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return YES if it is a success.
  */
 - (BOOL)unloadRegistries{
-    BOOL status=YES;
-    for (NSString*keyID in _registries) {
-        status=status&&[self unloadRegistryWithRegistryID:keyID];
+    BOOL status=YES;;
+    for (NSString*keyID in [_registries allKeys]) {
+         status=status&&[self unloadRegistryWithRegistryID:keyID];
+        [_registries removeObjectForKey:keyID];
     }
     return status;
 }
@@ -735,6 +737,16 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     
 }
 
+
+/**
+ *  Returns the number of registries in the pool
+ *
+ *  @return the count
+ */
+- (NSUInteger)registryCount{
+    return [_registries count];
+}
+
 #pragma mark -  serialization
 
 
@@ -830,9 +842,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 /**
  * Mixes the data if necessary
  * The data soup method is a simple and fast encoding / decoding method.
- * That reverses the bytes array and reverse each byte value according to the _secretBooleanList
+ * That invert or revers each byte value according to the _secretBooleanList
  * It is a simple symetric encoding to prevent from manual editing.
- * It is not a super securized crypto method.
+ * It is not a securized crypto method.
  *
  *  @param data the original data
  *  @param mix  should we mix ?
@@ -842,30 +854,33 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 -(NSData*)_dataSoup:(NSData*)data  mix:(BOOL)mix{
     if(mix && _secretBooleanList && [_secretBooleanList count]>1){
         const char *bytes = [data bytes];
-        char *reverseBytes = malloc(sizeof(char) * [data length]);
-        int index = [data length] - 1;
+        char *mixedBytes = malloc(sizeof(char) * [data length]);
         _secretLoopIndex=0;
         for (int i = 0; i < [data length]; i++){
             // QUICK dirty and not memory efficient
-            //Should be optimized in c.
-            // Objective C is not efficient here (refactory needed)
-           // BOOL shouldReverse=[[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue];
-           // if(shouldReverse)
-                reverseBytes[index--] = (~ bytes[i]); // double reverse
-           // else
-            //     reverseBytes[index--] = (bytes[i]);
+            // Should be optimized in c.
+            // Objective C is certainly not efficient here
+           BOOL shouldReverse=[[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue];
+           if(shouldReverse)
+               mixedBytes[i] = (~ bytes[i]);
+            else
+               mixedBytes[i] = (- bytes[i]);
             _secretLoopIndex++;
             if(_secretLoopIndex>=_secretLength){
                 _secretLoopIndex=0;
             }
         }
-        NSData *mixed =[NSData dataWithBytes:reverseBytes length:[data length]];
-        free(reverseBytes);
+        NSData *mixed =[NSData dataWithBytes:mixedBytes length:[data length]];
+        free(mixedBytes);
         return mixed;
     }else{
         return data;
     }
 }
+
+
+
+
 
 /**
  *  Generate a _secretBooleanList from a secretKey
@@ -874,23 +889,11 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 - (void)_generateTheSymetricKeyFrom:(NSString*)secretKey{
     if(secretKey){
-        // We gonna double the key to make it symetric.
-        NSMutableString *symetricKey = [NSMutableString string];
-        NSInteger charIndex = [secretKey length];
-        while (charIndex > 0) {
-            charIndex--;
-            NSRange subStrRange = NSMakeRange(charIndex, 1);
-            [symetricKey appendString:[secretKey substringWithRange:subStrRange]];
-        }
-        // we concat the keys "ABCD" becomes a symetric string "DCBAABCD"
-        [symetricKey appendString:secretKey];
-        // Then we transform "DCBAABCD" to a boolean list based on the binary representation of each char
         _secretBooleanList=[NSMutableArray array];
-        
-        NSUInteger nbOfChar=[symetricKey length];
+        NSUInteger nbOfChar=[secretKey length];
         for (int i=1; i<nbOfChar ; i++) {
-            NSString *previousChar=[symetricKey substringWithRange:NSMakeRange(i-1,1)];
-            NSString *currentChar=[symetricKey substringWithRange:NSMakeRange(i, 1)];
+            NSString *previousChar=[secretKey substringWithRange:NSMakeRange(i-1,1)];
+            NSString *currentChar=[secretKey substringWithRange:NSMakeRange(i, 1)];
             // We compare the previous and the current char.
             // If previousChar is > currentChar then we add YES to the _secretBooleanList
             // THE _secretBooleanList will be an array of : YES, NO, NO, YES ....
