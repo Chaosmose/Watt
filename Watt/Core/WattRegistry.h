@@ -207,13 +207,14 @@
 - (BOOL)mergeWithRegistry:(WattRegistry*)registryToAdd;
 
 
-#pragma mark - Destroy
+#pragma mark - purge
 
 
 /**
- *  Destroys the registry ( used in merging process for example)
+ *  Purge the registry from memory ( used in merging process for example)
+ *  but do not modify the serialized files. The files are coordinated by the registry pool.
  */
-- (void)destroyRegistry;
+- (void)purgeRegistry;
 
 
 @end

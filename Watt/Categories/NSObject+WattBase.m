@@ -8,6 +8,8 @@
 
 #import "NSObject+WattBase.h"
 
+
+
 @implementation NSObject (WattBase)
 
 
@@ -19,8 +21,8 @@
  *
  *  @return the identifier
  */
-- (NSString *)uuidString{
-    return [NSObject uuidString];
+- (NSString *)uuidStringCreate{
+    return [NSObject uuidStringCreate];
 }
 
 /**
@@ -28,7 +30,7 @@
  *
  *  @return the identifier
  */
-+ (NSString *)uuidString{
++ (NSString *)uuidStringCreate{
     // Returns a UUID
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);
@@ -50,9 +52,9 @@
     NSString *s = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
     if(s)
-        [NSException raise:@"Watt Exception" format:@"%@",s];
+        [NSException raise:wattExceptionName format:@"%@",s];
     else
-        [NSException raise:@"Watt Exception" format:@"Internal error"];
+        [NSException raise:wattExceptionName format:@"Internal error"];
     
 }
 

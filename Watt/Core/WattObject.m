@@ -26,6 +26,7 @@
 
 @interface WattObject(){
     BOOL _aliasesHasBeenResolved; //A flag to Prevent circular desaliasing.
+ 
 }
 @end
 
@@ -85,7 +86,7 @@
 }
 
 
-#pragma  mark - KVC 
+#pragma  mark - KVC
 
 #ifdef WT_KVC_KEY_FAULT_TOLERENCE
 
@@ -122,7 +123,12 @@
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattObject*instance=[[[self class] alloc] init];
     instance->_registry=destinationRegistry;
-    instance->_uinstID=[self uinstID];
+    if([destinationRegistry count]>0){
+        instance->_uinstID=[destinationRegistry nextUinstID];
+    }else{
+        instance->_uinstID=kWattRegistryRootUinstID;
+    }
+    self->_copyUinstID=instance->_uinstID;// We set the copy registry
     [destinationRegistry addObject:instance];
     destinationRegistry.hasChanged=YES;
     return instance;
@@ -138,11 +144,11 @@
  *  @return return the copy
  */
 - (instancetype)instancebyCopyTo:(WattRegistry*)destinationRegistry{
-    WattObject *instance=[destinationRegistry objectWithUinstID:[self uinstID]];
+    WattObject *instance=[destinationRegistry objectWithUinstID:self->_copyUinstID];
     if(!instance){
         instance=[self wattCopyInRegistry:destinationRegistry];
     }
-    if(![destinationRegistry objectWithUinstID:[instance uinstID]]){
+    if(![destinationRegistry objectWithUinstID:self->_copyUinstID]){
         [destinationRegistry addObject:instance];
     }
     return instance;
@@ -167,19 +173,24 @@
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
     WattObject*instance=[[[self class] alloc] init];
     instance->_registry=destinationRegistry;
-    instance->_uinstID=[self uinstID];
+    if([destinationRegistry count]>0){
+        instance->_uinstID=[destinationRegistry nextUinstID];
+    }else{
+        instance->_uinstID=kWattRegistryRootUinstID;
+    }
+    self->_copyUinstID=instance->_uinstID;// We set the copy registry
     [destinationRegistry addObject:instance];
     destinationRegistry.hasChanged=YES;
     return instance;
-
+    
 }
 
 - (instancetype)extractInstancebyCopyTo:(WattRegistry*)destinationRegistry{
-    WattObject *instance=[destinationRegistry objectWithUinstID:[self uinstID]];
+    WattObject *instance=[destinationRegistry objectWithUinstID:self->_copyUinstID];
     if(!instance){
         instance=[self wattExtractAndCopyToRegistry:destinationRegistry];
     }
-    if(![destinationRegistry objectWithUinstID:[instance uinstID]]){
+    if(![destinationRegistry objectWithUinstID:self->_copyUinstID]){
         [destinationRegistry addObject:instance];
     }
     return instance;

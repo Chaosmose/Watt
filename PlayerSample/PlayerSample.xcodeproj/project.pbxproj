@@ -33,7 +33,7 @@
 		E56E248F17D79C7C009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
 		E56E249317D7A14B009C2C2C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248E17D79C7C009C2C2C /* CoreAudio.framework */; };
 		E56E249417D7A153009C2C2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E56E248C17D79C54009C2C2C /* AVFoundation.framework */; };
-		E586EAB51813D80000C77705 /* WTM_Pools_WTM_tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E586EAB41813D80000C77705 /* WTM_Pools_WTM_tests.m */; };
+		E586EAB51813D80000C77705 /* Watt_Pools_WTM_tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E586EAB41813D80000C77705 /* Watt_Pools_WTM_tests.m */; };
 		E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */; };
 		E589F9D617D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
 		E589F9D717D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */; };
@@ -253,7 +253,7 @@
 		E56E248417D77C39009C2C2C /* WIOSButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSButton.m; sourceTree = "<group>"; };
 		E56E248C17D79C54009C2C2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E56E248E17D79C7C009C2C2C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
-		E586EAB41813D80000C77705 /* WTM_Pools_WTM_tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTM_Pools_WTM_tests.m; sourceTree = "<group>"; };
+		E586EAB41813D80000C77705 /* Watt_Pools_WTM_tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Watt_Pools_WTM_tests.m; sourceTree = "<group>"; };
 		E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Watt_ACL_tests.m; sourceTree = "<group>"; };
 		E589F9D417D4BF04002BF82C /* WIOSSoundManagerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WIOSSoundManagerTableViewController.h; sourceTree = "<group>"; };
 		E589F9D517D4BF04002BF82C /* WIOSSoundManagerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WIOSSoundManagerTableViewController.m; sourceTree = "<group>"; };
@@ -603,7 +603,7 @@
 			children = (
 				E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */,
 				E54FBA291809AB51002B2BAB /* Watt_Registry_data_Tests.m */,
-				E586EAB41813D80000C77705 /* WTM_Pools_WTM_tests.m */,
+				E586EAB41813D80000C77705 /* Watt_Pools_WTM_tests.m */,
 				E54FBA241809AB51002B2BAB /* Supporting Files */,
 			);
 			path = "PlayerSample Tests";
@@ -892,7 +892,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = WTM;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Pereira da Silva";
 				TargetAttributes = {
 					E54FBA1D1809AB51002B2BAB = {
@@ -1090,7 +1090,7 @@
 			files = (
 				E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */,
 				E54FBA2A1809AB51002B2BAB /* Watt_Registry_data_Tests.m in Sources */,
-				E586EAB51813D80000C77705 /* WTM_Pools_WTM_tests.m in Sources */,
+				E586EAB51813D80000C77705 /* Watt_Pools_WTM_tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,7 +1306,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlayerSample.app/PlayerSample";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -1339,7 +1338,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlayerSample.app/PlayerSample";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;

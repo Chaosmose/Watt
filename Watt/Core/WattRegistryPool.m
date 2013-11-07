@@ -39,7 +39,10 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     
 }
 
-
+// NOTE :
+// - (BOOL)addRegistry:(WattRegistry*)registry;
+// is declared in WattObject.m @interface WattRegistryPool (Invisible)
+// To remain invisible
 
 /**
  *  The pool relative path
@@ -70,6 +73,10 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the absolute path of the registry bundle folder
  */
 - (NSString*)absolutePathForRegistryBundleFolderWithName:(NSString*)name;
+
+
+
+
 
 
 
@@ -183,6 +190,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return YES if there was no instance.
  */
 - (BOOL)addRegistry:(WattRegistry*)registry{
+    if(registry.pool && ![registry.pool isEqual:self]){
+        [self raiseExceptionWithFormat:@"You cannot add a registry to another pool source pool : %@ destination pool : %@ ",registry.pool,self];
+    }
     if(![_registries objectForKey:registry.uidString]){
         registry.pool=self;
         [_registries setObject:registry
@@ -192,6 +202,59 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     return NO;
 }
 
+
+
+/**
+ *  Unloads the registry with a given id
+ *
+ *  @param registryUidString the identifier
+ *
+ *  @return YES if there was a registry with this identifier
+ */
+- (BOOL)unloadRegistryWithRegistryID:(NSString*)registryUidString{
+    WattRegistry*registry=[_registries objectForKey:registryUidString];
+    if(registry){
+        [self detachRegistry:registry];
+        [registry purgeRegistry];
+        return  YES;
+    }else{
+        return NO;
+    }
+}
+
+
+
+/**
+ *  Unloads all the registries
+ *
+ *  @return YES if it is a success.
+ */
+- (BOOL)unloadRegistries{
+    BOOL status=YES;
+    for (NSString*keyID in _registries) {
+        status=status&&[self unloadRegistryWithRegistryID:keyID];
+    }
+    return status;
+}
+
+/**
+ *  The registry is removed from the pool but not clean up in memory.
+ *  This method is used to move a registry from a pool to another.
+ *
+ *  @param registry the registry to deReference
+ *
+ *  @return YES if the registry was referenced
+ */
+- (BOOL)detachRegistry:(WattRegistry*)registry{
+    if([_registries objectForKey:registry.uidString]){
+        registry.pool=nil;
+        [_registries removeObjectForKey:registry.uidString];
+        return YES;
+    }
+    return NO;
+}
+
+
 /**
  *  Removes the registry and its dependencies
  *
@@ -199,10 +262,10 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *
  *  @return YES if there was an instance.
  */
-- (BOOL)removeRegistry:(WattRegistry*)registry{
+- (BOOL)trashRegistry:(WattRegistry*)registry{
     if([_registries objectForKey:registry.uidString]){
-        [_registries removeObjectForKey:registry.uidString];
         [self trashItemFromPath:[self absolutePathForRegistryBundleFolderWithName:registry.uidString]];
+        [self unloadRegistryWithRegistryID:registry.uidString];
         return YES;
     }
     return NO;
@@ -227,7 +290,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     if(registry)
         return registry;// We return if the registry is alaready added.
     if(!registryUidString)
-        registryUidString=[self uuidString];
+        registryUidString=[self uuidStringCreate];
     NSString*p=[self absolutePathForRegistryFileWithName:registryUidString];
     if([self.fileManager fileExistsAtPath:p]){
         registry=[self readRegistryFromFile:p withUniqueStringIdentifier:registryUidString];
@@ -239,9 +302,6 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         [registry save];
     }
     
-    //The registry has been loaded or created
-    //We add it to the pool
-    [self addRegistry:registry];
     
     return registry;
     
@@ -888,9 +948,6 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     return @[@"jx",@"j",@"px",@"p"];
 }
 
-
-
-
 - (NSFileManager *)fileManager {
     if(!_fileManager)
         _fileManager=[[NSFileManager alloc] init];
@@ -921,16 +978,5 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 - (void)setForcedSoupPaths:(NSMutableArray *)aForcedSoupPaths {
     _forcedSoupPaths = [aForcedSoupPaths mutableCopy];
 }
-
-
-
-#pragma mark - Memory optimization
-
-
-//- (BOOL)unloadRegistryWithRegistryID:(NSString*)registryUidString;
-
-//- (BOOl)unloadRegistries;
-
-
 
 @end

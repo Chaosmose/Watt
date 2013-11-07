@@ -47,12 +47,32 @@
 
 @end
 
+@interface WattRegistryPool (Invisible){
+}
+/**
+ *  Adds the registry to the pool
+ *  You should not call this method directly
+ 
+ *  @param registry the instance
+ *
+ *  @return YES if there was no instance.
+ */
+- (BOOL)addRegistry:(WattRegistry*)registry;
+@end
+
+
 @implementation WattObject(Invisible)
+
 - (void)identifyWithUinstId:(NSInteger)identifier{
     self->_uinstID=identifier;
 }
+
 - (void)moveToRegistry:(WattRegistry*)registry{
-    self->_registry=registry;
+    if(![self.registry isEqual:registry]){
+        // We proceed to reidentification
+        [self identifyWithUinstId:self.uinstID+[registry nextUinstID]];
+        self->_registry=registry;
+    }
 }
 @end
 
@@ -123,7 +143,7 @@
         _uidString=identifier;
         _pool=pool;
         // We add this registry to the pool
-        [_pool addRegistry:self];
+        [_pool addRegistry:self];// Invisible public method
     }
     return self;
 }
@@ -451,11 +471,10 @@
 - (BOOL)mergeWithRegistry:(WattRegistry*)registryToAdd{
     BOOL __block success=YES;
     [registryToAdd enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        [obj identifyWithUinstId:obj.uinstID+[self nextUinstID]];
         [obj moveToRegistry:self];
         [self addObject:obj];
     }];
-    [registryToAdd destroyRegistry];
+    [registryToAdd purgeRegistry];
     return success;
 }
 
@@ -466,7 +485,7 @@
 /**
  *  Destroys the registry ( used in merging process for example)
  */
-- (void)destroyRegistry{
+- (void)purgeRegistry{
     _uinstIDCounter=0;
     _registry=nil;
     _history=nil;
@@ -474,6 +493,7 @@
     _uidString=nil;
     _hasChanged=NO;
     _autosave=NO;
+    _pool=nil;
 }
 
 

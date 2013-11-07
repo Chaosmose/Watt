@@ -15,13 +15,16 @@ static NSString*mapFileDefaultName=@"map";
 
 /*
  
- Definitions :
+ Notes :
  --------------
  
- -A pool                    : coordinate and insure the persistency of an ensemble of registries and associated files
- -A registry                : manages a graph of watt objects and collections (it is an object graph DB)
- -A WattExternalReference   : identifies a WattModel by its registry identity and unique instance identifier (UinstID)
+
  
+ -A WattRegistryPool        : coordinates and insure the persistency of an ensemble of registries and associated files
+ -A WattRegistry            : manages a graph of WattObjects and collections (it is an object graph DB)
+ -A WattExternalReference   : identifies a WattObject by its registry identity and unique instance identifier (UinstID)
+ 
+  NEED TO EXPLAIN WAttObject Aliasing <> external reference.
  
  File tree :
  -----------
@@ -30,11 +33,11 @@ static NSString*mapFileDefaultName=@"map";
     -> <registryUidString>/             <- the watt bundle folder for a given registry and dependencies
         registry.<ext>                  <- the serialized registry (object DB)
         <bundled folders and file>      <- the bundled files and folders
-        <delta-DB>  <- future extension for delta synchronisation
-    <trash/>    <- trash area for registry-bundle
+        <delta-DB>                      <- future extension for delta synchronisation
+    <trash/>                            <- trash area for registry-bundle
  
- ->Import/      <- conventionnaly we copy the files to import (dowloads in progress..., etc)
- ->Export/      <- conventionnaly we copy the exported files
+ ->Import/                              <- conventionnaly we copy the files to import (dowloads in progress..., etc)
+ ->Export/                              <- conventionnaly we copy the exported files
  
  Note : <ext> depends on serialization + soup mode
  
@@ -44,6 +47,14 @@ static NSString*mapFileDefaultName=@"map";
  
  An app generally use one WattRegistryPool (but can use more if necessary)
  For better performance you should use multiple registries
+
+ IMPORTANT IDEA : 
+ -----------------
+ 
+ Data/Assets Mobility
+ Serialized registries are very easy to move.
+ You only need to move the files to the pool folder and load using the id and the secret if the content is protected.
+ 
  
  Samples :
  -------------
@@ -114,16 +125,35 @@ static NSString*mapFileDefaultName=@"map";
 - (WattRegistry*)registryWithUidString:(NSString*)registryUidString;
 
 
-// POST CREATION
 
 /**
- *  Adds the registry to the pool
+ *  The registry is removed from the pool but not clean up in memory.
+ *  This method is used to move a registry from a pool to another.
  *
- *  @param registry the instance
+ *  @param registry the registry to deReference
  *
- *  @return YES if there was no instance.
+ *  @return YES if the registry was referenced
  */
-- (BOOL)addRegistry:(WattRegistry*)registry;
+- (BOOL)detachRegistry:(WattRegistry*)registry;
+
+
+/**
+ *  Unloads the registry with a given id (and cleanup the memory)
+ *  The file remain intact (but the state is not saved before unloading)
+ *
+ *  @param registryUidString the identifier
+ *
+ *  @return YES if there was a registry with this identifier
+ */
+- (BOOL)unloadRegistryWithRegistryID:(NSString*)registryUidString;
+
+
+/**
+ *  Unloads all the registries
+ *
+ *  @return YES if it is a success.
+ */
+- (BOOL)unloadRegistries;
 
 
 /**
@@ -133,7 +163,7 @@ static NSString*mapFileDefaultName=@"map";
  *
  *  @return YES if there was an instance.
  */
-- (BOOL)removeRegistry:(WattRegistry*)registry;
+- (BOOL)trashRegistry:(WattRegistry*)registry;
 
 
 /**
@@ -231,7 +261,7 @@ static NSString*mapFileDefaultName=@"map";
                                       all:(BOOL)returnAll;
 
 
-#pragma mark - Trash
+#pragma mark - Trash file management
 
 
 /**
@@ -256,7 +286,6 @@ static NSString*mapFileDefaultName=@"map";
  *  Deletes all the data and files
  */
 - (void)deletePoolFiles;
-
 
 
 #pragma mark - file I/O
@@ -321,14 +350,6 @@ static NSString*mapFileDefaultName=@"map";
  *  @return the success of the operation
  */
 - (BOOL)removeItemAtPath:(NSString*)path;
-
-
-#pragma mark - Memory optimization
-
-
-//- (BOOL)unloadRegistryWithRegistryID:(NSString*)registryUidString;
-
-//- (BOOl)unloadRegistries;
 
 
 @end

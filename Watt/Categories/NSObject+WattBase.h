@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  A generic exception name.
+ *  Used when calling raiseExceptionWithFormat:..
+ */
+static NSString *wattExceptionName=@"WattException";
+
 @interface NSObject (WattBase)
 
 #pragma mark - Unique identification
@@ -17,14 +23,14 @@
  *
  *  @return the identifier
  */
-- (NSString *)uuidString;
+- (NSString *)uuidStringCreate;
 
 /**
  *  Returns an unique identifier string
  *
  *  @return the identifier
  */
-+ (NSString *)uuidString;
++ (NSString *)uuidStringCreate;
 
 
 #pragma  mark - exceptions
@@ -35,6 +41,5 @@
  *  @param format the format
  */
 - (void)raiseExceptionWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
-
 
 @end

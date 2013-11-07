@@ -28,8 +28,24 @@
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
 @protected
-    NSInteger _uinstID;
+    /**
+     *  the identifier of the watt object within the registry
+     */
+    NSInteger  _uinstID;
+    
+    /**
+     * an identifier used during the interRegistry copy process only
+     */
+    NSUInteger _copyUinstID;
+    
+    /**
+     *  The registry that currently contains the wattObject
+     */
     WattRegistry*_registry;
+    
+    /**
+     * The alias flag
+     */
     BOOL _isAnAlias;
 }
 

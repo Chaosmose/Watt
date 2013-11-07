@@ -37,6 +37,11 @@
                BlueprintName = "PlayerSample Tests"
                ReferencedContainer = "container:PlayerSample.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "WTM_Pools_WTM_tests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

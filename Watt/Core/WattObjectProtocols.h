@@ -73,9 +73,7 @@
 - (instancetype)extractInstancebyCopyTo:(WattRegistry*)destinationRegistry;
 
 //- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry withExclusionPathList:(NSArray*)exclusionPathList;
-
 @end
-
 
 #pragma mark - WattCoding
 
