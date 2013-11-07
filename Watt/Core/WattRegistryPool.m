@@ -401,6 +401,15 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     
 }
 
+/**
+ *  The absolute path of the pool folder
+ *
+ *  @return the path
+ */
+- (NSString*)poolFolderAbsolutePath{
+    return _poolFolderAbsolutePath;
+}
+
 #pragma mark - Trash
 
 - (BOOL)trashItemFromPath:(NSString*)path{

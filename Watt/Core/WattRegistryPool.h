@@ -226,6 +226,14 @@ static NSString*mapFileDefaultName=@"map";
 - (NSString*)applicationDocumentsDirectory;
 
 /**
+ *  The absolute path of the pool folder
+ *
+ *  @return the path
+ */
+- (NSString*)poolFolderAbsolutePath;
+
+
+/**
  *  Returns the absolute path of the registry serialization file
  *
  *  @param name the registry name
