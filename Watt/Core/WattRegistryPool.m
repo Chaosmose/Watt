@@ -75,12 +75,6 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 - (NSString*)absolutePathForRegistryBundleFolderWithName:(NSString*)name;
 
 
-
-
-
-
-
-
 // File serialization / deserialization
 
 /**
@@ -163,11 +157,11 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
                        andSecretKey:(NSString*)secret{
     self=[super init];
     if(self){
-        
         if(!secret)
             secret=rimbaud;
-        [self _generateTheSymetricKeyFrom:secret];
         _serializationMode=mode;
+        if(mode==WattJx || mode==WattPx)
+            [self _generateTheSymetricKeyFrom:secret];
         _registries=[NSMutableDictionary dictionary];
         _mixableExtensions=[NSMutableArray array];
         _forcedSoupPaths=[NSMutableArray array];
@@ -299,12 +293,8 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         // We create a registry with the default serialization mode
         registry=[WattRegistry registryWithUniqueStringIdentifier:registryUidString
                                                            inPool:self];
-        [registry save];
     }
-    
-    
     return registry;
-    
 }
 
 
@@ -314,8 +304,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @param registry the registry to be saved
  */
 - (void)saveRegistry:(WattRegistry*)registry{
+    NSString*path=[self absolutePathForRegistryFileWithName:registry.uidString];
     if([self writeRegistry:registry
-                    toFile:[self absolutePathForRegistryFileWithName:registry.uidString]]){
+                    toFile:path]){
         registry.hasChanged=NO;
         WTLog(@"Registry %@ has been saved",registry.uidString);
     }
@@ -360,6 +351,13 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
             if([s rangeOfString:kWattBundle].location!=NSNotFound){
                 [list addObject:[s stringByDeletingPathExtension]];
             }
+        }
+        // Registries in memory
+        for (NSString*uidString in _registries) {
+            // We add uidString that have not been file detected.
+            if([list indexOfObject:uidString]==NSNotFound){
+                [list addObject:[uidString copy]];
+            };
         }
         return list;
     }
@@ -846,21 +844,22 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         const char *bytes = [data bytes];
         char *reverseBytes = malloc(sizeof(char) * [data length]);
         int index = [data length] - 1;
+        _secretLoopIndex=0;
         for (int i = 0; i < [data length]; i++){
             // QUICK dirty and not memory efficient
             //Should be optimized in c.
             // Objective C is not efficient here (refactory needed)
-            if([[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue]){
+           // BOOL shouldReverse=[[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue];
+           // if(shouldReverse)
                 reverseBytes[index--] = (~ bytes[i]); // double reverse
-            }else{
-                reverseBytes[index--] = (bytes[i]); // no reverse
-            }
+           // else
+            //     reverseBytes[index--] = (bytes[i]);
             _secretLoopIndex++;
-            if(_secretLoopIndex>_secretLength){
+            if(_secretLoopIndex>=_secretLength){
                 _secretLoopIndex=0;
             }
         }
-        NSData *mixed = [NSData dataWithBytes:reverseBytes length:[data length]];
+        NSData *mixed =[NSData dataWithBytes:reverseBytes length:[data length]];
         free(reverseBytes);
         return mixed;
     }else{
