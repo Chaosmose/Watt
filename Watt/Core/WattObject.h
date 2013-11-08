@@ -24,6 +24,8 @@
 
 #pragma mark - WattObject
 
+@class WattExternalReference;
+
 @interface WattObject : NSObject<WattCoding,WattCopying,WattExtraction>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
@@ -87,6 +89,8 @@
 // Returns all the properties keys of the object.
 - (NSArray*)propertiesKeys;
 
+#pragma mark - ExternalReference
 
+- (WattExternalReference*)externalReference;
 
 @end

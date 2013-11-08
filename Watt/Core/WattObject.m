@@ -22,6 +22,7 @@
 
 #import "WattObject.h"
 #import "WattCollectionOfObject.h"
+#import "WattExternalReference.h"
 #import <objc/runtime.h>
 
 @interface WattObject(){
@@ -344,5 +345,13 @@
     return [NSString stringWithFormat:@"Alias of %@(#%i)",NSStringFromClass([self class]),self.uinstID];
 }
 
+#pragma mark - ExternalReference
+
+- (WattExternalReference*)externalReference{
+    WattExternalReference*r=[[WattExternalReference alloc]init];
+    r.registryUidString=self.registry.uidString;
+    r.objectUinstID=self->_uinstID;
+    return r;
+}
 
 @end
