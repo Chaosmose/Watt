@@ -203,7 +203,7 @@ static NSString*mapFileDefaultName=@"map";
  *
  *  @return the object or nil
  */
-- (WattModel*)objectByWattReference:(WattExternalReference*)externalReference;
+- (id)objectByWattReference:(WattExternalReference*)externalReference;
 
 
 /**
@@ -213,7 +213,7 @@ static NSString*mapFileDefaultName=@"map";
  *
  *  @return the object or nil
  */
-- (WattModel*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
+- (id)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
 
 
 #pragma mark - file paths

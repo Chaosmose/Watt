@@ -376,7 +376,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *
  *  @return the object or nil
  */
-- (WattModel*)objectByWattReference:(WattExternalReference*)externalReference{
+- (id)objectByWattReference:(WattExternalReference*)externalReference{
     WattRegistry*registry=[self registryWithUidString:externalReference.registryUidString];
     return [registry objectWithUinstID:externalReference.uinstID];
 }
@@ -389,7 +389,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *
  *  @return the object or nil
  */
-- (WattModel*)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID{
+- (id)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID{
     WattRegistry*registry=[self registryWithUidString:registryUidString];
     return [registry objectWithUinstID:objectUinstID];
 }
