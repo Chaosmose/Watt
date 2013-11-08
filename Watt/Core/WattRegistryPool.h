@@ -244,6 +244,16 @@ static NSString*mapFileDefaultName=@"map";
 
 
 /**
+ *  Returns the absolute path of the registry bundle folder
+ *
+ *  @param name the registry name
+ *
+ *  @return the absolute path of the registry bundle folder
+ */
+- (NSString*)absolutePathForRegistryBundleFolderWithName:(NSString*)name;
+
+
+/**
  *  Returns an existing absolute paths from a relative path
  *
  *  @param relativePath    the relative path

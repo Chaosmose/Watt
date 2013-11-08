@@ -45,17 +45,6 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 // To remain invisible
 
 /**
- *  The pool relative path
- *
- *  @return the path
- */
-- (NSString*)poolFolderRelativePath;
-
-//  bundle files relative path and path discovery
-
-
-
-/**
  *  Return an existing path from registry file path (absolute or relative)
  *
  *  @param path the path used for discovery
@@ -64,15 +53,6 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 - (NSString*)foundRegistryFilePathForAnyModeFromPath:(NSString*)path;
 
-
-/**
- *  Returns the absolute path of the registry bundle folder
- *
- *  @param name the registry name
- *
- *  @return the absolute path of the registry bundle folder
- */
-- (NSString*)absolutePathForRegistryBundleFolderWithName:(NSString*)name;
 
 
 // File serialization / deserialization
