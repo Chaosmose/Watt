@@ -49,7 +49,7 @@
 
 
 /**
- *  Create a shelf in a new registry
+ *  Create a shelf in a new registry and add it to the pool
  *
  *  @param pool       pool description
  *
@@ -59,18 +59,80 @@
 
 #pragma mark - User and groups
 
+/**
+ *  Creates a user on
+ *
+ *  @param shelf The shelf
+ *
+ *  @return the user
+ */
 - (WattUser*)createUserInShelf:(WTMShelf*)shelf;
+
+/**
+ *  Creates a group
+ *
+ *  @param shelf the shelf
+ *
+ *  @return the group
+ */
 - (WattGroup*)createGroupInShelf:(WTMShelf*)shelf;
+
+/**
+ *  Adds a user to a group
+ *
+ *  @param user  the user
+ *  @param group the group
+ */
 - (void)addUser:(WattUser*)user toGroup:(WattGroup*)group;
 
 // No remove method actually (need to be analyzed)
 
+
 #pragma mark - Menus & section
 
+/**
+ *  Create a section in the shelf
+ *
+ *  @param shelf the shelf
+ *
+ *  @return the menu section
+ */
 - (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf;
-- (void)removeSection:(WTMMenuSection*)section;
-- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section;
-- (void)removeMenu:(WTMMenu*)menu;
+
+/**
+ * Removes the section and all its menus and derivated files
+ *
+ *
+ *  @param section the section to remove
+ */
+- (void)removeAndDestroySection:(WTMMenuSection*)section;
+
+/**
+ *  Removes a menu from all its menu section and destroys the menu
+ *
+ *  @param menu the menu to destroy
+ */
+- (void)removeAndDestroyMenu:(WTMMenu*)menu;
+
+/**
+ *  Remove a men from a section but keeps the "menu alive"
+ *
+ *  @param menu    the menu to remove
+ *  @param section the section to update
+ */
+- (void)removeMenu:(WTMMenu *)menu fromSection:(WTMMenuSection*)section;
+
+
+/**
+ *  Creates a menu from an external reference in a section
+ *
+ *  @param section   the section
+ *  @param reference the menu reference
+ *
+ *  @return the menu
+ */
+- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section thatRefersTo:(WattExternalReference*)reference;
+
 
 
 #pragma mark - /// PACKAGE ///

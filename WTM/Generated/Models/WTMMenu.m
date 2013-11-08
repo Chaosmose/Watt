@@ -22,8 +22,8 @@
 #import "WTMMenu.h" 
 #import "WattExternalReference.h"
 #import "WTMCollectionOfMenu.h"
-#import "WTMMenuSection.h"
 #import "WTMMenu.h"
+#import "WTMCollectionOfMenuSection.h"
 
 @implementation WTMMenu 
 
@@ -33,8 +33,8 @@
 @synthesize pictureRelativePath=_pictureRelativePath;
 @synthesize reference=_reference;
 @synthesize childrens=_childrens;
-@synthesize menuSection=_menuSection;
 @synthesize parent=_parent;
+@synthesize sections=_sections;
 
 
 #pragma  mark WattCopying
@@ -48,8 +48,8 @@
 	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_reference=[_reference instancebyCopyTo:destinationRegistry];
 	instance->_childrens=[_childrens instancebyCopyTo:destinationRegistry];
-	instance->_menuSection=[_menuSection instancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent instancebyCopyTo:destinationRegistry];
+	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -64,8 +64,8 @@
 	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_reference=[_reference extractInstancebyCopyTo:destinationRegistry];
 	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
-	instance->_menuSection=[_menuSection extractInstancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
+	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -88,10 +88,10 @@
 		[super setValue:[WattExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"reference"];
 	} else if ([key isEqualToString:@"childrens"]) {
 		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"childrens"];
-	} else if ([key isEqualToString:@"menuSection"]) {
-		[super setValue:[WTMMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"menuSection"];
 	} else if ([key isEqualToString:@"parent"]) {
 		[super setValue:[WTMMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"parent"];
+	} else if ([key isEqualToString:@"sections"]) {
+		[super setValue:[WTMCollectionOfMenuSection instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"sections"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -143,29 +143,6 @@
 	_childrens=childrens;
 }
 
-- (WTMMenuSection*)menuSection{
-	if([_menuSection isAnAlias]){
-		id o=[_registry objectWithUinstID:_menuSection.uinstID];
-		if(o){
-			_menuSection=o;
-		}
-	}
-	return _menuSection;
-}
-
-
-- (WTMMenuSection*)menuSection_auto{
-	_menuSection=[self menuSection];
-	if(!_menuSection){
-		_menuSection=[[WTMMenuSection alloc] initInRegistry:_registry];
-	}
-	return _menuSection;
-}
-
-- (void)setMenuSection:(WTMMenuSection*)menuSection{
-	_menuSection=menuSection;
-}
-
 - (WTMMenu*)parent{
 	if([_parent isAnAlias]){
 		id o=[_registry objectWithUinstID:_parent.uinstID];
@@ -187,6 +164,29 @@
 
 - (void)setParent:(WTMMenu*)parent{
 	_parent=parent;
+}
+
+- (WTMCollectionOfMenuSection*)sections{
+	if([_sections isAnAlias]){
+		id o=[_registry objectWithUinstID:_sections.uinstID];
+		if(o){
+			_sections=o;
+		}
+	}
+	return _sections;
+}
+
+
+- (WTMCollectionOfMenuSection*)sections_auto{
+	_sections=[self sections];
+	if(!_sections){
+		_sections=[[WTMCollectionOfMenuSection alloc] initInRegistry:_registry];
+	}
+	return _sections;
+}
+
+- (void)setSections:(WTMCollectionOfMenuSection*)sections{
+	_sections=sections;
 }
 
 
@@ -224,18 +224,18 @@
 			[dictionary setValue:[self.childrens aliasDictionaryRepresentation] forKey:@"childrens"];
 		}
 	}
-	if(_menuSection){
-		if(includeChildren){
-			[dictionary setValue:[self.menuSection dictionaryRepresentationWithChildren:includeChildren] forKey:@"menuSection"];
-		}else{
-			[dictionary setValue:[self.menuSection aliasDictionaryRepresentation] forKey:@"menuSection"];
-		}
-	}
 	if(_parent){
 		if(includeChildren){
 			[dictionary setValue:[self.parent dictionaryRepresentationWithChildren:includeChildren] forKey:@"parent"];
 		}else{
 			[dictionary setValue:[self.parent aliasDictionaryRepresentation] forKey:@"parent"];
+		}
+	}
+	if(_sections){
+		if(includeChildren){
+			[dictionary setValue:[self.sections dictionaryRepresentationWithChildren:includeChildren] forKey:@"sections"];
+		}else{
+			[dictionary setValue:[self.sections aliasDictionaryRepresentation] forKey:@"sections"];
 		}
 	}
     return dictionary;
@@ -253,8 +253,8 @@
 	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"reference : %@\n",NSStringFromClass([self.reference class])];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
-	[s appendFormat:@"menuSection : %@\n",NSStringFromClass([self.menuSection class])];
 	[s appendFormat:@"parent : %@\n",NSStringFromClass([self.parent class])];
+	[s appendFormat:@"sections : %@\n",NSStringFromClass([self.sections class])];
 	return s;
 }
 

@@ -23,8 +23,8 @@
 #import "WattModel.h"
 @class WattExternalReference;
 @class WTMCollectionOfMenu;
-@class WTMMenuSection;
 @class WTMMenu;
+@class WTMCollectionOfMenuSection;
 
 @interface WTMMenu:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
@@ -35,12 +35,12 @@
 @property (nonatomic,copy) NSString * pictureRelativePath;
 @property (nonatomic,strong) WattExternalReference * reference;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
-@property (nonatomic,strong) WTMMenuSection * menuSection;
 @property (nonatomic,strong) WTMMenu * parent;
+@property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 
 - (WattExternalReference*)reference_auto;
 - (WTMCollectionOfMenu*)childrens_auto;
-- (WTMMenuSection*)menuSection_auto;
 - (WTMMenu*)parent_auto;
+- (WTMCollectionOfMenuSection*)sections_auto;
 
 @end
