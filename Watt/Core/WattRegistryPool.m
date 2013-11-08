@@ -266,7 +266,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     if(registry)
         return registry;// We return if the registry is alaready added.
     if(!registryUidString)
-        registryUidString=[self uuidStringCreate];
+        registryUidString=[self uidStringCreate];
     NSString*p=[self absolutePathForRegistryFileWithName:registryUidString];
     if([self.fileManager fileExistsAtPath:p]){
         registry=[self readRegistryFromFile:p withUniqueStringIdentifier:registryUidString];

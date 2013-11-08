@@ -52,7 +52,7 @@
     //3- We generate a new Registry (r2) from a1 by deserializing
     WattRegistry *r2=[WattRegistry instanceFromArray:a1
                                withSerializationMode:WattJ
-                              uniqueStringIdentifier:[_pool uuidStringCreate]
+                              uniqueStringIdentifier:[_pool uidStringCreate]
                                               inPool:_pool
                                       resolveAliases:YES];
     

@@ -87,7 +87,7 @@
     
     WattUser *user=[[WattUser alloc]initInRegistry:shelf.registry];
     [shelf.users_auto addObject:user];
-    user.identity=[shelf.registry.pool uuidStringCreate];
+    user.identity=[shelf.registry.pool uidStringCreate];
     
     return user;
 }
@@ -231,7 +231,7 @@
     // IMPORTANT WE CREATE A NEW REGISTRY
     WattRegistry *registry=[pool registryWithUidString:nil];
     WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
-    package.objectName=[pool uuidStringCreate];// We create a uuid for each package and library to deal with linked assets
+    package.objectName=[pool uidStringCreate];// We create a uuid for each package and library to deal with linked assets
     
     // We create a default library
     WTMLibrary*library=[self createLibraryInPackage:package];
@@ -256,7 +256,7 @@
     [self raiseExceptionWithFormat:@"package is nil in %@",NSStringFromSelector(@selector(createLibraryInPackage:))];
     if([self actionIsAllowed:WattWRITE on:package]){
         WTMLibrary *library=[[WTMLibrary alloc] initInRegistry:package.registry];
-        library.objectName=[package.registry.pool uuidStringCreate];// We create a uuid for each package and library to deal with linked assets
+        library.objectName=[package.registry.pool uidStringCreate];// We create a uuid for each package and library to deal with linked assets
         [package.libraries_auto addObject:library];
         [library setPackage:package];
         return library;

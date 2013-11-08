@@ -21,8 +21,8 @@
  *
  *  @return the identifier
  */
-- (NSString *)uuidStringCreate{
-    return [NSObject uuidStringCreate];
+- (NSString *)uidStringCreate{
+    return [NSObject uidStringCreate];
 }
 
 /**
@@ -30,7 +30,7 @@
  *
  *  @return the identifier
  */
-+ (NSString *)uuidStringCreate{
++ (NSString *)uidStringCreate{
     // Returns a UUID
     CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
     NSString *uuidStr = (__bridge_transfer NSString *)CFUUIDCreateString(kCFAllocatorDefault, uuid);

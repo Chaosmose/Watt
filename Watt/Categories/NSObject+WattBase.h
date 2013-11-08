@@ -23,14 +23,14 @@ static NSString *wattExceptionName=@"WattException";
  *
  *  @return the identifier
  */
-- (NSString *)uuidStringCreate;
+- (NSString *)uidStringCreate;
 
 /**
  *  Returns an unique identifier string
  *
  *  @return the identifier
  */
-+ (NSString *)uuidStringCreate;
++ (NSString *)uidStringCreate;
 
 
 #pragma  mark - exceptions
