@@ -12,7 +12,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files =  'WattPackager/*.{h,m}'
   s.public_header_files = 'WattPackager/*.h'
-  s.dependency  'Watt', '~> 0.23'
-  s.dependency   'WTM', '~> 0.17'
   s.dependency  'AFNetworking','~>2.0.1'
 end
