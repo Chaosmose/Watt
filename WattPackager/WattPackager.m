@@ -20,21 +20,21 @@
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
 
-#import "WattBundlePackager.h"
+#import "WattPackager.h"
 #import "SSZipArchive.h"
 
 
-@interface WattBundlePackager()<SSZipArchiveDelegate>{
+@interface WattPackager()<SSZipArchiveDelegate>{
 }
 @property (nonatomic,strong)    NSOperationQueue *queue;
 @property (atomic,strong)       NSFileManager *fileManager;
 @end
 
-@implementation WattBundlePackager
+@implementation WattPackager
 
 
-+ (WattBundlePackager*)sharedInstance {
-    static WattBundlePackager *sharedInstance = nil;
++ (WattPackager*)sharedInstance {
+    static WattPackager *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
@@ -125,7 +125,7 @@
         }
         [self _createRecursivelyRequiredFolderForPath:destination];
         
-        WattBundlePackager *__weak weakSelf=self;
+        WattPackager *__weak weakSelf=self;
         NSString *__weak weakSourcePath=sourcePath;
         [self unZip:sourcePath
                  to:destination

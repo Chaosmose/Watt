@@ -21,10 +21,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WattBundlePackager : NSObject
+@interface WattPackager : NSObject
 
 // WTMPackager singleton accessor
-+ (WattBundlePackager*)sharedInstance;
++ (WattPackager*)sharedInstance;
 
 /**
  *  By default ".watt" you can use your own packExtension

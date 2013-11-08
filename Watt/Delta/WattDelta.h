@@ -14,7 +14,6 @@
 #define kWattDeltaIdentifierKey     @"i"
 #define kWattDeltaTimeStampKey      @"t"
 
-
 @interface WattDelta : NSObject
 
 @property (strong,nonatomic) NSString* message;// user message

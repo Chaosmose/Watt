@@ -73,7 +73,7 @@ __LINE__ ,\
 #import "WattACL.h"
 #import "WattDelta.h"
 #import "WattDeltaEngine.h"
-#import "WattBundlePackager.h"
+#import "WattPackager.h"
 
 #pragma mark - generated imports
 

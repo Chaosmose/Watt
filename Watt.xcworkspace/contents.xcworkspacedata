@@ -11,6 +11,9 @@
       location = "group:Watt.podspec">
    </FileRef>
    <FileRef
+      location = "group:WattPackager.podspec">
+   </FileRef>
+   <FileRef
       location = "group:WTM.podspec">
    </FileRef>
    <FileRef

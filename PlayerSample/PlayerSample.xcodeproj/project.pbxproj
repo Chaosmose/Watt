@@ -14,10 +14,6 @@
 		E50004F217B6655300E50D70 /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
 		E50004F617B66A7B00E50D70 /* UIImage+WattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+WattAdaptive.m */; };
 		E50004F717B66A7B00E50D70 /* UIImage+WattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+WattAdaptive.m */; };
-		E50B610217FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */; };
-		E50B610317FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */; };
-		E50B610417FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
-		E50B610517FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */; };
 		E54FBA201809AB51002B2BAB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54FBA1F1809AB51002B2BAB /* XCTest.framework */; };
 		E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
 		E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
@@ -125,8 +121,8 @@
 		E5D48F821828E35B00CC30F0 /* WattExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */; };
 		E5D48F861828E61900CC30F0 /* NSObject+WattBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */; };
 		E5D48F871828E61900CC30F0 /* NSObject+WattBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */; };
-		E5ECCD521826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
-		E5ECCD531826B72100242150 /* WattBundlePackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */; };
+		E5E409B5182CC56100AC9BA9 /* WattPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E409B4182CC56100AC9BA9 /* WattPackager.m */; };
+		E5E409B6182CC56200AC9BA9 /* WattPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E409B4182CC56100AC9BA9 /* WattPackager.m */; };
 		E5F4333F17D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432EF17D8B52600CD20B7 /* WTMCollectionOfActivity.m */; };
 		E5F4334017D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432EF17D8B52600CD20B7 /* WTMCollectionOfActivity.m */; };
 		E5F4334117D8B52600CD20B7 /* WTMCollectionOfBehavior.m in Sources */ = {isa = PBXBuildFile; fileRef = E5F432F217D8B52600CD20B7 /* WTMCollectionOfBehavior.m */; };
@@ -231,13 +227,6 @@
 		E50004F017B6655200E50D70 /* WTMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMApi.m; sourceTree = "<group>"; };
 		E50004F417B66A7B00E50D70 /* UIImage+WattAdaptive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WattAdaptive.h"; sourceTree = "<group>"; };
 		E50004F517B66A7B00E50D70 /* UIImage+WattAdaptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WattAdaptive.m"; sourceTree = "<group>"; };
-		E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIOSMatrixViewController.m; path = ../WTMIOS/WIOSMatrixViewController.m; sourceTree = "<group>"; };
-		E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WIOSMatrixCellViewController.m; path = ../WTMIOS/WIOSMatrixCellViewController.m; sourceTree = "<group>"; };
-		E50B60FD17FF30CC006E76C5 /* WIOSMatrixProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIOSMatrixProtocol.h; path = ../WTMIOS/WIOSMatrixProtocol.h; sourceTree = "<group>"; };
-		E50B60FE17FF30CC006E76C5 /* WIOSMatrixViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIOSMatrixViewController.h; path = ../WTMIOS/WIOSMatrixViewController.h; sourceTree = "<group>"; };
-		E50B60FF17FF30CD006E76C5 /* WIOSMatrixCellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WIOSMatrixCellViewController.h; path = ../WTMIOS/WIOSMatrixCellViewController.h; sourceTree = "<group>"; };
-		E51AC40D17B9129900E9DC83 /* WattBundlePackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattBundlePackager.h; sourceTree = "<group>"; };
-		E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattBundlePackager.m; sourceTree = "<group>"; };
 		E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PlayerSample Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E54FBA1F1809AB51002B2BAB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayerSample Tests-Info.plist"; sourceTree = "<group>"; };
@@ -334,6 +323,8 @@
 		E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattExternalReference.m; sourceTree = "<group>"; };
 		E5D48F841828E61900CC30F0 /* NSObject+WattBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+WattBase.h"; sourceTree = "<group>"; };
 		E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+WattBase.m"; sourceTree = "<group>"; };
+		E5E409B3182CC56100AC9BA9 /* WattPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattPackager.h; sourceTree = "<group>"; };
+		E5E409B4182CC56100AC9BA9 /* WattPackager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattPackager.m; sourceTree = "<group>"; };
 		E5F432E917D8B52600CD20B7 /* WTMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMCell.h; sourceTree = "<group>"; };
 		E5F432EA17D8B52600CD20B7 /* WTMActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMActivity.h; sourceTree = "<group>"; };
 		E5F432EB17D8B52600CD20B7 /* WTMAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMAsset.h; sourceTree = "<group>"; };
@@ -589,15 +580,6 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		E51AC40C17B9129900E9DC83 /* Packager */ = {
-			isa = PBXGroup;
-			children = (
-				E51AC40D17B9129900E9DC83 /* WattBundlePackager.h */,
-				E51AC40E17B9129900E9DC83 /* WattBundlePackager.m */,
-			);
-			path = Packager;
-			sourceTree = "<group>";
-		};
 		E54FBA231809AB51002B2BAB /* PlayerSample Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -641,9 +623,9 @@
 			isa = PBXGroup;
 			children = (
 				E5CFF95F1826668D003658CE /* Watt */,
-				E5D9A3091824FC8500824D47 /* To_be_extracted_in_separate_projects */,
 				E589F9D317D4BAB9002BF82C /* WTIOS */,
 				E50003FB17B6428100E50D70 /* WTM */,
+				E5E409B2182CC56100AC9BA9 /* WattPackager */,
 				E5B4624A1732A4A000E654A1 /* PlayerSample */,
 				E54FBA231809AB51002B2BAB /* PlayerSample Tests */,
 				E5B462431732A4A000E654A1 /* Frameworks */,
@@ -801,26 +783,14 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		E5D9A3091824FC8500824D47 /* To_be_extracted_in_separate_projects */ = {
+		E5E409B2182CC56100AC9BA9 /* WattPackager */ = {
 			isa = PBXGroup;
 			children = (
-				E5D9A30A1824FCA900824D47 /* WUIMatrix */,
-				E51AC40C17B9129900E9DC83 /* Packager */,
+				E5E409B3182CC56100AC9BA9 /* WattPackager.h */,
+				E5E409B4182CC56100AC9BA9 /* WattPackager.m */,
 			);
-			name = To_be_extracted_in_separate_projects;
-			path = ../Watt;
-			sourceTree = "<group>";
-		};
-		E5D9A30A1824FCA900824D47 /* WUIMatrix */ = {
-			isa = PBXGroup;
-			children = (
-				E50B60FD17FF30CC006E76C5 /* WIOSMatrixProtocol.h */,
-				E50B60FE17FF30CC006E76C5 /* WIOSMatrixViewController.h */,
-				E50B60FB17FF30CC006E76C5 /* WIOSMatrixViewController.m */,
-				E50B60FF17FF30CD006E76C5 /* WIOSMatrixCellViewController.h */,
-				E50B60FC17FF30CC006E76C5 /* WIOSMatrixCellViewController.m */,
-			);
-			name = WUIMatrix;
+			name = WattPackager;
+			path = ../WattPackager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1104,7 +1074,6 @@
 				E5A9EBF31799242F00976997 /* WTMViewController.m in Sources */,
 				E5CF13331826669E003658CE /* WattRegistry.m in Sources */,
 				E589F9D717D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */,
-				E50B610517FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */,
 				E5CF133C1826669E003658CE /* WattDeltaEngine.m in Sources */,
 				E50004F217B6655300E50D70 /* WTMApi.m in Sources */,
 				E50004F717B66A7B00E50D70 /* UIImage+WattAdaptive.m in Sources */,
@@ -1113,6 +1082,7 @@
 				E5ADA55F17F988790068BCDE /* WTMCollectionOfPdf.m in Sources */,
 				E56E248817D77C4A009C2C2C /* WIOSSoundRecorderViewController.m in Sources */,
 				E56E248917D77C4E009C2C2C /* WIOSSoundListCell.m in Sources */,
+				E5E409B6182CC56200AC9BA9 /* WattPackager.m in Sources */,
 				E56E248A17D77C54009C2C2C /* WIOSButton.m in Sources */,
 				E5ADA55D17F988740068BCDE /* WTMCollectionOfHtml.m in Sources */,
 				E5F4334017D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */,
@@ -1146,7 +1116,6 @@
 				E5F4336A17D8B52600CD20B7 /* WTMColumn.m in Sources */,
 				E5CF132D1826669E003658CE /* WattCollectionOfObject.m in Sources */,
 				E5F4336C17D8B52600CD20B7 /* WTMVideo.m in Sources */,
-				E50B610317FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */,
 				E5CF13481826669E003658CE /* WattGroup.m in Sources */,
 				E5F4336E17D8B52600CD20B7 /* WTMMember.m in Sources */,
 				E5CF133F1826669E003658CE /* WattCollectionOfGroup.m in Sources */,
@@ -1154,7 +1123,6 @@
 				E5F4337217D8B52600CD20B7 /* WTMBehavior.m in Sources */,
 				E5F4337417D8B52600CD20B7 /* WTMLine.m in Sources */,
 				E5CDFE401827A9CC002FC634 /* WattRegistryPool.m in Sources */,
-				E5ECCD521826B72100242150 /* WattBundlePackager.m in Sources */,
 				E5F4337617D8B52600CD20B7 /* WTMSound.m in Sources */,
 				E5F4337817D8B52600CD20B7 /* WTMTable.m in Sources */,
 				E5F4337A17D8B52600CD20B7 /* WTMOperator.m in Sources */,
@@ -1185,7 +1153,6 @@
 				E5C5D9471746719200A6A46F /* WTMViewController.m in Sources */,
 				E5CF13321826669E003658CE /* WattRegistry.m in Sources */,
 				E589F9D617D4BF04002BF82C /* WIOSSoundManagerTableViewController.m in Sources */,
-				E50B610417FF30CD006E76C5 /* WIOSMatrixCellViewController.m in Sources */,
 				E5CF133B1826669E003658CE /* WattDeltaEngine.m in Sources */,
 				E50004F117B6655300E50D70 /* WTMApi.m in Sources */,
 				E50004F617B66A7B00E50D70 /* UIImage+WattAdaptive.m in Sources */,
@@ -1194,6 +1161,7 @@
 				E5ADA55917F9885B0068BCDE /* WTMCollectionOfPdf.m in Sources */,
 				E56E248517D77C39009C2C2C /* WIOSSoundRecorderViewController.m in Sources */,
 				E56E248617D77C39009C2C2C /* WIOSSoundListCell.m in Sources */,
+				E5E409B5182CC56100AC9BA9 /* WattPackager.m in Sources */,
 				E56E248717D77C39009C2C2C /* WIOSButton.m in Sources */,
 				E5ADA55717F9885B0068BCDE /* WTMCollectionOfHtml.m in Sources */,
 				E5F4333F17D8B52600CD20B7 /* WTMCollectionOfActivity.m in Sources */,
@@ -1227,7 +1195,6 @@
 				E5F4336917D8B52600CD20B7 /* WTMColumn.m in Sources */,
 				E5CF132C1826669E003658CE /* WattCollectionOfObject.m in Sources */,
 				E5F4336B17D8B52600CD20B7 /* WTMVideo.m in Sources */,
-				E50B610217FF30CD006E76C5 /* WIOSMatrixViewController.m in Sources */,
 				E5CF13471826669E003658CE /* WattGroup.m in Sources */,
 				E5F4336D17D8B52600CD20B7 /* WTMMember.m in Sources */,
 				E5CF133E1826669E003658CE /* WattCollectionOfGroup.m in Sources */,
@@ -1235,7 +1202,6 @@
 				E5F4337117D8B52600CD20B7 /* WTMBehavior.m in Sources */,
 				E5F4337317D8B52600CD20B7 /* WTMLine.m in Sources */,
 				E5CDFE3F1827A9CC002FC634 /* WattRegistryPool.m in Sources */,
-				E5ECCD531826B72100242150 /* WattBundlePackager.m in Sources */,
 				E5F4337517D8B52600CD20B7 /* WTMSound.m in Sources */,
 				E5F4337717D8B52600CD20B7 /* WTMTable.m in Sources */,
 				E5F4337917D8B52600CD20B7 /* WTMOperator.m in Sources */,
