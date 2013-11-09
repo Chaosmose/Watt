@@ -23,4 +23,17 @@
     return r;
 }
 
+
+/**
+ *  Determine if the current instance correspond to a given externalReference
+ *
+ *  @param externalReference the external reference
+ *
+ *  @return YES it the registry and ID maps
+ */
+-(BOOL)isEqualToExternalReference:(WattExternalReference*)externalReference{
+    return ([externalReference.registryUidString isEqual:self.registry.uidString] &&
+            externalReference.uinstID==self->_uinstID);
+}
+
 @end

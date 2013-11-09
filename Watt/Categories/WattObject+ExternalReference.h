@@ -17,4 +17,14 @@
  */
 - (WattExternalReference*)externalReference;
 
+
+/**
+ *  Determine if the current instance correspond to a given externalReference
+ *
+ *  @param externalReference the external reference
+ *
+ *  @return YES it the registry and ID maps
+ */
+-(BOOL)isEqualToExternalReference:(WattExternalReference*)externalReference;
+
 @end
