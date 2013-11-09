@@ -63,7 +63,7 @@ __LINE__ ,\
 
 #pragma mark - Imports
 
-#import "NSObject+WattBase.h"
+
 
 #import "WattObjectProtocols.h"
 #import "WattObject.h"
@@ -74,6 +74,11 @@ __LINE__ ,\
 #import "WattDelta.h"
 #import "WattDeltaEngine.h"
 #import "WattPackager.h"
+
+
+#import "NSObject+WattBase.h"
+#import "WattExternalReference+Resolution.h"
+#import "WattObject+ExternalReference.h"
 
 #pragma mark - generated imports
 

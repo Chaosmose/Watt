@@ -89,8 +89,4 @@
 // Returns all the properties keys of the object.
 - (NSArray*)propertiesKeys;
 
-#pragma mark - ExternalReference
-
-- (WattExternalReference*)externalReference;
-
 @end
