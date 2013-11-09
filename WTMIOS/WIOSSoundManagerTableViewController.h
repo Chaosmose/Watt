@@ -22,7 +22,6 @@
 
 
 - (void)setUpWithSound:(WTMSound*)sound
-           fromLibrary:(WTMLibrary*)library
        useCategoryName:(NSString*)category
             anDelegate:(id<WIOSSoundRecorderDelegate>)delegate;
 

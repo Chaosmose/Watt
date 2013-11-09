@@ -36,12 +36,11 @@
 }
 
 - (void)setUpWithSound:(WTMSound*)sound
-           fromLibrary:(WTMLibrary*)library
        useCategoryName:(NSString*)category
             anDelegate:(id<WIOSSoundRecorderDelegate>)delegate{
     [self setSelectedSound:sound];
     [self setCategoryName:category];
-    [self setLibrary:library];
+    [self setLibrary:sound.library];
     self.delegate=delegate;
     [self.tableView reloadData];
 }
