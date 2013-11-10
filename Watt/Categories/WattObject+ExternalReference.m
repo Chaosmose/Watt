@@ -7,18 +7,24 @@
 //
 
 #import "WattObject+ExternalReference.h"
+#import "NSObject+WattBase.h"
 #import "WattExternalReference.h"
 
 
 @implementation WattObject (ExternalReference)
+
 /**
- *  Returns the external reference from the instance
+ *  Factory method to create an WattExternalReference in a given registry
  *
- *  @return the reference.
+ *  @param destinationRegistry the destination registry
+ *
+ *  @return the WattExternalReference
  */
-- (WattExternalReference*)externalReference{
-    WattExternalReference*r=[[WattExternalReference alloc]initInRegistry:nil];
-    r.registryUidString=[self.registry.uidString copy];
+- (WattExternalReference*)externalReferenceInRegistry:(WattRegistry*)destinationRegistry{
+    if(!destinationRegistry)
+        [self raiseExceptionWithFormat:@"destinationRegistry not set"];
+    WattExternalReference*r=[[WattExternalReference alloc]initInRegistry:destinationRegistry];
+    r.registryUidString=self.registry.uidString;
     r.objectUinstID=self->_uinstID;
     return r;
 }

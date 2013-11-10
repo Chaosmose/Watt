@@ -52,7 +52,7 @@
 }
 
 @property (readonly)NSInteger uinstID;
-@property (readonly)WattRegistry*registry;
+@property (readonly,copy)WattRegistry*registry;
 
 /**
  *  Relays the change status to its registry

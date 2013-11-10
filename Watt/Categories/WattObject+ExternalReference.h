@@ -10,12 +10,16 @@
 
 @interface WattObject (ExternalReference)
 
+
+
 /**
- *  Returns the external reference from the instance
- *
- *  @return the reference.
- */
-- (WattExternalReference*)externalReference;
+*  Factory method to create an WattExternalReference in a given registry
+*
+*  @param destinationRegistry the destination registry
+*
+*  @return the WattExternalReference
+*/
+- (WattExternalReference*)externalReferenceInRegistry:(WattRegistry*)destinationRegistry;
 
 
 /**
