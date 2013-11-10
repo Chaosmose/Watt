@@ -18,7 +18,7 @@
  */
 - (WattExternalReference*)externalReference{
     WattExternalReference*r=[[WattExternalReference alloc]initInRegistry:self.registry];
-    r.registryUidString=self.registry.uidString;
+    r.registryUidString=[self.registry.uidString copy];
     r.objectUinstID=self->_uinstID;
     return r;
 }

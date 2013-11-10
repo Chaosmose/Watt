@@ -14,6 +14,7 @@
 		E50004F217B6655300E50D70 /* WTMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F017B6655200E50D70 /* WTMApi.m */; };
 		E50004F617B66A7B00E50D70 /* UIImage+WattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+WattAdaptive.m */; };
 		E50004F717B66A7B00E50D70 /* UIImage+WattAdaptive.m in Sources */ = {isa = PBXBuildFile; fileRef = E50004F517B66A7B00E50D70 /* UIImage+WattAdaptive.m */; };
+		E546A01E182EB5310031882F /* Watt_Collection_Filtering.m in Sources */ = {isa = PBXBuildFile; fileRef = E546A01D182EB5310031882F /* Watt_Collection_Filtering.m */; };
 		E54FBA201809AB51002B2BAB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E54FBA1F1809AB51002B2BAB /* XCTest.framework */; };
 		E54FBA211809AB51002B2BAB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462461732A4A000E654A1 /* Foundation.framework */; };
 		E54FBA221809AB51002B2BAB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5B462441732A4A000E654A1 /* UIKit.framework */; };
@@ -231,6 +232,7 @@
 		E50004F017B6655200E50D70 /* WTMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMApi.m; sourceTree = "<group>"; };
 		E50004F417B66A7B00E50D70 /* UIImage+WattAdaptive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WattAdaptive.h"; sourceTree = "<group>"; };
 		E50004F517B66A7B00E50D70 /* UIImage+WattAdaptive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WattAdaptive.m"; sourceTree = "<group>"; };
+		E546A01D182EB5310031882F /* Watt_Collection_Filtering.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Watt_Collection_Filtering.m; sourceTree = "<group>"; };
 		E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PlayerSample Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E54FBA1F1809AB51002B2BAB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		E54FBA251809AB51002B2BAB /* PlayerSample Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PlayerSample Tests-Info.plist"; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 		E54FBA231809AB51002B2BAB /* PlayerSample Tests */ = {
 			isa = PBXGroup;
 			children = (
+				E546A01D182EB5310031882F /* Watt_Collection_Filtering.m */,
 				E586EAB61813DD6300C77705 /* Watt_ACL_tests.m */,
 				E54FBA291809AB51002B2BAB /* Watt_Registry_data_Tests.m */,
 				E586EAB41813D80000C77705 /* Watt_Pools_WTM_tests.m */,
@@ -1070,6 +1073,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E546A01E182EB5310031882F /* Watt_Collection_Filtering.m in Sources */,
 				E586EAB71813DD6300C77705 /* Watt_ACL_tests.m in Sources */,
 				E54FBA2A1809AB51002B2BAB /* Watt_Registry_data_Tests.m in Sources */,
 				E586EAB51813D80000C77705 /* Watt_Pools_WTM_tests.m in Sources */,
