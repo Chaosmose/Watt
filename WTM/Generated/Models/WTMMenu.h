@@ -29,16 +29,16 @@
 @interface WTMMenu:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
+@property (nonatomic,strong) WattExternalReference * destination;
 @property (nonatomic,copy) NSString * details;
 @property (nonatomic,assign) NSInteger  index;
 @property (nonatomic,copy) NSString * label;
 @property (nonatomic,copy) NSString * pictureRelativePath;
-@property (nonatomic,strong) WattExternalReference * reference;
 @property (nonatomic,strong) WTMCollectionOfMenu * childrens;
 @property (nonatomic,strong) WTMMenu * parent;
 @property (nonatomic,strong) WTMCollectionOfMenuSection * sections;
 
-- (WattExternalReference*)reference_auto;
+- (WattExternalReference*)destination_auto;
 - (WTMCollectionOfMenu*)childrens_auto;
 - (WTMMenu*)parent_auto;
 - (WTMCollectionOfMenuSection*)sections_auto;

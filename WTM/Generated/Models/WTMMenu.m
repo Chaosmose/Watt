@@ -27,11 +27,11 @@
 
 @implementation WTMMenu 
 
+@synthesize destination=_destination;
 @synthesize details=_details;
 @synthesize index=_index;
 @synthesize label=_label;
 @synthesize pictureRelativePath=_pictureRelativePath;
-@synthesize reference=_reference;
 @synthesize childrens=_childrens;
 @synthesize parent=_parent;
 @synthesize sections=_sections;
@@ -42,11 +42,11 @@
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
 	WTMMenu *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
+	instance->_destination=[_destination instancebyCopyTo:destinationRegistry];
 	instance->_details=[_details copy];
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_reference=[_reference instancebyCopyTo:destinationRegistry];
 	instance->_childrens=[_childrens instancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent instancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
@@ -58,11 +58,11 @@
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
 	WTMMenu *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
+	instance->_destination=[_destination extractInstancebyCopyTo:destinationRegistry];
 	instance->_details=[_details copy];
 	instance->_index=_index;
 	instance->_label=[_label copy];
 	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_reference=[_reference extractInstancebyCopyTo:destinationRegistry];
 	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
 	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
 	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
@@ -76,7 +76,9 @@
 
 
 - (void)setValue:(id)value forKey:(NSString *)key {
-	if ([key isEqualToString:@"details"]){
+	if ([key isEqualToString:@"destination"]){
+		[super setValue:[WattExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"destination"];
+	} else if ([key isEqualToString:@"details"]) {
 		[super setValue:value forKey:@"details"];
 	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
@@ -84,8 +86,6 @@
 		[super setValue:value forKey:@"label"];
 	} else if ([key isEqualToString:@"pictureRelativePath"]) {
 		[super setValue:value forKey:@"pictureRelativePath"];
-	} else if ([key isEqualToString:@"reference"]) {
-		[super setValue:[WattExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"reference"];
 	} else if ([key isEqualToString:@"childrens"]) {
 		[super setValue:[WTMCollectionOfMenu instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"childrens"];
 	} else if ([key isEqualToString:@"parent"]) {
@@ -97,27 +97,27 @@
 	}
 }
 
-- (WattExternalReference*)reference{
-	if([_reference isAnAlias]){
-		id o=[_registry objectWithUinstID:_reference.uinstID];
+- (WattExternalReference*)destination{
+	if([_destination isAnAlias]){
+		id o=[_registry objectWithUinstID:_destination.uinstID];
 		if(o){
-			_reference=o;
+			_destination=o;
 		}
 	}
-	return _reference;
+	return _destination;
 }
 
 
-- (WattExternalReference*)reference_auto{
-	_reference=[self reference];
-	if(!_reference){
-		_reference=[[WattExternalReference alloc] initInRegistry:_registry];
+- (WattExternalReference*)destination_auto{
+	_destination=[self destination];
+	if(!_destination){
+		_destination=[[WattExternalReference alloc] initInRegistry:_registry];
 	}
-	return _reference;
+	return _destination;
 }
 
-- (void)setReference:(WattExternalReference*)reference{
-	_reference=reference;
+- (void)setDestination:(WattExternalReference*)destination{
+	_destination=destination;
 }
 
 - (WTMCollectionOfMenu*)childrens{
@@ -200,6 +200,13 @@
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
+	if(_destination){
+		if(includeChildren){
+			[dictionary setValue:[self.destination dictionaryRepresentationWithChildren:includeChildren] forKey:@"destination"];
+		}else{
+			[dictionary setValue:[self.destination aliasDictionaryRepresentation] forKey:@"destination"];
+		}
+	}
 	if(_details){
 		[dictionary setValue:self.details forKey:@"details"];
 	}
@@ -209,13 +216,6 @@
 	}
 	if(_pictureRelativePath){
 		[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
-	}
-	if(_reference){
-		if(includeChildren){
-			[dictionary setValue:[self.reference dictionaryRepresentationWithChildren:includeChildren] forKey:@"reference"];
-		}else{
-			[dictionary setValue:[self.reference aliasDictionaryRepresentation] forKey:@"reference"];
-		}
 	}
 	if(_childrens){
 		if(includeChildren){
@@ -247,11 +247,11 @@
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMenu ",self.uinstID];
+	[s appendFormat:@"destination : %@\n",NSStringFromClass([self.destination class])];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"index : %@\n",@(self.index)];
 	[s appendFormat:@"label : %@\n",self.label];
 	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
-	[s appendFormat:@"reference : %@\n",NSStringFromClass([self.reference class])];
 	[s appendFormat:@"childrens : %@\n",NSStringFromClass([self.childrens class])];
 	[s appendFormat:@"parent : %@\n",NSStringFromClass([self.parent class])];
 	[s appendFormat:@"sections : %@\n",NSStringFromClass([self.sections class])];

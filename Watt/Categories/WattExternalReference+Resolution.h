@@ -15,6 +15,6 @@
  *
  *  @return the related instance;
  */
--(id)instance;
+-(id)concreteInstance;
 
 @end

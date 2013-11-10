@@ -108,15 +108,15 @@
         </relationship>
     </entity>
     <entity name="Menu" syncable="YES">
-        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="pictureRelativePath" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="reference" optional="YES" attributeType="String" syncable="YES">
+        <attribute name="destination" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="relationship" value="WattExternalReference"/>
             </userInfo>
         </attribute>
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pictureRelativePath" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="childrens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
         <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Menu" syncable="YES"/>
         <relationship name="sections" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" destinationEntity="MenuSection" inverseName="menus" inverseEntity="MenuSection" syncable="YES"/>

@@ -10,7 +10,7 @@
 
 @implementation WattExternalReference (Resolution)
 
--(id)instance{
+-(id)concreteInstance{
     return [self.registry.pool objectByWattReference:self];
 }
 
