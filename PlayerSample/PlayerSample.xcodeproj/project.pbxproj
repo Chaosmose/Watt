@@ -122,8 +122,6 @@
 		E5D48F821828E35B00CC30F0 /* WattExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */; };
 		E5D48F861828E61900CC30F0 /* NSObject+WattBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */; };
 		E5D48F871828E61900CC30F0 /* NSObject+WattBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */; };
-		E5DB370C182E5C6F00BABD01 /* WattExternalReference+resolution.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB370B182E5C6F00BABD01 /* WattExternalReference+resolution.m */; };
-		E5DB370D182E5C6F00BABD01 /* WattExternalReference+resolution.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB370B182E5C6F00BABD01 /* WattExternalReference+resolution.m */; };
 		E5DB3710182E5D4400BABD01 /* WattObject+ExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB370F182E5D4400BABD01 /* WattObject+ExternalReference.m */; };
 		E5DB3711182E5D4400BABD01 /* WattObject+ExternalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DB370F182E5D4400BABD01 /* WattObject+ExternalReference.m */; };
 		E5E409B5182CC56100AC9BA9 /* WattPackager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5E409B4182CC56100AC9BA9 /* WattPackager.m */; };
@@ -329,8 +327,6 @@
 		E5D48F7E1828E35B00CC30F0 /* WattExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WattExternalReference.m; sourceTree = "<group>"; };
 		E5D48F841828E61900CC30F0 /* NSObject+WattBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+WattBase.h"; sourceTree = "<group>"; };
 		E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+WattBase.m"; sourceTree = "<group>"; };
-		E5DB370A182E5C6F00BABD01 /* WattExternalReference+Resolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WattExternalReference+Resolution.h"; sourceTree = "<group>"; };
-		E5DB370B182E5C6F00BABD01 /* WattExternalReference+resolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WattExternalReference+resolution.m"; sourceTree = "<group>"; };
 		E5DB370E182E5D4400BABD01 /* WattObject+ExternalReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WattObject+ExternalReference.h"; sourceTree = "<group>"; };
 		E5DB370F182E5D4400BABD01 /* WattObject+ExternalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WattObject+ExternalReference.m"; sourceTree = "<group>"; };
 		E5E409B3182CC56100AC9BA9 /* WattPackager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WattPackager.h; sourceTree = "<group>"; };
@@ -790,8 +786,6 @@
 			children = (
 				E5D48F841828E61900CC30F0 /* NSObject+WattBase.h */,
 				E5D48F851828E61900CC30F0 /* NSObject+WattBase.m */,
-				E5DB370A182E5C6F00BABD01 /* WattExternalReference+Resolution.h */,
-				E5DB370B182E5C6F00BABD01 /* WattExternalReference+resolution.m */,
 				E5DB370E182E5D4400BABD01 /* WattObject+ExternalReference.h */,
 				E5DB370F182E5D4400BABD01 /* WattObject+ExternalReference.m */,
 			);
@@ -1128,7 +1122,6 @@
 				E5CF13451826669E003658CE /* WattCollectionOfUser.m in Sources */,
 				E5F4336217D8B52600CD20B7 /* WTMRule.m in Sources */,
 				E5DB3711182E5D4400BABD01 /* WattObject+ExternalReference.m in Sources */,
-				E5DB370D182E5C6F00BABD01 /* WattExternalReference+resolution.m in Sources */,
 				E5F4336417D8B52600CD20B7 /* WTMShelf.m in Sources */,
 				E5F4336817D8B52600CD20B7 /* WTMLabel.m in Sources */,
 				E5F4336A17D8B52600CD20B7 /* WTMColumn.m in Sources */,
@@ -1209,7 +1202,6 @@
 				E5CF13441826669E003658CE /* WattCollectionOfUser.m in Sources */,
 				E5F4336117D8B52600CD20B7 /* WTMRule.m in Sources */,
 				E5DB3710182E5D4400BABD01 /* WattObject+ExternalReference.m in Sources */,
-				E5DB370C182E5C6F00BABD01 /* WattExternalReference+resolution.m in Sources */,
 				E5F4336317D8B52600CD20B7 /* WTMShelf.m in Sources */,
 				E5F4336717D8B52600CD20B7 /* WTMLabel.m in Sources */,
 				E5F4336917D8B52600CD20B7 /* WTMColumn.m in Sources */,

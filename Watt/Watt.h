@@ -77,7 +77,6 @@ __LINE__ ,\
 
 
 #import "NSObject+WattBase.h"
-#import "WattExternalReference+Resolution.h"
 #import "WattObject+ExternalReference.h"
 
 #pragma mark - generated imports
