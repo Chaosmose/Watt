@@ -152,6 +152,29 @@
 }
 
 /**
+ *  Creates a menu
+ *
+ *  @param section   the section
+ *  @param object    the menu reference
+ *
+ *  @return the menu
+ */
+- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section thatRefersTo:(WattObject*)object{
+    if([self actionIsAllowed:WattWRITE on:section]){
+        WTMMenu *menu=[[WTMMenu alloc] initInRegistry:section.shelf.registry];
+        menu.destination_auto.registryUidString=object.registry.uidString;
+        menu.destination_auto.objectUinstID=object.uinstID;
+        [section.menus_auto addObject:menu];
+        [menu.sections_auto addObject:section];
+        menu.index=[section.menus count];
+        return menu;
+    }
+    return nil;
+}
+
+
+
+/**
  *  Removes the section and all its menus and derivated files
  *
  *  @param section the section to remove
@@ -178,6 +201,8 @@
         [menu.sections_auto enumerateObjectsUsingBlock:^(WTMMenuSection *obj, NSUInteger idx, BOOL *stop) {
             [obj.menus_auto removeObject:menu];
         } reverse:YES];
+        [menu.destination autoUnRegister];
+        menu.destination=nil;
         [menu autoUnRegister];
     }
     
@@ -196,25 +221,7 @@
 
 
 
-/**
- *  Creates a menu from an external reference in a section
- *
- *  @param section   the section
- *  @param reference the menu reference
- *
- *  @return the menu
- */
-- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section thatRefersTo:(WattExternalReference*)reference{
-    if([self actionIsAllowed:WattWRITE on:section]){
-        WTMMenu *menu=[[WTMMenu alloc] initInRegistry:section.shelf.registry];
-        menu.reference=reference;
-        [section.menus_auto addObject:menu];
-        [menu.sections_auto addObject:section];
-        menu.index=[section.menus count];
-        return menu;
-    }
-    return nil;
-}
+
 
 
 

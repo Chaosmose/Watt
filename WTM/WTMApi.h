@@ -99,6 +99,18 @@
  */
 - (WTMMenuSection*)createSectionInShelf:(WTMShelf*)shelf;
 
+
+/**
+ *  Creates a menu
+ *
+ *  @param section   the section
+ *  @param object    the menu reference
+ *
+ *  @return the menu
+ */
+- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section thatRefersTo:(WattObject*)object;
+
+
 /**
  * Removes the section and all its menus and derivated files
  *
@@ -123,15 +135,6 @@
 - (void)removeMenu:(WTMMenu *)menu fromSection:(WTMMenuSection*)section;
 
 
-/**
- *  Creates a menu from an external reference in a section
- *
- *  @param section   the section
- *  @param reference the menu reference
- *
- *  @return the menu
- */
-- (WTMMenu*)createMenuInSection:(WTMMenuSection*)section thatRefersTo:(WattExternalReference*)reference;
 
 
 
