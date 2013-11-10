@@ -47,16 +47,18 @@
 
 
 /**
- *  Create a shelf and a new registry
+ *  Create a shelf in a new registry and add it to the pool
  *
- *  @param pool       pool description
+ *  @param pool              the pool
+ *  @param registryUidString the registryUidString or nil
  *
  *  @return The shelf
  */
--(WTMShelf*)createShelfInPool:(WattRegistryPool*)pool{
+-(WTMShelf*)createShelfInPool:(WattRegistryPool*)pool
+        withRegistryUidString:(NSString*)registryUidString{
     
     // IMPORTANT WE CREATE A NEW REGISTRY
-    WattRegistry *registry=[pool registryWithUidString:nil];
+    WattRegistry *registry=[pool registryWithUidString:registryUidString];
     WTMShelf *shelf=[[WTMShelf alloc] initInRegistry:registry];
     if(!self.me){
         self.me=[self createUserInShelf:shelf];
@@ -233,10 +235,19 @@
 #pragma mark - /// PACKAGE ///
 #pragma mark -
 
-- (WTMPackage*)createPackageInPool:(WattRegistryPool*)pool{
+/**
+ *  Creates a package and its default library in a new registry
+ *
+ *  @param pool              the pool
+ *  @param registryUidString the registryUidString or nil
+ *
+ *  @return The package
+ */
+-(WTMPackage*)createPackageInPool:(WattRegistryPool*)pool
+          withRegistryUidString:(NSString*)registryUidString{
     
     // IMPORTANT WE CREATE A NEW REGISTRY
-    WattRegistry *registry=[pool registryWithUidString:nil];
+    WattRegistry *registry=[pool registryWithUidString:registryUidString];
     WTMPackage *package=[[WTMPackage alloc] initInRegistry:registry];
     package.objectName=[pool uidStringCreate];// We create a uuid for each package and library to deal with linked assets
     

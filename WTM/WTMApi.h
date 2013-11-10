@@ -51,11 +51,13 @@
 /**
  *  Create a shelf in a new registry and add it to the pool
  *
- *  @param pool       pool description
+ *  @param pool              the pool
+ *  @param registryUidString the registryUidString or nil
  *
  *  @return The shelf
  */
--(WTMShelf*)createShelfInPool:(WattRegistryPool*)pool;
+-(WTMShelf*)createShelfInPool:(WattRegistryPool*)pool
+        withRegistryUidString:(NSString*)registryUidString;
 
 #pragma mark - User and groups
 
@@ -141,15 +143,18 @@
 #pragma mark - /// PACKAGE ///
 #pragma mark -
 
-//
+
 /**
  *  Creates a package and its default library in a new registry
  *
- *  @param pool the pool
+ *  @param pool              the pool
+ *  @param registryUidString the registryUidString or nil
  *
- *  @return the package
+ *  @return The package
  */
-- (WTMPackage*)createPackageInPool:(WattRegistryPool*)pool;
+-(WTMPackage*)createPackageInPool:(WattRegistryPool*)pool
+        withRegistryUidString:(NSString*)registryUidString;
+
 
 /**
  *  Moves the package and all its dependencies to the trash

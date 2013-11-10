@@ -34,16 +34,16 @@
                                             andSecretKey:nil];
     
     // We create a Shelf (with its own registry)
-    WTMShelf*shelf=[wtmAPI createShelfInPool:pool];
+    WTMShelf*shelf=[wtmAPI createShelfInPool:pool withRegistryUidString:@"s"];
 
     WTMMenuSection *section=[wtmAPI createSectionInShelf:shelf];
     
     // We create some menu
-    [wtmAPI createMenuInSection:section thatRefersTo:[shelf externalReference]];
-    [wtmAPI createMenuInSection:section thatRefersTo:[shelf externalReference]];
-    [wtmAPI createMenuInSection:section thatRefersTo:[shelf externalReference]];
-    [wtmAPI createMenuInSection:section thatRefersTo:[shelf externalReference]];
-    [wtmAPI createMenuInSection:section thatRefersTo:[shelf externalReference]];
+    [wtmAPI createMenuInSection:section thatRefersTo:shelf];
+    [wtmAPI createMenuInSection:section thatRefersTo:shelf];
+    [wtmAPI createMenuInSection:section thatRefersTo:shelf];
+    [wtmAPI createMenuInSection:section thatRefersTo:shelf];
+    [wtmAPI createMenuInSection:section thatRefersTo:shelf];
     
     
     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"SELF.category==%@",@"favorite"];

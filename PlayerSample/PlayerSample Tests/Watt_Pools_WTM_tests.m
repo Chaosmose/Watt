@@ -288,11 +288,11 @@
                                             andSecretKey:nil];
     
     // We create a Shelf (with its own registry)
-    _shelf=[wtmAPI createShelfInPool:_pool];
+    _shelf=[wtmAPI createShelfInPool:_pool withRegistryUidString:@"shelf"];
     _shelf.comment=@"Comment #1 for test purposes";
     
     // And one package (with its own registry)
-    _package=[wtmAPI createPackageInPool:_pool];
+    _package=[wtmAPI createPackageInPool:_pool withRegistryUidString:@"package"];
     
     
     // We populate the package with a few content
