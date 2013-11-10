@@ -790,7 +790,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     NSData *data=nil;
     @try {
         data=[NSJSONSerialization dataWithJSONObject:reference
-                                             options:0
+                                             options:NSJSONWritingPrettyPrinted
                                                error:&errorJson];
     }
     @catch (NSException *exception) {
