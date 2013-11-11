@@ -21,18 +21,17 @@
  
 #import "WTMActivity.h" 
 #import "WTMPackage.h"
-#import "WTMImage.h"
 #import "WTMCollectionOfScene.h"
 
 @implementation WTMActivity 
 
 @synthesize level=_level;
+@synthesize pictureRelativePath=_pictureRelativePath;
 @synthesize rating=_rating;
 @synthesize score=_score;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
 @synthesize package=_package;
-@synthesize picture=_picture;
 @synthesize scenes=_scenes;
 
 
@@ -42,12 +41,12 @@
 	WTMActivity *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_level=_level;
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_rating=_rating;
 	instance->_score=_score;
 	instance->_shortName=[_shortName copy];
 	instance->_title=[_title copy];
 	instance->_package=[_package instancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
 	instance->_scenes=[_scenes instancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -58,12 +57,12 @@
 	WTMActivity *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_level=_level;
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_rating=_rating;
 	instance->_score=_score;
 	instance->_shortName=[_shortName copy];
 	instance->_title=[_title copy];
 	instance->_package=nil;// Non extractible
-	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
 	instance->_scenes=[_scenes extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -77,6 +76,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"level"]){
 		[super setValue:value forKey:@"level"];
+	} else if ([key isEqualToString:@"pictureRelativePath"]) {
+		[super setValue:value forKey:@"pictureRelativePath"];
 	} else if ([key isEqualToString:@"rating"]) {
 		[super setValue:value forKey:@"rating"];
 	} else if ([key isEqualToString:@"score"]) {
@@ -87,8 +88,6 @@
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"package"]) {
 		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"scenes"]) {
 		[super setValue:[WTMCollectionOfScene instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"scenes"];
 	} else {
@@ -117,29 +116,6 @@
 
 - (void)setPackage:(WTMPackage*)package{
 	_package=package;
-}
-
-- (WTMImage*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
-		if(o){
-			_picture=o;
-		}
-	}
-	return _picture;
-}
-
-
-- (WTMImage*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _picture;
-}
-
-- (void)setPicture:(WTMImage*)picture{
-	_picture=picture;
 }
 
 - (WTMCollectionOfScene*)scenes{
@@ -177,6 +153,9 @@
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
     NSMutableDictionary *dictionary=[super dictionaryOfPropertiesWithChildren:includeChildren];
 	[dictionary setValue:@(self.level) forKey:@"level"];
+	if(_pictureRelativePath){
+		[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
+	}
 	[dictionary setValue:@(self.rating) forKey:@"rating"];
 	[dictionary setValue:@(self.score) forKey:@"score"];
 	if(_shortName){
@@ -190,13 +169,6 @@
 			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"package"];
 		}else{
 			[dictionary setValue:[self.package aliasDictionaryRepresentation] forKey:@"package"];
-		}
-	}
-	if(_picture){
-		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
-		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
 		}
 	}
 	if(_scenes){
@@ -216,12 +188,12 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMActivity ",self.uinstID];
 	[s appendFormat:@"level : %@\n",@(self.level)];
+	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"rating : %@\n",@(self.rating)];
 	[s appendFormat:@"score : %@\n",@(self.score)];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
 	return s;
 }

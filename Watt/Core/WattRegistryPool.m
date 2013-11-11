@@ -397,9 +397,15 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 #pragma mark - Trash
 
 - (BOOL)trashItemFromPath:(NSString*)path{
+    if(!path && [path length]<2){
+        return NO;
+    }
     NSError*error=nil;
+    NSString *relativeDestination=[path stringByReplacingOccurrencesOfString:[self poolFolderAbsolutePath]
+                                                              withString:@""];
     [self.fileManager moveItemAtPath:path
-                              toPath:[self _trashFolderPath] error:&error];
+                              toPath:[[self _trashFolderPath] stringByAppendingString:relativeDestination]
+                               error:&error];
     if (error) {
         return NO;
     }

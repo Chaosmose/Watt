@@ -22,15 +22,14 @@
 #import "WTMPackage.h" 
 #import "WTMCollectionOfActivity.h"
 #import "WTMCollectionOfLibrary.h"
-#import "WTMImage.h"
 
 @implementation WTMPackage 
 
 @synthesize license=_license;
 @synthesize name=_name;
+@synthesize pictureRelativePath=_pictureRelativePath;
 @synthesize activities=_activities;
 @synthesize libraries=_libraries;
-@synthesize picture=_picture;
 
 
 #pragma  mark WattCopying
@@ -40,9 +39,9 @@
 	instance->_registry=destinationRegistry;
 	instance->_license=[_license copy];
 	instance->_name=[_name copy];
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_activities=[_activities instancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries instancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -53,9 +52,9 @@
 	instance->_registry=destinationRegistry;
 	instance->_license=[_license copy];
 	instance->_name=[_name copy];
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_activities=[_activities extractInstancebyCopyTo:destinationRegistry];
 	instance->_libraries=[_libraries extractInstancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
 
@@ -70,12 +69,12 @@
 		[super setValue:value forKey:@"license"];
 	} else if ([key isEqualToString:@"name"]) {
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"pictureRelativePath"]) {
+		[super setValue:value forKey:@"pictureRelativePath"];
 	} else if ([key isEqualToString:@"activities"]) {
 		[super setValue:[WTMCollectionOfActivity instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"activities"];
 	} else if ([key isEqualToString:@"libraries"]) {
 		[super setValue:[WTMCollectionOfLibrary instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"libraries"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else {
 		[super setValue:value forKey:key];
 	}
@@ -127,29 +126,6 @@
 	_libraries=libraries;
 }
 
-- (WTMImage*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
-		if(o){
-			_picture=o;
-		}
-	}
-	return _picture;
-}
-
-
-- (WTMImage*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _picture;
-}
-
-- (void)setPicture:(WTMImage*)picture{
-	_picture=picture;
-}
-
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
@@ -167,6 +143,9 @@
 	if(_name){
 		[dictionary setValue:self.name forKey:@"name"];
 	}
+	if(_pictureRelativePath){
+		[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
+	}
 	if(_activities){
 		if(includeChildren){
 			[dictionary setValue:[self.activities dictionaryRepresentationWithChildren:includeChildren] forKey:@"activities"];
@@ -181,13 +160,6 @@
 			[dictionary setValue:[self.libraries aliasDictionaryRepresentation] forKey:@"libraries"];
 		}
 	}
-	if(_picture){
-		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
-		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
-		}
-	}
     return dictionary;
 }
 
@@ -199,9 +171,9 @@
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMPackage ",self.uinstID];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"activities : %@\n",NSStringFromClass([self.activities class])];
 	[s appendFormat:@"libraries : %@\n",NSStringFromClass([self.libraries class])];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	return s;
 }
 

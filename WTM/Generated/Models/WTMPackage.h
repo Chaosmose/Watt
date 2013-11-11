@@ -23,19 +23,17 @@
 #import "WattModel.h"
 @class WTMCollectionOfActivity;
 @class WTMCollectionOfLibrary;
-@class WTMImage;
 
 @interface WTMPackage:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,copy) NSString * license;
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,copy) NSString * pictureRelativePath;
 @property (nonatomic,strong) WTMCollectionOfActivity * activities;
 @property (nonatomic,strong) WTMCollectionOfLibrary * libraries;
-@property (nonatomic,strong) WTMImage * picture;
 
 - (WTMCollectionOfActivity*)activities_auto;
 - (WTMCollectionOfLibrary*)libraries_auto;
-- (WTMImage*)picture_auto;
 
 @end

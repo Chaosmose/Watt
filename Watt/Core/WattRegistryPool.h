@@ -306,6 +306,8 @@ static NSString*mapFileDefaultName=@"map";
 #pragma mark - Trash file management
 
 
+
+
 /**
  *  Moves the items to the trash
  *

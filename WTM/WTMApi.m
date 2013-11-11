@@ -25,7 +25,6 @@
  return nil;
  
  */
-
 @implementation WTMApi
 
 + (WTMApi*)sharedInstance {
@@ -222,16 +221,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 #pragma mark - /// PACKAGE ///
 #pragma mark -
 
@@ -262,7 +251,7 @@
 - (void)removePackage:(WTMPackage*)package{
     if([self actionIsAllowed:WattWRITE on:package]){
         [package.registry.pool trashRegistry:package.registry];
-        //[package.registry.pool emptyTheTrash];// We currently do not empty the trash
+        [package.registry.pool unloadRegistryWithRegistryID:package.registry.uidString];
     }
 }
 
@@ -285,6 +274,9 @@
 
 - (void)removeLibrary:(WTMLibrary*)library{
     if([self actionIsAllowed:WattWRITE on:library.package]){
+        
+        [library.registry.pool trashItemFromPath:library.pictureRelativePath];
+        
         
         [library.members enumerateObjectsUsingBlock:^(WTMMember *obj, NSUInteger idx, BOOL *stop) {
             [self removeMember:obj];
@@ -313,6 +305,7 @@
 
 - (void)removeActivity:(WTMActivity*)activity{
     if([self actionIsAllowed:WattWRITE on:activity]){
+        [activity.registry.pool trashItemFromPath:activity.pictureRelativePath];
         [activity.package.activities removeObject:activity];
         [activity autoUnRegister];
     }
@@ -337,8 +330,9 @@
 
 - (void)removeScene:(WTMScene*)scene{
     if([self actionIsAllowed:WattWRITE on:scene]){
-        if(scene.picture)
-        [self purgeMemberIfNecessary:scene.picture];
+        
+        [scene.registry.pool trashItemFromPath:scene.pictureRelativePath];
+        
         [scene.elements enumerateObjectsUsingBlock:^(WTMElement *obj, NSUInteger idx, BOOL *stop) {
             [self removeElement:obj];
         }reverse:YES];
@@ -705,9 +699,11 @@
 
 
 - (void)_removeFilesWithRelativesPath:(NSString*)relativePath inRegistry:(WattRegistry*)registry{
-    NSArray *absolutePaths=[registry.pool absolutePathsFromRelativePath:relativePath inBundleWithName:registry.uidString all:YES];
-    for (NSString *pathToDelete in absolutePaths) {
-        [registry.pool removeItemAtPath:pathToDelete];
+    if(relativePath && [relativePath length]>1 && registry){
+        NSArray *absolutePaths=[registry.pool absolutePathsFromRelativePath:relativePath inBundleWithName:registry.uidString all:YES];
+        for (NSString *pathToDelete in absolutePaths) {
+            [registry.pool removeItemAtPath:pathToDelete];
+        }
     }
     
 }

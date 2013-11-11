@@ -24,7 +24,6 @@
 @class WTMActivity;
 @class WTMCollectionOfBehavior;
 @class WTMCollectionOfElement;
-@class WTMImage;
 @class WTMTable;
 
 @interface WTMScene:WattModel<WattCoding,WattCopying,WattExtraction>{
@@ -33,17 +32,16 @@
 @property (nonatomic,copy) NSString * footer;
 @property (nonatomic,copy) NSString * header;
 @property (nonatomic,assign) NSInteger  index;
+@property (nonatomic,copy) NSString * pictureRelativePath;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMActivity * activity;
 @property (nonatomic,strong) WTMCollectionOfBehavior * behaviors;
 @property (nonatomic,strong) WTMCollectionOfElement * elements;
-@property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMTable * table;
 
 - (WTMActivity*)activity_auto;
 - (WTMCollectionOfBehavior*)behaviors_auto;
 - (WTMCollectionOfElement*)elements_auto;
-- (WTMImage*)picture_auto;
 - (WTMTable*)table_auto;
 
 @end

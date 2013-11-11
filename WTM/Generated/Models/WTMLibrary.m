@@ -26,6 +26,7 @@
 @implementation WTMLibrary 
 
 @synthesize name=_name;
+@synthesize pictureRelativePath=_pictureRelativePath;
 @synthesize members=_members;
 @synthesize package=_package;
 
@@ -36,6 +37,7 @@
 	WTMLibrary *instance=[super wattCopyInRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_name=[_name copy];
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_members=[_members instancebyCopyTo:destinationRegistry];
 	instance->_package=[_package instancebyCopyTo:destinationRegistry];
     return instance;
@@ -47,6 +49,7 @@
 	WTMLibrary *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
 	instance->_registry=destinationRegistry;
 	instance->_name=[_name copy];
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_members=[_members extractInstancebyCopyTo:destinationRegistry];
 	instance->_package=nil;// Non extractible
     return instance;
@@ -61,6 +64,8 @@
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];
+	} else if ([key isEqualToString:@"pictureRelativePath"]) {
+		[super setValue:value forKey:@"pictureRelativePath"];
 	} else if ([key isEqualToString:@"members"]) {
 		[super setValue:[WTMCollectionOfMember instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"members"];
 	} else if ([key isEqualToString:@"package"]) {
@@ -130,6 +135,9 @@
 	if(_name){
 		[dictionary setValue:self.name forKey:@"name"];
 	}
+	if(_pictureRelativePath){
+		[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
+	}
 	if(_members){
 		if(includeChildren){
 			[dictionary setValue:[self.members dictionaryRepresentationWithChildren:includeChildren] forKey:@"members"];
@@ -154,6 +162,7 @@
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
 	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMLibrary ",self.uinstID];
 	[s appendFormat:@"name : %@\n",self.name];
+	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
 	return s;

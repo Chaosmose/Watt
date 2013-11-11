@@ -23,7 +23,6 @@
 #import "WTMActivity.h"
 #import "WTMCollectionOfBehavior.h"
 #import "WTMCollectionOfElement.h"
-#import "WTMImage.h"
 #import "WTMTable.h"
 
 @implementation WTMScene 
@@ -31,11 +30,11 @@
 @synthesize footer=_footer;
 @synthesize header=_header;
 @synthesize index=_index;
+@synthesize pictureRelativePath=_pictureRelativePath;
 @synthesize title=_title;
 @synthesize activity=_activity;
 @synthesize behaviors=_behaviors;
 @synthesize elements=_elements;
-@synthesize picture=_picture;
 @synthesize table=_table;
 
 
@@ -47,11 +46,11 @@
 	instance->_footer=[_footer copy];
 	instance->_header=[_header copy];
 	instance->_index=_index;
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_title=[_title copy];
 	instance->_activity=[_activity instancebyCopyTo:destinationRegistry];
 	instance->_behaviors=[_behaviors instancebyCopyTo:destinationRegistry];
 	instance->_elements=[_elements instancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture instancebyCopyTo:destinationRegistry];
 	instance->_table=[_table instancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -64,11 +63,11 @@
 	instance->_footer=[_footer copy];
 	instance->_header=[_header copy];
 	instance->_index=_index;
+	instance->_pictureRelativePath=[_pictureRelativePath copy];
 	instance->_title=[_title copy];
 	instance->_activity=[_activity extractInstancebyCopyTo:destinationRegistry];
 	instance->_behaviors=[_behaviors extractInstancebyCopyTo:destinationRegistry];
 	instance->_elements=[_elements extractInstancebyCopyTo:destinationRegistry];
-	instance->_picture=[_picture extractInstancebyCopyTo:destinationRegistry];
 	instance->_table=[_table extractInstancebyCopyTo:destinationRegistry];
     return instance;
 }
@@ -86,6 +85,8 @@
 		[super setValue:value forKey:@"header"];
 	} else if ([key isEqualToString:@"index"]) {
 		[super setValue:value forKey:@"index"];
+	} else if ([key isEqualToString:@"pictureRelativePath"]) {
+		[super setValue:value forKey:@"pictureRelativePath"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
 	} else if ([key isEqualToString:@"activity"]) {
@@ -94,8 +95,6 @@
 		[super setValue:[WTMCollectionOfBehavior instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"behaviors"];
 	} else if ([key isEqualToString:@"elements"]) {
 		[super setValue:[WTMCollectionOfElement instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"elements"];
-	} else if ([key isEqualToString:@"picture"]) {
-		[super setValue:[WTMImage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"picture"];
 	} else if ([key isEqualToString:@"table"]) {
 		[super setValue:[WTMTable instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"table"];
 	} else {
@@ -172,29 +171,6 @@
 	_elements=elements;
 }
 
-- (WTMImage*)picture{
-	if([_picture isAnAlias]){
-		id o=[_registry objectWithUinstID:_picture.uinstID];
-		if(o){
-			_picture=o;
-		}
-	}
-	return _picture;
-}
-
-
-- (WTMImage*)picture_auto{
-	_picture=[self picture];
-	if(!_picture){
-		_picture=[[WTMImage alloc] initInRegistry:_registry];
-	}
-	return _picture;
-}
-
-- (void)setPicture:(WTMImage*)picture{
-	_picture=picture;
-}
-
 - (WTMTable*)table{
 	if([_table isAnAlias]){
 		id o=[_registry objectWithUinstID:_table.uinstID];
@@ -236,6 +212,9 @@
 		[dictionary setValue:self.header forKey:@"header"];
 	}
 	[dictionary setValue:@(self.index) forKey:@"index"];
+	if(_pictureRelativePath){
+		[dictionary setValue:self.pictureRelativePath forKey:@"pictureRelativePath"];
+	}
 	if(_title){
 		[dictionary setValue:self.title forKey:@"title"];
 	}
@@ -260,13 +239,6 @@
 			[dictionary setValue:[self.elements aliasDictionaryRepresentation] forKey:@"elements"];
 		}
 	}
-	if(_picture){
-		if(includeChildren){
-			[dictionary setValue:[self.picture dictionaryRepresentationWithChildren:includeChildren] forKey:@"picture"];
-		}else{
-			[dictionary setValue:[self.picture aliasDictionaryRepresentation] forKey:@"picture"];
-		}
-	}
 	if(_table){
 		if(includeChildren){
 			[dictionary setValue:[self.table dictionaryRepresentationWithChildren:includeChildren] forKey:@"table"];
@@ -286,11 +258,11 @@
 	[s appendFormat:@"footer : %@\n",self.footer];
 	[s appendFormat:@"header : %@\n",self.header];
 	[s appendFormat:@"index : %@\n",@(self.index)];
+	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"title : %@\n",self.title];
 	[s appendFormat:@"activity : %@\n",NSStringFromClass([self.activity class])];
 	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"elements : %@\n",NSStringFromClass([self.elements class])];
-	[s appendFormat:@"picture : %@\n",NSStringFromClass([self.picture class])];
 	[s appendFormat:@"table : %@\n",NSStringFromClass([self.table class])];
 	return s;
 }

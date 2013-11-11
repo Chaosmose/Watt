@@ -23,23 +23,21 @@
 #import "WattModel.h"
 #import "WattModel.h"
 @class WTMPackage;
-@class WTMImage;
 @class WTMCollectionOfScene;
 
 @interface WTMActivity:WattModel<WattCoding,WattCopying,WattExtraction>{
 }
 
 @property (nonatomic,assign) NSInteger  level;
+@property (nonatomic,copy) NSString * pictureRelativePath;
 @property (nonatomic,assign) NSInteger  rating;
 @property (nonatomic,assign) NSInteger  score;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
 @property (nonatomic,strong) WTMPackage * package;// non extractible
-@property (nonatomic,strong) WTMImage * picture;
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
 
 - (WTMPackage*)package_auto;
-- (WTMImage*)picture_auto;
 - (WTMCollectionOfScene*)scenes_auto;
 
 @end

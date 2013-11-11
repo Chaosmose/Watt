@@ -28,6 +28,7 @@
 }
 
 @property (nonatomic,copy) NSString * name;
+@property (nonatomic,copy) NSString * pictureRelativePath;
 @property (nonatomic,strong) WTMCollectionOfMember * members;
 @property (nonatomic,strong) WTMPackage * package;// non extractible
 
