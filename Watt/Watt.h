@@ -18,6 +18,28 @@
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
+
+
+/*
+ 
+ KVC Advanced configuration  :
+ -----------------------------
+
+ #define WT_KVC_REGISTRY_CONTROL_AT_RUNTIME // Should not be used in production code.
+ #define WT_KVC_KEY_FAULT_TOLERENCE         // Can be used in production code
+ 
+ You can define WT_KVC_REGISTRY_CONTROL_AT_RUNTIME :
+ During developpment to check cross registry aggregation. 
+ A registry aggregation is a semantic fault any cross registry referencing should be handled using an WattExternalReference
+ If you raise "RegistryAggregation" exception you should use a WattExternalReference
+ 
+ You can define WT_KVC_KEY_FAULT_TOLERENCE :
+ if you want to allow unstrict KVC
+ In such a case the undefined key (due to versionning for example can be ignored)
+
+*/
+
+
 #import "WattDefinitions.h"
 
 #ifndef WT_LOG
@@ -49,8 +71,6 @@ __LINE__ ,\
 
 #define selectorSetterFromPropertyName(propertyName) NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]])
 #define selectorGetterFromPropertyName(propertyName) NSSelectorFromString(propertyName)
-
-#define WT_KVC_KEY_FAULT_TOLERENCE // Remove to be KVC strict
 
 #if TARGET_OS_IPHONE
 #define currentOrientation() [[UIApplication sharedApplication] statusBarOrientation]

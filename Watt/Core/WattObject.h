@@ -52,7 +52,8 @@
 }
 
 @property (readonly)NSInteger uinstID;
-@property (readonly,copy)WattRegistry*registry;
+@property (readonly)WattRegistry*registry;
+
 
 /**
  *  Relays the change status to its registry
@@ -70,13 +71,14 @@
 // autoUnRegister is a facility
 -(void)autoUnRegister;
 
-#pragma mark - Aliasing
+#pragma mark - Aliasing (linear serialization process)
 
 - (BOOL)isAnAlias;
 - (void)resolveAliases;
 
 - (NSDictionary *)aliasDictionaryRepresentation;
 - (NSString*)aliasDescription;
+
 
 #pragma mark -
 

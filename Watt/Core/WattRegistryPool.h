@@ -24,7 +24,10 @@ static NSString*mapFileDefaultName=@"map";
  -A WattRegistry            : manages a graph of WattObjects and collections (it is an object graph DB)
  -A WattExternalReference   : identifies a WattObject by its registry identity and unique instance identifier (UinstID)
  
-  NEED TO EXPLAIN WAttObject Aliasing <> external reference.
+  NEED TO EXPLAIN : 
+    *WAttObject Aliasing (linear serialization)
+    *WattExternalReference (referencing loading on demand) 
+ 
  
  File tree :
  -----------

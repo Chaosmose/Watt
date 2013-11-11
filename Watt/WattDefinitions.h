@@ -22,11 +22,11 @@ typedef enum WattSerializationModes{
 
 //  WT_CODING_KEYS
 
-#define __uinstID__         @"i"
-#define __className__       @"c"
-#define __properties__      @"p"
-#define __collection__      @"cl"
-#define __isAliased__       @"a"
+#define __uinstID__             @"i"
+#define __className__           @"c"
+#define __properties__          @"p"
+#define __collection__          @"cl"
+#define __isAliased__           @"a"
 
 
 // WT_CONST

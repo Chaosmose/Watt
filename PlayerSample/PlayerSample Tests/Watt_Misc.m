@@ -9,11 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "WTM.h"
 
-@interface Watt_Collection_Filtering : XCTestCase
+@interface Watt_Misc : XCTestCase
 
 @end
 
-@implementation Watt_Collection_Filtering
+@implementation Watt_Misc
 
 - (void)setUp
 {
@@ -27,6 +27,13 @@
     [super tearDown];
 }
 
+- (void)testMultiRegistryAggregation{
+    
+    // Combining multi registry should produces a runtime issue
+    
+}
+
+/*
 - (void)testExample
 {
     WattRegistryPool *pool=[[WattRegistryPool alloc] initWithRelativePath:@"test/"
@@ -62,5 +69,7 @@
     
     
 }
+ 
+ */
 
 @end

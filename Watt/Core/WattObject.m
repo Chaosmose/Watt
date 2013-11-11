@@ -102,6 +102,19 @@
 
 #endif
 
+#ifdef WT_KVC_REGISTRY_CONTROL_AT_RUNTIME
+
+- (void)setValue:(id)value forKey:(NSString *)key{
+    if([value respondsToSelector:@selector(registry)]){
+        if(![self.registry.uidString isEqual:[value  registry].uidString]){
+            [NSException raise:@"RegistryAggregation" format:@"KVC self.registry.uidString : %@ is not equal to [value  registry].uidString : %@",self.registry.uidString,[value  registry].uidString];
+        }
+    }
+    [super setValue:value forKeyPath:key];
+}
+
+#endif
+
 #pragma  mark -  WattCopying
 
 /**
@@ -124,6 +137,7 @@
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattObject*instance=[[[self class] alloc] init];
     instance->_registry=destinationRegistry;
+   
     if([destinationRegistry count]>0){
         instance->_uinstID=[destinationRegistry nextUinstID];
     }else{
