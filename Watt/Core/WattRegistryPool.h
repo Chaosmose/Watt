@@ -18,26 +18,27 @@ static NSString*mapFileDefaultName=@"map";
  Notes :
  --------------
  
-
+ 
  
  -A WattRegistryPool        : coordinates and insure the persistency of an ensemble of registries and associated files
  -A WattRegistry            : manages a graph of WattObjects and collections (it is an object graph DB)
  -A WattExternalReference   : identifies a WattObject by its registry identity and unique instance identifier (UinstID)
  
-  NEED TO EXPLAIN : 
-    *WAttObject Aliasing (linear serialization)
-    *WattExternalReference (referencing loading on demand) 
+ NEED TO EXPLAIN :
+ *WAttObject Aliasing (linear serialization)
+ *WattExternalReference (referencing loading on demand)
+ *Cross registry aggregation issues
  
  
  File tree :
  -----------
  
  ->PoolFolder/                          <- the root pool folder (its path is defined by initializationpath)
-    -> <registryUidString>/             <- the watt bundle folder for a given registry and dependencies
-        registry.<ext>                  <- the serialized registry (object DB)
-        <bundled folders and file>      <- the bundled files and folders
-        <delta-DB>                      <- future extension for delta synchronisation
-    <trash/>                            <- trash area for registry-bundle
+ -> <registryUidString>/             <- the watt bundle folder for a given registry and dependencies
+ registry.<ext>                  <- the serialized registry (object DB)
+ <bundled folders and file>      <- the bundled files and folders
+ <delta-DB>                      <- future extension for delta synchronisation
+ <trash/>                            <- trash area for registry-bundle
  
  ->Import/                              <- conventionnaly we copy the files to import (dowloads in progress..., etc)
  ->Export/                              <- conventionnaly we copy the exported files
@@ -50,8 +51,8 @@ static NSString*mapFileDefaultName=@"map";
  
  An app generally use one WattRegistryPool (but can use more if necessary)
  For better performance you should use multiple registries
-
- IMPORTANT IDEA : 
+ 
+ IMPORTANT IDEA :
  -----------------
  
  Data/Assets Mobility
@@ -67,6 +68,8 @@ static NSString*mapFileDefaultName=@"map";
  
  
  */
+
+
 @interface WattRegistryPool : NSObject
 
 
@@ -83,9 +86,27 @@ static NSString*mapFileDefaultName=@"map";
 @property (nonatomic,strong)    NSMutableArray *forcedSoupPaths;
 
 /**
- * the serialization mode 
+ * the serialization mode
  */
 @property (nonatomic,readonly)WattSerializationMode serializationMode;
+
+
+
+#pragma mark - KVC Advanced configuration
+
+/**
+ *  During developpment to check cross registry aggregation.
+ *  A registry aggregation is a semantic fault any cross registry referencing should be handled using an WattExternalReference
+ *  If you raise "RegistryAggregation" exception you should use a WattExternalReference
+ */
+@property (nonatomic) BOOL controlKVCRegistriesAtRuntime;   // Default is NO production code should normaly use YES.
+
+/**
+ *  If you want to allow unstrict KVC
+ *  In such a case the undefined key (due to versionning for example can be ignored)
+ */
+@property (nonatomic) BOOL faultTolerenceOnMissingKVCkeys;  // Default is YES;
+
 
 
 #pragma mark - Initializer
@@ -101,11 +122,11 @@ static NSString*mapFileDefaultName=@"map";
  *  @return the pool of registries
  */
 -(instancetype)initWithRelativePath:(NSString*)path
-                   serializationMode:(WattSerializationMode)mode
+                  serializationMode:(WattSerializationMode)mode
                        andSecretKey:(NSString*)secret;
 
 
-#pragma mark - converter 
+#pragma mark - converter
 
 
 #warning todo

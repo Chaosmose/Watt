@@ -120,6 +120,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 @synthesize forcedSoupPaths = _forcedSoupPaths;
 @synthesize serializationMode = _serializationMode;
 
+@synthesize faultTolerenceOnMissingKVCkeys = _faultTolerenceOnMissingKVCkeys;
+@synthesize controlKVCRegistriesAtRuntime = _controlKVCRegistriesAtRuntime;
+
 #pragma mark - Initializer
 
 
@@ -146,9 +149,10 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         _mixableExtensions=[NSMutableArray array];
         _forcedSoupPaths=[NSMutableArray array];
         _poolFolderRelativePath=[path copy];
-        _poolFolderAbsolutePath=[[self applicationDocumentsDirectory]stringByAppendingString:_poolFolderRelativePath];
-        //Create the trash folder if necessary
+        _poolFolderAbsolutePath=[[self applicationDocumentsDirectory]stringByAppendingString:_poolFolderRelativePath];        //Create the trash folder if necessary
         [self createRecursivelyRequiredFolderForPath:[self _trashFolderPath]];
+        _controlKVCRegistriesAtRuntime=NO;
+        _faultTolerenceOnMissingKVCkeys=YES;
     }
     return self;
 }

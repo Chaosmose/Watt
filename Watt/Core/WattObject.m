@@ -21,13 +21,14 @@
 //
 
 #import "WattObject.h"
+#import "Watt.h"
 #import "WattCollectionOfObject.h"
 #import "WattExternalReference.h"
 #import <objc/runtime.h>
 
 @interface WattObject(){
     BOOL _aliasesHasBeenResolved; //A flag to Prevent circular desaliasing.
- 
+    
 }
 @end
 
@@ -89,31 +90,34 @@
 
 #pragma  mark - KVC
 
-#ifdef WT_KVC_KEY_FAULT_TOLERENCE
-
 - (id)valueForUndefinedKey:(NSString *)key{
-    WTLog(@"Get Undefined key %@ in %@",key, NSStringFromClass([self class]));
-    return nil;
+    if(_registry.pool.faultTolerenceOnMissingKVCkeys){
+        WTLog(@"Get Undefined key %@ in %@",key, NSStringFromClass([self class]));
+        return nil;
+    }else{
+        return [super valueForUndefinedKey:key];
+    }
 }
 
 - (void) setValue:(id)value forUndefinedKey:(NSString *)key{
-    WTLog(@"Set Undefined key %@ in %@",key, NSStringFromClass([self class]));
+    if(_registry.pool.faultTolerenceOnMissingKVCkeys){
+        WTLog(@"Set Undefined key %@ in %@",key, NSStringFromClass([self class]));
+    }else{
+        [super setValue:value forUndefinedKey:key];
+    }
 }
 
-#endif
-
-#ifdef WT_KVC_REGISTRY_CONTROL_AT_RUNTIME
-
 - (void)setValue:(id)value forKey:(NSString *)key{
-    if([value respondsToSelector:@selector(registry)]){
-        if(![self.registry.uidString isEqual:[value  registry].uidString]){
-            [NSException raise:@"RegistryAggregation" format:@"KVC self.registry.uidString : %@ is not equal to [value  registry].uidString : %@",self.registry.uidString,[value  registry].uidString];
+    if(_registry.pool.controlKVCRegistriesAtRuntime){
+        if([value respondsToSelector:@selector(registry)]){
+            if(![self.registry.uidString isEqual:[value  registry].uidString]){
+                [NSException raise:@"RegistryAggregation" format:@"KVC self.registry.uidString : %@ is not equal to [value  registry].uidString : %@",self.registry.uidString,[value  registry].uidString];
+            }
         }
     }
     [super setValue:value forKeyPath:key];
 }
 
-#endif
 
 #pragma  mark -  WattCopying
 
@@ -137,7 +141,7 @@
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattObject*instance=[[[self class] alloc] init];
     instance->_registry=destinationRegistry;
-   
+    
     if([destinationRegistry count]>0){
         instance->_uinstID=[destinationRegistry nextUinstID];
     }else{
