@@ -107,16 +107,6 @@
     }
 }
 
-- (void)setValue:(id)value forKey:(NSString *)key{
-    if(_registry.pool.controlKVCRegistriesAtRuntime){
-        if([value respondsToSelector:@selector(registry)]){
-            if(![self.registry.uidString isEqual:[value  registry].uidString]){
-                [NSException raise:@"RegistryAggregation" format:@"KVC self.registry.uidString : %@ is not equal to [value  registry].uidString : %@",self.registry.uidString,[value  registry].uidString];
-            }
-        }
-    }
-    [super setValue:value forKeyPath:key];
-}
 
 
 #pragma  mark -  WattCopying
@@ -280,6 +270,9 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
+    if(_registry.pool.controlKVCRegistriesAtRuntime){
+        [self _checkRegistryConsistancy:_registry.uidString];
+    }
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:[self dictionaryOfPropertiesWithChildren:includeChildren] forKey:__properties__];
@@ -359,10 +352,29 @@
     return wrapper;
 }
 
+
 - (NSString*)aliasDescription{
     return [NSString stringWithFormat:@"Alias of %@(#%i)",NSStringFromClass([self class]),self.uinstID];
 }
 
+#pragma mark - Registry consistancy
+
+/**
+ *  Check the members registry consistancy (any member should be in the current registry)
+ *
+ *  @param registryUidString the registry unique string identifier
+ */
+- (void)_checkRegistryConsistancy:(NSString*)registryUidString{
+    // We control the consistancy of the members
+    for (NSString *propertyName in self->_propertiesKeys) {
+        id value=[super valueForKey:propertyName];
+        if([value respondsToSelector:@selector(registry)]){
+            if(![registryUidString isEqual:[value  registry].uidString]){
+                [NSException raise:@"RegistryAggregation" format:@"%@.%@ registry is inconsistant %@ should be %@",NSStringFromClass([self class]),propertyName,[value  registry].uidString,registryUidString];
+            }
+        }
+    }
+}
 
 
 @end

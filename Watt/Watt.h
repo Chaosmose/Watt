@@ -18,8 +18,6 @@
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
-
-
 #import "WattDefinitions.h"
 
 #ifndef WT_LOG
@@ -63,8 +61,6 @@ __LINE__ ,\
 
 #pragma mark - Imports
 
-
-
 #import "WattObjectProtocols.h"
 #import "WattObject.h"
 #import "WattRegistry.h"
@@ -82,8 +78,3 @@ __LINE__ ,\
 #pragma mark - generated imports
 
 #import "WattImports.h"
-
-
-
-
-
