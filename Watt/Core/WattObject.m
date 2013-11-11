@@ -368,7 +368,7 @@
         id value=[super valueForKey:propertyName];
         if([value respondsToSelector:@selector(registry)]){
             if(![registryUidString isEqual:[value  registry].uidString]){
-                [NSException raise:@"RegistryAggregation" format:@"The registry of %@.%@  is inconsistant : \"%@\" should be : \"%@\" please use an WattExternalReference to store a relation with another registry",NSStringFromClass([self class]),propertyName,[value  registry].uidString,registryUidString];
+                [NSException raise:@"RegistryAggregation" format:@"The registry of %@.%@  is inconsistant : \"%@\" should be : \"%@\" please use an WattExternalReference to store a relation with an instance of another registry or instantiate %@ in %@ ",NSStringFromClass([self class]),propertyName,[value  registry].uidString,registryUidString,propertyName,registryUidString];
             }
         }
     }

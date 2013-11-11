@@ -97,12 +97,13 @@
 
 /**
  *  Invalid initializer
- *  You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry
+ *  You must use @selector(initRegistryWithUniqueStringIdentifier:inPool:)  to initialize a WattRegistry
  *  @return nil
  */
 - (id)init{
     [NSException raise:@"WattRegistry initialization exception"
-                format:@"You must use @selector(initWithSerializationMode:name:andContainerName:) to initialize a WattRegistry"];
+                format:@"You must use  @selector(registryWithUniqueStringIdentifier:inPool:) or @selector(initRegistryWithUniqueStringIdentifier:inPool:)  to initialize a WattRegistry"];
+    
     return nil;
 }
 
