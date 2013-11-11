@@ -47,14 +47,14 @@
     return nil;
 }
 
-- (BOOL)writePNGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry{
+- (BOOL)writePNGToAbsolutePath:(NSString*)path forPool:(WattRegistryPool*)pool{
     NSData *data=UIImagePNGRepresentation(self);
-    return [registry.pool writeData:data toPath:path];
+    return [pool writeData:data toPath:path];
 }
 
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry{
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path forPool:(WattRegistryPool*)pool{
     NSData *data=UIImageJPEGRepresentation(self, 0.5f);
-    return [registry.pool writeData:data toPath:path];
+    return [pool writeData:data toPath:path];
 }
 
 

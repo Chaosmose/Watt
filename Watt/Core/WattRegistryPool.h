@@ -33,8 +33,8 @@ static NSString*mapFileDefaultName=@"map";
  File tree :
  -----------
  
- ->PoolFolder/                          <- the root pool folder (its path is defined by initializationpath)
- -> <registryUidString>/             <- the watt bundle folder for a given registry and dependencies
+ ->PoolFolder/                   <- the root pool folder (its path is defined by initializationpath)
+ -> <registryUidString>/         <- the watt bundle folder for a given registry and dependencies
  registry.<ext>                  <- the serialized registry (object DB)
  <bundled folders and file>      <- the bundled files and folders
  <delta-DB>                      <- future extension for delta synchronisation

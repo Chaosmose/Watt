@@ -37,8 +37,8 @@
 +(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath inRegistry:(WattRegistry*)registry;
 
 
-- (BOOL)writePNGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry;
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path forRegistry:(WattRegistry*)registry;
+- (BOOL)writePNGToAbsolutePath:(NSString*)path forPool:(WattRegistryPool*)pool;
+- (BOOL)writeJPGToAbsolutePath:(NSString*)path forPool:(WattRegistryPool*)pool;
 
 @end
 #endif
