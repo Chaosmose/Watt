@@ -270,9 +270,6 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
-    if(_registry.pool.controlKVCRegistriesAtRuntime){
-        [self _checkRegistryConsistancy:_registry.uidString];
-    }
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
 	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:[self dictionaryOfPropertiesWithChildren:includeChildren] forKey:__properties__];
@@ -282,15 +279,15 @@
 
 
 - (NSMutableDictionary*)dictionaryOfPropertiesWithChildren:(BOOL)includeChildren{
+    if(_registry.pool.controlKVCRegistriesAtRuntime){
+        [self _checkRegistryConsistancy:_registry.uidString];
+    }
     return [NSMutableDictionary dictionary];
 }
-
 
 - (NSInteger)uinstID{
     return _uinstID;
 }
-
-
 
 
 // _keys dictionary caches the responses for future uses.
@@ -359,6 +356,7 @@
 
 #pragma mark - Registry consistancy
 
+
 /**
  *  Check the members registry consistancy (any member should be in the current registry)
  *
@@ -366,15 +364,16 @@
  */
 - (void)_checkRegistryConsistancy:(NSString*)registryUidString{
     // We control the consistancy of the members
-    for (NSString *propertyName in self->_propertiesKeys) {
+    for (NSString *propertyName in [self propertiesKeys]) {
         id value=[super valueForKey:propertyName];
         if([value respondsToSelector:@selector(registry)]){
             if(![registryUidString isEqual:[value  registry].uidString]){
-                [NSException raise:@"RegistryAggregation" format:@"%@.%@ registry is inconsistant %@ should be %@",NSStringFromClass([self class]),propertyName,[value  registry].uidString,registryUidString];
+                [NSException raise:@"RegistryAggregation" format:@"The registry of %@.%@  is inconsistant : \"%@\" should be : \"%@\" please use an WattExternalReference to store a relation with another registry",NSStringFromClass([self class]),propertyName,[value  registry].uidString,registryUidString];
             }
         }
     }
 }
+
 
 
 @end
