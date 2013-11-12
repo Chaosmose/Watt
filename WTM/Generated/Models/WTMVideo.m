@@ -78,7 +78,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMVideo ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMVideo ",_registry.uidString,_uinstID];
 	[s appendFormat:@"duration : %@\n",@(self.duration)];
 	return s;
 }

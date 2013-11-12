@@ -80,7 +80,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMAsset ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMAsset ",_registry.uidString,_uinstID];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	return s;
 }

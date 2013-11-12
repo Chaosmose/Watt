@@ -216,7 +216,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMElement ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMElement ",_registry.uidString,_uinstID];
 	[s appendFormat:@"asset : %@\n",NSStringFromClass([self.asset class])];
 	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];

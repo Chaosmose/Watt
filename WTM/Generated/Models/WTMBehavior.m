@@ -96,7 +96,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMBehavior ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMBehavior ",_registry.uidString,_uinstID];
 	[s appendFormat:@"actionName : %@\n",self.actionName];
 	[s appendFormat:@"attributes : %@\n",self.attributes];
 	[s appendFormat:@"triggerName : %@\n",self.triggerName];

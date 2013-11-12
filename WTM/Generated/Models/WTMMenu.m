@@ -246,7 +246,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMMenu ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMMenu ",_registry.uidString,_uinstID];
 	[s appendFormat:@"destination : %@\n",NSStringFromClass([self.destination class])];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"index : %@\n",@(self.index)];

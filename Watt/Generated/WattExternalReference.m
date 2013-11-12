@@ -86,7 +86,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WattExternalReference ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WattExternalReference ",_registry.uidString,_uinstID];
 	[s appendFormat:@"objectUinstID : %@\n",@(self.objectUinstID)];
 	[s appendFormat:@"registryUidString : %@\n",self.registryUidString];
 	return s;

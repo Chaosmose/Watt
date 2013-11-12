@@ -186,7 +186,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMColumn ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMColumn ",_registry.uidString,_uinstID];
 	[s appendFormat:@"height : %@\n",@(self.height)];
 	[s appendFormat:@"behaviors : %@\n",NSStringFromClass([self.behaviors class])];
 	[s appendFormat:@"cells : %@\n",NSStringFromClass([self.cells class])];

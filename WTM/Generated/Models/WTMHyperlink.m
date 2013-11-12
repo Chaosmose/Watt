@@ -98,7 +98,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMHyperlink ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMHyperlink ",_registry.uidString,_uinstID];
 	[s appendFormat:@"allowExploration : %@\n",@(self.allowExploration)];
 	[s appendFormat:@"updateImageOnChange : %@\n",@(self.updateImageOnChange)];
 	[s appendFormat:@"updateUrlOnChange : %@\n",@(self.updateUrlOnChange)];

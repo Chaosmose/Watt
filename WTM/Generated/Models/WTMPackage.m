@@ -168,7 +168,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WTMPackage ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMPackage ",_registry.uidString,_uinstID];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];

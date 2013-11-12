@@ -124,7 +124,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%i) :\n",@"WattUser ",self.uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WattUser ",_registry.uidString,_uinstID];
 	[s appendFormat:@"identity : %@\n",self.identity];
 	[s appendFormat:@"objectName : %@\n",self.objectName];
 	[s appendFormat:@"group : %@\n",NSStringFromClass([self.group class])];
