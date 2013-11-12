@@ -39,7 +39,7 @@
  */
 -(BOOL)isEqualToExternalReference:(WattExternalReference*)externalReference{
     return ([externalReference.registryUidString isEqual:self.registry.uidString] &&
-            externalReference.uinstID==self->_uinstID);
+            externalReference.objectUinstID==self->_uinstID);
 }
 
 @end
