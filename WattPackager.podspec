@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name        = 'WattPackager'
-  s.version     = '0.01'
+  s.version     = '0.02'
   s.authors     = { 'Benoit Pereira da Silva' => 'benoit@pereira-da-silva.com' }
   s.homepage    = 'https://https://github.com/benoit-pereira-da-silva/Watt'
   s.summary     = 'A module to extract, package transmit, download watt registry pool and bundles'
@@ -12,5 +12,4 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source_files =  'WattPackager/*.{h,m}'
   s.public_header_files = 'WattPackager/*.h'
-  s.dependency  'AFNetworking','~>2.0.1'
 end
