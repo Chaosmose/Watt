@@ -147,6 +147,7 @@
         [shelf.sections_auto addObject:section];
         section.shelf=shelf;
         section.index=[shelf.sections count];
+        [section menus_auto];// We create a collection of menu
         return section;
     }
     return nil;
