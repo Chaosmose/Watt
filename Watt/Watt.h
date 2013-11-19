@@ -20,8 +20,8 @@
 
 #import "WattDefinitions.h"
 
-#ifndef WT_LOG
-#define WT_LOG 1 // You can set up WT_LOG to 1 or 0
+#ifndef __WT_LOG
+#define __WT_LOG 1 // You can set up WT_LOG to 1 or 0
 typedef enum logNatures{
     WT_LOG_DEBUG=0,
     WT_LOG_RUNTIME=1,
@@ -44,8 +44,9 @@ __LINE__ ,\
 #endif
 #endif
 
-#ifndef WT_RUNTIME_CONFIGURATION
-#define WT_RUNTIME_CONFIGURATION
+#ifndef __WT_RUNTIME_CONFIGURATION
+#define __WT_RUNTIME_CONFIGURATION
+
 
 #define selectorSetterFromPropertyName(propertyName) NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]])
 #define selectorGetterFromPropertyName(propertyName) NSSelectorFromString(propertyName)

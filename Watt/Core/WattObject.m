@@ -367,7 +367,9 @@
     for (NSString *propertyName in [self propertiesKeys]) {
         id value=[super valueForKey:propertyName];
         if([value respondsToSelector:@selector(registry)]){
-            if(![registryUidString isEqual:[value  registry].uidString]){
+            if(![value  registry] && WT_ALLOW_VOID_REGISTRIES){
+                WTLog(@"Auto-correction of nil registry for %@.%@(%@)",NSStringFromClass([self class]),propertyName,NSStringFromClass([value class]));
+            }else if(registryUidString && ![registryUidString isEqual:[value  registry].uidString]){
                 [NSException raise:@"RegistryAggregation" format:@"The registry of %@.%@  is inconsistant : \"%@\" should be : \"%@\" please use an WattExternalReference to store a relation with an instance of another registry or instantiate %@ in %@ ",NSStringFromClass([self class]),propertyName,[value  registry].uidString,registryUidString,propertyName,registryUidString];
             }
         }

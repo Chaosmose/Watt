@@ -22,6 +22,13 @@
 #import "WattObjectProtocols.h"
 #import "WattRegistry.h"
 
+#ifdef __WT_ALLOW_VOID_REGISTRIES
+#define WT_ALLOW_VOID_REGISTRIES YES
+#else
+#define WT_ALLOW_VOID_REGISTRIES NO
+#endif
+
+
 #pragma mark - WattObject
 
 @class WattExternalReference;
