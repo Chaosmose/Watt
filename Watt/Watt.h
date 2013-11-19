@@ -26,7 +26,7 @@ typedef enum logNatures{
     WT_LOG_DEBUG=0,
     WT_LOG_RUNTIME=1,
 }LogNature;
-#if WT_LOG
+#if __WT_LOG
 #define WTLogNF(nature,format, ... ){\
 NSLog( @"WT(%i):%s line:%d:{\n%@\n}\n",\
 nature,\
