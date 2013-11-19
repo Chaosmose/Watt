@@ -22,6 +22,7 @@
 #import "WattObjectProtocols.h"
 #import "WattRegistry.h"
 
+#define __WT_ALLOW_VOID_REGISTRIES
 #ifdef __WT_ALLOW_VOID_REGISTRIES
 #define WT_ALLOW_VOID_REGISTRIES YES
 #else
