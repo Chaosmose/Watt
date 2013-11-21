@@ -284,28 +284,20 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 }
 
 
+
 /**
- *  Saves the registry on the main thread
+ *  Saves the registry
  *
  *  @param registry the registry to be saved
  */
 - (void)saveRegistry:(WattRegistry*)registry{
-   [self performSelectorOnMainThread:@selector(_saveRegistry:)
-                          withObject:registry
-                       waitUntilDone:YES];
-}
-
-/**
- *  Saves the registry on the main thread
- *
- *  @param registry the registry to be saved
- */
-- (void)_saveRegistry:(WattRegistry*)registry{
     NSString*path=[self absolutePathForRegistryFileWithName:registry.uidString];
     if([self writeRegistry:registry
                     toFile:path]){
         registry.hasChanged=NO;
         WTLog(@"Registry %@ has been saved",registry.uidString);
+    }else{
+        WTLog(@"An error occured while saving registry : %@ ",registry.uidString);
     }
 }
 
