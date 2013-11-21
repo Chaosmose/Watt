@@ -36,11 +36,12 @@
 }
 
 - (void)setUpWithSound:(WTMSound*)sound
+           fromLibrary:(WTMLibrary*)library
        useCategoryName:(NSString*)category
             anDelegate:(id<WIOSSoundRecorderDelegate>)delegate{
     [self setSelectedSound:sound];
     [self setCategoryName:category];
-    [self setLibrary:sound.library];
+    [self setLibrary:library];
     self.delegate=delegate;
     [self.tableView reloadData];
 }
@@ -48,15 +49,15 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     _addButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                              target:self
                                                              action:@selector(_createSound:)];
-
- 
+    
+    
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItems = @[_addButton,self.editButtonItem];
 }
@@ -75,7 +76,7 @@
     [super viewWillAppear:animated];
     if(!_wiosBundle)
         [self setBundleName:@"WTMIOS"];
-
+    
 }
 
 
@@ -112,16 +113,14 @@
 
 
 - (void) _createSound:(id)sender{
-    WIOSSoundManagerTableViewController *__weak weakSelf=self;
-    [self.library.registry executeBlockAndSaveIfNecessary:^{
-        WTMLibrary*library=weakSelf.library;
-        WTMSound*sound=[wtmAPI createSoundMemberInLibrary:library];
-        sound.refererCounter=NSIntegerMax; // We do consider that any sound must be persistent and explicitly deleted.
-        sound.category=weakSelf.categoryName;;
-        sound.name=NSLocalizedString(@"New sound name", @"The default sound name to be used on sound creation");
-        sound.relativePath=[NSString stringWithFormat:@"%i/%i/%i.caf",sound.library.package.uinstID,sound.library.uinstID,sound.uinstID];
-        [_sounds addObject:sound];
-    }];
+    WTMLibrary*library=self.library;
+    WTMSound*sound=[wtmAPI createSoundMemberInLibrary:library];
+    sound.refererCounter=NSIntegerMax; // We do consider that any sound must be persistent and explicitly deleted.
+    sound.category=self.categoryName;
+    sound.name=NSLocalizedString(@"New sound name", @"The default sound name to be used on sound creation");
+    sound.relativePath=[NSString stringWithFormat:@"%i/%i/%i.caf",sound.library.package.uinstID,sound.library.uinstID,sound.uinstID];
+    [_sounds addObject:sound];
+    [self.library.registry save];
     [self.tableView reloadData];
 }
 
@@ -156,27 +155,26 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
         [self.delegate willDeleteSound:sound];
-        [self.library.registry executeBlockAndSaveIfNecessary:^{
-               [wtmAPI removeMember:sound];
-        }];
+        [wtmAPI removeMember:sound];
+        [self.library.registry save];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
 

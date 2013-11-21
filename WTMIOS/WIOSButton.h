@@ -12,5 +12,5 @@
 /**
  *  We use this property to embed buttons in a collection view or table view easily
  */
-@property (weak,nonatomic) NSIndexPath *indexPath;
+@property (copy,nonatomic) NSIndexPath *indexPath;
 @end

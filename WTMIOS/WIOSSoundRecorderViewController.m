@@ -295,7 +295,7 @@
 
 
 - (NSString*)_soundPath{
-    return  [_sound.registry.pool absolutePathFromRelativePath:self.sound.relativePath inBundleWithName:self.sound.registry.uidString];
+    return  [[_sound.registry.pool absolutePathForRegistryBundleFolderWithName:self.sound.registry.uidString]stringByAppendingString:self.sound.relativePath];
 }
 
 
