@@ -167,6 +167,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         WTMSound *sound=(WTMSound*)[_sounds objectAtIndex:indexPath.row];
+        [_sounds removeObject:sound];// Delete from the data source
         [self.delegate willDeleteSound:sound];
         [wtmAPI removeMember:sound];
         [self.library.registry save];
