@@ -290,6 +290,17 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @param registry the registry to be saved
  */
 - (void)saveRegistry:(WattRegistry*)registry{
+   [self performSelectorOnMainThread:@selector(_saveRegistry:)
+                          withObject:registry
+                       waitUntilDone:YES];
+}
+
+/**
+ *  Saves the registry on the main thread
+ *
+ *  @param registry the registry to be saved
+ */
+- (void)_saveRegistry:(WattRegistry*)registry{
     NSString*path=[self absolutePathForRegistryFileWithName:registry.uidString];
     if([self writeRegistry:registry
                     toFile:path]){
@@ -297,6 +308,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         WTLog(@"Registry %@ has been saved",registry.uidString);
     }
 }
+
 
 /**
  *  Saves all the registries
@@ -626,7 +638,6 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 #pragma mark - files I/O
 
-
 /**
  *  Write the data mixing if necessary
  *
@@ -637,14 +648,11 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
-    WattRegistryPool *__weak weakSelf=self;
-    BOOL __block result;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [weakSelf createRecursivelyRequiredFolderForPath:path];
-        result=[[weakSelf _dataSoup:data mix:[weakSelf _shouldMixPath:path]] writeToFile:path atomically:YES];
-    });
-    return result;
+    [self createRecursivelyRequiredFolderForPath:path];
+    data=[self _dataSoup:data mix:[self _shouldMixPath:path]];
+    return [data writeToFile:path atomically:YES];
 }
+
 
 /**
  *  Reads the data and mix if necessary (mixing is reversible)
@@ -654,13 +662,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the Data
  */
 -(NSData*)readDataFromPath:(NSString*)path{
-    WattRegistryPool *__weak weakSelf=self;
-    NSData* __block data=nil;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        data=[weakSelf _dataSoup:[NSData dataWithContentsOfFile:path]
-                             mix:[weakSelf _shouldMixPath:path]];
-    });
-    return data;
+    NSData *data=[NSData dataWithContentsOfFile:path];
+    return [self _dataSoup:data mix:[self _shouldMixPath:path]];
+    
 }
 
 
@@ -673,14 +677,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the success of the file operation
  */
 - (BOOL)writeData:(NSData*)data toPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode{
-    WattRegistryPool *__weak weakSelf=self;
-    NSData *__weak weakData=data;
-    BOOL __block result;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [weakSelf createRecursivelyRequiredFolderForPath:path];
-        result=[[weakSelf _dataSoup:weakData mix:(mode==WattJx||mode==WattPx)] writeToFile:path atomically:YES];
-    });
-    return result;
+    [self createRecursivelyRequiredFolderForPath:path];
+    data=[self _dataSoup:data mix:(mode==WattJx||mode==WattPx)];
+    return [data writeToFile:path atomically:YES];
 }
 
 /**
@@ -692,12 +691,8 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the Data
  */
 - (NSData*)readDataFromPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode{
-    WattRegistryPool *__weak weakSelf=self;
-    NSData* __block data=nil;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        data=[weakSelf _dataSoup:[NSData dataWithContentsOfFile:path] mix:(mode==WattJx||mode==WattPx)];
-    });
-    return data;
+    NSData *data=[NSData dataWithContentsOfFile:path];
+    return [self _dataSoup:data mix:(mode==WattJx||mode==WattPx)];
 }
 
 
