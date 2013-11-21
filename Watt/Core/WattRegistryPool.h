@@ -204,7 +204,7 @@ static NSString*mapFileDefaultName=@"map";
 - (void)saveRegistries;
 
 /**
- *  Saves all the registries with hasChanged flag set to YES
+ *  Saves all the registries with hasChanged flag set to YES on the main thread
  */
 - (void)saveRegistriesIfNecessary;
 
@@ -334,6 +334,11 @@ static NSString*mapFileDefaultName=@"map";
 
 #pragma mark - file I/O
 
+//************************************
+// All the I/O are performed
+// on synchronously on the main queue
+// Using GCD
+//************************************
 
 /**
  *  Write the data mixing if necessary
