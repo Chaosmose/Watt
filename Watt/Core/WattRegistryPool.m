@@ -211,7 +211,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 - (BOOL)unloadRegistries{
     BOOL status=YES;;
     for (NSString*keyID in [_registries allKeys]) {
-         status=status&&[self unloadRegistryWithRegistryID:keyID];
+        status=status&&[self unloadRegistryWithRegistryID:keyID];
         [_registries removeObjectForKey:keyID];
     }
     return status;
@@ -405,7 +405,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     }
     NSError*error=nil;
     NSString *relativeDestination=[path stringByReplacingOccurrencesOfString:[self poolFolderAbsolutePath]
-                                                              withString:@""];
+                                                                  withString:@""];
     [self.fileManager moveItemAtPath:path
                               toPath:[[self _trashFolderPath] stringByAppendingString:relativeDestination]
                                error:&error];
@@ -642,7 +642,14 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
     [self createRecursivelyRequiredFolderForPath:path];
     data=[self _dataSoup:data mix:[self _shouldMixPath:path]];
-    return [data writeToFile:path atomically:YES];
+    NSError *error=nil;
+    [data writeToFile:path options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
+    if(error){
+        WTLog(@"Error while writing %i bytes to %@",[data length],path);
+        return NO;
+    }else{
+        return YES;
+    }
 }
 
 
@@ -806,6 +813,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         data=[NSJSONSerialization dataWithJSONObject:reference
                                              options:NSJSONWritingPrettyPrinted
                                                error:&errorJson];
+        if(errorJson){
+            WTLog(@"JSON error on %@ %@",[errorJson localizedDescription],reference);
+        }
     }
     @catch (NSException *exception) {
         return NO;
@@ -813,7 +823,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     @finally {
     }
     if(data){
-        [self writeData:data toPath:path];
+        return [self writeData:data toPath:path];
     }else{
         return NO;
     }
@@ -863,11 +873,11 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
             // QUICK dirty and not memory efficient
             // Should be optimized in c.
             // Objective C is certainly not efficient here
-           BOOL shouldReverse=[[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue];
-           if(shouldReverse)
-               mixedBytes[i] = (~ bytes[i]);
+            BOOL shouldReverse=[[_secretBooleanList objectAtIndex:_secretLoopIndex] boolValue];
+            if(shouldReverse)
+                mixedBytes[i] = (~ bytes[i]);
             else
-               mixedBytes[i] = (- bytes[i]);
+                mixedBytes[i] = (- bytes[i]);
             _secretLoopIndex++;
             if(_secretLoopIndex>=_secretLength){
                 _secretLoopIndex=0;
