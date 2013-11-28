@@ -8,8 +8,6 @@
 
 #import "WIOSSoundRecorderViewController.h"
 
-//#import <AVFoundation/AVAudioSettings.h>
-
 #define  AUDIOMONITOR_THRESHOLD
 
 @interface WIOSSoundRecorderViewController(){
@@ -67,6 +65,7 @@
     
     [self.stopButton setImage:[UIImage imageWithContentsOfFile:[_wiosBundle pathForResource:@"stop" ofType:@"png"]]forState:UIControlStateNormal];
     [self.nameTextField setText:self.sound.name];
+    [self.nameTextField setDelegate:self];
     [self.progressSlider setContinuous:YES];
     [self.progressSlider setMinimumValue:0.f];
     [self.progressSlider setMaximumValue:1.f];
@@ -514,6 +513,14 @@
 /* audioRecorderBeginInterruption: is called when the audio session has been interrupted while the recorder was recording. The recorded file will be closed. */
 - (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder{
     
+}
+
+
+#pragma mark - UItextFieldDelegate 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

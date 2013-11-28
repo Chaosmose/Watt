@@ -12,7 +12,7 @@
 #import "WTM.h"
 #import "WTMSound.h"
 
-@interface WIOSSoundRecorderViewController : UIViewController<AVAudioRecorderDelegate,AVAudioPlayerDelegate>{
+@interface WIOSSoundRecorderViewController : UIViewController<AVAudioRecorderDelegate,AVAudioPlayerDelegate,UITextFieldDelegate>{
 
 }
 
