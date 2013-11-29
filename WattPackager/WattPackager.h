@@ -42,7 +42,7 @@
  *  @param overWrite      if there is an existing destination and set to yes it is overwritten
  */
 -(void)packFolderFromPath:(NSString*)path
-                    withBlock:(void (^)(BOOL success, NSString*packPath))block
+                    withBlock:(void (^)(BOOL success, NSString*packPath, NSError*error))block
             useBackgroundMode:(BOOL)backgroundMode
                 overWrite:(BOOL)overWrite;
 
@@ -58,7 +58,7 @@
  */
 -(void)unPackFromPath:(NSString*)sourcePath
                    to:(NSString*)destinationFolder
-            withBlock:(void (^)(BOOL success,NSString*path))block
+            withBlock:(void (^)(BOOL success,NSString*path,NSError*error))block
     useBackgroundMode:(BOOL)backgroundMode
    overWrite:(BOOL)overWrite;
 

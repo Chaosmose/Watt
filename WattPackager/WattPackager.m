@@ -65,17 +65,16 @@
  *  @param overWrite      if there is an existing destination and set to yes it is overwritten
  */
 -(void)packFolderFromPath:(NSString*)path
-                withBlock:(void (^)(BOOL success, NSString*packPath))block
+                withBlock:(void (^)(BOOL success, NSString*packPath,NSError*error))block
         useBackgroundMode:(BOOL)backgroundMode
                 overWrite:(BOOL)overWrite{
-    
+    NSError*error=nil;
     NSString *sourceFolderPath=path;
     sourceFolderPath=[sourceFolderPath substringToIndex:[sourceFolderPath length]-1];
     NSString *__weak destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@",self.defaultPackExtension];
     NSInteger i=0;
     if(overWrite){
         if([self.fileManager fileExistsAtPath:destinationFilePath]){
-            NSError*error=nil;
             [self.fileManager removeItemAtPath:destinationFilePath error:&error];
         }
     }else{
@@ -84,13 +83,15 @@
             i++;
         }
     }
-    
-    [self zip:sourceFolderPath
-           to:destinationFilePath
-    withBlock:^(BOOL success) {
-        block(success,destinationFilePath);
-    } useBackgroundMode:backgroundMode];
-    
+    if(!error){
+        [self _zip:sourceFolderPath
+                to:destinationFilePath
+         withBlock:^(BOOL success,NSError *error) {
+             block((success&&!error),destinationFilePath,error);
+         } useBackgroundMode:backgroundMode];
+    }else{
+        block(NO,destinationFilePath,error);
+    }
 }
 
 
@@ -105,37 +106,35 @@
  */
 -(void)unPackFromPath:(NSString*)sourcePath
                    to:(NSString*)destinationFolder
-            withBlock:(void (^)(BOOL success,NSString*path))block
+            withBlock:(void (^)(BOOL success,NSString*path,NSError*error))block
     useBackgroundMode:(BOOL)backgroundMode
             overWrite:(BOOL)overWrite{
     
-    if(![self.fileManager fileExistsAtPath:sourcePath]){
-        block(NO,nil);
+    
+    NSString *__weak destination=destinationFolder;
+    if([self.fileManager fileExistsAtPath:destinationFolder] && overWrite){
+        NSError*error=nil;
+        [self.fileManager removeItemAtPath:destinationFolder error:&error];
     }else{
-        NSString *__weak destination=destinationFolder;
-        if([self.fileManager fileExistsAtPath:destinationFolder] && overWrite){
-            NSError*error=nil;
-            [self.fileManager removeItemAtPath:destinationFolder error:&error];
-        }else{
-            int i=1;
-            while ([self.fileManager fileExistsAtPath:destination]) {
-                i++;
-                destination=[destinationFolder stringByAppendingFormat:@"_%i",i];
-            }
+        int i=1;
+        while ([self.fileManager fileExistsAtPath:destination]) {
+            i++;
+            destination=[destinationFolder stringByAppendingFormat:@"_%i",i];
         }
-        [self _createRecursivelyRequiredFolderForPath:destination];
-        
-        WattPackager *__weak weakSelf=self;
-        NSString *__weak weakSourcePath=sourcePath;
-        [self unZip:sourcePath
-                 to:destination
-          withBlock:^(BOOL success) {
-              NSError *error=nil;
-              [weakSelf.fileManager removeItemAtPath:weakSourcePath
-                                               error:&error];
-              block(success,destination);
-          }useBackgroundMode:backgroundMode];
     }
+    [self _createRecursivelyRequiredFolderForPath:destination];
+    
+    WattPackager *__weak weakSelf=self;
+    NSString *__weak weakSourcePath=sourcePath;
+    [self _unZip:sourcePath
+              to:destination
+       withBlock:^(BOOL success,NSError*error) {
+           if (success) {
+               [weakSelf.fileManager removeItemAtPath:weakSourcePath
+                                                error:&error];
+               block((success&&!error),destination,error);
+           }
+       }useBackgroundMode:backgroundMode];
 }
 
 
@@ -161,34 +160,44 @@
 
 #pragma mark - ZIP / UNZIP
 
--(void)unZip:(NSString*)zipSourcePath
-          to:(NSString*)destinationFolder
-   withBlock:(void (^)(BOOL success))block
+-(void)_unZip:(NSString*)zipSourcePath
+           to:(NSString*)destinationFolder
+    withBlock:(void (^)(BOOL success,NSError*error))block
 useBackgroundMode:(BOOL)backgroundMode{
-    if([self.fileManager fileExistsAtPath:zipSourcePath]){
-        if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
-            if(backgroundMode){
-                [self.queue addOperationWithBlock:^{
-                    if([SSZipArchive unzipFileAtPath:zipSourcePath
-                                       toDestination:destinationFolder
-                                            delegate:self]){
-                        block(YES);
-                    }else{
-                        block(NO);
-                    }
-                }];
-            }else{
+    WattPackager *__weak weakSelf=self;
+    if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
+        if(backgroundMode){
+            [self.queue addOperationWithBlock:^{
+                NSError *error=nil;
                 if([SSZipArchive unzipFileAtPath:zipSourcePath
                                    toDestination:destinationFolder
-                                        delegate:self]){
-                    block(YES);
+                                       overwrite:YES
+                                        password:nil
+                                           error:&error
+                                        delegate:weakSelf]){
+                    block(YES,error);
                 }else{
-                    block(NO);
+                    block(NO,error);
                 }
-            }
+            }];
         }else{
-            // Error
+            NSError *error=nil;
+            if([SSZipArchive unzipFileAtPath:zipSourcePath
+                               toDestination:destinationFolder
+                                   overwrite:YES
+                                    password:nil
+                                       error:&error
+                                    delegate:weakSelf]){
+                block(YES,error);
+            }else{
+                block(NO,error);
+            }
         }
+    }else{
+        NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+                                           code:1
+                                       userInfo:@{@"message": @"_createRecursivelyRequiredFolderForPath failed"}];
+        block(NO,error);
     }
 }
 
@@ -212,36 +221,54 @@ useBackgroundMode:(BOOL)backgroundMode{
 }
 
 
--(void)zip:(NSString*)sourcePath
-        to:(NSString*)destinationZipFilePath
- withBlock:(void (^)(BOOL success))block
+-(void)_zip:(NSString*)sourcePath
+         to:(NSString*)destinationZipFilePath
+  withBlock:(void (^)(BOOL success,NSError*error))block
 useBackgroundMode:(BOOL)backgroundMode{
     NSError*error=nil;
+    WattPackager *__weak weakSelf=self;
     if([self.fileManager fileExistsAtPath:sourcePath]){
         if([self.fileManager fileExistsAtPath:destinationZipFilePath]){
             [self.fileManager removeItemAtPath:destinationZipFilePath error:&error];
         }
+        if(error){
+            block(NO,error);
+        }
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
+                
                 if([SSZipArchive createZipFileAtPath:destinationZipFilePath
                              withContentsOfDirectory:sourcePath]){
-                    block(YES);
+                    block(YES,nil);
                 }else{
-                    block(NO);
+                    NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+                                                       code:2
+                                                   userInfo:@{@"message": @"createZipFileAtPath error"
+                                                              ,@"source":[sourcePath copy]
+                                                              ,@"destination:":[destinationZipFilePath copy]}];
+                    block(NO,error);
                 }
             }];
         }else{
             if([SSZipArchive createZipFileAtPath:destinationZipFilePath
                          withContentsOfDirectory:sourcePath]){
-                block(YES);
+                block(YES,nil);
             }else{
-                block(NO);
+                NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+                                                   code:2
+                                               userInfo:@{@"message": @"createZipFileAtPath error"
+                                                          ,@"source":[sourcePath copy]
+                                                          ,@"destination:":[destinationZipFilePath copy]}];
+                block(NO,error);
             }
+
         }
     }else{
-        block(NO);
+        NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+                                           code:3
+                                       userInfo:@{@"message": @"Unexisting source",@"source":[sourcePath copy]}];
+        block(NO,error);
     }
-    
 }
 
 
