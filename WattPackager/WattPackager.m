@@ -134,7 +134,7 @@ static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
                [weakSelf.fileManager removeItemAtPath:weakSourcePath
                                                 error:&error];
            }
-           block((success&&!error),destination,error);
+           block((success && !error),destination,error);
        }useBackgroundMode:backgroundMode];
 }
 
@@ -165,14 +165,15 @@ static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
            to:(NSString*)destinationFolder
     withBlock:(void (^)(BOOL success,NSError*error))block
 useBackgroundMode:(BOOL)backgroundMode{
-    
-    NSString *__weak weakSourcePath=zipSourcePath;//tempPath;
+    //Files paths starting per file:///private are not unzippable
+    //Those paths are commons when importing from mail for example.
+    zipSourcePath=[zipSourcePath stringByReplacingOccurrencesOfString:@"file:///private" withString:@""];
     WattPackager *__weak weakSelf=self;
     if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
                 NSError *error=nil;
-                if([SSZipArchive unzipFileAtPath:weakSourcePath
+                if([SSZipArchive unzipFileAtPath:zipSourcePath
                                    toDestination:destinationFolder
                                        overwrite:NO
                                         password:nil
@@ -185,7 +186,7 @@ useBackgroundMode:(BOOL)backgroundMode{
             }];
         }else{
             NSError *error=nil;
-            if([SSZipArchive unzipFileAtPath:weakSourcePath
+            if([SSZipArchive unzipFileAtPath:zipSourcePath
                                toDestination:destinationFolder
                                    overwrite:NO
                                     password:nil
