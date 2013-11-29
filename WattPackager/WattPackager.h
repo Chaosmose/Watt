@@ -31,6 +31,11 @@
  */
 @property (nonatomic,copy) NSString *defaultPackExtension;
 
+/**
+ * The file  manager
+ */
+@property (atomic,strong)  NSFileManager *fileManager;
+
 #pragma mark - Packaging
 
 /**

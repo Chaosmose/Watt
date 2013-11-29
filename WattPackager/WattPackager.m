@@ -23,11 +23,12 @@
 #import "WattPackager.h"
 #import "SSZipArchive.h"
 
+static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
 
 @interface WattPackager()<SSZipArchiveDelegate>{
 }
 @property (nonatomic,strong)    NSOperationQueue *queue;
-@property (atomic,strong)       NSFileManager *fileManager;
+
 @end
 
 @implementation WattPackager
@@ -40,7 +41,7 @@
         sharedInstance = [[self alloc] init];
         sharedInstance.queue=[[NSOperationQueue alloc] init];
         [sharedInstance.queue setMaxConcurrentOperationCount:1];
-        sharedInstance.fileManager=[[NSFileManager alloc]init];
+        sharedInstance.fileManager=[NSFileManager defaultManager];
     });
     return sharedInstance;
 }
@@ -129,11 +130,11 @@
     [self _unZip:sourcePath
               to:destination
        withBlock:^(BOOL success,NSError*error) {
-           if (success) {
+           if (success){
                [weakSelf.fileManager removeItemAtPath:weakSourcePath
                                                 error:&error];
-               block((success&&!error),destination,error);
            }
+           block((success&&!error),destination,error);
        }useBackgroundMode:backgroundMode];
 }
 
@@ -164,14 +165,16 @@
            to:(NSString*)destinationFolder
     withBlock:(void (^)(BOOL success,NSError*error))block
 useBackgroundMode:(BOOL)backgroundMode{
+    
+    NSString *__weak weakSourcePath=zipSourcePath;//tempPath;
     WattPackager *__weak weakSelf=self;
     if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
                 NSError *error=nil;
-                if([SSZipArchive unzipFileAtPath:zipSourcePath
+                if([SSZipArchive unzipFileAtPath:weakSourcePath
                                    toDestination:destinationFolder
-                                       overwrite:YES
+                                       overwrite:NO
                                         password:nil
                                            error:&error
                                         delegate:weakSelf]){
@@ -182,9 +185,9 @@ useBackgroundMode:(BOOL)backgroundMode{
             }];
         }else{
             NSError *error=nil;
-            if([SSZipArchive unzipFileAtPath:zipSourcePath
+            if([SSZipArchive unzipFileAtPath:weakSourcePath
                                toDestination:destinationFolder
-                                   overwrite:YES
+                                   overwrite:NO
                                     password:nil
                                        error:&error
                                     delegate:weakSelf]){
@@ -194,7 +197,7 @@ useBackgroundMode:(BOOL)backgroundMode{
             }
         }
     }else{
-        NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+        NSError *error=[NSError errorWithDomain:WattPackagerErrorDomainName
                                            code:1
                                        userInfo:@{@"message": @"_createRecursivelyRequiredFolderForPath failed"}];
         block(NO,error);
@@ -241,7 +244,7 @@ useBackgroundMode:(BOOL)backgroundMode{
                              withContentsOfDirectory:sourcePath]){
                     block(YES,nil);
                 }else{
-                    NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+                    NSError *error=[NSError errorWithDomain:WattPackagerErrorDomainName
                                                        code:2
                                                    userInfo:@{@"message": @"createZipFileAtPath error"
                                                               ,@"source":[sourcePath copy]
@@ -254,17 +257,17 @@ useBackgroundMode:(BOOL)backgroundMode{
                          withContentsOfDirectory:sourcePath]){
                 block(YES,nil);
             }else{
-                NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+                NSError *error=[NSError errorWithDomain:WattPackagerErrorDomainName
                                                    code:2
                                                userInfo:@{@"message": @"createZipFileAtPath error"
                                                           ,@"source":[sourcePath copy]
                                                           ,@"destination:":[destinationZipFilePath copy]}];
                 block(NO,error);
             }
-
+            
         }
     }else{
-        NSError *error=[NSError errorWithDomain:@"com.pereira-da-silva.WattPackager"
+        NSError *error=[NSError errorWithDomain:WattPackagerErrorDomainName
                                            code:3
                                        userInfo:@{@"message": @"Unexisting source",@"source":[sourcePath copy]}];
         block(NO,error);
