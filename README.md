@@ -11,6 +11,7 @@ Watt is a model driven framework based extensively on code generation (Flexions)
 The models are modelized hacking the XCode datamodeler (used by cored data), and generating sources on the fly (in building phase) within xcode using Flexions (a simple code generator by BPdS)
 
 It allows :
+
 - to generate normalized models sources files from xcdatamodel files.
 - to serialize object graphs
 - to move object graphs from a device to another transparently

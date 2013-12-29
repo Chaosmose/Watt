@@ -212,16 +212,7 @@ useBackgroundMode:(BOOL)backgroundMode{
                             totalFiles:(NSInteger)totalFiles
                            archivePath:(NSString *)archivePath
                               fileInfo:(unz_file_info)fileInfo{
-    /*
-     CGFloat progress=(CGFloat)fileIndex/(CGFloat)totalFiles;
-     dispatch_sync(dispatch_get_main_queue(), ^{
-     
-     [SVProgressHUD showProgress:progress
-     status:@"UNZIP"
-     maskType:SVProgressHUDMaskTypeBlack];
-     
-     });
-     */
+
 }
 
 
@@ -230,7 +221,7 @@ useBackgroundMode:(BOOL)backgroundMode{
   withBlock:(void (^)(BOOL success,NSError*error))block
 useBackgroundMode:(BOOL)backgroundMode{
     NSError*error=nil;
-    WattPackager *__weak weakSelf=self;
+   // WattPackager *__weak weakSelf=self;
     if([self.fileManager fileExistsAtPath:sourcePath]){
         if([self.fileManager fileExistsAtPath:destinationZipFilePath]){
             [self.fileManager removeItemAtPath:destinationZipFilePath error:&error];

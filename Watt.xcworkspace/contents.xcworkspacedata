@@ -11,15 +11,6 @@
       location = "group:Watt.podspec">
    </FileRef>
    <FileRef
-      location = "group:WattPackager.podspec">
-   </FileRef>
-   <FileRef
-      location = "group:WTM.podspec">
-   </FileRef>
-   <FileRef
-      location = "group:WTMIOS.podspec">
-   </FileRef>
-   <FileRef
       location = "group:README.md">
    </FileRef>
    <FileRef
@@ -27,8 +18,5 @@
    </FileRef>
    <FileRef
       location = "group:PlayerSample/PlayerSample.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:WattAuthor/WattAuthor.xcodeproj">
    </FileRef>
 </Workspace>
