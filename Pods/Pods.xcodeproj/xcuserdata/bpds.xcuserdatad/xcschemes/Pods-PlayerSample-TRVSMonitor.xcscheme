@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A4E9B62843794BF5A80121FE"
+               BlueprintIdentifier = "05A83267757940EEA561D9E7"
                BuildableName = "libPods-PlayerSample-TRVSMonitor.a"
                BlueprintName = "Pods-PlayerSample-TRVSMonitor"
                ReferencedContainer = "container:Pods.xcodeproj">

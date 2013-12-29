@@ -19,22 +19,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-PlayerSample-Watt.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-PlayerSample.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<true/>
-		</dict>
-		<key>Pods-WattAuthor-AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-WattAuthor-SSZipArchive.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-WattAuthor.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>8CA7BB15F12B4A32B164B8FA</key>
+		<key>05A83267757940EEA561D9E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A4E9B62843794BF5A80121FE</key>
+		<key>413ACAC16E0F4FC4938B575B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A8B76C4C475B44BD8B9BB2BA</key>
+		<key>71744F3C50A34AB0A93951F2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B84E083230734817BFAE893B</key>
+		<key>9CB2E19D712B4D8DB66671DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BE906FAF26D04CA295E2C626</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E076ACA05FC341B8A473A7F4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F3DF1B0613B2402C98D5A8B3</key>
+		<key>AF878DC8059E4C478E7FF489</key>
 		<dict>
 			<key>primary</key>
 			<true/>

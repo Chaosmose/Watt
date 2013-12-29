@@ -1,0 +1,1 @@
+../../../WTMIOS/Categories/UIImage+WattAdaptive.h
