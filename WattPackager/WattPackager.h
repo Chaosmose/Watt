@@ -36,6 +36,7 @@
  */
 @property (atomic,strong)  NSFileManager *fileManager;
 
+
 #pragma mark - Packaging
 
 /**
@@ -66,6 +67,9 @@
             withBlock:(void (^)(BOOL success,NSString*path,NSError*error))block
     useBackgroundMode:(BOOL)backgroundMode
    overWrite:(BOOL)overWrite;
+
+
+
 
 
 

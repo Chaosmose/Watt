@@ -3,7 +3,7 @@
 //  PlayerSample
 //
 //  Created by Benoit Pereira da Silva on 02/09/13.
-//  Copyright (c) 2013 Pereira da Silva. All rights reserved.
+//  Copyright (c) 2013 http://pereira-da-silva.com All rights reserved.
 //
 
 #import "WIOSSoundManagerTableViewController.h"

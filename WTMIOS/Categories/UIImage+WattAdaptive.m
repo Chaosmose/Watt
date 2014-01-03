@@ -17,7 +17,7 @@
 //
 //
 //  Created by Benoit Pereira da Silva on 05/04/13.
-//  Copyright (c) 2013 Azurgate. All rights reserved.
+//  Copyright (c) 2013 http://pereira-da-silva.com All rights reserved.
 //
 
 

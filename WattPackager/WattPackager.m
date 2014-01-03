@@ -19,14 +19,23 @@
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
-
+#define USE_ZIP_ZAP 0
+#define USE_SSZIPArchive !USE_ZIP_ZAP
 #import "WattPackager.h"
+#if  !USE_ZIP_ZAP
 #import "SSZipArchive.h"
+#else
+#import "zipzap.h"
+#endif
+
 
 static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
 
-@interface WattPackager()<SSZipArchiveDelegate>{
-}
+@interface WattPackager()
+#if USE_SSZIPArchive
+<SSZipArchiveDelegate>
+#endif
+{}
 @property (nonatomic,strong)    NSOperationQueue *queue;
 
 @end
@@ -161,6 +170,8 @@ static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
 
 #pragma mark - ZIP / UNZIP
 
+
+
 -(void)_unZip:(NSString*)zipSourcePath
            to:(NSString*)destinationFolder
     withBlock:(void (^)(BOOL success,NSError*error))block
@@ -169,7 +180,9 @@ useBackgroundMode:(BOOL)backgroundMode{
     //Those paths are commons when importing from mail for example.
     zipSourcePath=[zipSourcePath stringByReplacingOccurrencesOfString:@"file:///private" withString:@""];
     WattPackager *__weak weakSelf=self;
+    
     if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
+#if USE_SSZIPArchive
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
                 NSError *error=nil;
@@ -196,32 +209,27 @@ useBackgroundMode:(BOOL)backgroundMode{
             }else{
                 block(NO,error);
             }
+            
         }
+#endif
     }else{
         NSError *error=[NSError errorWithDomain:WattPackagerErrorDomainName
                                            code:1
                                        userInfo:@{@"message": @"_createRecursivelyRequiredFolderForPath failed"}];
         block(NO,error);
     }
+    
 }
 
-
-#pragma mark SSZipArchiveDelegate
-
-- (void)zipArchiveWillUnzipFileAtIndex:(NSInteger)fileIndex
-                            totalFiles:(NSInteger)totalFiles
-                           archivePath:(NSString *)archivePath
-                              fileInfo:(unz_file_info)fileInfo{
-
-}
 
 
 -(void)_zip:(NSString*)sourcePath
          to:(NSString*)destinationZipFilePath
   withBlock:(void (^)(BOOL success,NSError*error))block
 useBackgroundMode:(BOOL)backgroundMode{
+    
     NSError*error=nil;
-   // WattPackager *__weak weakSelf=self;
+    // WattPackager *__weak weakSelf=self;
     if([self.fileManager fileExistsAtPath:sourcePath]){
         if([self.fileManager fileExistsAtPath:destinationZipFilePath]){
             [self.fileManager removeItemAtPath:destinationZipFilePath error:&error];
@@ -229,9 +237,9 @@ useBackgroundMode:(BOOL)backgroundMode{
         if(error){
             block(NO,error);
         }
+#if USE_SSZIPArchive
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
-                
                 if([SSZipArchive createZipFileAtPath:destinationZipFilePath
                              withContentsOfDirectory:sourcePath]){
                     block(YES,nil);
@@ -258,6 +266,8 @@ useBackgroundMode:(BOOL)backgroundMode{
             }
             
         }
+#endif
+        
     }else{
         NSError *error=[NSError errorWithDomain:WattPackagerErrorDomainName
                                            code:3
@@ -268,24 +278,27 @@ useBackgroundMode:(BOOL)backgroundMode{
 
 
 
+
+/*
+
 -(void)_addFolder:(NSString*)path pathPrefix:(NSString*)prefix toMapping:(NSMutableDictionary**)dictionary{
     NSFileManager *fm=self.fileManager;
-	NSArray		*dirArray = [fm contentsOfDirectoryAtPath:path
+    NSArray		*dirArray = [fm contentsOfDirectoryAtPath:path
                                                  error:nil];
     int nb=[dirArray count];
     for (int i=0; i<nb;i++) {
         NSString *s=[dirArray objectAtIndex:i];
-		NSDictionary *dict = [fm attributesOfItemAtPath:[path stringByAppendingPathComponent:s] error:nil];
+        NSDictionary *dict = [fm attributesOfItemAtPath:[path stringByAppendingPathComponent:s] error:nil];
         NSString *prefixUpdated=[prefix length]>0 ? [prefix stringByAppendingPathComponent:s] : s;
-		if ([[dict fileType] isEqualToString:NSFileTypeDirectory]
+        if ([[dict fileType] isEqualToString:NSFileTypeDirectory]
             || [[dict fileType] isEqualToString:NSFileTypeSymbolicLink]) {
             [self _addFolder:[path stringByAppendingPathComponent:s] pathPrefix:prefixUpdated toMapping:*&dictionary];
-		} else {
+        } else {
             [*dictionary setValue:[path stringByAppendingPathComponent:s] forKey:prefixUpdated];
         }
-	}
+    }
 }
-
+*/
 
 
 @end

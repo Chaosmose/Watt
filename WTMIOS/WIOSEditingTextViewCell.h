@@ -13,32 +13,18 @@
 // You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
 // along with "Watt"  If not, see <http://www.gnu.org/licenses/>
 //
-//  UIImage+adaptive.h
+//  WIOSEditingTextViewCell.h
 //
 //
 //  Created by Benoit Pereira da Silva on 05/04/13.
 //  Copyright (c) 2013 http://pereira-da-silva.com All rights reserved.
 //
 
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#import "Watt.h"
+#import "WIOS.h"
 
+@interface WIOSEditingTextViewCell : UITableViewCell<UITextViewDelegate>
 
-@interface UIImage(WattAdaptive)
-
-/*
- Support of multiple modifiers
- 
- Standard <ImageName><orientation_modifier><device_modifier>.<filename_extension>
- Retina <ImageName><orientation_modifier>@2x<device_modifier>.<filename_extension>
- */
-
-+(UIImage*)adaptiveWithRelativePath:(NSString *)relativePath inRegistry:(WattRegistry*)registry;
-
-
-- (BOOL)writePNGToAbsolutePath:(NSString*)path forPool:(WattRegistryPool*)pool;
-- (BOOL)writeJPGToAbsolutePath:(NSString*)path forPool:(WattRegistryPool*)pool;
-
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) WattObject*reference;
+@property (strong,nonatomic) NSString *propertyName;
 @end
-#endif

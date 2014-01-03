@@ -21,6 +21,7 @@ Pod::Spec.new do |s|
       ss.public_header_files = 'WattPackager/*.h'
       ss.dependency 'AFNetworking'
       ss.dependency 'SSZipArchive'
+      ss.dependency 'zipzap'
   end
 
   s.subspec 'WTM' do |ss|
