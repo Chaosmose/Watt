@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name        = 'Watt'
-  s.version     = '0.30'
+  s.version     = '0.31'
   s.authors     = { 'Benoit Pereira da Silva' => 'benoit@pereira-da-silva.com' }
   s.homepage    = 'https://https://github.com/benoit-pereira-da-silva/Watt'
   s.summary     = 'Watt'
-  s.source      = { :git => 'https://github.com/benoit-pereira-da-silva/Watt.git', :tag => "0.30", :submodules => true }
+  s.source      = { :git => 'https://github.com/benoit-pereira-da-silva/Watt.git',  :submodules => true }
   s.license     = { :type => "LGPL", :file => "LICENSE" }
   
   s.ios.deployment_target = '6.0'
