@@ -35,6 +35,7 @@ Pod::Spec.new do |s|
       ss.ios.deployment_target = '6.0'
       ss.ios.source_files =  'WTMIOS/**/*.{h,m}'
       ss.ios.public_header_files = 'WTMIOS/**/*.h'
+      ss.resource_bundles = {'WTMIOS'=>'WTMIOS/Resources/*.png'}
       ss.ios.frameworks ='UIKit'
       ss.osx.source_files = ''
       ss.osx.public_header_files =''
