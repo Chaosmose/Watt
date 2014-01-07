@@ -23,7 +23,7 @@
 
 #import "Watt.h"
 #import "WTMApi.h"
-
+#import "WTMModelsImports.h"
 #ifndef _WTM
 #define _WTM
 #define wtmAPI [WTMApi sharedInstance]
