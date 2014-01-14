@@ -148,7 +148,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         _registries=[NSMutableDictionary dictionary];
         _mixableExtensions=[NSMutableArray array];
         _forcedSoupPaths=[NSMutableArray array];
-        _poolFolderRelativePath=[path copy];
+        _poolFolderRelativePath=[self _filter:path];
         _poolFolderAbsolutePath=[[self applicationDocumentsDirectory]stringByAppendingString:_poolFolderRelativePath];        //Create the trash folder if necessary
         [self createRecursivelyRequiredFolderForPath:[self _trashFolderPath]];
         _controlKVCRegistriesAtRuntime=NO;
@@ -406,7 +406,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     NSError*error=nil;
     NSString *relativeDestination=[path stringByReplacingOccurrencesOfString:[self poolFolderAbsolutePath]
                                                                   withString:@""];
-    [self.fileManager moveItemAtPath:path
+    [self.fileManager moveItemAtPath:[self _filter:path]
                               toPath:[[self _trashFolderPath] stringByAppendingString:relativeDestination]
                                error:&error];
     if (error) {
@@ -484,7 +484,8 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 - (NSArray*)absolutePathsFromRelativePath:(NSString *)relativePath
                          inBundleWithName:(NSString*)wattBundleName
                                       all:(BOOL)returnAll{
-    NSString *baseRelativePath = [relativePath copy];
+    
+    NSString *baseRelativePath = [self _filter:relativePath];
     NSArray *orientation_modifiers=@[@""];
     NSArray *device_modifiers=@[@""];
     NSArray *pixel_density_modifiers=@[@"@2x",@""];
@@ -564,7 +565,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 - (NSString*)foundRegistryFilePathForAnyModeFromPath:(NSString*)path{
     NSArray*s=[self _suffixes];
-    NSString *bPath=[path copy];
+    NSString *bPath=[self _filter:path];
     if ([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
         // It is a relative path.
         bPath=[[self applicationDocumentsDirectory] stringByAppendingString:bPath];
@@ -587,7 +588,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     if(!_applicationDocumentsDirectory){
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
-        _applicationDocumentsDirectory=[basePath stringByAppendingString:@"/"];
+        _applicationDocumentsDirectory=[self _filter:[basePath stringByAppendingString:@"/"]];
     }
     return _applicationDocumentsDirectory;
 }
@@ -640,12 +641,13 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
-    [self createRecursivelyRequiredFolderForPath:path];
-    data=[self _dataSoup:data mix:[self _shouldMixPath:path]];
+    NSString*filteredPath=[self _filter:path];
+    [self createRecursivelyRequiredFolderForPath:filteredPath];
+    data=[self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
     NSError *error=nil;
-    [data writeToFile:path options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
+    [data writeToFile:filteredPath options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
     if(error){
-        WTLog(@"Error while writing %i bytes to %@",[data length],path);
+        WTLog(@"Error while writing %i bytes to %@",[data length],filteredPath);
         return NO;
     }else{
         return YES;
@@ -661,8 +663,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the Data
  */
 -(NSData*)readDataFromPath:(NSString*)path{
-    NSData *data=[NSData dataWithContentsOfFile:path];
-    return [self _dataSoup:data mix:[self _shouldMixPath:path]];
+    NSString*filteredPath=[self _filter:path];
+    NSData *data=[NSData dataWithContentsOfFile:filteredPath];
+    return [self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
     
 }
 
@@ -676,9 +679,10 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the success of the file operation
  */
 - (BOOL)writeData:(NSData*)data toPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode{
-    [self createRecursivelyRequiredFolderForPath:path];
+    NSString*filteredPath=[self _filter:path];
+    [self createRecursivelyRequiredFolderForPath:filteredPath];
     data=[self _dataSoup:data mix:(mode==WattJx||mode==WattPx)];
-    return [data writeToFile:path atomically:YES];
+    return [data writeToFile:filteredPath atomically:YES];
 }
 
 /**
@@ -690,18 +694,20 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  *  @return the Data
  */
 - (NSData*)readDataFromPath:(NSString*)path withForcedSerializationMode:(WattSerializationMode)mode{
-    NSData *data=[NSData dataWithContentsOfFile:path];
+    NSString*filteredPath=[self _filter:path];
+    NSData *data=[NSData dataWithContentsOfFile:filteredPath];
     return [self _dataSoup:data mix:(mode==WattJx||mode==WattPx)];
 }
 
 
 -(BOOL)_shouldMixPath:(NSString*)path{
-    if([_forcedSoupPaths indexOfObject:path]!=NSNotFound){
+    NSString*filteredPath=[self _filter:path];
+    if([_forcedSoupPaths indexOfObject:filteredPath]!=NSNotFound){
         return YES;
     }
     BOOL modeAllowsToMix=((_serializationMode==WattJx)||(_serializationMode==WattPx));
     if(modeAllowsToMix){
-        if([_mixableExtensions indexOfObject:[path pathExtension]]!=NSNotFound ||
+        if([_mixableExtensions indexOfObject:[filteredPath pathExtension]]!=NSNotFound ||
            [[path pathExtension] isEqualToString:@"jx"]||
            [[path pathExtension] isEqualToString:@"px"]){
             return YES;
@@ -716,15 +722,16 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 
 -(BOOL)createRecursivelyRequiredFolderForPath:(NSString*)path{
+    NSString*filteredPath=[self _filter:path];
     if([path rangeOfString:[self applicationDocumentsDirectory]].location==NSNotFound){
         return NO;
     }
-    if(![[path substringFromIndex:path.length-1] isEqualToString:@"/"])
-        path=[path stringByDeletingLastPathComponent];
+    if(![[filteredPath substringFromIndex:filteredPath.length-1] isEqualToString:@"/"])
+        filteredPath=[filteredPath stringByDeletingLastPathComponent];
     
-    if(![self.fileManager fileExistsAtPath:path]){
+    if(![self.fileManager fileExistsAtPath:filteredPath]){
         NSError *error=nil;
-        [self.fileManager createDirectoryAtPath:path
+        [self.fileManager createDirectoryAtPath:filteredPath
                     withIntermediateDirectories:YES
                                      attributes:nil
                                           error:&error];
@@ -737,11 +744,12 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 
 - (BOOL)removeItemAtPath:(NSString*)path{
+    NSString*filteredPath=[self _filter:path];
     NSError *error=nil;
-    [self.fileManager removeItemAtPath:path
+    [self.fileManager removeItemAtPath:filteredPath
                                  error:&error];
     if(error){
-        WTLog(@"Impossible to delete %@",path);
+        WTLog(@"Impossible to delete %@",filteredPath);
         return NO;
     }
     return YES;
@@ -762,35 +770,38 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 
 -(BOOL)writeRegistryIfNecessary:(WattRegistry*)registry toFile:(NSString*)path{
+     NSString*filteredPath=[self _filter:path];
     if([registry hasChanged]){
         [registry setHasChanged:NO];
-        return  [self writeRegistry:registry toFile:path];
+        return  [self writeRegistry:registry toFile:filteredPath];
     }
     return YES;
 }
 
 -(BOOL)writeRegistry:(WattRegistry*)registry toFile:(NSString*)path{
+    NSString*filteredPath=[self _filter:path];
     NSArray *array=[registry arrayRepresentation];
     if(((_serializationMode==WattPx)||(_serializationMode==WattP))){
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array];
-        return [self writeData:data toPath:path];
+        return [self writeData:data toPath:filteredPath];
     }else{
-        return [self _serializeToJson:array toPath:path];
+        return [self _serializeToJson:array toPath:filteredPath];
     }
 }
 
 -(WattRegistry*)readRegistryFromFile:(NSString*)path withUniqueStringIdentifier:(NSString*)identifier{
-    if(self.fileManager && ![self.fileManager fileExistsAtPath:path isDirectory:NO]){
-        [self raiseExceptionWithFormat:@"Unexisting registry path %@",path];
+    NSString*filteredPath=[self _filter:path];
+    if(self.fileManager && ![self.fileManager fileExistsAtPath:filteredPath isDirectory:NO]){
+        [self raiseExceptionWithFormat:@"Unexisting registry path %@",filteredPath];
     }
     
-    _serializationMode=[self serializationModeFromRegistryFilePath:path];
+    _serializationMode=[self serializationModeFromRegistryFilePath:filteredPath];
     NSArray *array=nil;
     if(((_serializationMode==WattPx)||(_serializationMode==WattP))){
-        NSData *data=[self readDataFromPath:path];
+        NSData *data=[self readDataFromPath:filteredPath];
         array = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }else{
-        array=[self _deserializeFromJsonWithPath:path];
+        array=[self _deserializeFromJsonWithPath:filteredPath];
     }
     if(array){
         return [WattRegistry instanceFromArray:array
@@ -823,14 +834,14 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     @finally {
     }
     if(data){
-        return [self writeData:data toPath:path];
+        return [self writeData:data toPath:[self _filter:path]];
     }else{
         return NO;
     }
 }
 
 - (id)_deserializeFromJsonWithPath:(NSString*)path{
-    NSData *data=[self readDataFromPath:path];
+    NSData *data=[self readDataFromPath:[self _filter:path]];
     NSError*errorJson=nil;
     @try {
         // We use mutable containers and leaves by default.
@@ -993,5 +1004,19 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 - (void)setForcedSoupPaths:(NSMutableArray *)aForcedSoupPaths {
     _forcedSoupPaths = [aForcedSoupPaths mutableCopy];
 }
+
+
+
+- (NSString*)_filter:(NSString*)path{
+    if(!path)
+        return path;
+    // Those filtering operations may be necessary sometimes when manipulating IOS FS.
+    NSString *filtered=[[path copy] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    filtered=[filtered stringByReplacingOccurrencesOfString:@"file:///private" withString:@""];
+    filtered=[filtered stringByReplacingOccurrencesOfString:@"file://" withString:@""];
+    return filtered;
+}
+
+
 
 @end
