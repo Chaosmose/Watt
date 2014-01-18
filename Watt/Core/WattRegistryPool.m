@@ -975,14 +975,13 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 }
 
 - (NSFileManager *)fileManager {
-    if(!_fileManager)
+    if(!_fileManager){
         _fileManager=[[NSFileManager alloc] init];
+        [_fileManager setDelegate:self];
+    }
     return _fileManager;
 }
 
-- (void)setFileManager:(NSFileManager *)aFileManager {
-    _fileManager = aFileManager;
-}
 
 - (NSMutableArray *)mixableExtensions {
     if(!_mixableExtensions)
@@ -1015,6 +1014,40 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     filtered=[filtered stringByReplacingOccurrencesOfString:@"file:///private" withString:@""];
     filtered=[filtered stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     return filtered;
+}
+
+
+
+#pragma mark - NSFileManagerDelegate
+
+
+- (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error copyingItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath{
+    if ([error code] == NSFileWriteFileExistsError) //error code for: The operation couldn’t be completed. File exists
+        return YES;
+    else
+        return NO;
+}
+- (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error copyingItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL{
+    if ([error code] == NSFileWriteFileExistsError) //error code for: The operation couldn’t be completed. File exists
+        return YES;
+    else
+        return NO;
+    
+}
+
+- (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error movingItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath{
+    if ([error code] == NSFileWriteFileExistsError) //error code for: The operation couldn’t be completed. File exists
+        return YES;
+    else
+        return NO;
+    
+}
+- (BOOL)fileManager:(NSFileManager *)fileManager shouldProceedAfterError:(NSError *)error movingItemAtURL:(NSURL *)srcURL toURL:(NSURL *)dstURL{
+    if ([error code] == NSFileWriteFileExistsError) //error code for: The operation couldn’t be completed. File exists
+        return YES;
+    else
+        return NO;
+    
 }
 
 

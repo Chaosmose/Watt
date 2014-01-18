@@ -70,7 +70,7 @@ static NSString*mapFileDefaultName=@"map";
  */
 
 
-@interface WattRegistryPool : NSObject
+@interface WattRegistryPool : NSObject<NSFileManagerDelegate>
 
 
 /**
