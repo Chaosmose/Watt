@@ -645,7 +645,11 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     [self createRecursivelyRequiredFolderForPath:filteredPath];
     data=[self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
     NSError *error=nil;
+#if TARGET_IPHONE
     [data writeToFile:filteredPath options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
+#else
+    [data writeToFile:filteredPath options:NSDataWritingAtomic error:&error];
+#endif
     if(error){
         WTLog(@"Error while writing %i bytes to %@",[data length],filteredPath);
         return NO;
