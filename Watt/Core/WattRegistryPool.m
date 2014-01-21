@@ -9,12 +9,24 @@
 #import "WattRegistryPool.h"
 #import "watt.h"
 
+/**
+ *  Runs synchronously a block on the main queue without deadlocking
+ */
+void runOnMainQueueWithoutDeadlocking(void (^block)(void)){
+    if ([NSThread isMainThread]){
+        block();
+    }else{
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
 static NSString* kDefaultName        = @"default";
 static NSString* kRegistryFileName   = @"registry";
 static NSString* kWattBundle         = @".watt";
 static NSString* trashFolderName     = @"trash";
 static NSString* mapRegistryID       = @"pool";
 static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsSmVuZW1lc2VudGlzcGx1c2d1aWTpcGFybGVzaGFsZXVyczpEZXNQZWF1eC1Sb3VnZXNjcmlhcmRzbGVzYXZhaWVudHByaXNwb3VyY2libGVzLExlc2F5YW50Y2xvdelzbnVzYXV4cG90ZWF1eGRlY291bGV1cnMuSjpdGFpc2luc291Y2lldXhkZXRvdXNsZXPpcXVpcGFnZXMsUG9ydGV1cmRlYmzpc2ZsYW1hbmRzb3VkZWNvdG9uc2FuZ2xhaXMuUXVhbmRhdmVjbWVzaGFsZXVyc29udGZpbmljZXN0YXBhZ2VzLExlc0ZsZXV2ZXNtP29udGxhaXNz6WRlc2NlbmRyZW5amV2b3VsYWlzLkRhbnNsZXNjbGFwb3RlbWVudHNmdXJpZXV4ZGVzbWFy6WVzLE1vaSxsP2F1dHJlaGl2ZXIscGx1c3NvdXJkcXVlbGVzY2VydmVhdXhkP2VuZmFudHMsSmVjb3VydXMhRXRs";
+
 
 #pragma mark - WattRegistryPool extension interface
 
@@ -641,21 +653,25 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 
 -(BOOL)writeData:(NSData*)data toPath:(NSString*)path{
-    NSString*filteredPath=[self _filter:path];
-    [self createRecursivelyRequiredFolderForPath:filteredPath];
-    data=[self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
-    NSError *error=nil;
+    BOOL __block result=YES;
+    runOnMainQueueWithoutDeadlocking(^{
+        NSString*filteredPath=[self _filter:path];
+        [self createRecursivelyRequiredFolderForPath:filteredPath];
+        NSData *soup=[self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
+        NSError *error=nil;
 #if TARGET_IPHONE
-    [data writeToFile:filteredPath options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
+        [soup writeToFile:filteredPath options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
 #else
-    [data writeToFile:filteredPath options:NSDataWritingAtomic error:&error];
+        [soup writeToFile:filteredPath options:NSDataWritingAtomic error:&error];
 #endif
-    if(error){
-        WTLog(@"Error while writing %i bytes to %@",[data length],filteredPath);
-        return NO;
-    }else{
-        return YES;
-    }
+        if(error){
+            WTLog(@"Error while writing %i bytes to %@",[data length],filteredPath);
+            result=NO;
+        }else{
+            result=YES;
+        }
+    });
+    return result;
 }
 
 
@@ -668,9 +684,12 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
  */
 -(NSData*)readDataFromPath:(NSString*)path{
     NSString*filteredPath=[self _filter:path];
-    NSData *data=[NSData dataWithContentsOfFile:filteredPath];
-    return [self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
-    
+    NSData*__block resultData=nil;
+    runOnMainQueueWithoutDeadlocking(^{
+        NSData *data=[NSData dataWithContentsOfFile:filteredPath];
+        resultData= [self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
+    });
+    return resultData;
 }
 
 
@@ -774,7 +793,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 
 -(BOOL)writeRegistryIfNecessary:(WattRegistry*)registry toFile:(NSString*)path{
-     NSString*filteredPath=[self _filter:path];
+    NSString*filteredPath=[self _filter:path];
     if([registry hasChanged]){
         [registry setHasChanged:NO];
         return  [self writeRegistry:registry toFile:filteredPath];
