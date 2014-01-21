@@ -841,12 +841,14 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 // JSON private methods
 
 - (BOOL)_serializeToJson:(id)reference toPath:(NSString*)path{
-    NSError*errorJson=nil;
-    NSData *data=nil;
+    NSError*__block errorJson=nil;
+    NSData *__block data=nil;
     @try {
-        data=[NSJSONSerialization dataWithJSONObject:reference
-                                             options:NSJSONWritingPrettyPrinted
-                                               error:&errorJson];
+        runOnMainQueueWithoutDeadlocking(^{
+            data=[NSJSONSerialization dataWithJSONObject:reference
+                                                 options:NSJSONWritingPrettyPrinted
+                                                   error:&errorJson];
+        });
         if(errorJson){
             WTLog(@"JSON error on %@ %@",[errorJson localizedDescription],reference);
         }
@@ -864,13 +866,16 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 }
 
 - (id)_deserializeFromJsonWithPath:(NSString*)path{
-    NSData *data=[self readDataFromPath:[self _filter:path]];
-    NSError*errorJson=nil;
+    NSData *__block data=[self readDataFromPath:[self _filter:path]];
+    NSError*__block errorJson=nil;
     @try {
         // We use mutable containers and leaves by default.
-        id result=[NSJSONSerialization JSONObjectWithData:data
-                                                  options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments
-                                                    error:&errorJson];
+        id __block result=nil;
+        runOnMainQueueWithoutDeadlocking(^{
+            result=[NSJSONSerialization JSONObjectWithData:data
+                                                   options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves|NSJSONReadingAllowFragments
+                                                     error:&errorJson];
+        });
         return result;
     }
     @catch (NSException *exception) {
