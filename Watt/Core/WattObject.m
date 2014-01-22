@@ -300,7 +300,7 @@
         _propertiesKeys=[NSMutableArray array];
     }
     Class currentClass=[self class];
-    NSUInteger  count;
+    unsigned int count;
     // Each class has its own set of property in the inheritance chain.
     // So we do perform while "currentClass" has a superClass
     while (currentClass) {
@@ -364,7 +364,8 @@
  */
 - (void)_checkRegistryConsistancy:(NSString*)registryUidString{
     // We control the consistancy of the members
-    for (NSString *propertyName in [self propertiesKeys]) {
+    NSArray*propertieskeys=[self propertiesKeys];
+    for (NSString *propertyName in propertieskeys) {
         id value=[super valueForKey:propertyName];
         if([value respondsToSelector:@selector(registry)]){
             if(![value  registry] && WT_ALLOW_VOID_REGISTRIES){

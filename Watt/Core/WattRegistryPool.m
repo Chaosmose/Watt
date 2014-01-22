@@ -138,6 +138,8 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 #pragma mark - Initializer
 
 
+#if TARGET_OS_IPHONE
+
 /**
  *  If the pool does not exists it is created.
  *
@@ -168,6 +170,45 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     }
     return self;
 }
+
+#else
+
+
+/**
+ *  If the pool does not exists it is created.
+ *
+ *  @param path   the pool absolute path
+ *  @param mode   the serialization mode
+ *  @param secret the secret key used when mixing the soup
+ *
+ *  @return the pool of registries
+ */
+-(instancetype)initWithAbsolutePath:(NSString*)path
+                  serializationMode:(WattSerializationMode)mode
+                       andSecretKey:(NSString*)secret{
+    self=[super init];
+    if(self){
+        if(!secret)
+            secret=rimbaud;
+        _serializationMode=mode;
+        if(mode==WattJx || mode==WattPx)
+            [self _generateTheSymetricKeyFrom:secret];
+        _registries=[NSMutableDictionary dictionary];
+        _mixableExtensions=[NSMutableArray array];
+        _forcedSoupPaths=[NSMutableArray array];
+        _applicationDocumentsDirectory=[path copy];
+        _poolFolderRelativePath=@"pool/";
+        _poolFolderAbsolutePath=[[self applicationDocumentsDirectory]stringByAppendingString:_poolFolderRelativePath];
+        //Create the trash folder if necessary
+        [self createRecursivelyRequiredFolderForPath:[self _trashFolderPath]];
+        _controlKVCRegistriesAtRuntime=NO;
+        _faultTolerenceOnMissingKVCkeys=YES;
+    }
+    return self;
+}
+
+#endif
+
 
 
 #pragma mark - Registries management
@@ -598,9 +639,17 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 - (NSString *) applicationDocumentsDirectory{
     if(!_applicationDocumentsDirectory){
+#if TARGET_OS_IPHONE
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
         _applicationDocumentsDirectory=[self _filter:[basePath stringByAppendingString:@"/"]];
+#else
+        // If the absolute path was nil
+        // We create automatically a data folder
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *basePath=[paths lastObject];
+        _applicationDocumentsDirectory=[basePath stringByAppendingFormat:@"/Watt/%@/",[self uidStringCreate]];
+#endif
     }
     return _applicationDocumentsDirectory;
 }
@@ -659,13 +708,13 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         [self createRecursivelyRequiredFolderForPath:filteredPath];
         NSData *soup=[self _dataSoup:data mix:[self _shouldMixPath:filteredPath]];
         NSError *error=nil;
-#if TARGET_IPHONE
+#if TARGET_OS_IPHONE
         [soup writeToFile:filteredPath options:NSDataWritingAtomic|NSDataWritingFileProtectionNone error:&error];
 #else
         [soup writeToFile:filteredPath options:NSDataWritingAtomic error:&error];
 #endif
         if(error){
-            WTLog(@"Error while writing %i bytes to %@",[data length],filteredPath);
+            WTLog(@"Error while writing %i bytes to %@",(int)[data length],filteredPath);
             result=NO;
         }else{
             result=YES;
@@ -1035,6 +1084,7 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 
 - (NSString*)_filter:(NSString*)path{
+#if TARGET_OS_IPHONE
     if(!path)
         return path;
     // Those filtering operations may be necessary sometimes when manipulating IOS FS.
@@ -1042,6 +1092,9 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     filtered=[filtered stringByReplacingOccurrencesOfString:@"file:///private" withString:@""];
     filtered=[filtered stringByReplacingOccurrencesOfString:@"file://" withString:@""];
     return filtered;
+#else
+    return path;
+#endif
 }
 
 
