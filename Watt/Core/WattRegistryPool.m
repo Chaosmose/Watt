@@ -174,16 +174,19 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 #else
 
 
+
 /**
  *  If the pool does not exists it is created.
  *
- *  @param path   the pool absolute path
- *  @param mode   the serialization mode
- *  @param secret the secret key used when mixing the soup
+ *  @param absolutePath     the application document directory path
+ *  @param poolRelativePath the pool folder relative path
+ *  @param mode             the serialization mode
+ *  @param secret           the secret key used when mixing the soup
  *
- *  @return the pool of registries
+ *  @return  the pool of registries
  */
--(instancetype)initWithAbsolutePath:(NSString*)path
+-(instancetype)initWithApplicationDocumentsDirectoryPath:(NSString*)absolutePath
+                    andRelativePoolPath:(NSString*)poolRelativePath
                   serializationMode:(WattSerializationMode)mode
                        andSecretKey:(NSString*)secret{
     self=[super init];
@@ -196,8 +199,8 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
         _registries=[NSMutableDictionary dictionary];
         _mixableExtensions=[NSMutableArray array];
         _forcedSoupPaths=[NSMutableArray array];
-        _applicationDocumentsDirectory=[path copy];
-        _poolFolderRelativePath=@"pool/";
+        _applicationDocumentsDirectory=[absolutePath copy];
+        _poolFolderRelativePath=poolRelativePath;
         _poolFolderAbsolutePath=[[self applicationDocumentsDirectory]stringByAppendingString:_poolFolderRelativePath];
         //Create the trash folder if necessary
         [self createRecursivelyRequiredFolderForPath:[self _trashFolderPath]];

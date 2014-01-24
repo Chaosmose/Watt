@@ -131,18 +131,21 @@ static NSString*mapFileDefaultName=@"map";
 #else
 
 
+
 /**
  *  If the pool does not exists it is created.
  *
- *  @param path   the pool absolute path
- *  @param mode   the serialization mode
- *  @param secret the secret key used when mixing the soup
+ *  @param absolutePath     the application document directory path
+ *  @param poolRelativePath the pool folder relative path
+ *  @param mode             the serialization mode
+ *  @param secret           the secret key used when mixing the soup
  *
- *  @return the pool of registries
+ *  @return  the pool of registries
  */
--(instancetype)initWithAbsolutePath:(NSString*)path
-                  serializationMode:(WattSerializationMode)mode
-                       andSecretKey:(NSString*)secret;
+-(instancetype)initWithApplicationDocumentsDirectoryPath:(NSString*)absolutePath
+                                     andRelativePoolPath:(NSString*)poolRelativePath
+                                       serializationMode:(WattSerializationMode)mode
+                                            andSecretKey:(NSString*)secret;
 #endif
 
 
