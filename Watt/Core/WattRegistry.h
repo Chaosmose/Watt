@@ -209,6 +209,11 @@
 
 #pragma mark - purge
 
+/**
+ *  Re intialize the registry and make it void
+ */
+- (void)removeAllObjects;
+
 
 /**
  *  Purge the registry from memory ( used in merging process for example)

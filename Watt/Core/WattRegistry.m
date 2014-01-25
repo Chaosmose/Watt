@@ -85,7 +85,6 @@
 @implementation WattRegistry{
     NSInteger             _uinstIDCounter;
     NSMutableDictionary    *_registry;
-    NSMutableArray         *_history;
     NSArray               *__sortedKeys;
 }
 
@@ -481,7 +480,19 @@
 
 
 
-#pragma mark - Destroy
+#pragma mark - Purge
+
+
+/**
+ *  Re intialize the registry and make it void
+ */
+- (void)removeAllObjects{
+    _uinstIDCounter=0;
+    _registry=[NSMutableDictionary dictionary];
+    __sortedKeys=nil;
+}
+
+
 
 /**
  *  Destroys the registry ( used in merging process for example)
@@ -489,7 +500,6 @@
 - (void)purgeRegistry{
     _uinstIDCounter=0;
     _registry=nil;
-    _history=nil;
     __sortedKeys=nil;
     _uidString=nil;
     _hasChanged=NO;

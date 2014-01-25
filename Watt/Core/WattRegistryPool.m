@@ -896,15 +896,18 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     NSError*__block errorJson=nil;
     NSData *__block data=nil;
     @try {
+    
         runOnMainQueueWithoutDeadlocking(^{
             data=[NSJSONSerialization dataWithJSONObject:reference
                                                  options:NSJSONWritingPrettyPrinted
                                                    error:&errorJson];
-        });
+        
         if(errorJson){
             WTLog(@"JSON error on %@ %@",[errorJson localizedDescription],reference);
         }
-    }
+            
+        });
+   }
     @catch (NSException *exception) {
         return NO;
     }
