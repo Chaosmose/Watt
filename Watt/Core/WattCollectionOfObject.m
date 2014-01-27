@@ -314,9 +314,9 @@
         id obj = [_collection objectAtIndex:from];
         [_collection removeObjectAtIndex:from];
         if (to >= [self count]) {
-            [self addObject:obj];
+            [_collection addObject:obj];
         } else {
-            [self insertObject:obj atIndex:to];
+            [_collection insertObject:obj atIndex:to];
         }
         self.registry.hasChanged=YES;
     }
