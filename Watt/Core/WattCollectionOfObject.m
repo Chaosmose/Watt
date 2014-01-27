@@ -131,7 +131,7 @@
                                                                  ascending:ascending];
     
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
-    NSArray *sorted=[array sortedArrayUsingDescriptors:descriptor];
+    NSArray *sorted=[array sortedArrayUsingDescriptors:@[descriptor]];
     
     Class currentClass=[self class];
     id instance=[[currentClass alloc]initInRegistry:registry];
