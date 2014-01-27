@@ -25,7 +25,7 @@
 #import "WattACL.h"
 
 @implementation WattCollectionOfObject
-
+    
 - (instancetype)init{
     self=[super init];
     if (self) {
@@ -33,7 +33,7 @@
     }
     return self;
 }
-
+    
 - (instancetype)initInRegistry:(WattRegistry *)registry{
     self=[super initInRegistry:registry];
     if (self) {
@@ -41,8 +41,8 @@
     }
     return self;
 }
-
-
+    
+    
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier{
     self=[super initInRegistry:registry withPresetIdentifier:identifier];
     if(self){
@@ -50,11 +50,11 @@
     }
     return self;
 }
-
-
+    
+    
 #pragma  mark WattCopying
-
-
+    
+    
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattCollectionOfObject *instance=[super wattCopyInRegistry:destinationRegistry];
     // We add the members of the collection to the registry"
@@ -66,17 +66,17 @@
     
     return instance;
 }
-
-
-
+    
+    
+    
 #pragma mark - WattExtraction
-
-/**
- *  Watt Collection members are always extractibles
- *  @param destinationRegistry the registry
- *
- *  @return the copy of the instance in the destinationRegistry
- */
+    
+    /**
+     *  Watt Collection members are always extractibles
+     *  @param destinationRegistry the registry
+     *
+     *  @return the copy of the instance in the destinationRegistry
+     */
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
     WattCollectionOfObject *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
     // We add the members of the collection to the registry"
@@ -87,15 +87,15 @@
     } reverse:NO];
     
     return instance;
-
+    
     
 }
-
-
+    
+    
 #pragma mark
-
-// Filtering
-
+    
+    // Filtering
+    
 - (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate withRegistry:(WattRegistry *)registry{
     NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
     Class currentClass=[self class];
@@ -106,7 +106,45 @@
     return instance;
     
 }
-
+    
+    
+    
+    /**
+     * Returns collection of object filtered by the predicate
+     * Simple filteredCollectionUsingPredicate is faster , use this method if there is no alternative
+     *
+     *  @param predicate  the predicate
+     *  @param sortingKey the sorting key
+     *  @param ascending  the sorting order
+     *  @param limit      the limit
+     *  @param registry   the registry that holds the collection Commonly you pass nil as registry to make the collection un persistent.
+     *
+     *  @return the filtered collection
+     */
+- (WattCollectionOfObject*)filteredCollectionUsingPredicate:(NSPredicate *)predicate
+                                                 sortingKey:(NSString*)sortingKey
+                                                  ascending:(BOOL)ascending
+                                                      limit: (NSUInteger)limit
+                                               withRegistry:(WattRegistry *)registry{
+    
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:sortingKey
+                                                                 ascending:ascending];
+    
+    NSArray *array=[_collection filteredArrayUsingPredicate:predicate];
+    NSArray *sorted=[array sortedArrayUsingDescriptors:descriptor];
+    
+    Class currentClass=[self class];
+    id instance=[[currentClass alloc]initInRegistry:registry];
+    int i=0;
+    for (id o in sorted) {
+        [instance addObject:o];
+        i++;
+        if (i >= limit) break;
+    }
+    return instance;
+}
+    
+    
 - (WattCollectionOfObject*)filteredCollectionUsingBlock:(BOOL (^)(WattObject *obj))block withRegistry:(WattRegistry *)registry{
     WattCollectionOfObject *__block collection=[[WattCollectionOfObject alloc] initInRegistry:registry];
     [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
@@ -116,17 +154,17 @@
     } reverse:NO];
     return collection;
 }
-
-// Sorting
-
+    
+    // Sorting
+    
 - (void)sortUsingComparator:(NSComparator)cmptr{
     [_collection sortUsingComparator:cmptr];
 }
-
-
-
-
-
+    
+    
+    
+    
+    
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
     NSUInteger idx = 0;
     BOOL stop = NO;
@@ -134,11 +172,11 @@
     for( WattObject* obj in enumerator ){
         block(obj, idx++, &stop);
         if( stop )
-            break;
+        break;
     }
 }
-
-
+    
+    
 -(void)resolveAliases{
     // We need eventually to replace the alias within the collection by real instances
     NSInteger nb=[_collection count]-1;
@@ -152,9 +190,9 @@
         }
     }
 }
-
-
-
+    
+    
+    
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
 	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
 		return;
@@ -168,9 +206,9 @@
         [_collection addObject:o];
     }
 }
-
-
-
+    
+    
+    
 - (NSDictionary*)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
 	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
 	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
@@ -191,8 +229,8 @@
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }
-
-
+    
+    
 - (WattObject *)objectAtIndex:(NSUInteger)index{
     WattObject*o=[_collection objectAtIndex:index];
     if([o isAnAlias]){
@@ -201,14 +239,14 @@
     }
     return o;
 }
-
+    
 - (WattObject *)firstObject{
     if([_collection count]>0){
         return [_collection objectAtIndex:0];
     }
     return nil;
 }
-
+    
 - (WattObject *)lastObject{
     WattObject*o=[_collection lastObject];
     if([o isAnAlias]){
@@ -217,7 +255,7 @@
     }
     return o;
 }
-
+    
 - (WattObject *)firstObjectCommonWithArray:(NSArray*)array{
     WattObject*o=[_collection firstObjectCommonWithArray:array];
     if([o isAnAlias]){
@@ -227,8 +265,8 @@
     }
     return o;
 }
-
-
+    
+    
 - (WattObject*)objectWithUinstID:(NSInteger)uinstID{
     for (WattObject*o in _collection) {
         if([o uinstID]==uinstID){
@@ -237,40 +275,40 @@
     }
     return nil;
 }
-
-
+    
+    
 - (void)addObject:(WattObject*)anObject{
     [_collection addObject:anObject];
     self.registry.hasChanged=YES;
 }
-
-
+    
+    
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
 	[_collection insertObject:anObject atIndex:index];
     self.registry.hasChanged=YES;
 }
-
+    
 - (void)removeLastObject{
 	[_collection removeLastObject];
     self.registry.hasChanged=YES;
 }
-
+    
 - (void)removeObjectAtIndex:(NSUInteger)index{
     [_collection removeObjectAtIndex:index];
     self.registry.hasChanged=YES;
 }
-
-
+    
+    
 - (void)removeObject:(WattObject*)object{
     [_collection removeObject:object];
     self.registry.hasChanged=YES;
 }
-
+    
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject{
     [_collection replaceObjectAtIndex:index withObject:anObject];
     self.registry.hasChanged=YES;
 }
-
+    
 - (void)moveObjectFromIndex:(NSUInteger)from toIndex:(NSUInteger)to{
     if (to != from) {
         id obj = [_collection objectAtIndex:from];
@@ -283,57 +321,57 @@
         self.registry.hasChanged=YES;
     }
 }
-
-
-
+    
+    
+    
 - (BOOL)containsAnObjectWithID:(NSUInteger)uinstID{
     for (WattObject*o in _collection) {
         if(o.uinstID==uinstID)
-            return YES;
+        return YES;
     }
     return NO;
 }
-
+    
 - (NSUInteger)indexOfObjectWithID:(NSUInteger)uinstID{
     NSUInteger i=0;
     for (WattObject*o in _collection) {
         if(o.uinstID==uinstID)
-            return i;
+        return i;
         i++;
     }
     return NSNotFound;
 }
-
-
-
+    
+    
+    
 -(NSUInteger)count{
     return [_collection count];
 }
-
+    
 - (NSUInteger)indexOfObject:(WattObject *)object{
     return [_collection indexOfObject:object];
 }
-
-
+    
+    
 - (NSString*)description{
     if([self isAnAlias])
-        return [super aliasDescription];
+    return [super aliasDescription];
 	NSMutableString *s=[NSMutableString string];
     Class theClass=(_collection && [_collection count]>0)?[[_collection objectAtIndex:0] class]:[NSNull class];
     [s appendFormat:@"Collection of %@\n",NSStringFromClass(theClass)];
     [s appendFormat:@"With of %i members\n",_collection?[_collection count]:0];
 	return s;
 }
-
+    
 #pragma mark - index
-
-
-/**
- *  This selector enumerates the member of the collection and allocate the index value
- *  and allocate to the designated property
- *
- *  @param propertyName the name of the property
- */
+    
+    
+    /**
+     *  This selector enumerates the member of the collection and allocate the index value
+     *  and allocate to the designated property
+     *
+     *  @param propertyName the name of the property
+     */
 - (void)computeCollectionIndexesAndStoreInPropertyWithName:(NSString*)propertyName{
     SEL selectorForProperty=selectorSetterFromPropertyName(propertyName);
     BOOL tested=NO;
@@ -341,7 +379,7 @@
     NSInteger i=0;
     for (id member in _collection) {
         if(!tested)
-            ok=[member respondsToSelector:selectorForProperty];
+        ok=[member respondsToSelector:selectorForProperty];
         if(!ok){
             [NSException raise:@"computeCollectionIndexesAndStoreInPropertyWithName"
                         format:@"Member does not respond to %@",NSStringFromSelector(selectorForProperty)];
@@ -351,5 +389,5 @@
         i++;
     }
 }
-
-@end
+    
+    @end
