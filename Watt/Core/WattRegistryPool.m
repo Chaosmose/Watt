@@ -437,6 +437,19 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
     return [registry objectWithUinstID:objectUinstID];
 }
 
+
+
+/**
+ *  An alias of the root object
+ *
+ *  @param registryUidString the registry UID
+ *
+ *  @return the object or nil
+ */
+-(id)rootObjectOfRegistryWithID:(NSString*)registryUidString{
+    return [self objectByRegistryID:registryUidString andObjectUinstID:kWattRegistryRootUinstID];
+}
+
 #pragma mark - files
 
 - (NSString*)poolFolderRelativePath{

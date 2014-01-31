@@ -263,6 +263,17 @@ static NSString*mapFileDefaultName=@"map";
 - (id)objectByRegistryID:(NSString*)registryUidString andObjectUinstID:(NSInteger)objectUinstID;
 
 
+
+/**
+ *  An alias of the root object
+ *
+ *  @param registryUidString the registry UID
+ *
+ *  @return the object or nil
+ */
+-(id)rootObjectOfRegistryWithID:(NSString*)registryUidString;
+
+
 #pragma mark - file paths
 
 /**
