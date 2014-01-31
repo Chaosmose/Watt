@@ -368,17 +368,6 @@ static NSString*mapFileDefaultName=@"map";
 
 #pragma mark - file I/O
 
-//************************************
-// All the I/O are performed
-// on the current thread
-// Using GCD if necessary to fix saving issues.
-//
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [weakPoolReference writeData:weakData
-//                                  to:weakPath];
-//     });
-//
-//************************************
 
 /**
  *  Write the data mixing if necessary
