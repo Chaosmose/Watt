@@ -42,11 +42,11 @@
                  on:objectReference];
  */
 
-typedef enum watt_Actions{
+typedef NS_ENUM(NSUInteger, Watt_Action){
     WattREAD=0,     //view the file
     WattWRITE=1,    //create, edit or delete
     WattEXECUTE=2   //run a script or enter a directory ?
-}Watt_Action;
+};
 
 
 #ifndef WATT_CONST

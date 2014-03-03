@@ -28,6 +28,7 @@
 #pragma  mark - WattObject reIdentification invisible category
 
 @interface WattObject (Invisible){
+    
 }
 /**
  *  Do not call directly
@@ -86,6 +87,7 @@
     NSInteger             _uinstIDCounter;
     NSMutableDictionary    *_registry;
     NSArray               *__sortedKeys;
+    BOOL _sortKeyInvalidationEnabled;
 }
 
 @synthesize hasChanged = _hasChanged;
@@ -119,7 +121,7 @@
 +(instancetype)registryWithUniqueStringIdentifier:(NSString*)identifier
                                            inPool:(WattRegistryPool*)pool{
     return [[WattRegistry alloc] initRegistryWithUniqueStringIdentifier:identifier
-                                                            inPool:pool];
+                                                                 inPool:pool];
 }
 
 
@@ -142,6 +144,7 @@
         _autosave=YES;// By default
         _uidString=identifier;
         _pool=pool;
+        _sortKeyInvalidationEnabled=YES;
         // We add this registry to the pool
         [_pool addRegistry:self];// Invisible public method
     }
@@ -233,19 +236,25 @@
     // Second step  :  resolves the aliases (and the force the caches computation)
     // The second step is optionnal as the generated getters
     // can proceed to dealiasing (runtime aliases resolution)
-
-
+    
+    
     // First step :
     NSUInteger i=1;
+    r->_sortKeyInvalidationEnabled=NO;
     for (NSDictionary *d in array) {
+        
         WattObject *liveObject=[WattObject instanceFromDictionary:d
                                                        inRegistry:r
                                                   includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
         }
+        
+        
+        
         i++;
     }
+    r->_sortKeyInvalidationEnabled=YES;
     if(resolveAliases){
         // Second step :
         [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
@@ -281,22 +290,26 @@
     // Check _invalidateSortedKeys?
     if(__sortedKeys)
         return __sortedKeys;
-    NSArray *keys=[_registry allKeys];
-    NSArray *sortedKeys=[keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ( [obj1 integerValue] < [obj2 integerValue]) {
-            return NSOrderedAscending;
-        } else  {
-            return NSOrderedDescending;
-        }
-        // In this case NSOrderedSame is not possible (two keys cannot be equals)
-    }];
-    __sortedKeys=sortedKeys;
+    __sortedKeys=[_registry allKeys];
+    if(_sortKeyInvalidationEnabled){
+        __sortedKeys=[__sortedKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            if ( [obj1 integerValue] < [obj2 integerValue]) {
+                return NSOrderedAscending;
+            } else  {
+                return NSOrderedDescending;
+            }
+            // In this case NSOrderedSame is not possible (two keys cannot be equals)
+        }];
+    }
+    
     return __sortedKeys;
 }
 
 
 - (void)_invalidateSortedKeys{
-    __sortedKeys=nil;
+    if(_sortKeyInvalidationEnabled){
+        __sortedKeys=nil;
+    }
 }
 
 - (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary{

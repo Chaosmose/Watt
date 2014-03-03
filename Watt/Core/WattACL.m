@@ -78,9 +78,9 @@
  
  @"RWXRWXRWX"
  
- OWNER 400-200-100
- GROUP 40-20-10
- OTHERS 4-2-1
+ OWNER  400- 200  - 100
+ GROUP   40-  20  -  10
+ OTHERS   4-   2  -   1
  
  */
 
