@@ -87,7 +87,6 @@
     NSInteger             _uinstIDCounter;
     NSMutableDictionary    *_registry;
     NSArray               *__sortedKeys;
-    BOOL _sortKeyInvalidationEnabled;
 }
 
 @synthesize hasChanged = _hasChanged;
@@ -144,7 +143,6 @@
         _autosave=YES;// By default
         _uidString=identifier;
         _pool=pool;
-        _sortKeyInvalidationEnabled=YES;
         // We add this registry to the pool
         [_pool addRegistry:self];// Invisible public method
     }
@@ -240,29 +238,33 @@
     
     // First step :
     NSUInteger i=1;
-    r->_sortKeyInvalidationEnabled=NO;
+    
     for (NSDictionary *d in array) {
-        
         WattObject *liveObject=[WattObject instanceFromDictionary:d
                                                        inRegistry:r
                                                   includeChildren:NO];
         if(liveObject){
             [r registerObject:liveObject];
         }
-        
-        
-        
         i++;
     }
-    r->_sortKeyInvalidationEnabled=YES;
+    
     if(resolveAliases){
         // Second step :
-        [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        // For better performance we donnot use [self _sortedKeys]
+        // [r enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
+        // [obj resolveAliases];
+        //}];
+        
+        for (NSString  *key in r->_registry) {
+            WattObject*obj =[r->_registry objectForKey:key];
             [obj resolveAliases];
-            
-        }];
+        }
+        
+        
     }
     r.hasChanged=NO;
+    
     return r;
 }
 
@@ -286,30 +288,26 @@
     // We prefer to have a fast key based random access using a NSDictionary
     // allKeys selector returns an unordered key array.
     // So we sort the keys to store in the linear creation order.
-    
-    // Check _invalidateSortedKeys?
-    if(__sortedKeys)
+    if(__sortedKeys){
         return __sortedKeys;
-    __sortedKeys=[_registry allKeys];
-    if(_sortKeyInvalidationEnabled){
-        __sortedKeys=[__sortedKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            if ( [obj1 integerValue] < [obj2 integerValue]) {
-                return NSOrderedAscending;
-            } else  {
-                return NSOrderedDescending;
-            }
-            // In this case NSOrderedSame is not possible (two keys cannot be equals)
-        }];
     }
+    NSArray *unSortedKey=[_registry allKeys];
+    __sortedKeys=[unSortedKey sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if ( [obj1 integerValue] < [obj2 integerValue]) {
+            return NSOrderedAscending;
+        } else  {
+            return NSOrderedDescending;
+        }
+        // In this case NSOrderedSame is not possible (two keys cannot be equals)
+    }];
+    
     
     return __sortedKeys;
 }
 
 
 - (void)_invalidateSortedKeys{
-    if(_sortKeyInvalidationEnabled){
-        __sortedKeys=nil;
-    }
+    __sortedKeys=nil;
 }
 
 - (WattObject*)instanceFromDictionary:(NSDictionary*)dictionary{
@@ -377,7 +375,7 @@
 - (void)addObject:(WattObject *)reference{
     if(reference.uinstID>0){
         NSString*referenceKey=[self _keyFrom:reference.uinstID];
-        if([[self _sortedKeys] indexOfObject:referenceKey]!=NSNotFound){
+        if([_registry objectForKey:referenceKey]){
             // The reference is already Registred.
             if([[_registry objectForKey:referenceKey] isEqual:reference]){
                 // we do nothing ..
