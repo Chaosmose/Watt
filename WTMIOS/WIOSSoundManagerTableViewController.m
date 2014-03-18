@@ -115,7 +115,7 @@
 - (void) _createSound:(id)sender{
     WTMLibrary*library=self.library;
     WTMSound*sound=[wtmAPI createSoundMemberInLibrary:library];
-    sound.refererCounter=NSIntegerMax; // We do consider that any sound must be persistent and explicitly deleted.
+    sound.refererCounter=ABS(NSIntegerMax); // We do consider that any sound must be persistent and explicitly deleted.
     sound.category=self.categoryName;
     sound.name=NSLocalizedString(@"New sound name", @"The default sound name to be used on sound creation");
     sound.relativePath=[NSString stringWithFormat:@"%i/%i/%i.caf",sound.library.package.uinstID,sound.library.uinstID,sound.uinstID];
