@@ -671,7 +671,7 @@
 - (void)purgeMemberIfNecessary:(WTMMember*)member{
     if([self actionIsAllowed:WattWRITE on:member]){
         member.refererCounter--;
-        if(member.refererCounter<=0){
+        if(member.refererCounter==0){
             [self removeMember:member];
         }
     }
