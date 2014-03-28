@@ -68,8 +68,6 @@ __LINE__ ,\
 #import "WattCollectionOfObject.h"
 
 #import "WattACL.h"
-#import "WattDelta.h"
-#import "WattDeltaEngine.h"
 #import "WattPackager.h"
 
 
