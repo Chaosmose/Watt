@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
       ss.description     = 'A module to extract, package transmit, download watt registry pool and bundles'
       ss.source_files =  'WattPackager/*.{h,m}'         
       ss.public_header_files = 'WattPackager/*.h'
-      ss.dependency 'AFNetworking'
       ss.dependency 'SSZipArchive'
       ss.dependency 'zipzap'
   end
