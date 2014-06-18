@@ -50,11 +50,12 @@
     }
     return self;
 }
-    
+
+
     
 #pragma  mark WattCopying
     
-    
+    /*
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
     WattCollectionOfObject *instance=[super wattCopyInRegistry:destinationRegistry];
     // We add the members of the collection to the registry"
@@ -67,16 +68,19 @@
     return instance;
 }
     
-    
+    */
     
 #pragma mark - WattExtraction
-    
+
+
     /**
      *  Watt Collection members are always extractibles
      *  @param destinationRegistry the registry
      *
      *  @return the copy of the instance in the destinationRegistry
      */
+
+/*
 - (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
     WattCollectionOfObject *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
     // We add the members of the collection to the registry"
@@ -90,7 +94,7 @@
     
     
 }
-    
+*/
     
 #pragma mark
     
@@ -136,8 +140,15 @@
     Class currentClass=[self class];
     id instance=[[currentClass alloc]initInRegistry:registry];
     int i=0;
-    for (id o in sorted) {
-        [instance addObject:o];
+#warning experimental support we should implement WattCopying
+    for (WattObject*o in sorted) {
+        if([o.registry.uidString isEqualToString:registry.uidString]|| !registry){
+           [instance addObject:o];
+        }else{
+            NSDictionary*d=[o dictionaryRepresentationWithChildren:YES];
+            [instance addObject:[[o class] instanceFromDictionary:d inRegistry:registry includeChildren:YES]];
+        }
+        
         i++;
         if (i >= limit) break;
     }

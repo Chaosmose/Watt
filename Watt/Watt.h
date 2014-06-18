@@ -70,7 +70,6 @@ __LINE__ ,\
 #import "WattACL.h"
 #import "WattPackager.h"
 
-
 #import "NSObject+WattBase.h"
 #import "WattObject+ExternalReference.h"
 

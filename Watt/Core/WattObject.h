@@ -34,7 +34,7 @@
 
 @class WattExternalReference;
 
-@interface WattObject : NSObject<WattCoding,WattCopying,WattExtraction>{
+@interface WattObject : NSObject<WattCoding>{//,WattCopying,WattExtraction>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
 @protected

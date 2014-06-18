@@ -33,7 +33,7 @@
 @synthesize rights=_rights;
 @synthesize references=_references;
 
-
+/*
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
@@ -66,7 +66,7 @@
     return instance;
 }
 
-
+*/
 
 
 #pragma mark -

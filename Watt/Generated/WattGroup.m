@@ -28,7 +28,7 @@
 @synthesize objectName=_objectName;
 @synthesize users=_users;
 
-
+/*
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
@@ -52,7 +52,7 @@
 }
 
 
-
+*/
 
 #pragma mark -
 

@@ -26,7 +26,7 @@
 @synthesize objectUinstID=_objectUinstID;
 @synthesize registryUidString=_registryUidString;
 
-
+/*
 #pragma  mark WattCopying
 
 - (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
@@ -48,7 +48,7 @@
 }
 
 
-
+*/
 
 #pragma mark -
 
