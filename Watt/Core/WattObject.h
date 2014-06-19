@@ -75,7 +75,24 @@
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier; //Used for reinstanciation from a device to another
 - (instancetype)initAsAliasWithIdentifier:(NSInteger)identifier; // instanciate an alias
 
-- (instancetype)copyToRegistry:(WattRegistry*)destination;
+#pragma mark - Replication
+
+/**
+ *  Replicates the object and its member by deep copying in a new registry
+ *
+ *  @param destination the registry
+ *
+ *  @return the replicated object
+ */
+- (instancetype)replicateToRegistry:(WattRegistry*)destination;
+/**
+ *  Return if a property can be replicated
+ *
+ *  @param key the key
+ *
+ *  @return if YES the key is replicable
+ */
+- (BOOL)canReplicateKey:(NSString*)key;
 
 // ANY WattObject should be unRegistered to be released from its registry
 // autoUnRegister is a facility

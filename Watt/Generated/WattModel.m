@@ -61,6 +61,15 @@
 	}
 }
 
+
+- (BOOL)canReplicateKey:(NSString*)key{
+    // Patch ? references are not replicable
+    if([key isEqualToString:@"references"])
+        return NO;
+    return [super canReplicateKey:key];
+}
+
+
 - (WattCollectionOfExternalReference*)references{
 	if([_references isAnAlias]){
 		id o=[_registry objectWithUinstID:_references.uinstID];

@@ -51,6 +51,15 @@
     return self;
 }
 
+- (instancetype)replicateToRegistry:(WattRegistry*)destination{
+    Class CurrentClass=[self class];
+    id instance=[[CurrentClass alloc] initInRegistry:destination];
+    for (id object in _collection) {
+        [((WattCollectionOfObject*)instance)->_collection addObject:[((WattObject*)object) replicateToRegistry:destination]];
+    }
+    return instance;
+}
+
 
     
 
@@ -98,12 +107,12 @@
     Class currentClass=[self class];
     id instance=[[currentClass alloc]initInRegistry:registry];
     int i=0;
-    for (WattObject*o in sorted) {
-        if([o.registry.uidString isEqualToString:registry.uidString]|| !registry){
+    for (id o in sorted) {
+        if([((WattObject*)o).registry.uidString isEqualToString:registry.uidString]|| !registry){
            [instance addObject:o];
         }else{
-            NSDictionary*d=[o dictionaryRepresentationWithChildren:YES];
-            [instance addObject:[o copyToRegistry:registry]];
+            id cpo=[o replicateToRegistry:registry];
+            [instance addObject:cpo];
         }
         
         i++;

@@ -77,15 +77,27 @@
     return self;
 }
 
+#pragma mark - Replication
 
-- (instancetype)copyToRegistry:(WattRegistry*)destination{
+
+/**
+ *  Replicates the object and its member by deep copying in a new registry
+ *
+ *  @param destination the registry
+ *
+ *  @return the replicated object
+ */
+- (instancetype)replicateToRegistry:(WattRegistry*)destination{
     Class CurrentClass=[self class];
-    WattObject*instance=[[CurrentClass alloc] initInRegistry:destination];
-    for (NSString*key in [self propertiesKeys]) {
+    id instance=[[CurrentClass alloc] initInRegistry:destination];
+    NSArray*keys=[self propertiesKeys];
+    for (NSString*key in keys) {
+        if(![instance canReplicateKey:key])
+            continue;
         id value=[self valueForKey:key];
         id copyed=nil;
-        if([value isMemberOfClass:[WattObject class]]){
-            copyed=[(WattObject*)value copyToRegistry:destination];
+        if([value isKindOfClass:[WattObject class]]){
+            copyed=[value replicateToRegistry:destination];
         }else{
             if([value conformsToProtocol:@protocol(NSCopying)]){
                 copyed=[value copy];
@@ -93,10 +105,23 @@
                 copyed=value;
             }
         }
-        [self setValue:value forKey:key];
+        [instance setValue:value forKey:key];
     }
     return instance;
 }
+
+/**
+ *  Return if a property can be replicated
+ *
+ *  @param key the key
+ *
+ *  @return if YES the key is replicable
+ */
+- (BOOL)canReplicateKey:(NSString*)key{
+    return YES;
+}
+
+
 
 - (void)setHasChanged:(BOOL)hasChanged{
     _hasChanged=hasChanged;
