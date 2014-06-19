@@ -23,6 +23,4 @@
 #import "WIOSSoundListCell.h"
 #import "WIOSSoundRecorderViewController.h"
 #import "WIOSSoundManagerTableViewController.h"
-#import "WIOSEditingTextViewCell.h"
-
 #endif
