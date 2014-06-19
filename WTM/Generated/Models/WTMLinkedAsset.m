@@ -26,25 +26,6 @@
 @synthesize relativePath=_relativePath;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMLinkedAsset *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_relativePath=[_relativePath copy];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMLinkedAsset *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_relativePath=[_relativePath copy];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -80,7 +61,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMLinkedAsset ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMLinkedAsset ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"relativePath : %@\n",self.relativePath];
 	return s;
 }

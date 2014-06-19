@@ -29,31 +29,6 @@
 @synthesize urlString=_urlString;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMHyperlink *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_allowExploration=_allowExploration;
-	instance->_updateImageOnChange=_updateImageOnChange;
-	instance->_updateUrlOnChange=_updateUrlOnChange;
-	instance->_urlString=[_urlString copy];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMHyperlink *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_allowExploration=_allowExploration;
-	instance->_updateImageOnChange=_updateImageOnChange;
-	instance->_updateUrlOnChange=_updateUrlOnChange;
-	instance->_urlString=[_urlString copy];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -98,7 +73,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMHyperlink ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMHyperlink ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"allowExploration : %@\n",@(self.allowExploration)];
 	[s appendFormat:@"updateImageOnChange : %@\n",@(self.updateImageOnChange)];
 	[s appendFormat:@"updateUrlOnChange : %@\n",@(self.updateUrlOnChange)];

@@ -26,25 +26,6 @@
 @synthesize duration=_duration;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMVideo *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_duration=_duration;
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMVideo *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_duration=_duration;
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -78,7 +59,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMVideo ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMVideo ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"duration : %@\n",@(self.duration)];
 	return s;
 }

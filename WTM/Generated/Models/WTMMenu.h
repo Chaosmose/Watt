@@ -26,7 +26,7 @@
 @class WTMMenu;
 @class WTMCollectionOfMenuSection;
 
-@interface WTMMenu:WattModel<WattCoding,WattCopying,WattExtraction>{
+@interface WTMMenu:WattModel<WattCoding>{
 }
 
 @property (nonatomic,strong) WattExternalReference * destination;

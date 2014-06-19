@@ -37,39 +37,6 @@
 @synthesize sections=_sections;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMMenu *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_destination=[_destination instancebyCopyTo:destinationRegistry];
-	instance->_details=[_details copy];
-	instance->_index=_index;
-	instance->_label=[_label copy];
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_childrens=[_childrens instancebyCopyTo:destinationRegistry];
-	instance->_parent=[_parent instancebyCopyTo:destinationRegistry];
-	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMMenu *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_destination=[_destination extractInstancebyCopyTo:destinationRegistry];
-	instance->_details=[_details copy];
-	instance->_index=_index;
-	instance->_label=[_label copy];
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_childrens=[_childrens extractInstancebyCopyTo:destinationRegistry];
-	instance->_parent=[_parent extractInstancebyCopyTo:destinationRegistry];
-	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -246,7 +213,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMMenu ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMMenu ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"destination : %@\n",NSStringFromClass([self.destination class])];
 	[s appendFormat:@"details : %@\n",self.details];
 	[s appendFormat:@"index : %@\n",@(self.index)];

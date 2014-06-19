@@ -26,25 +26,6 @@
 @synthesize comment=_comment;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMAsset *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_comment=[_comment copy];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMAsset *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_comment=[_comment copy];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -80,7 +61,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMAsset ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMAsset ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	return s;
 }

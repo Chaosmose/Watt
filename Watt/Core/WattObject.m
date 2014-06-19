@@ -78,6 +78,26 @@
 }
 
 
+- (instancetype)copyToRegistry:(WattRegistry*)destination{
+    Class CurrentClass=[self class];
+    WattObject*instance=[[CurrentClass alloc] initInRegistry:destination];
+    for (NSString*key in [self propertiesKeys]) {
+        id value=[self valueForKey:key];
+        id copyed=nil;
+        if([value isMemberOfClass:[WattObject class]]){
+            copyed=[(WattObject*)value copyToRegistry:destination];
+        }else{
+            if([value conformsToProtocol:@protocol(NSCopying)]){
+                copyed=[value copy];
+            }else{
+                copyed=value;
+            }
+        }
+        [self setValue:value forKey:key];
+    }
+    return instance;
+}
+
 - (void)setHasChanged:(BOOL)hasChanged{
     _hasChanged=hasChanged;
     self.registry.hasChanged=(self.registry.hasChanged&&_hasChanged);

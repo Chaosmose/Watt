@@ -32,31 +32,6 @@
 @synthesize sections=_sections;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMShelf *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_groups=[_groups instancebyCopyTo:destinationRegistry];
-	instance->_name=[_name copy];
-	instance->_users=[_users instancebyCopyTo:destinationRegistry];
-	instance->_sections=[_sections instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMShelf *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_groups=[_groups extractInstancebyCopyTo:destinationRegistry];
-	instance->_name=[_name copy];
-	instance->_users=[_users extractInstancebyCopyTo:destinationRegistry];
-	instance->_sections=[_sections extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -188,7 +163,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMShelf ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMShelf ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"groups : %@\n",NSStringFromClass([self.groups class])];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"users : %@\n",NSStringFromClass([self.users class])];

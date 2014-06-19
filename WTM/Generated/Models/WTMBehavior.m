@@ -28,29 +28,6 @@
 @synthesize triggerName=_triggerName;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMBehavior *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_actionName=[_actionName copy];
-	instance->_attributes=[_attributes copy];
-	instance->_triggerName=[_triggerName copy];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMBehavior *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_actionName=[_actionName copy];
-	instance->_attributes=[_attributes copy];
-	instance->_triggerName=[_triggerName copy];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -96,7 +73,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMBehavior ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMBehavior ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"actionName : %@\n",self.actionName];
 	[s appendFormat:@"attributes : %@\n",self.attributes];
 	[s appendFormat:@"triggerName : %@\n",self.triggerName];

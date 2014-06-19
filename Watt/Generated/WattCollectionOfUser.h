@@ -22,7 +22,7 @@
 #import "WattUser.h" 
 #import "WattCollectionOfObject.h" 
 
-@interface WattCollectionOfUser:WattCollectionOfObject <WattCoding,WattCopying,WattExtraction>{
+@interface WattCollectionOfUser:WattCollectionOfObject <WattCoding>{
 }
 - (void)enumerateObjectsUsingBlock:(void (^)(WattUser *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - ( WattCollectionOfUser*)filteredCollectionUsingBlock:(BOOL (^)(WattUser  *obj))block withRegistry:(WattRegistry *)registry;

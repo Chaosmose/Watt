@@ -32,33 +32,6 @@
 @synthesize libraries=_libraries;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMPackage *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_license=[_license copy];
-	instance->_name=[_name copy];
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_activities=[_activities instancebyCopyTo:destinationRegistry];
-	instance->_libraries=[_libraries instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMPackage *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_license=[_license copy];
-	instance->_name=[_name copy];
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_activities=[_activities extractInstancebyCopyTo:destinationRegistry];
-	instance->_libraries=[_libraries extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -168,7 +141,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMPackage ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMPackage ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"license : %@\n",self.license];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];

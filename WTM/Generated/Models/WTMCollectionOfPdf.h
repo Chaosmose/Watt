@@ -22,7 +22,7 @@
 #import "WTMPdf.h" 
 #import "WattCollectionOfModel.h" 
 
-@interface WTMCollectionOfPdf:WattCollectionOfModel <WattCoding,WattCopying,WattExtraction>{
+@interface WTMCollectionOfPdf:WattCollectionOfModel <WattCoding>{
 }
 - (void)enumerateObjectsUsingBlock:(void (^)(WTMPdf *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - ( WTMCollectionOfPdf*)filteredCollectionUsingBlock:(BOOL (^)(WTMPdf  *obj))block withRegistry:(WattRegistry *)registry;

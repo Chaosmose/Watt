@@ -28,32 +28,9 @@
 @synthesize objectName=_objectName;
 @synthesize group=_group;
 
-/*
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WattUser *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_identity=[_identity copy];
-	instance->_objectName=[_objectName copy];
-	instance->_group=[_group instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WattUser *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_identity=[_identity copy];
-	instance->_objectName=[_objectName copy];
-	instance->_group=[_group extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
 
 
 
-*/
 #pragma mark -
 
 
@@ -124,7 +101,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WattUser ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WattUser ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"identity : %@\n",self.identity];
 	[s appendFormat:@"objectName : %@\n",self.objectName];
 	[s appendFormat:@"group : %@\n",NSStringFromClass([self.group class])];

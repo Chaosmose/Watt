@@ -22,7 +22,7 @@
 
 #import "WattObject.h"
 
-@interface WattExternalReference:WattObject<WattCoding,WattCopying,WattExtraction>{
+@interface WattExternalReference:WattObject<WattCoding>{
 }
 
 @property (nonatomic,assign) NSInteger  objectUinstID;

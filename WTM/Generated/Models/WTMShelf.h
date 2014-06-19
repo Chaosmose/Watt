@@ -25,7 +25,7 @@
 @class WattCollectionOfUser;
 @class WTMCollectionOfMenuSection;
 
-@interface WTMShelf:WattModel<WattCoding,WattCopying,WattExtraction>{
+@interface WTMShelf:WattModel<WattCoding>{
 }
 
 @property (nonatomic,strong) WattCollectionOfGroup * groups;

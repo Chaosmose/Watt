@@ -33,40 +33,7 @@
 @synthesize rights=_rights;
 @synthesize references=_references;
 
-/*
-#pragma  mark WattCopying
 
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WattModel *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_category=[_category copy];
-	instance->_comment=[_comment copy];
-	instance->_groupID=_groupID;
-	instance->_metadata=[_metadata copy];
-	instance->_objectName=[_objectName copy];
-	instance->_ownerID=_ownerID;
-	instance->_rights=_rights;
-	instance->_references=[_references instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WattModel *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_category=[_category copy];
-	instance->_comment=[_comment copy];
-	instance->_groupID=_groupID;
-	instance->_metadata=[_metadata copy];
-	instance->_objectName=[_objectName copy];
-	instance->_ownerID=_ownerID;
-	instance->_rights=_rights;
-	instance->_references=[_references extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-*/
 
 
 #pragma mark -
@@ -158,7 +125,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WattModel ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WattModel ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"category : %@\n",self.category];
 	[s appendFormat:@"comment : %@\n",self.comment];
 	[s appendFormat:@"groupID : %@\n",@(self.groupID)];

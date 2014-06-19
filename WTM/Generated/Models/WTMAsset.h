@@ -23,7 +23,7 @@
 #import "WattModel.h"
 #import "WTMMember.h"
 
-@interface WTMAsset:WTMMember<WattCoding,WattCopying,WattExtraction>{
+@interface WTMAsset:WTMMember<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * comment;

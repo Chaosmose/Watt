@@ -53,49 +53,7 @@
 
 
     
-#pragma  mark WattCopying
-    
-    /*
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-    WattCollectionOfObject *instance=[super wattCopyInRegistry:destinationRegistry];
-    // We add the members of the collection to the registry"
-    WattRegistry *__block registryReference=destinationRegistry;
-    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        WattObject *objectToAdd=[obj instancebyCopyTo:registryReference];
-        [instance addObject:objectToAdd];
-    } reverse:NO];
-    
-    return instance;
-}
-    
-    */
-    
-#pragma mark - WattExtraction
 
-
-    /**
-     *  Watt Collection members are always extractibles
-     *  @param destinationRegistry the registry
-     *
-     *  @return the copy of the instance in the destinationRegistry
-     */
-
-/*
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-    WattCollectionOfObject *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-    // We add the members of the collection to the registry"
-    WattRegistry *__block registryReference=destinationRegistry;
-    [self enumerateObjectsUsingBlock:^(WattObject *obj, NSUInteger idx, BOOL *stop) {
-        WattObject *objectToAdd=[obj extractInstancebyCopyTo:registryReference];
-        [instance addObject:objectToAdd];
-    } reverse:NO];
-    
-    return instance;
-    
-    
-}
-*/
-    
 #pragma mark
     
     // Filtering
@@ -140,13 +98,12 @@
     Class currentClass=[self class];
     id instance=[[currentClass alloc]initInRegistry:registry];
     int i=0;
-#warning experimental support we should implement WattCopying
     for (WattObject*o in sorted) {
         if([o.registry.uidString isEqualToString:registry.uidString]|| !registry){
            [instance addObject:o];
         }else{
             NSDictionary*d=[o dictionaryRepresentationWithChildren:YES];
-            [instance addObject:[[o class] instanceFromDictionary:d inRegistry:registry includeChildren:YES]];
+            [instance addObject:[o copyToRegistry:registry]];
         }
         
         i++;

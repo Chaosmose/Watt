@@ -34,7 +34,7 @@
 
 @class WattExternalReference;
 
-@interface WattObject : NSObject<WattCoding>{//,WattCopying,WattExtraction>{
+@interface WattObject : NSObject<WattCoding>{
 @private
     NSMutableArray *_propertiesKeys;    // Used by the WTMObject root object to store the properties name
 @protected
@@ -74,6 +74,8 @@
 - (instancetype)initInRegistry:(WattRegistry*)registry;
 - (instancetype)initInRegistry:(WattRegistry*)registry withPresetIdentifier:(NSInteger)identifier; //Used for reinstanciation from a device to another
 - (instancetype)initAsAliasWithIdentifier:(NSInteger)identifier; // instanciate an alias
+
+- (instancetype)copyToRegistry:(WattRegistry*)destination;
 
 // ANY WattObject should be unRegistered to be released from its registry
 // autoUnRegister is a facility

@@ -38,41 +38,6 @@
 @synthesize table=_table;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMScene *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_footer=[_footer copy];
-	instance->_header=[_header copy];
-	instance->_index=_index;
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_title=[_title copy];
-	instance->_activity=[_activity instancebyCopyTo:destinationRegistry];
-	instance->_behaviors=[_behaviors instancebyCopyTo:destinationRegistry];
-	instance->_elements=[_elements instancebyCopyTo:destinationRegistry];
-	instance->_table=[_table instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMScene *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_footer=[_footer copy];
-	instance->_header=[_header copy];
-	instance->_index=_index;
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_title=[_title copy];
-	instance->_activity=[_activity extractInstancebyCopyTo:destinationRegistry];
-	instance->_behaviors=[_behaviors extractInstancebyCopyTo:destinationRegistry];
-	instance->_elements=[_elements extractInstancebyCopyTo:destinationRegistry];
-	instance->_table=[_table extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -254,7 +219,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMScene ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMScene ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"footer : %@\n",self.footer];
 	[s appendFormat:@"header : %@\n",self.header];
 	[s appendFormat:@"index : %@\n",@(self.index)];

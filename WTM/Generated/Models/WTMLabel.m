@@ -27,27 +27,6 @@
 @synthesize text=_text;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMLabel *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_font=[_font copy];
-	instance->_text=[_text copy];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMLabel *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_font=[_font copy];
-	instance->_text=[_text copy];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -88,7 +67,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMLabel ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMLabel ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"font : %@\n",self.font];
 	[s appendFormat:@"text : %@\n",self.text];
 	return s;

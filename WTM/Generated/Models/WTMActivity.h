@@ -25,7 +25,7 @@
 @class WTMPackage;
 @class WTMCollectionOfScene;
 
-@interface WTMActivity:WattModel<WattCoding,WattCopying,WattExtraction>{
+@interface WTMActivity:WattModel<WattCoding>{
 }
 
 @property (nonatomic,assign) NSInteger  level;

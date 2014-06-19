@@ -31,31 +31,6 @@
 @synthesize package=_package;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMLibrary *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_name=[_name copy];
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_members=[_members instancebyCopyTo:destinationRegistry];
-	instance->_package=[_package instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMLibrary *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_name=[_name copy];
-	instance->_pictureRelativePath=[_pictureRelativePath copy];
-	instance->_members=[_members extractInstancebyCopyTo:destinationRegistry];
-	instance->_package=nil;// Non extractible
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -160,7 +135,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMLibrary ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMLibrary ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"name : %@\n",self.name];
 	[s appendFormat:@"pictureRelativePath : %@\n",self.pictureRelativePath];
 	[s appendFormat:@"members : %@\n",NSStringFromClass([self.members class])];

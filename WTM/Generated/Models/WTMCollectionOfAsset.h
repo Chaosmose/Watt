@@ -22,7 +22,7 @@
 #import "WTMAsset.h" 
 #import "WattCollectionOfModel.h" 
 
-@interface WTMCollectionOfAsset:WattCollectionOfModel <WattCoding,WattCopying,WattExtraction>{
+@interface WTMCollectionOfAsset:WattCollectionOfModel <WattCoding>{
 }
 - (void)enumerateObjectsUsingBlock:(void (^)(WTMAsset *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration;
 - ( WTMCollectionOfAsset*)filteredCollectionUsingBlock:(BOOL (^)(WTMAsset  *obj))block withRegistry:(WattRegistry *)registry;

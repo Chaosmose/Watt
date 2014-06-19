@@ -24,7 +24,7 @@
 @class WTMCollectionOfActivity;
 @class WTMCollectionOfLibrary;
 
-@interface WTMPackage:WattModel<WattCoding,WattCopying,WattExtraction>{
+@interface WTMPackage:WattModel<WattCoding>{
 }
 
 @property (nonatomic,copy) NSString * license;

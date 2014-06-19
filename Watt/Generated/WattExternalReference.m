@@ -26,29 +26,8 @@
 @synthesize objectUinstID=_objectUinstID;
 @synthesize registryUidString=_registryUidString;
 
-/*
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WattExternalReference *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_objectUinstID=_objectUinstID;
-	instance->_registryUidString=[_registryUidString copy];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WattExternalReference *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_objectUinstID=_objectUinstID;
-	instance->_registryUidString=[_registryUidString copy];
-    return instance;
-}
 
 
-*/
 
 #pragma mark -
 
@@ -86,7 +65,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WattExternalReference ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WattExternalReference ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"objectUinstID : %@\n",@(self.objectUinstID)];
 	[s appendFormat:@"registryUidString : %@\n",self.registryUidString];
 	return s;

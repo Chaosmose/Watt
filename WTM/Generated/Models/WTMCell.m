@@ -32,31 +32,6 @@
 @synthesize line=_line;
 
 
-#pragma  mark WattCopying
-
-- (instancetype)wattCopyInRegistry:(WattRegistry*)destinationRegistry{
-	WTMCell *instance=[super wattCopyInRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_attributes=[_attributes copy];
-	instance->_column=[_column instancebyCopyTo:destinationRegistry];
-	instance->_element=[_element instancebyCopyTo:destinationRegistry];
-	instance->_line=[_line instancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-#pragma  mark WattExtraction
-
-- (instancetype)wattExtractAndCopyToRegistry:(WattRegistry*)destinationRegistry{
-	WTMCell *instance=[super wattExtractAndCopyToRegistry:destinationRegistry];
-	instance->_registry=destinationRegistry;
-	instance->_attributes=[_attributes copy];
-	instance->_column=[_column extractInstancebyCopyTo:destinationRegistry];
-	instance->_element=[_element extractInstancebyCopyTo:destinationRegistry];
-	instance->_line=[_line extractInstancebyCopyTo:destinationRegistry];
-    return instance;
-}
-
-
 
 
 #pragma mark -
@@ -188,7 +163,7 @@
     if([self isAnAlias])
         return [super aliasDescription];
     NSMutableString *s=[NSMutableString stringWithString:[super description]];
-	[s appendFormat:@"Instance of %@ (%@.%i) :\n",@"WTMCell ",_registry.uidString,_uinstID];
+	[s appendFormat:@"Instance of %@ (%@.%@) :\n",@"WTMCell ",_registry.uidString,@(_uinstID)];
 	[s appendFormat:@"attributes : %@\n",self.attributes];
 	[s appendFormat:@"column : %@\n",NSStringFromClass([self.column class])];
 	[s appendFormat:@"element : %@\n",NSStringFromClass([self.element class])];

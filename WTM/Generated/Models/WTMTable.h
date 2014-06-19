@@ -25,7 +25,7 @@
 @class WTMCollectionOfLine;
 @class WTMScene;
 
-@interface WTMTable:WattModel<WattCoding,WattCopying,WattExtraction>{
+@interface WTMTable:WattModel<WattCoding>{
 }
 
 @property (nonatomic,strong) WTMCollectionOfColumn * columns;
