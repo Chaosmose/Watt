@@ -65,6 +65,7 @@ __LINE__ ,\
 #import "WattObjectProtocols.h"
 #import "WattObject.h"
 #import "WattRegistry.h"
+#import "WattRegistryPool.h"
 #import "WattCollectionOfObject.h"
 
 #import "WattACL.h"
