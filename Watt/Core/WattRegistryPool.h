@@ -152,7 +152,6 @@ static NSString*mapFileDefaultName=@"map";
 #pragma mark - converter
 
 
-#warning todo
 //- (void)convertToSerializationMode:(WattSerializationMode)mode;
 
 
