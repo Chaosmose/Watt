@@ -25,7 +25,6 @@
 #import "WattACL.h"
 
 
-#define checkCollectedType(instance){ }
 
 @implementation WattCollectionOfObject
     
