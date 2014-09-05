@@ -24,6 +24,9 @@
 #import "Watt.h"
 #import "WattACL.h"
 
+
+#define checkCollectedType(instance){ }
+
 @implementation WattCollectionOfObject
     
 - (instancetype)init{
@@ -255,12 +258,22 @@
     
     
 - (void)addObject:(WattObject*)anObject{
+#ifdef  __WT_COLLECTION_ADDITION_RUNTINE_TYPE_CHECKING
+    if(![anObject isMemberOfClass:[self collectedObjectClass]]){
+        [NSException raise:@"Watt collection type mismatch while calling addObject " format:@"Should be %@", [self collectedObjectClass],anObject?[anObject class]:@"Is nil"];
+    }
+#endif
     [_collection addObject:anObject];
     self.registry.hasChanged=YES;
 }
     
     
 - (void)insertObject:(WattObject*)anObject atIndex:(NSUInteger)index{
+#ifdef  __WT_COLLECTION_ADDITION_RUNTINE_TYPE_CHECKING
+    if(![anObject isMemberOfClass:[self collectedObjectClass]]){
+        [NSException raise:@"Watt collection type mismatch while calling insertObject " format:@"Should be %@", [self collectedObjectClass],anObject?[anObject class]:@"Is nil"];
+    }
+#endif
 	[_collection insertObject:anObject atIndex:index];
     self.registry.hasChanged=YES;
 }
@@ -282,6 +295,11 @@
 }
     
 - (void)replaceObjectAtIndex:(NSUInteger)index withObject:(WattObject*)anObject{
+#ifdef  __WT_COLLECTION_ADDITION_RUNTINE_TYPE_CHECKING
+    if(![anObject isMemberOfClass:[self collectedObjectClass]]){
+        [NSException raise:@"Watt collection type mismatch while calling replaceObjectAtIndex " format:@"Should be %@", [self collectedObjectClass],anObject?[anObject class]:@"Is nil"];
+    }
+#endif
     [_collection replaceObjectAtIndex:index withObject:anObject];
     self.registry.hasChanged=YES;
 }
@@ -366,5 +384,16 @@
         i++;
     }
 }
-    
-    @end
+
+
+#pragma mark - runtime
+
+/**
+ *  Used when __WT_COLLECTION_ADDITION_RUNTINE_TYPE_CHECKING is defined
+ *
+ *  @return the collectedObjectClass
+ */
+- (Class)collectedObjectClass{
+    return [WattObject class];
+}
+@end

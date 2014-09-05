@@ -20,6 +20,11 @@
 
 #import "WattDefinitions.h"
 
+
+// To control if added object have the good type at runtime
+// #define __WT_COLLECTION_ADDITION_RUNTINE_TYPE_CHECKING
+
+
 #ifndef __WT_LOG
 #define __WT_LOG 1 // You can set up WT_LOG to 1 or 0
 typedef enum logNatures{
@@ -46,6 +51,7 @@ __LINE__ ,\
 
 #ifndef __WT_RUNTIME_CONFIGURATION
 #define __WT_RUNTIME_CONFIGURATION
+
 
 
 #define selectorSetterFromPropertyName(propertyName) NSSelectorFromString([NSString stringWithFormat:@"set%@:",[propertyName capitalizedString]])

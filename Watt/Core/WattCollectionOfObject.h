@@ -27,7 +27,8 @@
     @protected
     NSMutableArray* _collection;
 }
-    
+
+
 #pragma mark - filtering
     
     /**
@@ -122,5 +123,17 @@
      *  @param propertyName the name of the property
      */
 - (void)computeCollectionIndexesAndStoreInPropertyWithName:(NSString*)propertyName;
-    
-    @end
+
+
+
+#pragma mark - runtime
+
+/**
+ *  Used when __WT_COLLECTION_ADDITION_RUNTINE_TYPE_CHECKING is defined
+ *
+ *  @return the collectedObjectClass
+ */
+- (Class)collectedObjectClass;
+
+
+@end
