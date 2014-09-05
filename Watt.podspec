@@ -1,26 +1,26 @@
 Pod::Spec.new do |s|
 
   s.name        = 'Watt'
-  s.version     = '0.31'
+  s.version     = '0.32'
   s.authors     = { 'Benoit Pereira da Silva' => 'benoit@pereira-da-silva.com' }
   s.homepage    = 'https://https://github.com/benoit-pereira-da-silva/Watt'
   s.summary     = 'Watt'
   s.source      = { :git => 'https://github.com/benoit-pereira-da-silva/Watt.git',  :submodules => true }
   s.license     = { :type => "LGPL", :file => "LICENSE" }
-  
+
   s.ios.deployment_target = '6.0'
   s.osx.deployment_target = '10.8'
   s.requires_arc = true
-  
+
   s.source_files =  'Watt','Watt/**/*.{h,m}'
   s.public_header_files = 'Watt/**/*.h'
 
   s.subspec 'WattPackager' do |ss|
       ss.description     = 'A module to extract, package transmit, download watt registry pool and bundles'
-      ss.source_files =  'WattPackager/*.{h,m}'         
+      ss.source_files =  'WattPackager/*.{h,m}'
       ss.public_header_files = 'WattPackager/*.h'
       ss.dependency 'SSZipArchive'
-      ss.dependency 'zipzap'
+      #ss.dependency 'zipzap'
   end
 
   s.subspec 'WTM' do |ss|
@@ -39,5 +39,5 @@ Pod::Spec.new do |s|
       ss.osx.source_files = ''
       ss.osx.public_header_files =''
    end
- 
+
 end

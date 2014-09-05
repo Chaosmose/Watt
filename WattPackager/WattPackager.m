@@ -19,20 +19,17 @@
 //  Created by Benoit Pereira da Silva on 17/05/13.
 //  Copyright (c) 2013 Pereira da Silva. All rights reserved.
 
-#define USE_ZIP_ZAP 0
-#define USE_SSZIPArchive !USE_ZIP_ZAP
-#import "WattPackager.h"
-#if  !USE_ZIP_ZAP
-#import "SSZipArchive.h"
-#else
-#import "zipzap.h"
-#endif
 
+#import "WattPackager.h"
+#define  USE_SSZIPArchive
+#ifdef USE_SSZIPArchive
+#import "SSZipArchive.h"
+#endif
 
 static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
 
 @interface WattPackager()
-#if USE_SSZIPArchive
+#ifdef USE_SSZIPArchive
 <SSZipArchiveDelegate>
 #endif
 {}
@@ -182,7 +179,7 @@ useBackgroundMode:(BOOL)backgroundMode{
     WattPackager *__weak weakSelf=self;
     
     if([self _createRecursivelyRequiredFolderForPath:destinationFolder]){
-#if USE_SSZIPArchive
+#ifdef USE_SSZIPArchive
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
                 NSError *error=nil;
@@ -237,7 +234,7 @@ useBackgroundMode:(BOOL)backgroundMode{
         if(error){
             block(NO,error);
         }
-#if USE_SSZIPArchive
+#ifdef USE_SSZIPArchive
         if(backgroundMode){
             [self.queue addOperationWithBlock:^{
                 if([SSZipArchive createZipFileAtPath:destinationZipFilePath
@@ -277,28 +274,6 @@ useBackgroundMode:(BOOL)backgroundMode{
 }
 
 
-
-
-/*
-
--(void)_addFolder:(NSString*)path pathPrefix:(NSString*)prefix toMapping:(NSMutableDictionary**)dictionary{
-    NSFileManager *fm=self.fileManager;
-    NSArray		*dirArray = [fm contentsOfDirectoryAtPath:path
-                                                 error:nil];
-    int nb=[dirArray count];
-    for (int i=0; i<nb;i++) {
-        NSString *s=[dirArray objectAtIndex:i];
-        NSDictionary *dict = [fm attributesOfItemAtPath:[path stringByAppendingPathComponent:s] error:nil];
-        NSString *prefixUpdated=[prefix length]>0 ? [prefix stringByAppendingPathComponent:s] : s;
-        if ([[dict fileType] isEqualToString:NSFileTypeDirectory]
-            || [[dict fileType] isEqualToString:NSFileTypeSymbolicLink]) {
-            [self _addFolder:[path stringByAppendingPathComponent:s] pathPrefix:prefixUpdated toMapping:*&dictionary];
-        } else {
-            [*dictionary setValue:[path stringByAppendingPathComponent:s] forKey:prefixUpdated];
-        }
-    }
-}
-*/
 
 
 @end
