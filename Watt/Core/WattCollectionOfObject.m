@@ -224,7 +224,7 @@
 
 - (WattObject *)firstObject{
     if([_collection count]>0){
-        return [_collection objectAtIndex:0];
+        return [self objectAtIndex:0];
     }
     return nil;
 }
