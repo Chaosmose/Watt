@@ -118,9 +118,10 @@
  *  @return if YES the key is replicable
  */
 - (BOOL)canReplicateKey:(NSString*)key{
+    if([key isEqualToString:@"uinstID"])
+        return NO;
     return YES;
 }
-
 
 
 - (void)setHasChanged:(BOOL)hasChanged{
