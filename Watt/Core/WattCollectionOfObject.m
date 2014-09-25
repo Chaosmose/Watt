@@ -148,11 +148,12 @@
 
 
 - (void)enumerateObjectsUsingBlock:(void (^)(WattObject *obj, NSUInteger idx, BOOL *stop))block reverse:(BOOL)useReverseEnumeration{
-    NSUInteger idx = 0;
+    BOOL __block reversed=useReverseEnumeration;
+    NSUInteger idx = reversed?[self count]-1:0;
     BOOL stop = NO;
     NSEnumerator * enumerator=useReverseEnumeration?[_collection reverseObjectEnumerator]: [_collection objectEnumerator];
     for( WattObject* obj in enumerator ){
-        block(obj, idx++, &stop);
+        block(obj, (reversed?idx--:idx++), &stop);
         if( stop )
             break;
     }
