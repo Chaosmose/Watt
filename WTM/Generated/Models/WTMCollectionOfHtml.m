@@ -107,5 +107,8 @@
     [super replaceObjectAtIndex:index withObject:anObject];
 }
 
+- (Class)collectedObjectClass{
+	return [WTMHtml class];
+}
 
 @end

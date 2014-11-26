@@ -31,12 +31,6 @@
 @synthesize users=_users;
 @synthesize sections=_sections;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"groups"]){
 		[super setValue:[WattCollectionOfGroup instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"groups"];

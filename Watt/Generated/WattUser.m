@@ -28,12 +28,6 @@
 @synthesize objectName=_objectName;
 @synthesize group=_group;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"identity"]){
 		[super setValue:value forKey:@"identity"];

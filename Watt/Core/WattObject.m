@@ -297,7 +297,7 @@
 
 
 - (NSString*)aliasDescription{
-    return [NSString stringWithFormat:@"Alias of %@(#%i)",NSStringFromClass([self class]),self.uinstID];
+    return [NSString stringWithFormat:@"Alias of %@(#%@)",NSStringFromClass([self class]),@(self.uinstID)];
 }
 
 #pragma mark - Registry consistancy

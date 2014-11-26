@@ -31,14 +31,9 @@
 @synthesize score=_score;
 @synthesize shortName=_shortName;
 @synthesize title=_title;
+@synthesize toto=_toto;
 @synthesize package=_package;
 @synthesize scenes=_scenes;
-
-
-
-
-#pragma mark -
-
 
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"level"]){
@@ -53,6 +48,8 @@
 		[super setValue:value forKey:@"shortName"];
 	} else if ([key isEqualToString:@"title"]) {
 		[super setValue:value forKey:@"title"];
+	} else if ([key isEqualToString:@"toto"]) {
+		[super setValue:value forKey:@"toto"];
 	} else if ([key isEqualToString:@"package"]) {
 		[super setValue:[WTMPackage instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"package"];
 	} else if ([key isEqualToString:@"scenes"]) {
@@ -131,6 +128,7 @@
 	if(_title){
 		[dictionary setValue:self.title forKey:@"title"];
 	}
+	[dictionary setValue:@(self.toto) forKey:@"toto"];
 	if(_package){
 		if(includeChildren){
 			[dictionary setValue:[self.package dictionaryRepresentationWithChildren:includeChildren] forKey:@"package"];
@@ -160,6 +158,7 @@
 	[s appendFormat:@"score : %@\n",@(self.score)];
 	[s appendFormat:@"shortName : %@\n",self.shortName];
 	[s appendFormat:@"title : %@\n",self.title];
+	[s appendFormat:@"toto : %@\n",@(self.toto)];
 	[s appendFormat:@"package : %@\n",NSStringFromClass([self.package class])];
 	[s appendFormat:@"scenes : %@\n",NSStringFromClass([self.scenes class])];
 	return s;

@@ -31,12 +31,6 @@
 @synthesize menus=_menus;
 @synthesize shelf=_shelf;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"details"]){
 		[super setValue:value forKey:@"details"];

@@ -29,12 +29,6 @@
 @synthesize cells=_cells;
 @synthesize table=_table;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"width"]){
 		[super setValue:value forKey:@"width"];

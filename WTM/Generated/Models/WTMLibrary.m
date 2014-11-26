@@ -30,12 +30,6 @@
 @synthesize members=_members;
 @synthesize package=_package;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];

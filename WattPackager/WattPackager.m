@@ -86,7 +86,7 @@ static NSString *WattPackagerErrorDomainName=@"WattPackagerErrorDomainName";
         }
     }else{
         while ([self.fileManager fileExistsAtPath:destinationFilePath]) {
-            destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%i.%@",i,self.defaultPackExtension];
+            destinationFilePath=[sourceFolderPath stringByAppendingFormat:@".%@.%@",@(i),self.defaultPackExtension];
             i++;
         }
     }

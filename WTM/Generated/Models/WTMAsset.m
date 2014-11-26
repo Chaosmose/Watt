@@ -25,12 +25,6 @@
 
 @synthesize comment=_comment;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"comment"]){
 		[super setValue:value forKey:@"comment"];

@@ -879,7 +879,8 @@ static NSString* rimbaud =@"Q9tbWVqZWRlc2NlbmRhaXNkZXNGbGV1dmVzaW1wYXNzaWJsZXMsS
 
 -(WattRegistry*)readRegistryFromFile:(NSString*)path withUniqueStringIdentifier:(NSString*)identifier{
     NSString*filteredPath=[self _filter:path];
-    if(self.fileManager && ![self.fileManager fileExistsAtPath:filteredPath isDirectory:NO]){
+    BOOL isDirectory=NO;
+    if(self.fileManager && ![self.fileManager fileExistsAtPath:filteredPath isDirectory:&isDirectory]){
         [self raiseExceptionWithFormat:@"Unexisting registry path %@",filteredPath];
     }
     

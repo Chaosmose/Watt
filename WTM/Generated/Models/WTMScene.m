@@ -37,12 +37,6 @@
 @synthesize elements=_elements;
 @synthesize table=_table;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"footer"]){
 		[super setValue:value forKey:@"footer"];

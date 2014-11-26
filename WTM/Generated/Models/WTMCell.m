@@ -31,12 +31,6 @@
 @synthesize element=_element;
 @synthesize line=_line;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"attributes"]){
 		[super setValue:value forKey:@"attributes"];

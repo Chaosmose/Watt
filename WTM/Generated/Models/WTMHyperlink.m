@@ -28,12 +28,6 @@
 @synthesize updateUrlOnChange=_updateUrlOnChange;
 @synthesize urlString=_urlString;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"allowExploration"]){
 		[super setValue:value forKey:@"allowExploration"];

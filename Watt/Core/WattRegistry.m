@@ -358,7 +358,7 @@
 
 
 - (NSString*)_keyFrom:(NSInteger)uinstID{
-    return [NSString stringWithFormat:@"%i",uinstID];
+    return [NSString stringWithFormat:@"%@",@(uinstID)];
 }
 
 
@@ -405,12 +405,12 @@
 
 - (NSString*)description{
 	NSMutableString *s=[NSMutableString string];
-    [s appendFormat:@"Registry with %i members\n\n",[[self _sortedKeys] count]];
+    [s appendFormat:@"Registry with %@ members\n\n",@([[self _sortedKeys] count])];
     NSUInteger i=1;
     NSArray *sortedKeys=[self _sortedKeys];
     for (NSString*key in sortedKeys) {
         WattObject*o=[_registry objectForKey:key];
-        [s appendFormat:@"%i|#%i|%@\n",i,o.uinstID,o];
+        [s appendFormat:@"%@|#%@|%@\n",@(i),@(o.uinstID),o];
         i++;
     }
 	return s;

@@ -34,6 +34,7 @@
 @property (nonatomic,assign) NSInteger  score;
 @property (nonatomic,copy) NSString * shortName;
 @property (nonatomic,copy) NSString * title;
+@property (nonatomic,assign) float  toto;
 @property (nonatomic,strong) WTMPackage * package;// non extractible
 @property (nonatomic,strong) WTMCollectionOfScene * scenes;
 

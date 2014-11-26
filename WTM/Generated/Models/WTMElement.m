@@ -32,12 +32,6 @@
 @synthesize cells=_cells;
 @synthesize scene=_scene;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"asset"]){
 		[super setValue:[WTMAsset instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"asset"];

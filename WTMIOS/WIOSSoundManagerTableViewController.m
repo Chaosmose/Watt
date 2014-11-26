@@ -118,7 +118,7 @@
     sound.refererCounter=ABS(NSIntegerMax); // We do consider that any sound must be persistent and explicitly deleted.
     sound.category=self.categoryName;
     sound.name=NSLocalizedString(@"New sound name", @"The default sound name to be used on sound creation");
-    sound.relativePath=[NSString stringWithFormat:@"%i/%i/%i.caf",sound.library.package.uinstID,sound.library.uinstID,sound.uinstID];
+    sound.relativePath=[NSString stringWithFormat:@"%@/%@/%@.caf",@(sound.library.package.uinstID),@(sound.library.uinstID),@(sound.uinstID)];
     [_sounds addObject:sound];
     [self.library.registry save];
     [self.tableView reloadData];

@@ -25,12 +25,6 @@
 
 @synthesize size=_size;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"size"]){
 		[super setValue:value forKey:@"size"];

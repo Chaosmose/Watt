@@ -27,12 +27,6 @@
 @synthesize attributes=_attributes;
 @synthesize triggerName=_triggerName;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"actionName"]){
 		[super setValue:value forKey:@"actionName"];

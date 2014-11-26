@@ -30,12 +30,6 @@
 @synthesize lines=_lines;
 @synthesize scene=_scene;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"columns"]){
 		[super setValue:[WTMCollectionOfColumn instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"columns"];

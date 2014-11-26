@@ -33,12 +33,6 @@
 @synthesize rights=_rights;
 @synthesize references=_references;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"category"]){
 		[super setValue:value forKey:@"category"];
@@ -60,15 +54,6 @@
 		[super setValue:value forKey:key];
 	}
 }
-
-
-- (BOOL)canReplicateKey:(NSString*)key{
-    // Patch ? references are not replicable
-    if([key isEqualToString:@"references"])
-        return NO;
-    return [super canReplicateKey:key];
-}
-
 
 - (WattCollectionOfExternalReference*)references{
 	if([_references isAnAlias]){

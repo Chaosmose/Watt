@@ -25,12 +25,6 @@
 
 @synthesize duration=_duration;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"duration"]){
 		[super setValue:value forKey:@"duration"];

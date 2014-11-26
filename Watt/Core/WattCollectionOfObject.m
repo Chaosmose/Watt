@@ -357,7 +357,7 @@
 	NSMutableString *s=[NSMutableString string];
     Class theClass=(_collection && [_collection count]>0)?[[_collection objectAtIndex:0] class]:[NSNull class];
     [s appendFormat:@"Collection of %@\n",NSStringFromClass(theClass)];
-    [s appendFormat:@"With of %i members\n",_collection?[_collection count]:0];
+    [s appendFormat:@"With of %@ members\n",_collection?@([_collection count]):@(0)];
 	return s;
 }
 

@@ -107,5 +107,8 @@
     [super replaceObjectAtIndex:index withObject:anObject];
 }
 
+- (Class)collectedObjectClass{
+	return [WTMBehavior class];
+}
 
 @end

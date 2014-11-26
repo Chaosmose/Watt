@@ -25,12 +25,6 @@
 
 @synthesize string=_string;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"string"]){
 		[super setValue:value forKey:@"string"];

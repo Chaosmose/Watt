@@ -36,12 +36,6 @@
 @synthesize parent=_parent;
 @synthesize sections=_sections;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"destination"]){
 		[super setValue:[WattExternalReference instanceFromDictionary:value inRegistry:_registry includeChildren:NO] forKey:@"destination"];

@@ -26,12 +26,6 @@
 @synthesize objectUinstID=_objectUinstID;
 @synthesize registryUidString=_registryUidString;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"objectUinstID"]){
 		[super setValue:value forKey:@"objectUinstID"];

@@ -31,12 +31,6 @@
 @synthesize activities=_activities;
 @synthesize libraries=_libraries;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"license"]){
 		[super setValue:value forKey:@"license"];

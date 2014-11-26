@@ -29,12 +29,6 @@
 @synthesize thumbnailRelativePath=_thumbnailRelativePath;
 @synthesize library=_library;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"name"]){
 		[super setValue:value forKey:@"name"];

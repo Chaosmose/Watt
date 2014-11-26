@@ -182,7 +182,7 @@
              imTheOwner:(BOOL)owned
       imInTheOwnerGroup:(BOOL)inTheGroup{
     
-    WTLog(@"Rights %@ (%i) action %i",[self rightsFromInteger:rights],rights,action);
+    WTLog(@"Rights %@ (%@) action %@",[self rightsFromInteger:rights],@(rights),@(action));
     
     NSInteger values[9];
     values[0]=400;

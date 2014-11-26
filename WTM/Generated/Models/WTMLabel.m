@@ -26,12 +26,6 @@
 @synthesize font=_font;
 @synthesize text=_text;
 
-
-
-
-#pragma mark -
-
-
 - (void)setValue:(id)value forKey:(NSString *)key {
 	if ([key isEqualToString:@"font"]){
 		[super setValue:value forKey:@"font"];
