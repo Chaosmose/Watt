@@ -4,17 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-PlayerSample-AFNetworking.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-PlayerSample-SSZipArchive.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-PlayerSample-TRVSMonitor.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -29,30 +19,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>WTMIOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05A83267757940EEA561D9E7</key>
+		<key>0A28296E84EC9E157B42651A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>413ACAC16E0F4FC4938B575B</key>
+		<key>411AE2673D3EC7EC6F48A32D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>71744F3C50A34AB0A93951F2</key>
+		<key>469734748A0BA1E34AF1836C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CB2E19D712B4D8DB66671DA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AF878DC8059E4C478E7FF489</key>
+		<key>958F7CCC5D53E8563A267575</key>
 		<dict>
 			<key>primary</key>
 			<true/>

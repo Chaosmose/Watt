@@ -61,8 +61,8 @@
 
 /* Begin PBXFileReference section */
 		4D765C0724FF40EB85ED90BC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSample.xcconfig"; path = "../Pods/Pods-PlayerSample.xcconfig"; sourceTree = SOURCE_ROOT; };
-		D8890FBD9D4042C081050B0D /* Pods-PlayerSampleFlexions.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSampleFlexions.xcconfig"; path = "../Pods/Pods-PlayerSampleFlexions.xcconfig"; sourceTree = SOURCE_ROOT; };
+		4D98F5FF2B1C382F6D0114FA /* Pods-PlayerSample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSample.release.xcconfig"; path = "../Pods/Target Support Files/Pods-PlayerSample/Pods-PlayerSample.release.xcconfig"; sourceTree = "<group>"; };
+		7A172954227362C0823BEE0A /* Pods-PlayerSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlayerSample.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-PlayerSample/Pods-PlayerSample.debug.xcconfig"; sourceTree = "<group>"; };
 		DAEB403454494F16A7456E26 /* libPods-PlayerSampleFlexions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlayerSampleFlexions.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E546A01D182EB5310031882F /* Watt_Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Watt_Misc.m; sourceTree = "<group>"; };
 		E54FBA1E1809AB51002B2BAB /* PlayerSample Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PlayerSample Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,8 +168,7 @@
 				E54FBA231809AB51002B2BAB /* PlayerSample Tests */,
 				E5B462431732A4A000E654A1 /* Frameworks */,
 				E5B462421732A4A000E654A1 /* Products */,
-				B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */,
-				D8890FBD9D4042C081050B0D /* Pods-PlayerSampleFlexions.xcconfig */,
+				FD3F3FCBE1803C9BAB8C33E7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -226,6 +225,15 @@
 				E5B4625A1732A4A000E654A1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FD3F3FCBE1803C9BAB8C33E7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A172954227362C0823BEE0A /* Pods-PlayerSample.debug.xcconfig */,
+				4D98F5FF2B1C382F6D0114FA /* Pods-PlayerSample.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -389,7 +397,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Pods-PlayerSample-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-PlayerSample/Pods-PlayerSample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A22FAC1FB848477EA66B196C /* Check Pods Manifest.lock */ = {
@@ -434,7 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Pods-PlayerSample-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-PlayerSample/Pods-PlayerSample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CE428BA37C3D4665A42F9C63 /* Copy Pods Resources */ = {
@@ -449,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Pods-PlayerSample-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-PlayerSample/Pods-PlayerSample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E5A9EBEE1799242F00976997 /* Invoke Flexions */ = {
@@ -548,7 +556,7 @@
 /* Begin XCBuildConfiguration section */
 		E54FBA2E1809AB51002B2BAB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			baseConfigurationReference = 7A172954227362C0823BEE0A /* Pods-PlayerSample.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlayerSample.app/PlayerSample";
 				CLANG_ENABLE_MODULES = YES;
@@ -580,7 +588,7 @@
 		};
 		E54FBA2F1809AB51002B2BAB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			baseConfigurationReference = 4D98F5FF2B1C382F6D0114FA /* Pods-PlayerSample.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlayerSample.app/PlayerSample";
 				CLANG_ENABLE_MODULES = YES;
@@ -609,7 +617,7 @@
 		};
 		E5A9EC311799242F00976997 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			baseConfigurationReference = 7A172954227362C0823BEE0A /* Pods-PlayerSample.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerSample/PlayerSample-Prefix.pch";
@@ -622,7 +630,7 @@
 		};
 		E5A9EC321799242F00976997 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			baseConfigurationReference = 4D98F5FF2B1C382F6D0114FA /* Pods-PlayerSample.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerSample/PlayerSample-Prefix.pch";
@@ -693,7 +701,7 @@
 		};
 		E5B462681732A4A000E654A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			baseConfigurationReference = 7A172954227362C0823BEE0A /* Pods-PlayerSample.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerSample/PlayerSample-Prefix.pch";
@@ -706,7 +714,7 @@
 		};
 		E5B462691732A4A000E654A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F76722A8D4443CA1CA0AFC /* Pods-PlayerSample.xcconfig */;
+			baseConfigurationReference = 4D98F5FF2B1C382F6D0114FA /* Pods-PlayerSample.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PlayerSample/PlayerSample-Prefix.pch";

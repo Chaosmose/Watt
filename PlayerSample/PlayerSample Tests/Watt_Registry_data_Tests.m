@@ -9,7 +9,6 @@
 #import <XCTest/XCTest.h>
 #import "Watt.h"
 #import "WTM.h"
-#import "TRVSMonitor.h"
 
 @interface Watt_Registry_data_Tests : XCTestCase
 @property (atomic,strong)WattRegistry*dataRegistry;

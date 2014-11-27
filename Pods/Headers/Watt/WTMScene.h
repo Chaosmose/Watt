@@ -1,1 +1,0 @@
-../../../WTM/Generated/Models/WTMScene.h

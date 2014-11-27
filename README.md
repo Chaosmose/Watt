@@ -36,4 +36,3 @@ The Watt.podspec refers to the Watt/Watt (the engine)
 
 You can experiment Watt by using :
 pod 'Watt', {:git => 'https://github.com/benoit-pereira-da-silva/Watt.git'}
-pod 'WTM", {:git => 'https://github.com/benoit-pereira-da-silva/Watt.git'}

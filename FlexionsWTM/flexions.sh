@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 
 # Created by Benoit Pereira da Silva on 20/04/2013.
 # Copyright (c) 2013  http://www.pereira-da-silva.com
@@ -20,10 +20,10 @@
 
 
 ########################
-# Configuration  
+# Configuration
 ########################
 
-# We define the  path to the flexions folder. 
+# We define the  path to the flexions folder.
 flexionsFolder="../../Flexions/"
 
 . ${flexionsFolder}default.flx
@@ -31,15 +31,15 @@ flexionsFolder="../../Flexions/"
 #You can override the default variables
 # templates, pre , post, destination
 
-# We setup the descriptor  
+# We setup the descriptor
 descriptor="WTM.xcdatamodel/contents"
 
 #You can specify a destination folder
 #If not it will  generate in the out/ folder
-destination="../WTM/Generated/"
+destination="../Classes/WTM/Generated/"
 
 ###############
-# Invoke flexions 
+# Invoke flexions
 ###############
 
 . ${flexionsFolder}flexions.flx
