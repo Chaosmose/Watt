@@ -30,15 +30,14 @@ Pod::Spec.new do |s|
     m.description     = 'A multimedia - hypermedia engine built on Watt'
     m.source_files =  'Classes/WTM/**/*.{h,m}'
     m.public_header_files = 'Classes/WTM/**/*.h'
-  #  WTM.dependency 'Watt/Base'
   end
 
   s.subspec 'WTMIOS' do |mios|
     mios.description   = 'Reusable WTM components for IOS'
     mios.ios.source_files =  'Classes/WTMIOS/**/*.{h,m}'
     mios.ios.public_header_files = 'Classes/WTMIOS/**/*.h'
-    mios.resource_bundles = {'WTMIOS'=>'Classes/WTMIOS/Resources/*.png'}
-  #  mios.dependency 'Classes/WTM'
+    # SEEMS NOT TO WORK ANYMORE !
+    #mios.resource_bundles = {'WTMIOS'=>'Classes/WTMIOS/Resources/*.png'}
     mios.ios.frameworks ='UIKit'
     mios.osx.source_files = ''
     mios.osx.public_header_files =''
