@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
     mios.ios.source_files =  'Classes/WTMIOS/**/*.{h,m}'
     mios.ios.public_header_files = 'Classes/WTMIOS/**/*.h'
     # SEEMS NOT TO WORK ANYMORE !
-    #mios.resource_bundles = {'WTMIOS'=>'Classes/WTMIOS/Resources/*.png'}
+    mios.resource_bundles = {'WTMIOS'=>'Classes/WTMIOS/Resources/*.png'}
     mios.ios.frameworks ='UIKit'
     mios.osx.source_files = ''
     mios.osx.public_header_files =''
