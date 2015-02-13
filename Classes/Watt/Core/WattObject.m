@@ -105,7 +105,7 @@
                 copyed=value;
             }
         }
-        [instance setValue:value forKey:key];
+        [instance setValue:copyed forKey:key];
     }
     return instance;
 }
