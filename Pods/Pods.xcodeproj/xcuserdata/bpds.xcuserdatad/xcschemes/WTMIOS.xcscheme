@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "958F7CCC5D53E8563A267575"
+               BlueprintIdentifier = "5FA85E42E39680B52E837FC8"
                BuildableName = "WTMIOS.bundle"
                BlueprintName = "WTMIOS"
                ReferencedContainer = "container:Pods.xcodeproj">
