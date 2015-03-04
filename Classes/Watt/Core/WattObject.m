@@ -136,9 +136,11 @@
 
 #pragma  mark - KVC
 
+
 - (id)valueForUndefinedKey:(NSString *)key{
     if(_registry.pool.faultTolerenceOnMissingKVCkeys){
-        WTLog(@"Get Undefined key %@ in %@",key, NSStringFromClass([self class]));
+        if(![key isEqualToString:@"observationInfo"])
+            WTLog(@"Get Undefined key %@ in %@",key, NSStringFromClass([self class]));
         return nil;
     }else{
         return [super valueForUndefinedKey:key];
@@ -147,7 +149,8 @@
 
 - (void) setValue:(id)value forUndefinedKey:(NSString *)key{
     if(_registry.pool.faultTolerenceOnMissingKVCkeys){
-        WTLog(@"Set Undefined key %@ in %@",key, NSStringFromClass([self class]));
+         if(![key isEqualToString:@"observationInfo"])
+             WTLog(@"Set Undefined key %@ in %@",key, NSStringFromClass([self class]));
     }else{
         [super setValue:value forUndefinedKey:key];
     }
