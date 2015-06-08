@@ -139,8 +139,6 @@
 
 - (id)valueForUndefinedKey:(NSString *)key{
     if(_registry.pool.faultTolerenceOnMissingKVCkeys){
-        if(![key isEqualToString:@"observationInfo"])
-            WTLog(@"Get Undefined key %@ in %@",key, NSStringFromClass([self class]));
         return nil;
     }else{
         return [super valueForUndefinedKey:key];
@@ -149,8 +147,6 @@
 
 - (void) setValue:(id)value forUndefinedKey:(NSString *)key{
     if(_registry.pool.faultTolerenceOnMissingKVCkeys){
-         if(![key isEqualToString:@"observationInfo"])
-             WTLog(@"Set Undefined key %@ in %@",key, NSStringFromClass([self class]));
     }else{
         [super setValue:value forUndefinedKey:key];
     }
@@ -184,14 +180,14 @@
             instance= [[theClass alloc] initInRegistry:registry withPresetIdentifier:wtuinstID];
             [instance setAttributesFromDictionary:aDictionary];
         }
-	}
-	return instance;
+    }
+    return instance;
 }
 
 - (void)setAttributesFromDictionary:(NSDictionary *)aDictionary{
-	if (![aDictionary isKindOfClass:[NSDictionary class]]) {
-		return;
-	}
+    if (![aDictionary isKindOfClass:[NSDictionary class]]) {
+        return;
+    }
     if([aDictionary objectForKey:__className__]){
         NSNumber *uinstID=[aDictionary objectForKey:__uinstID__];
         if(uinstID){
@@ -219,8 +215,8 @@
 
 
 - (NSDictionary *)dictionaryRepresentationWithChildren:(BOOL)includeChildren{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
-	[wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
+    NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    [wrapper setObject:NSStringFromClass([self class]) forKey:__className__];
     [wrapper setObject:[self dictionaryOfPropertiesWithChildren:includeChildren] forKey:__properties__];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
@@ -293,7 +289,7 @@
 #pragma mark - alias mode
 
 - (NSDictionary *)aliasDictionaryRepresentation{
-	NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
+    NSMutableDictionary *wrapper = [NSMutableDictionary dictionary];
     [wrapper setObject:[NSNumber numberWithInteger:self.uinstID] forKey:__uinstID__];
     return wrapper;
 }
