@@ -10,7 +10,7 @@ if (isset ( $f )) {
 	$f->prefix = $prefix;
 	$f->author = "benoit@pereira-da-silva.com";
 	$f->projectName = "Watt";
-	$f->license = FLEXIONS_ROOT_DIR."flexions/helpers/licenses/LGPL.tpl.php";
+	$f->license = FLEXIONS_MODULES_DIR."licenses/LGPL.template.php";
 }
 $parentClass = "WattObject";
 $collectionParentClass="WattCollectionOfObject";
